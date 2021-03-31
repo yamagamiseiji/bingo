@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Give me a break! | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://born-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://born-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Archives</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Give me a break!</h2>
+    <div class="post_content">
+      <p>新型コロナによってたくさんの国民の <strong>生命財産</strong> が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた <strong>税金</strong> をどうして国民のために使えないのか。もういい加減にして欲しい！ <strong>&lsquo;Give me a break !'</strong> と叫びたい気持ちです。</p>
+<p><strong>税金</strong> といえば、4月に入ってから <strong>Ledger-cli</strong> と <strong>gnuplot</strong> で3月までの1年間に納税した税金の取りまとめをしました。「租税公課」の金額そのものはLedgerで簡単に獲得できますが、それを表にして見るだけでなく、月ごとの納税額の推移を可視化しました。それ自体はそんなに複雑な作業ではありません。</p>
+<p>しかし一つ問題があります。納税金額は <strong>月ごとの変動</strong> がとても大きい。たとえば、100万円を超える月がある一方、別の月は数万円レベルとかゼロ円ということもありえます（ヒトそれぞれですが・・・）。こんな風に極端な <strong>外れ値</strong> を含むデータを「見える化」するのはちょっとやっかいです。</p>
+<p>よく見かけるのは、棒グラフに <strong>波線</strong> などを入れてY軸を <strong>中断</strong> する方法。グラフを途中でカットする線は日本語では「中略波線」とか「省略線」、「中断線」とか言うようですが、サイエンスの世界ではそれを使ってグラフを描くことは禁忌になっています。その他、ドーナツチャート（円グラフ）も避けるべきとされます。グラフの原点をゼロ以外の数値にしないようにという指導もされます。経理・会計の世界とサイエンスの世界とでは図に求められるものが異なっているようです。</p>
+<p>ところで、この <strong>中断線</strong> は英語では <strong>break</strong> といいます。途中でカットされた棒グラフは <strong>histogram with break</strong> でしょうか。</p>
+<p>コロナへの政府の対応に憤慨して <strong>give me a break!</strong> って叫ぶ感じで、この際、禁断の <strong>breakつき棒グラフ</strong> を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね（笑）</p>
+<h3 id="y軸にbreakを入れてみる">Y軸にbreakを入れてみる</h3>
+<p>こんな感じになります（金額はでたらめです）。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<figure>
+    <img src="/broken-histogram.png"
+         alt="Figure 1: Breakを入れた棒グラフの例（納税額の推移）" width="90%"/> <figcaption>
+            <p>Figure 1: Breakを入れた棒グラフの例（納税額の推移）</p>
+        </figcaption>
+</figure>
+
+<p>Ledgerとgnuplotを組み合わせて図<a href="#org1f4a511">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
+<h4 id="ledger-cliのクエリー">Ledger-cliのクエリー</h4>
+<p>税額の計算をするためのLedgerクエリーは次のとおりです。</p>
+<pre><code class="language-nil" data-lang="nil">ledger reg --amount-data --collapse --monthly  ^expenses and %tax
+</code></pre><p>ここで、 <strong><code>%tax</code></strong> は税金に関係するトランザクションにつけた <strong>タグ</strong> です。税金にはさまざまな名前がついています。計算の際に、それらを洩れなくすくい上げるために、記帳の段階で全て <code>tax</code> というタグをつけてあります。</p>
+<p>オプションの意味は次のとおりです。（ ）内は短縮形です。</p>
+<dl>
+<dt><code>--amount-data (-j)</code></dt>
+<dd>個々のトランザクションの日付と合計金額だけを出力</dd>
+<dt><code>--collapse (-n)</code></dt>
+<dd>トップレベルのアカウントだけを出力</dd>
+<dt><code>--monthly (-M)</code></dt>
+<dd>月ごとにまとめて出力</dd>
+</dl>
+<p>このクエリーによって得られるデータの例（数値はデタラメです）：</p>
+<pre><code class="language-nil" data-lang="nil">　：
+2020-01-01 7234
+2020-02-01 4567
+2020-03-01 8901
+2020-04-01 98760
+</code></pre><p>これをファイルに格納してgnuplotに読み込ませます。</p>
+<h4 id="gnuplotスクリプト">gnuplotスクリプト</h4>
+<p><strong>break</strong> つきのヒストグラムはmultiplotを使って描きます。
+<a href="https://stackoverflow.com/questions/17564497/gnuplot-break-y-axis-in-two-parts">こちらのサイト</a>のスクリプトを参考にさせていただきました。</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>ターミナルと出力ファイルの指定</p>
+<p>出力図はPDFにして <code>$out_file</code> に出力します。</p>
+<pre><code class="language-nil" data-lang="nil">set terminal pdfcairo transparent enhanced font 'Arial,10'
+set output '$out_file'
+</code></pre></li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>multiplotのためのパラメータを変数にして指定</p>
+<p>上下左右のマージンなどをこうして <strong>変数化</strong> することで、図のバランスの微調整が楽になります。</p>
+<pre><code class="language-nil" data-lang="nil">bm = 0.15    # bmargin
+lm = 0.12    # lmargin
+rm = 0.95    # rmargin
+gap = 0.03   # gap betweein 2 charts
+size = 0.75  # plot size
+kk = 0.5     # relative height of bottom plot
+</code></pre></li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>Y軸の範囲（最小値、最大値）を変数にして指定</p>
+<p>上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。</p>
+<pre><code class="language-nil" data-lang="nil">y1 = 0
+y2 =  120000/1000
+y3 = 1000000/1000
+y4 = 1120000/1000
+</code></pre></li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>図のスタイルとY軸の数字のフォーマット</p>
+<pre><code class="language-nil" data-lang="nil">set style histogram
+set style data histograms
+set style fill transparent solid 0.8 border -1
+set boxwidth 0.70
+set decimal locale
+set format y &quot;%'6.0f&quot;
+</code></pre></li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>multiplotの宣言と下の図</p>
+<p>読み込むデータファイルは変数 <code>$data_to_plot</code> で指示します。</p>
+<pre><code class="language-nil" data-lang="nil">set multiplot
+set label &quot;Amount(千円)&quot; at screen 0.03,0.5 center front rotate font &quot;,&quot; . 10
+
+set border 1+2+8
+set xtics nomirror
+set ytics nomirror
+set lmargin at screen lm
+set rmargin at screen rm
+set bmargin at screen bm
+set tmargin at screen bm + size * kk
+set yrange [y1:y2]
+set xlabel &quot;FY 2019-20&quot;
+
+plot '$data_to_plot' \
+      using 0:(column(2)/1000):xticlabels(strftime('%b', strptime('%Y-%m-%d', strcol(1))))\
+     with boxes notitle linecolor rgb &quot;skyblue&quot;,\
+   '' using 0:(column(2)/1000):(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))): &quot;ｇ&quot;) \
+     with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
+</code></pre></li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>上の図</p>
+<pre><code class="language-nil" data-lang="nil">unset xtics
+unset xlabel
+
+set border 2+4+8
+set bmargin at screen bm + size * kk + gap
+set tmargin at screen bm + size + gap
+set yrange [y3:y4]
+
+MyTitle = &quot;消費税・ガソリン税を除く納税額の推移（〜`date +&quot;%Y/%m/%d&quot;`）&quot;
+set title font &quot;Arial,12&quot;
+set title MyTitle offset char 0, char -0.75
+
+plot '$data_to_plot' \
+      using 0:(column(2)/1000) with boxes notitle linecolor rgb &quot;skyblue&quot;,\
+   '' using 0:(column(2)/1000):(sprintf(&quot;%'d&quot;,(column(2)))) \
+     with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
+
+unset multiplot
+</code></pre><p>こんな感じです。</p>
+</li>
+</ul>
+<h4 id="細かいことですが">細かいことですが・・・</h4>
+<p>納税金額が <strong>ゼロの月</strong> では数字の'0&rsquo;を書かないようにします。それにはgnuplotの <strong>三項演算子</strong> を使います。その部分だけを抽出すると次のとおりです：</p>
+<pre><code class="language-nil" data-lang="nil">(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))):&quot;&quot;)
+</code></pre><p>gnuplotの三項演算子の記号は <!-- raw HTML omitted --><strong>? :</strong><!-- raw HTML omitted --> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
+<p>つまり：</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">colomn(2) != 0            （第2列の値がゼロではない）が真か偽か
+sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単位でカンマをつける
+&#34;&#34;                          偽ならばブランクにする
+</code></pre></div><p>ということになります。</p>
+<h4 id="問題点と今後の課題">問題点と今後の課題</h4>
+<p>グラフに <strong>break</strong> を入れた図はできるだけ避けるべき図ですが、この例図のように</p>
+<ul>
+<li>ある一部が突出した <strong>外れ値</strong> であることをこれみよがしに見せつける</li>
+<li>それ以外の、有象無象の変動をそれなりに見せる</li>
+</ul>
+<p>という特殊な目的をどうしても達成したい場合に限っては「あり」かも知れません。</p>
+<p>なお、
+<a href="http://gnuplot-tricks.blogspot.com/2009/11/broken-histograms.html">こちらの例（Gnuplot Tricks)</a>
+では <strong>multiplot</strong> ではなくて <strong>vectors</strong> を使うという方法をとっています。とても魅力的ですが、Y軸の数値を書く方法が思いつかなかったのでギブアップしました。もっともっと <strong>break</strong> が必要となったら再検討してみます。</p>
+<h2 id="acknowledgement">Acknowledgement</h2>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2020-04-22T10:21:00&#43;0900 class="date">Wednesday, April 22, 2020</time>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://born-in-bingo.netlify.app/posts/daily-expns-watcher/" class="prev">予算消化状況を日々 ledger-cliとgnuplotでモニターする</a>
+      
+      
+      <a href="https://born-in-bingo.netlify.app/posts/hanamame-sprouting/" class="next">花豆の発芽と積算温度</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <span>&copy; 2021 <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://born-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

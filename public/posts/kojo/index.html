@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    ごあいさつ | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://born-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://born-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Archives</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">ごあいさつ</h2>
+    <div class="post_content">
+      <p>これまで2年ほどブログ書きは下のようなフローでやってきました。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Emacs &gt; org2blog &gt; WordPress &gt; freenom &gt; AWS
+</code></pre></div><p>しかし</p>
+<ol>
+<li>WordPress(WP)ではバージョンアップに追いつくのが大変</li>
+<li>サボっていると、画像ファイルが表示されないなどの <strong>トラブル</strong> 頻発</li>
+<li>WPトラブルへの対応力不足だけではなく</li>
+<li>WPは <strong>隔靴掻痒</strong> （かっかそうよう）っぽい</li>
+<li>SSL対応もしなくちゃならないし・・・</li>
+<li>AWSも最初の1年間はほぼ無料でありがたかったけど、その後は年間120ドルほどになって結構 <strong>負担</strong> が大きい</li>
+</ol>
+<p>などなどから一念発起。この際、ブログ書きの流れをつぎのように変えようと思いました。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Emacs &gt; org-mode &gt; ox-hugo &gt; Hugo &gt; Netlify &gt; GitHub
+</code></pre></div><p>ところが始めてみるとあちこちに地雷や落とし穴が！「新装開店」まで　まだ一山も二山もあるかと思います。</p>
+<h2 id="四苦八苦">四苦八苦</h2>
+<p>最大の難関は、NetlifyがGitHubレポジトリを自動的にデプロイしてくれなかったこと。ウエッブで調べてみると、簡単だったという記事がある一方で、英語でも日本語でもこの段階でハマったという記事もたくさんあります。それらを見ながらほんとうにいろいろやりましたｗ</p>
+<p>四苦八苦しましたが、2021-03-25に初デプロイ成功！。うまくいった理由は</p>
+<ol>
+<li>
+<p>hugoを <code>hugo_extended_0.81.0_Linux-64bit.deb</code> にアップしたこと</p>
+</li>
+<li>
+<p>Netlifyウエブサイトの&rsquo;Deploy settings&rsquo;中の&rsquo;Build settings&rsquo;の内容をGitHubのサイトルートにしたこと。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Base = hugo-site/
+　：
+Publish = public
+　：
+</code></pre></div></li>
+</ol>
+<p>などが奏功したんだと思います。</p>
+<h2 id="環境">環境</h2>
+<p>ソフトウエアの環境は次のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th style="text-align:right">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td style="text-align:right">Ubuntu20.04</td>
+</tr>
+<tr>
+<td>Emacs</td>
+<td style="text-align:right">26.3</td>
+</tr>
+<tr>
+<td>org-mode</td>
+<td style="text-align:right">9.4.4</td>
+</tr>
+<tr>
+<td>ox-hugo</td>
+<td style="text-align:right">0.7</td>
+</tr>
+<tr>
+<td>hugo</td>
+<td style="text-align:right">extended 0.81.0</td>
+</tr>
+<tr>
+<td>git</td>
+<td style="text-align:right">2.25.1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="acknowledgment">Acknowledgment　</h2>
+<p>（これはテストページです）</p>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021-03-26T00:00:00&#43;0900 class="date">Friday, March 26, 2021</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://born-in-bingo.netlify.app/tags/emacs">Emacs</a> </li>
+        
+          <li> <a href="https://born-in-bingo.netlify.app/tags/hugo">hugo</a> </li>
+        
+          <li> <a href="https://born-in-bingo.netlify.app/tags/ox-hugo">ox-hugo</a> </li>
+        
+          <li> <a href="https://born-in-bingo.netlify.app/tags/netlify">Netlify</a> </li>
+        
+          <li> <a href="https://born-in-bingo.netlify.app/tags/github">GitHub</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://born-in-bingo.netlify.app/posts/theme-selection/" class="prev">Hugoのテーマえらび</a>
+      
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <span>&copy; 2021 <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://born-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

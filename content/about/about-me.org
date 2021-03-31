@@ -1,0 +1,24 @@
+#+title: About Me
+#+date: <2021-03-29 月>
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: about
+
+#+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
+#+hugo_categories: about 
+
+#+hugo_custom_front_matter: :toc true
+#+draft: false
+
+#+link: file file+sys:../../static/
+
+Coming soon....
+
+
+#+caption: テスト画像
+#+attr_org: :width 30%
+#+attr_html: :width 30% :aligne center
+[[file:me.jpg]]
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

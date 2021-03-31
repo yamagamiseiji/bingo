@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    予算消化率の水平ゲージをledger-cliとgnuplotで描く | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://born-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://born-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Archives</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">予算消化率の水平ゲージをledger-cliとgnuplotで描く</h2>
+    <div class="post_content">
+      <h3 id="きっかけ">きっかけ</h3>
+<p><strong>新型コロナウイルス</strong> が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の <strong>支出予算</strong> がどれくらい消化されているかを表示する <strong>水平ゲージ</strong> （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</p>
+<blockquote>
+<p>（例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい</p>
+</blockquote>
+<p>予算消化率の可視化については<a href="http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/">前回の投稿</a>で、GNOME端末での <strong>プログレッシブ・バーグラフ</strong> を紹介しました。今回はそれよりももう少しグラッフィックに図<a href="#org4a8df78">1</a>のような水平ゲージを描きます。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<figure>
+    <img src="/horizontal-gauge.png"
+         alt="Figure 1: 当日までの予算消化率をプロットする水平ゲージ" width="400px"/> <figcaption>
+            <p>Figure 1: 当日までの予算消化率をプロットする水平ゲージ</p>
+        </figcaption>
+</figure>
+
+<h4 id="仕掛け">仕掛け</h4>
+<p>当月内の当日までに支出した金額の累計はleger-cliで算出します。それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。その値をgnuplotにスクリプト内変数として引き渡して、水平ゲージ内に <strong>太めの黒い線</strong> を描くというシンプルな仕掛けです。</p>
+<h4 id="ネットには見当たらない">ネットには見当たらない？</h4>
+<p>当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図<a href="#org1769805">2</a>のような <strong>計器盤</strong> 風のゲージ（<a href="https://angularscript.com/angular-gauge-chart-library/">出典</a>）もgnuplotで描いた例を見つけることができませんでした。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<figure>
+    <img src="/gauge-chart-library.png"
+         alt="Figure 2: 計器盤風ゲージチャートの例" width="200px"/> <figcaption>
+            <p>Figure 2: 計器盤風ゲージチャートの例</p>
+        </figcaption>
+</figure>
+
+<p>こうしたゲージ類は、今流行りのいわゆる <strong>ダッシュボード</strong> では多用されていますが、 <strong>サイエンスの世界</strong> では余り使われませんよね。そのため、Excelなどでは簡単にこうした図を描ける（らしい）し、それ以外にもゲージ類を描くための専用のアプリケーションが <strong>ビジネス向け</strong> にたくさん存在しています。</p>
+<p>それらを使わず、あえてgnuplotで描いてみようと思った理由は：</p>
+<ul>
+<li>gnuplotはledger-cliと とても相性が良いし使い慣れている</li>
+<li>Excleはこれまでほとんど真面目に使ったことがない</li>
+</ul>
+<p>などです。</p>
+<p>前置きはこの辺にして中身を紹介します。</p>
+<h3 id="環境">環境</h3>
+<ul>
+<li>ubuntu 16.04</li>
+<li>GNU bash, バージョン 4.3.48(1)-release (x86_64-pc-linux-gnu)</li>
+<li>gnuplot 5.2 patchlevel 8</li>
+</ul>
+<h3 id="コーディング">コーディング</h3>
+<p>次の２つのスクリプトを組み合わせます。</p>
+<ul>
+<li><strong>bashスクリプト</strong> ： ledgerを動かして平均値などを計算します。下のgnuplotスクリプトをコールします。</li>
+<li><strong>gnuplotスクリプト</strong> （ <code>simple-horizntl-gauge.plt</code> ）： 標準的な <strong>縦</strong> の積上げ棒グラフ（rowstacked）を描きますが、できた画像をあとで90度回転して <strong>横</strong> にする関係で、目盛りの文字列を90度回転しておきます。</li>
+</ul>
+<p>コードは大急ぎで書いたままでブサイクですがとりあえず動いています。スキルの高い人が書けばもっとスマートな方法があると思います。ま、とりあえず、ということで勘弁して下さい。</p>
+<h4 id="bashからgnuplotへの変数と文字列の受け渡し">bashからgnuplotへの変数と文字列の受け渡し</h4>
+<p>bashスクリプト内のledgerで算出した支出パーセントが格納されている <strong>変数</strong> （ <code>$pct</code> ）をgnuplotに <code>percent</code> という変数名で引き渡します。</p>
+<p>引き渡す <strong>文字列</strong> は図のタイトル( <code>'% of Monthly Budget'</code> )です。これをgnuplot内の変数 <code>fig_title</code> として引き渡しています。これについては必ずしも両者の間で引き渡ししなくても良いのですが、将来の汎用性のために書いておきました。</p>
+<p>そのパートだけを抜き出すと次のようになっています：</p>
+<pre><code class="language-nil" data-lang="nil">gnuplot -e &quot;percent='$pct'; fig_title='% of Monthly Budget'&quot;\
+	./simple-horizntl-gauge.plt
+</code></pre><h4 id="bashスクリプト">bashスクリプト</h4>
+<pre><code class="language-nil" data-lang="nil">#!/bin/bash
+#
+#  毎月の支出予算に対して当日までの支出金額がどれくらいになるかを
+#  水平方向のゲージチャートhorizontal bar gauge chart に表示する
+
+###############################################
+# 当日までの支出額は支出予算の何％にあたるかを計算
+###############################################
+budget=`expr 400000 - 40000`  # 360,000円
+##
+# Ledgerで当日までの累積支出額($month_total)を求める
+ledger bal -J ^expenses -p 'this month' --depth 1\
+       -X JPY &gt; ./tmp-total.csv
+month_total=`cut -d ' ' -f 2 ./tmp-total.csv`
+##
+# 予算($budget)に対する支出のパーセント($pct)を計算
+pct=`echo &quot;scale=3;${month_total} / ${budget} * 100&quot; | bc`
+#
+##############################################################
+# gnuplotで縦方向（普通の）積上げバーグラフを描く
+##
+gnuplot -e &quot;percent='$pct'; fig_title='% of Monthly Budget'&quot;\
+	./simple-horizntl-gauge.plt
+###############################################################
+# 上で作った積上げバーグラフ(out-sample.png)を90度右回転しrotated-fig.pngに格納
+convert -rotate 90 ./out-sample.png  ./rotated-sample.png
+##
+# 余計な余白をトリミングしてhorizontal-gauge.pngに格納
+convert ./rotated-sample.png -trim  ./horizontal-gauge.png
+##
+# 表示する
+mupdf ./horizontal-gauge.png &amp;
+
+</code></pre><h4 id="gnuplotスクリプト">gnuplotスクリプト</h4>
+<pre><code class="language-nil" data-lang="nil">#
+#    gnuplot script for horizontal gauge of % monthly budget
+#
+
+$Plotdata &lt;&lt;EOD
+1 60 20 20 20
+# 積上げ棒グラフ（4段）の値
+EOD
+
+reset
+
+set terminal pngcairo font 'Arial, 12'
+set style data histogram
+set style histogram rowstacked
+set style fill transparent solid  0.5 border -1
+#
+unset xtics
+unset ytics
+set ytics rotate by 90
+set xrange[0:1]
+set yrange[0:120]
+set y2label fig_title.&quot; （`date &quot;+%Y/%m/%d&quot;`）&quot; offset 1.0
+set xlabel ' '
+#
+set size 0.9
+set size ratio 5
+set boxwidth 2.0
+# 予算消化率変数percentはbashスクリプトから引き渡される
+##
+set arrow 1 from 0,percent to 1,percent nohead lc rgb &quot;black&quot; lw 5
+set output &quot;./out-sample.png&quot;
+#
+plot $Plotdata using 2:xtic(1) notitle linecolor rgb &quot;green&quot;,\
+	     '' using 3 notitle  linecolor rgb &quot;light-green&quot;,\
+	     '' using 4 notitle  linecolor rgb &quot;yellow&quot;,\
+	     '' using 5 notitle  linecolor rgb &quot;red&quot;
+set output
+</code></pre><h3 id="使いみち">使いみち</h3>
+<p>買い物が終わった後、レシートなどを見ながらその日の支出をledgerで転記しますが、転記が終わったら、金額などの確認のためにいくつかのスクリプトを起動させて、各種のグラフやチャートを表示させます。そのスクリプト群の一つに、この水平ゲージ表示スクリプトを埋め込んでいます。</p>
+<p>ゲージスクリプトが起動すると、スクリーンの <strong>空いた</strong> 場所にこのゲージが表示されます。表示されている情報価は大したものではないのですが、見た目がもっともらしいので（笑）満足しています。</p>
+<h3 id="acknowledgement">Acknowledgement</h3>
+<p>次のサイトがとても参考になりました。</p>
+<ul>
+<li><a href="http://www.phyast.pitt.edu/~zov1/gnuplot/html/histogram.html">http://www.phyast.pitt.edu/~zov1/gnuplot/html/histogram.html</a></li>
+<li><a href="https://github.com/cbdevnet/ledger-reports">ledger-reports</a></li>
+</ul>
+<h2 id="acknowledgement">Acknowledgement</h2>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2020-02-21T18:05:00&#43;0900 class="date">Friday, February 21, 2020</time>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://born-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/" class="prev">ぼちぼちですが可視化してます</a>
+      
+      
+      <a href="https://born-in-bingo.netlify.app/posts/daily-expns-watcher/" class="next">予算消化状況を日々 ledger-cliとgnuplotでモニターする</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <span>&copy; 2021 <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://born-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

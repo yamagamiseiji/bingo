@@ -1,0 +1,175 @@
+#+title: 予算消化率の水平ゲージをledger-cliとgnuplotで描く
+#+date: [2020-02-21 金 18:05]
+
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: posts
+#+options: toc:nil num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+
+** きっかけ
+ *新型コロナウイルス* が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の *支出予算* がどれくらい消化されているかを表示する *水平ゲージ* （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：
+#+begin_quote
+（例えば）２月１日から２月２０日までの累積支出額が、
+月額支出予算の何パーセントに当たるのかを可視化したい
+#+end_quote
+
+予算消化率の可視化については[[http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/][前回の投稿]]で、GNOME端末での *プログレッシブ・バーグラフ* を紹介しました。今回はそれよりももう少しグラッフィックに図[[my_gauge]]のような水平ゲージを描きます。
+
+#+caption: 当日までの予算消化率をプロットする水平ゲージ
+#+name: my_gauge
+#+attr_org: :width 400px
+#+attr_html: :width 400px
+[[file:horizontal-gauge.png]]
+
+*** 仕掛け
+当月内の当日までに支出した金額の累計はleger-cliで算出します。
+それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。
+その値をgnuplotにスクリプト内変数として引き渡して、
+水平ゲージ内に *太めの黒い線* を描くというシンプルな仕掛けです。
+
+*** ネットには見当たらない？
+当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[[gauge_chart]]のような *計器盤* 風のゲージ（[[https://angularscript.com/angular-gauge-chart-library/][出典]]）もgnuplotで描いた例を見つけることができませんでした。
+
+
+#+caption: 計器盤風ゲージチャートの例
+#+name: gauge_chart
+#+attr_org: :width 200px
+#+attr_html: :width 200px
+[[file:gauge-chart-library.png]]
+
+
+
+こうしたゲージ類は、今流行りのいわゆる *ダッシュボード* では多用されていますが、 *サイエンスの世界* では余り使われませんよね。そのため、Excelなどでは簡単にこうした図を描ける（らしい）し、それ以外にもゲージ類を描くための専用のアプリケーションが *ビジネス向け* にたくさん存在しています。
+
+それらを使わず、あえてgnuplotで描いてみようと思った理由は：
+- gnuplotはledger-cliと とても相性が良いし使い慣れている
+- Excleはこれまでほとんど真面目に使ったことがない
+などです。
+
+前置きはこの辺にして中身を紹介します。
+
+** 環境
+- ubuntu 16.04
+- GNU bash, バージョン 4.3.48(1)-release (x86_64-pc-linux-gnu)
+- gnuplot 5.2 patchlevel 8
+
+*** COMMENT 使いみち
+Ledgerで当日の支出を記帳した後、どれほどの支出額になったかを確認する際に、
+このスクリプトが自動起動するようにしている。
+
+** コーディング
+次の２つのスクリプトを組み合わせます。
+- *bashスクリプト* ： ledgerを動かして平均値などを計算します。下のgnuplotスクリプトをコールします。
+- *gnuplotスクリプト* （ =simple-horizntl-gauge.plt= ）： 標準的な *縦* の積上げ棒グラフ（rowstacked）を描きますが、できた画像をあとで90度回転して *横* にする関係で、目盛りの文字列を90度回転しておきます。
+
+コードは大急ぎで書いたままでブサイクですがとりあえず動いています。
+スキルの高い人が書けばもっとスマートな方法があると思います。
+ま、とりあえず、ということで勘弁して下さい。
+
+*** bashからgnuplotへの変数と文字列の受け渡し
+
+bashスクリプト内のledgerで算出した支出パーセントが格納されている *変数* （ =$pct= ）をgnuplotに =percent= という変数名で引き渡します。
+
+引き渡す *文字列* は図のタイトル( ='% of Monthly Budget'= )です。
+これをgnuplot内の変数 =fig_title= として引き渡しています。
+これについては必ずしも両者の間で引き渡ししなくても良いのですが、将来の汎用性のために書いておきました。
+
+そのパートだけを抜き出すと次のようになっています：
+#+begin_src
+gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
+	./simple-horizntl-gauge.plt
+#+end_src
+
+*** bashスクリプト
+
+#+begin_src bash
+#!/bin/bash
+#
+#  毎月の支出予算に対して当日までの支出金額がどれくらいになるかを
+#  水平方向のゲージチャートhorizontal bar gauge chart に表示する
+
+############################################### 
+# 当日までの支出額は支出予算の何％にあたるかを計算
+############################################### 
+budget=`expr 400000 - 40000`  # 360,000円
+##
+# Ledgerで当日までの累積支出額($month_total)を求める
+ledger bal -J ^expenses -p 'this month' --depth 1\
+       -X JPY > ./tmp-total.csv
+month_total=`cut -d ' ' -f 2 ./tmp-total.csv`
+##
+# 予算($budget)に対する支出のパーセント($pct)を計算
+pct=`echo "scale=3;${month_total} / ${budget} * 100" | bc`
+#
+##############################################################
+# gnuplotで縦方向（普通の）積上げバーグラフを描く
+##
+gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
+	./simple-horizntl-gauge.plt
+###############################################################
+# 上で作った積上げバーグラフ(out-sample.png)を90度右回転しrotated-fig.pngに格納
+convert -rotate 90 ./out-sample.png  ./rotated-sample.png
+##
+# 余計な余白をトリミングしてhorizontal-gauge.pngに格納
+convert ./rotated-sample.png -trim  ./horizontal-gauge.png
+##
+# 表示する
+mupdf ./horizontal-gauge.png &
+
+#+end_src
+
+*** gnuplotスクリプト
+#+begin_src bash
+#
+#    gnuplot script for horizontal gauge of % monthly budget 
+#
+
+$Plotdata <<EOD
+1 60 20 20 20
+# 積上げ棒グラフ（4段）の値
+EOD
+
+reset
+
+set terminal pngcairo font 'Arial, 12'
+set style data histogram
+set style histogram rowstacked
+set style fill transparent solid  0.5 border -1
+#
+unset xtics
+unset ytics
+set ytics rotate by 90
+set xrange[0:1]
+set yrange[0:120]
+set y2label fig_title." （`date "+%Y/%m/%d"`）" offset 1.0
+set xlabel ' '
+#
+set size 0.9
+set size ratio 5
+set boxwidth 2.0
+# 予算消化率変数percentはbashスクリプトから引き渡される
+##
+set arrow 1 from 0,percent to 1,percent nohead lc rgb "black" lw 5
+set output "./out-sample.png"
+#
+plot $Plotdata using 2:xtic(1) notitle linecolor rgb "green",\
+             '' using 3 notitle  linecolor rgb "light-green",\
+             '' using 4 notitle  linecolor rgb "yellow",\
+	     '' using 5 notitle  linecolor rgb "red"
+set output
+#+end_src
+
+** 使いみち
+買い物が終わった後、レシートなどを見ながらその日の支出をledgerで転記しますが、転記が終わったら、金額などの確認のためにいくつかのスクリプトを起動させて、各種のグラフやチャートを表示させます。そのスクリプト群の一つに、この水平ゲージ表示スクリプトを埋め込んでいます。
+
+ゲージスクリプトが起動すると、スクリーンの *空いた* 場所にこのゲージが表示されます。表示されている情報価は大したものではないのですが、見た目がもっともらしいので（笑）満足しています。
+
+** Acknowledgement
+次のサイトがとても参考になりました。
+- http://www.phyast.pitt.edu/~zov1/gnuplot/html/histogram.html
+- [[https://github.com/cbdevnet/ledger-reports][ledger-reports]]
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

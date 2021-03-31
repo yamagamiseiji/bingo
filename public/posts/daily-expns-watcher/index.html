@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    予算消化状況を日々 ledger-cliとgnuplotでモニターする | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://born-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://born-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Archives</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">予算消化状況を日々 ledger-cliとgnuplotでモニターする</h2>
+    <div class="post_content">
+      <p><strong>新型コロナウイルス</strong> という外来の危機（ <strong>外患</strong> ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという <strong>内憂</strong> が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが <strong>挙国一致</strong> してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 <strong>「帝国」</strong> はこんな風にして <strong>内側</strong> から崩壊するんですね。</p>
+<p>それはともかく、<a href="http://org2-wp.kgt-yamy.tk/2020/02/21/post-904/">前回</a>、グラッフィクな水平ゲージで予算消化率（パーセンテージだけ）をプロットする方法を紹介しました。今回は、新型コロナウィルスで <strong>外遊び</strong> もままならぬので（笑）、さらに一歩を進めて次のようなチャートを作ってみました。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">月々の支出目標（予算）に向けて日々の累積支出額がどのように推移しているか
+その動きをモニターする
+</code></pre></div><p>まずは例図をみてください（金額はでたらめです）。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<figure>
+    <img src="/budget-watcher-sample.png"
+         alt="Figure 1: 予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。" width="90%"/> <figcaption>
+            <p>Figure 1: 予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。</p>
+        </figcaption>
+</figure>
+
+<h3 id="仕掛け">仕掛け</h3>
+<p>月始めから当日までに支出した金額の累計（緑のライン）はledger-cliで算出します。これはとても簡単。次の１行です：</p>
+<pre><code class="language-nil" data-lang="nil">#  当月の累積支出金額（１日毎） --&gt; tmp-togetsu.dat
+ledger reg ^expenses -p 'this month' -J -D --collapse\
+       --plot-total-format=&quot;%(format_date(date, \&quot;%d\&quot;))\
+	%(abs(quantity(scrub(display_total))))\n&quot;  &gt; ./tmp-togetsu.dat
+</code></pre><p>上で得られる <code>tmp-togetsu.dat</code> は次のような形になります（金額はでたらめです）：</p>
+<pre><code class="language-nil" data-lang="nil">01   8404
+02   49728
+03   56663
+04   59663
+05   62779
+：　　　　：
+</code></pre><p>あと、予算の <strong>バイオレットライン</strong> ですが、この線の <strong>関数式</strong> は各月ごとの特殊事情などを勘案して目標値と開始値を定めておいて、昔懐かしい <strong>連立方程式</strong> を解いて求めます。紙と鉛筆で計算すると間違えるので、これまた昔懐かしい <strong>Fortran</strong> で <code>y=ax+b</code> の係数 a, bを求めます。計算された各月のa,bを次のようなイメージで <code>budget.tabl</code> ファイル内に格納しておきます：</p>
+<pre><code class="language-nil" data-lang="nil"># date  budget   a         b
+2020/03	350000 10666.7  19333.3
+2020/04	450000 11034.4  18965.5
+2020/05 400000 12333.3  17666.7
+　　：　　：　　　　：　　　：
+</code></pre><p>これを使って、gnuplotで <code>f(x)=ax+b</code> をプロットします。この関数の直線と、実際の支出データの折れ線グラフの2本の折れ線に <strong>はさまれた領域</strong> を、関数直線の上下で <strong>色分け</strong> して表示します。なおファイルの第2列はこのスクリプトでは使いません。</p>
+<p>実は当初、この <strong>領域色分け</strong> を実現するための  <code>filledcurves</code> の書き方がよくわからなかったために手こずりました。できてしまえば簡単ですが変なところでハマって結構時間がかかりました（笑）。コードは<a href="#script-gnu">こちら</a>を見て下さい。</p>
+<h2 id="環境">環境</h2>
+<ul>
+<li>Ubuntu 16.04</li>
+<li>GNU bash, バージョン 4.3.48(1)-release (x86_64-pc-linux-gnu)</li>
+<li>Ledger 3.1.1-20160111</li>
+<li>gnuplot 5.2 patchlevel 8</li>
+<li>GNU Fortran (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609</li>
+</ul>
+<h2 id="コーディング">コーディング</h2>
+<p>次の２つのスクリプトを組み合わせて動かします。</p>
+<ul>
+<li><strong>bashスクリプト</strong> ： ledgerを動かして当月の1日ごとの累積支出金額を計算します。その後、下のgnuplotスクリプトをコールします。</li>
+<li><strong>gnuplotスクリプト</strong> （ <code>gp-budget-watcher.plt</code> ）： filledcurvesを使って2本のラインに囲まれた領域を色分けします。</li>
+</ul>
+<h3 id="bashスクリプト">bashスクリプト</h3>
+<pre><code class="language-nil" data-lang="nil">#!/bin/bash
+#
+#  Ledgerで当月における当日までの支出金額を1日毎にまとめたデータを取得し、
+#  当月の支出予算式の係数 a,b をconfig/budgets.tableから抽出し、
+#   gnuplotに引き渡す
+
+#  当月の累積支出金額のファイルを作成する --&gt; tmp-togetsu.dat
+ledger reg ^expenses -p 'this month' -J -D --collapse\
+       --plot-total-format=&quot;%(format_date(date, \&quot;%d\&quot;))\
+	%(abs(quantity(scrub(display_total))))\n&quot;  &gt; tmp-togetsu.dat
+##
+#  当月の年月を得る
+ym=`date +&quot;%Y/%m&quot;`
+
+# ymの年月文字列を含む行をbudgets.tableから抽出しtmp-hitline.txtに格納
+grep $ym ~/hogehoge/configs/budget.table &gt; tmp-hitline.txt
+
+#  係数a,bを獲得し、gnuplotに引き渡す
+a=`awk '{printf $3}' tmp-hitline.txt`
+b=`awk '{printf $4}' tmp-hitline.txt`
+
+###############################
+#  gnuplot の励起
+gnuplot -e &quot;a='$a';b='$b';out_file='doya-out.pdf'&quot; gp-budget-daily.plt
+###############################
+# 端末に表示
+mupdf $out_file &amp;
+</code></pre><h3 id="script-gnu">gnuplotスクリプト</h3>
+<p>スクリプト名は <code>gp-budget-daily.plt</code> 。</p>
+<pre><code class="language-nil" data-lang="nil">reset
+set terminal pdfcairo  transparent enhanced font &quot;arial,10&quot;
+
+set style fill transparent solid 0.8 noborder
+set style increment default
+set style data lines
+#
+set grid ytics xtics
+set ylabel '金額（円）'
+set xlabel 'Days in Month'
+#
+set title &quot;支出予算額と当月の支出額 （`date &quot;+%Y/%m&quot;`）&quot; \
+   font &quot;arial,14&quot;
+set key inside left top
+set xrange [ 01 : 31 ] noreverse writeback
+set yrange [0:450000] noreverse writeback
+set decimal locale
+set format y &quot;%'8.0f&quot;
+#
+set samples 31
+#  予算式の係数a,bはbashから受け取る
+f(x) = a * x + b
+
+#  出力ファイル名はbashから受け取る
+set output out_file
+
+plot '/home/hogehoge/tmp-togetsu.dat'\
+   using 1:2:(f($1)) w filledcurves below title '予算以下' lc rgb &quot;skyblue&quot;,\
+'' using 1:2:(f($1)) w filledcurves above title '予算以上' lc rgb &quot;orange-red&quot;,\
+'' using 1:2 w lines lt 2 lw 3  title '当月の支出',\
+   f(x) lt 2 lw 1 lc rgb &quot;violet&quot; title '支出予算額'
+
+set output
+</code></pre><p>ここのミソは次の1行です：</p>
+<pre><code class="language-nil" data-lang="nil">plot '/home/hogehoge/tmp-togetsu.dat'\
+   using 1:2:(f($1)) w filledcurves below title '予算以下' lc rgb &quot;skyblue&quot;,\
+　　：
+</code></pre><p>引っかかったのは、 <code>f($1)</code> の <code>$1</code> がbashとgnuplotの間で <strong>もめ事</strong> を起こすこと。そのために <code>gnuplot &lt;&lt; EOF</code> スタイルでgnuplotスクリプトを素直にbashに埋め込むことができませんでした。それを迂回するためにこんな形でしのいでいます。回避できるので大きな問題ではありませんが、簡単にエスケープ？する方法が他にもあるんだとは思いますが・・・（笑）</p>
+<h3 id="追記-上記-もめ事-解決しました">（追記）上記「もめ事」解決しました！</h3>
+<p><a href="https://groups.google.com/forum/m/#!topic/comp.graphics.apps.gnuplot/JCNS96hGaIg">こちらのサイト</a> にすばらしい情報がありました。gnuplotの <code>column()</code> 関数を使う方法です。たとえば次のようにします：</p>
+<pre><code class="language-nil" data-lang="nil">（旧）   using ($2*0.5):0:($2*0.5):(0.35):yticlabels(1)\
+（新）   using (column(2)*0.5):0:(column(2)*0.5):(0.35):yticlabels(1)\
+</code></pre><p>これで、 <code>gnuplot &lt;&lt;EOF 〜 EOF</code> スタイルが使える範囲がぐっと増えます。</p>
+<h2 id="使いみちなど">使いみちなど</h2>
+<p>前回の水平バーチャートも今回の予算消化チャートも、お金の動きを <strong>ワンクリック</strong> またはコマンド一発で <strong>リアルタイム</strong> に確認するための <strong>道具</strong> として使っています。そうした用途にはいわゆる <strong>ダッシュボード</strong> を使うのが王道のような気もします。現在、そっちに向けて色々考えているところですが、一つの有力な候補は <a href="https://grafana.com/"> <strong>Grafana</strong> </a>でしょうか。Ledgerと組み合わせて使っている先例もあるので、そのうちトライしてみたいと思っています。</p>
+<h2 id="acknowledgement">Acknowledgement</h2>
+<p>次のサイトがとても参考になりました。</p>
+<ul>
+<li><a href="https://github.com/cbdevnet/ledger-reports">ledger-reports</a></li>
+<li><a href="https://groups.google.com/d/msg/comp.graphics.apps.gnuplot/YkZJ6EdS5MM/S9jFF0yu6qIJ">https://groups.google.com/d/msg/comp.graphics.apps.gnuplot/YkZJ6EdS5MM/S9jFF0yu6qIJ</a></li>
+</ul>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2020-03-09T19:40:00&#43;0900 class="date">Monday, March 9, 2020</time>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://born-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/" class="prev">予算消化率の水平ゲージをledger-cliとgnuplotで描く</a>
+      
+      
+      <a href="https://born-in-bingo.netlify.app/posts/broken-histogram/" class="next">Give me a break!</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <span>&copy; 2021 <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://born-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

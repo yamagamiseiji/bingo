@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yam’s Peace Blog</title>
+    <link>https://born-in-bingo.netlify.app/</link>
+    <description>Recent content on Yam’s Peace Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://born-in-bingo.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://born-in-bingo.netlify.app/about/about-me/</link>
+      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/about/about-me/</guid>
+      <description>Coming soon….</description>
+    </item>
+    
+    <item>
+      <title>ごあいさつ</title>
+      <link>https://born-in-bingo.netlify.app/posts/kojo/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/kojo/</guid>
+      <description>これまで2年ほどブログ書きは下のようなフローでやってきました。
+Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
+    </item>
+    
+    <item>
+      <title>Hugoのテーマえらび</title>
+      <link>https://born-in-bingo.netlify.app/posts/theme-selection/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/theme-selection/</guid>
+      <description>このサイトの目的はブログなので Hugo Themes(Tag: blog) の中からmixedpaterを使わせてもらうことにしました。
+当初の希望  個々の記事のタイトルと内容が数行程度表示されるパートがほしい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい 記事1本を1ファイルにしたい  だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、これにしました。</description>
+    </item>
+    
+    <item>
+      <title>ドメイン名の由来</title>
+      <link>https://born-in-bingo.netlify.app/posts/origin-of-domain-name/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/origin-of-domain-name/</guid>
+      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名は born-in-bingo.netlify.app です。
+由来はとても単純。bingoは英語じゃあなくて地名の「 備後 （びんご）」でボクの生まれ故郷です。</description>
+    </item>
+    
+    <item>
+      <title>古い道具たち – 折りたたみワークベンチ</title>
+      <link>https://born-in-bingo.netlify.app/posts/old-workbench/</link>
+      <pubDate>Tue, 03 Nov 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/old-workbench/</guid>
+      <description>知人の紹介でこの土地＝片品村にお世話になっていますが、 ん十年前 にウッドデッキを作ったりするために色々な工具や道具を購入しました。この 折りたたみワークベンチ も、ん十年来の付き合いです。
+長い付き合いの期間中、使わないときは一年中 屋外 に置きっぱなしにしていました。一応ブルーシートで覆ってはいましたが、ここの標高は1,000mほどあります。冬場は天板の高さまで雪が積もります。そうしたとても厳しい、というか悪条件の中で長年「屋外生活」をさせた道具が急にいとおしくなってきました。</description>
+    </item>
+    
+    <item>
+      <title>古い道具たち – B＆Dのジグソー</title>
+      <link>https://born-in-bingo.netlify.app/posts/old-jigsaw/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/old-jigsaw/</guid>
+      <description>しばらくぶりのブログ投稿です。今回はDIYっぽい話題です。
+5mmほどの厚みの合板を丸く切って直径約40cmの円盤に加工したい ということで、久しぶりに工具箱から ジグソー を引っ張り出しました。ブラック・アンド・デッカー（ B&amp;amp;D ）社の製品で型番は 7504-03/04 。記憶にないほど大昔に入手したものです。写真のようにホコリまみれでした。</description>
+    </item>
+    
+    <item>
+      <title>花豆の発芽と積算温度</title>
+      <link>https://born-in-bingo.netlify.app/posts/hanamame-sprouting/</link>
+      <pubDate>Fri, 12 Jun 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/hanamame-sprouting/</guid>
+      <description>はじめに 今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図1）。
+  Figure 1: 花豆の発芽と子葉になるまでの経過（ N=40 ）。Y軸は種・苗のステータス（種、発芽、子葉）を累積パーセントにしたものです。X軸の第1軸は年月日、第2軸は積算温度（ ℃ ）。</description>
+    </item>
+    
+    <item>
+      <title>Give me a break!</title>
+      <link>https://born-in-bingo.netlify.app/posts/broken-histogram/</link>
+      <pubDate>Wed, 22 Apr 2020 10:21:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/broken-histogram/</guid>
+      <description>新型コロナによってたくさんの国民の 生命財産 が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた 税金 をどうして国民のために使えないのか。もういい加減にして欲しい！ &amp;lsquo;Give me a break !</description>
+    </item>
+    
+    <item>
+      <title>予算消化状況を日々 ledger-cliとgnuplotでモニターする</title>
+      <link>https://born-in-bingo.netlify.app/posts/daily-expns-watcher/</link>
+      <pubDate>Mon, 09 Mar 2020 19:40:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/daily-expns-watcher/</guid>
+      <description>新型コロナウイルス という外来の危機（ 外患 ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという 内憂 が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが 挙国一致 してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 「帝国」 はこんな風にして 内側 から崩壊するんですね。</description>
+    </item>
+    
+    <item>
+      <title>予算消化率の水平ゲージをledger-cliとgnuplotで描く</title>
+      <link>https://born-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/</link>
+      <pubDate>Fri, 21 Feb 2020 18:05:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/</guid>
+      <description>きっかけ 新型コロナウイルス が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の 支出予算 がどれくらい消化されているかを表示する 水平ゲージ （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</description>
+    </item>
+    
+    <item>
+      <title>ぼちぼちですが可視化してます</title>
+      <link>https://born-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/</link>
+      <pubDate>Fri, 31 Jan 2020 12:29:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/</guid>
+      <description>ここでは、 Ledger-cli （3.11）と Gnuplot （5.28）および bash （on ubuntu16.04）の組み合わせで描いた各種グラフのとりあえず「 見た目 」だけを紹介します。中身の説明とかソースなどは後日、GitHubとかに上げます。</description>
+    </item>
+    
+    <item>
+      <title>忘年会会計をledger-cliで</title>
+      <link>https://born-in-bingo.netlify.app/posts/%E5%BF%98%E5%B9%B4%E4%BC%9A/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/%E5%BF%98%E5%B9%B4%E4%BC%9A/</guid>
+      <description>忘年会シーズン 忘年会シーズンですね。
+最近は 会社の忘年会 への風当たりが強くなってきています。とくに若い世代に不賛同の声が多いようです。その一方で、年長者には伝統的な行事のひとつとして継続して欲しいという気持ちがあるのも分かります。
+  若い世代と年長者の両方を立てるために、忘年会のお約束として「出席を無理強いしない」「宴席で仕事の話はしない」「セクハラ・パワハラ・アルハラはしない」などを申し合わせるのはどうでしょうか。</description>
+    </item>
+    
+    <item>
+      <title>榎下城と観護寺</title>
+      <link>https://born-in-bingo.netlify.app/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/</link>
+      <pubDate>Sun, 15 Dec 2019 13:13:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/</guid>
+      <description>榎下城址 ボクの自宅の最寄り駅は横浜線・十日市場ですが、そのお隣の駅＝ 中山駅 の近くに「 榎下城址 」があります。榎下城址へは、自宅から新治市民の森 を抜けるルートで徒歩30分程度です。
+さて、図1は榎下城址の銘板です。かなり古びて傷んでいますが、図がおもしろいので記録しておきました。銘板にあるように、 榎下城 が築城されたのは永享年間（1429年〜1441年）で関東管領・上杉 憲清 （生没年？）によるとされています。憲清は宅間上杉家の筆頭四家の流れをくむ名家の出でした。</description>
+    </item>
+    
+    <item>
+      <title>Ledger-cliで「車検」の転記</title>
+      <link>https://born-in-bingo.netlify.app/posts/%E8%BB%8A%E6%A4%9C%E8%BB%A2%E8%A8%98/</link>
+      <pubDate>Fri, 06 Dec 2019 15:29:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/%E8%BB%8A%E6%A4%9C%E8%BB%A2%E8%A8%98/</guid>
+      <description>車検哀歌 12月2日（月）、車検が終わりました。毎度のことながら車検は金がかかりますね（涙）。
+  まずは２年分の税金（ 重量税 ）と 自賠責保険料 そして 手数料 （印紙代）、これはキャッシュでディーラに預けます。その他にクルマの状況によっては 点検整備費 がどっさり請求されます。よく見るとワイパー交換とか、わざわざディラー様でやらなくても通販などで安く買え、交換も簡単というものまで入ってきますよね（笑）。車種によりますが、わが愛車フォレスターではトータルでざくっと15万円前後というイメージです。</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（10）</title>
+      <link>https://born-in-bingo.netlify.app/posts/10th-step/</link>
+      <pubDate>Tue, 03 Dec 2019 21:05:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/10th-step/</guid>
+      <description>今回をもって、とりあえずシリーズ的なイントロ的投稿は 打ち止め にします。今後は、これまで以上にトピックベースの ショート・ショート 形式での記事にします。
+帳簿の厳密さ・細かさについて このシリーズの (3)で、小額キャッシュの扱いについて、「あまり細かいことはさておいて大雑把に行きましょう」という風な記述をしました。現在は、この考え方はかなり変わってきています。</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（9）</title>
+      <link>https://born-in-bingo.netlify.app/posts/9th-step_ledger/</link>
+      <pubDate>Fri, 04 Oct 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/9th-step_ledger/</guid>
+      <description>2019年10月1日から消費税が（一部）10%に増税になりました。ボクは経済学が専門ではありませんが、不況下で増税するのはどういう理屈なんでしょうか？不況には 減税 するものと思っていました。経済の専門家のみなさんはオッケーなんですかね？
+ま、それはともかくとして、庶民としてはなんとか対応しなければならないわけです。その一つが家計簿などの帳簿でどうやって仕訳するか、です（小さいなぁ〜ｗ）。
+物品やサービスごとに税率が8%だったり10%だったりするだけならば、帳簿書きは簡単。ですが、今回は増税に同期して キャッシュレス還元 という不思議な仕掛けが始まりました。ここでは、とりあえずそれへの対応を紹介します。
+キャッシュレス還元が始まった これが 増税 とペアになって始まったこと、それから８ヶ月後には終わりになることなど、とても イミフ な状況ですが、今日（10月3日）、増税後はじめてセブンイレブンで買い物をしてレシートをもらいました。次のような内容でした：</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（8）</title>
+      <link>https://born-in-bingo.netlify.app/posts/8th-step_ledger/</link>
+      <pubDate>Mon, 16 Sep 2019 10:10:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/8th-step_ledger/</guid>
+      <description>高速道路料金、高い！ 日本の高速道路料金は 不当に高い ですよね。誰もがそう感じていると思います。
+一体どうなっているのか、 国際比較 のデータを見たいと思って報告書や資料、ネットを探しても、なかなかこれというものが見つかりませんでした。つい最近、偶然、こちらにとてもコンパクトにまとまったデータを見つけました。元は英語だったので日本語にさせてもらいました。なお、「円」換算はその日のレートによって異なります。およその目安としてごらんください。
+  Figure 1: 高速道路料金国際比較（https://livejapan.</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（7）</title>
+      <link>https://born-in-bingo.netlify.app/posts/7th-step_ledger/</link>
+      <pubDate>Wed, 14 Aug 2019 12:30:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/7th-step_ledger/</guid>
+      <description>AndroidタブレットでLedger cli 家計簿のみならず全ての会計帳簿は 即時性 と 継続性 を基礎にした 正確さ が命です。</description>
+    </item>
+    
+    <item>
+      <title>ハクビシンとのたたかい(2)</title>
+      <link>https://born-in-bingo.netlify.app/posts/2nd_fight_againt_maskedmusang/</link>
+      <pubDate>Sun, 11 Aug 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/2nd_fight_againt_maskedmusang/</guid>
+      <description>本題に入る前に ボクはコーヒーが大好きです。１日に３杯は飲みます。朝食、昼食の後、３時のおやつの時間、それから夜に宴席があると食後に１杯という感じです。
+大学を定年退職する際に、ほとんどの私物は廃棄したり、訪ねてきた卒業生の方たちにgive awayしましたが、荷造りして大事に持ち帰った少数の物品のなかの１つが図1 のエスプレッソマシン（Saeco Taleaです）。
+  Figure 1: 愛用のエスプレッソマシン。今や廃版ですが現役ばりばり。</description>
+    </item>
+    
+    <item>
+      <title>ハクビシンとのたたかい（1）</title>
+      <link>https://born-in-bingo.netlify.app/posts/fight_againt_maskedmusang/</link>
+      <pubDate>Thu, 08 Aug 2019 13:47:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/fight_againt_maskedmusang/</guid>
+      <description>忌避剤デフューザー（発散器）の効果 これまでの経過 ８月２日 づけの投稿（ハクビシンめ！ ）で、梅雨明けとともにミニトマトが色づきはじめたこと、それと同時に夜中にハクビシンが畑に出没するようになり、トマトを喰い散らかすようになったことを報告しました。また竹酢液を長期にわたって発散させる仕掛け＝ 忌避剤デフューザー （発散器）を設置したことを報告しました。
+どうしても ８月３日 には横浜に戻らなければならない用事があったため、 竹酢液デフューザー に加えて きざみニンニク と 防鳥ネット を防御のために仕掛けておきました。きざみみニンニクは、マルチと周辺の土壌にたっぷりまいておきました。また防鳥ネット（30mm目）は、ハクビシンが歩くと、否が応でも足にまとわりついて引っかかるように、トンネル内にできるだけ ユルユル に張りました（図1）。ネットの半分以上は地面にフンワリとつくねてありますので、「張った」というよりは「 垂らした 」というべきでしょうか。</description>
+    </item>
+    
+    <item>
+      <title>ハクビシンめ！</title>
+      <link>https://born-in-bingo.netlify.app/posts/masked-musang/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/masked-musang/</guid>
+      <description>7月の末、梅雨明けとともに 梅雨が開けて、遅れていたミニトマトの実がやっとと赤くなってきた、と思っていたら、 7月27日 頃から毎夜、 ハクビシン の襲撃を受けるようになりました。
+当初は熟した実が少ないので、一晩に３，４個の食いカスがあるという状況でした。しかし 7月30日 からは、数え切れないほど食い散らかした跡が見られるようになりました。</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（6）</title>
+      <link>https://born-in-bingo.netlify.app/posts/6th-step_ledger/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/6th-step_ledger/</guid>
+      <description>グラフを描いてみました シリーズの（1）で家計簿には 可視化 の必要性は大きくないと書きましたが、そうは言っても、Ledgerでできないわけではありません。そこで今回はとりあえずシンプルな図を描いてみました。
+4月以降からのクルマに関係する経費（いわゆる「車両費」）の月ごとの推移を 積み上げ棒グラフ の例図にしたものです。3月は一部だけデータがあったので、それもプロットしています。
+  Figure 1: Ledgerとgnuplotを組み合わせてプロットした例図</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（5）</title>
+      <link>https://born-in-bingo.netlify.app/posts/5th-step_ledger/</link>
+      <pubDate>Sun, 21 Jul 2019 18:26:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/5th-step_ledger/</guid>
+      <description>再訪　「借方」「貸方」 このシリーズ（４）でもお話しましたが、「借方」「貸方」という語について考えれば考えるほど目まいと頭痛がしてきます。
+しかし理屈はともかく、「借方」「貸方」を仕訳帳の 右 に書くか 左 に書くかについては、とても面白い「丸暗記の仕方」があることを最近知りました（笑）。大学入試の受験生向けに、いろいろな覚え方の秘訣集が出版されていますが、それと同じような暗記法があるんですね。</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（4）</title>
+      <link>https://born-in-bingo.netlify.app/posts/4th-step_ledger/</link>
+      <pubDate>Sun, 07 Jul 2019 16:15:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/4th-step_ledger/</guid>
+      <description>トランザクションのスケジューリング 繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。
+そのため結構四苦八苦しましたが、ここの記事を見て「目からウロコ！」。やり方は簡単で、まずホームディレクトリに ledger-schedule.ledger という名前（ディフォールトです）で、次のようなコンテンツのファイルを作ります：
+;;; 毎月 [*/*/01] NTTコミュニケーション Expenses:通信費 4590 JPY Assets:三菱UFJ [*/*/05] 東京ガス Expenses:公共料金:ガス 4000 JPY Assets:三菱UFJ ： ;;; 隔月 [*/E/01] 団地管理費 Expenses:管理費:横浜 40400 JPY Assets:三菱UFJ ： ;;; 年に1回 [*/03/31] 日本基礎心理学会 Expenses:諸会費 9000 JPY Assets:Cash ： そして、Emacsでメインのledgerファイルを開き、メニューから、「Ledger」 &amp;ndash;&amp;gt; 「Show upcoming transaction（C-c C-u）」をクリックすると、本日から7日 前 および15日 後 の間の定期的トランザクションの候補が上記ファイルから読み出されて、2ndバッファに表示されます。ユーザはそれを コピペ して使う、というしかけです。</description>
+    </item>
+    
+    <item>
+      <title>だんだん日本ワインが・・・</title>
+      <link>https://born-in-bingo.netlify.app/posts/tdm1874/</link>
+      <pubDate>Sat, 06 Jul 2019 11:49:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/tdm1874/</guid>
+      <description>自宅からの散歩エリア内というか、散歩の帰りに立ち寄れる場所に TDM1874横浜 があります(http://www.tdm1874brewery.com/ja/)。昨日、曇り空ながら雨が降っていないのをこれ幸いに、ちょっと立ち寄ってSogga pere et filsのシャルドネを1本購入してバックパックに入れて帰ってきました。
+  Figure 1: Sogga Wine</description>
+    </item>
+    
+    <item>
+      <title>みなさん、ごちそうさまでした・・・</title>
+      <link>https://born-in-bingo.netlify.app/posts/leoville1979/</link>
+      <pubDate>Sat, 22 Jun 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/leoville1979/</guid>
+      <description>2019年3月16日（土）の「送別会」でみなさまからプレゼントされた1979年のワイン（図1）を先日、抜栓し賞味させていただきました。SNSでは速報でお知らせいたしましたが、もうすこし詳しくご報告申し上げます。
+  Figure 1: Leoville du Marquis de Las Cases(1979)</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（3）</title>
+      <link>https://born-in-bingo.netlify.app/posts/3rd-step_ledger/</link>
+      <pubDate>Fri, 07 Jun 2019 18:56:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/3rd-step_ledger/</guid>
+      <description>この（３）でも「その（２）」に引き続き、ちいさなTipsを備忘的に記します。
+Adjustmentsを使おう 銀行からの口座残高のお知らせと自分のLedgerとの間で、残高が不一致となることは珍しくはありません。そんな時に、帳合を取るために使うのが Adjustments （調整）というトランザクションというか裏ワザ。
+たとえば、銀行からの残高をチェックすると35,000円だったけど、ledgerでbalしたら、Bank bal = 45,000になっていた：</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://born-in-bingo.netlify.app/about/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/about/</guid>
+      <description>Written in Go, Hugo is an open source static site generator available under the Apache License 2.</description>
+    </item>
+    
+    <item>
+      <title>About Hugo</title>
+      <link>https://born-in-bingo.netlify.app/about/about/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/about/about/</guid>
+      <description>Written in Go, Hugo is an open source static site generator available under the Apache License 2.</description>
+    </item>
+    
+    <item>
+      <title>手作りポット苗トレーラック for フォレスター</title>
+      <link>https://born-in-bingo.netlify.app/posts/seedling-rack/</link>
+      <pubDate>Fri, 24 May 2019 22:25:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/seedling-rack/</guid>
+      <description>ボクが趣味で土いぢり・畑作業をしているのは群馬の標高1,000メートルの村です。村では、5月20日以前に苗を畑に定植するのはとても危険とされています。もちろんへいちゃらな年もあるにはありますが、遅霜がくると畑の作物たちは（種類によりますが）一夜にして絶滅します。
+そこで地元の農家の方たちは、5月末の苗定植に向けて、ゴールデン・ウィークの前後から温室や納屋で苗のケアをしながら育苗の作業をされています。しかし、ボクらのように群馬と横浜の二重生活をしている場合には、現地で苗の面倒を見ることはできません。群馬に常駐する誰かが散水とか温度管理とかをしてくれれば良いでしょうが、それは無理な相談。
+今までどうしていたかというと、主要な作物はゴールデン・ウィーク明けから、まずは横浜でポットに種まきして育苗を始め、ポット内で苗がほどよく成長してきたら、それを群馬に運び、畑に定植します。とくに花豆についてはかれこれ「ん十年」もこの方式でやってきました。
+花豆は、タイミングさえちゃんとしていれば、種を畑に直植えしても育ちますが、ここ二十年ほどは、花豆が双葉になった頃を見計らって、山から鹿が降りてきて、畑を襲って新芽のほとんどを食ってしまいます。そうすると花豆の赤ちゃんは単なる「棒っこ」の状態になって全員お陀仏です。だから、本葉プラス少し弦（つる）が出るまで育苗しておいて、畑に定植していたわけです。
+けれども、最近だんだん横浜で育苗する作物が増えてきています。今年は米なす、オクラ、ロマネスコ、ズッキーニなどなど・・・。そうすると今度は別の問題が・・・。
+トランスポーテーション問題 荷台の広さが自慢のスバル・フォレスターも、さすがに育苗したポット苗をポット苗トレーに入れた状態で、平積みで運べる数には限りがあります。
+  Figure 1: ポット苗トレー（W600mm x D400mm x H75mm）</description>
+    </item>
+    
+    <item>
+      <title>「菊鹿」 – my favorite</title>
+      <link>https://born-in-bingo.netlify.app/posts/kikuka/</link>
+      <pubDate>Mon, 20 May 2019 00:08:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/kikuka/</guid>
+      <description>近年、日本ワインがどんどんレベルを高めていて美味しくなっているのは分かっているつもりです。けれども、コストパファーマンスという意味では、なかなか難しい側面があります。これまで、ボクらが日々飲むワインで、たとえば1,000円前後のワインでいえば、国産ワインは、新世界やフランス、イタリアなどのワインを比べると、申し訳ありませんが、海外のワインを飲んだ方が満足度が高かったです。
+それに加えて、ご存知の通り2月1日に日本と欧州連合（EU）による経済連携協定（EPA）が発効しました。この先、EUからの輸入品にかかる関税がワインを含めて大幅に撤廃されます。それを記念して、EUワインのバーゲンが多数の小売店で展開されています。とても喜ばしい流れだとボクは思っています。日本ワインはこれから正念場でしょうか。
+今日の晩酌は菊鹿 ところで今日は、大事に保管していた「菊鹿（きくか）」を満を持して開けて晩酌にしました。ワインのあては、鮮度抜群の群馬県片品村のゼンマイ、コゴミ、そしてカリフォルニア産のアスパラ。それから野性的な群馬のこんにゃくと豆腐の味噌田楽、メインはノールウェイ産の生鮭を全粒粉パン粉をまぶしてフライにしたもの。パンはフランス産小麦粉のフランスパンを焼きたてアツアツ。仕上げは塩分少なめながら、深い滋味にあふれたとろとろクリーミィーなブリー。
+  菊鹿とのゆかり それで、「菊鹿」とボクの関係ですが、まず、日本ワインの中でボクの大好きなワインの一つです。コスパの埒外にある、そんなワインです。</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（2）</title>
+      <link>https://born-in-bingo.netlify.app/posts/2nd_step_ledger/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/2nd_step_ledger/</guid>
+      <description>はじめに Ledger というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて ランダム な小さな事例集というか、ちょっとした カンニングペーパ 風なメモにしました。
+トランザクション記帳について 日付けの手抜き入力 毎回、2019/と西暦まで入力するのがうざい 次のように、第1行目に Y 2019 とか書くと、西暦年の入力は不要になります：</description>
+    </item>
+    
+    <item>
+      <title>プレーンテキストファイルで「複式」家計簿（１）</title>
+      <link>https://born-in-bingo.netlify.app/posts/1st_step_ledger/</link>
+      <pubDate>Sun, 28 Apr 2019 09:25:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/1st_step_ledger/</guid>
+      <description>はじめに 簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger1のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳2のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。
+Ledgerのインストール インストール先のハードウエアは、ThinkPad X230（HDDはSSDに換装済）です。ソフトウエア環境は、Ubuntu16.04/Emacs25.3.2/Ledger3.1.1です。</description>
+    </item>
+    
+    <item>
+      <title>「而今」とスイングボトル</title>
+      <link>https://born-in-bingo.netlify.app/posts/jikon/</link>
+      <pubDate>Mon, 15 Apr 2019 23:29:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/jikon/</guid>
+      <description>今宵から「而今」・・・ 先般、定年退職に際してのお祝いということでぼくの日本酒の「お師匠さん（C・SKGMさん）」から、三重の銘酒＝「而今」を頂戴しておりましたが、本日より晴れて飲み始めました。
+頂戴したのが「生」だったものですから、どうしても冷蔵保存が必要でした。しかし、自宅にある冷蔵庫では日本酒の一升瓶を立てて格納・保存できないため、「而今」の一升瓶と同色の色付きスイングボトル(720ml)を購入し、それに詰め替えて冷蔵しておりました。
+  Figure 1: 日本酒「而今」とスイングボトル</description>
+    </item>
+    
+    <item>
+      <title>さようなら, マイPHS！</title>
+      <link>https://born-in-bingo.netlify.app/posts/keitai%E6%A9%9F%E7%A8%AE%E5%A4%89/</link>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/keitai%E6%A9%9F%E7%A8%AE%E5%A4%89/</guid>
+      <description>PHSの最期 Willcom以来、長らくPHS（070-xxxx-yyyy）を愛用していましたが、Willcomが2014年にSoftBank傘下のY!mobileブランドとなったのが運のつき（笑）、悲しいかな、ついに2020年7月にはサービス停止になるとのこと。
+4月になっていくらか時間ができたので、この先、音声通話のための携帯電話をどうすべきかについて、ぼくのライフスタイルをベースに、通信料金をできるだけ安く抑えるにはどうしたらよいか、真剣に検討しました。その結果、いわゆるスマホではなくて、Y!mobileの Simply という単機能の携帯電話（図1)に機種変することにしました。
+  Figure 1: 4月からの通話端末Y!</description>
+    </item>
+    
+    <item>
+      <title>退職祝賀会の写真</title>
+      <link>https://born-in-bingo.netlify.app/posts/getting-snap-photos/</link>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/getting-snap-photos/</guid>
+      <description>2019年3月16日（土）に開催していただいたボクの退職祝賀会の多数の写真が幹事のみなさんのご尽力で本日公開されました。
+  Figure 1: 集合写真（2019/03/16）
+  ご参加されたみなさんは、当日配布された「式次第」にアクセス方法が書かれていますので、それをご覧ください。また当日、都合で参加されなかった方々も、祝賀会幹事のメールアドレス：　yamagamisensei＠gmail.</description>
+    </item>
+    
+    <item>
+      <title>山研のみなさん, ありがとうございました！</title>
+      <link>https://born-in-bingo.netlify.app/posts/soyokunoma-speech/</link>
+      <pubDate>Tue, 19 Mar 2019 22:27:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/soyokunoma-speech/</guid>
+      <description>退職祝賀会スピーチ原稿1 ごあいさつ　  日時： 2019年3月16日（土）13時30分〜16時 場所： 専修大学生田3号館7F　蒼翼の間  みなさん、今日は年度末3月のどまんなかの週末、それぞれのお立場で一番お忙しい時期に、こんなにも多数のみなさんにおいでいただき、本当にありがとうございます。感謝の言葉もありません。</description>
+    </item>
+    
+    <item>
+      <title>vivat senshu!</title>
+      <link>https://born-in-bingo.netlify.app/posts/vivat_senshu/</link>
+      <pubDate>Sun, 17 Mar 2019 22:09:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/vivat_senshu/</guid>
+      <description>退職者代表スピーチ1　（定年退職者慰労会）  日時： 2019年3月14日（木）17時〜19時 場所： ホテル・グランドパレス＠九段下  ごあいさつ 人間科学部の山上です。ご指名を頂きましたので、僭越ではありますが、定年退職の先生方、職員の皆様方を代表・・・というか代理として一言ご挨拶申し上げます。本日は、私ども退職する教員・職員のために、このような慰労会をお持ち頂き、ありがとうございます。こころから御礼申し上げます。</description>
+    </item>
+    
+    <item>
+      <title>山研年報に関する速報です</title>
+      <link>https://born-in-bingo.netlify.app/posts/yamaken/</link>
+      <pubDate>Thu, 07 Mar 2019 21:35:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/yamaken/</guid>
+      <description>Vol.9 の相互校閲プロセスが完了しました！ 2019年02月28日（木）をもって、山研年報 Vol.9 (2019)の学生相互校閲（peer review）プロセスが完了しました。1月19日に卒業論文の相互校閲作業を開始して以来、40日間もの大奮闘でした。みなさん、ほんとうにお疲れ様でした！　Vol.9 の相互校閲プロセスの詳細は こちら をご覧ください。プロセスの公開期間は数カ月程度を予定しています。</description>
+    </item>
+    
+    <item>
+      <title>名刺を自作しました</title>
+      <link>https://born-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</link>
+      <pubDate>Wed, 27 Feb 2019 08:39:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</guid>
+      <description>自作するわけ まもなく（2019年3月末）大学を退職するので、４月以降は、
+ 名刺が大量に必要な場面への出番はなくなる 大学の費用で印刷してもらえない（これが最大の理由ｗ）  少ない枚数の名刺印刷を私費で印刷屋さんに依頼するのはどう考えてもコスト的に見合わない。だとしたら、この際、 人生初 の名刺自作にトライしようと思い立ったわけ。備忘も兼ねてここに紹介する。</description>
+    </item>
+    
+    <item>
+      <title>リモート温度計プロジェクト</title>
+      <link>https://born-in-bingo.netlify.app/posts/temp_katashina_prj/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/temp_katashina_prj/</guid>
+      <description>ねらい 寒冷地に別荘とか別宅とかをお持ちの方は、天気予報アプリなどでこまめに現地のお天気や温度をチェックされているようです。しかし困ったことに、人里離れた地方になればなるほど、また山岳地になればなるほど、メジャーな天気予報の観測点が、自分の調べたい場所と離れてきます。またさらに悪いことに、山間（やまあい）の土地だと、わずか数百メートル離れただけで、微妙な地形の違いによって日当たりや風の流れが変わります。温度も湿度もそれに伴って大きく変化します。
+2016年（平成28年）秋、武尊山の山麓にある畑小屋の室内温度と隣接する畑の気温を、本拠地であるヨコハマから、スポット的かつできるだけリアルタイムにモニターしたいと思い立ち、いろいろ試行錯誤の結果、とても原始的な方法ではありますが、何とか実用的な形ができあがりました。実際に運用を開始してから既に2年半、とくに大きな問題なく動いていますので、備忘もかねてここに紹介します。
+基本ポリシー 内外温度計を使って、室内温度は親機、屋外（畑）の気温は子機で測定します。PCにつないだカメラでその画面を、一定時間ごとにスチル撮影し保存します。保存した画像ファイルはレンタルサーバに転送します。
+具体的な方法について 用意する物品 必要なものは次のとおりです。</description>
+    </item>
+    
+    <item>
+      <title>新年のご挨拶</title>
+      <link>https://born-in-bingo.netlify.app/posts/2k19happynewyear/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://born-in-bingo.netlify.app/posts/2k19happynewyear/</guid>
+      <description>平成31年（2019年）年頭にあたり年始のご挨拶を申し上げます。明けましておめでとうございます。みなさま方にはすばらしい新年をお迎えになったこととお慶び申し上げます。
+  Figure 1: ことしの年賀状
+  さて私事ではありますが、昭和54年（1979年）入職以来、 40年もの長きにわたりお世話になった専修大学を今年の3月末日を以って定年退職いたします。ご関係のみなさま方には大変にお世話になりました。心から御礼を申し上げます。ありがとうございました。</description>
+    </item>
+    
+  </channel>
+</rss>

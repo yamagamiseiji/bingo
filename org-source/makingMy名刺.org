@@ -1,0 +1,123 @@
+#+title: 名刺を自作しました
+#+date: [2019-02-27 水 08:39]
+
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: posts
+#+options: toc:nil num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+
+* 自作するわけ
+まもなく（2019年3月末）大学を退職するので、４月以降は、
+- 名刺が大量に必要な場面への出番はなくなる
+- 大学の費用で印刷してもらえない（これが最大の理由ｗ）
+少ない枚数の名刺印刷を私費で印刷屋さんに依頼するのはどう考えてもコスト的に見合わない。だとしたら、この際、 **人生初** の名刺自作にトライしようと思い立ったわけ。備忘も兼ねてここに紹介する。
+
+** 自作の方法は大別して次の２つ
+1. TeX/Linuxでやる
+2. 「ラベル屋さん９」/Win10でやる
+いずれにしても、まずは用紙の選択から・・・
+** 用紙の選定
+用紙はエーワン・マルチカード・名刺厚口100枚分、型番＝51275の一択。
+レーザ、インクジェット共用で、名刺100枚分で415円（@Amazon）。
+51275の紙サイズの詳細は図[[fig:1]] を参照のこと。
+
+#+CAPTION: エーワン 51275 サイズ詳細
+#+NAME: fig:1
+#+attr_html: :width 50%
+[[file:F51275_O.jpg]]
+
+なおこのシリーズでは、用紙パッケージに封入されている「テスト印刷」に使えるペーパーがナイス！それから、「マイクロミシンカット」というミシン目加工が素晴らしい。手でもぎっても、エッジがキレイ。
+
+* TeXでがんばる
+[[http://www.w3-4f5f.ee.uec.ac.jp/nameCard/][電通大の名刺作成キット]] の **j-namecard.tex** を使わせて頂く。
+実際に作る前は、TeXでは自由度小さいかも？と思っていたが、
+意外にも「ラベル屋さん９」よりもTeXの方が自由度が大きく、しかもキレイかも？
+
+** 紙サイズのパラメータ設定
+**j-namecard.tex** の標準設定を、とりあえず１箇所だけエーワン 51275に合わせて修正した。
+#+begin_src latex
+\setlength{\textwidth}{182truemm}
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\oddsidemargin}{14truemm}
+\setlength{\textheight}{275truemm}
+\setlength{\topmargin}{11truemm}  % only this line is changed. 
+\advance\oddsidemargin -1in
+\advance\topmargin -1in	
+\setlength{\footskip}{0in}
+#+end_src
+上で指定されているパラメータの意味は、図[[fig:2]]を参照のこと[ [[http://cns-guide.sfc.keio.ac.jp/2001/11/5/1.html][出典]] ]。
+
+#+caption: TeXの紙サイズパラメータ
+#+NAME: fig:2
+#+attr_html: :width 90%
+[[file:img251.png]]
+
+以下の説明文も図と同一の[ [[http://cns-guide.sfc.keio.ac.jp/2001/11/5/1.html][出典]] ]から。とてもわかりやすい。
+#+begin_quote  
+図からも分かるように，ページ上端と左端はあらかじめ1インチ(25.4mm)ずつ余計に余白がとられています．つまりページ上端から本文領域の上端までの具体的な長さは， \topmargin + \headheight + \headsep にさらに1インチ加えた値となります．個人でそれぞれのパラメータを設定し直す場合はこの点に注意してください．ページ上端や左端を1インチ以下にしたい場合はそれぞれ\topmargin，\oddsidemargin，\evensidemarginに負の値を設定します．
+#+end_quote
+
+** j-namecard.tex での作成例
+今回のMy名刺のデザイン・ポリシイは次のとおり。
+1. 名前と所属、職階を日本語・英語併記にする
+2. SNS（Facebook, Blogs, Twitter）アカウントのQRコードを貼り付ける
+3. 住所、電話番号は掲載しない
+4. 公的メールアドレスのみを掲載する
+組版したA4シートの印刷イメージは図[[fig:texsample]] のとおり。
+
+#+caption: TeXで作成した名刺の印刷イメージ
+#+name: fig:texsample
+#+attr_html: :width 80%
+[[file:x400sample_out.png]]
+
+** Bottom line is ・・・・
+*** すばらしいのは
+1. Emacs/Linuxで作業できるからストレスがないｗ
+2. 用紙に合わせて2x5=10枚分の名刺をA4用紙にしてくれる
+3. フォントサイズをきちんと決められる
+4. 文字の印刷場所を容易かつ精密にコントロールできる
+
+*** 「ラベル屋さん９」に比べてやや劣るのは
+1. 裏表両面のある名刺を作る際の工数
+2. 最後の微調整に試行錯誤が必要となる
+
+* 「ラベル屋さん９」でやる
+** やり方
+1. Win10 でアプリをダウンロードしてインストール・起動する（not ウエッブ版）。
+2. WinなGUIで、ボクには最初はちょっと分かりにくかったが、全体としては無料ソフトとは思えない完成度。特にステップごとの説明書の書き方はとても秀逸。完全な初経験者でもほぼ半日作業かと。
+3. 用紙のディメンションは図[[fig:1]]参照
+
+** COMMENT 試作品
+試作品とはいえ、３月１６日（土）のパーティ用に150枚が必要なので、大急ぎで枚数だけ印刷した。その際のデザイン・ポリシイは上のTeXベースの場合と同じ。
+1. 名前と所属、職階を日本語・英語併記にする
+2. SNS（Facebook, Blogs, Twitter）のQRコードを貼り付ける
+3. 住所、電話番号は掲載しない
+4. 公的なメールアドレスのみを掲載する
+
+*** COMMENT 例
+できたイメージ画像は図[[fig:namecard]]の通り。
+#+CAPTION: 「ラベル屋さん９」による試作名刺#1
+#+NAME: fig:namecard
+#+attr_html: :width 70%
+[[file:jpg名誉教授名刺.jpg]]
+
+** Bottom line is ・・・・
+- メニューやタブを探しながら機能を推定するのが認知的に辛かった（加齢のせいです）。
+- 文字サイズや位置を目でにらみながらマウスで微調整するのは視運動的に苦痛だった（加齢のせいです）。
+- 表面と裏面を並行して作成・編集できるのはすばらしい（図[[ura-omote]] ）。けど、この表裏切替えボタンは、すべての作業が終わるまで目につかなかった（涙）（これも加齢のせい？）
+
+#+caption: 「ラベル屋さん９」で表面と裏面を切り替えるボタン
+#+NAME: ura-omote
+#+attr_html: :width 70%
+[[file:x250ura_omote.png]]
+
+
+* Acknowledgement
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

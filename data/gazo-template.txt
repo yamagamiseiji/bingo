@@ -1,0 +1,4 @@
+#+caption:
+#+attr_html: :width xx%
+#+attr_org: :width yy%
+[[file:

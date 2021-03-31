@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    プレーンテキストファイルで「複式」家計簿（2） | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://born-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://born-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Archives</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">プレーンテキストファイルで「複式」家計簿（2）</h2>
+    <div class="post_content">
+      <h2 id="はじめに">はじめに</h2>
+<p><strong><code>Ledger</code></strong> というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて <strong>ランダム</strong> な小さな事例集というか、ちょっとした <strong>カンニングペーパ</strong> 風なメモにしました。</p>
+<h2 id="トランザクション記帳について">トランザクション記帳について</h2>
+<h3 id="日付けの手抜き入力">日付けの手抜き入力</h3>
+<h4 id="毎回-2019-と西暦まで入力するのがうざい">毎回、2019/と西暦まで入力するのがうざい</h4>
+<p>次のように、第1行目に <strong><code>Y 2019</code></strong> とか書くと、西暦年の入力は不要になります：</p>
+<pre><code class="language-nil" data-lang="nil">Y 2019
+05/01  * Petty Cash
+	Expenses:Cash
+	Assets:BKみずほ
+</code></pre><h4 id="日付けの半自動入力">日付けの半自動入力</h4>
+<p>けど、実際にはもっと便利な方法があります。</p>
+<p><strong><code>C-c C-a</code></strong> でミニバッファに「Transaction: 2019/05/」が表示されます。
+<strong><code>RET</code></strong> すると、今日の日付けが自動的にjournalに書き込まれます。記帳したいトランザクションの日付けが今日でなければ、その日付けを手入力します。いずれの場合にも、日付け順にみてしかるべき場所に、新規トランザクションの種（日付けのみ）が記入されます。</p>
+<h3 id="トランザクション名-アカウント名などの手抜き記帳">トランザクション名、アカウント名などの手抜き記帳</h3>
+<p><strong><code>TAB</code></strong> などによる補完や入力修正機能を使うと、キーを叩く回数を節約できます。たとえば次のようなトランザクションを記帳したいとしましょう：</p>
+<pre><code class="language-nil" data-lang="nil">2019/05/16 Amazon
+    Expenses:Grocery:Food
+    Liabilities:VisaCard
+</code></pre><p>必要なキー入力は：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">C-c C-a RET am RET
+TAB e TAB g TAB ESC RET
+l TAB v TAB
+</code></pre></div><p><strong><code>RET,TAB,ESC</code></strong> 以外の一般文字キーで、入力したのは
+<strong><code>am, e, g, l, v</code></strong> の6文字だけです。ボクがゆっくりタイプしても10秒程度で金額以外は記帳が終わります。</p>
+<p>なお既存のjournalの中に頭文字が同じアカウント名やカテゴリ名があると、手数が増えます。なので、できるだけ最初の第1文字かせいぜい第2文字まででアカウント名などを同定・識別できるようなネーミングを考えておきましょう。（ファイル名を決める際に共通する一般教養ですがｗ）</p>
+<p>もちろんトランザクション、アカウント名に日本語を使っていてもぜんぜん大丈夫。補完や修正は有効にはたらきますが、変換キーを叩かなければならないので、アルファベットだけよりは手数は増えます。</p>
+<h3 id="コピペを活用">コピペを活用</h3>
+<p>Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
+<strong><code>C-c C-k</code></strong> するとEmacsの下半分に次のようなカレンダーが表示されます。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<figure>
+    <img src="/emacs_calendar.png"
+         alt="Figure 1: Emacs内に表示されるカレンダー" width="95%"/> <figcaption>
+            <p>Figure 1: Emacs内に表示されるカレンダー</p>
+        </figcaption>
+</figure>
+
+<p>その中から適当な日にちを選んでクリックします。日付けが選んだ日に変更された上で、
+journal中の正しい日付け位置に複写されたトランザクションが挿入されます。そこで金額だけ修正すればおわり。（家計簿では、金額の修正も必要ないなことが多いのに驚いています）</p>
+<h2 id="絞り込みreportの表示">絞り込みReportの表示</h2>
+<h3 id="よく使う絞り込み">よく使う絞り込み</h3>
+<p>簡単に絞り込みreportを表示する方法をメモしておきます。元帳ledgerファイルのデフォルト指定は終わっているという前提です。指定が終わっていない場合には、ledgerコマンドの後ろに「-f hogehoge.ledger」を追加してください。</p>
+<h4 id="クルマ関係経費だけ表示">クルマ関係経費だけ表示</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b cars
+</code></pre></div><p><strong><code>b</code></strong> は <strong><code>balance</code></strong> の略です。上のように、carsと小文字にしても、大文字になっているCarsも拾ってくれます。</p>
+<h4 id="クルマ-食費-教養娯楽の経費の表示">クルマ、食費、教養娯楽の経費の表示</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b cars food 娯楽
+</code></pre></div><p>並べて書いた経費カテゴリの「すべて」についてのバランスが表示されます。</p>
+<h4 id="上の経費からケーブルtv-など-を除外した表示">上の経費からケーブルTV（など）を除外した表示</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b cars food 娯楽 and not TV
+</code></pre></div><p>カテゴリ名にTVを含む経費は除外して表示します。</p>
+<h4 id="昨日の食費の表示">昨日の食費の表示</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b -p yesterday
+</code></pre></div><p><strong><code>-p</code></strong> は <strong><code>--period</code></strong> の略です。「yesterday」と指定しただけでOKなのがクールですｗ</p>
+<h4 id="この１か月のクルマ関係経費の表示">この１か月のクルマ関係経費の表示</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b cars -p this momth
+</code></pre></div><p>これで、この1ヶ月間のクルマ関係経費になります。
+yesterday, this monthの他、次のような期間指定が可能です（詳しくはマニュアルを参照してください）：</p>
+<pre><code class="language-example" data-lang="example">october
+oct
+this week(day, month, quarter, year)
+next week
+last week
+;
+monthly
+monthly in 2004
+weekly from oct
+weekly from last month
+from sep to oct
+from 10/1 to 10/5
+monthly until 2005
+from apr
+until nov
+last oct
+weekly last august
+</code></pre><h4 id="もっとこまかく期間を限定して経費を表示">もっとこまかく期間を限定して経費を表示</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b cars -b 04/01 -e 04/20
+</code></pre></div><p>この例では、04/01から06/30までの期間におけるクルマ関係経費を表示します。
+<strong><code>-b</code></strong> は <strong><code>-begin=*、 *</code>-e=</strong> は <strong><code>-end</code></strong> の略です。</p>
+<h3 id="register-report">Register report</h3>
+<p>ここまでのreportではすべて、バランス（残高）の金額だけが表示されます。例えば、上の最後の例（＝期間限定のクルマ関係経費バランス）では次のような結果になります：</p>
+<pre><code class="language-nil" data-lang="nil">$ ledger b cars -b 04/01 -e 04/20
+	  30,890 JPY  Expenses:Cars
+	  15,530 JPY    ガソリン
+	   2,700 JPY    整備
+	  12,660 JPY    通行料金
+--------------------
+	  30,890 JPY
+</code></pre><p>この「b」を「r」にするだけで、バランス金額だけでなく、各トランザクションの日付や支出先などの詳細レポートが表示されます：</p>
+<pre><code class="language-nil" data-lang="nil">$ led r cars -b 04/01 -e 04/20
+
+19-Apr-04 ENEOS SS       Expenses:Cars:ガソリン    7,374 JPY   7,374 JPY
+19-Apr-11 沼田往復        Expenses:Cars:通行料金   10,640 JP   18,014 JPY
+19-Apr-15 シェル石油      Expenses:Cars:ガソリン    8,156 JP   26,170 JPY
+19-Apr-17 大師往復        Expenses:Cars:通行料金    2,020 JPY  28,190 JPY
+19-Apr-18 ENEOS SS       Expense:Cars:整備         2,700 JPY  30,890 JPY
+</code></pre><h3 id="その他いろいろ">その他いろいろ</h3>
+<h4 id="トランザクション名での絞り込み">トランザクション名での絞り込み</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger -r @starbacks
+</code></pre></div><p>アカウント名ではなくて、特定のトランザクション（取引）先の名前で整理したいことがあります。上の例のように <strong><code>@</code></strong> （atのつもりですねｗ）をつけるとスタバでの支出のレポートを得ることができます。</p>
+<h4 id="クレカ名での絞り込み">クレカ名での絞り込み</h4>
+<p>あるクレジットカードでどれ位の支出をしたか、これは頻繁にチェックしますね。たとえばVisaCardでの支出をみたければ：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger r visa
+</code></pre></div><p>期間指定をしなければ、びっくりするほどの行数（と金額）が表示されます。それだけ支出したってことですので、反省材料になります。もちろん、合計金額だけでよければ：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b visa
+</code></pre></div><p>これでVisaCardについての「Liabilities」（負債）の金額が表示されます。</p>
+<h4 id="手元にいくら残っているかしら">手元にいくら残っているかしら？</h4>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger b -e 05/20 ^Assets ^Liabilities --invert
+</code></pre></div><p>過去のある年月日における純資産（的な）ものをチェックできます。はたして家計簿で何の意味があるかよく分かりませんがｗ</p>
+<h2 id="使い勝手について">使い勝手について</h2>
+<h3 id="セキュリティとの関連で">セキュリティとの関連で</h3>
+<p>Ledgerプログラムには、 <strong>クラウド</strong> 対応機能が内蔵されていない点が不満であるとの意見があります。けれども仕訳帳journalデータをクラウドに上げておけば、いつでもどこでも瞬時に記帳や編集、レポート作成ができます。しかし、一般のクラウドサービスに上げておいて、万が一データが流出したら、家計簿といえどもちょっとマズイ。企業会計でそれが起こったらただじゃあ済まないと思います。</p>
+<p>そこで、journalデータを <strong>gpg</strong> で <strong>暗号化</strong> してからクラウドに上げることにしました。これで、必要に応じて、暗号化されたファイルを手元のPCにダウンロードし、それを復号化して記帳、編集、レポートを作成することが可能となります。データのセキュリティと使い勝手がほどよくバランスしたと思います。</p>
+<h3 id="レポートの可視化について">レポートの可視化について</h3>
+<p>多くの家計簿・会計ソフトでは、見た目も華やかなグラフ出力が標準的についてきます。それに比べると、Ledgerはとてもプアｗ　というかほぼゼロです。</p>
+<p>Ledgerでも、どうしてもやりたければ、 <strong>gnuplot</strong> と連携できます。gnuplotですよ！個人的には長い付き合いがあるし、自然に使えるという意味ではとても好感度高く、学生言葉で言えば「萌えます」。　しかし、もともと配布されている限りでは、Ledger内のgnuplotグラフはぜんぜん美しくないです。</p>
+<p>けど、家計簿で可視化して見なければならないこと、または他人にプレゼンして理解してもらわなければならないことがあるかしら？と考えてみると、あまり思いつきません。会社の経理とは異なり、家計は固定費が大きく、変動する部分が小さいので、変動部分だけを数値で見れば済む感じ。ただ、株式とか投資信託とか金とかプラチナとか（w）を保有していて、その資産状態を日々、チェックする（という趣味）をお持ちの方は、変動を可視化して「ふむふむ」と満足したり、「あらら」と心配したりするには可視化の機能がもっと充実が望ましいでしょう。</p>
+<h4 id="csvの入出力について">CSVの入出力について</h4>
+<p>上の可視化問題とも関連しますが、LedgerはCSVとの親和性がとても高いです。
+CSVを経由して他の会計ソフトや描画機能と連携することでたいがいの問題は解消するように思われます。この点については、後日ということで・・・</p>
+<h2 id="acknowledgment">Acknowledgment</h2>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2019-05-16T00:00:00&#43;0900 class="date">Thursday, May 16, 2019</time>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://born-in-bingo.netlify.app/posts/1st_step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（１）</a>
+      
+      
+      <a href="https://born-in-bingo.netlify.app/posts/kikuka/" class="next">「菊鹿」 – my favorite</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <span>&copy; 2021 <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://born-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

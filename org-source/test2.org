@@ -1,0 +1,20 @@
+#+title: Test2
+
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: posts
+
+hogehoge.
+
+
+
+改行コード設定
+
+どうなっているの？
+
+
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

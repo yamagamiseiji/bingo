@@ -1,0 +1,240 @@
+#+title: プレーンテキストファイルで「複式」家計簿（5）
+#+date: [2019-07-21 日 18:26]
+
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: posts
+#+options: toc:nil num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+#+TAGS: ledger emacs ledger accounting 
+
+* 再訪　「借方」「貸方」
+このシリーズ（４）でもお話しましたが、
+「借方」「貸方」という語について考えれば考えるほど目まいと頭痛がしてきます。
+
+しかし理屈はともかく、「借方」「貸方」を仕訳帳の *右* に書くか *左* に書くかについては、とても面白い「丸暗記の仕方」があることを最近知りました（笑）。大学入試の受験生向けに、いろいろな覚え方の秘訣集が出版されていますが、それと同じような暗記法があるんですね。
+
+多くの複式簿記入門書に図として紹介されていますし、ネット上にも掲載されています（たとえば [[https://boki.popnavi.net/005/post_8.html][複式簿記入門講座]] など）。要するに「借方」の「 *り* 」が「 *左はね* 」になるから「左に書く」、「貸方」の「 *し* 」が「 *右はね* 」になるから「右に書く」というおぼえ方（笑）。このそもそもの発案者が誰でどの本に書かれたものか、ちょっと興味がありますが、ま、それはそれとして、これで誰でも仕訳帳の左右どちらに書くかは、しっかりと記憶できます。
+
+ところで、この「借方」「貸方」という日本語の生い立ちはなかなか由緒正しいもののようです。福澤諭吉が「 *帳合之法* 」（1873）で使い始めたのが最初とのこと。
+
+#+caption: 「帳合之法」福澤諭吉（1873）表紙
+#+name: hyoshi
+#+attr_html: :width 90%
+[[file:s-choainoho-hyoshi.jpg]]
+
+「帳合之法」は国会図書館でデジタル化した原本をキンドルストアで購入できました！良い時代になったもんです。話は逸れますが、有名な（？）「古来から日本においては、学者は必ず貧乏である。金持ちは必ず無学である。」の文言がこの本の冒頭にあったんですね。
+
+#+caption: 「帳合之法」2ページ
+#+name: 2page
+#+attr_html: :width 90%
+[[file:s-choainoho-page02.jpg]]
+
+** 英語でもたいへんのようです
+
+ところで、どうやら英語を母国語とする人たちにとっても、この *debit* と *credit* は難関のようです。先日Ledger cliに関するGoogle groupで偶然、[[https://groups.google.com/d/msg/ledger-cli/k0ZRUfBWvL4/Dr4GXTGKCQAJ][Martin Blaisさんの投稿]] (2016/02/07)を見かけました。
+
+その投稿の直前に *debit* と *credit* をめぐって混乱しているユーザからの質問があって、それ（=その「苦しみ」）を受けての投稿です。日本語にすると（拙訳）つぎのような感じでしょうか？
+#+begin_quote
+苦しみから自分自身を解放しましょう：「借方」「貸方」という言葉遣いを脳みそから洗い流してください。
+あるのはアカウント（account;勘定）のみ。以上。
+#+end_quote
+英語の原文（ママ）は次のとおりです：
+#+begin_quote
+Save yourself some pain: Flush your brain from the "debit" and "credit" terminology.
+
+Your have accounts. Period. 
+#+end_quote
+ぜひこの先の部分も含めて一読をおすすめしたいと思います。
+コンパクトながら、ボクのような初心者には眼からウロコ的な説明です。
+
+** Ledger cli では
+このシリーズで紹介しているLedgerでは、ポリシーとして意図的に「借方（Debit）」「貸方（Credit）」の語を使わないようにしているようです。Blaisさんの言うとおり、使わなくても、あるいはもしかしたら使わないほうが一般のユーザは助かるのかも知れません。
+
+* tagは便利！ 使わない手は無い！
+家計簿や帳簿をつける際には、しばしば費目や科目（アカウント）の追加・修正あるいは組み換えが必要になります。一般の会計ソフトでは、その作業は結構たいへんです。
+
+しかし、Ledgerは柔軟性が高いので、アカウントの名称や構造をお気楽に変更できます。帳簿をつけ始める際に、アカウントのカテゴリ体系をきちんと設計しなくても、とりあえずの枠で始めれば良いわけです。これがLedgerを使うことの大きなメリットの一つです。
+
+しかし、それでも次から次へと構造を変えるのはできれば避けるほうが望ましいでしょう。
+
+たとえばある支出アカウントが新規に発生したとしましょう。もし今後とも、そのアカウントを含むトランザクションが高頻度で発生するならば、新規カテゴリを作成すれば良いでしょう。たまにしか発生しない場合には、その支出に新しい科目カテゴリを割り当てるのは転記の際に混乱をもたらす原因になりますし、元帳がゴチャゴチャう小るさいものになってしまいます。（次のシリーズで紹介しますが、アカウントの整理には =accounts= コマンドが有効です）
+
+そんな場合に便利なのが *tag* です。使いかたは簡単です。
+トランザクションまたはそれの構成要素であるアカウントに適宜タグをつければよいだけ。それで、 =bal/reg= でレポートを作成する際に、そのタグを使って計算することができます。いま次のようなトランザクションがあるとします：
+#+begin_src
+05/15   Book 1st.
+    Expenses:教養娯楽:Books     1950 JPY
+    Liabilities:Visa
+#+end_src
+このトランザクションで購入した本は、実際には *教養娯楽* 目的ではなくて、知人への *プレゼント* 用だったとします。しかも数年に1回程度しか、そうしたことが発生しないとすれば、次のように、この支出に *presents* というタグをつけます：
+#+begin_src
+05/15   Book 1st.
+    Expenses:教養娯楽:Books     1950 JPY
+    ; :presents:
+    Liabilities:Visa
+#+end_src
+タグ付けのルールは
+- コメント（；）の後ろに2つのコロンの間に、スペースを入れずにタグとなる語を入れる
+- トランザクションへのタグ付けは、第1行目のPayeeの後ろにタグコードを書く
+- アカウントへのタグ付けは、（上の例のように）当該アカウントの次の行にタグコードを書く
+
+これだけです。階層的で多層構造のタグも使えますが、とりあえずは単層の例を示しました。 *tag* を参照してレポートするには、次のように =%= の後ろにタグ語を書きます：
+#+begin_src
+$ led bal %presents
+      1,950 JPY  Expenses:教養娯楽:Books
+
+$ led reg %presents
+2019/05/15 Book 1st.       Expenses:教養娯楽:Books     1,950 JPY     1,950 JPY
+#+end_src
+もちろんタグ語は正規表現を受け付けます。
+
+ *tag* をつかうと良さそうな例としては、
+
+1) 個人的なビジネスと私生活に関わる支出がある場合
+2) 別荘と本宅とで二重生活（？）をしている場合
+3) 家族旅行に関わる支出がある場合
+などで、かつ、それらを独立にカテゴリ化して別計算するほどでもないケースなどでしょうか。
+本格的にビジネスと私生活を分けなければならない場合などには、後述する[[#apply_account][apply account]] を使うことになります。
+
+* 外国通貨の扱い
+たとえばAmazon USAで洋書を購入すると、代金は米ドル建てで支払うことになります。しかし一般的には、日本円ベースのクレジットカードから支払うケースが多いかと思います。そのような場合の転記の仕方は次の通りです：
+#+begin_src
+2019/07/08   Amazon US
+    Expenses:Books                  27.97 USD @ 108.04 JPY
+    Liabilities:Visa
+#+end_src
+これで、27.97ドルの洋書を買いました、支払いはVisaです、当日の円ドルレートは180.04円でしたということになります。この書き方がもっとも基本的なやりかたですが、
+https://www.convalesco.org/articles/2016/11/01/fetching-ledger-exchange-rates.html　
+によい説明があります。それに基づいて、例を上げながら補足的に説明をします。
+
+** まずは上の例のようにアカウントの金額の後ろにレートを書いた場合
+balレポートさせると次のようになります：
+#+begin_src
+$ led bal
+           27.97 USD  Expenses:Books
+          -27.97 USD  Liabilities:VisaCard
+--------------------
+                   0
+#+end_src
+ドルベースでのバランスが表示されます。
+もし、すべてを円換算した結果のレポートを出したい場合には、 =-X JPY= オプションを追加します：
+#+begin_src
+$ led bal -X JPY 
+           3,013 JPY  Expenses:Books
+          -3,013 JPY  Liabilities:VisaCard
+--------------------
+                   0
+#+end_src
+すると、さっきの円ドルレートに基づいてすべて円に換算されたバランスが表示されます。
+
+
+わたしたちの多くは大半の生活を円ベースで暮らしているわけですので、
+その場合にはこのように
+- アカウントの後ろに円ドル換算のデータを追加し
+- レポートは円のみベースで出す
+というのが合理的なやりかただと思います。
+
+しかし、中にはひんぱんに色々な国の通貨を使って経済生活をしている方もいます。
+その場合にはこの方法ではなくて、次の方法、つまり日々の為替換算データをデータベースファイルにして、それに基づいて計算するような形でLedgerを使う方が良いと思います。
+
+** ~/.prices.db ファイルを使う
+ =.prices.db= はディフォールトのファイル名ですが、 =--price-db= オプションでの指定は必須です。次のように =~/.ledgerrc= ファイルに追記しておきましょう：
+#+begin_src
+　　：
+--color
+--date-format %Y/%m/%d
+--price-db ~/.prices.db
+　　：
+#+end_src
+実際の =~/.prices.db= ファイルの中身は、円ドルの為替レートに関しては次のような感じになります：
+#+begin_src
+P 2019/07/08 12:25:00 USD JPY 108.04 
+#+end_src
+このDBファイルがあれば、ledgerファイル内のアカウントで =@108.04 USD= を記述する必要はありません。
+
+ =$ led bal -X JPY= に =-H= オプションをつけると、Ledgerはトランザクションの日の為替レートを =.prices.db= ファイルから読みだして日本円に変換してくれます。いま仮に、07/20の =.prices.db= の中身が次のとおりだとします：
+#+begin_src
+P 2019/07/20 10:01:10 USD JPY 108.2695
+P 2019/07/21 15:41:02 USD JPY 107.7151
+#+end_src
+
+07/21に、次のように =-H=オプションをつけてbalレポートさせると次のように円の値が変わってきます：
+#+begin_src
+$ led bal -X JPY -H 
+           3,022 JPY  Expenses:Books
+          -3,022 JPY  Liabilities:VisaCard
+--------------------
+                   0
+#+end_src
+
+**** xurrency.comから自動的に為替データをゲットする方法
+ =.prices.db= に毎日その都度、為替レートを手入力で追加するのは非合理的です。いろいろな方法がありますが、たとえば、http://xurrency.com から円ドルレートを取得して、 =.prices.db= に追記するスクリプトは次のような感じです。とても原始的ですが、とりあえず動きます（わかりやすくするために余分なコードが入っています）：
+#+begin_src
+#!/bin/bash
+#  https://xurrency.com/usd/jpy/ から「円ドルレート」のみ入手し
+#  $HOME/.prices.db に追記する 
+
+# 「円ドル」レートが表示されたページをゲット
+curl -Ss https://xurrency.com/usd/jpy/ > ~/tmp/xurrency-page.txt
+
+# そのページから為替レートの行のみを抽出し、one-line.txtへ
+grep "1 USD" ~/tmp/xurrency-page.txt > ~/tmp/one-line.txt
+
+# その行の２番め目の'='よりも後ろ(eg. '108.9626 JPY</span> ')を
+# 残して、after-equal.txt へ
+awk -F '=' '{print $3}' ~/tmp/one-line.txt > ~/tmp/after-equal.txt
+
+# そこから数字とピリオドと改行だけを抽出し、RATEに代入
+RATE=`cat ~/tmp/after-equal.txt |tr -cd '0123456789.\n'`
+
+# Ledger の.prices.db用に整形して追記
+prices_db="$HOME/.prices.db"
+date=$(date "+%Y/%m/%d %H:%M:%S")
+echo "P $date USD JPY $RATE" >> "$prices_db"
+
+# 無用になったファイルを削除
+rm ~/tmp/xurrency-page.txt
+rm ~/tmp/one-line.txt
+rm ~/tmp/after-equal.txt
+#+end_src
+
+これで =~/.prices.db= ファイルの末尾に、次のようにスクリプト起動時の円ドルの為替レートが追加されます：
+#+begin_src
+P 2019/07/10 10:47:40 USD JPY 108.6957
+P 2019/07/21 15:41:02 USD JPY 107.7151
+#+end_src
+このスクリプトを適当なタイミングで1日1回自動起動するようにしておけば、 =.prices-db= は常に最新のものになります。
+
+* apply account の使い勝手
+:PROPERTIES:
+  :CUSTOM_ID: apply_account
+  :END:
+
+ =apply account= はアカウントの全カテゴリの *ルート* を新たに追加する際に使います。マニュアルによれば、 =apply account= 記述子に続くアカウントはすべて、指定されたルートの配下になります。Ledgerは階層的なカウントの樹状構造に対応しています。ルートアカウントが2つ（以上）あればとても便利です。そうすれば、たとえば個人的な生活費をPrivateとして、またビジネスに関係する費用をBussinessとして、別々に分けて計上することができます：
+#+begin_src
+apply account Personal
+2011/11/15  Supermarket
+    Expenses:Groceries      $ 50.00
+    Assets:checking
+end apply
+#+end_src
+上のように =apply account= を宣言して、終わったら =end apply= すれば、その間に記帳されたトランザクションは *Personal* というルートの配下になり、 ターゲットアカウントは *Personal:Expenses:Groceries* に、ソースアカウントは *Personal:Assets:checking* になります。
+
+これに続いて、 *Bussiness* にするとトランザクションはビジネス関連となります：
+#+begin_src
+apply account Bussiness
+2011/11/20  
+    Expenses:Travels      $ 500.00
+    Assets:checking
+end apply
+#+end_src
+この =apply account= は、さまざまなフェーズで経済的活動をしている多くの人にとって、とても便利な機能だと思います。
+
+
+* Acknowledgement
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
+

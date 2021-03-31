@@ -1,0 +1,14 @@
+#+title: タイトルをここに
+#+date: 2021-03-25
+
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: posts
+#+options: toc:nil num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+
+記事はここに
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

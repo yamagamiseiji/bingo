@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Yam’s Peace Blog</title>
+    <link>http://localhost:1313/tags/hugo/</link>
+    <description>Recent content in hugo on Yam’s Peace Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ごあいさつ</title>
+      <link>http://localhost:1313/posts/kojo/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/kojo/</guid>
+      <description>Figure 1: テスト画像
+  これまで2年ほどブログ書きは下のようなフローでやってきました。</description>
+    </item>
+    
+    <item>
+      <title>Hugoのテーマえらび</title>
+      <link>http://localhost:1313/posts/theme-selection/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/theme-selection/</guid>
+      <description>このサイトの目的はブログなので Hugo Themes(Tag: blog) の中からmixedpaterを使わせてもらうことにしました。
+当初の希望  個々の記事のタイトルと内容が数行程度表示されるパートがほしい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい 記事1本を1ファイルにしたい  だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、これにしました。</description>
+    </item>
+    
+  </channel>
+</rss>

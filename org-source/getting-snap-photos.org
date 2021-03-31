@@ -1,0 +1,25 @@
+#+title: 退職祝賀会の写真
+#+date: [2019-03-24]
+
+#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_section: posts
+#+options: toc:nil num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+
+
+2019年3月16日（土）に開催していただいたボクの退職祝賀会の多数の写真が幹事のみなさんのご尽力で本日公開されました。
+#+caption: 集合写真（2019/03/16）
+#+name: shugo
+#+attr_html: :width 95%
+[[file:shugo_shashin.jpg]]
+
+ご参加されたみなさんは、当日配布された「式次第」にアクセス方法が書かれていますので、それをご覧ください。また当日、都合で参加されなかった方々も、
+祝賀会幹事のメールアドレス：　yamagamisensei＠gmail.com （＠は半角に直してください）までご連絡いただければ、アクセス方法を教えて頂けるとのことです。
+
+なお公開期限は4月30日までだそうです。よろしくお願い申し上げます。
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
+

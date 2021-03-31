@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Yam’s Peace Blog</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Yam’s Peace Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ごあいさつ</title>
+      <link>http://localhost:1313/posts/kojo/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/kojo/</guid>
+      <description>Figure 1: テスト画像
+  これまで2年ほどブログ書きは下のようなフローでやってきました。</description>
+    </item>
+    
+    <item>
+      <title>Hugoのテーマえらび</title>
+      <link>http://localhost:1313/posts/theme-selection/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/theme-selection/</guid>
+      <description>このサイトの目的はブログなので Hugo Themes(Tag: blog) の中からmixedpaterを使わせてもらうことにしました。
+当初の希望  個々の記事のタイトルと内容が数行程度表示されるパートがほしい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい 記事1本を1ファイルにしたい  だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、これにしました。</description>
+    </item>
+    
+    <item>
+      <title>ドメイン名の由来</title>
+      <link>http://localhost:1313/posts/origin-of-domain-name/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/origin-of-domain-name/</guid>
+      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名は born-in-bingo.netlify.app です。
+由来はとても単純。bingoは英語じゃあなくて地名の「 備後 （びんご）」でボクの生まれ故郷です。</description>
+    </item>
+    
+    <item>
+      <title>古い道具たち – 折りたたみワークベンチ</title>
+      <link>http://localhost:1313/posts/old-workbench/</link>
+      <pubDate>Tue, 03 Nov 2020 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/old-workbench/</guid>
+      <description>知人の紹介でこの土地＝片品村にお世話になっていますが、 ん十年前 にウッドデッキを作ったりするために色々な工具や道具を購入しました。この 折りたたみワークベンチ も、ん十年来の付き合いです。
+長い付き合いの期間中、使わないときは一年中 屋外 に置きっぱなしにしていました。一応ブルーシートで覆ってはいましたが、ここの標高は1,000mほどあります。冬場は天板の高さまで雪が積もります。そうしたとても厳しい、というか悪条件の中で長年「屋外生活」をさせた道具が急にいとおしくなってきました。</description>
+    </item>
+    
+    <item>
+      <title>古い道具たち – B＆Dのジグソー</title>
+      <link>http://localhost:1313/posts/old-jigsaw/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/old-jigsaw/</guid>
+      <description>しばらくぶりのブログ投稿です。今回はDIYっぽい話題です。
+5mmほどの厚みの合板を丸く切って直径約40cmの円盤に加工したい ということで、久しぶりに工具箱から ジグソー を引っ張り出しました。ブラック・アンド・デッカー（ B&amp;amp;D ）社の製品で型番は 7504-03/04 。記憶にないほど大昔に入手したものです。写真のようにホコリまみれでした。</description>
+    </item>
+    
+    <item>
+      <title>花豆の発芽と積算温度</title>
+      <link>http://localhost:1313/posts/hanamame-sprouting/</link>
+      <pubDate>Fri, 12 Jun 2020 00:00:00 +0900</pubDate>
+      
+      <guid>http://localhost:1313/posts/hanamame-sprouting/</guid>
+      <description>はじめに 今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図1）。
+  Figure 1: 花豆の発芽と子葉になるまでの経過（ N=40 ）。Y軸は種・苗のステータス（種、発芽、子葉）を累積パーセントにしたものです。X軸の第1軸は年月日、第2軸は積算温度（ ℃ ）。</description>
+    </item>
+    
+    <item>
+      <title>Test2</title>
+      <link>http://localhost:1313/posts/test2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/test2/</guid>
+      <description>hogehoge.
+改行コード設定
+どうなっているの？</description>
+    </item>
+    
+  </channel>
+</rss>
