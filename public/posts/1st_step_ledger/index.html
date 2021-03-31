@@ -77,7 +77,43 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（１）</h2>
     <div class="post_content">
-      <h2 id="はじめに">はじめに</h2>
+      <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
+<li><a href="#ledger%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">Ledgerのインストール</a>
+<ul>
+<li><a href="#init-dot-el%E3%81%AE%E8%A8%AD%E5%AE%9A">init.elの設定</a></li>
+</ul>
+</li>
+<li><a href="#%E7%99%BE%E8%81%9E%E3%81%AF%E4%B8%80%E8%A6%8B%E3%81%AB%E3%81%97%E3%81%8B%E3%81%9A">百聞は一見にしかず</a>
+<ul>
+<li><a href="#%E3%81%9D%E3%81%AE%E5%89%8D%E3%81%AB">その前に・・・</a></li>
+<li><a href="#%E4%BB%95%E8%A8%B3%E5%B8%B3-journal-%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">仕訳帳（Journal）の書き方</a>
+<ul>
+<li><a href="#%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%A7%E4%BB%95%E8%A8%B3%E5%B8%B3">プレーンテキストで仕訳帳</a></li>
+<li><a href="#%E4%BB%95%E8%A8%B3%E5%B8%B3%E3%81%AFopening-balance%E3%81%8B%E3%82%89%E5%A7%8B%E3%81%BE%E3%82%8B">仕訳帳はOpening Balanceから始まる</a></li>
+<li><a href="#%E4%BB%95%E8%A8%B3%E5%B8%B3-journal-%E3%81%AE%E5%85%B7%E4%BD%93%E4%BE%8B">仕訳帳（Journal）の具体例</a></li>
+</ul>
+</li>
+<li><a href="#report-register%E3%81%AE%E4%BE%8B%E3%81%A8%E8%A6%8B%E6%96%B9">Report/Registerの例と見方</a>
+<ul>
+<li><a href="#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%A7%E9%9B%86%E8%A8%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B">コマンドラインで集計レポートを表示する</a></li>
+</ul>
+</li>
+<li><a href="#emacs%E3%81%AE%E4%B8%AD%E3%81%A7ledger%E3%82%92%E4%BD%BF%E3%81%86">Emacsの中でLedgerを使う</a>
+<ul>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E7%B7%A8%E9%9B%86">トランザクションの編集</a></li>
+<li><a href="#report%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">Reportについて</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#references">References</a></li>
+<li><a href="#footnote">Footnote</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="はじめに">はじめに</h2>
 <p>簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。</p>
 <h2 id="ledgerのインストール">Ledgerのインストール</h2>
 <p>インストール先のハードウエアは、ThinkPad X230（HDDはSSDに換装済）です。ソフトウエア環境は、Ubuntu16.04/Emacs25.3.2/Ledger3.1.1です。</p>
@@ -402,6 +438,16 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
     </div>
     <div class="info post_meta">
       <time datetime=2019-04-28T09:25:00&#43;0900 class="date">Sunday, April 28, 2019</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/accounting">accounting</a> </li>
+        
+        </ul>
       
       
     </div>

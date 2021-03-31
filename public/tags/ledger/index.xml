@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>emacs on Yam’s Peace Blog</title>
-    <link>https://competent-gates-c3fe1e.netlify.app/tags/emacs/</link>
-    <description>Recent content in emacs on Yam’s Peace Blog</description>
+    <title>ledger on Yam’s Peace Blog</title>
+    <link>https://competent-gates-c3fe1e.netlify.app/tags/ledger/</link>
+    <description>Recent content in ledger on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>ごあいさつ</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/kojo/</link>
-      <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
-      
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/kojo/</guid>
-      <description>これまで2年ほどブログ書きは下のようなフローでやってきました。
-Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
-    </item>
-    
+    <lastBuildDate>Thu, 25 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/tags/ledger/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugoのテーマえらび</title>
       <link>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</link>
@@ -35,17 +25,6 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       
       <guid>https://competent-gates-c3fe1e.netlify.app/posts/1st_step_ledger/</guid>
       <description>はじめに Ledgerのインストール  init.elの設定   百聞は一見にしかず  その前に・・・ 仕訳帳（Journal）の書き方  プレーンテキストで仕訳帳 仕訳帳はOpening Balanceから始まる 仕訳帳（Journal）の具体例   Report/Registerの例と見方  コマンドラインで集計レポートを表示する   Emacsの中でLedgerを使う  トランザクションの編集 Reportについて     References Footnote  はじめに 簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger1のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳2のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。</description>
-    </item>
-    
-    <item>
-      <title>archives test</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</link>
-      <pubDate>Sat, 01 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</guid>
-      <description>アーカイブのテストです。
-アーカイブされるかしら？
-おっけ！</description>
     </item>
     
   </channel>

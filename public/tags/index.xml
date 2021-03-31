@@ -9,7 +9,7 @@
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
     <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Emacs</title>
+      <title>emacs</title>
       <link>https://competent-gates-c3fe1e.netlify.app/tags/emacs/</link>
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
@@ -50,6 +50,24 @@
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://competent-gates-c3fe1e.netlify.app/tags/ox-hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ledger</title>
+      <link>https://competent-gates-c3fe1e.netlify.app/tags/ledger/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://competent-gates-c3fe1e.netlify.app/tags/ledger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>accounting</title>
+      <link>https://competent-gates-c3fe1e.netlify.app/tags/accounting/</link>
+      <pubDate>Sun, 28 Apr 2019 09:25:00 +0900</pubDate>
+      
+      <guid>https://competent-gates-c3fe1e.netlify.app/tags/accounting/</guid>
       <description></description>
     </item>
     

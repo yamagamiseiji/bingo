@@ -1,6 +1,8 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（１）"
 date = 2019-04-28T09:25:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
 
@@ -400,7 +402,7 @@ Pfeiffer,T. (2016). Ledgerで経理　<https://www.slideshare.net/pfi/ledger-594
 <https://www.ledger-cli.org/docs.html>  マニュアルはこちらです
 
 
-## Acknowledgement {#acknowledgement}
+## Footnote {#footnote}
 
 [^fn:1]: Ledgerという英語は一般名詞では「元帳」と訳されますが、ソフトウエアとしてのLedgerを指すときには英語つづりのまま使います。
 [^fn:2]: journalは「仕訳帳」と訳されますが、ここでは家計簿を想定しているので、ちょっと大げさ。けれども他に適切な言い回しを思いつかないので、暫定的に「仕訳帳」を使います。

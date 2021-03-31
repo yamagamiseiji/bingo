@@ -1,14 +1,14 @@
 +++
 title = "Hugoのテーマえらび"
 date = 2021-03-25
-tags = ["Emacs", "hugo", "ox-hugo", "Netlify", "GitHub"]
+tags = ["Emacs", "hugo", "ox-hugo", "Netlify", "GitHub", "ledger"]
 categories = ["comp"]
 draft = false
 toc = true
 +++
 
-このサイトの目的はブログなので
-[Hugo Themes(Tag: blog)](https://themes.gohugo.io/tags/blog/) の中からmixedpaterを使わせてもらうことにしました。
+このサイトでは、
+[Hugo Themes(Tag: blog)](https://themes.gohugo.io/tags/blog/) の中から[mixedpaper](https://themes.gohugo.io/hugo-theme-mixedpaper/)を使わせてもらうことにしました。
 
 
 ### 当初の希望 {#当初の希望}

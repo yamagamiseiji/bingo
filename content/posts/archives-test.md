@@ -1,0 +1,15 @@
++++
+title = "archives test"
+author = ["YAMAGAMI"]
+date = 2018-12-01
+tags = ["Emacs", "hugo", "ox-hugo", "Netlify", "GitHub"]
+categories = ["comp"]
+draft = false
+toc = true
++++
+
+アーカイブのテストです。
+
+アーカイブされるかしら？
+
+おっけ！

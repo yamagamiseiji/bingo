@@ -1,8 +1,37 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（１）"
 date = 2019-04-28T09:25:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [はじめに](#はじめに)
+- [Ledgerのインストール](#ledgerのインストール)
+    - [init.elの設定](#init-dot-elの設定)
+- [百聞は一見にしかず](#百聞は一見にしかず)
+    - [その前に・・・](#その前に)
+    - [仕訳帳（Journal）の書き方](#仕訳帳-journal-の書き方)
+        - [プレーンテキストで仕訳帳](#プレーンテキストで仕訳帳)
+        - [仕訳帳はOpening Balanceから始まる](#仕訳帳はopening-balanceから始まる)
+        - [仕訳帳（Journal）の具体例](#仕訳帳-journal-の具体例)
+    - [Report/Registerの例と見方](#report-registerの例と見方)
+        - [コマンドラインで集計レポートを表示する](#コマンドラインで集計レポートを表示する)
+    - [Emacsの中でLedgerを使う](#emacsの中でledgerを使う)
+        - [トランザクションの編集](#トランザクションの編集)
+        - [Reportについて](#reportについて)
+- [References](#references)
+- [Footnote](#footnote)
+
+</div>
+<!--endtoc-->
+
+
 
 ## はじめに {#はじめに}
 

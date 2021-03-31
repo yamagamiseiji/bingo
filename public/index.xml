@@ -33,7 +33,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</guid>
-      <description>このサイトの目的はブログなので Hugo Themes(Tag: blog) の中からmixedpaterを使わせてもらうことにしました。
+      <description>このサイトでは、 Hugo Themes(Tag: blog) の中からmixedpaperを使わせてもらうことにしました。
 当初の希望  個々の記事のタイトルと内容が数行程度表示されるパートがほしい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい 記事1本を1ファイルにしたい  だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、これにしました。</description>
     </item>
     
@@ -332,8 +332,7 @@ Adjustmentsを使おう 銀行からの口座残高のお知らせと自分のLe
       <pubDate>Sun, 28 Apr 2019 09:25:00 +0900</pubDate>
       
       <guid>https://competent-gates-c3fe1e.netlify.app/posts/1st_step_ledger/</guid>
-      <description>はじめに 簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger1のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳2のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。
-Ledgerのインストール インストール先のハードウエアは、ThinkPad X230（HDDはSSDに換装済）です。ソフトウエア環境は、Ubuntu16.04/Emacs25.3.2/Ledger3.1.1です。</description>
+      <description>はじめに Ledgerのインストール  init.elの設定   百聞は一見にしかず  その前に・・・ 仕訳帳（Journal）の書き方  プレーンテキストで仕訳帳 仕訳帳はOpening Balanceから始まる 仕訳帳（Journal）の具体例   Report/Registerの例と見方  コマンドラインで集計レポートを表示する   Emacsの中でLedgerを使う  トランザクションの編集 Reportについて     References Footnote  はじめに 簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger1のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳2のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。</description>
     </item>
     
     <item>
@@ -427,6 +426,17 @@ Ledgerのインストール インストール先のハードウエアは、Thin
       <description>平成31年（2019年）年頭にあたり年始のご挨拶を申し上げます。明けましておめでとうございます。みなさま方にはすばらしい新年をお迎えになったこととお慶び申し上げます。
   Figure 1: ことしの年賀状
   さて私事ではありますが、昭和54年（1979年）入職以来、 40年もの長きにわたりお世話になった専修大学を今年の3月末日を以って定年退職いたします。ご関係のみなさま方には大変にお世話になりました。心から御礼を申し上げます。ありがとうございました。</description>
+    </item>
+    
+    <item>
+      <title>archives test</title>
+      <link>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</guid>
+      <description>アーカイブのテストです。
+アーカイブされるかしら？
+おっけ！</description>
     </item>
     
   </channel>

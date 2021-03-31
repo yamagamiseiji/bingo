@@ -24,8 +24,19 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</guid>
-      <description>このサイトの目的はブログなので Hugo Themes(Tag: blog) の中からmixedpaterを使わせてもらうことにしました。
+      <description>このサイトでは、 Hugo Themes(Tag: blog) の中からmixedpaperを使わせてもらうことにしました。
 当初の希望  個々の記事のタイトルと内容が数行程度表示されるパートがほしい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい 記事1本を1ファイルにしたい  だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、これにしました。</description>
+    </item>
+    
+    <item>
+      <title>archives test</title>
+      <link>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</guid>
+      <description>アーカイブのテストです。
+アーカイブされるかしら？
+おっけ！</description>
     </item>
     
   </channel>
