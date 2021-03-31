@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Abouts on Yam’s Peace Blog</title>
-    <link>https://born-in-bingo.netlify.app/about/</link>
+    <link>https://competent-gates-c3fe1e.netlify.app/about/</link>
     <description>Recent content in Abouts on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://born-in-bingo.netlify.app/about/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/about/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Me</title>
-      <link>https://born-in-bingo.netlify.app/about/about-me/</link>
+      <link>https://competent-gates-c3fe1e.netlify.app/about/about-me/</link>
       <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://born-in-bingo.netlify.app/about/about-me/</guid>
+      <guid>https://competent-gates-c3fe1e.netlify.app/about/about-me/</guid>
       <description>Coming soon….</description>
     </item>
     
     <item>
       <title>About Hugo</title>
-      <link>https://born-in-bingo.netlify.app/about/about/</link>
+      <link>https://competent-gates-c3fe1e.netlify.app/about/about/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://born-in-bingo.netlify.app/about/about/</guid>
+      <guid>https://competent-gates-c3fe1e.netlify.app/about/about/</guid>
       <description>Written in Go, Hugo is an open source static site generator available under the Apache License 2.</description>
     </item>
     

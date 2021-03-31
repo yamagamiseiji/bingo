@@ -27,7 +27,7 @@
   
   
   
-  <link rel="stylesheet" href="https://born-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://competent-gates-c3fe1e.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
 
   
   
@@ -39,11 +39,11 @@
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="https://competent-gates-c3fe1e.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://born-in-bingo.netlify.app">Home</a></li>
+        <li><a href="https://competent-gates-c3fe1e.netlify.app">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -78,7 +78,7 @@
     <h2 class="title">花豆の発芽と積算温度</h2>
     <div class="post_content">
       <h3 id="はじめに">はじめに</h3>
-<p>今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図<a href="#orgdab3fe8">1</a>）。</p>
+<p>今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図<a href="#org2b2c9b7">1</a>）。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/out-sprouting0530.png"
@@ -87,7 +87,7 @@
         </figcaption>
 </figure>
 
-<p>ここでの「発芽」は図<a href="#org7f196f4">2</a>、「子葉」は図<a href="#orgc21ecc8">3</a>のような状態です。</p>
+<p>ここでの「発芽」は図<a href="#orga884033">2</a>、「子葉」は図<a href="#org0b7ca7e">3</a>のような状態です。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/status02.jpg"
@@ -126,8 +126,8 @@
 <p>気温データはアメダスの現在気温のデータを使わせてもらいました。 <strong>横浜</strong> は<a href="https://tenki.jp/amedas/3/17/46106.html">こちら</a>のデータを使えますが、 <strong>片品村</strong> にはアメダスの測定ポイント（気温）が存在しないので、もっとも近隣にある<a href="https://tenki.jp/amedas/3/13/42046.html">「みなかみ藤原」</a>のデータを使いました（注 <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>）。</p>
 <p>畑の場所と「みなかみ藤原」には標高差が250m以上ありますので、平均温度は畑の方が1.5℃程度低いと思いますが、今回はその辺は目をつむっています。</p>
 <p>なお、アメダスデータはスクリプトをcronで毎時1回ずつ起動して取得します。仕掛けは簡単で、上記の横浜と片品村のURLを <code>curl -s</code> したサイトのデータ <code>${site}.html</code> から次のような方法で気温を抽出しています：</p>
-<pre><code class="language-nil" data-lang="nil">current=`grep &quot;&gt;現在&lt;&quot; ${site}.html | grep &quot;℃&quot; | grep -Eo '[+-]?([0-9]*[.])?[0-9]+'`
-</code></pre><p>もっとエレガントな方法があるかと思いますが、現在のところ取りこぼしなどのエラーは起こっていません。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">current</span><span class="o">=</span><span class="sb">`</span>grep <span class="s2">&#34;&gt;現在&lt;&#34;</span> <span class="si">${</span><span class="nv">site</span><span class="si">}</span>.html <span class="p">|</span> grep <span class="s2">&#34;℃&#34;</span> <span class="p">|</span> grep -Eo <span class="s1">&#39;[+-]?([0-9]*[.])?[0-9]+&#39;</span><span class="sb">`</span>
+</code></pre></div><p>もっとエレガントな方法があるかと思いますが、現在のところ取りこぼしなどのエラーは起こっていません。</p>
 <p>抽出したデータは次のような形のファイルにして保存します：</p>
 <pre><code class="language-nil" data-lang="nil">　　：
 2020-06-11 00:03 19.1
@@ -145,8 +145,8 @@
 </code></pre><p>毎時03分にデータを取得しています。毎時00分にアメダスデータを取得するのは意図的に避けています（注 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>）。</p>
 <h4 id="日平均気温の計算">日平均気温の計算</h4>
 <p>上で収集した毎時の気温データファイルを24個読み込んで、毎日23時30分に当日の日平均気温を算出します。awkを使うと1行で平均値が計算できるのですね、ありがたいです：</p>
-<pre><code class="language-nil" data-lang="nil">cat ${kion}.dat | awk '{m+=$3} END{print m/NR;}' &gt; ./wrk-avr.dat
-</code></pre><h3 id="グラフのプロット">グラフのプロット</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">cat <span class="si">${</span><span class="nv">kion</span><span class="si">}</span>.dat <span class="p">|</span> awk <span class="s1">&#39;{m+=$3} END{print m/NR;}&#39;</span> &gt; ./wrk-avr.dat
+</code></pre></div><h3 id="グラフのプロット">グラフのプロット</h3>
 <p>データは次のような形になっています。右側の6カラムはポット苗のステータスで、
 1=種, 2=発芽, 3=子葉 です。</p>
 <pre><code class="language-nil" data-lang="nil"># Date   平均気温 積算温度 1   2   3   4   5   6
@@ -170,7 +170,7 @@
 2020-05-28  13.9  279.2    3  37  35   2   0   0
 2020-05-29  13.3  292.5    3  37  35   4   0   0
 2020-05-30  15.0  307.5    2  38  37   6
-</code></pre><p>これを読み込んで図<a href="#orgdab3fe8">1</a>をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図<a href="#orgdab3fe8">1</a>のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。</p>
+</code></pre><p>これを読み込んで図<a href="#org2b2c9b7">1</a>をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図<a href="#org2b2c9b7">1</a>のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。</p>
 <pre><code class="language-nil" data-lang="nil">set terminal pdfcairo transparent enhanced font &quot;Arial, 8&quot;
 
 set grid x y
@@ -269,10 +269,10 @@ set output
   
     <div class="other_posts">
       
-      <a href="https://born-in-bingo.netlify.app/posts/broken-histogram/" class="prev">Give me a break!</a>
+      <a href="https://competent-gates-c3fe1e.netlify.app/posts/broken-histogram/" class="prev">Give me a break!</a>
       
       
-      <a href="https://born-in-bingo.netlify.app/posts/old-jigsaw/" class="next">古い道具たち – B＆Dのジグソー</a>
+      <a href="https://competent-gates-c3fe1e.netlify.app/posts/old-jigsaw/" class="next">古い道具たち – B＆Dのジグソー</a>
       
     </div>
     <aside id="comments">
@@ -292,12 +292,12 @@ set output
 
         <footer id="footer">
   <p>
-    <span>&copy; 2021 <a href="https://born-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2021 <a href="https://competent-gates-c3fe1e.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://born-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="https://competent-gates-c3fe1e.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
 
     </body>
