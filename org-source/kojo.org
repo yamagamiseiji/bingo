@@ -2,7 +2,7 @@
 #+date: 2021-03-26
 #+link: file file+sys:../static/
 
-#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_base_dir: ~/blog-peace/bingo/
 #+hugo_section: posts
 
 #+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
@@ -44,7 +44,7 @@ Emacs > org-mode > ox-hugo > Hugo > Netlify > GitHub
 1) hugoを =hugo_extended_0.81.0_Linux-64bit.deb= にアップしたこと
 2) Netlifyウエブサイトの'Deploy settings'中の'Build settings'の内容をGitHubのサイトルートにしたこと。
     #+begin_example
-Base = hugo-site/
+Base = bingo/
 　：
 Publish = public
 　：

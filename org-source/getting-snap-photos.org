@@ -1,7 +1,7 @@
 #+title: 退職祝賀会の写真
 #+date: [2019-03-24]
 
-#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_base_dir: ~/blog-peace/bingo/
 #+hugo_section: posts
 #+options: toc:nil num:nil author:nil
 #+link: file file+sys:../static/

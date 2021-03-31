@@ -42,7 +42,7 @@ Emacs > org-mode > ox-hugo > Hugo > Netlify > GitHub
 2.  Netlifyウエブサイトの'Deploy settings'中の'Build settings'の内容をGitHubのサイトルートにしたこと。
 
     ```text
-    Base = hugo-site/
+    Base = bingo/
     　：
     Publish = public
     　：

@@ -1,6 +1,6 @@
 #+title: About Me
 #+date: <2021-03-29 月>
-#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_base_dir: ~/blog-peace/bingo/
 #+hugo_section: about
 
 #+hugo_tags: Emacs hugo ox-hugo Netlify GitHub

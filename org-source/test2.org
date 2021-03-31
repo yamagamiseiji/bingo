@@ -1,6 +1,6 @@
 #+title: Test2
 
-#+hugo_base_dir: ~/blog-peace/hugo-site/
+#+hugo_base_dir: ~/blog-peace/bingo/
 #+hugo_section: posts
 
 hogehoge.
