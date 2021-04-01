@@ -1,6 +1,7 @@
 +++
 title = "古い道具たち – B＆Dのジグソー"
 date = 2020-10-28
+tags = ["DIY"]
 draft = false
 +++
 

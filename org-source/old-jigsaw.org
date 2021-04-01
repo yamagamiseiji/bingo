@@ -6,8 +6,7 @@
 #+options: toc:nil num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-#+tags: DIY
-
+#+hugo_tags: DIY
 
 しばらくぶりのブログ投稿です。今回はDIYっぽい話題です。
 #+begin_example

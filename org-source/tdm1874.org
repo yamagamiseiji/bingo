@@ -6,7 +6,7 @@
 #+options: toc:nil num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-#+TAGS: wine food
+#+hugo_tags: wine food
 
 自宅からの散歩エリア内というか、散歩の帰りに立ち寄れる場所に *TDM1874横浜* があります(http://www.tdm1874brewery.com/ja/)。昨日、曇り空ながら雨が降っていないのをこれ幸いに、ちょっと立ち寄ってSogga pere et filsのシャルドネを1本購入してバックパックに入れて帰ってきました。
 

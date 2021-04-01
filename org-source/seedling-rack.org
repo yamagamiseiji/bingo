@@ -6,7 +6,7 @@
 #+options: toc:nil num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-#+TAGS: DIY farming
+#+hugo_tags: DIY farming
 
 ボクが趣味で土いぢり・畑作業をしているのは群馬の標高1,000メートルの村です。村では、5月20日以前に苗を畑に定植するのはとても危険とされています。もちろんへいちゃらな年もあるにはありますが、遅霜がくると畑の作物たちは（種類によりますが）一夜にして絶滅します。
 
