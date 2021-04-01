@@ -8,6 +8,6 @@ draft = false
 toc = true
 +++
 
-Coming soon....
+Coming soon.......
 
-{{< figure src="../../staticme.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+{{< figure src="/me.jpg" caption="Figure 1: テスト画像" width="30%" >}}

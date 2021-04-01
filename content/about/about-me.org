@@ -1,9 +1,9 @@
 #+title: About Me
 #+date: <2021-03-29 月>
-#+hugo_base_dir: ~/blog-peace/bingo/
-#+hugo_section: about
 
-#+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: about
+#+hugo_tags: social greeting
 #+hugo_categories: about 
 
 #+hugo_custom_front_matter: :toc true
@@ -12,7 +12,6 @@
 #+link: file file+sys:../../static/
 
 Coming soon....
-
 
 #+caption: テスト画像
 #+attr_org: :width 30%
