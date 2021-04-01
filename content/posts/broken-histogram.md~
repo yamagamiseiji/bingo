@@ -1,8 +1,21 @@
 +++
 title = "Give me a break!"
 date = 2020-04-22T10:21:00+09:00
+tags = ["ledger", "emacs", "accounting", "gnuplot", "covid-19"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+    - [Y軸にbreakを入れてみる](#y軸にbreakを入れてみる)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
 
 新型コロナによってたくさんの国民の **生命財産** が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた **税金** をどうして国民のために使えないのか。もういい加減にして欲しい！ **'Give me a break !'** と叫びたい気持ちです。
 
@@ -21,18 +34,18 @@ draft = false
 
 こんな感じになります（金額はでたらめです）。
 
-<a id="org26279a4"></a>
+<a id="org84be90f"></a>
 
 {{< figure src="/broken-histogram.png" caption="Figure 1: Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
 
-Ledgerとgnuplotを組み合わせて図[1](#org26279a4)のような **break** つき棒グラフを描く方法を紹介します。
+Ledgerとgnuplotを組み合わせて図[1](#org84be90f)のような **break** つき棒グラフを描く方法を紹介します。
 
 
 #### Ledger-cliのクエリー {#ledger-cliのクエリー}
 
 税額の計算をするためのLedgerクエリーは次のとおりです。
 
-```sh
+```shell
 $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 ```
 

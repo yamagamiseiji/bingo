@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ubuntu on Yam’s Peace Blog</title>
+    <link>https://competent-gates-c3fe1e.netlify.app/tags/ubuntu/</link>
+    <description>Recent content in ubuntu on Yam’s Peace Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0900</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>リモート温度計プロジェクト</title>
+      <link>https://competent-gates-c3fe1e.netlify.app/posts/temp_katashina_prj/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://competent-gates-c3fe1e.netlify.app/posts/temp_katashina_prj/</guid>
+      <description>ねらい 基本ポリシー 具体的な方法について  用意する物品 温湿度計の設置方法 ソフトの設定   実際に使う  カメラから静止画像を得る ローカルに保存された画像をサーバに転送する Cronの設定   検討課題と今後の展開 Acknowledgement  ねらい 寒冷地に別荘とか別宅とかをお持ちの方は、天気予報アプリなどでこまめに現地のお天気や温度をチェックされているようです。しかし困ったことに、人里離れた地方になればなるほど、また山岳地になればなるほど、メジャーな天気予報の観測点が、自分の調べたい場所と離れてきます。またさらに悪いことに、山間（やまあい）の土地だと、わずか数百メートル離れただけで、微妙な地形の違いによって日当たりや風の流れが変わります。温度も湿度もそれに伴って大きく変化します。</description>
+    </item>
+    
+  </channel>
+</rss>

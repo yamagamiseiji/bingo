@@ -3,10 +3,12 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+options: toc:nil num:nil author:nil
+#+hugo_tags: edu social
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-
 
 2019年3月16日（土）に開催していただいたボクの退職祝賀会の多数の写真が幹事のみなさんのご尽力で本日公開されました。
 #+caption: 集合写真（2019/03/16）

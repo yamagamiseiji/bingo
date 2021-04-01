@@ -3,7 +3,10 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+options: toc:nil num:nil author:nil
+#+hugo_tags: ledger emacs accounting gnuplot covid-19
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
 
@@ -28,7 +31,7 @@
 この際、禁断の *breakつき棒グラフ* を描いてみようと思い、やってみました。
 くれぐれも良い子は真似をしないでくださいね（笑）
 
-** Y軸にbreakを入れてみる
+* Y軸にbreakを入れてみる
 こんな感じになります（金額はでたらめです）。
 
 #+caption: Breakを入れた棒グラフの例（納税額の推移）
@@ -39,7 +42,7 @@
 
 Ledgerとgnuplotを組み合わせて図[[fig1]]のような *break* つき棒グラフを描く方法を紹介します。
 
-*** Ledger-cliのクエリー
+** Ledger-cliのクエリー
 税額の計算をするためのLedgerクエリーは次のとおりです。
 #+begin_src shell
 $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
@@ -61,11 +64,11 @@ $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 #+end_src
 これをファイルに格納してgnuplotに読み込ませます。
 
-*** gnuplotスクリプト
+** gnuplotスクリプト
 *break* つきのヒストグラムはmultiplotを使って描きます。
 [[https://stackoverflow.com/questions/17564497/gnuplot-break-y-axis-in-two-parts][こちらのサイト]]のスクリプトを参考にさせていただきました。
 
-**** ターミナルと出力ファイルの指定
+*** ターミナルと出力ファイルの指定
 出力図はPDFにして =$out_file= に出力します。
 #+begin_src
 set terminal pdfcairo transparent enhanced font 'Arial,10'
@@ -82,7 +85,7 @@ size = 0.75  # plot size
 kk = 0.5     # relative height of bottom plot
 #+end_src
 
-**** Y軸の範囲（最小値、最大値）を変数にして指定
+*** Y軸の範囲（最小値、最大値）を変数にして指定
 上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。
 #+begin_src
 y1 = 0
@@ -91,7 +94,7 @@ y3 = 1000000/1000
 y4 = 1120000/1000
 #+end_src
 
-**** 図のスタイルとY軸の数字のフォーマット
+*** 図のスタイルとY軸の数字のフォーマット
 #+begin_src
 set style histogram 
 set style data histograms
@@ -101,7 +104,7 @@ set decimal locale
 set format y "%'6.0f"
 #+end_src
 
-**** multiplotの宣言と下の図
+*** multiplotの宣言と下の図
 読み込むデータファイルは変数 =$data_to_plot= で指示します。
 #+begin_src
 set multiplot
@@ -123,8 +126,7 @@ plot '$data_to_plot' \
    '' using 0:(column(2)/1000):(column(2) != 0 ? (sprintf("%'d",(column(2)))): "ｇ") \
          with labels font "Courier,8" offset 0,0.5 textcolor linestyle 0 notitle
 #+end_src
-
-**** 上の図
+*** 上の図
 #+begin_src
 unset xtics
 unset xlabel
@@ -147,7 +149,7 @@ unset multiplot
 #+end_src
 こんな感じです。
 
-*** 細かいことですが・・・
+** 細かいことですが・・・
 納税金額が *ゼロの月* では数字の'0'を書かないようにします。それにはgnuplotの *三項演算子* を使います。その部分だけを抽出すると次のとおりです：
 #+begin_src
 (column(2) != 0 ? (sprintf("%'d",(column(2)))):"")
@@ -162,7 +164,7 @@ sprintf("%'d",(column(2)))  真ならば、第2列の値に1000単位でカン�
 #+end_example
 ということになります。
 
-*** 問題点と今後の課題
+* 問題点と今後の課題
 グラフに *break* を入れた図はできるだけ避けるべき図ですが、この例図のように
 - ある一部が突出した *外れ値* であることをこれみよがしに見せつける
 - それ以外の、有象無象の変動をそれなりに見せる

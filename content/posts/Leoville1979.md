@@ -1,12 +1,32 @@
 +++
 title = "みなさん、ごちそうさまでした・・・"
 date = 2019-06-22T00:00:00+09:00
+tags = ["edu", "wine"]
+categories = ["comp"]
 draft = false
 +++
 
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [抜栓までの顛末（てんまつ）](#抜栓までの顛末-てんまつ)
+    - [どこで飲むか](#どこで飲むか)
+    - [誕生日をかねて](#誕生日をかねて)
+    - [ビンテージワインのこわさ](#ビンテージワインのこわさ)
+- [ついにその日が！](#ついにその日が)
+    - [呆然・陶然](#呆然-陶然)
+    - [そしてBDケーキ](#そしてbdケーキ)
+    - [感謝のことば](#感謝のことば)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
+
 2019年3月16日（土）の「送別会」でみなさまからプレゼントされた1979年のワイン（図1）を先日、抜栓し賞味させていただきました。SNSでは速報でお知らせいたしましたが、もうすこし詳しくご報告申し上げます。
 
-<a id="org1250549"></a>
+<a id="orgee58aae"></a>
 
 {{< figure src="/leo-label.jpg" caption="Figure 1: Leoville du Marquis de Las Cases(1979)" width="70%" >}}
 
@@ -55,7 +75,7 @@ draft = false
 
 さて、当日のメニューはこんな風でした。
 
-<a id="orgc4de574"></a>
+<a id="org426d29c"></a>
 
 {{< figure src="/leo-menu.jpg" caption="Figure 2: 6月10日のメニュー＠リパイユ様" width="90%" >}}
 
@@ -63,13 +83,13 @@ draft = false
 
 それから、ソムリエが慎重に慎重にゆっくりと抜栓してくださったのですけれど、途中で、「あ、これはすごい、大丈夫ですよ、すばらしい！」の発声。そして、次の写真を見てください。
 
-<a id="orgf56c51c"></a>
+<a id="orgada6a88"></a>
 
 {{< figure src="/leo-cork.jpg" caption="Figure 3: 抜栓直後のコルク" width="70%" >}}
 
 コルクの匂いを嗅ぐまでもなく、40年まえのコルクとは思えない良い状態です。ボクのグラスに少しだけ注いでいただいた、その色が綺麗なワイン色、鼻をグラスの近づける前から、豊かなボルドーの香り。一口、ワインを含んだとき・・・たぶん目は上方45度にうわずっていたと思います。それで、お店の壁にはすばらしい絵画がたくさんかかっていますが、それらのどれかを見ていたわけではなくて、視線が彷徨し呆然というか陶然として胸がつまる思いがしました。
 
-<a id="org5391947"></a>
+<a id="org4ad5530"></a>
 
 {{< figure src="/leo-bottle.jpg" caption="Figure 4: Leoville du Marquis de Las Cases(1979)" width="90%" >}}
 
@@ -84,7 +104,7 @@ draft = false
 
 食後のデザートになったら、とつぜんお店のBGMがハッピーバースデーに変わりました。それまで、今日のディナーが抜栓会プラス誕生会であることをすっかり忘れていました。「えっ？何？誰か誕生日？」と口に出して聞いたほどです。
 
-<a id="orgb9b177c"></a>
+<a id="orgd5661aa"></a>
 
 {{< figure src="/leo-cake.jpg" caption="Figure 5: サプライズのデザート" width="90%" >}}
 

@@ -77,13 +77,27 @@
   <article class="post content">
     <h2 class="title">Give me a break!</h2>
     <div class="post_content">
-      <p>新型コロナによってたくさんの国民の <strong>生命財産</strong> が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた <strong>税金</strong> をどうして国民のために使えないのか。もういい加減にして欲しい！ <strong>&lsquo;Give me a break !'</strong> と叫びたい気持ちです。</p>
+      <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#y%E8%BB%B8%E3%81%ABbreak%E3%82%92%E5%85%A5%E3%82%8C%E3%81%A6%E3%81%BF%E3%82%8B">Y軸にbreakを入れてみる</a>
+<ul>
+<li><a href="#ledger-cli%E3%81%AE%E3%82%AF%E3%82%A8%E3%83%AA%E3%83%BC">Ledger-cliのクエリー</a></li>
+<li><a href="#gnuplot%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">gnuplotスクリプト</a></li>
+<li><a href="#%E7%B4%B0%E3%81%8B%E3%81%84%E3%81%93%E3%81%A8%E3%81%A7%E3%81%99%E3%81%8C">細かいことですが・・・</a></li>
+</ul>
+</li>
+<li><a href="#%E5%95%8F%E9%A1%8C%E7%82%B9%E3%81%A8%E4%BB%8A%E5%BE%8C%E3%81%AE%E8%AA%B2%E9%A1%8C">問題点と今後の課題</a></li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<p>新型コロナによってたくさんの国民の <strong>生命財産</strong> が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた <strong>税金</strong> をどうして国民のために使えないのか。もういい加減にして欲しい！ <strong>&lsquo;Give me a break !'</strong> と叫びたい気持ちです。</p>
 <p><strong>税金</strong> といえば、4月に入ってから <strong>Ledger-cli</strong> と <strong>gnuplot</strong> で3月までの1年間に納税した税金の取りまとめをしました。「租税公課」の金額そのものはLedgerで簡単に獲得できますが、それを表にして見るだけでなく、月ごとの納税額の推移を可視化しました。それ自体はそんなに複雑な作業ではありません。</p>
 <p>しかし一つ問題があります。納税金額は <strong>月ごとの変動</strong> がとても大きい。たとえば、100万円を超える月がある一方、別の月は数万円レベルとかゼロ円ということもありえます（ヒトそれぞれですが・・・）。こんな風に極端な <strong>外れ値</strong> を含むデータを「見える化」するのはちょっとやっかいです。</p>
 <p>よく見かけるのは、棒グラフに <strong>波線</strong> などを入れてY軸を <strong>中断</strong> する方法。グラフを途中でカットする線は日本語では「中略波線」とか「省略線」、「中断線」とか言うようですが、サイエンスの世界ではそれを使ってグラフを描くことは禁忌になっています。その他、ドーナツチャート（円グラフ）も避けるべきとされます。グラフの原点をゼロ以外の数値にしないようにという指導もされます。経理・会計の世界とサイエンスの世界とでは図に求められるものが異なっているようです。</p>
 <p>ところで、この <strong>中断線</strong> は英語では <strong>break</strong> といいます。途中でカットされた棒グラフは <strong>histogram with break</strong> でしょうか。</p>
 <p>コロナへの政府の対応に憤慨して <strong>give me a break!</strong> って叫ぶ感じで、この際、禁断の <strong>breakつき棒グラフ</strong> を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね（笑）</p>
-<h3 id="y軸にbreakを入れてみる">Y軸にbreakを入れてみる</h3>
+<h2 id="y軸にbreakを入れてみる">Y軸にbreakを入れてみる</h2>
 <p>こんな感じになります（金額はでたらめです）。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
@@ -93,8 +107,8 @@
         </figcaption>
 </figure>
 
-<p>Ledgerとgnuplotを組み合わせて図<a href="#orge604d71">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
-<h4 id="ledger-cliのクエリー">Ledger-cliのクエリー</h4>
+<p>Ledgerとgnuplotを組み合わせて図<a href="#orgcb2d3e7">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
+<h3 id="ledger-cliのクエリー">Ledger-cliのクエリー</h3>
 <p>税額の計算をするためのLedgerクエリーは次のとおりです。</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 </code></pre></div><p>ここで、 <strong><code>%tax</code></strong> は税金に関係するトランザクションにつけた <strong>タグ</strong> です。税金にはさまざまな名前がついています。計算の際に、それらを洩れなくすくい上げるために、記帳の段階で全て <code>tax</code> というタグをつけてあります。</p>
@@ -114,19 +128,14 @@
 2020-03-01 8901
 2020-04-01 98760
 </code></pre><p>これをファイルに格納してgnuplotに読み込ませます。</p>
-<h4 id="gnuplotスクリプト">gnuplotスクリプト</h4>
+<h3 id="gnuplotスクリプト">gnuplotスクリプト</h3>
 <p><strong>break</strong> つきのヒストグラムはmultiplotを使って描きます。
 <a href="https://stackoverflow.com/questions/17564497/gnuplot-break-y-axis-in-two-parts">こちらのサイト</a>のスクリプトを参考にさせていただきました。</p>
-<!-- raw HTML omitted -->
-<ul>
-<li>
-<p>ターミナルと出力ファイルの指定</p>
+<h4 id="ターミナルと出力ファイルの指定">ターミナルと出力ファイルの指定</h4>
 <p>出力図はPDFにして <code>$out_file</code> に出力します。</p>
 <pre><code class="language-nil" data-lang="nil">set terminal pdfcairo transparent enhanced font 'Arial,10'
 set output '$out_file'
-</code></pre></li>
-</ul>
-<!-- raw HTML omitted -->
+</code></pre><!-- raw HTML omitted -->
 <ul>
 <li>
 <p>multiplotのためのパラメータを変数にして指定</p>
@@ -139,33 +148,20 @@ size = 0.75  # plot size
 kk = 0.5     # relative height of bottom plot
 </code></pre></li>
 </ul>
-<!-- raw HTML omitted -->
-<ul>
-<li>
-<p>Y軸の範囲（最小値、最大値）を変数にして指定</p>
+<h4 id="y軸の範囲-最小値-最大値-を変数にして指定">Y軸の範囲（最小値、最大値）を変数にして指定</h4>
 <p>上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。</p>
 <pre><code class="language-nil" data-lang="nil">y1 = 0
 y2 =  120000/1000
 y3 = 1000000/1000
 y4 = 1120000/1000
-</code></pre></li>
-</ul>
-<!-- raw HTML omitted -->
-<ul>
-<li>
-<p>図のスタイルとY軸の数字のフォーマット</p>
+</code></pre><h4 id="図のスタイルとy軸の数字のフォーマット">図のスタイルとY軸の数字のフォーマット</h4>
 <pre><code class="language-nil" data-lang="nil">set style histogram
 set style data histograms
 set style fill transparent solid 0.8 border -1
 set boxwidth 0.70
 set decimal locale
 set format y &quot;%'6.0f&quot;
-</code></pre></li>
-</ul>
-<!-- raw HTML omitted -->
-<ul>
-<li>
-<p>multiplotの宣言と下の図</p>
+</code></pre><h4 id="multiplotの宣言と下の図">multiplotの宣言と下の図</h4>
 <p>読み込むデータファイルは変数 <code>$data_to_plot</code> で指示します。</p>
 <pre><code class="language-nil" data-lang="nil">set multiplot
 set label &quot;Amount(千円)&quot; at screen 0.03,0.5 center front rotate font &quot;,&quot; . 10
@@ -182,15 +178,10 @@ set xlabel &quot;FY 2019-20&quot;
 
 plot '$data_to_plot' \
       using 0:(column(2)/1000):xticlabels(strftime('%b', strptime('%Y-%m-%d', strcol(1))))\
-     with boxes notitle linecolor rgb &quot;skyblue&quot;,\
+	 with boxes notitle linecolor rgb &quot;skyblue&quot;,\
    '' using 0:(column(2)/1000):(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))): &quot;ｇ&quot;) \
-     with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
-</code></pre></li>
-</ul>
-<!-- raw HTML omitted -->
-<ul>
-<li>
-<p>上の図</p>
+	 with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
+</code></pre><h4 id="上の図">上の図</h4>
 <pre><code class="language-nil" data-lang="nil">unset xtics
 unset xlabel
 
@@ -206,13 +197,11 @@ set title MyTitle offset char 0, char -0.75
 plot '$data_to_plot' \
       using 0:(column(2)/1000) with boxes notitle linecolor rgb &quot;skyblue&quot;,\
    '' using 0:(column(2)/1000):(sprintf(&quot;%'d&quot;,(column(2)))) \
-     with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
+	 with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
 
 unset multiplot
 </code></pre><p>こんな感じです。</p>
-</li>
-</ul>
-<h4 id="細かいことですが">細かいことですが・・・</h4>
+<h3 id="細かいことですが">細かいことですが・・・</h3>
 <p>納税金額が <strong>ゼロの月</strong> では数字の'0&rsquo;を書かないようにします。それにはgnuplotの <strong>三項演算子</strong> を使います。その部分だけを抽出すると次のとおりです：</p>
 <pre><code class="language-nil" data-lang="nil">(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))):&quot;&quot;)
 </code></pre><p>gnuplotの三項演算子の記号は <!-- raw HTML omitted --><strong>? :</strong><!-- raw HTML omitted --> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
@@ -221,7 +210,7 @@ unset multiplot
 sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単位でカンマをつける
 &#34;&#34;                          偽ならばブランクにする
 </code></pre></div><p>ということになります。</p>
-<h4 id="問題点と今後の課題">問題点と今後の課題</h4>
+<h2 id="問題点と今後の課題">問題点と今後の課題</h2>
 <p>グラフに <strong>break</strong> を入れた図はできるだけ避けるべき図ですが、この例図のように</p>
 <ul>
 <li>ある一部が突出した <strong>外れ値</strong> であることをこれみよがしに見せつける</li>
@@ -236,6 +225,20 @@ sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単�
     </div>
     <div class="info post_meta">
       <time datetime=2020-04-22T10:21:00&#43;0900 class="date">Wednesday, April 22, 2020</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/accounting">accounting</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/covid-19">covid-19</a> </li>
+        
+        </ul>
       
       
     </div>

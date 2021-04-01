@@ -71,4 +71,4 @@ draft = false
 ## Footnote {#footnote}
 
 [^fn:1]: このドキュメントは、スピーチのために用意した原稿です。実際のスピーチでは一部割愛されたり字句が追加されたりしています。
-[^fn:2]: ニホンヒキガエル （出典：[南部町の生きもの図典](http://www.town.nanbu.tottori.jp/ikimono/picbook/139/)） <a id="orge90d443"></a> {{< figure src="/nihonhikigaeru.jpg" caption="Figure 1: ニホンヒキガエル" >}}
+[^fn:2]: ニホンヒキガエル （出典：[南部町の生きもの図典](http://www.town.nanbu.tottori.jp/ikimono/picbook/139/)） <a id="org46b73e8"></a> {{< figure src="/nihonhikigaeru.jpg" caption="Figure 1: ニホンヒキガエル" width="60%" >}}

@@ -4,29 +4,29 @@ date = 2020-02-21T18:05:00+09:00
 draft = false
 +++
 
-### きっかけ {#きっかけ}
+## きっかけ {#きっかけ}
 
 **新型コロナウイルス** が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の **支出予算** がどれくらい消化されているかを表示する **水平ゲージ** （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：
 
 > （例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい
 
-予算消化率の可視化については[前回の投稿](http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/)で、GNOME端末での **プログレッシブ・バーグラフ** を紹介しました。今回はそれよりももう少しグラッフィックに図[1](#orgbbc0ac8)のような水平ゲージを描きます。
+予算消化率の可視化については[前回の投稿](http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/)で、GNOME端末での **プログレッシブ・バーグラフ** を紹介しました。今回はそれよりももう少しグラッフィックに図[1](#org2d8da3c)のような水平ゲージを描きます。
 
-<a id="orgbbc0ac8"></a>
+<a id="org2d8da3c"></a>
 
 {{< figure src="/horizontal-gauge.png" caption="Figure 1: 当日までの予算消化率をプロットする水平ゲージ" width="400px" >}}
 
 
-#### 仕掛け {#仕掛け}
+### 仕掛け {#仕掛け}
 
 当月内の当日までに支出した金額の累計はleger-cliで算出します。それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。その値をgnuplotにスクリプト内変数として引き渡して、水平ゲージ内に **太めの黒い線** を描くというシンプルな仕掛けです。
 
 
-#### ネットには見当たらない？ {#ネットには見当たらない}
+### ネットには見当たらない？ {#ネットには見当たらない}
 
-当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[2](#org795471e)のような **計器盤** 風のゲージ（[出典](https://angularscript.com/angular-gauge-chart-library/)）もgnuplotで描いた例を見つけることができませんでした。
+当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[2](#org2d57884)のような **計器盤** 風のゲージ（[出典](https://angularscript.com/angular-gauge-chart-library/)）もgnuplotで描いた例を見つけることができませんでした。
 
-<a id="org795471e"></a>
+<a id="org2d57884"></a>
 
 {{< figure src="/gauge-chart-library.png" caption="Figure 2: 計器盤風ゲージチャートの例" width="200px" >}}
 
@@ -42,14 +42,14 @@ draft = false
 前置きはこの辺にして中身を紹介します。
 
 
-### 環境 {#環境}
+## 環境 {#環境}
 
 -   ubuntu 16.04
 -   GNU bash, バージョン 4.3.48(1)-release (x86\_64-pc-linux-gnu)
 -   gnuplot 5.2 patchlevel 8
 
 
-### コーディング {#コーディング}
+## コーディング {#コーディング}
 
 次の２つのスクリプトを組み合わせます。
 
@@ -59,7 +59,7 @@ draft = false
 コードは大急ぎで書いたままでブサイクですがとりあえず動いています。スキルの高い人が書けばもっとスマートな方法があると思います。ま、とりあえず、ということで勘弁して下さい。
 
 
-#### bashからgnuplotへの変数と文字列の受け渡し {#bashからgnuplotへの変数と文字列の受け渡し}
+### bashからgnuplotへの変数と文字列の受け渡し {#bashからgnuplotへの変数と文字列の受け渡し}
 
 bashスクリプト内のledgerで算出した支出パーセントが格納されている **変数** （ `$pct` ）をgnuplotに `percent` という変数名で引き渡します。
 
@@ -73,7 +73,7 @@ gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
 ```
 
 
-#### bashスクリプト {#bashスクリプト}
+### bashスクリプト {#bashスクリプト}
 
 ```bash
 #!/bin/bash
@@ -112,7 +112,7 @@ mupdf ./horizontal-gauge.png &
 ```
 
 
-#### gnuplotスクリプト {#gnuplotスクリプト}
+### gnuplotスクリプト {#gnuplotスクリプト}
 
 ```bash
 #
@@ -155,19 +155,16 @@ set output
 ```
 
 
-### 使いみち {#使いみち}
+## 使いみち {#使いみち}
 
 買い物が終わった後、レシートなどを見ながらその日の支出をledgerで転記しますが、転記が終わったら、金額などの確認のためにいくつかのスクリプトを起動させて、各種のグラフやチャートを表示させます。そのスクリプト群の一つに、この水平ゲージ表示スクリプトを埋め込んでいます。
 
 ゲージスクリプトが起動すると、スクリーンの **空いた** 場所にこのゲージが表示されます。表示されている情報価は大したものではないのですが、見た目がもっともらしいので（笑）満足しています。
 
 
-### Acknowledgement {#acknowledgement}
+## Acknowledgement {#acknowledgement}
 
 次のサイトがとても参考になりました。
 
 -   <http://www.phyast.pitt.edu/~zov1/gnuplot/html/histogram.html>
 -   [ledger-reports](https://github.com/cbdevnet/ledger-reports)
-
-
-## Acknowledgement {#acknowledgement}

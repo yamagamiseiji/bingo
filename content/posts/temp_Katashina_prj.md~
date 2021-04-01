@@ -58,7 +58,7 @@ draft = false
 
 それはともかく、さんざん悩んだあげく、写真のような場所に結わえつけることにしました。プロパンガスのボンベを雪害から守るために作ったボンベハウスの屋根ウラという感じです。日光、雨、風、地上高の条件はほぼ満たしています。
 
-<a id="orgdbc59d3"></a>
+<a id="org9a0c91b"></a>
 
 {{< figure src="/koki.jpg" caption="Figure 1: 子機設置の様子" width="60%" >}}
 
@@ -67,7 +67,7 @@ draft = false
 
 100均のワイヤー製の皿ホルダーを流用。温度計の表示面を上にしてフラットに置いて、それをまたぐような形で皿ホルダーを図のようにかぶせます。皿ホルダーの外枠の幅と、温度計の横幅がぴったり同じというのが味噌ｗ
 
-<a id="org9dbe0d3"></a>
+<a id="orge37bfeb"></a>
 
 {{< figure src="/oyaki_citizen.jpg" caption="Figure 2: 親機とC270そしてLEDブックライトのマウント方法" width="60%" >}}
 
@@ -210,6 +210,3 @@ EOF
 
 
 ## Acknowledgement {#acknowledgement}
-
-![](../static/H80citizen.jpg) ![](../static/H80logitech.jpg) ![](../static/H80unicorn.png)
-![](../static/H80plala.jpg)   ![](../static/H80panasonic.jpg) ![](../static/H80ubuntu.png)

@@ -1,8 +1,27 @@
 +++
 title = "vivat senshu!"
 date = 2019-03-17T22:09:00+09:00
+tags = ["edu", "social"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [退職者代表スピーチ　（定年退職者慰労会）](#退職者代表スピーチ-定年退職者慰労会)
+    - [ごあいさつ](#ごあいさつ)
+    - [人の年齢](#人の年齢)
+    - [大学の年齢](#大学の年齢)
+    - [結び](#結び)
+- [Footnote](#footnote)
+
+</div>
+<!--endtoc-->
+
+
 
 ## 退職者代表スピーチ[^fn:1]　（定年退職者慰労会） {#退職者代表スピーチ-定年退職者慰労会}
 
@@ -71,4 +90,4 @@ draft = false
 ## Footnote {#footnote}
 
 [^fn:1]: このドキュメントは、スピーチのために用意した原稿です。実際のスピーチでは一部割愛されたり字句が追加されたりしています。
-[^fn:2]: ニホンヒキガエル （出典：[南部町の生きもの図典](http://www.town.nanbu.tottori.jp/ikimono/picbook/139/)） <a id="org46b73e8"></a> {{< figure src="/nihonhikigaeru.jpg" caption="Figure 1: ニホンヒキガエル" width="60%" >}}
+[^fn:2]: ニホンヒキガエル （出典：[南部町の生きもの図典](http://www.town.nanbu.tottori.jp/ikimono/picbook/139/)） <a id="orgcac64b0"></a> {{< figure src="/nihonhikigaeru.jpg" caption="Figure 1: ニホンヒキガエル" width="60%" >}}

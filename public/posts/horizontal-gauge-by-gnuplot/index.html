@@ -77,12 +77,33 @@
   <article class="post content">
     <h2 class="title">予算消化率の水平ゲージをledger-cliとgnuplotで描く</h2>
     <div class="post_content">
-      <h2 id="きっかけ">きっかけ</h2>
+      <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#%E3%81%8D%E3%81%A3%E3%81%8B%E3%81%91">きっかけ</a>
+<ul>
+<li><a href="#%E4%BB%95%E6%8E%9B%E3%81%91">仕掛け</a></li>
+<li><a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%81%AB%E3%81%AF%E8%A6%8B%E5%BD%93%E3%81%9F%E3%82%89%E3%81%AA%E3%81%84">ネットには見当たらない？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%92%B0%E5%A2%83">環境</a></li>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">コーディング</a>
+<ul>
+<li><a href="#bash%E3%81%8B%E3%82%89gnuplot%E3%81%B8%E3%81%AE%E5%A4%89%E6%95%B0%E3%81%A8%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E5%8F%97%E3%81%91%E6%B8%A1%E3%81%97">bashからgnuplotへの変数と文字列の受け渡し</a></li>
+<li><a href="#bash%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">bashスクリプト</a></li>
+<li><a href="#gnuplot%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">gnuplotスクリプト</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E3%81%84%E3%81%BF%E3%81%A1">使いみち</a></li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="きっかけ">きっかけ</h2>
 <p><strong>新型コロナウイルス</strong> が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の <strong>支出予算</strong> がどれくらい消化されているかを表示する <strong>水平ゲージ</strong> （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</p>
 <blockquote>
 <p>（例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい</p>
 </blockquote>
-<p>予算消化率の可視化については<a href="http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/">前回の投稿</a>で、GNOME端末での <strong>プログレッシブ・バーグラフ</strong> を紹介しました。今回はそれよりももう少しグラッフィックに図<a href="#org2d8da3c">1</a>のような水平ゲージを描きます。</p>
+<p>予算消化率の可視化については<a href="http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/">前回の投稿</a>で、GNOME端末での <strong>プログレッシブ・バーグラフ</strong> を紹介しました。今回はそれよりももう少しグラッフィックに図<a href="#org670bcc6">1</a>のような水平ゲージを描きます。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/horizontal-gauge.png"
@@ -94,7 +115,7 @@
 <h3 id="仕掛け">仕掛け</h3>
 <p>当月内の当日までに支出した金額の累計はleger-cliで算出します。それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。その値をgnuplotにスクリプト内変数として引き渡して、水平ゲージ内に <strong>太めの黒い線</strong> を描くというシンプルな仕掛けです。</p>
 <h3 id="ネットには見当たらない">ネットには見当たらない？</h3>
-<p>当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図<a href="#org2d57884">2</a>のような <strong>計器盤</strong> 風のゲージ（<a href="https://angularscript.com/angular-gauge-chart-library/">出典</a>）もgnuplotで描いた例を見つけることができませんでした。</p>
+<p>当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図<a href="#org09ec545">2</a>のような <strong>計器盤</strong> 風のゲージ（<a href="https://angularscript.com/angular-gauge-chart-library/">出典</a>）もgnuplotで描いた例を見つけることができませんでした。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/gauge-chart-library.png"
@@ -215,6 +236,20 @@ plot <span class="nv">$Plotdata</span> using 2:xtic<span class="o">(</span>1<spa
     </div>
     <div class="info post_meta">
       <time datetime=2020-02-21T18:05:00&#43;0900 class="date">Friday, February 21, 2020</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/accounting">accounting</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/viz">viz</a> </li>
+        
+        </ul>
       
       
     </div>

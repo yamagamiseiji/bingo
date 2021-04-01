@@ -3,10 +3,13 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+options: toc:nil num:nil author:nil
+#+hugo_tags: edun wine
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-#+hugo_tags: education wine 
+
 
 近年、日本ワインがどんどんレベルを高めていて美味しくなっているのは分かっているつもりです。けれども、コストパファーマンスという意味では、なかなか難しい側面があります。これまで、ボクらが日々飲むワインで、たとえば1,000円前後のワインでいえば、国産ワインは、新世界やフランス、イタリアなどのワインを比べると、申し訳ありませんが、海外のワインを飲んだ方が満足度が高かったです。
 

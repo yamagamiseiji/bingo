@@ -77,10 +77,19 @@
   <article class="post content">
     <h2 class="title">ぼちぼちですが可視化してます</h2>
     <div class="post_content">
-      <p>ここでは、
+      <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E5%85%83%E3%83%97%E3%83%AD%E3%83%83%E3%83%88%E3%81%AE%E4%BE%8B">二次元プロットの例</a></li>
+<li><a href="#3d%E3%83%97%E3%83%AD%E3%83%83%E3%83%88%E3%81%AE%E4%BE%8B">3Dプロットの例</a></li>
+<li><a href="#%E3%81%8A%E3%81%BE%E3%81%91-%E6%97%A5%E3%80%85%E3%81%AE%E6%94%AF%E5%87%BA%E7%8A%B6%E6%B3%81%E3%82%92%E3%81%BF%E3%82%8Btoday%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">（おまけ）日々の支出状況をみるtodayスクリプト</a></li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<p>ここでは、
 <strong>Ledger-cli</strong> （3.11）と <strong>Gnuplot</strong> （5.28）および <strong>bash</strong> （on ubuntu16.04）の組み合わせで描いた各種グラフのとりあえず「 <strong>見た目</strong> 」だけを紹介します。中身の説明とかソースなどは後日、GitHubとかに上げます。</p>
 <h2 id="二次元プロットの例">二次元プロットの例</h2>
-<p>図<a href="#org0f30105">1</a>は経理情報を可視化するための自作スクリプトによる出力例です。</p>
+<p>図<a href="#org8f335d8">1</a>は経理情報を可視化するための自作スクリプトによる出力例です。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/small-work.png"
@@ -93,7 +102,7 @@
 <p>かなり面倒な整形や計算をしているグラフもありますが、すべてワンクリック（またはコマンドラインからのコマンド入力）によって、ほとんど <strong>瞬時</strong> に表示されます。</p>
 <p>Ledgerの計算速度には目を見張るものがあります。C++の効果かしら？　それからGnuplotの描画スピードもすごい。元帳のポスティング行数は5,000行以上もあるのに、グラフが出てくるのを心理的に「待つ」ということがありません。PCはLenovo/X230というかなり型落ちのノートなんですが・・・。</p>
 <h2 id="3dプロットの例">3Dプロットの例</h2>
-<p>次の図<a href="#orgc9545da">2</a>は、Ledger＋gnuplotによる3Dプロットの例図（試作品）です。縦軸の金額にはボカシを入れています。</p>
+<p>次の図<a href="#org7ab7078">2</a>は、Ledger＋gnuplotによる3Dプロットの例図（試作品）です。縦軸の金額にはボカシを入れています。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/fence-plot-sample.png"
@@ -104,7 +113,7 @@
 
 <p>アカウンティングの世界で3Dプロットが普及していないのは、3Dの図から視覚的に多くの情報を抽出するのが思いの外むずかしいからかも知れません。しかしこれをマウスでクリクリ回して様々な視点から <strong>アニメーション</strong> で見えるようにすると、新たな傾向が見えてきて、「おぉ！」と言う感じになります。それはまた後日ということで・・・</p>
 <h2 id="おまけ-日々の支出状況をみるtodayスクリプト">（おまけ）日々の支出状況をみるtodayスクリプト</h2>
-<p>日々の記帳作業のあと、(1) その日の入力を確認するため、(2) 月々の支出予定金額に対して現在の支出がどれくらいの割合になっているかを一目で見るために、 <strong><code>today</code></strong> という <strong>ターミナル</strong> 上で動く小さなスクリプトを作って愛用しています。図<a href="#orgd668b8d">3</a>の下の方には、 <code>$ ledger bal ^expenses -p today</code> と <code>reg</code> の出力を表示していますが、省略しています。</p>
+<p>日々の記帳作業のあと、(1) その日の入力を確認するため、(2) 月々の支出予定金額に対して現在の支出がどれくらいの割合になっているかを一目で見るために、 <strong><code>today</code></strong> という <strong>ターミナル</strong> 上で動く小さなスクリプトを作って愛用しています。図<a href="#org691005c">3</a>の下の方には、 <code>$ ledger bal ^expenses -p today</code> と <code>reg</code> の出力を表示していますが、省略しています。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/snapshot-today.png"
@@ -124,6 +133,20 @@
     </div>
     <div class="info post_meta">
       <time datetime=2020-01-31T12:29:00&#43;0900 class="date">Friday, January 31, 2020</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/accounting">accounting</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/viz">viz</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+        </ul>
       
       
     </div>

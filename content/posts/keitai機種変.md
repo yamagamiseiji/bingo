@@ -1,25 +1,41 @@
 +++
 title = "さようなら, マイPHS！"
 date = 2019-04-09T00:00:00+09:00
+tags = ["mobile"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [PHSの最期](#phsの最期)
+- [ということで](#ということで)
+- [Footnote](#footnote)
+
+</div>
+<!--endtoc-->
+
+
 
 ## PHSの最期 {#phsの最期}
 
 Willcom以来、長らくPHS（070-xxxx-yyyy）を愛用していましたが、Willcomが2014年にSoftBank傘下のY!mobileブランドとなったのが運のつき（笑）、悲しいかな、ついに2020年7月にはサービス停止になるとのこと。
 
-4月になっていくらか時間ができたので、この先、音声通話のための携帯電話をどうすべきかについて、ぼくのライフスタイルをベースに、通信料金をできるだけ安く抑えるにはどうしたらよいか、真剣に検討しました。その結果、いわゆるスマホではなくて、Y!mobileの ****Simply**** という単機能の携帯電話（図[1](#orge3fc4d6))に機種変することにしました。
+4月になっていくらか時間ができたので、この先、音声通話のための携帯電話をどうすべきかについて、ぼくのライフスタイルをベースに、通信料金をできるだけ安く抑えるにはどうしたらよいか、真剣に検討しました。その結果、いわゆるスマホではなくて、Y!mobileの ****Simply**** という単機能の携帯電話（図[1](#org025e8fa))に機種変することにしました。
 
-<a id="orge3fc4d6"></a>
+<a id="org025e8fa"></a>
 
 {{< figure src="/S603Six500.png" caption="Figure 1: 4月からの通話端末Y!mobile Simply(S603Si)" width="80%" >}}
 
 決め手となったのは次の2点です。
 
 -   電話番号が070-xxxx-yyyyのまま継続できること
--   月額基本料金[^fn:1]が通話（かけ放題的）＋メールで **360円** ) になること（図[2](#org074800b)）
+-   月額基本料金[^fn:1]が通話（かけ放題的）＋メールで **360円** ) になること（図[2](#orga8e9633)）
 
-<a id="org074800b"></a>
+<a id="orga8e9633"></a>
 
 {{< figure src="/meisai_keitaix300.png" caption="Figure 2: 支払い明細（抜粋）" width="80%" >}}
 
