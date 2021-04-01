@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>LaTeX on Yam’s Peace Blog</title>
-    <link>https://competent-gates-c3fe1e.netlify.app/tags/latex/</link>
+    <link>https://bred-in-bingo.netlify.app/tags/latex/</link>
     <description>Recent content in LaTeX on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 27 Feb 2019 08:39:00 +0900</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Feb 2019 08:39:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/latex/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>名刺を自作しました</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</link>
+      <link>https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</link>
       <pubDate>Wed, 27 Feb 2019 08:39:00 +0900</pubDate>
       
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</guid>
+      <guid>https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</guid>
       <description>自作するわけ  自作の方法は大別して次の２つ 用紙の選定   TeXでがんばる  紙サイズのパラメータ設定 j-namecard.</description>
     </item>
     
     <item>
       <title>わざわざ Emacs/LaTeXでハガキ印刷するわけ</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/hagaki%E5%8D%B0%E5%88%B7/</link>
+      <link>https://bred-in-bingo.netlify.app/posts/hagaki%E5%8D%B0%E5%88%B7/</link>
       <pubDate>Sun, 30 Dec 2018 11:52:00 +0900</pubDate>
       
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/hagaki%E5%8D%B0%E5%88%B7/</guid>
+      <guid>https://bred-in-bingo.netlify.app/posts/hagaki%E5%8D%B0%E5%88%B7/</guid>
       <description>表面（宛名）印刷  年賀状の宛名面印刷のためのクラスファイル 普通葉書の宛名印刷のためのクラスファイル   文面（ウラ面）のためのサンプルファイル  最近でも、年に数回はどうしてもハガキでの通信が必要になります。目上の方へのお中元やお歳暮のお礼とか、住所とお名前だけは分かっているけれど、電話番号やメールやラインなどの情報がない方への連絡というのが主なケースです。</description>
     </item>
     

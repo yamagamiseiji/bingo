@@ -2,38 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GitHub on Yam’s Peace Blog</title>
-    <link>https://competent-gates-c3fe1e.netlify.app/tags/github/</link>
+    <link>https://bred-in-bingo.netlify.app/tags/github/</link>
     <description>Recent content in GitHub on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://competent-gates-c3fe1e.netlify.app/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/github/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ごあいさつ</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/kojo/</link>
+      <link>https://bred-in-bingo.netlify.app/posts/kojo/</link>
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/kojo/</guid>
-      <description>これまで2年ほどブログ書きは下のようなフローでやってきました。
+      <guid>https://bred-in-bingo.netlify.app/posts/kojo/</guid>
+      <description>Something&amp;rsquo;s wrong again&amp;hellip;
+これまで2年ほどブログ書きは下のようなフローでやってきました。
 Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
     </item>
     
     <item>
       <title>Hugoのテーマえらび</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</link>
+      <link>https://bred-in-bingo.netlify.app/posts/theme-selection/</link>
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</guid>
+      <guid>https://bred-in-bingo.netlify.app/posts/theme-selection/</guid>
       <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中から、mixedpaperを使わせてもらうことにしました。
 当初の希望  個々の記事のタイトルと内容を数行程度で要約表示したい 記事の要約リストにサムネイル画像をつけたい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい １記事1ファイルで運用したい  候補 検討したのは次のようなテーマです。</description>
     </item>
     
     <item>
       <title>archives test</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</link>
+      <link>https://bred-in-bingo.netlify.app/posts/archives-test/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0900</pubDate>
       
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/archives-test/</guid>
+      <guid>https://bred-in-bingo.netlify.app/posts/archives-test/</guid>
       <description>アーカイブのテストです。
 アーカイブされるかしら？
 おっけ！</description>

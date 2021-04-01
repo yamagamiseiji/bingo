@@ -8,8 +8,6 @@ draft = false
 toc = true
 +++
 
-{{< figure src="/me.jpg" caption="Figure 1: テスト画像" width="30%" >}}
-
 これまで2年ほどブログ書きは下のようなフローでやってきました。
 
 ```text
@@ -44,7 +42,7 @@ Emacs > org-mode > ox-hugo > Hugo > Netlify > GitHub
 2.  Netlifyウエブサイトの'Deploy settings'中の'Build settings'の内容をGitHubのサイトルートにしたこと。
 
     ```text
-    Base = hugo-site/
+    Base = bingo/
     　：
     Publish = public
     　：

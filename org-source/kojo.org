@@ -4,7 +4,6 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-
 #+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
 #+hugo_categories: comp
 
@@ -17,8 +16,6 @@
 # [[file:me.jpg]]
 
 Something's wrong again...
-local にも反映しない。
-
 
 これまで2年ほどブログ書きは下のようなフローでやってきました。
 #+begin_example
