@@ -19,23 +19,22 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
     </item>
     
     <item>
+      <title>bingo の由来</title>
+      <link>https://competent-gates-c3fe1e.netlify.app/posts/origin-of-domain-name/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://competent-gates-c3fe1e.netlify.app/posts/origin-of-domain-name/</guid>
+      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名には bingo の語を入れました。このbingoは英語じゃあなくて、地名の「 備後 （びんご）」でボクの生まれ故郷です。</description>
+    </item>
+    
+    <item>
       <title>Hugoのテーマえらび</title>
       <link>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</link>
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://competent-gates-c3fe1e.netlify.app/posts/theme-selection/</guid>
-      <description>このサイトでは、 Hugo Themes(Tag: blog) の中からmixedpaperを使わせてもらうことにしました。
-当初の希望  個々の記事のタイトルと内容が数行程度表示されるパートがほしい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい 記事1本を1ファイルにしたい  だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、これにしました。</description>
-    </item>
-    
-    <item>
-      <title>ドメイン名の由来</title>
-      <link>https://competent-gates-c3fe1e.netlify.app/posts/origin-of-domain-name/</link>
-      <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
-      
-      <guid>https://competent-gates-c3fe1e.netlify.app/posts/origin-of-domain-name/</guid>
-      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名は born-in-bingo.netlify.app です。
-由来はとても単純。bingoは英語じゃあなくて地名の「 備後 （びんご）」でボクの生まれ故郷です。</description>
+      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中から、mixedpaperを使わせてもらうことにしました。
+当初の希望  個々の記事のタイトルと内容を数行程度で要約表示したい 記事の要約リストにサムネイル画像をつけたい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい １記事1ファイルで運用したい  候補 検討したのは次のようなテーマです。</description>
     </item>
     
     <item>

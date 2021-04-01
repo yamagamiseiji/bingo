@@ -4,29 +4,30 @@ date = 2021-03-25
 tags = ["Emacs", "hugo", "ox-hugo", "Netlify", "GitHub", "ledger"]
 categories = ["comp"]
 draft = false
-toc = true
+toc = 2
 +++
 
-このサイトでは、
-[Hugo Themes(Tag: blog)](https://themes.gohugo.io/tags/blog/) の中から[mixedpaper](https://themes.gohugo.io/hugo-theme-mixedpaper/)を使わせてもらうことにしました。
+[Hugo Themes: Complete List](https://themes.gohugo.io/) に400ほどのテーマが公開されています。それらの中から、[mixedpaper](https://themes.gohugo.io/hugo-theme-mixedpaper/)を使わせてもらうことにしました。
 
 
-### 当初の希望 {#当初の希望}
+## 当初の希望 {#当初の希望}
 
--   個々の記事のタイトルと内容が数行程度表示されるパートがほしい
+-   個々の記事のタイトルと内容を数行程度で要約表示したい
+-   記事の要約リストにサムネイル画像をつけたい
 -   サイドバーに記事の目次がほしい
 -   個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい
--   記事1本を1ファイルにしたい
-
-だったのですが、ドンピシャってわけには行かず、半日ほどかけて使えそうなテーマを探索した結果、[これ](https://themes.gohugo.io/strange-case/)にしました。
+-   １記事1ファイルで運用したい
 
 
-### 候補者たち {#候補者たち}
+## 候補 {#候補}
 
 検討したのは次のようなテーマです。
 
+[Tranquilpeak](https://themes.gohugo.io/hugo-tranquilpeak-theme/)
+: 　高度な画面　しかし設定の自由度と難度が高い
+
 [strange case](https://themes.gohugo.io/strange-case/)
-: 　画面幅が狭くなるとサイドバーのコンテンツがヘッダーに移動　けど目次が消える
+: 　これもお気に入り　しかし画面幅が狭くなるとサイドバーのコンテンツがヘッダーに移動して目次が消える
 
 [cayman](https://themes.gohugo.io/cayman-hugo-theme/)
 : 　1記事1ファイルベースだけどサイドバーなし　
@@ -41,4 +42,4 @@ toc = true
 : 　トップページに要約表示があるのは良いけどその幅がなぜか狭い（変更可能とは思いますが）
 
 
-## Ackknowledgment {#ackknowledgment}
+### Ackknowledgment {#ackknowledgment}
