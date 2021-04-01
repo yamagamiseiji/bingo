@@ -3,10 +3,13 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+options: toc:nil num:nil author:nil
+#+hugo_tags: ledger emacs accounting 
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-#+hugo_tags: ledger emacs accounting 
+
 
 この（３）でも「その（２）」に引き続き、ちいさなTipsを備忘的に記します。
 * Adjustmentsを使おう

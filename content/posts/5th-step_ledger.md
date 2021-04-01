@@ -1,8 +1,30 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（5）"
 date = 2019-07-21T18:26:00+09:00
+tags = ["ledger", "emacs", "ledger", "accounting"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [再訪　「借方」「貸方」](#再訪-借方-貸方)
+    - [英語でもたいへんのようです](#英語でもたいへんのようです)
+    - [Ledger cli では](#ledger-cli-では)
+- [tagは便利！ 使わない手は無い！](#tagは便利-使わない手は無い)
+- [外国通貨の扱い](#外国通貨の扱い)
+    - [まずは上の例のようにアカウントの金額の後ろにレートを書いた場合](#まずは上の例のようにアカウントの金額の後ろにレートを書いた場合)
+    - [~/.prices.db ファイルを使う](#dot-prices-dot-db-ファイルを使う)
+- [apply account の使い勝手](#apply_account)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
+
+
 
 ## 再訪　「借方」「貸方」 {#再訪-借方-貸方}
 
@@ -14,13 +36,13 @@ draft = false
 
 ところで、この「借方」「貸方」という日本語の生い立ちはなかなか由緒正しいもののようです。福澤諭吉が「 **帳合之法** 」（1873）で使い始めたのが最初とのこと。
 
-<a id="orgf01d7ef"></a>
+<a id="org7c8a644"></a>
 
 {{< figure src="/s-choainoho-hyoshi.jpg" caption="Figure 1: 「帳合之法」福澤諭吉（1873）表紙" width="90%" >}}
 
 「帳合之法」は国会図書館でデジタル化した原本をキンドルストアで購入できました！良い時代になったもんです。話は逸れますが、有名な（？）「古来から日本においては、学者は必ず貧乏である。金持ちは必ず無学である。」の文言がこの本の冒頭にあったんですね。
 
-<a id="orgaa3a487"></a>
+<a id="org0d8196a"></a>
 
 {{< figure src="/s-choainoho-page02.jpg" caption="Figure 2: 「帳合之法」2ページ" width="90%" >}}
 

@@ -3,11 +3,12 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+options: toc:nil num:nil author:nil
+#+hugo_tags: ledger emacs accounting
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-
-#+hugo_tags: ledger emacs accounting
 
 * トランザクションのスケジューリング 
 繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。

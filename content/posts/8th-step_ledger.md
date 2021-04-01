@@ -1,8 +1,29 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（8）"
 date = 2019-09-16T10:10:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [高速道路料金、高い！](#高速道路料金-高い)
+- [ETCマイレージポイントをなんとかしよう！](#etcマイレージポイントをなんとかしよう)
+    - [ETCマイレージポイントの残高などを記録・管理する試み](#etcマイレージポイントの残高などを記録-管理する試み)
+    - [PTAによる処理の一例](#ptaによる処理の一例)
+    - [トランザクションコードを使う方法](#トランザクションコードを使う方法)
+    - [ということで](#ということで)
+    - [おわりに・・・](#おわりに)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
+
+
 
 ## 高速道路料金、高い！ {#高速道路料金-高い}
 

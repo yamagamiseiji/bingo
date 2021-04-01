@@ -1,8 +1,26 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（3）"
 date = 2019-06-07T18:56:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [Adjustmentsを使おう](#adjustment)
+- [少額の現金の扱い](#petty_cash)
+- [利子・利息の転記方法](#利子-利息の転記方法)
+- [定期的なトランザクションの書き方](#定期的なトランザクションの書き方)
+    - [レポートの表示](#レポートの表示)
+- [几帳面？](#几帳面)
+- [Acknowledgment](#acknowledgment)
+
+</div>
+<!--endtoc-->
 
 この（３）でも「その（２）」に引き続き、ちいさなTipsを備忘的に記します。
 
@@ -196,7 +214,7 @@ $ led reg --add-budget
 
 それで、「几帳面」と言うのは「帳面」をきちんとつけられることだと思っていましたが、どうやらそれは間違いで、「几帳」という「寝殿造りの間仕切り」の仕上げがとても丁寧だったことに由来するそうです。
 
-<a id="org83f2ddc"></a>
+<a id="orgb90b8cd"></a>
 
 {{< figure src="/kicho.jpg" caption="Figure 1: 几帳です。記帳ではありませんw" width="80%" >}}
 

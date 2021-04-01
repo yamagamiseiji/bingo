@@ -77,7 +77,23 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（7）</h2>
     <div class="post_content">
-      <h2 id="androidタブレットでledger-cli">AndroidタブレットでLedger cli</h2>
+      <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#android%E3%82%BF%E3%83%96%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7ledger-cli">AndroidタブレットでLedger cli</a>
+<ul>
+<li><a href="#%E7%92%B0%E5%A2%83%E6%9D%A1%E4%BB%B6">環境条件</a></li>
+<li><a href="#%E3%83%9D%E3%83%AA%E3%82%B7%E3%82%A4">ポリシイ</a></li>
+<li><a href="#%E5%AE%9F%E9%9A%9B%E3%81%AB%E3%82%84%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8">実際にやったこと</a></li>
+<li><a href="#ledger%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%85%B1%E6%9C%89%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB">ledgerファイルの共有のために・・・</a></li>
+<li><a href="#%E4%BD%BF%E3%81%84%E6%96%B9">使い方</a></li>
+<li><a href="#%E3%81%84%E3%81%BE%E3%81%AE%E3%81%A8%E3%81%93%E3%82%8D%E6%BA%80%E8%B6%B3%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99">いまのところ満足しています</a></li>
+</ul>
+</li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="androidタブレットでledger-cli">AndroidタブレットでLedger cli</h2>
 <p>家計簿のみならず全ての会計帳簿は <strong>即時性</strong> と <strong>継続性</strong> を基礎にした <strong>正確さ</strong> が命です。</p>
 <p>Ledgerには大きなメリットがたくさんありますが、その一つは、記帳にかかる時間が（他の会計ソフトに比べて）とても短いこと、つまり人間工学的に即時性と継続性を実現しやすくできている点を上げることができます。</p>
 <p>しかし、人間は欲深いというか生来のなまけ者というか、Ledgerを使っていると、もっと即応的に、もっと簡便にという欲望が湧いてきます。たとえば、
@@ -115,7 +131,7 @@
 <pre><code class="language-nil" data-lang="nil">$ ledger bal ガソリン -p jul -X JPY
 $ ledger reg farming -p aug
 $ mbal 交際費
-</code></pre><p>最後の <code>mbal</code> はこの<a href="http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/">シリーズ(4)</a>で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図<a href="#org42268d3">1</a>のようになります。</p>
+</code></pre><p>最後の <code>mbal</code> はこの<a href="http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/">シリーズ(4)</a>で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図<a href="#org57170a4">1</a>のようになります。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/termux-fig1.jpg"
@@ -126,7 +142,7 @@ $ mbal 交際費
 
 <p>画面下部のキーボードがHacker&rsquo;s Keyboardです。これはLinuxターミナル用にはとても便利。ただ残念なことに日本語対応していません。日本語入力が必要になったら、その都度キーボードを切り替えなければなりません。だれか日本語対応版を作ってくれないでしょうか？</p>
 <p>Termuxの細かい使い方はネット上によい紹介がたくさんありますので、そちらをごらんください。ここでは特に気に入っている機能（＝同時に <strong>複数のセッション</strong> を開く機能）だけ、紹介しておきます。</p>
-<p>新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって <strong>スワイプ</strong> します。すると図<a href="#org168e655">2</a>のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには <strong>NEW SESSION</strong> をタップします。</p>
+<p>新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって <strong>スワイプ</strong> します。すると図<a href="#org4160d05">2</a>のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには <strong>NEW SESSION</strong> をタップします。</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/sshot2-termux.jpg"
@@ -163,6 +179,16 @@ $ mbal 交際費
     </div>
     <div class="info post_meta">
       <time datetime=2019-08-14T12:30:00&#43;0900 class="date">Wednesday, August 14, 2019</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://competent-gates-c3fe1e.netlify.app/tags/accounting">accounting</a> </li>
+        
+        </ul>
       
       
     </div>

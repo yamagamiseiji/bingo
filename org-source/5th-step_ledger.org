@@ -3,10 +3,12 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+options: toc:nil num:nil author:nil
+#+hugo_tags: ledger emacs ledger accounting
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false
-#+hugo_tags: ledger emacs ledger accounting 
 
 * 再訪　「借方」「貸方」
 このシリーズ（４）でもお話しましたが、

@@ -3,6 +3,9 @@
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
+#+hugo_tags: ledger emacs accounting
+#+hugo_categories: comp
+
 #+options: toc:nil num:nil author:nil
 #+link: file file+sys:../static/
 #+draft: false

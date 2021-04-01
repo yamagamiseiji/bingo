@@ -1,8 +1,30 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（9）"
 date = 2019-10-04T00:00:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [キャッシュレス還元が始まった](#キャッシュレス還元が始まった)
+    - [real か virtualか](#real-か-virtualか)
+- [便利なコマンド・オプションたち](#便利なコマンド-オプションたち)
+    - [accountsコマンド](#accountsコマンド)
+    - [payeesコマンド](#payeesコマンド)
+    - [`--by-payee` （ `-P` ）オプション](#by-payee-p-オプション)
+    - [xactコマンド](#xactコマンド)
+- [おまけ -- suicaの残高をPCで確認する](#おまけ-suicaの残高をpcで確認する)
+    - [suicaの残高](#suicaの残高)
+    - [PaSoRiを使って残高確認](#pasoriを使って残高確認)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
 
 2019年10月1日から消費税が（一部）10%に増税になりました。ボクは経済学が専門ではありませんが、不況下で増税するのはどういう理屈なんでしょうか？不況には ****減税**** するものと思っていました。経済の専門家のみなさんはオッケーなんですかね？
 

@@ -1,9 +1,34 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（2）"
 date = 2019-05-16T00:00:00+09:00
+tags = ["ledger", "emacs", "accounting"]
 categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [はじめに](#はじめに)
+- [トランザクション記帳について](#トランザクション記帳について)
+    - [日付けの手抜き入力](#日付けの手抜き入力)
+    - [トランザクション名、アカウント名などの手抜き記帳](#トランザクション名-アカウント名などの手抜き記帳)
+    - [コピペを活用](#コピペを活用)
+- [絞り込みReportの表示](#絞り込みreportの表示)
+    - [よく使う絞り込み](#よく使う絞り込み)
+    - [Register report](#register-report)
+    - [その他いろいろ](#その他いろいろ)
+- [使い勝手について](#使い勝手について)
+    - [セキュリティとの関連で](#セキュリティとの関連で)
+    - [レポートの可視化について](#レポートの可視化について)
+- [Acknowledgment](#acknowledgment)
+
+</div>
+<!--endtoc-->
+
+
 
 ## はじめに {#はじめに}
 
@@ -68,7 +93,7 @@ l TAB v TAB
 Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
  **`C-c C-k`** するとEmacsの下半分に次のようなカレンダーが表示されます。
 
-<a id="org94f902e"></a>
+<a id="org789a3a3"></a>
 
 {{< figure src="/emacs_calendar.png" caption="Figure 1: Emacs内に表示されるカレンダー" width="95%" >}}
 
