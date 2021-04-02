@@ -14,8 +14,7 @@
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/kojo/</guid>
-      <description>Something&amp;rsquo;s wrong again&amp;hellip;
-これまで2年ほどブログ書きは下のようなフローでやってきました。
+      <description>これまで2年ほどブログ書きは下のようなフローでやってきました。
 Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
     </item>
     
@@ -27,17 +26,6 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <guid>https://bred-in-bingo.netlify.app/posts/theme-selection/</guid>
       <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中から、mixedpaperを使わせてもらうことにしました。
 当初の希望  個々の記事のタイトルと内容を数行程度で要約表示したい 記事の要約リストにサムネイル画像をつけたい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい １記事1ファイルで運用したい  候補 検討したのは次のようなテーマです。</description>
-    </item>
-    
-    <item>
-      <title>archives test</title>
-      <link>https://bred-in-bingo.netlify.app/posts/archives-test/</link>
-      <pubDate>Sat, 01 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>https://bred-in-bingo.netlify.app/posts/archives-test/</guid>
-      <description>アーカイブのテストです。
-アーカイブされるかしら？
-おっけ！</description>
     </item>
     
   </channel>
