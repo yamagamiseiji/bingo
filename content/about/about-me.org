@@ -1,22 +1,35 @@
 #+title: About Me
-#+date: <2021-03-29 月>
+#+date: <2021-04-01 月>
 
 #+hugo_base_dir: ~/peace-blog/bingo/
-#+hugo_section: about
+#+hugo_section: about/
 #+hugo_tags: social greeting
-#+hugo_categories: about 
 
 #+hugo_custom_front_matter: :toc true
 #+draft: false
 
-#+link: file file+sys:../../static/
+#+link: file file+sys:../../
 
-Coming soon....
+- base-dir = ~/peace-blog/bingo   # ケツのスラッシュどっちでもよい？
+- section = about/            　　# ケツのスラッシュどっちでもよい？
+# - link = ../../    　　# ケツのスラッシュここは必要らしひ
+- .mdファイル内の画像ロケーションは:
+#   link = ../../    + file:me.jpg      # OK
+#   link = ../../    + file:../me.jpg   #
+# - file:../me.jpg                # ../ はブサイク
 
 #+caption: テスト画像
 #+attr_org: :width 30%
 #+attr_html: :width 30% :aligne center
-[[file:me.jpg]]
+[[file:momo.jpg]]
+
+
+
+Where in the world, should 'about-me.{org|.md}'  be placed?
+- ~/content/about/
+
+Where should images be plated?
+- ~/static/
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)

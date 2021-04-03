@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Contents on Yam’s Peace Blog</title>
+    <link>https://bred-in-bingo.netlify.app/content/</link>
+    <description>Recent content in Contents on Yam’s Peace Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/content/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://bred-in-bingo.netlify.app/content/about/about-me/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://bred-in-bingo.netlify.app/content/about/about-me/</guid>
+      <description>Coming soon&amp;hellip;.
+ base-dir = ~/peace-blog/bingo section = content/about link = .</description>
+    </item>
+    
+  </channel>
+</rss>

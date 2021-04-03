@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>greeting</title>
+      <link>https://bred-in-bingo.netlify.app/tags/greeting/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://bred-in-bingo.netlify.app/tags/greeting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>social</title>
+      <link>https://bred-in-bingo.netlify.app/tags/social/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://bred-in-bingo.netlify.app/tags/social/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>emacs</title>
       <link>https://bred-in-bingo.netlify.app/tags/emacs/</link>
@@ -189,15 +207,6 @@
     </item>
     
     <item>
-      <title>social</title>
-      <link>https://bred-in-bingo.netlify.app/tags/social/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://bred-in-bingo.netlify.app/tags/social/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>LaTeX</title>
       <link>https://bred-in-bingo.netlify.app/tags/latex/</link>
       <pubDate>Wed, 27 Feb 2019 08:39:00 +0900</pubDate>
@@ -212,15 +221,6 @@
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/tags/ubuntu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>greeting</title>
-      <link>https://bred-in-bingo.netlify.app/tags/greeting/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://bred-in-bingo.netlify.app/tags/greeting/</guid>
       <description></description>
     </item>
     

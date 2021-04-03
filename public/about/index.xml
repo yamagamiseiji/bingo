@@ -7,14 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/about/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/about/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Me</title>
       <link>https://bred-in-bingo.netlify.app/about/about-me/</link>
-      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/about/about-me/</guid>
-      <description>Coming soon….</description>
+      <description>base-dir = ~/peace-blog/bingo # ケツのスラッシュどっちでもよい？
+  section = about/ # ケツのスラッシュどっちでもよい？</description>
     </item>
     
     <item>

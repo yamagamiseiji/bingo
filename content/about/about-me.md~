@@ -1,13 +1,25 @@
 +++
 title = "About Me"
 author = ["YAMAGAMI"]
-date = 2021-03-29T00:00:00+09:00
-tags = ["Emacs", "hugo", "ox-hugo", "Netlify", "GitHub"]
-categories = ["about"]
+date = 2021-04-01T00:00:00+09:00
+tags = ["social", "greeting"]
 draft = false
 toc = true
 +++
 
-Coming soon.......
+-   base-dir = ~/peace-blog/bingo   # ケツのスラッシュどっちでもよい？
+-   section = about/            　　# ケツのスラッシュどっちでもよい？
 
-{{< figure src="/me.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+<!--listend-->
+
+-   .mdファイル内の画像ロケーションは: `{{< figure src="../../static/../me.jpg" caption="Figure 1: テスト画像" width="30%" >}}`
+
+{{< figure src="../../momo.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+
+Where in the world, should 'about-me.{org|.md}'  be placed?
+
+-   ~/content/about/
+
+Where should images be plated?
+
+-   ~/static/

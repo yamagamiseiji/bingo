@@ -1,6 +1,8 @@
 +++
 title = "古い道具たち – 折りたたみワークベンチ"
 date = 2020-11-03
+tags = ["DIY"]
+categories = ["comp"]
 draft = false
 +++
 
