@@ -1,8 +1,14 @@
 ---
 date: 2019-05-28
 type: section
-title: "About Hugo"
+title: "About Me"
 ---
+
+## 画像はどこにおけばよい？ {#画像はどこにおけばよい}
+
+{{< figure src="../../jikon.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+
+## original article
 
 Written in Go, Hugo is an open source static site generator available under the [Apache License 2.0](https://github.com/gohugoio/hugo/blob/master/LICENSE). Hugo supports TOML, YAML, and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
 

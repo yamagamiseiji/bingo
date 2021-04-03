@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://bred-in-bingo.netlify.app/about/about-me/</loc>
-    <lastmod>2021-04-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://bred-in-bingo.netlify.app/about/</loc>
-    <lastmod>2021-04-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://bred-in-bingo.netlify.app/</loc>
-    <lastmod>2021-04-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://bred-in-bingo.netlify.app/tags/emacs/</loc>
     <lastmod>2021-03-26T00:00:00+09:00</lastmod>
   </url><url>
@@ -30,6 +21,9 @@
     <lastmod>2021-03-26T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/tags/</loc>
+    <lastmod>2021-03-26T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://bred-in-bingo.netlify.app/</loc>
     <lastmod>2021-03-26T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/posts/kojo/</loc>
@@ -153,6 +147,9 @@
     <lastmod>2019-06-07T18:56:00+09:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/about/about/</loc>
+    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://bred-in-bingo.netlify.app/about/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/posts/seedling-rack/</loc>

@@ -7,16 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About Me</title>
-      <link>https://bred-in-bingo.netlify.app/about/about-me/</link>
-      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://bred-in-bingo.netlify.app/about/about-me/</guid>
-      <description>画像はどこにおけばよい？    四苦八苦ログ    base-dir = ~/peace-blog/bingo # ケツのスラッシュどっちでもよい？</description>
-    </item>
-    
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ごあいさつ</title>
       <link>https://bred-in-bingo.netlify.app/posts/kojo/</link>
@@ -259,12 +250,13 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
     </item>
     
     <item>
-      <title>About Hugo</title>
+      <title>About Me</title>
       <link>https://bred-in-bingo.netlify.app/about/about/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/about/about/</guid>
-      <description>Written in Go, Hugo is an open source static site generator available under the Apache License 2.</description>
+      <description>画像はどこにおけばよい？   Figure 1: テスト画像
+  original article Written in Go, Hugo is an open source static site generator available under the Apache License 2.</description>
     </item>
     
     <item>
