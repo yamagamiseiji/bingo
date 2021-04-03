@@ -10,26 +10,25 @@
 
 #+link: file file+sys:../../
 
+* 画像はどこにおけばよい？
+#+caption: テスト画像
+#+attr_org: :width 30%
+#+attr_html: :width 30% :aligne center
+[[file:jikon.jpg]]
+
+* 四苦八苦ログ
 - base-dir = ~/peace-blog/bingo   # ケツのスラッシュどっちでもよい？
 - section = about/            　　# ケツのスラッシュどっちでもよい？
 # - link = ../../    　　# ケツのスラッシュここは必要らしひ
-- .mdファイル内の画像ロケーションは:
+- .mdファイル内での画像ロケーションはつぎのとおり：
+
+なんか変だが、ローカルにはこれでstatic/内のイメージファイルを表示する
 #   link = ../../    + file:me.jpg      # OK
 #   link = ../../    + file:../me.jpg   #
 # - file:../me.jpg                # ../ はブサイク
 
-#+caption: テスト画像
-#+attr_org: :width 30%
-#+attr_html: :width 30% :aligne center
-[[file:momo.jpg]]
+- これをGitHubにpushしてデプロイしてみると（前はだめだった）
 
-
-
-Where in the world, should 'about-me.{org|.md}'  be placed?
-- ~/content/about/
-
-Where should images be plated?
-- ~/static/
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)

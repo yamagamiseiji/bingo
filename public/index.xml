@@ -14,18 +14,7 @@
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/about/about-me/</guid>
-      <description>base-dir = ~/peace-blog/bingo # ケツのスラッシュどっちでもよい？
-  section = about/ # ケツのスラッシュどっちでもよい？</description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>https://bred-in-bingo.netlify.app/content/about/about-me/</link>
-      <pubDate>Thu, 01 Apr 2021 00:00:00 +0900</pubDate>
-      
-      <guid>https://bred-in-bingo.netlify.app/content/about/about-me/</guid>
-      <description>Coming soon&amp;hellip;.
- base-dir = ~/peace-blog/bingo section = content/about link = .</description>
+      <description>画像はどこにおけばよい？    四苦八苦ログ    base-dir = ~/peace-blog/bingo # ケツのスラッシュどっちでもよい？</description>
     </item>
     
     <item>

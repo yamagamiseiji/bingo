@@ -7,19 +7,20 @@ draft = false
 toc = true
 +++
 
+## 画像はどこにおけばよい？ {#画像はどこにおけばよい}
+
+{{< figure src="../../jikon.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+
+
+## 四苦八苦ログ {#四苦八苦ログ}
+
 -   base-dir = ~/peace-blog/bingo   # ケツのスラッシュどっちでもよい？
 -   section = about/            　　# ケツのスラッシュどっちでもよい？
 
 <!--listend-->
 
--   .mdファイル内の画像ロケーションは:
+-   .mdファイル内での画像ロケーションはつぎのとおり：
 
-{{< figure src="../../momo.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+なんか変だが、ローカルにはこれでstatic/内のイメージファイルを表示する
 
-Where in the world, should 'about-me.{org|.md}'  be placed?
-
--   ~/content/about/
-
-Where should images be plated?
-
--   ~/static/
+-   これをGitHubにpushしてデプロイしてみると（前はだめだった）
