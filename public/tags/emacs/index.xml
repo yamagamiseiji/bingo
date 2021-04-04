@@ -43,7 +43,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 09 Mar 2020 19:40:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/daily-expns-watcher/</guid>
-      <description>- [仕掛け](#仕掛け)   環境 コーディング  bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！   使いみちなど Acknowledgement  新型コロナウイルス という外来の危機（ 外患 ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという 内憂 が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが 挙国一致 してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 「帝国」 はこんな風にして 内側 から崩壊するんですね。</description>
+      <description>日々の累積支出額と予算の関係  仕掛け 環境   コーディング  bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！   使いみちなど Acknowledgement  新型コロナウイルス という外来の危機（ 外患 ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという 内憂 が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが 挙国一致 してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 「帝国」 はこんな風にして 内側 から崩壊するんですね。</description>
     </item>
     
     <item>
@@ -52,7 +52,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 21 Feb 2020 18:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/</guid>
-      <description>きっかけ  仕掛け ネットには見当たらない？   環境 コーディング  bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト   使いみち Acknowledgement  きっかけ 新型コロナウイルス が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の 支出予算 がどれくらい消化されているかを表示する 水平ゲージ （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</description>
+      <description>きっかけ  仕掛け ネットには見当たらない？   環境 コーディング  bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみち   Acknowledgement  きっかけ 新型コロナウイルス が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の 支出予算 がどれくらい消化されているかを表示する 水平ゲージ （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</description>
     </item>
     
     <item>
@@ -70,7 +70,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 03 Dec 2019 21:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/10th-step/</guid>
-      <description>帳簿の厳密さ・細かさについて  そのきっかけは で、フランクリンですが・・・   ということで、今回のTips＆Hints  領収書・請求書などへのリンク プリペイドカードと商品券（ギフト券）のトラッキングについて プリペイドカード 商品券（ギフト券） まとめ   Acknowledgement  今回をもって、とりあえずシリーズ的なイントロ的投稿は 打ち止め にします。今後は、これまで以上にトピックベースの ショート・ショート 形式での記事にします。</description>
+      <description>帳簿の厳密さ・細かさについて  そのきっかけは   で、フランクリンですが・・・ 翻ってわが国を見ると（涙） ところで脇道にそれますが・・・ ということで、今回のTips＆Hints  領収書・請求書などへのリンク プリペイドカードと商品券（ギフト券）のトラッキングについて プリペイドカード 商品券（ギフト券）   まとめ  「まま子三兄弟」 Penny talks   Acknowledgement  今回をもって、とりあえずシリーズ的なイントロ的投稿は 打ち止め にします。今後は、これまで以上にトピックベースの ショート・ショート 形式での記事にします。</description>
     </item>
     
     <item>
@@ -144,7 +144,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 16 May 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/2nd_step_ledger/</guid>
-      <description>はじめに トランザクション記帳について  日付けの手抜き入力 トランザクション名、アカウント名などの手抜き記帳 コピペを活用   絞り込みReportの表示  よく使う絞り込み Register report その他いろいろ   使い勝手について  セキュリティとの関連で レポートの可視化について   Acknowledgment  はじめに Ledger というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて ランダム な小さな事例集というか、 pちょっとした カンニングペーパ 風なメモにしました。</description>
+      <description>はじめに トランザクション記帳について  日付けの手抜き入力 トランザクション名、アカウント名などの手抜き記帳 コピペを活用   絞り込みReportの表示  よく使う絞り込み Register report その他いろいろ   使い勝手について  セキュリティとの関連で レポートの可視化について   Acknowledgment  はじめに Ledger というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて ランダム な小さな事例集というか、ちょっとした カンニングペーパ 風なメモにしました。</description>
     </item>
     
     <item>

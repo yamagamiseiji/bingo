@@ -1,8 +1,27 @@
 +++
 title = "予算消化状況を日々 ledger-cliとgnuplotでモニターする"
 date = 2020-03-09T19:40:00+09:00
+tags = ["ledger", "emacs", "accounting", "viz", "gnuplot"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+    - [仕掛け](#仕掛け)
+- [環境](#環境)
+- [コーディング](#コーディング)
+    - [bashスクリプト](#bashスクリプト)
+    - [gnuplotスクリプト](#script-gnu)
+    - [（追記）上記「もめ事」解決しました！](#追記-上記-もめ事-解決しました)
+- [使いみちなど](#使いみちなど)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
 
 **新型コロナウイルス** という外来の危機（ **外患** ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという **内憂** が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが **挙国一致** してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 **「帝国」** はこんな風にして **内側** から崩壊するんですね。
 
@@ -15,7 +34,7 @@ draft = false
 
 まずは例図をみてください（金額はでたらめです）。
 
-<a id="org2a98d68"></a>
+<a id="orgb7275b2"></a>
 
 {{< figure src="/budget-watcher-sample.png" caption="Figure 1: 予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。" width="90%" >}}
 

@@ -62,7 +62,7 @@
           <li>
             <a href="/archives/">
               
-              <span>Archives</span>
+              <span>Posts</span>
             </a>
           </li>
 
@@ -140,12 +140,12 @@
     Assets:未払金:太郎   5,400 JPY
     Assets:Cash         -5,400 JPY
 </code></pre><p>こうしておけば、年末の締めの時に太郎への未払金が <strong>5,400円</strong> 残っていることがわかります：</p>
-<pre><code class="language-nil" data-lang="nil">$ led bal
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal
 	  -5,400 JPY  Assets:未払金:太郎
 	   5,400 JPY  Expeses:忘年会
 --------------------
-		   0
-</code></pre><h3 id="自分のクレジットカードで全員分を立替払いした">自分のクレジットカードで全員分を立替払いした</h3>
+		   <span class="m">0</span>
+</code></pre></div><h3 id="自分のクレジットカードで全員分を立替払いした">自分のクレジットカードで全員分を立替払いした</h3>
 <p>とりあえず自分のカードを切って全額を支払いました。その際、
 <strong>21,345円</strong> を均等割りせずに、花子は飲まなかったので <strong>3,000円</strong> 、自分と太郎、次郎は割り勘で <strong>6,115円</strong> という風に <strong>ウエイトをつけた割り勘</strong> の場合：</p>
 <pre><code class="language-ledger" data-lang="ledger">2019/12/20 * ファンシーレストラン
@@ -179,7 +179,7 @@
 <li><strong>忘年会当日</strong> のbalレポート：</li>
 </ul>
 <!-- raw HTML omitted -->
-<pre><code class="language-nil" data-lang="nil">$ led bal
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal
 	  15,230 JPY  Assets:未収金
 	   6,115 JPY    太郎
 	   6,115 JPY    次郎
@@ -187,35 +187,35 @@
 	   6,115 JPY  Expenses:宴会費
 	 -21,345 JPY  Liabilities:Visa
 --------------------
-		   0
-</code></pre><ul>
+		   <span class="m">0</span>
+</code></pre></div><ul>
 <li><strong>年末</strong> 12月31日のbalレポート。 <strong>未収金</strong> をクエリーすると：</li>
 </ul>
 <!-- raw HTML omitted -->
-<pre><code class="language-nil" data-lang="nil">$ led bal 未収金
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal 未収金
 	   6,115 JPY  Assets:未収金
-		   0    太郎
+		   <span class="m">0</span>    太郎
 	   6,115 JPY    次郎
-		   0    花子
+		   <span class="m">0</span>    花子
 --------------------
 	   6,115 JPY
-</code></pre><p>花子と太郎からは返金を受けているので未収金ゼロ、次郎だけが返済を忘れているw</p>
+</code></pre></div><p>花子と太郎からは返金を受けているので未収金ゼロ、次郎だけが返済を忘れているw</p>
 <ul>
 <li>年開けの <strong>1月10日</strong> 、次郎がようやく返済。その時点でのbalレポート：</li>
 </ul>
 <!-- raw HTML omitted -->
-<pre><code class="language-nil" data-lang="nil">	  15,700 JPY  Assets
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">	  15,700 JPY  Assets
 	  15,700 JPY    Cash
-		   0    未収金
-		   0      太郎
-		   0      次郎
-		   0      花子
+		   <span class="m">0</span>    未収金
+		   <span class="m">0</span>      太郎
+		   <span class="m">0</span>      次郎
+		   <span class="m">0</span>      花子
 	    -470 JPY  Equity:Adjustments
 	   6,115 JPY  Expenses:宴会費
 	 -21,345 JPY  Liabilities:Visa
 --------------------
-		   0
-</code></pre><p>めでたく未収金がゼロになりました。なお、全体のバランスをゼロにするために、 <code>Equity:Adjustments</code> というアカウントを設けて差額を収納しています。</p>
+		   <span class="m">0</span>
+</code></pre></div><p>めでたく未収金がゼロになりました。なお、全体のバランスをゼロにするために、 <code>Equity:Adjustments</code> というアカウントを設けて差額を収納しています。</p>
 <p>ではLedger-cliで良い忘年会を！（笑）</p>
 <h2 id="acknowledgement">Acknowledgement</h2>
 

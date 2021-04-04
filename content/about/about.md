@@ -6,7 +6,9 @@ title: "About Me"
 
 ## 画像はどこにおけばよい？ {#画像はどこにおけばよい}
 
-{{< figure src="../../jikon.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+{{< figure src="../../me.jpg" caption="Figure 1: テスト画像" width="30%" >}}
+
+ただいまテスト中・・・
 
 ## original article
 

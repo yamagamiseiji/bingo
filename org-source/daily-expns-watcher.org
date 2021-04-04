@@ -10,8 +10,10 @@
 #+link: file file+sys:../static/
 #+draft: false
 
- *新型コロナウイルス* という外来の危機（ *外患* ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという *内憂* が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが *挙国一致* してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 *「帝国」* はこんな風にして *内側* から崩壊するんですね。
 
+*新型コロナウイルス* という外来の危機（ *外患* ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという *内憂* が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが *挙国一致* してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 *「帝国」* はこんな風にして *内側* から崩壊するんですね。
+
+* 日々の累積支出額と予算の関係
 それはともかく、[[http://org2-wp.kgt-yamy.tk/2020/02/21/post-904/][前回]]、グラッフィクな水平ゲージで予算消化率（パーセンテージだけ）をプロットする方法を紹介しました。今回は、新型コロナウィルスで *外遊び* もままならぬので（笑）、さらに一歩を進めて次のようなチャートを作ってみました。
 
 #+begin_example
@@ -26,7 +28,7 @@
 #+attr_html: :width 90%
 [[file:budget-watcher-sample.png]]
 
-*** 仕掛け
+** 仕掛け
 月始めから当日までに支出した金額の累計（緑のライン）はledger-cliで算出します。これはとても簡単。次の１行です：
 #+begin_src
 #  当月の累積支出金額（１日毎） --> tmp-togetsu.dat
@@ -62,12 +64,12 @@ ledger reg ^expenses -p 'this month' -J -D --collapse\
 - gnuplot 5.2 patchlevel 8
 - GNU Fortran (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
 
-** コーディング
+* コーディング
 次の２つのスクリプトを組み合わせて動かします。
 - *bashスクリプト* ： ledgerを動かして当月の1日ごとの累積支出金額を計算します。その後、下のgnuplotスクリプトをコールします。
 - *gnuplotスクリプト* （ =gp-budget-watcher.plt= ）： filledcurvesを使って2本のラインに囲まれた領域を色分けします。
 
-*** bashスクリプト
+** bashスクリプト
 #+begin_src
 #!/bin/bash
 #
@@ -98,7 +100,7 @@ gnuplot -e "a='$a';b='$b';out_file='doya-out.pdf'" gp-budget-daily.plt
 mupdf $out_file &
 #+end_src
 
-*** gnuplotスクリプト
+** gnuplotスクリプト
 :properties:
 :custom_id: script-gnu
 :end:
@@ -147,7 +149,7 @@ plot '/home/hogehoge/tmp-togetsu.dat'\
 #+end_src
 引っかかったのは、 =f($1)= の =$1= がbashとgnuplotの間で *もめ事* を起こすこと。そのために =gnuplot << EOF= スタイルでgnuplotスクリプトを素直にbashに埋め込むことができませんでした。それを迂回するためにこんな形でしのいでいます。回避できるので大きな問題ではありませんが、簡単にエスケープ？する方法が他にもあるんだとは思いますが・・・（笑）
 
-*** （追記）上記「もめ事」解決しました！
+** （追記）上記「もめ事」解決しました！
 [[https://groups.google.com/forum/m/#!topic/comp.graphics.apps.gnuplot/JCNS96hGaIg][こちらのサイト]] にすばらしい情報がありました。gnuplotの =column()= 関数を使う方法です。たとえば次のようにします：
 #+begin_src
 （旧）   using ($2*0.5):0:($2*0.5):(0.35):yticlabels(1)\
@@ -155,10 +157,10 @@ plot '/home/hogehoge/tmp-togetsu.dat'\
 #+end_src
 これで、 =gnuplot <<EOF 〜 EOF= スタイルが使える範囲がぐっと増えます。
 
-** 使いみちなど
+* 使いみちなど
 前回の水平バーチャートも今回の予算消化チャートも、お金の動きを *ワンクリック* またはコマンド一発で *リアルタイム* に確認するための *道具* として使っています。そうした用途にはいわゆる *ダッシュボード* を使うのが王道のような気もします。現在、そっちに向けて色々考えているところですが、一つの有力な候補は [[https://grafana.com/][ *Grafana* ]]でしょうか。Ledgerと組み合わせて使っている先例もあるので、そのうちトライしてみたいと思っています。
 
-** Acknowledgement
+* Acknowledgement
 次のサイトがとても参考になりました。
 - [[https://github.com/cbdevnet/ledger-reports][ledger-reports]]
 - [[https://groups.google.com/d/msg/comp.graphics.apps.gnuplot/YkZJ6EdS5MM/S9jFF0yu6qIJ]]

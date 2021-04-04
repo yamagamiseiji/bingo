@@ -252,7 +252,7 @@ suicaは、残高を印刷されたレシートから得るチャンスが少な
 
 ### PaSoRiを使って残高確認 {#pasoriを使って残高確認}
 
-{{< figure src="../static/pasori.jpg" caption="Figure 1: PaSoRiを使ってsuica残高確認" width="80%" >}}
+{{< figure src="/pasori.jpg" caption="Figure 1: PaSoRiを使ってsuica残高確認" width="80%" >}}
 
 Windows10では、[SONYのHP](https://www.sony.co.jp/Products/felica/consumer/index.html) を見ながらやれば簡単にできますが、ubuntuではちょっとだけ余分な手数が必要です。
 

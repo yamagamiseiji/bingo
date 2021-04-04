@@ -10,7 +10,7 @@
 #+link: file file+sys:../static/
 #+draft: false
 
-** きっかけ
+* きっかけ
  *新型コロナウイルス* が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の *支出予算* がどれくらい消化されているかを表示する *水平ゲージ* （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：
 #+begin_quote
 （例えば）２月１日から２月２０日までの累積支出額が、
@@ -25,13 +25,13 @@
 #+attr_html: :width 400px
 [[file:horizontal-gauge.png]]
 
-*** 仕掛け
+** 仕掛け
 当月内の当日までに支出した金額の累計はleger-cliで算出します。
 それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。
 その値をgnuplotにスクリプト内変数として引き渡して、
 水平ゲージ内に *太めの黒い線* を描くというシンプルな仕掛けです。
 
-*** ネットには見当たらない？
+** ネットには見当たらない？
 当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[[gauge_chart]]のような *計器盤* 風のゲージ（[[https://angularscript.com/angular-gauge-chart-library/][出典]]）もgnuplotで描いた例を見つけることができませんでした。
 
 
@@ -52,7 +52,7 @@
 
 前置きはこの辺にして中身を紹介します。
 
-** 環境
+* 環境
 - ubuntu 16.04
 - GNU bash, バージョン 4.3.48(1)-release (x86_64-pc-linux-gnu)
 - gnuplot 5.2 patchlevel 8
@@ -61,7 +61,7 @@
 Ledgerで当日の支出を記帳した後、どれほどの支出額になったかを確認する際に、
 このスクリプトが自動起動するようにしている。
 
-** コーディング
+* コーディング
 次の２つのスクリプトを組み合わせます。
 - *bashスクリプト* ： ledgerを動かして平均値などを計算します。下のgnuplotスクリプトをコールします。
 - *gnuplotスクリプト* （ =simple-horizntl-gauge.plt= ）： 標準的な *縦* の積上げ棒グラフ（rowstacked）を描きますが、できた画像をあとで90度回転して *横* にする関係で、目盛りの文字列を90度回転しておきます。
@@ -70,7 +70,7 @@ Ledgerで当日の支出を記帳した後、どれほどの支出額になっ�
 スキルの高い人が書けばもっとスマートな方法があると思います。
 ま、とりあえず、ということで勘弁して下さい。
 
-*** bashからgnuplotへの変数と文字列の受け渡し
+** bashからgnuplotへの変数と文字列の受け渡し
 
 bashスクリプト内のledgerで算出した支出パーセントが格納されている *変数* （ =$pct= ）をgnuplotに =percent= という変数名で引き渡します。
 
@@ -84,7 +84,7 @@ gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
 	./simple-horizntl-gauge.plt
 #+end_src
 
-*** bashスクリプト
+** bashスクリプト
 
 #+begin_src bash
 #!/bin/bash
@@ -122,7 +122,7 @@ mupdf ./horizontal-gauge.png &
 
 #+end_src
 
-*** gnuplotスクリプト
+** gnuplotスクリプト
 #+begin_src bash
 #
 #    gnuplot script for horizontal gauge of % monthly budget 
@@ -168,7 +168,7 @@ set output
 
 ゲージスクリプトが起動すると、スクリーンの *空いた* 場所にこのゲージが表示されます。表示されている情報価は大したものではないのですが、見た目がもっともらしいので（笑）満足しています。
 
-** Acknowledgement
+* Acknowledgement
 次のサイトがとても参考になりました。
 - http://www.phyast.pitt.edu/~zov1/gnuplot/html/histogram.html
 - [[https://github.com/cbdevnet/ledger-reports][ledger-reports]]

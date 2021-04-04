@@ -1,8 +1,31 @@
 +++
 title = "予算消化率の水平ゲージをledger-cliとgnuplotで描く"
 date = 2020-02-21T18:05:00+09:00
+tags = ["ledger", "emacs", "accounting", "gnuplot", "viz"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [きっかけ](#きっかけ)
+    - [仕掛け](#仕掛け)
+    - [ネットには見当たらない？](#ネットには見当たらない)
+- [環境](#環境)
+- [コーディング](#コーディング)
+    - [bashからgnuplotへの変数と文字列の受け渡し](#bashからgnuplotへの変数と文字列の受け渡し)
+    - [bashスクリプト](#bashスクリプト)
+    - [gnuplotスクリプト](#gnuplotスクリプト)
+- [使いみち](#使いみち)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
+
+
 
 ## きっかけ {#きっかけ}
 
@@ -10,9 +33,9 @@ draft = false
 
 > （例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい
 
-予算消化率の可視化については[前回の投稿](http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/)で、GNOME端末での **プログレッシブ・バーグラフ** を紹介しました。今回はそれよりももう少しグラッフィックに図[1](#org2d8da3c)のような水平ゲージを描きます。
+予算消化率の可視化については[前回の投稿](http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/)で、GNOME端末での **プログレッシブ・バーグラフ** を紹介しました。今回はそれよりももう少しグラッフィックに図[1](#org670bcc6)のような水平ゲージを描きます。
 
-<a id="org2d8da3c"></a>
+<a id="org670bcc6"></a>
 
 {{< figure src="/horizontal-gauge.png" caption="Figure 1: 当日までの予算消化率をプロットする水平ゲージ" width="400px" >}}
 
@@ -24,9 +47,9 @@ draft = false
 
 ### ネットには見当たらない？ {#ネットには見当たらない}
 
-当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[2](#org2d57884)のような **計器盤** 風のゲージ（[出典](https://angularscript.com/angular-gauge-chart-library/)）もgnuplotで描いた例を見つけることができませんでした。
+当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[2](#org09ec545)のような **計器盤** 風のゲージ（[出典](https://angularscript.com/angular-gauge-chart-library/)）もgnuplotで描いた例を見つけることができませんでした。
 
-<a id="org2d57884"></a>
+<a id="org09ec545"></a>
 
 {{< figure src="/gauge-chart-library.png" caption="Figure 2: 計器盤風ゲージチャートの例" width="200px" >}}
 

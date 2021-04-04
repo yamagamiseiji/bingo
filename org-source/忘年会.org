@@ -91,7 +91,7 @@
     Assets:Cash         -5,400 JPY
 #+end_src
 こうしておけば、年末の締めの時に太郎への未払金が *5,400円* 残っていることがわかります：
-#+begin_src
+#+begin_src bash
 $ led bal
           -5,400 JPY  Assets:未払金:太郎
            5,400 JPY  Expeses:忘年会
@@ -132,7 +132,7 @@ $ led bal
 *** balレポート
 上の転記についてタイミング別にbalレポートを見てみます。
 - *忘年会当日* のbalレポート：
-#+begin_src
+#+begin_src bash
 $ led bal
           15,230 JPY  Assets:未収金
            6,115 JPY    太郎
@@ -145,7 +145,7 @@ $ led bal
 #+end_src
 
 - *年末* 12月31日のbalレポート。 *未収金* をクエリーすると：
-#+begin_src
+#+begin_src bash
 $ led bal 未収金
            6,115 JPY  Assets:未収金
                    0    太郎
@@ -157,7 +157,7 @@ $ led bal 未収金
 花子と太郎からは返金を受けているので未収金ゼロ、次郎だけが返済を忘れているw
 
 - 年開けの *1月10日* 、次郎がようやく返済。その時点でのbalレポート：
-#+begin_src
+#+begin_src bash
           15,700 JPY  Assets
           15,700 JPY    Cash
                    0    未収金

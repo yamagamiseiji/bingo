@@ -62,7 +62,7 @@
           <li>
             <a href="/archives/">
               
-              <span>Archives</span>
+              <span>Posts</span>
             </a>
           </li>
 
@@ -79,10 +79,13 @@
     <div class="post_content">
       <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
-<pre><code>- [仕掛け](#仕掛け)
-</code></pre>
 <ul>
+<li><a href="#%E6%97%A5%E3%80%85%E3%81%AE%E7%B4%AF%E7%A9%8D%E6%94%AF%E5%87%BA%E9%A1%8D%E3%81%A8%E4%BA%88%E7%AE%97%E3%81%AE%E9%96%A2%E4%BF%82">日々の累積支出額と予算の関係</a>
+<ul>
+<li><a href="#%E4%BB%95%E6%8E%9B%E3%81%91">仕掛け</a></li>
 <li><a href="#%E7%92%B0%E5%A2%83">環境</a></li>
+</ul>
+</li>
 <li><a href="#%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">コーディング</a>
 <ul>
 <li><a href="#bash%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">bashスクリプト</a></li>
@@ -95,6 +98,7 @@
 </ul>
 <!-- raw HTML omitted -->
 <p><strong>新型コロナウイルス</strong> という外来の危機（ <strong>外患</strong> ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという <strong>内憂</strong> が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが <strong>挙国一致</strong> してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 <strong>「帝国」</strong> はこんな風にして <strong>内側</strong> から崩壊するんですね。</p>
+<h2 id="日々の累積支出額と予算の関係">日々の累積支出額と予算の関係</h2>
 <p>それはともかく、<a href="http://org2-wp.kgt-yamy.tk/2020/02/21/post-904/">前回</a>、グラッフィクな水平ゲージで予算消化率（パーセンテージだけ）をプロットする方法を紹介しました。今回は、新型コロナウィルスで <strong>外遊び</strong> もままならぬので（笑）、さらに一歩を進めて次のようなチャートを作ってみました。</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">月々の支出目標（予算）に向けて日々の累積支出額がどのように推移しているか
 その動きをモニターする
@@ -128,7 +132,7 @@ ledger reg ^expenses -p 'this month' -J -D --collapse\
 　　：　　：　　　　：　　　：
 </code></pre><p>これを使って、gnuplotで <code>f(x)=ax+b</code> をプロットします。この関数の直線と、実際の支出データの折れ線グラフの2本の折れ線に <strong>はさまれた領域</strong> を、関数直線の上下で <strong>色分け</strong> して表示します。なおファイルの第2列はこのスクリプトでは使いません。</p>
 <p>実は当初、この <strong>領域色分け</strong> を実現するための  <code>filledcurves</code> の書き方がよくわからなかったために手こずりました。できてしまえば簡単ですが変なところでハマって結構時間がかかりました（笑）。コードは<a href="#script-gnu">こちら</a>を見て下さい。</p>
-<h2 id="環境">環境</h2>
+<h3 id="環境">環境</h3>
 <ul>
 <li>Ubuntu 16.04</li>
 <li>GNU bash, バージョン 4.3.48(1)-release (x86_64-pc-linux-gnu)</li>
