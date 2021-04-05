@@ -6,7 +6,7 @@ theme = "mixedpaper"
 
 canonifyurls = false
 paginate = 5
-languageCode = "en-us"
+languageCode = "jp"
 enableRobotsTXT = true
 
 summaryLength = 8 # Configure how long the post summary should be on the homepage.
