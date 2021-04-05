@@ -7,7 +7,7 @@
   <meta name="format-detection" content="telephone=no" />
 
   <title>
-    ごあいさつ | Yam’s Peace Blog
+    さようならWordPress | Yam’s Peace Blog
   </title>
 
   
@@ -75,15 +75,15 @@
         
 <section id="main">
   <article class="post content">
-    <h2 class="title">ごあいさつ</h2>
+    <h2 class="title">さようならWordPress</h2>
     <div class="post_content">
-      <p>これまで2年ほどブログ書きは下のようなフローでやってきました。</p>
+      <p>これまで2年ほどブログ書きは下のようなフローでやってきました<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Emacs &gt; org2blog &gt; WordPress &gt; freenom &gt; AWS
 </code></pre></div><p>しかし</p>
 <ol>
 <li>WordPress(WP)ではバージョンアップに追いつくのが大変</li>
 <li>サボっていると、画像ファイルが表示されないなどの <strong>トラブル</strong> が頻発</li>
-<li>トラブルがあっても自力で十分に対応することができません（非力のため）</li>
+<li>トラブルがあっても自力で十分に対応できません（非力のため）</li>
 <li>SSL対応もしなくちゃならないし・・・</li>
 <li>AWSも最初の1年間はほぼ無料でありがたかったけど、その後は年間120ドルほどになって結構 <strong>負担</strong> が大きい</li>
 </ol>
@@ -92,26 +92,28 @@
 </code></pre></div><p>ところが始めてみるとあちこちに地雷や落とし穴が！ちゃんとした「新装開店」まで　まだ一山も二山もあるかと思います。</p>
 <h2 id="四苦八苦ログ">四苦八苦ログ</h2>
 <h3 id="最大の難関">最大の難関</h3>
-<p>NetlifyがGitHubレポジトリをデプロイするところでかなりはまりました。ウエッブで調べてみると、とても簡単だったという記事がある一方で、この段階でハマったという記事が英語でも日本語でも多くあります。それらの記事を見ながらほんとうにいろいろやりました。</p>
-<p>文字通り四苦八苦しましたが、2021-03-25に初デプロイ成功！。うまくいった理由は</p>
+<p>NetlifyがGitHubレポジトリをデプロイするところでかなりはまりました。ウエッブで調べてみると、とても簡単だったという記事がある一方で、ひどくハマったという記事が英語でも日本語でも多数あります。それらを見ながらほんとうにいろいろやりました。</p>
+<p>文字通り四苦八苦しましたが、ついに <strong>2021/03/25</strong> に初デプロイ成功！。うまくいった理由は</p>
 <ol>
 <li>
 <p>hugoを <code>hugo_extended_0.81.0_Linux-64bit.deb</code> にアップしたこと</p>
 </li>
 <li>
-<p>Netlifyウエブサイトの&rsquo;Deploy settings&rsquo;中の&rsquo;Build settings&rsquo;の内容をGitHubのサイトルートにしたこと。</p>
+<p>Netlifyウエブサイトの&rsquo;Deploy settings&rsquo;中の&rsquo;Build settings&rsquo;の内容をGitHubのサイトルートにしたこと</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Base = bingo/
 　：
 Publish = public
 　：
 </code></pre></div></li>
 </ol>
-<p>などが奏功したんだと思いますが、理屈はよく分かっていません。</p>
+<p>などが奏功したのではないかと思いますが、じつは理由はよく分かっていません。</p>
+<p>何回もやりなおして苦労したので、後日 <strong>org-mode＋~ox-hugo＋Hugo+Netlify＋GitHub</strong> でホームページを公開する手順を整理して備忘録としてまとめようと思います。</p>
 <h3 id="hugoテーマの変更">Hugoテーマの変更</h3>
-<p>ここでもハマりました。つまらないことですが、テーマによって必要なディレクトリの名称が
-postsだったりpostだったり！それ以外にもテーマを変更したときに変更の必要な箇所があちこちに散在しています。分かるまでエラーの嵐との戦いでした。</p>
+<p>ここでもハマりました。つまらないことですがテーマによって必要なディレクトリの名称が
+postsだったりpostだったり！それ以外にもテーマを変更したときに変更の必要な設定ファイル類があちこちに在ります。分かるまでエラーの嵐でした。</p>
 <p>まったく新規にレポジトリを作ってテーマの設定をまっさらな状態で行えばスムーズなのでしょうが、そうるすとNetlifyのデプロイをやり直さなければなりません。そこでまたハマる。</p>
-<p>それから、いったんローカルのある特定のディレクトリでhugo初期化した投稿記事原稿には、環境が変わると変更が必要になるところがたくさんあります。５０本程度の（さほど多くない）記事ですが、手作業ではできないので、その都度スクリプトを書いたりして、結構つかれます。</p>
+<p>それから、いったんローカルのある特定のディレクトリでhugo初期化した投稿記事原稿には、環境が変わると変更が必要になるところがあります<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。40から50本程度の記事数ですが、手作業ではできないのでその都度スクリプトを書いたりして、結構つかれました。</p>
+<p>あとヘッダー内の <strong>ARCHIVES</strong> という語を <strong>POSTS</strong> に変更したくて、コード内を <code>grep -ir</code> したのですが見つからず困ってました。そしたら灯台下暗し、 <code>config.toml</code> 内で簡単に書き換えできました。</p>
 <h3 id="netlifyのドメイン名変更">Netlifyのドメイン名変更</h3>
 <p>ここはまだハマった状態です（笑）。</p>
 <h2 id="環境">環境</h2>
@@ -150,8 +152,19 @@ postsだったりpostだったり！それ以外にもテーマを変更した�
 </tr>
 </tbody>
 </table>
-<h2 id="acknowledgment">Acknowledgment　</h2>
 <p>（これはテストページです）</p>
+<h2 id="footnote">Footnote</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>今は昔、HTML＝ホームページの黎明期、国内の大学で学科単位のHPを持っているところがほとんどなかった頃、HTMLの直書きで所属学科のHPを一人で書きました。その時の記憶が少しだけ残っていて今回の作業にもいくらか役に立ちました。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><code>#+HUGO_BASE_DIR:</code> の変更は必須です。もしこれが記事中に散在する「一般語」と重複すると置換作業が面倒だったのですが、幸い今回は重複ゼロでしたので簡単なスクリプトで一発置換できました。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 
     </div>
     <div class="info post_meta">
@@ -180,6 +193,8 @@ postsだったりpostだったり！それ以外にもテーマを変更した�
       
       <a href="https://bred-in-bingo.netlify.app/posts/origin-of-domain-name/" class="prev">bingo の由来</a>
       
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/" class="next">サンマルツァーノの種まきと育苗</a>
       
     </div>
     <aside id="comments">

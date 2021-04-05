@@ -1,0 +1,5 @@
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

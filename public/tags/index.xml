@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>farming</title>
+      <link>https://bred-in-bingo.netlify.app/tags/farming/</link>
+      <pubDate>Mon, 05 Apr 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://bred-in-bingo.netlify.app/tags/farming/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>emacs</title>
       <link>https://bred-in-bingo.netlify.app/tags/emacs/</link>
@@ -77,15 +86,6 @@
       <pubDate>Tue, 03 Nov 2020 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/tags/diy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>farming</title>
-      <link>https://bred-in-bingo.netlify.app/tags/farming/</link>
-      <pubDate>Fri, 12 Jun 2020 00:00:00 +0900</pubDate>
-      
-      <guid>https://bred-in-bingo.netlify.app/tags/farming/</guid>
       <description></description>
     </item>
     

@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://bred-in-bingo.netlify.app/tags/farming/</loc>
+    <lastmod>2021-04-05T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://bred-in-bingo.netlify.app/posts/</loc>
+    <lastmod>2021-04-05T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://bred-in-bingo.netlify.app/tags/</loc>
+    <lastmod>2021-04-05T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://bred-in-bingo.netlify.app/</loc>
+    <lastmod>2021-04-05T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/</loc>
+    <lastmod>2021-04-05T00:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://bred-in-bingo.netlify.app/tags/emacs/</loc>
     <lastmod>2021-03-26T00:00:00+09:00</lastmod>
   </url><url>
@@ -15,15 +30,6 @@
     <lastmod>2021-03-26T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/tags/ox-hugo/</loc>
-    <lastmod>2021-03-26T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://bred-in-bingo.netlify.app/posts/</loc>
-    <lastmod>2021-03-26T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://bred-in-bingo.netlify.app/tags/</loc>
-    <lastmod>2021-03-26T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://bred-in-bingo.netlify.app/</loc>
     <lastmod>2021-03-26T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/posts/kojo/</loc>
@@ -49,9 +55,6 @@
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/posts/old-jigsaw/</loc>
     <lastmod>2020-10-28T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://bred-in-bingo.netlify.app/tags/farming/</loc>
-    <lastmod>2020-06-12T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://bred-in-bingo.netlify.app/tags/gnuplot/</loc>
     <lastmod>2020-06-12T00:00:00+09:00</lastmod>

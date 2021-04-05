@@ -13,7 +13,7 @@
 #+draft: false
 
 [[https://themes.gohugo.io/][Hugo Themes: Complete List]] に400ほどのテーマが公開されています。それらの
-中から、[[https://themes.gohugo.io/hugo-theme-mixedpaper/][mixedpaper]]を使わせてもらうことにしました。
+中から[[https://themes.gohugo.io/hugo-theme-mixedpaper/][mixedpaper]]を使わせてもらうことにしました。
 
 * 当初の希望
 - 個々の記事のタイトルと内容を数行程度で要約表示したい
@@ -23,16 +23,17 @@
 - １記事1ファイルで運用したい
   
 * 候補
-検討したのは次のようなテーマです。
-- [[https://themes.gohugo.io/hugo-tranquilpeak-theme/][Tranquilpeak]] :: 　高度な画面　しかし設定の自由度と難度が高い
-- [[https://themes.gohugo.io/strange-case/][strange case]] :: 　これもお気に入り　しかし画面幅が狭くなるとサイドバーのコンテンツがヘッダーに移動して目次が消える
-- [[https://themes.gohugo.io/cayman-hugo-theme/][cayman]] :: 　1記事1ファイルベースだけどサイドバーなし　
-- [[https://themes.gohugo.io/hugo-theme-m10c/][m10c]] :: 　ヘッダーが大きい　サイドバーは画面幅が狭くなるとヘッダーに移動
+検討したのは次のようなテーマです。✔印は実際にインストールしてみました。
+- ✔ [[https://themes.gohugo.io/hugo-tranquilpeak-theme/][Tranquilpeak]] :: 　高度な画面　設定の自由度と難度が高い
+- ✔ [[https://themes.gohugo.io/strange-case/][strange case]] :: 　これもお気に入り　しかし画面幅が狭くなるとサイドバーのコンテンツがヘッダーに移動して目次が消える
+- ✔ [[https://themes.gohugo.io/cayman-hugo-theme/][cayman]] :: 　1記事1ファイルベースだけどサイドバーなし　
+- ✔ [[https://themes.gohugo.io/hugo-theme-m10c/][m10c]] :: 　ヘッダーが大きい　サイドバーは画面幅が狭くなるとヘッダーに移動
 - [[https://themes.gohugo.io/blackburn/][blackburn]] :: 　なかなか高級　時間があれば使ってみたい
 - [[https://themes.gohugo.io/story/][story]] :: 　トップページに要約表示があるのは良いけどその幅がなぜか狭い（変更可能とは思いますが）
+
+* Acknowledgment
+mixedpaperのクリエータをはじめとして、Hugoテーマを広く人々に公開しているみなさんには感謝の言葉もありません。ほんとうにありがたいことです。
   
-** Ackknowledgment
-   
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
 # End:

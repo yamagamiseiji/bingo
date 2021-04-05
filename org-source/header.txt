@@ -1,0 +1,12 @@
+#+title: 
+#+date: 
+#+link: file file+sys:../static/
+
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
+#+hugo_categories: comp
+
+#+hugo_custom_front_matter: :toc true
+#+draft: false
+
