@@ -1,4 +1,5 @@
-#+title: サンマルツァーノの種まきと育苗
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#+title: サンマルツァーノの育苗
 #+date: 2021-04-05
 #+link: file file+sys:../static/
 

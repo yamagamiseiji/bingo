@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -112,7 +112,7 @@ Publish = public
 <p>ここでもハマりました。つまらないことですがテーマによって必要なディレクトリの名称が
 postsだったりpostだったり！それ以外にもテーマを変更したときに変更の必要な設定ファイル類があちこちに在ります。分かるまでエラーの嵐でした。</p>
 <p>まったく新規にレポジトリを作ってテーマの設定をまっさらな状態で行えばスムーズなのでしょうが、そうるすとNetlifyのデプロイをやり直さなければなりません。そこでまたハマる。</p>
-<p>それから、いったんローカルのある特定のディレクトリでhugo初期化した投稿記事原稿には、環境が変わると変更が必要になるところがあります<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。40から50本程度の記事数ですが、手作業ではできないのでその都度スクリプトを書いたりして、結構つかれました。</p>
+<p>それから、いったんローカルのある特定のディレクトリでhugo初期化した投稿記事原稿には、環境が変わると変更が必要になるところがあります<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。40から50本程度の記事数ですが、手作業ではできないのでその都度スクリプトを書いたりして、結構つかれました<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
 <p>あとヘッダー内の <strong>ARCHIVES</strong> という語を <strong>POSTS</strong> に変更したくて、コード内を <code>grep -ir</code> したのですが見つからず困ってました。そしたら灯台下暗し、 <code>config.toml</code> 内で簡単に書き換えできました。</p>
 <h3 id="netlifyのドメイン名変更">Netlifyのドメイン名変更</h3>
 <p>ここはまだハマった状態です（笑）。</p>
@@ -163,12 +163,15 @@ postsだったりpostだったり！それ以外にもテーマを変更した�
 <li id="fn:2" role="doc-endnote">
 <p><code>#+HUGO_BASE_DIR:</code> の変更は必須です。もしこれが記事中に散在する「一般語」と重複すると置換作業が面倒だったのですが、幸い今回は重複ゼロでしたので簡単なスクリプトで一発置換できました。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
+<li id="fn:3" role="doc-endnote">
+<p>これを回避する方法があるようです。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
 </section>
 
     </div>
     <div class="info post_meta">
-      <time datetime=2021年&#32;3月&#32;26日&#32;(月)&#32;00:00:00&#43;0900 class="date">2021年 3月 26日 (月)</time>
+      <time datetime=2021年3月26日T00:00:00&#43;0900 class="date">2021年3月26日</time>
       
         <ul class="tags">
         
@@ -194,7 +197,7 @@ postsだったりpostだったり！それ以外にもテーマを変更した�
       <a href="https://bred-in-bingo.netlify.app/posts/origin-of-domain-name/" class="prev">bingo の由来</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/" class="next">サンマルツァーノの種まきと育苗</a>
+      <a href="https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/" class="next">サンマルツァーノの育苗</a>
       
     </div>
     <aside id="comments">

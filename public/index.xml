@@ -5,30 +5,25 @@
     <link>https://bred-in-bingo.netlify.app/</link>
     <description>Recent content on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>jp</language>
+    <language>ja-jp</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
     <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>イタリアンパセリの種まきと育苗</title>
+      <title>イタリアンパセリの育苗</title>
       <link>https://bred-in-bingo.netlify.app/posts/italian-parsley-sprouting/</link>
       <pubDate>Mon, 05 Apr 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/italian-parsley-sprouting/</guid>
-      <description>今年（2021年）はイタリアンパセリをたくさん作る予定です。
-生食するのはごく一部で、大半は電子レンジで乾燥させて「 乾燥パセリ 」にしてビンにつめて冷蔵庫に保管します。手で握ってパラパラとパスタに振りかけると見た目もきれいだし美味しいです。１年中重宝します。
-畑では一定の場所を「パセリ畑」にするのではなく、他の作物と 混植 して見ようと思います。セリ科の植物はナスやピーマンの コンパニオンプランツ 1のようですから2。</description>
+      <description>今年（2021年）はイタリアンパセリをたくさん作る予定です。 生食するのはごく一部で、大半は電子レンジで乾燥させて「 乾燥パセリ 」にしてビンにつめて冷凍庫に保管しま</description>
     </item>
     
     <item>
-      <title>サンマルツァーノの種まきと育苗</title>
+      <title>サンマルツァーノの育苗</title>
       <link>https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/</link>
       <pubDate>Mon, 05 Apr 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/</guid>
-      <description>3月20日に、横浜で2021年ファーミングの最初の作業を始めました。
-調理用のイタリアントマト＝ サンマルツァーノ の種まきです。わずか12粒しか入っていない袋が700円以上するという貴重品。失敗は許されません（笑）
-今年のやりかた 2021年は次のようにしてみました。
- まず種まきの前夜、種を水につけておきます（図1） 育苗ポット（10cm）はあらかじめ「 底面給水 」でしっかり水分を含ませます 1ポットに2から3粒ずつ、種をポットの土の上において ふるい で薄く覆土 その後は「常時底面給水」しつつ南向きの日当たりの良い部屋の窓際に一日中おいて 保温  という感じで芽が出るのを待ちました。</description>
+      <description>3月20日に、横浜で2021年ファーミングの最初の作業を始めました。 調理用のイタリアントマト＝ サンマルツァーノ の種まきです。わずか12粒しか入っていない袋が70</description>
     </item>
     
     <item>
@@ -37,8 +32,7 @@
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/about/about/</guid>
-      <description>画像はどこにおけばよい？   Figure 1: テスト画像
-  ただいまテスト中・・・</description>
+      <description>Coming soon &amp;hellip; Figure 1: テスト画像 ただいまテスト中・・・ original article on Hugo Written in Go, Hugo is an open source static site generator available under the Apache License 2.0. Hugo supports TOML, YAML, and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for</description>
     </item>
     
     <item>
@@ -47,8 +41,7 @@
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/kojo/</guid>
-      <description>これまで2年ほどブログ書きは下のようなフローでやってきました1。
-Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
+      <description>これまで2年ほどブログ書きは下のようなフローでやってきました1。 Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし WordPress(WP)ではバージョンアップに追いつくのが大変 サボって</description>
     </item>
     
     <item>
@@ -57,7 +50,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/origin-of-domain-name/</guid>
-      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名には bingo の語を入れました。このbingoは英語じゃあなくて、地名の「 備後 （びんご）」でボクの生まれ故郷です。</description>
+      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名には bingo の語を入れました。このbingoは英語じゃあなくて、地名の「 備後 （びんご）」でボクの生まれ故郷です。 そこで「備後」うんち</description>
     </item>
     
     <item>
@@ -66,8 +59,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/theme-selection/</guid>
-      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中からmixedpaperを使わせてもらうことにしました。
-当初の希望  個々の記事のタイトルと内容を数行程度で要約表示したい 記事の要約リストにサムネイル画像をつけたい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい １記事1ファイルで運用したい  候補 検討したのは次のようなテーマです。✔印は実際にインストールしてみました。</description>
+      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中からmixedpaperを使わせてもらうことにしました。 当初の希望 個々の記事のタイトルと内容を数行程度</description>
     </item>
     
     <item>
@@ -76,8 +68,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 03 Nov 2020 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/old-workbench/</guid>
-      <description>知人の紹介でこの土地＝片品村にお世話になっていますが、 ん十年前 にウッドデッキを作ったりするために色々な工具や道具を購入しました。この 折りたたみワークベンチ も、ん十年来の付き合いです。
-　長い付き合いの期間中、使わないときは一年中 屋外 に置きっぱなしにしていました。一応ブルーシートで覆ってはいましたが、ここの標高は1,000mほどあります。冬場は天板の高さまで雪が積もります。そうしたとても厳しい、というか悪条件の中で長年「屋外生活」をさせた道具が急にいとおしくなってきました。</description>
+      <description>知人の紹介でこの土地＝片品村にお世話になっていますが、 ん十年前 にウッドデッキを作ったりするために色々な工具や道具を購入しました。この 折りたたみワークベンチ も、ん</description>
     </item>
     
     <item>
@@ -86,8 +77,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 28 Oct 2020 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/old-jigsaw/</guid>
-      <description>しばらくぶりのブログ投稿です。今回はDIYっぽい話題です。
-5mmほどの厚みの合板を丸く切って直径約40cmの円盤に加工したい ということで、久しぶりに工具箱から ジグソー を引っ張り出しました。ブラック・アンド・デッカー（ B&amp;amp;D ）社の製品で型番は 7504-03/04 。記憶にないほど大昔に入手したものです。写真のようにホコリまみれでした。</description>
+      <description>しばらくぶりのブログ投稿です。今回はDIYっぽい話題です。 5mmほどの厚みの合板を丸く切って直径約40cmの円盤に加工したい ということで、久しぶりに工具箱から ジ</description>
     </item>
     
     <item>
@@ -96,7 +86,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 12 Jun 2020 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/hanamame-sprouting/</guid>
-      <description>はじめに 花豆の発芽について  積算温度との関係 今回の結果は   気温データの取得  アメダスデータ 日平均気温の計算 グラフのプロット   今後の課題 おまけ  今日の花豆（2020/06/12）   Acknowledgement  はじめに 今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図1）。</description>
+      <description>Table of Contents はじめに 花豆の発芽について 積算温度との関係 今回の結果は 気温データの取得 アメダスデータ 日平均気温の計算 グラフのプロット 今後の課題 おまけ 今日の花豆（2020/</description>
     </item>
     
     <item>
@@ -105,7 +95,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 22 Apr 2020 10:21:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/broken-histogram/</guid>
-      <description>Y軸にbreakを入れてみる  Ledger-cliのクエリー gnuplotスクリプト 細かいことですが・・・   問題点と今後の課題 Acknowledgement  新型コロナによってたくさんの国民の 生命財産 が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた 税金 をどうして国民のために使えないのか。もういい加減にして欲しい！ &amp;lsquo;Give me a break !</description>
+      <description>Table of Contents Y軸にbreakを入れてみる Ledger-cliのクエリー gnuplotスクリプト 細かいことですが・・・ 問題点と今後の課題 Acknowledgement 新型コロナによってたくさんの国</description>
     </item>
     
     <item>
@@ -114,7 +104,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 09 Mar 2020 19:40:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/daily-expns-watcher/</guid>
-      <description>日々の累積支出額と予算の関係  仕掛け 環境   コーディング  bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！   使いみちなど Acknowledgement  新型コロナウイルス という外来の危機（ 外患 ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという 内憂 が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが 挙国一致 してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 「帝国」 はこんな風にして 内側 から崩壊するんですね。</description>
+      <description>Table of Contents 日々の累積支出額と予算の関係 仕掛け 環境 コーディング bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！ 使いみちなど Acknowledgement 新型コロナウ</description>
     </item>
     
     <item>
@@ -123,7 +113,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 21 Feb 2020 18:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/</guid>
-      <description>きっかけ  仕掛け ネットには見当たらない？   環境 コーディング  bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみち   Acknowledgement  きっかけ 新型コロナウイルス が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の 支出予算 がどれくらい消化されているかを表示する 水平ゲージ （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</description>
+      <description>Table of Contents きっかけ 仕掛け ネットには見当たらない？ 環境 コーディング bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみ</description>
     </item>
     
     <item>
@@ -132,7 +122,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 31 Jan 2020 12:29:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/</guid>
-      <description>二次元プロットの例 3Dプロットの例 （おまけ）日々の支出状況をみるtodayスクリプト Acknowledgement  ここでは、 Ledger-cli （3.</description>
+      <description>Table of Contents 二次元プロットの例 3Dプロットの例 （おまけ）日々の支出状況をみるtodayスクリプト Acknowledgement ここでは、 Ledger-cli （3.11）と Gnuplot （5.28）および bash （on ubuntu1</description>
     </item>
     
     <item>
@@ -141,7 +131,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/%E5%BF%98%E5%B9%B4%E4%BC%9A/</guid>
-      <description>忘年会シーズン  宴席でよく見る光景 無礼講 なので・・・   忘年会の会計  現金ベースの割り勘のとき 太郎がクレジットカードで立替払いをしてくれた 自分のクレジットカードで全員分を立替払いした   Acknowledgement  忘年会シーズン 忘年会シーズンですね。</description>
+      <description>Table of Contents 忘年会シーズン 宴席でよく見る光景 無礼講 なので・・・ 忘年会の会計 現金ベースの割り勘のとき 太郎がクレジットカードで立替払いをしてくれた 自分のクレジットカードで</description>
     </item>
     
     <item>
@@ -150,7 +140,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 15 Dec 2019 13:13:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/</guid>
-      <description>榎下城址  小机城址 話しを榎下城にもどしします   本題＝観護寺  観護寺と榎下城   長延寺について（おまけ）  榎下城址 ボクの自宅の最寄り駅は横浜線・十日市場ですが、そのお隣の駅＝ 中山駅 の近くに「 榎下城址 」があります。榎下城址へは、自宅から新治市民の森 を抜けるルートで徒歩30分程度です。</description>
+      <description>Table of Contents 榎下城址 小机城址 話しを榎下城にもどしします 本題＝観護寺 観護寺と榎下城 長延寺について（おまけ） 榎下城址 ボクの自宅の最寄り駅は横浜線・十日市場ですが、そのお隣</description>
     </item>
     
     <item>
@@ -159,7 +149,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 06 Dec 2019 15:29:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/%E8%BB%8A%E6%A4%9C%E8%BB%A2%E8%A8%98/</guid>
-      <description>車検哀歌  とにかくクルマは維持費がたいへん・・・   さて転記のこころみ  使い勝手   Footnote  車検哀歌 12月2日（月）、車検が終わりました。毎度のことながら車検は金がかかりますね（涙）。</description>
+      <description>Table of Contents 車検哀歌 とにかくクルマは維持費がたいへん・・・ さて転記のこころみ 使い勝手 Footnote 車検哀歌 12月2日（月）、車検が終わりました。毎度のことながら車検は金がかかりま</description>
     </item>
     
     <item>
@@ -168,7 +158,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 03 Dec 2019 21:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/10th-step/</guid>
-      <description>帳簿の厳密さ・細かさについて  そのきっかけは   で、フランクリンですが・・・ 翻ってわが国を見ると（涙） ところで脇道にそれますが・・・ ということで、今回のTips＆Hints  領収書・請求書などへのリンク プリペイドカードと商品券（ギフト券）のトラッキングについて プリペイドカード 商品券（ギフト券）   まとめ  「まま子三兄弟」 Penny talks   Acknowledgement  今回をもって、とりあえずシリーズ的なイントロ的投稿は 打ち止め にします。今後は、これまで以上にトピックベースの ショート・ショート 形式での記事にします。</description>
+      <description>Table of Contents 帳簿の厳密さ・細かさについて そのきっかけは で、フランクリンですが・・・ 翻ってわが国を見ると（涙） ところで脇道にそれますが・・・ ということで、今回のTips</description>
     </item>
     
     <item>
@@ -177,7 +167,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 04 Oct 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/9th-step_ledger/</guid>
-      <description>キャッシュレス還元が始まった  real か virtualか   便利なコマンド・オプションたち  accountsコマンド payeesコマンド --by-payee （ -P ）オプション xactコマンド   おまけ &amp;ndash; suicaの残高をPCで確認する  suicaの残高 PaSoRiを使って残高確認   Acknowledgement  2019年10月1日から消費税が（一部）10%に増税になりました。ボクは経済学が専門ではありませんが、不況下で増税するのはどういう理屈なんでしょうか？不況には 減税 するものと思っていました。経済の専門家のみなさんはオッケーなんですかね？</description>
+      <description>Table of Contents キャッシュレス還元が始まった real か virtualか 便利なコマンド・オプションたち accountsコマンド payeesコマンド --by-payee （ -P ）オプション xactコマン</description>
     </item>
     
     <item>
@@ -186,7 +176,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 16 Sep 2019 10:10:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/8th-step_ledger/</guid>
-      <description>高速道路料金、高い！ ETCマイレージポイントをなんとかしよう！  ETCマイレージポイントの残高などを記録・管理する試み PTAによる処理の一例 トランザクションコードを使う方法 ということで おわりに・・・   Acknowledgement  高速道路料金、高い！ 日本の高速道路料金は 不当に高い ですよね。誰もがそう感じていると思います。</description>
+      <description>Table of Contents 高速道路料金、高い！ ETCマイレージポイントをなんとかしよう！ ETCマイレージポイントの残高などを記録・管理する試み PTAによる処理の一例 トランザクション</description>
     </item>
     
     <item>
@@ -195,7 +185,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 14 Aug 2019 12:30:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/7th-step_ledger/</guid>
-      <description>AndroidタブレットでLedger cli  環境条件 ポリシイ 実際にやったこと ledgerファイルの共有のために・・・ 使い方 いまのところ満足しています   Acknowledgement  AndroidタブレットでLedger cli 家計簿のみならず全ての会計帳簿は 即時性 と 継続性 を基礎にした 正確さ が命です。</description>
+      <description>Table of Contents AndroidタブレットでLedger cli 環境条件 ポリシイ 実際にやったこと ledgerファイルの共有のために・・・ 使い方 いまのところ満足しています Acknowledgement Andr</description>
     </item>
     
     <item>
@@ -204,7 +194,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 11 Aug 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/2nd_fight_againt_maskedmusang/</guid>
-      <description>本題に入る前に ニンニク臭発散器  これまでのところ   コーヒーのカス＝大失敗  しかしコーヒーカスは偉大？   Acknowledgement  本題に入る前に ボクはコーヒーが大好きです。１日に３杯は飲みます。朝食、昼食の後、３時のおやつの時間、それから夜に宴席があると食後に１杯という感じです。</description>
+      <description>Table of Contents 本題に入る前に ニンニク臭発散器 これまでのところ コーヒーのカス＝大失敗 しかしコーヒーカスは偉大？ Acknowledgement 本題に入る前に ボクはコーヒーが大好きです。１日に３杯は飲み</description>
     </item>
     
     <item>
@@ -213,7 +203,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 08 Aug 2019 13:47:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/fight_againt_maskedmusang/</guid>
-      <description>忌避剤デフューザー（発散器）の効果  これまでの経過 その後の報告です   ニンニク臭デフューザー（発散器）  結局、今回は・・・ おまけ   第四の武器＝イヌの被毛 Acknowledgement  忌避剤デフューザー（発散器）の効果 これまでの経過 ８月２日 づけの投稿（ハクビシンめ！ ）で、梅雨明けとともにミニトマトが色づきはじめたこと、それと同時に夜中にハクビシンが畑に出没するようになり、トマトを喰い散らかすようになったことを報告しました。また竹酢液を長期にわたって発散させる仕掛け＝ 忌避剤デフューザー （発散器）を設置したことを報告しました。</description>
+      <description>Table of Contents 忌避剤デフューザー（発散器）の効果 これまでの経過 その後の報告です ニンニク臭デフューザー（発散器） 結局、今回は・・・ おまけ 第四の武器＝イヌの被毛 Acknowledgement 忌避剤デフ</description>
     </item>
     
     <item>
@@ -222,7 +212,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 02 Aug 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/masked-musang/</guid>
-      <description>7月の末、梅雨明けとともに ところが！ そもそもハクビシンってやつは 負けるものか！ ハクビシン撃退方法 忌避剤デフューザの試作  用意する部材など 作り方   To be continued&amp;hellip; Acknowledgement  7月の末、梅雨明けとともに 梅雨が開けて、遅れていたミニトマトの実がやっとと赤くなってきた、と思っていたら、 7月27日 頃から毎夜、 ハクビシン の襲撃を受けるようになりました。</description>
+      <description>Table of Contents 7月の末、梅雨明けとともに ところが！ そもそもハクビシンってやつは 負けるものか！ ハクビシン撃退方法 忌避剤デフューザの試作 用意する部材など 作り方 To be continued&amp;hellip; Acknowledgement 7月の</description>
     </item>
     
     <item>
@@ -231,9 +221,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/6th-step_ledger/</guid>
-      <description>グラフを描いてみました シリーズの（1）で家計簿には 可視化 の必要性は大きくないと書きましたが、そうは言っても、Ledgerでできないわけではありません。そこで今回はとりあえずシンプルな図を描いてみました。
-4月以降からのクルマに関係する経費（いわゆる「車両費」）の月ごとの推移を 積み上げ棒グラフ の例図にしたものです。3月は一部だけデータがあったので、それもプロットしています。
-  Figure 1: Ledgerとgnuplotを組み合わせてプロットした例図</description>
+      <description>グラフを描いてみました シリーズの（1）で家計簿には 可視化 の必要性は大きくないと書きましたが、そうは言っても、Ledgerでできないわけではありません。そこで今回</description>
     </item>
     
     <item>
@@ -242,7 +230,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 21 Jul 2019 18:26:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/5th-step_ledger/</guid>
-      <description>再訪　「借方」「貸方」  英語でもたいへんのようです Ledger cli では   tagは便利！ 使わない手は無い！ 外国通貨の扱い  まずは上の例のようにアカウントの金額の後ろにレートを書いた場合 ~/.</description>
+      <description>Table of Contents 再訪 「借方」「貸方」 英語でもたいへんのようです Ledger cli では tagは便利！ 使わない手は無い！ 外国通貨の扱い まずは上の例のようにアカウントの金額の後ろにレートを書</description>
     </item>
     
     <item>
@@ -251,7 +239,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 07 Jul 2019 16:15:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/4th-step_ledger/</guid>
-      <description>トランザクションのスケジューリング  （補足）   トランザクション中のアカウントで計算式を使う 月別の支出をざくっと知りたい 「帳簿の世界史（文春文庫）」  資格と学会と一般人のリテラシー もしかしたら    トランザクションのスケジューリング 繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。</description>
+      <description>Table of Contents トランザクションのスケジューリング （補足） トランザクション中のアカウントで計算式を使う 月別の支出をざくっと知りたい 「帳簿の世界史（文春文庫）」 資格と学会と</description>
     </item>
     
     <item>
@@ -260,8 +248,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sat, 06 Jul 2019 11:49:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/tdm1874/</guid>
-      <description>自宅からの散歩エリア内というか、散歩の帰りに立ち寄れる場所に TDM1874横浜 があります(http://www.tdm1874brewery.com/ja/)。昨日、曇り空ながら雨が降っていないのをこれ幸いに、ちょっと立ち寄ってSogga pere et filsのシャルドネを1本購入してバックパックに入れて帰ってきました。
-  Figure 1: Sogga Wine</description>
+      <description>自宅からの散歩エリア内というか、散歩の帰りに立ち寄れる場所に TDM1874横浜 があります(http://www.tdm1874brewery.com/ja/)。</description>
     </item>
     
     <item>
@@ -270,7 +257,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sat, 22 Jun 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/leoville1979/</guid>
-      <description>抜栓までの顛末（てんまつ）  どこで飲むか 誕生日をかねて ビンテージワインのこわさ   ついにその日が！  呆然・陶然 そしてBDケーキ 感謝のことば   Acknowledgement  2019年3月16日（土）の「送別会」でみなさまからプレゼントされた1979年のワイン（図1）を先日、抜栓し賞味させていただきました。SNSでは速報でお知らせいたしましたが、もうすこし詳しくご報告申し上げます。</description>
+      <description>Table of Contents 抜栓までの顛末（てんまつ） どこで飲むか 誕生日をかねて ビンテージワインのこわさ ついにその日が！ 呆然・陶然 そしてBDケーキ 感謝のことば Acknowledgement 2019年3月16日（</description>
     </item>
     
     <item>
@@ -279,7 +266,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 07 Jun 2019 18:56:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/3rd-step_ledger/</guid>
-      <description>Adjustmentsを使おう 少額の現金の扱い 利子・利息の転記方法 定期的なトランザクションの書き方  レポートの表示   几帳面？ Acknowledgment  この（３）でも「その（２）」に引き続き、ちいさなTipsを備忘的に記します。</description>
+      <description>Table of Contents Adjustmentsを使おう 少額の現金の扱い 利子・利息の転記方法 定期的なトランザクションの書き方 レポートの表示 几帳面？ Acknowledgment この（３）でも「その（２）」に引</description>
     </item>
     
     <item>
@@ -288,7 +275,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 24 May 2019 22:25:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/seedling-rack/</guid>
-      <description>トランスポーテーション問題 ということで  仕掛けは簡単です   車体にラックを固定する  前提は・・・   必要な部材  １段あたりの必要部材   今後の課題 Acknowledgement  ボクが趣味で土いぢり・畑作業をしているのは群馬の標高1,000メートルの村です。村では、5月20日以前に苗を畑に定植するのはとても危険とされています。もちろんへいちゃらな年もあるにはありますが、遅霜がくると畑の作物たちは（種類によりますが）一夜にして絶滅します。</description>
+      <description>Table of Contents トランスポーテーション問題 ということで 仕掛けは簡単です 車体にラックを固定する 前提は・・・ 必要な部材 １段あたりの必要部材 今後の課題 Acknowledgement ボクが趣味で土いぢり・畑</description>
     </item>
     
     <item>
@@ -297,8 +284,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 20 May 2019 00:08:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/kikuka/</guid>
-      <description>今日の晩酌は菊鹿 菊鹿とのゆかり じつは・・・ Acknowledgement  近年、日本ワインがどんどんレベルを高めていて美味しくなっているのは分かっているつもりです。けれども、コストパファーマンスという意味では、なかなか難しい側面があります。これまで、ボクらが日々飲むワインで、たとえば1,000円前後のワインでいえば、国産ワインは、新世界やフランス、イタリアなどのワインを比べると、申し訳ありませんが、海外のワインを飲んだ方が満足度が高かったです。
-それに加えて、ご存知の通り2月1日に日本と欧州連合（EU）による経済連携協定（EPA）が発効しました。この先、EUからの輸入品にかかる関税がワインを含めて大幅に撤廃されます。それを記念して、EUワインのバーゲンが多数の小売店で展開されています。とても喜ばしい流れだとボクは思っています。日本ワインはこれから正念場でしょうか。</description>
+      <description>Table of Contents 今日の晩酌は菊鹿 菊鹿とのゆかり じつは・・・ Acknowledgement 近年、日本ワインがどんどんレベルを高めていて美味しくなっているのは分かっているつもりです。けれども、コストパフ</description>
     </item>
     
     <item>
@@ -307,7 +293,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 16 May 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/2nd_step_ledger/</guid>
-      <description>はじめに トランザクション記帳について  日付けの手抜き入力 トランザクション名、アカウント名などの手抜き記帳 コピペを活用   絞り込みReportの表示  よく使う絞り込み Register report その他いろいろ   使い勝手について  セキュリティとの関連で レポートの可視化について   Acknowledgment  はじめに Ledger というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて ランダム な小さな事例集というか、ちょっとした カンニングペーパ 風なメモにしました。</description>
+      <description>Table of Contents はじめに トランザクション記帳について 日付けの手抜き入力 トランザクション名、アカウント名などの手抜き記帳 コピペを活用 絞り込みReportの表示 よく使う絞り込</description>
     </item>
     
     <item>
@@ -316,7 +302,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 28 Apr 2019 09:25:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/1st_step_ledger/</guid>
-      <description>はじめに Ledgerのインストール  init.elの設定   百聞は一見にしかず  その前に・・・ 仕訳帳（Journal）の書き方 Report/Registerの例と見方 Emacsの中でLedgerを使う   References Footnote  はじめに 簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger1のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳2のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。</description>
+      <description>Table of Contents はじめに Ledgerのインストール init.elの設定 百聞は一見にしかず その前に・・・ 仕訳帳（Journal）の書き方 Report/Registerの例と</description>
     </item>
     
     <item>
@@ -325,9 +311,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 15 Apr 2019 23:29:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/jikon/</guid>
-      <description>今宵から「而今」・・・ 先般、定年退職に際してのお祝いということでぼくの日本酒の「お師匠さん（C・SKGMさん）」から、三重の銘酒＝「而今」を頂戴しておりましたが、本日より晴れて飲み始めました。
-頂戴したのが「生」だったものですから、どうしても冷蔵保存が必要でした。しかし、自宅にある冷蔵庫では日本酒の一升瓶を立てて格納・保存できないため、「而今」の一升瓶と同色の色付きスイングボトル(720ml)を購入し、それに詰め替えて冷蔵しておりました。
-  Figure 1: 日本酒「而今」とスイングボトル</description>
+      <description>今宵から「而今」・・・ 先般、定年退職に際してのお祝いということでぼくの日本酒の「お師匠さん（C・SKGMさん）」から、三重の銘酒＝「而今」を頂戴しておりましたが</description>
     </item>
     
     <item>
@@ -336,8 +320,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 09 Apr 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/keitai%E6%A9%9F%E7%A8%AE%E5%A4%89/</guid>
-      <description>PHSの最期 ということで Footnote  PHSの最期 Willcom以来、長らくPHS（070-xxxx-yyyy）を愛用していましたが、Willcomが2014年にSoftBank傘下のY!mobileブランドとなったのが運のつき（笑）、悲しいかな、ついに2020年7月にはサービス停止になるとのこと。
-4月になっていくらか時間ができたので、この先、音声通話のための携帯電話をどうすべきかについて、ぼくのライフスタイルをベースに、通信料金をできるだけ安く抑えるにはどうしたらよいか、真剣に検討しました。その結果、いわゆるスマホではなくて、Y!mobileの Simply という単機能の携帯電話（図1)に機種変することにしました。</description>
+      <description>Table of Contents PHSの最期 ということで Footnote PHSの最期 Willcom以来、長らくPHS（070-xxxx-yyyy）を愛用していましたが、Willcomが2014年にSo</description>
     </item>
     
     <item>
@@ -346,9 +329,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/getting-snap-photos/</guid>
-      <description>2019年3月16日（土）に開催していただいたボクの退職祝賀会の多数の写真が幹事のみなさんのご尽力で本日公開されました。
-  Figure 1: 集合写真（2019/03/16）
-  ご参加されたみなさんは、当日配布された「式次第」にアクセス方法が書かれていますので、それをご覧ください。また当日、都合で参加されなかった方々も、祝賀会幹事のメールアドレス：　yamagamisensei＠gmail.</description>
+      <description>2019年3月16日（土）に開催していただいたボクの退職祝賀会の多数の写真が幹事のみなさんのご尽力で本日公開されました。 Figure 1: 集合写真（2019/03/16） ご参</description>
     </item>
     
     <item>
@@ -357,7 +338,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 19 Mar 2019 22:27:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/soyokunoma-speech/</guid>
-      <description>退職祝賀会スピーチ原稿  ごあいさつ　 定年を迎えるにあたり この先の人生   むすび  補足１：式次第です 補足２：senecaのことばについて   Footnote  退職祝賀会スピーチ原稿1 ごあいさつ　  日時： 2019年3月16日（土）13時30分〜16時 場所： 専修大学生田3号館7F　蒼翼の間  みなさん、今日は年度末3月のどまんなかの週末、それぞれのお立場で一番お忙しい時期に、こんなにも多数のみなさんにおいでいただき、本当にありがとうございます。感謝の言葉もありません。</description>
+      <description>Table of Contents 退職祝賀会スピーチ原稿 ごあいさつ 定年を迎えるにあたり この先の人生 むすび 補足１：式次第です 補足２：senecaのことばについて Footnote 退職祝賀会スピーチ原稿1 ごあ</description>
     </item>
     
     <item>
@@ -366,7 +347,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 17 Mar 2019 22:09:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/vivat_senshu/</guid>
-      <description>退職者代表スピーチ　（定年退職者慰労会）  ごあいさつ 人の年齢 大学の年齢 結び   Footnote  退職者代表スピーチ1　（定年退職者慰労会）  日時： 2019年3月14日（木）17時〜19時 場所： ホテル・グランドパレス＠九段下  ごあいさつ 人間科学部の山上です。ご指名を頂きましたので、僭越ではありますが、定年退職の先生方、職員の皆様方を代表・・・というか代理として一言ご挨拶申し上げます。本日は、私ども退職する教員・職員のために、このような慰労会をお持ち頂き、ありがとうございます。こころから御礼申し上げます。</description>
+      <description>Table of Contents 退職者代表スピーチ （定年退職者慰労会） ごあいさつ 人の年齢 大学の年齢 結び Footnote 退職者代表スピーチ1 （定年退職者慰労会） 日時： 2019年3月14日（木）17時〜1</description>
     </item>
     
     <item>
@@ -375,7 +356,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 07 Mar 2019 21:35:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/yamaken/</guid>
-      <description>- [Vol.9 の相互校閲プロセスが完了しました！](#vol-dot-9-の相互校閲プロセスが完了しました) - [山研年報バックナンバーは・・・](#山研年報バックナンバーは) - [山研年報supplement を準備中です](#山研年報supplement-を準備中です)   Acknowledgement  Vol.</description>
+      <description>Table of Contents - [Vol.9 の相互校閲プロセスが完了しました！](#vol-dot-9-の相互校閲プロセスが完了しました) - [山研年報バックナンバーは・・・](#山研年報バックナ</description>
     </item>
     
     <item>
@@ -384,7 +365,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 27 Feb 2019 08:39:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</guid>
-      <description>自作するわけ  自作の方法は大別して次の２つ 用紙の選定   TeXでがんばる  紙サイズのパラメータ設定 j-namecard.</description>
+      <description>Table of Contents 自作するわけ 自作の方法は大別して次の２つ 用紙の選定 TeXでがんばる 紙サイズのパラメータ設定 j-namecard.tex での作成例 Bottom line is ・・・・ 「ラベル屋さん９」でやる やり方 Bottom line is ・</description>
     </item>
     
     <item>
@@ -393,7 +374,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/temp_katashina_prj/</guid>
-      <description>ねらい 基本ポリシー 具体的な方法について  用意する物品 温湿度計の設置方法 ソフトの設定   実際に使う  カメラから静止画像を得る ローカルに保存された画像をサーバに転送する Cronの設定   検討課題と今後の展開 Acknowledgement  ねらい 寒冷地に別荘とか別宅とかをお持ちの方は、天気予報アプリなどでこまめに現地のお天気や温度をチェックされているようです。しかし困ったことに、人里離れた地方になればなるほど、また山岳地になればなるほど、メジャーな天気予報の観測点が、自分の調べたい場所と離れてきます。またさらに悪いことに、山間（やまあい）の土地だと、わずか数百メートル離れただけで、微妙な地形の違いによって日当たりや風の流れが変わります。温度も湿度もそれに伴って大きく変化します。</description>
+      <description>Table of Contents ねらい 基本ポリシー 具体的な方法について 用意する物品 温湿度計の設置方法 ソフトの設定 実際に使う カメラから静止画像を得る ローカルに保存された画像をサーバに転送す</description>
     </item>
     
     <item>
@@ -402,9 +383,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/2k19happynewyear/</guid>
-      <description>平成31年（2019年）年頭にあたり年始のご挨拶を申し上げます。明けましておめでとうございます。みなさま方にはすばらしい新年をお迎えになったこととお慶び申し上げます。
-  Figure 1: ことしの年賀状
-  さて私事ではありますが、昭和54年（1979年）入職以来、 40年もの長きにわたりお世話になった専修大学を今年の3月末日を以って定年退職いたします。ご関係のみなさま方には大変にお世話になりました。心から御礼を申し上げます。ありがとうございました。</description>
+      <description>平成31年（2019年）年頭にあたり年始のご挨拶を申し上げます。明けましておめでとうございます。みなさま方にはすばらしい新年をお迎えになったこととお慶び申し上げ</description>
     </item>
     
     <item>
@@ -413,7 +392,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 30 Dec 2018 11:52:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/hagaki%E5%8D%B0%E5%88%B7/</guid>
-      <description>表面（宛名）印刷  年賀状の宛名面印刷のためのクラスファイル 普通葉書の宛名印刷のためのクラスファイル   文面（ウラ面）のためのサンプルファイル  最近でも、年に数回はどうしてもハガキでの通信が必要になります。目上の方へのお中元やお歳暮のお礼とか、住所とお名前だけは分かっているけれど、電話番号やメールやラインなどの情報がない方への連絡というのが主なケースです。</description>
+      <description>Table of Contents 表面（宛名）印刷 年賀状の宛名面印刷のためのクラスファイル 普通葉書の宛名印刷のためのクラスファイル 文面（ウラ面）のためのサンプルファイル 最近でも、年に数回は</description>
     </item>
     
   </channel>

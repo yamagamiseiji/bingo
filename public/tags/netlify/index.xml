@@ -5,7 +5,7 @@
     <link>https://bred-in-bingo.netlify.app/tags/netlify/</link>
     <description>Recent content in Netlify on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>jp</language>
+    <language>ja-jp</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
     <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/netlify/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,8 +14,7 @@
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/kojo/</guid>
-      <description>これまで2年ほどブログ書きは下のようなフローでやってきました1。
-Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
+      <description>これまで2年ほどブログ書きは下のようなフローでやってきました1。 Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし WordPress(WP)ではバージョンアップに追いつくのが大変 サボって</description>
     </item>
     
     <item>
@@ -24,7 +23,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/origin-of-domain-name/</guid>
-      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名には bingo の語を入れました。このbingoは英語じゃあなくて、地名の「 備後 （びんご）」でボクの生まれ故郷です。</description>
+      <description>リニューアルした Yam&amp;rsquo;s Peace Blog のドメイン名には bingo の語を入れました。このbingoは英語じゃあなくて、地名の「 備後 （びんご）」でボクの生まれ故郷です。 そこで「備後」うんち</description>
     </item>
     
     <item>
@@ -33,8 +32,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/theme-selection/</guid>
-      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中からmixedpaperを使わせてもらうことにしました。
-当初の希望  個々の記事のタイトルと内容を数行程度で要約表示したい 記事の要約リストにサムネイル画像をつけたい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい １記事1ファイルで運用したい  候補 検討したのは次のようなテーマです。✔印は実際にインストールしてみました。</description>
+      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中からmixedpaperを使わせてもらうことにしました。 当初の希望 個々の記事のタイトルと内容を数行程度</description>
     </item>
     
   </channel>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（4）</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">トランザクションのスケジューリング</a>
 <ul>
@@ -94,7 +95,8 @@
 </ul>
 </li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="トランザクションのスケジューリング">トランザクションのスケジューリング</h2>
 <p>繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。</p>
 <p>そのため結構四苦八苦しましたが、<a href="https://groups.google.com/forum/m/#!topic/ledger-cli/MZwjYEp2rjU">ここ</a>の記事を見て「目からウロコ！」。やり方は簡単で、まずホームディレクトリに <strong>ledger-schedule.ledger</strong> という名前（ディフォールトです）で、次のようなコンテンツのファイルを作ります：</p>
@@ -200,7 +202,7 @@ options=$1
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;7月&#32;7日&#32;(月)&#32;16:15:00&#43;0900 class="date">2019年 7月 7日 (月)</time>
+      <time datetime=2019年7月7日T16:15:00&#43;0900 class="date">2019年7月7日</time>
       
         <ul class="tags">
         

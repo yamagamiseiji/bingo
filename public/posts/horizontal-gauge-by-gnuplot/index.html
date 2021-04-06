@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">予算消化率の水平ゲージをledger-cliとgnuplotで描く</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#%E3%81%8D%E3%81%A3%E3%81%8B%E3%81%91">きっかけ</a>
 <ul>
@@ -97,14 +98,15 @@
 </li>
 <li><a href="#acknowledgement">Acknowledgement</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="きっかけ">きっかけ</h2>
 <p><strong>新型コロナウイルス</strong> が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の <strong>支出予算</strong> がどれくらい消化されているかを表示する <strong>水平ゲージ</strong> （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</p>
 <blockquote>
 <p>（例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい</p>
 </blockquote>
 <p>予算消化率の可視化については<a href="http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/">前回の投稿</a>で、GNOME端末での <strong>プログレッシブ・バーグラフ</strong> を紹介しました。今回はそれよりももう少しグラッフィックに図<a href="#orgefdca17">1</a>のような水平ゲージを描きます。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="orgefdca17"></a></p>
 <figure>
     <img src="/horizontal-gauge.png"
          alt="Figure 1: 当日までの予算消化率をプロットする水平ゲージ" width="400px"/> <figcaption>
@@ -116,7 +118,7 @@
 <p>当月内の当日までに支出した金額の累計はleger-cliで算出します。それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。その値をgnuplotにスクリプト内変数として引き渡して、水平ゲージ内に <strong>太めの黒い線</strong> を描くというシンプルな仕掛けです。</p>
 <h3 id="ネットには見当たらない">ネットには見当たらない？</h3>
 <p>当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図<a href="#org9854720">2</a>のような <strong>計器盤</strong> 風のゲージ（<a href="https://angularscript.com/angular-gauge-chart-library/">出典</a>）もgnuplotで描いた例を見つけることができませんでした。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="org9854720"></a></p>
 <figure>
     <img src="/gauge-chart-library.png"
          alt="Figure 2: 計器盤風ゲージチャートの例" width="200px"/> <figcaption>
@@ -235,7 +237,7 @@ plot <span class="nv">$Plotdata</span> using 2:xtic<span class="o">(</span>1<spa
 
     </div>
     <div class="info post_meta">
-      <time datetime=2020年&#32;2月&#32;21日&#32;(月)&#32;18:05:00&#43;0900 class="date">2020年 2月 21日 (月)</time>
+      <time datetime=2020年2月21日T18:05:00&#43;0900 class="date">2020年2月21日</time>
       
         <ul class="tags">
         

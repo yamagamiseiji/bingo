@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（3）</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#adjustment">Adjustmentsを使おう</a></li>
 <li><a href="#petty_cash">少額の現金の扱い</a></li>
@@ -91,7 +92,8 @@
 <li><a href="#%E5%87%A0%E5%B8%B3%E9%9D%A2">几帳面？</a></li>
 <li><a href="#acknowledgment">Acknowledgment</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <p>この（３）でも「その（２）」に引き続き、ちいさなTipsを備忘的に記します。</p>
 <h2 id="adjustment">Adjustmentsを使おう</h2>
 <p>銀行からの口座残高のお知らせと自分のLedgerとの間で、残高が不一致となることは珍しくはありません。そんな時に、帳合を取るために使うのが <strong>Adjustments</strong> （調整）というトランザクションというか裏ワザ。</p>
@@ -170,17 +172,17 @@
 <ul>
 <li>IncomeとExpensesについて定期的（予算）のバランスをレポート：</li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <pre><code class="language-nil" data-lang="nil">$ led budget ^income ^expenses
 </code></pre><ul>
 <li>上のようにbudgetを定義していても、単にbal/regでのレポートには反映されません。bal/regでbudget（定期・予算）定義を反映させるには次のようにします：</li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <pre><code class="language-nil" data-lang="nil">$ led bal --add-budget
 </code></pre><ul>
 <li>より詳細なregレポートを表示するには：</li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <pre><code class="language-nil" data-lang="nil">$ led reg --add-budget
 </code></pre><p>上のコマンドの結果の抜粋を示します：</p>
 <pre><code class="language-nil" data-lang="nil">　　　：
@@ -200,7 +202,7 @@
 <h2 id="几帳面">几帳面？</h2>
 <p>これまで、子どもの頃のお小遣い帳、研究費の精算表などいろいろな帳簿をつけてきましたが、帳簿つけで一番大事なのは「継続性」と「即時性」。継続性は連続して長い年月、記録し続けるということ、「即時性」はお金が動いたとき（正確には「トランザクションが発生したとき」）、後回しにしないで、すぐに記帳することです。いずれも言うは易く行うは難しです。実際これまで、何度も痛い目に合いました。自分の性格がだらしなくて几帳面じゃあないからだと思っていました。</p>
 <p>それで、「几帳面」と言うのは「帳面」をきちんとつけられることだと思っていましたが、どうやらそれは間違いで、「几帳」という「寝殿造りの間仕切り」の仕上げがとても丁寧だったことに由来するそうです。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="orgb90b8cd"></a></p>
 <figure>
     <img src="/kicho.jpg"
          alt="Figure 1: 几帳です。記帳ではありませんw" width="80%"/> <figcaption>
@@ -214,7 +216,7 @@
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;6月&#32;7日&#32;(月)&#32;18:56:00&#43;0900 class="date">2019年 6月 7日 (月)</time>
+      <time datetime=2019年6月7日T18:56:00&#43;0900 class="date">2019年6月7日</time>
       
         <ul class="tags">
         

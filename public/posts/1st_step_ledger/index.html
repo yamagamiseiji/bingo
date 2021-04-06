@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（１）</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
 <li><a href="#ledger%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">Ledgerのインストール</a>
@@ -97,7 +98,8 @@
 <li><a href="#references">References</a></li>
 <li><a href="#footnote">Footnote</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="はじめに">はじめに</h2>
 <p>簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。</p>
 <h2 id="ledgerのインストール">Ledgerのインストール</h2>
@@ -254,7 +256,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <li>仕訳帳の全体バランス（Balance; <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>経費状態や入金、残高などの状態）を見るには、</li>
 </ul>
 <p>次のようにします：</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="code-snippet--list:1"></a></p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal
 
 	 999,220 JPY  Assets
@@ -271,7 +273,10 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	  -4,680 JPY  Liabilities:VisaCard
 --------------------
 		   <span class="m">0</span>
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--list:1">Code Snippet 1</a></span>:
+  仕訳帳（sample.ledger）の全体バランスレポート
+</div>
 <p>「-f」オプションでファイル名を指定しています。「bal」はbalanceの略です。</p>
 <ul>
 <li>
@@ -290,7 +295,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <li>環境変数 <em>LEDGER_FILE</em> でファイル名を指定する</li>
 <li>~/.legerrcファイルを作成し、その中に次の例のような行を書いておく：</li>
 </ol>
-<!-- raw HTML omitted -->
+<!--listend-->
 <pre><code class="language-nil" data-lang="nil">--file ~/Dropbox/sample.Ledger
 </code></pre></li>
 <li>
@@ -370,7 +375,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <p>Emacs本体の持つ検索機能では、パタンにマッチした「行」のみが表示されますが、Ledger-modeでのnarrowingでは、トランザクション単位で表示されるというのが味噌。 <strong><strong><em>C-c C-f</em></strong></strong> を叩くと、ミニバッファに&rsquo;Regexp:&lsquo;が表示されます。ここで入力された文字列とマッチしたトランザクションが表示されます。たとえば、「ゆうちょ」を入力すると：</p>
 </li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <pre><code class="language-nil" data-lang="nil">2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        50000 JPY
@@ -422,7 +427,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;4月&#32;28日&#32;(月)&#32;09:25:00&#43;0900 class="date">2019年 4月 28日 (月)</time>
+      <time datetime=2019年4月28日T09:25:00&#43;0900 class="date">2019年4月28日</time>
       
         <ul class="tags">
         

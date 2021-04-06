@@ -5,7 +5,7 @@
     <link>https://bred-in-bingo.netlify.app/tags/viz/</link>
     <description>Recent content in viz on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>jp</language>
+    <language>ja-jp</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
     <lastBuildDate>Mon, 09 Mar 2020 19:40:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/viz/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,7 +14,7 @@
       <pubDate>Mon, 09 Mar 2020 19:40:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/daily-expns-watcher/</guid>
-      <description>日々の累積支出額と予算の関係  仕掛け 環境   コーディング  bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！   使いみちなど Acknowledgement  新型コロナウイルス という外来の危機（ 外患 ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという 内憂 が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが 挙国一致 してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 「帝国」 はこんな風にして 内側 から崩壊するんですね。</description>
+      <description>Table of Contents 日々の累積支出額と予算の関係 仕掛け 環境 コーディング bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！ 使いみちなど Acknowledgement 新型コロナウ</description>
     </item>
     
     <item>
@@ -23,7 +23,7 @@
       <pubDate>Fri, 21 Feb 2020 18:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/</guid>
-      <description>きっかけ  仕掛け ネットには見当たらない？   環境 コーディング  bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみち   Acknowledgement  きっかけ 新型コロナウイルス が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の 支出予算 がどれくらい消化されているかを表示する 水平ゲージ （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</description>
+      <description>Table of Contents きっかけ 仕掛け ネットには見当たらない？ 環境 コーディング bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみ</description>
     </item>
     
     <item>
@@ -32,7 +32,7 @@
       <pubDate>Fri, 31 Jan 2020 12:29:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/</guid>
-      <description>二次元プロットの例 3Dプロットの例 （おまけ）日々の支出状況をみるtodayスクリプト Acknowledgement  ここでは、 Ledger-cli （3.</description>
+      <description>Table of Contents 二次元プロットの例 3Dプロットの例 （おまけ）日々の支出状況をみるtodayスクリプト Acknowledgement ここでは、 Ledger-cli （3.11）と Gnuplot （5.28）および bash （on ubuntu1</description>
     </item>
     
   </channel>

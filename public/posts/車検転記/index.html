@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">Ledger-cliで「車検」の転記</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#%E8%BB%8A%E6%A4%9C%E5%93%80%E6%AD%8C">車検哀歌</a>
 <ul>
@@ -92,7 +93,8 @@
 </li>
 <li><a href="#footnote">Footnote</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="車検哀歌">車検哀歌</h2>
 <p>12月2日（月）、車検が終わりました。毎度のことながら車検は金がかかりますね（涙）。</p>
 <figure>
@@ -180,7 +182,7 @@ end apply
 <p>さらに車検タグを「値つきタグ( <strong>valued tag</strong> )」にして、車検の <strong>年</strong> を「値」として設定すると、車検の年を使って経費を検索・抽出することができます。たとえば <code>apply tags 車検: 2019</code> （コロンの後ろ、2019の前にある半角スペースは必須です）とし、抽出するときにはtag名の後ろに <strong>等号</strong> をつけてその「値」を入力します：</p>
 </li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ led bal %車検<span class="o">=</span><span class="m">2019</span>
 </code></pre></div><p>検索語には正規表現が使えるので、 <code>%車検=19</code> でも、 <code>%車検=9</code> でも、 <code>%車=9</code> でもOKです。</p>
 <p>ではでは、ハッピーPTA<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>！</p>
@@ -199,7 +201,7 @@ end apply
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;12月&#32;6日&#32;(月)&#32;15:29:00&#43;0900 class="date">2019年 12月 6日 (月)</time>
+      <time datetime=2019年12月6日T15:29:00&#43;0900 class="date">2019年12月6日</time>
       
         <ul class="tags">
         

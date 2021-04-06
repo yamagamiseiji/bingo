@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">忘年会会計をledger-cliで</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3">忘年会シーズン</a>
 <ul>
@@ -96,11 +97,12 @@
 </li>
 <li><a href="#acknowledgement">Acknowledgement</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="忘年会シーズン">忘年会シーズン</h2>
 <p>忘年会シーズンですね。</p>
 <p>最近は <strong>会社の忘年会</strong> への風当たりが強くなってきています。とくに若い世代に不賛同の声が多いようです。その一方で、年長者には伝統的な行事のひとつとして継続して欲しいという気持ちがあるのも分かります。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="org1406799"></a></p>
 <figure>
     <img src="/ochoko-tokkuri.jpg" width="60%"/> 
 </figure>
@@ -178,7 +180,7 @@
 <ul>
 <li><strong>忘年会当日</strong> のbalレポート：</li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal
 	  15,230 JPY  Assets:未収金
 	   6,115 JPY    太郎
@@ -191,7 +193,7 @@
 </code></pre></div><ul>
 <li><strong>年末</strong> 12月31日のbalレポート。 <strong>未収金</strong> をクエリーすると：</li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal 未収金
 	   6,115 JPY  Assets:未収金
 		   <span class="m">0</span>    太郎
@@ -203,7 +205,7 @@
 <ul>
 <li>年開けの <strong>1月10日</strong> 、次郎がようやく返済。その時点でのbalレポート：</li>
 </ul>
-<!-- raw HTML omitted -->
+<!--listend-->
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">	  15,700 JPY  Assets
 	  15,700 JPY    Cash
 		   <span class="m">0</span>    未収金
@@ -221,7 +223,7 @@
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;12月&#32;17日&#32;(月)&#32;00:00:00&#43;0900 class="date">2019年 12月 17日 (月)</time>
+      <time datetime=2019年12月17日T00:00:00&#43;0900 class="date">2019年12月17日</time>
       
         <ul class="tags">
         

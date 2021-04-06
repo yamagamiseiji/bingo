@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（2）</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
 <li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E8%A8%98%E5%B8%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">トランザクション記帳について</a>
@@ -103,7 +104,8 @@
 </li>
 <li><a href="#acknowledgment">Acknowledgment</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="はじめに">はじめに</h2>
 <p><strong><code>Ledger</code></strong> というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて <strong>ランダム</strong> な小さな事例集というか、ちょっとした <strong>カンニングペーパ</strong> 風なメモにしました。</p>
 <h2 id="トランザクション記帳について">トランザクション記帳について</h2>
@@ -134,7 +136,7 @@ l TAB v TAB
 <h3 id="コピペを活用">コピペを活用</h3>
 <p>Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
 <strong><code>C-c C-k</code></strong> するとEmacsの下半分に次のようなカレンダーが表示されます。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="org3303da8"></a></p>
 <figure>
     <img src="/emacs_calendar.png"
          alt="Figure 1: Emacs内に表示されるカレンダー" width="95%"/> <figcaption>
@@ -229,7 +231,7 @@ CSVを経由して他の会計ソフトや描画機能と連携することで�
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;5月&#32;16日&#32;(月)&#32;00:00:00&#43;0900 class="date">2019年 5月 16日 (月)</time>
+      <time datetime=2019年5月16日T00:00:00&#43;0900 class="date">2019年5月16日</time>
       
         <ul class="tags">
         

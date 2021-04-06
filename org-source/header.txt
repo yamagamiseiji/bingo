@@ -1,12 +1,13 @@
+#    Time-stamp: <2021-04-05 16:39:00 yamagami>
 #+title: 
-#+date: 
+#+date: [ ]
 #+link: file file+sys:../static/
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
+#+hugo_tags: xxxxx yyyyy zzzzz
 #+hugo_categories: comp
 
-#+hugo_custom_front_matter: :toc true
+#+options: toc:nil
 #+draft: false
 

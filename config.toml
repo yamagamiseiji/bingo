@@ -6,12 +6,12 @@ theme = "mixedpaper"
 
 canonifyurls = false
 paginate = 5
-languageCode = "jp"
+languageCode = "ja-jp"
 enableRobotsTXT = true
 
-summaryLength = 8 # Configure how long the post summary should be on the homepage.
+summaryLength = 80 # Configure how long the post summary should be on the homepage.
 pygmentsUseClasses = true # enable theme-defined highlight style
-hasCJKLanguage = false
+hasCJKLanguage = true # 日本語文字数を正しくカウントさせるため必要
 
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
 googleAnalytics = ""
@@ -24,8 +24,9 @@ name = "YAMAGAMI, Seiji"
 
 [params]
 # Blog description at the top of the homepage. Supports markdown.
+dateFormat = "2021/04/05"
 description = "{Psy|Edu|Agri|Comp|Etc} = PEACE"
-showReadMore = false
+showReadMore = true
 mainSections = [
 	"posts",
 ]
@@ -85,11 +86,16 @@ useSessionStorage = false
 # simple = false
 [privacy.twitter]
 disable = false
-enableDNT = false
-simple = false
+enableDNT = true
+simple = true
 # [privacy.vimeo]
 # disable = false
 # simple = false
 # [privacy.youtube]
 # disable = false
 # privacyEnhanced = true
+
+[markup]      # unsafe modeを有効にしてmacroが読めるようにする
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

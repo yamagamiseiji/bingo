@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">Give me a break!</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#y%E8%BB%B8%E3%81%ABbreak%E3%82%92%E5%85%A5%E3%82%8C%E3%81%A6%E3%81%BF%E3%82%8B">Y軸にbreakを入れてみる</a>
 <ul>
@@ -90,7 +91,8 @@
 <li><a href="#%E5%95%8F%E9%A1%8C%E7%82%B9%E3%81%A8%E4%BB%8A%E5%BE%8C%E3%81%AE%E8%AA%B2%E9%A1%8C">問題点と今後の課題</a></li>
 <li><a href="#acknowledgement">Acknowledgement</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <p>新型コロナによってたくさんの国民の <strong>生命財産</strong> が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた <strong>税金</strong> をどうして国民のために使えないのか。もういい加減にして欲しい！ <strong>&lsquo;Give me a break !'</strong> と叫びたい気持ちです。</p>
 <p><strong>税金</strong> といえば、4月に入ってから <strong>Ledger-cli</strong> と <strong>gnuplot</strong> で3月までの1年間に納税した税金の取りまとめをしました。「租税公課」の金額そのものはLedgerで簡単に獲得できますが、それを表にして見るだけでなく、月ごとの納税額の推移を可視化しました。それ自体はそんなに複雑な作業ではありません。</p>
 <p>しかし一つ問題があります。納税金額は <strong>月ごとの変動</strong> がとても大きい。たとえば、100万円を超える月がある一方、別の月は数万円レベルとかゼロ円ということもありえます（ヒトそれぞれですが・・・）。こんな風に極端な <strong>外れ値</strong> を含むデータを「見える化」するのはちょっとやっかいです。</p>
@@ -99,7 +101,7 @@
 <p>コロナへの政府の対応に憤慨して <strong>give me a break!</strong> って叫ぶ感じで、この際、禁断の <strong>breakつき棒グラフ</strong> を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね（笑）</p>
 <h2 id="y軸にbreakを入れてみる">Y軸にbreakを入れてみる</h2>
 <p>こんな感じになります（金額はでたらめです）。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="orgcb2d3e7"></a></p>
 <figure>
     <img src="/broken-histogram.png"
          alt="Figure 1: Breakを入れた棒グラフの例（納税額の推移）" width="90%"/> <figcaption>
@@ -135,7 +137,7 @@
 <p>出力図はPDFにして <code>$out_file</code> に出力します。</p>
 <pre><code class="language-nil" data-lang="nil">set terminal pdfcairo transparent enhanced font 'Arial,10'
 set output '$out_file'
-</code></pre><!-- raw HTML omitted -->
+</code></pre><!--list-separator-->
 <ul>
 <li>
 <p>multiplotのためのパラメータを変数にして指定</p>
@@ -204,7 +206,7 @@ unset multiplot
 <h3 id="細かいことですが">細かいことですが・・・</h3>
 <p>納税金額が <strong>ゼロの月</strong> では数字の'0&rsquo;を書かないようにします。それにはgnuplotの <strong>三項演算子</strong> を使います。その部分だけを抽出すると次のとおりです：</p>
 <pre><code class="language-nil" data-lang="nil">(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))):&quot;&quot;)
-</code></pre><p>gnuplotの三項演算子の記号は <!-- raw HTML omitted --><strong>? :</strong><!-- raw HTML omitted --> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
+</code></pre><p>gnuplotの三項演算子の記号は <span class="underline"><strong>? :</strong></span> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
 <p>つまり：</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">colomn(2) != 0            （第2列の値がゼロではない）が真か偽か
 sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単位でカンマをつける
@@ -224,7 +226,7 @@ sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単�
 
     </div>
     <div class="info post_meta">
-      <time datetime=2020年&#32;4月&#32;22日&#32;(月)&#32;10:21:00&#43;0900 class="date">2020年 4月 22日 (月)</time>
+      <time datetime=2020年4月22日T10:21:00&#43;0900 class="date">2020年4月22日</time>
       
         <ul class="tags">
         

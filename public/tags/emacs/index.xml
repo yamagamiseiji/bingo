@@ -5,7 +5,7 @@
     <link>https://bred-in-bingo.netlify.app/tags/emacs/</link>
     <description>Recent content in emacs on Yam’s Peace Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>jp</language>
+    <language>ja-jp</language>
     <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
     <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://bred-in-bingo.netlify.app/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,8 +14,7 @@
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/kojo/</guid>
-      <description>これまで2年ほどブログ書きは下のようなフローでやってきました1。
-Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし</description>
+      <description>これまで2年ほどブログ書きは下のようなフローでやってきました1。 Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しかし WordPress(WP)ではバージョンアップに追いつくのが大変 サボって</description>
     </item>
     
     <item>
@@ -24,8 +23,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 25 Mar 2021 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/theme-selection/</guid>
-      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中からmixedpaperを使わせてもらうことにしました。
-当初の希望  個々の記事のタイトルと内容を数行程度で要約表示したい 記事の要約リストにサムネイル画像をつけたい サイドバーに記事の目次がほしい 個々の記事の最後尾にトップページ（または目次）に戻るボタンがほしい １記事1ファイルで運用したい  候補 検討したのは次のようなテーマです。✔印は実際にインストールしてみました。</description>
+      <description>Hugo Themes: Complete List に400ほどのテーマが公開されています。それらの中からmixedpaperを使わせてもらうことにしました。 当初の希望 個々の記事のタイトルと内容を数行程度</description>
     </item>
     
     <item>
@@ -34,7 +32,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 22 Apr 2020 10:21:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/broken-histogram/</guid>
-      <description>Y軸にbreakを入れてみる  Ledger-cliのクエリー gnuplotスクリプト 細かいことですが・・・   問題点と今後の課題 Acknowledgement  新型コロナによってたくさんの国民の 生命財産 が脅威にさらされています。それに対するわが国政府の対応はあまりにもひどい。腹立たしくも情けなく恥ずかしい思いで、日々ストレスが溜まっています。国民から巻き上げた 税金 をどうして国民のために使えないのか。もういい加減にして欲しい！ &amp;lsquo;Give me a break !</description>
+      <description>Table of Contents Y軸にbreakを入れてみる Ledger-cliのクエリー gnuplotスクリプト 細かいことですが・・・ 問題点と今後の課題 Acknowledgement 新型コロナによってたくさんの国</description>
     </item>
     
     <item>
@@ -43,7 +41,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 09 Mar 2020 19:40:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/daily-expns-watcher/</guid>
-      <description>日々の累積支出額と予算の関係  仕掛け 環境   コーディング  bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！   使いみちなど Acknowledgement  新型コロナウイルス という外来の危機（ 外患 ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという 内憂 が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが 挙国一致 してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 「帝国」 はこんな風にして 内側 から崩壊するんですね。</description>
+      <description>Table of Contents 日々の累積支出額と予算の関係 仕掛け 環境 コーディング bashスクリプト gnuplotスクリプト （追記）上記「もめ事」解決しました！ 使いみちなど Acknowledgement 新型コロナウ</description>
     </item>
     
     <item>
@@ -52,7 +50,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 21 Feb 2020 18:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/</guid>
-      <description>きっかけ  仕掛け ネットには見当たらない？   環境 コーディング  bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみち   Acknowledgement  きっかけ 新型コロナウイルス が、政府のunbelievableな不手際もあって急速に蔓延してます。ニュースを見るたびに気が滅入ってきます。そこで、というわけでもありませんが、一ヶ月の 支出予算 がどれくらい消化されているかを表示する 水平ゲージ （horizontal linear gauge）を作ってみました。ねらいは次のようなものです：</description>
+      <description>Table of Contents きっかけ 仕掛け ネットには見当たらない？ 環境 コーディング bashからgnuplotへの変数と文字列の受け渡し bashスクリプト gnuplotスクリプト 使いみ</description>
     </item>
     
     <item>
@@ -61,7 +59,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 31 Jan 2020 12:29:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/</guid>
-      <description>二次元プロットの例 3Dプロットの例 （おまけ）日々の支出状況をみるtodayスクリプト Acknowledgement  ここでは、 Ledger-cli （3.</description>
+      <description>Table of Contents 二次元プロットの例 3Dプロットの例 （おまけ）日々の支出状況をみるtodayスクリプト Acknowledgement ここでは、 Ledger-cli （3.11）と Gnuplot （5.28）および bash （on ubuntu1</description>
     </item>
     
     <item>
@@ -70,7 +68,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Tue, 03 Dec 2019 21:05:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/10th-step/</guid>
-      <description>帳簿の厳密さ・細かさについて  そのきっかけは   で、フランクリンですが・・・ 翻ってわが国を見ると（涙） ところで脇道にそれますが・・・ ということで、今回のTips＆Hints  領収書・請求書などへのリンク プリペイドカードと商品券（ギフト券）のトラッキングについて プリペイドカード 商品券（ギフト券）   まとめ  「まま子三兄弟」 Penny talks   Acknowledgement  今回をもって、とりあえずシリーズ的なイントロ的投稿は 打ち止め にします。今後は、これまで以上にトピックベースの ショート・ショート 形式での記事にします。</description>
+      <description>Table of Contents 帳簿の厳密さ・細かさについて そのきっかけは で、フランクリンですが・・・ 翻ってわが国を見ると（涙） ところで脇道にそれますが・・・ ということで、今回のTips</description>
     </item>
     
     <item>
@@ -79,7 +77,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 04 Oct 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/9th-step_ledger/</guid>
-      <description>キャッシュレス還元が始まった  real か virtualか   便利なコマンド・オプションたち  accountsコマンド payeesコマンド --by-payee （ -P ）オプション xactコマンド   おまけ &amp;ndash; suicaの残高をPCで確認する  suicaの残高 PaSoRiを使って残高確認   Acknowledgement  2019年10月1日から消費税が（一部）10%に増税になりました。ボクは経済学が専門ではありませんが、不況下で増税するのはどういう理屈なんでしょうか？不況には 減税 するものと思っていました。経済の専門家のみなさんはオッケーなんですかね？</description>
+      <description>Table of Contents キャッシュレス還元が始まった real か virtualか 便利なコマンド・オプションたち accountsコマンド payeesコマンド --by-payee （ -P ）オプション xactコマン</description>
     </item>
     
     <item>
@@ -88,7 +86,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Mon, 16 Sep 2019 10:10:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/8th-step_ledger/</guid>
-      <description>高速道路料金、高い！ ETCマイレージポイントをなんとかしよう！  ETCマイレージポイントの残高などを記録・管理する試み PTAによる処理の一例 トランザクションコードを使う方法 ということで おわりに・・・   Acknowledgement  高速道路料金、高い！ 日本の高速道路料金は 不当に高い ですよね。誰もがそう感じていると思います。</description>
+      <description>Table of Contents 高速道路料金、高い！ ETCマイレージポイントをなんとかしよう！ ETCマイレージポイントの残高などを記録・管理する試み PTAによる処理の一例 トランザクション</description>
     </item>
     
     <item>
@@ -97,7 +95,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 14 Aug 2019 12:30:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/7th-step_ledger/</guid>
-      <description>AndroidタブレットでLedger cli  環境条件 ポリシイ 実際にやったこと ledgerファイルの共有のために・・・ 使い方 いまのところ満足しています   Acknowledgement  AndroidタブレットでLedger cli 家計簿のみならず全ての会計帳簿は 即時性 と 継続性 を基礎にした 正確さ が命です。</description>
+      <description>Table of Contents AndroidタブレットでLedger cli 環境条件 ポリシイ 実際にやったこと ledgerファイルの共有のために・・・ 使い方 いまのところ満足しています Acknowledgement Andr</description>
     </item>
     
     <item>
@@ -106,9 +104,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/6th-step_ledger/</guid>
-      <description>グラフを描いてみました シリーズの（1）で家計簿には 可視化 の必要性は大きくないと書きましたが、そうは言っても、Ledgerでできないわけではありません。そこで今回はとりあえずシンプルな図を描いてみました。
-4月以降からのクルマに関係する経費（いわゆる「車両費」）の月ごとの推移を 積み上げ棒グラフ の例図にしたものです。3月は一部だけデータがあったので、それもプロットしています。
-  Figure 1: Ledgerとgnuplotを組み合わせてプロットした例図</description>
+      <description>グラフを描いてみました シリーズの（1）で家計簿には 可視化 の必要性は大きくないと書きましたが、そうは言っても、Ledgerでできないわけではありません。そこで今回</description>
     </item>
     
     <item>
@@ -117,7 +113,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 21 Jul 2019 18:26:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/5th-step_ledger/</guid>
-      <description>再訪　「借方」「貸方」  英語でもたいへんのようです Ledger cli では   tagは便利！ 使わない手は無い！ 外国通貨の扱い  まずは上の例のようにアカウントの金額の後ろにレートを書いた場合 ~/.</description>
+      <description>Table of Contents 再訪 「借方」「貸方」 英語でもたいへんのようです Ledger cli では tagは便利！ 使わない手は無い！ 外国通貨の扱い まずは上の例のようにアカウントの金額の後ろにレートを書</description>
     </item>
     
     <item>
@@ -126,7 +122,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 07 Jul 2019 16:15:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/4th-step_ledger/</guid>
-      <description>トランザクションのスケジューリング  （補足）   トランザクション中のアカウントで計算式を使う 月別の支出をざくっと知りたい 「帳簿の世界史（文春文庫）」  資格と学会と一般人のリテラシー もしかしたら    トランザクションのスケジューリング 繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。</description>
+      <description>Table of Contents トランザクションのスケジューリング （補足） トランザクション中のアカウントで計算式を使う 月別の支出をざくっと知りたい 「帳簿の世界史（文春文庫）」 資格と学会と</description>
     </item>
     
     <item>
@@ -135,7 +131,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Fri, 07 Jun 2019 18:56:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/3rd-step_ledger/</guid>
-      <description>Adjustmentsを使おう 少額の現金の扱い 利子・利息の転記方法 定期的なトランザクションの書き方  レポートの表示   几帳面？ Acknowledgment  この（３）でも「その（２）」に引き続き、ちいさなTipsを備忘的に記します。</description>
+      <description>Table of Contents Adjustmentsを使おう 少額の現金の扱い 利子・利息の転記方法 定期的なトランザクションの書き方 レポートの表示 几帳面？ Acknowledgment この（３）でも「その（２）」に引</description>
     </item>
     
     <item>
@@ -144,7 +140,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Thu, 16 May 2019 00:00:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/2nd_step_ledger/</guid>
-      <description>はじめに トランザクション記帳について  日付けの手抜き入力 トランザクション名、アカウント名などの手抜き記帳 コピペを活用   絞り込みReportの表示  よく使う絞り込み Register report その他いろいろ   使い勝手について  セキュリティとの関連で レポートの可視化について   Acknowledgment  はじめに Ledger というプレーンテキストファイルに基づいて使える複式簿記、しかもコマンドラインで使える複式簿記がどれほど使い勝手が良いか、分かりやすくまとめようとしばらく試行錯誤していました。しかし、結局、体系的に良さを紹介するのはギブアップしました。ネット上には（英語が多いですが）たくさんの網羅的、体系的な紹介記事があります。それに対して屋上屋を架すのはむだだと悟りました。そこで、またまた申し訳ありませんが、備忘をかねて ランダム な小さな事例集というか、ちょっとした カンニングペーパ 風なメモにしました。</description>
+      <description>Table of Contents はじめに トランザクション記帳について 日付けの手抜き入力 トランザクション名、アカウント名などの手抜き記帳 コピペを活用 絞り込みReportの表示 よく使う絞り込</description>
     </item>
     
     <item>
@@ -153,7 +149,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 28 Apr 2019 09:25:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/1st_step_ledger/</guid>
-      <description>はじめに Ledgerのインストール  init.elの設定   百聞は一見にしかず  その前に・・・ 仕訳帳（Journal）の書き方 Report/Registerの例と見方 Emacsの中でLedgerを使う   References Footnote  はじめに 簿記・会計のまったくの素人が、よりによって、なんでプレーンテキストで複式「家計簿」をつけようとしたのか、その動機とか目的とかは長くなるので後回しにして、まずは、(1) Ledger1のインストール、(2) Emacsの環境設定の方法、続いていわゆる(3) 仕訳帳2のサンプルと報告書のサンプルをおもに自分の備忘のため、副次的には、初めてプレーンテキスト「複式」家計簿に取り組む人（とても少数派かとw）にいくらかでも参考になるようにまとめておきます。</description>
+      <description>Table of Contents はじめに Ledgerのインストール init.elの設定 百聞は一見にしかず その前に・・・ 仕訳帳（Journal）の書き方 Report/Registerの例と</description>
     </item>
     
     <item>
@@ -162,7 +158,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Wed, 27 Feb 2019 08:39:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/</guid>
-      <description>自作するわけ  自作の方法は大別して次の２つ 用紙の選定   TeXでがんばる  紙サイズのパラメータ設定 j-namecard.</description>
+      <description>Table of Contents 自作するわけ 自作の方法は大別して次の２つ 用紙の選定 TeXでがんばる 紙サイズのパラメータ設定 j-namecard.tex での作成例 Bottom line is ・・・・ 「ラベル屋さん９」でやる やり方 Bottom line is ・</description>
     </item>
     
     <item>
@@ -171,7 +167,7 @@ Emacs &amp;gt; org2blog &amp;gt; WordPress &amp;gt; freenom &amp;gt; AWS しか�
       <pubDate>Sun, 30 Dec 2018 11:52:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/posts/hagaki%E5%8D%B0%E5%88%B7/</guid>
-      <description>表面（宛名）印刷  年賀状の宛名面印刷のためのクラスファイル 普通葉書の宛名印刷のためのクラスファイル   文面（ウラ面）のためのサンプルファイル  最近でも、年に数回はどうしてもハガキでの通信が必要になります。目上の方へのお中元やお歳暮のお礼とか、住所とお名前だけは分かっているけれど、電話番号やメールやラインなどの情報がない方への連絡というのが主なケースです。</description>
+      <description>Table of Contents 表面（宛名）印刷 年賀状の宛名面印刷のためのクラスファイル 普通葉書の宛名印刷のためのクラスファイル 文面（ウラ面）のためのサンプルファイル 最近でも、年に数回は</description>
     </item>
     
   </channel>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja-jp">
     <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,8 +77,9 @@
   <article class="post content">
     <h2 class="title">プレーンテキストファイルで「複式」家計簿（7）</h2>
     <div class="post_content">
-      <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
 <ul>
 <li><a href="#android%E3%82%BF%E3%83%96%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7ledger-cli">AndroidタブレットでLedger cli</a>
 <ul>
@@ -92,7 +93,8 @@
 </li>
 <li><a href="#acknowledgement">Acknowledgement</a></li>
 </ul>
-<!-- raw HTML omitted -->
+</div>
+<!--endtoc-->
 <h2 id="androidタブレットでledger-cli">AndroidタブレットでLedger cli</h2>
 <p>家計簿のみならず全ての会計帳簿は <strong>即時性</strong> と <strong>継続性</strong> を基礎にした <strong>正確さ</strong> が命です。</p>
 <p>Ledgerには大きなメリットがたくさんありますが、その一つは、記帳にかかる時間が（他の会計ソフトに比べて）とても短いこと、つまり人間工学的に即時性と継続性を実現しやすくできている点を上げることができます。</p>
@@ -132,7 +134,7 @@
 $ ledger reg farming -p aug
 $ mbal 交際費
 </code></pre><p>最後の <code>mbal</code> はこの<a href="http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/">シリーズ(4)</a>で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図<a href="#org57170a4">1</a>のようになります。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="org57170a4"></a></p>
 <figure>
     <img src="/termux-fig1.jpg"
          alt="Figure 1: AndroidタブレットのTermuxでubuntu／Ledgerが動く！" width="90%"/> <figcaption>
@@ -143,7 +145,7 @@ $ mbal 交際費
 <p>画面下部のキーボードがHacker&rsquo;s Keyboardです。これはLinuxターミナル用にはとても便利。ただ残念なことに日本語対応していません。日本語入力が必要になったら、その都度キーボードを切り替えなければなりません。だれか日本語対応版を作ってくれないでしょうか？</p>
 <p>Termuxの細かい使い方はネット上によい紹介がたくさんありますので、そちらをごらんください。ここでは特に気に入っている機能（＝同時に <strong>複数のセッション</strong> を開く機能）だけ、紹介しておきます。</p>
 <p>新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって <strong>スワイプ</strong> します。すると図<a href="#org4160d05">2</a>のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには <strong>NEW SESSION</strong> をタップします。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a id="org4160d05"></a></p>
 <figure>
     <img src="/sshot2-termux.jpg"
          alt="Figure 2: Termuxで同時に複数セッションを開く" width="80%"/> <figcaption>
@@ -178,7 +180,7 @@ $ mbal 交際費
 
     </div>
     <div class="info post_meta">
-      <time datetime=2019年&#32;8月&#32;14日&#32;(月)&#32;12:30:00&#43;0900 class="date">2019年 8月 14日 (月)</time>
+      <time datetime=2019年8月14日T12:30:00&#43;0900 class="date">2019年8月14日</time>
       
         <ul class="tags">
         
