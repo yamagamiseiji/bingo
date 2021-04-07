@@ -1,5 +1,6 @@
 #+title: ぼちぼちですが可視化してます
 #+date: [2020-01-31 日 12:29]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

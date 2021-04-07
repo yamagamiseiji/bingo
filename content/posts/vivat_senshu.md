@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [退職者代表スピーチ　（定年退職者慰労会）](#退職者代表スピーチ-定年退職者慰労会)
     - [ごあいさつ](#ごあいさつ)
@@ -48,7 +48,7 @@ draft = false
 
 <a id="table--tbl:1"></a>
 <div class="table-caption">
-  <span class="table-number"><a href="#table--tbl:1">Table 1</a></span>:
+  <span class="table-number"><a href="#table--tbl:1">&#34920; 1</a></span>:
   老人医学会提言（2017）
 </div>
 
@@ -90,4 +90,4 @@ draft = false
 ## Footnote {#footnote}
 
 [^fn:1]: このドキュメントは、スピーチのために用意した原稿です。実際のスピーチでは一部割愛されたり字句が追加されたりしています。
-[^fn:2]: ニホンヒキガエル （出典：[南部町の生きもの図典](http://www.town.nanbu.tottori.jp/ikimono/picbook/139/)） <a id="orgcac64b0"></a> {{< figure src="/nihonhikigaeru.jpg" caption="Figure 1: ニホンヒキガエル" width="60%" >}}
+[^fn:2]: ニホンヒキガエル （出典：[南部町の生きもの図典](http://www.town.nanbu.tottori.jp/ikimono/picbook/139/)） <a id="org66dc8ce"></a> {{< figure src="/nihonhikigaeru.jpg" caption="&#22259;1: ニホンヒキガエル" width="60%" >}}

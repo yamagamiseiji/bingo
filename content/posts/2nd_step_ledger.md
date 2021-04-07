@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [はじめに](#はじめに)
 - [トランザクション記帳について](#トランザクション記帳について)
@@ -92,9 +92,9 @@ l TAB v TAB
 Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
  **`C-c C-k`** するとEmacsの下半分に次のようなカレンダーが表示されます。
 
-<a id="org3303da8"></a>
+<a id="org5d26a58"></a>
 
-{{< figure src="/emacs_calendar.png" caption="Figure 1: Emacs内に表示されるカレンダー" width="95%" >}}
+{{< figure src="/emacs_calendar.png" caption="&#22259;1:  Emacs内に表示されるカレンダー" width="95%" >}}
 
 その中から適当な日にちを選んでクリックします。日付けが選んだ日に変更された上で、
 journal中の正しい日付け位置に複写されたトランザクションが挿入されます。そこで金額だけ修正すればおわり。（家計簿では、金額の修正も必要ないなことが多いのに驚いています）

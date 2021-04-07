@@ -1,12 +1,14 @@
 +++
 title = "退職祝賀会の写真"
 date = 2019-03-24T00:00:00+09:00
+tags = ["edu", "social"]
+categories = ["comp"]
 draft = false
 +++
 
 2019年3月16日（土）に開催していただいたボクの退職祝賀会の多数の写真が幹事のみなさんのご尽力で本日公開されました。
 
-<a id="orga472158"></a>
+<a id="org2bc1f55"></a>
 
 {{< figure src="/shugo_shashin.jpg" caption="Figure 1: 集合写真（2019/03/16）" width="95%" >}}
 

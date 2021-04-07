@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [はじめに](#はじめに)
 - [花豆の発芽について](#花豆の発芽について)
@@ -31,21 +31,21 @@ draft = false
 
 ## はじめに {#はじめに}
 
-今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図[1](#org5ea6ffd)）。
+今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図[1](#org1bbbc53)）。
 
-<a id="org5ea6ffd"></a>
+<a id="org1bbbc53"></a>
 
-{{< figure src="/out-sprouting0530.png" caption="Figure 1: 花豆の発芽と子葉になるまでの経過（ _N=40_ ）。Y軸は種・苗のステータス（種、発芽、子葉）を累積パーセントにしたものです。X軸の第1軸は年月日、第2軸は積算温度（ _℃_ ）。" width="500px" >}}
+{{< figure src="/out-sprouting0530.png" caption="&#22259;1:  花豆の発芽と子葉になるまでの経過（ _N=40_ ）。Y軸は種・苗のステータス（種、発芽、子葉）を累積パーセントにしたものです。X軸の第1軸は年月日、第2軸は積算温度（ _℃_ ）。" width="500px" >}}
 
-ここでの「発芽」は図[2](#org4d641ad)、「子葉」は図[3](#orge88986d)のような状態です。
+ここでの「発芽」は図[2](#orga5d7d54)、「子葉」は図[3](#org1ace4d7)のような状態です。
 
-<a id="org4d641ad"></a>
+<a id="orga5d7d54"></a>
 
-{{< figure src="/status02.jpg" caption="Figure 2: 発芽の状態。芽の先端が地中から出たかどうかを判断基準としました。花豆では、まず軸の部分がアーチ状になって土から出てきて、先端部分は最後に地中からアタマをもたげます。" width="300px" >}}
+{{< figure src="/status02.jpg" caption="&#22259;2:  発芽の状態。芽の先端が地中から出たかどうかを判断基準としました。花豆では、まず軸の部分がアーチ状になって土から出てきて、先端部分は最後に地中からアタマをもたげます。" width="300px" >}}
 
-<a id="orge88986d"></a>
+<a id="org1ace4d7"></a>
 
-{{< figure src="/sprout-子葉.jpg" caption="Figure 3: 子葉になった状態。2枚の子葉の広がり角度がおよそ100度以上になったかどうかを判断基準としました。" width="300px" >}}
+{{< figure src="/sprout-子葉.jpg" caption="&#22259;3:  子葉になった状態。2枚の子葉の広がり角度がおよそ100度以上になったかどうかを判断基準としました。" width="300px" >}}
 
 
 ## 花豆の発芽について {#花豆の発芽について}
@@ -149,7 +149,7 @@ cat ${kion}.dat | awk '{m+=$3} END{print m/NR;}' > ./wrk-avr.dat
 2020-05-30  15.0  307.5    2  38  37   6
 ```
 
-これを読み込んで図[1](#org5ea6ffd)をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図[1](#org5ea6ffd)のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。
+これを読み込んで図[1](#org1bbbc53)をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図[1](#org1bbbc53)のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。
 
 ```nil
 set terminal pdfcairo transparent enhanced font "Arial, 8"
@@ -209,13 +209,13 @@ set output
 
 播種からちょうど1か月経過した花豆の様子です。ツルの先端はボクの背丈ほどあります。豆の成長はほんとうに速い。「ジャックと豆の木」の童話が生まれた訳が分かりますｗ
 
-<a id="org5eb5f63"></a>
+<a id="org348adba"></a>
 
-{{< figure src="/today1.jpg" caption="Figure 4: 播種後1か月目の花豆。" width="300px" >}}
+{{< figure src="/today1.jpg" caption="&#22259;4:  播種後1か月目の花豆。" width="300px" >}}
 
-<a id="orgd5552c8"></a>
+<a id="orgf164611"></a>
 
-{{< figure src="/today2.jpg" caption="Figure 5: 花豆トンネルの風景。" width="300px" >}}
+{{< figure src="/today2.jpg" caption="&#22259;5:  花豆トンネルの風景。" width="300px" >}}
 
 
 ## Acknowledgement {#acknowledgement}

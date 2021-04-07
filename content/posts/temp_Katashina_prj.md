@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [ねらい](#ねらい)
 - [基本ポリシー](#基本ポリシー)
@@ -83,18 +83,18 @@ draft = false
 
 それはともかく、さんざん悩んだあげく、写真のような場所に結わえつけることにしました。プロパンガスのボンベを雪害から守るために作ったボンベハウスの屋根ウラという感じです。日光、雨、風、地上高の条件はほぼ満たしています。
 
-<a id="org29e6c8a"></a>
+<a id="orgcf990db"></a>
 
-{{< figure src="/koki.jpg" caption="Figure 1: 子機設置の様子" width="60%" >}}
+{{< figure src="/koki.jpg" caption="&#22259;1:  子機設置の様子" width="60%" >}}
 
 
 #### 親機とカメラなどの設置方法 {#親機とカメラなどの設置方法}
 
 100均のワイヤー製の皿ホルダーを流用。温度計の表示面を上にしてフラットに置いて、それをまたぐような形で皿ホルダーを図のようにかぶせます。皿ホルダーの外枠の幅と、温度計の横幅がぴったり同じというのが味噌ｗ
 
-<a id="org104c731"></a>
+<a id="orgde3b53a"></a>
 
-{{< figure src="/oyaki_citizen.jpg" caption="Figure 2: 親機とC270そしてLEDブックライトのマウント方法" width="60%" >}}
+{{< figure src="/oyaki_citizen.jpg" caption="&#22259;2:  親機とC270そしてLEDブックライトのマウント方法" width="60%" >}}
 
 ウエッブカメラをマウントするために、太めの針金でアーチを作り皿ホルダーの脚に固定します。また、LEDのクリップは皿ホルダーの(本来は床にあたる）ワイヤメッシュをくわえさせています。
 

@@ -1,6 +1,8 @@
 +++
 title = "新年のご挨拶"
 date = 2019-01-01T00:00:00+09:00
+tags = ["social", "greeting"]
+categories = ["comp"]
 draft = false
 +++
 

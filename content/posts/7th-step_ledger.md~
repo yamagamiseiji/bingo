@@ -1,8 +1,29 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（7）"
 date = 2019-08-14T12:30:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
+
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">Table of Contents</div>
+
+- [AndroidタブレットでLedger cli](#androidタブレットでledger-cli)
+    - [環境条件](#環境条件)
+    - [ポリシイ](#ポリシイ)
+    - [実際にやったこと](#実際にやったこと)
+    - [ledgerファイルの共有のために・・・](#ledgerファイルの共有のために)
+    - [使い方](#使い方)
+    - [いまのところ満足しています](#いまのところ満足しています)
+- [Acknowledgement](#acknowledgement)
+
+</div>
+<!--endtoc-->
+
+
 
 ## AndroidタブレットでLedger cli {#androidタブレットでledger-cli}
 
@@ -56,9 +77,9 @@ $ ledger reg farming -p aug
 $ mbal 交際費
 ```
 
-最後の `mbal` はこの[シリーズ(4)](http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/)で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図[1](#org42268d3)のようになります。
+最後の `mbal` はこの[シリーズ(4)](http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/)で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図[1](#org57170a4)のようになります。
 
-<a id="org42268d3"></a>
+<a id="org57170a4"></a>
 
 {{< figure src="/termux-fig1.jpg" caption="Figure 1: AndroidタブレットのTermuxでubuntu／Ledgerが動く！" width="90%" >}}
 
@@ -66,9 +87,9 @@ $ mbal 交際費
 
 Termuxの細かい使い方はネット上によい紹介がたくさんありますので、そちらをごらんください。ここでは特に気に入っている機能（＝同時に **複数のセッション** を開く機能）だけ、紹介しておきます。
 
-新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって **スワイプ** します。すると図[2](#org168e655)のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには **NEW SESSION** をタップします。
+新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって **スワイプ** します。すると図[2](#org4160d05)のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには **NEW SESSION** をタップします。
 
-<a id="org168e655"></a>
+<a id="org4160d05"></a>
 
 {{< figure src="/sshot2-termux.jpg" caption="Figure 2: Termuxで同時に複数セッションを開く" width="80%" >}}
 

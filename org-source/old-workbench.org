@@ -1,5 +1,6 @@
 #+title: 古い道具たち -- 折りたたみワークベンチ
 #+date: 2020-11-03
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

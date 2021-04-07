@@ -79,7 +79,7 @@
     <div class="post_content">
       <div class="ox-hugo-toc toc">
 <div></div>
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 <ul>
 <li><a href="#y%E8%BB%B8%E3%81%ABbreak%E3%82%92%E5%85%A5%E3%82%8C%E3%81%A6%E3%81%BF%E3%82%8B">Y軸にbreakを入れてみる</a>
 <ul>
@@ -101,18 +101,18 @@
 <p>コロナへの政府の対応に憤慨して <strong>give me a break!</strong> って叫ぶ感じで、この際、禁断の <strong>breakつき棒グラフ</strong> を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね（笑）</p>
 <h2 id="y軸にbreakを入れてみる">Y軸にbreakを入れてみる</h2>
 <p>こんな感じになります（金額はでたらめです）。</p>
-<p><a id="orgcb2d3e7"></a></p>
+<p><a id="org36044b6"></a></p>
 <figure>
     <img src="/broken-histogram.png"
-         alt="Figure 1: Breakを入れた棒グラフの例（納税額の推移）" width="90%"/> <figcaption>
-            <p>Figure 1: Breakを入れた棒グラフの例（納税額の推移）</p>
+         alt="図1:  Breakを入れた棒グラフの例（納税額の推移）" width="90%"/> <figcaption>
+            <p>図1:  Breakを入れた棒グラフの例（納税額の推移）</p>
         </figcaption>
 </figure>
 
-<p>Ledgerとgnuplotを組み合わせて図<a href="#orgcb2d3e7">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
+<p>Ledgerとgnuplotを組み合わせて図<a href="#org36044b6">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
 <h3 id="ledger-cliのクエリー">Ledger-cliのクエリー</h3>
 <p>税額の計算をするためのLedgerクエリーは次のとおりです。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 </code></pre></div><p>ここで、 <strong><code>%tax</code></strong> は税金に関係するトランザクションにつけた <strong>タグ</strong> です。税金にはさまざまな名前がついています。計算の際に、それらを洩れなくすくい上げるために、記帳の段階で全て <code>tax</code> というタグをつけてあります。</p>
 <p>オプションの意味は次のとおりです。（ ）内は短縮形です。</p>
 <dl>
@@ -124,20 +124,20 @@
 <dd>月ごとにまとめて出力</dd>
 </dl>
 <p>このクエリーによって得られるデータの例（数値はデタラメです）：</p>
-<pre><code class="language-nil" data-lang="nil">　：
-2020-01-01 7234
-2020-02-01 4567
-2020-03-01 8901
-2020-04-01 98760
-</code></pre><p>これをファイルに格納してgnuplotに読み込ませます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">　：
+2020-01-01 <span style="color:#ae81ff">7234</span>
+2020-02-01 <span style="color:#ae81ff">4567</span>
+2020-03-01 <span style="color:#ae81ff">8901</span>
+2020-04-01 <span style="color:#ae81ff">98760</span>
+</code></pre></div><p>これをファイルに格納してgnuplotに読み込ませます。</p>
 <h3 id="gnuplotスクリプト">gnuplotスクリプト</h3>
 <p><strong>break</strong> つきのヒストグラムはmultiplotを使って描きます。
 <a href="https://stackoverflow.com/questions/17564497/gnuplot-break-y-axis-in-two-parts">こちらのサイト</a>のスクリプトを参考にさせていただきました。</p>
 <h4 id="ターミナルと出力ファイルの指定">ターミナルと出力ファイルの指定</h4>
 <p>出力図はPDFにして <code>$out_file</code> に出力します。</p>
-<pre><code class="language-nil" data-lang="nil">set terminal pdfcairo transparent enhanced font 'Arial,10'
-set output '$out_file'
-</code></pre><!--list-separator-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">set terminal pdfcairo transparent enhanced font <span style="color:#e6db74">&#39;Arial,10&#39;</span>
+set output <span style="color:#e6db74">&#39;$out_file&#39;</span>
+</code></pre></div><!--list-separator-->
 <ul>
 <li>
 <p>multiplotのためのパラメータを変数にして指定</p>
@@ -157,16 +157,16 @@ y2 =  120000/1000
 y3 = 1000000/1000
 y4 = 1120000/1000
 </code></pre><h4 id="図のスタイルとy軸の数字のフォーマット">図のスタイルとY軸の数字のフォーマット</h4>
-<pre><code class="language-nil" data-lang="nil">set style histogram
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">set style histogram
 set style data histograms
 set style fill transparent solid 0.8 border -1
 set boxwidth 0.70
 set decimal locale
-set format y &quot;%'6.0f&quot;
-</code></pre><h4 id="multiplotの宣言と下の図">multiplotの宣言と下の図</h4>
+set format y <span style="color:#e6db74">&#34;%&#39;6.0f&#34;</span>
+</code></pre></div><h4 id="multiplotの宣言と下の図">multiplotの宣言と下の図</h4>
 <p>読み込むデータファイルは変数 <code>$data_to_plot</code> で指示します。</p>
-<pre><code class="language-nil" data-lang="nil">set multiplot
-set label &quot;Amount(千円)&quot; at screen 0.03,0.5 center front rotate font &quot;,&quot; . 10
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">set multiplot
+set label <span style="color:#e6db74">&#34;Amount(千円)&#34;</span> at screen 0.03,0.5 center front rotate font <span style="color:#e6db74">&#34;,&#34;</span> . <span style="color:#ae81ff">10</span>
 
 set border 1+2+8
 set xtics nomirror
@@ -175,40 +175,40 @@ set lmargin at screen lm
 set rmargin at screen rm
 set bmargin at screen bm
 set tmargin at screen bm + size * kk
-set yrange [y1:y2]
-set xlabel &quot;FY 2019-20&quot;
+set yrange <span style="color:#f92672">[</span>y1:y2<span style="color:#f92672">]</span>
+set xlabel <span style="color:#e6db74">&#34;FY 2019-20&#34;</span>
 
-plot '$data_to_plot' \
-      using 0:(column(2)/1000):xticlabels(strftime('%b', strptime('%Y-%m-%d', strcol(1))))\
-	 with boxes notitle linecolor rgb &quot;skyblue&quot;,\
-   '' using 0:(column(2)/1000):(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))): &quot;ｇ&quot;) \
-	 with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
-</code></pre><h4 id="上の図">上の図</h4>
-<pre><code class="language-nil" data-lang="nil">unset xtics
+plot <span style="color:#e6db74">&#39;$data_to_plot&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>      using 0:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>/1000<span style="color:#f92672">)</span>:xticlabels<span style="color:#f92672">(</span>strftime<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;%b&#39;</span>, strptime<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;%Y-%m-%d&#39;</span>, strcol<span style="color:#f92672">(</span>1<span style="color:#f92672">))))</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	 with boxes notitle linecolor rgb <span style="color:#e6db74">&#34;skyblue&#34;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   <span style="color:#e6db74">&#39;&#39;</span> using 0:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>/1000<span style="color:#f92672">)</span>:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> !<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ? <span style="color:#f92672">(</span>sprintf<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%&#39;d&#34;</span>,<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">))))</span>: <span style="color:#e6db74">&#34;ｇ&#34;</span><span style="color:#f92672">)</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	 with labels font <span style="color:#e6db74">&#34;Courier,8&#34;</span> offset 0,0.5 textcolor linestyle <span style="color:#ae81ff">0</span> notitle
+</code></pre></div><h4 id="上の図">上の図</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">unset xtics
 unset xlabel
 
 set border 2+4+8
 set bmargin at screen bm + size * kk + gap
 set tmargin at screen bm + size + gap
-set yrange [y3:y4]
+set yrange <span style="color:#f92672">[</span>y3:y4<span style="color:#f92672">]</span>
 
-MyTitle = &quot;消費税・ガソリン税を除く納税額の推移（〜`date +&quot;%Y/%m/%d&quot;`）&quot;
-set title font &quot;Arial,12&quot;
+MyTitle <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;消費税・ガソリン税を除く納税額の推移（〜`date +&#34;</span>%Y/%m/%d<span style="color:#e6db74">&#34;`）&#34;</span>
+set title font <span style="color:#e6db74">&#34;Arial,12&#34;</span>
 set title MyTitle offset char 0, char -0.75
 
-plot '$data_to_plot' \
-      using 0:(column(2)/1000) with boxes notitle linecolor rgb &quot;skyblue&quot;,\
-   '' using 0:(column(2)/1000):(sprintf(&quot;%'d&quot;,(column(2)))) \
-	 with labels font &quot;Courier,8&quot; offset 0,0.5 textcolor linestyle 0 notitle
+plot <span style="color:#e6db74">&#39;$data_to_plot&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>      using 0:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>/1000<span style="color:#f92672">)</span> with boxes notitle linecolor rgb <span style="color:#e6db74">&#34;skyblue&#34;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   <span style="color:#e6db74">&#39;&#39;</span> using 0:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>/1000<span style="color:#f92672">)</span>:<span style="color:#f92672">(</span>sprintf<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%&#39;d&#34;</span>,<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">))))</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	 with labels font <span style="color:#e6db74">&#34;Courier,8&#34;</span> offset 0,0.5 textcolor linestyle <span style="color:#ae81ff">0</span> notitle
 
 unset multiplot
-</code></pre><p>こんな感じです。</p>
+</code></pre></div><p>こんな感じです。</p>
 <h3 id="細かいことですが">細かいことですが・・・</h3>
 <p>納税金額が <strong>ゼロの月</strong> では数字の'0&rsquo;を書かないようにします。それにはgnuplotの <strong>三項演算子</strong> を使います。その部分だけを抽出すると次のとおりです：</p>
 <pre><code class="language-nil" data-lang="nil">(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))):&quot;&quot;)
 </code></pre><p>gnuplotの三項演算子の記号は <span class="underline"><strong>? :</strong></span> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
 <p>つまり：</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">colomn(2) != 0            （第2列の値がゼロではない）が真か偽か
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">colomn(2) != 0            （第2列の値がゼロではない）が真か偽か
 sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単位でカンマをつける
 &#34;&#34;                          偽ならばブランクにする
 </code></pre></div><p>ということになります。</p>

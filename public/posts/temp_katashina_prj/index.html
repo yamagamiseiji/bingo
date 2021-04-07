@@ -79,7 +79,7 @@
     <div class="post_content">
       <div class="ox-hugo-toc toc">
 <div></div>
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 <ul>
 <li><a href="#%E3%81%AD%E3%82%89%E3%81%84">ねらい</a></li>
 <li><a href="#%E5%9F%BA%E6%9C%AC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC">基本ポリシー</a></li>
@@ -124,21 +124,21 @@
 <h4 id="子機の設置場所">子機の設置場所</h4>
 <p>これがなかなか大変でした。外気温を測定する条件は、直射日光が当たらず、雨に濡れず、風通しがよくなおかつ地上から1.5m ほどの高さに設置という感じです。小学校で百葉箱について勉強しましたよねｗ一番良いのは、適当な場所に百葉箱を設置することなのでしょうが、冬期には相当の積雪があるため、簡単ではありません。それにネットで調べると、百葉箱って信じられないほど高価！　なんでかしら？</p>
 <p>それはともかく、さんざん悩んだあげく、写真のような場所に結わえつけることにしました。プロパンガスのボンベを雪害から守るために作ったボンベハウスの屋根ウラという感じです。日光、雨、風、地上高の条件はほぼ満たしています。</p>
-<p><a id="org29e6c8a"></a></p>
+<p><a id="orgcf990db"></a></p>
 <figure>
     <img src="/koki.jpg"
-         alt="Figure 1: 子機設置の様子" width="60%"/> <figcaption>
-            <p>Figure 1: 子機設置の様子</p>
+         alt="図1:  子機設置の様子" width="60%"/> <figcaption>
+            <p>図1:  子機設置の様子</p>
         </figcaption>
 </figure>
 
 <h4 id="親機とカメラなどの設置方法">親機とカメラなどの設置方法</h4>
 <p>100均のワイヤー製の皿ホルダーを流用。温度計の表示面を上にしてフラットに置いて、それをまたぐような形で皿ホルダーを図のようにかぶせます。皿ホルダーの外枠の幅と、温度計の横幅がぴったり同じというのが味噌ｗ</p>
-<p><a id="org104c731"></a></p>
+<p><a id="orgde3b53a"></a></p>
 <figure>
     <img src="/oyaki_citizen.jpg"
-         alt="Figure 2: 親機とC270そしてLEDブックライトのマウント方法" width="60%"/> <figcaption>
-            <p>Figure 2: 親機とC270そしてLEDブックライトのマウント方法</p>
+         alt="図2:  親機とC270そしてLEDブックライトのマウント方法" width="60%"/> <figcaption>
+            <p>図2:  親機とC270そしてLEDブックライトのマウント方法</p>
         </figcaption>
 </figure>
 
@@ -146,17 +146,17 @@
 <h3 id="ソフトの設定">ソフトの設定</h3>
 <h4 id="fswebcam-を使う">fswebcam を使う</h4>
 <p>もしインストールされていなければインストールします。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install fswebcam
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install fswebcam
 </code></pre></div><h4 id="カメラの解像度を調べる">カメラの解像度を調べる</h4>
 <ul>
 <li>
 <p>USBデバイスの確認から始めます。たとえば・・・</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ lsusb <span class="p">|</span> grep C270
-Bus <span class="m">003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C270
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lsusb | grep C270
+Bus <span style="color:#ae81ff">003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C270
 </code></pre></div></li>
 <li>
 <p>ところで機種によっては（たとえばC922では）なぜか、次のようにメーカ名は表示されるのに、デバイス名は表示されませんでした。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">Bus <span class="m">001</span> Device 007: ID 046d:085c Logitech, Inc.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Bus <span style="color:#ae81ff">001</span> Device 007: ID 046d:085c Logitech, Inc.
 </code></pre></div></li>
 </ul>
 <p>けど、Bus:Deviceコードは表示されてるし、次の段階で lsusb -v すると解像度は見えるので問題はありませんｗ。</p>
@@ -164,41 +164,41 @@ Bus <span class="m">003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C2
 <li>解像度を調べる</li>
 </ul>
 <p>lsusbを「-v」オプションで起動すると表示されます。同時に「-s」オプションで「Bus:Device」の値を指定します。解像度情報を得るためにこの２つの値が必要です。単純にコマンドを起動すると、表示される情報が多すぎるので、grepを wWidth で絞って実行し、その前後1行だけ表示します。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ lsusb -s 003:006 -v <span class="p">|</span> grep -1 wWidth
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lsusb -s 003:006 -v | grep -1 wWidth
 </code></pre></div><p>それでもたくさんの組み合わせが表示されます。ちなみに、最後の3行あたりを抜粋すると次のような感じです。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">	  Still image supported
-	wWidth                           <span class="m">1184</span>
-	wHeight                           <span class="m">656</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">	  Still image supported
+	wWidth                           <span style="color:#ae81ff">1184</span>
+	wHeight                           <span style="color:#ae81ff">656</span>
 --
 	  Still image supported
-	wWidth                           <span class="m">1280</span>
-	wHeight                           <span class="m">720</span>
+	wWidth                           <span style="color:#ae81ff">1280</span>
+	wHeight                           <span style="color:#ae81ff">720</span>
 --
 	  Still image supported
-	wWidth                           <span class="m">1280</span>
-	wHeight                           <span class="m">960</span>
+	wWidth                           <span style="color:#ae81ff">1280</span>
+	wHeight                           <span style="color:#ae81ff">960</span>
 </code></pre></div><p>その他、細かい情報は<a href="https://www.sssg.org/blogs/hiro345/archives/18787.html">こちら</a>をどうぞ。</p>
 <h2 id="実際に使う">実際に使う</h2>
 <h3 id="カメラから静止画像を得る">カメラから静止画像を得る</h3>
 <p>次のようなスクリプトでカメラで静止画像を撮影し保存します。-r オプションで先ほど得た解像度を指定します。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#! /bin/bash
-</span><span class="cp"></span><span class="c1">#</span>
-<span class="c1">#   Get image from c270 (Logicool) cam.</span>
-<span class="c1">#</span>
-/usr/bin/fswebcam <span class="se">\
-</span><span class="se"></span> -p YUYV <span class="se">\
-</span><span class="se"></span> -d /dev/video1<span class="se">\
-</span><span class="se"></span> --font <span class="s1">&#39;/usr/share/fonts/alias/TrueType/MaruGo-Medium.ttf:32&#39;</span> <span class="se">\
-</span><span class="se"></span> --title <span class="s2">&#34;2came@Katashina&#34;</span> <span class="se">\
-</span><span class="se"></span> --bottom-banner <span class="se">\
-</span><span class="se"></span> --line-colour <span class="s1">&#39;#FF000000&#39;</span> <span class="se">\
-</span><span class="se"></span> --banner-colour <span class="s1">&#39;#FF000000&#39;</span> <span class="se">\
-</span><span class="se"></span> -D 2<span class="se">\
-</span><span class="se"></span> -S 5<span class="se">\
-</span><span class="se"></span> -r 1280x960 <span class="se">\
-</span><span class="se"></span> --save ~/webcam/2came_img.jpg <span class="se">\
-</span><span class="se"></span> --timestamp <span class="s1">&#39;%Y-%m-%d %H:%M (%Z)&#39;</span>
-<span class="c1">#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+<span style="color:#75715e">#   Get image from c270 (Logicool) cam.</span>
+<span style="color:#75715e">#</span>
+/usr/bin/fswebcam <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> -p YUYV <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> -d /dev/video1<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --font <span style="color:#e6db74">&#39;/usr/share/fonts/alias/TrueType/MaruGo-Medium.ttf:32&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --title <span style="color:#e6db74">&#34;2came@Katashina&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --bottom-banner <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --line-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --banner-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> -D 2<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> -S 5<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> -r 1280x960 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --save ~/webcam/2came_img.jpg <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> --timestamp <span style="color:#e6db74">&#39;%Y-%m-%d %H:%M (%Z)&#39;</span>
+<span style="color:#75715e">#</span>
 </code></pre></div><h4 id="d-オプションの指定の仕方">-d オプションの指定の仕方</h4>
 <dl>
 <dt>-d /dev/video0</dt>
@@ -217,17 +217,17 @@ ubuntuでのやり方はたとえば次の例などを参考にしてくださ�
 </ul>
 <h3 id="ローカルに保存された画像をサーバに転送する">ローカルに保存された画像をサーバに転送する</h3>
 <p>レンタルサーバ（ここでは plala）にftpで画像を転送します。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#</span>
-<span class="c1"># ftp_img_to_plala  server</span>
-<span class="c1">#</span>
-/usr/bin/ftp -n www999.plala.or.jp <span class="s">&lt;&lt;EOF
-</span><span class="s">user user_name password
-</span><span class="s">bin
-</span><span class="s">cd jpgs
-</span><span class="s">lcd /home/yamagami/webcam_katashina
-</span><span class="s">put 2came_katashina.jpg
-</span><span class="s">bye
-</span><span class="s">EOF</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#</span>
+<span style="color:#75715e"># ftp_img_to_plala  server</span>
+<span style="color:#75715e">#</span>
+/usr/bin/ftp -n www999.plala.or.jp <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">user user_name password
+</span><span style="color:#e6db74">bin
+</span><span style="color:#e6db74">cd jpgs
+</span><span style="color:#e6db74">lcd /home/yamagami/webcam_katashina
+</span><span style="color:#e6db74">put 2came_katashina.jpg
+</span><span style="color:#e6db74">bye
+</span><span style="color:#e6db74">EOF</span>
 </code></pre></div><h3 id="cronの設定">Cronの設定</h3>
 <p>あとやることは、cronの設定のみ。これについてはほとんど問題ないので、省略。</p>
 <h2 id="検討課題と今後の展開">検討課題と今後の展開</h2>

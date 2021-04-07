@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [日々の累積支出額と予算の関係](#日々の累積支出額と予算の関係)
     - [仕掛け](#仕掛け)
@@ -38,9 +38,9 @@ draft = false
 
 まずは例図をみてください（金額はでたらめです）。
 
-<a id="org33e602d"></a>
+<a id="org6be5d78"></a>
 
-{{< figure src="/budget-watcher-sample.png" caption="Figure 1: 予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。" width="90%" >}}
+{{< figure src="/budget-watcher-sample.png" caption="&#22259;1:  予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。" width="90%" >}}
 
 
 ### 仕掛け {#仕掛け}

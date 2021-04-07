@@ -1,5 +1,6 @@
 #+title: 「菊鹿」 -- my favorite
 #+date: [2019-05-20 月 00:08]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

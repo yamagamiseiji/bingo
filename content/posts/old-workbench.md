@@ -30,7 +30,7 @@ draft = false
 
 一番の問題は天板。図のように腐敗やひび割れ、歪みがひどくて、とても細かい木工作業には使えません。
 
-{{< figure src="/old天板.jpg" caption="Figure 1: 取り外したワークベンチの天板" >}}
+{{< figure src="/old天板.jpg" caption="&#22259;1:  取り外したワークベンチの天板" >}}
 
 天板は新品に交換するしかない状態です。
 
@@ -50,13 +50,13 @@ draft = false
 
 ところがこの「黒いプラスチック」の名称がわからず四苦八苦しました。各社が独自に？いろいろな名称をつけていて、結局日本語の「正式名称」はわからずじまいですが、英語では **plastic bench dogs** と言えば通じるようです。この語でAmazonで検索すると山ほどヒットします。 **fix clamp** とも言うようです。
 
-{{< figure src="/one-bench-dog.jpg" caption="Figure 2: 部品の名前はdogだった！" width="40%" >}}
+{{< figure src="/one-bench-dog.jpg" caption="&#22259;2:  部品の名前はdogだった！" width="40%" >}}
 
 bench dogの **シャフト** （足）をこの穴に差し込みます。その直径と長さは一般的には次の表[1](#table--bench-dogs-dimension) のとおりです。
 
 <a id="table--bench-dogs-dimension"></a>
 <div class="table-caption">
-  <span class="table-number"><a href="#table--bench-dogs-dimension">Table 1</a></span>:
+  <span class="table-number"><a href="#table--bench-dogs-dimension">&#34920; 1</a></span>:
   Plastic Bench Dogs Dimensions
 </div>
 
@@ -80,7 +80,7 @@ bench dogの **シャフト** （足）をこの穴に差し込みます。そ�
 
 **ACQ材** なので板材そのものに防腐・防虫塗料が浸透されていますが、カットした切り口部分は白木のまま。そこで、切り口だけでなく全面に、手持ちの防腐・防虫ペイントを塗布しました。ペンキが十分に乾燥したら、天板を裏から木ネジで固定。図はほぼ修復を終えたワークベンチの勇姿ですw
 
-{{< figure src="/workbench修理完20200917.jpg" caption="Figure 3: ほぼ修復完了したワークベンチ" width="50%" >}}
+{{< figure src="/workbench修理完20200917.jpg" caption="&#22259;3:  ほぼ修復完了したワークベンチ" width="50%" >}}
 
 ハンドルはクルクルと軽く回るし天板もスムーズに移動します。折りたたみも、まるで新品のような滑らかさ。今後は、使い終わったらきちんとたたんで物置にしまうことにします。この先、少なくとも **ん十年** は使えますねｗ
 
@@ -102,6 +102,6 @@ bench dogの **シャフト** （足）をこの穴に差し込みます。そ�
 ワークベンチの脚部パネルを見ると、図4のような製造メーカのロゴが刻印されています。
 "S"という文字を背景にして、その上に"K"が乗っている形です。
 
-{{< figure src="/logoSK.jpg" caption="Figure 4: メーカのロゴ" width="50%" >}}
+{{< figure src="/logoSK.jpg" caption="&#22259;4:  メーカのロゴ" width="50%" >}}
 
 そこで、 **SK** または **KS** が社名またはブランド名なのだろうと色々調べてみましたが、このロゴを持つ会社は見つかりませんでした。「 **教えて！goo** 」にユーザ登録し画像をアップして質問してみましたが、そうしたらすぐに「 **SSK** ではないか？」という親切な回答がありましたが、残念ながらまだ確認はできていません。自分でも、[特許庁の商標](https://www.jpo.go.jp/support/startup/shohyo%5Fsearch.html)検索ページや、さらには[WIPO](https://www3.wipo.int/branddb/en/)（世界知的所有権機関）の商標検索DBで調べてみたのですが、未だにこのロゴがどこの会社のものか不明です。どなたか教えていただけるとありがたいのですが・・・

@@ -1,5 +1,6 @@
 #+title: 手作りポット苗トレーラック for フォレスター
 #+date: [2019-05-24 金 22:25]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

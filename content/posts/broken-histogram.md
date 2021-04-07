@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [Y軸にbreakを入れてみる](#y軸にbreakを入れてみる)
     - [Ledger-cliのクエリー](#ledger-cliのクエリー)
@@ -38,18 +38,18 @@ draft = false
 
 こんな感じになります（金額はでたらめです）。
 
-<a id="orgcb2d3e7"></a>
+<a id="org36044b6"></a>
 
-{{< figure src="/broken-histogram.png" caption="Figure 1: Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
+{{< figure src="/broken-histogram.png" caption="&#22259;1:  Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
 
-Ledgerとgnuplotを組み合わせて図[1](#orgcb2d3e7)のような **break** つき棒グラフを描く方法を紹介します。
+Ledgerとgnuplotを組み合わせて図[1](#org36044b6)のような **break** つき棒グラフを描く方法を紹介します。
 
 
 ### Ledger-cliのクエリー {#ledger-cliのクエリー}
 
 税額の計算をするためのLedgerクエリーは次のとおりです。
 
-```shell
+```sh
 $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 ```
 
@@ -68,7 +68,7 @@ $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 
 このクエリーによって得られるデータの例（数値はデタラメです）：
 
-```nil
+```sh
 　：
 2020-01-01 7234
 2020-02-01 4567
@@ -89,7 +89,7 @@ $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 
 出力図はPDFにして `$out_file` に出力します。
 
-```nil
+```sh
 set terminal pdfcairo transparent enhanced font 'Arial,10'
 set output '$out_file'
 ```
@@ -124,7 +124,7 @@ y4 = 1120000/1000
 
 #### 図のスタイルとY軸の数字のフォーマット {#図のスタイルとy軸の数字のフォーマット}
 
-```nil
+```sh
 set style histogram
 set style data histograms
 set style fill transparent solid 0.8 border -1
@@ -138,7 +138,7 @@ set format y "%'6.0f"
 
 読み込むデータファイルは変数 `$data_to_plot` で指示します。
 
-```nil
+```shell
 set multiplot
 set label "Amount(千円)" at screen 0.03,0.5 center front rotate font "," . 10
 
@@ -162,7 +162,7 @@ plot '$data_to_plot' \
 
 #### 上の図 {#上の図}
 
-```nil
+```sh
 unset xtics
 unset xlabel
 

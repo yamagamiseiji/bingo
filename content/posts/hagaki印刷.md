@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [表面（宛名）印刷](#表面-宛名-印刷)
     - [年賀状の宛名面印刷のためのクラスファイル](#年賀状の宛名面印刷のためのクラスファイル)

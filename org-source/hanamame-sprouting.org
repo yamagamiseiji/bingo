@@ -1,5 +1,6 @@
 #+title: 花豆の発芽と積算温度
 #+date: 2020-06-12
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

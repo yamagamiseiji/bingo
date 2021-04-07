@@ -1,5 +1,6 @@
 #+title: 山研年報に関する速報です
 #+date: [2019-03-07 木 21:35]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

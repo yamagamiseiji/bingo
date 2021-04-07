@@ -1,5 +1,6 @@
 #+title: 予算消化状況を日々 ledger-cliとgnuplotでモニターする
 #+date: [2020-03-09 月 19:40]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

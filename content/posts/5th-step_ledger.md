@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [再訪　「借方」「貸方」](#再訪-借方-貸方)
     - [英語でもたいへんのようです](#英語でもたいへんのようです)
@@ -36,15 +36,15 @@ draft = false
 
 ところで、この「借方」「貸方」という日本語の生い立ちはなかなか由緒正しいもののようです。福澤諭吉が「 **帳合之法** 」（1873）で使い始めたのが最初とのこと。
 
-<a id="org7c8a644"></a>
+<a id="orgb74ddfc"></a>
 
-{{< figure src="/s-choainoho-hyoshi.jpg" caption="Figure 1: 「帳合之法」福澤諭吉（1873）表紙" width="90%" >}}
+{{< figure src="/s-choainoho-hyoshi.jpg" caption="&#22259;1:  「帳合之法」福澤諭吉（1873）表紙" width="90%" >}}
 
 「帳合之法」は国会図書館でデジタル化した原本をキンドルストアで購入できました！良い時代になったもんです。話は逸れますが、有名な（？）「古来から日本においては、学者は必ず貧乏である。金持ちは必ず無学である。」の文言がこの本の冒頭にあったんですね。
 
-<a id="org0d8196a"></a>
+<a id="org246a830"></a>
 
-{{< figure src="/s-choainoho-page02.jpg" caption="Figure 2: 「帳合之法」2ページ" width="90%" >}}
+{{< figure src="/s-choainoho-page02.jpg" caption="&#22259;2:  「帳合之法」2ページ" width="90%" >}}
 
 
 ### 英語でもたいへんのようです {#英語でもたいへんのようです}

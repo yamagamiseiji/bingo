@@ -1,5 +1,6 @@
 #+title: Ledger-cliで「車検」の転記
 #+date: [2019-12-06 金 15:29]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

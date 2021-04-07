@@ -1,5 +1,6 @@
 #+title: 古い道具たち -- B＆Dのジグソー
 #+date: 2020-10-28
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

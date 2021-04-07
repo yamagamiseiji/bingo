@@ -1,6 +1,7 @@
 #+title: ベイナスの育苗
 #+date: [2021-04-10]
 #+link: file file+sys:../static/
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

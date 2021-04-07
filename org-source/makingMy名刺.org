@@ -1,5 +1,6 @@
 #+title: 名刺を自作しました
 #+date: [2019-02-27 水 08:39]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

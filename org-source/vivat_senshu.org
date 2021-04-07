@@ -1,5 +1,6 @@
 #+title: vivat senshu!
 #+date: [2019-03-17 日 22:09]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

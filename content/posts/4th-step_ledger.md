@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [トランザクションのスケジューリング](#トランザクションのスケジューリング)
     - [（補足）](#補足)

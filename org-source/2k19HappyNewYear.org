@@ -1,5 +1,6 @@
 #+title: 新年のご挨拶
 #+date: [2019-01-01 火 00:00]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

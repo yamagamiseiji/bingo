@@ -1,5 +1,6 @@
 #+title: わざわざ Emacs/LaTeXでハガキ印刷するわけ
 #+date: [2018-12-30 日 11:52]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

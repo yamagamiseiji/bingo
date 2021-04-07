@@ -10,7 +10,9 @@ languageCode = "ja-jp"
 enableRobotsTXT = true
 
 summaryLength = 80 # Configure how long the post summary should be on the homepage.
-pygmentsUseClasses = true # enable theme-defined highlight style
+pygmentsCodeFences = true
+# pygmentsUseClasses = true
+# pygmentsStyle = "manni"
 hasCJKLanguage = true # 日本語文字数を正しくカウントさせるため必要
 
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
@@ -24,8 +26,8 @@ name = "YAMAGAMI, Seiji"
 
 [params]
 # Blog description at the top of the homepage. Supports markdown.
-dateFormat = "2021/04/05"
 description = "{Psy|Edu|Agri|Comp|Etc} = PEACE"
+dateFormat = "2021/04/05"
 showReadMore = true
 mainSections = [
 	"posts",
@@ -34,6 +36,7 @@ mainSections = [
 listPaginate = 20
 postLicense = ""
 pygmentsUseClasses = true
+
 
 [params.comment]
 type = "none"

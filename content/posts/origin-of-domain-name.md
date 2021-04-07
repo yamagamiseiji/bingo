@@ -18,7 +18,7 @@ draft = false
 
 ロケーションは地図を見てください([出典](https://www.shiseki-chikei.com/%E5%B9%95%E6%9C%AB%E4%B8%89%E7%99%BE%E8%97%A9-%E5%9F%8E-%E9%99%A3%E5%B1%8B/%E4%B8%AD%E5%9B%BD%E5%9C%B0%E6%96%B9%E3%81%AE%E8%AB%B8%E8%97%A9/%E7%A6%8F%E5%B1%B1%E8%97%A9-%E5%BA%83%E5%B3%B6%E7%9C%8C/))。現在の市域でいえば備後は広島県福山市（笠岡市の一部を含む）です。
 
-{{< figure src="/bingo-map.jpg" caption="Figure 1: 三分割された「吉備の国」の一つが備後国" width="80%" >}}
+{{< figure src="/bingo-map.jpg" caption="&#22259;1:  三分割された「吉備の国」の一つが備後国" width="80%" >}}
 
 
 ## 吉備津神社も三社に分霊 {#吉備津神社も三社に分霊}

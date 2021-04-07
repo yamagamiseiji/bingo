@@ -1,5 +1,6 @@
 #+title: ハクビシンとのたたかい（1）
 #+date:  [2019-08-08 木 13:47]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

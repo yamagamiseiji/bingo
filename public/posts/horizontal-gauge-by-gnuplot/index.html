@@ -79,7 +79,7 @@
     <div class="post_content">
       <div class="ox-hugo-toc toc">
 <div></div>
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 <ul>
 <li><a href="#%E3%81%8D%E3%81%A3%E3%81%8B%E3%81%91">きっかけ</a>
 <ul>
@@ -105,24 +105,24 @@
 <blockquote>
 <p>（例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい</p>
 </blockquote>
-<p>予算消化率の可視化については<a href="http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/">前回の投稿</a>で、GNOME端末での <strong>プログレッシブ・バーグラフ</strong> を紹介しました。今回はそれよりももう少しグラッフィックに図<a href="#orgefdca17">1</a>のような水平ゲージを描きます。</p>
-<p><a id="orgefdca17"></a></p>
+<p>予算消化率の可視化については<a href="http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/">前回の投稿</a>で、GNOME端末での <strong>プログレッシブ・バーグラフ</strong> を紹介しました。今回はそれよりももう少しグラッフィックに図<a href="#orgbfe67b3">1</a>のような水平ゲージを描きます。</p>
+<p><a id="orgbfe67b3"></a></p>
 <figure>
     <img src="/horizontal-gauge.png"
-         alt="Figure 1: 当日までの予算消化率をプロットする水平ゲージ" width="400px"/> <figcaption>
-            <p>Figure 1: 当日までの予算消化率をプロットする水平ゲージ</p>
+         alt="図1:  当日までの予算消化率をプロットする水平ゲージ" width="400px"/> <figcaption>
+            <p>図1:  当日までの予算消化率をプロットする水平ゲージ</p>
         </figcaption>
 </figure>
 
 <h3 id="仕掛け">仕掛け</h3>
 <p>当月内の当日までに支出した金額の累計はleger-cliで算出します。それを分子にし今月の支出予算を分母にしてパーセンテージを計算します。その値をgnuplotにスクリプト内変数として引き渡して、水平ゲージ内に <strong>太めの黒い線</strong> を描くというシンプルな仕掛けです。</p>
 <h3 id="ネットには見当たらない">ネットには見当たらない？</h3>
-<p>当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図<a href="#org9854720">2</a>のような <strong>計器盤</strong> 風のゲージ（<a href="https://angularscript.com/angular-gauge-chart-library/">出典</a>）もgnuplotで描いた例を見つけることができませんでした。</p>
-<p><a id="org9854720"></a></p>
+<p>当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図<a href="#orgbb8a88a">2</a>のような <strong>計器盤</strong> 風のゲージ（<a href="https://angularscript.com/angular-gauge-chart-library/">出典</a>）もgnuplotで描いた例を見つけることができませんでした。</p>
+<p><a id="orgbb8a88a"></a></p>
 <figure>
     <img src="/gauge-chart-library.png"
-         alt="Figure 2: 計器盤風ゲージチャートの例" width="200px"/> <figcaption>
-            <p>Figure 2: 計器盤風ゲージチャートの例</p>
+         alt="図2:  計器盤風ゲージチャートの例" width="200px"/> <figcaption>
+            <p>図2:  計器盤風ゲージチャートの例</p>
         </figcaption>
 </figure>
 
@@ -154,77 +154,77 @@
 <pre><code class="language-nil" data-lang="nil">gnuplot -e &quot;percent='$pct'; fig_title='% of Monthly Budget'&quot;\
 	./simple-horizntl-gauge.plt
 </code></pre><h3 id="bashスクリプト">bashスクリプト</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span><span class="c1">#</span>
-<span class="c1">#  毎月の支出予算に対して当日までの支出金額がどれくらいになるかを</span>
-<span class="c1">#  水平方向のゲージチャートhorizontal bar gauge chart に表示する</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+<span style="color:#75715e">#  毎月の支出予算に対して当日までの支出金額がどれくらいになるかを</span>
+<span style="color:#75715e">#  水平方向のゲージチャートhorizontal bar gauge chart に表示する</span>
 
-<span class="c1">###############################################</span>
-<span class="c1"># 当日までの支出額は支出予算の何％にあたるかを計算</span>
-<span class="c1">###############################################</span>
-<span class="nv">budget</span><span class="o">=</span><span class="sb">`</span>expr <span class="m">400000</span> - 40000<span class="sb">`</span>  <span class="c1"># 360,000円</span>
-<span class="c1">##</span>
-<span class="c1"># Ledgerで当日までの累積支出額($month_total)を求める</span>
-ledger bal -J ^expenses -p <span class="s1">&#39;this month&#39;</span> --depth 1<span class="se">\
-</span><span class="se"></span>       -X JPY &gt; ./tmp-total.csv
-<span class="nv">month_total</span><span class="o">=</span><span class="sb">`</span>cut -d <span class="s1">&#39; &#39;</span> -f <span class="m">2</span> ./tmp-total.csv<span class="sb">`</span>
-<span class="c1">##</span>
-<span class="c1"># 予算($budget)に対する支出のパーセント($pct)を計算</span>
-<span class="nv">pct</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">&#34;scale=3;</span><span class="si">${</span><span class="nv">month_total</span><span class="si">}</span><span class="s2"> / </span><span class="si">${</span><span class="nv">budget</span><span class="si">}</span><span class="s2"> * 100&#34;</span> <span class="p">|</span> bc<span class="sb">`</span>
-<span class="c1">#</span>
-<span class="c1">##############################################################</span>
-<span class="c1"># gnuplotで縦方向（普通の）積上げバーグラフを描く</span>
-<span class="c1">##</span>
-gnuplot -e <span class="s2">&#34;percent=&#39;</span><span class="nv">$pct</span><span class="s2">&#39;; fig_title=&#39;% of Monthly Budget&#39;&#34;</span><span class="se">\
-</span><span class="se"></span>	./simple-horizntl-gauge.plt
-<span class="c1">###############################################################</span>
-<span class="c1"># 上で作った積上げバーグラフ(out-sample.png)を90度右回転しrotated-fig.pngに格納</span>
-convert -rotate <span class="m">90</span> ./out-sample.png  ./rotated-sample.png
-<span class="c1">##</span>
-<span class="c1"># 余計な余白をトリミングしてhorizontal-gauge.pngに格納</span>
+<span style="color:#75715e">###############################################</span>
+<span style="color:#75715e"># 当日までの支出額は支出予算の何％にあたるかを計算</span>
+<span style="color:#75715e">###############################################</span>
+budget<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>expr <span style="color:#ae81ff">400000</span> - 40000<span style="color:#e6db74">`</span>  <span style="color:#75715e"># 360,000円</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e"># Ledgerで当日までの累積支出額($month_total)を求める</span>
+ledger bal -J ^expenses -p <span style="color:#e6db74">&#39;this month&#39;</span> --depth 1<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       -X JPY &gt; ./tmp-total.csv
+month_total<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>cut -d <span style="color:#e6db74">&#39; &#39;</span> -f <span style="color:#ae81ff">2</span> ./tmp-total.csv<span style="color:#e6db74">`</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e"># 予算($budget)に対する支出のパーセント($pct)を計算</span>
+pct<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo <span style="color:#e6db74">&#34;scale=3;</span><span style="color:#e6db74">${</span>month_total<span style="color:#e6db74">}</span><span style="color:#e6db74"> / </span><span style="color:#e6db74">${</span>budget<span style="color:#e6db74">}</span><span style="color:#e6db74"> * 100&#34;</span> | bc<span style="color:#e6db74">`</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">##############################################################</span>
+<span style="color:#75715e"># gnuplotで縦方向（普通の）積上げバーグラフを描く</span>
+<span style="color:#75715e">##</span>
+gnuplot -e <span style="color:#e6db74">&#34;percent=&#39;</span>$pct<span style="color:#e6db74">&#39;; fig_title=&#39;% of Monthly Budget&#39;&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	./simple-horizntl-gauge.plt
+<span style="color:#75715e">###############################################################</span>
+<span style="color:#75715e"># 上で作った積上げバーグラフ(out-sample.png)を90度右回転しrotated-fig.pngに格納</span>
+convert -rotate <span style="color:#ae81ff">90</span> ./out-sample.png  ./rotated-sample.png
+<span style="color:#75715e">##</span>
+<span style="color:#75715e"># 余計な余白をトリミングしてhorizontal-gauge.pngに格納</span>
 convert ./rotated-sample.png -trim  ./horizontal-gauge.png
-<span class="c1">##</span>
-<span class="c1"># 表示する</span>
-mupdf ./horizontal-gauge.png <span class="p">&amp;</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e"># 表示する</span>
+mupdf ./horizontal-gauge.png &amp;
 
 </code></pre></div><h3 id="gnuplotスクリプト">gnuplotスクリプト</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#</span>
-<span class="c1">#    gnuplot script for horizontal gauge of % monthly budget</span>
-<span class="c1">#</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#</span>
+<span style="color:#75715e">#    gnuplot script for horizontal gauge of % monthly budget</span>
+<span style="color:#75715e">#</span>
 
-<span class="nv">$Plotdata</span> <span class="s">&lt;&lt;EOD
-</span><span class="s">1 60 20 20 20
-</span><span class="s"># 積上げ棒グラフ（4段）の値
-</span><span class="s">EOD</span>
+$Plotdata <span style="color:#e6db74">&lt;&lt;EOD
+</span><span style="color:#e6db74">1 60 20 20 20
+</span><span style="color:#e6db74"># 積上げ棒グラフ（4段）の値
+</span><span style="color:#e6db74">EOD</span>
 
 reset
 
-<span class="nb">set</span> terminal pngcairo font <span class="s1">&#39;Arial, 12&#39;</span>
-<span class="nb">set</span> style data histogram
-<span class="nb">set</span> style histogram rowstacked
-<span class="nb">set</span> style fill transparent solid  0.5 border -1
-<span class="c1">#</span>
-<span class="nb">unset</span> xtics
-<span class="nb">unset</span> ytics
-<span class="nb">set</span> ytics rotate by <span class="m">90</span>
-<span class="nb">set</span> xrange<span class="o">[</span>0:1<span class="o">]</span>
-<span class="nb">set</span> yrange<span class="o">[</span>0:120<span class="o">]</span>
-<span class="nb">set</span> y2label fig_title.<span class="s2">&#34; （`date &#34;</span>+%Y/%m/%d<span class="s2">&#34;`）&#34;</span> offset 1.0
-<span class="nb">set</span> xlabel <span class="s1">&#39; &#39;</span>
-<span class="c1">#</span>
-<span class="nb">set</span> size 0.9
-<span class="nb">set</span> size ratio <span class="m">5</span>
-<span class="nb">set</span> boxwidth 2.0
-<span class="c1"># 予算消化率変数percentはbashスクリプトから引き渡される</span>
-<span class="c1">##</span>
-<span class="nb">set</span> arrow <span class="m">1</span> from 0,percent to 1,percent nohead lc rgb <span class="s2">&#34;black&#34;</span> lw <span class="m">5</span>
-<span class="nb">set</span> output <span class="s2">&#34;./out-sample.png&#34;</span>
-<span class="c1">#</span>
-plot <span class="nv">$Plotdata</span> using 2:xtic<span class="o">(</span>1<span class="o">)</span> notitle linecolor rgb <span class="s2">&#34;green&#34;</span>,<span class="se">\
-</span><span class="se"></span>	     <span class="s1">&#39;&#39;</span> using <span class="m">3</span> notitle  linecolor rgb <span class="s2">&#34;light-green&#34;</span>,<span class="se">\
-</span><span class="se"></span>	     <span class="s1">&#39;&#39;</span> using <span class="m">4</span> notitle  linecolor rgb <span class="s2">&#34;yellow&#34;</span>,<span class="se">\
-</span><span class="se"></span>	     <span class="s1">&#39;&#39;</span> using <span class="m">5</span> notitle  linecolor rgb <span class="s2">&#34;red&#34;</span>
-<span class="nb">set</span> output
+set terminal pngcairo font <span style="color:#e6db74">&#39;Arial, 12&#39;</span>
+set style data histogram
+set style histogram rowstacked
+set style fill transparent solid  0.5 border -1
+<span style="color:#75715e">#</span>
+unset xtics
+unset ytics
+set ytics rotate by <span style="color:#ae81ff">90</span>
+set xrange<span style="color:#f92672">[</span>0:1<span style="color:#f92672">]</span>
+set yrange<span style="color:#f92672">[</span>0:120<span style="color:#f92672">]</span>
+set y2label fig_title.<span style="color:#e6db74">&#34; （`date &#34;</span>+%Y/%m/%d<span style="color:#e6db74">&#34;`）&#34;</span> offset 1.0
+set xlabel <span style="color:#e6db74">&#39; &#39;</span>
+<span style="color:#75715e">#</span>
+set size 0.9
+set size ratio <span style="color:#ae81ff">5</span>
+set boxwidth 2.0
+<span style="color:#75715e"># 予算消化率変数percentはbashスクリプトから引き渡される</span>
+<span style="color:#75715e">##</span>
+set arrow <span style="color:#ae81ff">1</span> from 0,percent to 1,percent nohead lc rgb <span style="color:#e6db74">&#34;black&#34;</span> lw <span style="color:#ae81ff">5</span>
+set output <span style="color:#e6db74">&#34;./out-sample.png&#34;</span>
+<span style="color:#75715e">#</span>
+plot $Plotdata using 2:xtic<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span> notitle linecolor rgb <span style="color:#e6db74">&#34;green&#34;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	     <span style="color:#e6db74">&#39;&#39;</span> using <span style="color:#ae81ff">3</span> notitle  linecolor rgb <span style="color:#e6db74">&#34;light-green&#34;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	     <span style="color:#e6db74">&#39;&#39;</span> using <span style="color:#ae81ff">4</span> notitle  linecolor rgb <span style="color:#e6db74">&#34;yellow&#34;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	     <span style="color:#e6db74">&#39;&#39;</span> using <span style="color:#ae81ff">5</span> notitle  linecolor rgb <span style="color:#e6db74">&#34;red&#34;</span>
+set output
 </code></pre></div><h3 id="使いみち">使いみち</h3>
 <p>買い物が終わった後、レシートなどを見ながらその日の支出をledgerで転記しますが、転記が終わったら、金額などの確認のためにいくつかのスクリプトを起動させて、各種のグラフやチャートを表示させます。そのスクリプト群の一つに、この水平ゲージ表示スクリプトを埋め込んでいます。</p>
 <p>ゲージスクリプトが起動すると、スクリーンの <strong>空いた</strong> 場所にこのゲージが表示されます。表示されている情報価は大したものではないのですが、見た目がもっともらしいので（笑）満足しています。</p>

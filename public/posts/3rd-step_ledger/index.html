@@ -79,7 +79,7 @@
     <div class="post_content">
       <div class="ox-hugo-toc toc">
 <div></div>
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 <ul>
 <li><a href="#adjustment">Adjustmentsを使おう</a></li>
 <li><a href="#petty_cash">少額の現金の扱い</a></li>
@@ -98,7 +98,7 @@
 <h2 id="adjustment">Adjustmentsを使おう</h2>
 <p>銀行からの口座残高のお知らせと自分のLedgerとの間で、残高が不一致となることは珍しくはありません。そんな時に、帳合を取るために使うのが <strong>Adjustments</strong> （調整）というトランザクションというか裏ワザ。</p>
 <p>たとえば、銀行からの残高をチェックすると35,000円だったけど、ledgerでbalしたら、Bank bal = 45,000になっていた：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ led b bank
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ led b bank
 	 45,000 JPY  Assets:Bank
 </code></pre></div><p>こうした場合、銀行の残高が間違っている可能性はゼロなので、ledgerのトランザクションのどこかに、10,000円分の</p>
 <ul>
@@ -110,7 +110,7 @@
     Assets:bankA      = 35,000 JPY
     Equity:Adjustments
 </code></pre><p>ポイントは金額の前に <code>=</code> を書くことだけ。こうすると、BankAの残高はいわば強制的に35,000円となります：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ led b Adjustments
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ led b Adjustments
 	  10,00 JPY  Equity:Adjustments
 </code></pre></div><p>これで、当面は元帳内部はすっきりピッタリ帳合がとれます。その後、</p>
 <ul>
@@ -202,11 +202,11 @@
 <h2 id="几帳面">几帳面？</h2>
 <p>これまで、子どもの頃のお小遣い帳、研究費の精算表などいろいろな帳簿をつけてきましたが、帳簿つけで一番大事なのは「継続性」と「即時性」。継続性は連続して長い年月、記録し続けるということ、「即時性」はお金が動いたとき（正確には「トランザクションが発生したとき」）、後回しにしないで、すぐに記帳することです。いずれも言うは易く行うは難しです。実際これまで、何度も痛い目に合いました。自分の性格がだらしなくて几帳面じゃあないからだと思っていました。</p>
 <p>それで、「几帳面」と言うのは「帳面」をきちんとつけられることだと思っていましたが、どうやらそれは間違いで、「几帳」という「寝殿造りの間仕切り」の仕上げがとても丁寧だったことに由来するそうです。</p>
-<p><a id="orgb90b8cd"></a></p>
+<p><a id="orgc7607a2"></a></p>
 <figure>
     <img src="/kicho.jpg"
-         alt="Figure 1: 几帳です。記帳ではありませんw" width="80%"/> <figcaption>
-            <p>Figure 1: 几帳です。記帳ではありませんw</p>
+         alt="図1:  几帳です。記帳ではありませんw" width="80%"/> <figcaption>
+            <p>図1:  几帳です。記帳ではありませんw</p>
         </figcaption>
 </figure>
 

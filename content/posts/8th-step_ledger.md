@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [高速道路料金、高い！](#高速道路料金-高い)
 - [ETCマイレージポイントをなんとかしよう！](#etcマイレージポイントをなんとかしよう)
@@ -31,7 +31,7 @@ draft = false
 
 一体どうなっているのか、 **国際比較** のデータを見たいと思って報告書や資料、ネットを探しても、なかなかこれというものが見つかりませんでした。つい最近、偶然、[こちら](https://livejapan.com/en/article-a0002292/)にとてもコンパクトにまとまったデータを見つけました。元は英語だったので日本語にさせてもらいました。なお、「円」換算はその日のレートによって異なります。およその目安としてごらんください。
 
-{{< figure src="/tables.png" caption="Figure 1: 高速道路料金国際比較（<https://livejapan.com/en/article-a0002292/> より）" width="95%" >}}
+{{< figure src="/tables.png" caption="&#22259;1:  高速道路料金国際比較（<https://livejapan.com/en/article-a0002292/> より）" width="95%" >}}
 
 これを見ると各国の高速道路課金システムの主なものは **無料** の他、
 

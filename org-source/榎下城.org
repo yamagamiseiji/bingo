@@ -1,5 +1,6 @@
 #+title: 榎下城と観護寺
 #+date: [2019-12-15 日 13:13]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

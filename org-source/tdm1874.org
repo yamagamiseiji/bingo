@@ -1,5 +1,6 @@
 #+title: だんだん日本ワインが・・・
 #+date: [2019-07-06 土 11:49]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

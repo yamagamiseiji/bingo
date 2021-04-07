@@ -1,5 +1,6 @@
 #+title: プレーンテキストファイルで「複式」家計簿（１）
 #+date: [2019-04-28 日 09:25]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

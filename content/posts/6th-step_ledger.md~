@@ -1,6 +1,8 @@
 +++
 title = "プレーンテキストファイルで「複式」家計簿（6）"
 date = 2019-07-27T00:00:00+09:00
+tags = ["ledger", "emacs", "accounting"]
+categories = ["comp"]
 draft = false
 +++
 
@@ -10,7 +12,7 @@ draft = false
 
 4月以降からのクルマに関係する経費（いわゆる「車両費」）の月ごとの推移を **積み上げ棒グラフ** の例図にしたものです。3月は一部だけデータがあったので、それもプロットしています。
 
-<a id="orgd2ac390"></a>
+<a id="org92a1cd7"></a>
 
 {{< figure src="/rowstack-car-hist.jpg" caption="Figure 1: Ledgerとgnuplotを組み合わせてプロットした例図" width="90%" >}}
 

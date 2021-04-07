@@ -1,5 +1,7 @@
 #+title: さようならWordPress
 #+date: 2021-03-26
+#+language: ja
+
 #+link: file file+sys:../static/
 
 #+hugo_base_dir: ~/peace-blog/bingo/

@@ -1,5 +1,6 @@
 #+title: 退職祝賀会の写真
 #+date: [2019-03-24]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

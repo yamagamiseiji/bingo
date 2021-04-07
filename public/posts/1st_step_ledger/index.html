@@ -79,7 +79,7 @@
     <div class="post_content">
       <div class="ox-hugo-toc toc">
 <div></div>
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 <ul>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
 <li><a href="#ledger%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">Ledgerのインストール</a>
@@ -105,16 +105,16 @@
 <h2 id="ledgerのインストール">Ledgerのインストール</h2>
 <p>インストール先のハードウエアは、ThinkPad X230（HDDはSSDに換装済）です。ソフトウエア環境は、Ubuntu16.04/Emacs25.3.2/Ledger3.1.1です。</p>
 <p>さてLedger本体のインストールはapt installで一発です：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install ledger
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install ledger
 </code></pre></div><h3 id="init-dot-elの設定">init.elの設定</h3>
 <p>次に、EmacsでLedger-modeを使えるようにinit.elを設定します。
 <code>use-package</code> の設定が済んでいる場合には、次の数行をinit.elに追加するだけでとりあえず動きます：</p>
-<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;	ledger-mode</span>
-<span class="c1">;;</span>
-<span class="p">(</span><span class="nb">use-package</span> <span class="nv">ledger-mode</span>
-  <span class="nb">:ensure</span> <span class="no">t</span>
-  <span class="nb">:defer</span> <span class="no">t</span>
-  <span class="nb">:mode</span> <span class="p">(</span><span class="s">&#34;\\.ledger$&#34;</span><span class="p">))</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="color:#75715e">;;	ledger-mode</span>
+<span style="color:#75715e">;;</span>
+(use-package ledger-mode
+  :ensure <span style="color:#66d9ef">t</span>
+  :defer <span style="color:#66d9ef">t</span>
+  :mode (<span style="color:#e6db74">&#34;\\.ledger$&#34;</span>))
 </code></pre></div><p>上の例では、「複式」家計簿の基本データとなる仕訳帳（journal）ファイルの拡張子を <code>.ledger</code> としています。</p>
 <h2 id="百聞は一見にしかず">百聞は一見にしかず</h2>
 <h3 id="その前に">その前に・・・</h3>
@@ -257,7 +257,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </ul>
 <p>次のようにします：</p>
 <p><a id="code-snippet--list:1"></a></p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal
 
 	 999,220 JPY  Assets
 	  29,220 JPY    Cash
@@ -267,21 +267,21 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	   5,460 JPY  Expenses
 	   2,680 JPY    交際費
 	   1,900 JPY      Beer
-	     <span class="m">780</span> JPY      Coffee
+	     <span style="color:#ae81ff">780</span> JPY      Coffee
 	   2,780 JPY    教養費:Books
 	-250,000 JPY  Income:給与
 	  -4,680 JPY  Liabilities:VisaCard
 --------------------
-		   <span class="m">0</span>
+		   <span style="color:#ae81ff">0</span>
 </code></pre></div><div class="src-block-caption">
-  <span class="src-block-number"><a href="#code-snippet--list:1">Code Snippet 1</a></span>:
+  <span class="src-block-number"><a href="#code-snippet--list:1">ソースコード 1</a></span>:
   仕訳帳（sample.ledger）の全体バランスレポート
 </div>
 <p>「-f」オプションでファイル名を指定しています。「bal」はbalanceの略です。</p>
 <ul>
 <li>
 <p>資産（Assets）と負債（Liabilites）だけのバランスをチェックしたい時：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal Assets Liabilites
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal Assets Liabilites
 
      999,220 JPY  Assets
       29,220 JPY    Cash
@@ -300,9 +300,9 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </code></pre></li>
 <li>
 <p>特定のアカウントのバランスをチェックしたい場合、たとえば「交際費」のバランスを見たい時には次のようにします：</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger reg 交際費
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger reg 交際費
 
-19-Apr-10 スタバ                Expenses:交際費:Coffee      <span class="m">780</span> JPY      <span class="m">780</span> JPY
+19-Apr-10 スタバ                Expenses:交際費:Coffee      <span style="color:#ae81ff">780</span> JPY      <span style="color:#ae81ff">780</span> JPY
 19-Apr-26 居酒屋                Expenses:交際費:Beer      1,900 JPY    2,680 JPY
 </code></pre></div><p>「reg」はregisterの略です。金額の一番右側の列は、累計になります。</p>
 </li>

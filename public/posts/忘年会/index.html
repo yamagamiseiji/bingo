@@ -79,7 +79,7 @@
     <div class="post_content">
       <div class="ox-hugo-toc toc">
 <div></div>
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 <ul>
 <li><a href="#%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3">忘年会シーズン</a>
 <ul>
@@ -102,7 +102,7 @@
 <h2 id="忘年会シーズン">忘年会シーズン</h2>
 <p>忘年会シーズンですね。</p>
 <p>最近は <strong>会社の忘年会</strong> への風当たりが強くなってきています。とくに若い世代に不賛同の声が多いようです。その一方で、年長者には伝統的な行事のひとつとして継続して欲しいという気持ちがあるのも分かります。</p>
-<p><a id="org1406799"></a></p>
+<p><a id="org6291db0"></a></p>
 <figure>
     <img src="/ochoko-tokkuri.jpg" width="60%"/> 
 </figure>
@@ -120,12 +120,12 @@
 <p>そこで今回は、忘年会の会計についてのおはなしです。</p>
 <h2 id="忘年会の会計">忘年会の会計</h2>
 <p>次のような忘年会をやった場合のポスティングを考えてみます。</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">自分と太郎、次郎、花子の4人でファンシーなレストランで忘年会をしました。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">自分と太郎、次郎、花子の4人でファンシーなレストランで忘年会をしました。
 費用は4人で21,345円でした。
 </code></pre></div><p>会費の支払い方法ごとに転記例をあげます。</p>
 <h3 id="現金ベースの割り勘のとき">現金ベースの割り勘のとき</h3>
 <p>現金ベースなら「おごり」「割り勘」のいずれにしても転記は簡単。単に自分が支払った金額を転記するだけです。たとえば今回の忘年会は均等割りでは <strong>5,336円</strong> になるけど、自分としてはキリの良い金額＝ <strong>5,400円</strong> を払ったというケースでは：</p>
-<pre><code class="language-ledger" data-lang="ledger">2019/12/20 * ファンシーレストラン
+<pre><code class="language-nil" data-lang="nil">2019/12/20 * ファンシーレストラン
    ; 4人で忘年会、21,345円を割り勘　
    Expenses:宴会費    5,400 JPY
    Assets:Cash
@@ -142,11 +142,11 @@
     Assets:未払金:太郎   5,400 JPY
     Assets:Cash         -5,400 JPY
 </code></pre><p>こうしておけば、年末の締めの時に太郎への未払金が <strong>5,400円</strong> 残っていることがわかります：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ led bal
 	  -5,400 JPY  Assets:未払金:太郎
 	   5,400 JPY  Expeses:忘年会
 --------------------
-		   <span class="m">0</span>
+		   <span style="color:#ae81ff">0</span>
 </code></pre></div><h3 id="自分のクレジットカードで全員分を立替払いした">自分のクレジットカードで全員分を立替払いした</h3>
 <p>とりあえず自分のカードを切って全額を支払いました。その際、
 <strong>21,345円</strong> を均等割りせずに、花子は飲まなかったので <strong>3,000円</strong> 、自分と太郎、次郎は割り勘で <strong>6,115円</strong> という風に <strong>ウエイトをつけた割り勘</strong> の場合：</p>
@@ -181,7 +181,7 @@
 <li><strong>忘年会当日</strong> のbalレポート：</li>
 </ul>
 <!--listend-->
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ led bal
 	  15,230 JPY  Assets:未収金
 	   6,115 JPY    太郎
 	   6,115 JPY    次郎
@@ -189,16 +189,16 @@
 	   6,115 JPY  Expenses:宴会費
 	 -21,345 JPY  Liabilities:Visa
 --------------------
-		   <span class="m">0</span>
+		   <span style="color:#ae81ff">0</span>
 </code></pre></div><ul>
 <li><strong>年末</strong> 12月31日のbalレポート。 <strong>未収金</strong> をクエリーすると：</li>
 </ul>
 <!--listend-->
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ led bal 未収金
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ led bal 未収金
 	   6,115 JPY  Assets:未収金
-		   <span class="m">0</span>    太郎
+		   <span style="color:#ae81ff">0</span>    太郎
 	   6,115 JPY    次郎
-		   <span class="m">0</span>    花子
+		   <span style="color:#ae81ff">0</span>    花子
 --------------------
 	   6,115 JPY
 </code></pre></div><p>花子と太郎からは返金を受けているので未収金ゼロ、次郎だけが返済を忘れているw</p>
@@ -206,17 +206,17 @@
 <li>年開けの <strong>1月10日</strong> 、次郎がようやく返済。その時点でのbalレポート：</li>
 </ul>
 <!--listend-->
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">	  15,700 JPY  Assets
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">	  15,700 JPY  Assets
 	  15,700 JPY    Cash
-		   <span class="m">0</span>    未収金
-		   <span class="m">0</span>      太郎
-		   <span class="m">0</span>      次郎
-		   <span class="m">0</span>      花子
+		   <span style="color:#ae81ff">0</span>    未収金
+		   <span style="color:#ae81ff">0</span>      太郎
+		   <span style="color:#ae81ff">0</span>      次郎
+		   <span style="color:#ae81ff">0</span>      花子
 	    -470 JPY  Equity:Adjustments
 	   6,115 JPY  Expenses:宴会費
 	 -21,345 JPY  Liabilities:Visa
 --------------------
-		   <span class="m">0</span>
+		   <span style="color:#ae81ff">0</span>
 </code></pre></div><p>めでたく未収金がゼロになりました。なお、全体のバランスをゼロにするために、 <code>Equity:Adjustments</code> というアカウントを設けて差額を収納しています。</p>
 <p>ではLedger-cliで良い忘年会を！（笑）</p>
 <h2 id="acknowledgement">Acknowledgement</h2>

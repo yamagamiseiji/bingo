@@ -1,6 +1,8 @@
-#    Time-stamp: <2021-04-05 16:39:00 yamagami>
+#    Time-stamp: <2021-04-07 16:05:02 yamagami>
 #+title: 
 #+date: [ ]
+#+language: ja
+
 #+link: file file+sys:../static/
 
 #+hugo_base_dir: ~/peace-blog/bingo/

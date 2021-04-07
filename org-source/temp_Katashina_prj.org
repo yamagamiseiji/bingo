@@ -1,5 +1,6 @@
 #+title: リモート温度計プロジェクト
 #+date: [2019-02-13]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts

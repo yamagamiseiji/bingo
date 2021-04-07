@@ -162,20 +162,29 @@
     </item>
     
     <item>
-      <title>edu</title>
-      <link>https://bred-in-bingo.netlify.app/tags/edu/</link>
-      <pubDate>Sat, 22 Jun 2019 00:00:00 +0900</pubDate>
+      <title>food</title>
+      <link>https://bred-in-bingo.netlify.app/tags/food/</link>
+      <pubDate>Sat, 06 Jul 2019 11:49:00 +0900</pubDate>
       
-      <guid>https://bred-in-bingo.netlify.app/tags/edu/</guid>
+      <guid>https://bred-in-bingo.netlify.app/tags/food/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wine</title>
       <link>https://bred-in-bingo.netlify.app/tags/wine/</link>
-      <pubDate>Sat, 22 Jun 2019 00:00:00 +0900</pubDate>
+      <pubDate>Sat, 06 Jul 2019 11:49:00 +0900</pubDate>
       
       <guid>https://bred-in-bingo.netlify.app/tags/wine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>edu</title>
+      <link>https://bred-in-bingo.netlify.app/tags/edu/</link>
+      <pubDate>Sat, 22 Jun 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://bred-in-bingo.netlify.app/tags/edu/</guid>
       <description></description>
     </item>
     

@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
     - [Vol.9 の相互校閲プロセスが完了しました！](#vol-dot-9-の相互校閲プロセスが完了しました)
     - [山研年報バックナンバーは・・・](#山研年報バックナンバーは)
@@ -27,11 +27,11 @@ draft = false
 Vol.9 の相互校閲プロセスの詳細は [こちら](http://www3.psy.senshu-u.ac.jp/~yamagami/process%5Fchart%5F9vol.html) をご覧ください。プロセスの公開期間は数カ月程度を予定しています。
 
 なお、Vol.9の原稿は3月10日には印刷所（芳文社様＠町田）に入稿し、20日には刊行の予定です。ページ数は105ページになります。卒業式（3月22日）または翌日の卒業パーティには間に合います。
-Vol.9の表紙は図 [1](#org448222b) のとおりです。出来上がりを楽しみにしてください。
+Vol.9の表紙は図 [1](#org7c56dbd) のとおりです。出来上がりを楽しみにしてください。
 
-<a id="org448222b"></a>
+<a id="org7c56dbd"></a>
 
-{{< figure src="/30yamalab_hyoshi.png" caption="Figure 1: 山研年報Vol.9(最終巻)表紙" width="80%" >}}
+{{< figure src="/30yamalab_hyoshi.png" caption="&#22259;1:  山研年報Vol.9(最終巻)表紙" width="80%" >}}
 
 山研は2019年3月で満期「閉店」しますので、Vol.9 をもって山研年報は終刊となります。
 

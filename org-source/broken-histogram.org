@@ -1,5 +1,6 @@
 #+title: Give me a break!
 #+date:  [2020-04-22 水 10:21]
+#+language: ja
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
@@ -44,7 +45,7 @@ Ledgerとgnuplotを組み合わせて図[[fig1]]のような *break* つき棒�
 
 ** Ledger-cliのクエリー
 税額の計算をするためのLedgerクエリーは次のとおりです。
-#+begin_src shell
+#+begin_src sh
 $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 #+end_src
 ここで、 *=%tax=* は税金に関係するトランザクションにつけた *タグ* です。税金にはさまざまな名前がついています。計算の際に、それらを洩れなくすくい上げるために、記帳の段階で全て =tax= というタグをつけてあります。
@@ -55,7 +56,7 @@ $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 - =--monthly (-M)= :: 月ごとにまとめて出力
 
 このクエリーによって得られるデータの例（数値はデタラメです）：
-#+begin_src
+#+begin_src sh
 　：
 2020-01-01 7234	
 2020-02-01 4567	
@@ -70,7 +71,7 @@ $ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
 
 *** ターミナルと出力ファイルの指定
 出力図はPDFにして =$out_file= に出力します。
-#+begin_src
+#+begin_src sh
 set terminal pdfcairo transparent enhanced font 'Arial,10'
 set output '$out_file'
 #+end_src
@@ -95,7 +96,7 @@ y4 = 1120000/1000
 #+end_src
 
 *** 図のスタイルとY軸の数字のフォーマット
-#+begin_src
+#+begin_src sh
 set style histogram 
 set style data histograms
 set style fill transparent solid 0.8 border -1
@@ -106,7 +107,7 @@ set format y "%'6.0f"
 
 *** multiplotの宣言と下の図
 読み込むデータファイルは変数 =$data_to_plot= で指示します。
-#+begin_src
+#+begin_src shell
 set multiplot
 set label "Amount(千円)" at screen 0.03,0.5 center front rotate font "," . 10
 
@@ -127,7 +128,7 @@ plot '$data_to_plot' \
          with labels font "Courier,8" offset 0,0.5 textcolor linestyle 0 notitle
 #+end_src
 *** 上の図
-#+begin_src
+#+begin_src sh
 unset xtics
 unset xlabel
 
