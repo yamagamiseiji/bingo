@@ -106,8 +106,8 @@
 </div>
 <!--endtoc-->
 <h2 id="はじめに">はじめに</h2>
-<p>今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図<a href="#org1bbbc53">1</a>）。</p>
-<p><a id="org1bbbc53"></a></p>
+<p>今年は、5月11日に花豆を苗ポットに種まきしました。その後の発芽の進行と子葉（双葉）形成の進行を観察し、その結果を図にしてみました（図<a href="#orgc112b7a">1</a>）。</p>
+<p><a id="orgc112b7a"></a></p>
 <figure>
     <img src="/out-sprouting0530.png"
          alt="図1: 花豆の発芽と子葉になるまでの経過（ N=40 ）。Y軸は種・苗のステータス（種、発芽、子葉）を累積パーセントにしたものです。X軸の第1軸は年月日、第2軸は積算温度（ ℃ ）。" width="500px"/> <figcaption>
@@ -115,8 +115,8 @@
         </figcaption>
 </figure>
 
-<p>ここでの「発芽」は図<a href="#orga5d7d54">2</a>、「子葉」は図<a href="#org1ace4d7">3</a>のような状態です。</p>
-<p><a id="orga5d7d54"></a></p>
+<p>ここでの「発芽」は図<a href="#org71eb955">2</a>、「子葉」は図<a href="#orgb5283f3">3</a>のような状態です。</p>
+<p><a id="org71eb955"></a></p>
 <figure>
     <img src="/status02.jpg"
          alt="図2:  発芽の状態。芽の先端が地中から出たかどうかを判断基準としました。花豆では、まず軸の部分がアーチ状になって土から出てきて、先端部分は最後に地中からアタマをもたげます。" width="300px"/> <figcaption>
@@ -124,7 +124,7 @@
         </figcaption>
 </figure>
 
-<p><a id="org1ace4d7"></a></p>
+<p><a id="orgb5283f3"></a></p>
 <figure>
     <img src="/sprout-%e5%ad%90%e8%91%89.jpg"
          alt="図3:  子葉になった状態。2枚の子葉の広がり角度がおよそ100度以上になったかどうかを判断基準としました。" width="300px"/> <figcaption>
@@ -157,7 +157,7 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">current<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>grep <span style="color:#e6db74">&#34;&gt;現在&lt;&#34;</span> <span style="color:#e6db74">${</span>site<span style="color:#e6db74">}</span>.html | grep <span style="color:#e6db74">&#34;℃&#34;</span> | grep -Eo <span style="color:#e6db74">&#39;[+-]?([0-9]*[.])?[0-9]+&#39;</span><span style="color:#e6db74">`</span>
 </code></pre></div><p>もっとエレガントな方法があるかと思いますが、現在のところ取りこぼしなどのエラーは起こっていません。</p>
 <p>抽出したデータは次のような形のファイルにして保存します：</p>
-<pre><code class="language-nil" data-lang="nil">　　：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">　　：
 2020-06-11 00:03 19.1
 2020-06-11 01:03 18.1
 2020-06-11 02:03 18.1
@@ -170,14 +170,14 @@
 2020-06-11 09:03 21.3
 2020-06-11 10:03 23.0
 　　：
-</code></pre><p>毎時03分にデータを取得しています。毎時00分にアメダスデータを取得するのは意図的に避けています（注 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>）。</p>
+</code></pre></div><p>毎時03分にデータを取得しています。毎時00分にアメダスデータを取得するのは意図的に避けています（注 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>）。</p>
 <h3 id="日平均気温の計算">日平均気温の計算</h3>
 <p>上で収集した毎時の気温データファイルを24個読み込んで、毎日23時30分に当日の日平均気温を算出します。awkを使うと1行で平均値が計算できるのですね、ありがたいです：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat <span style="color:#e6db74">${</span>kion<span style="color:#e6db74">}</span>.dat | awk <span style="color:#e6db74">&#39;{m+=$3} END{print m/NR;}&#39;</span> &gt; ./wrk-avr.dat
 </code></pre></div><h3 id="グラフのプロット">グラフのプロット</h3>
 <p>データは次のような形になっています。右側の6カラムはポット苗のステータスで、
 1=種, 2=発芽, 3=子葉 です。</p>
-<pre><code class="language-nil" data-lang="nil"># Date   平均気温 積算温度 1   2   3   4   5   6
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># Date   平均気温 積算温度 1   2   3   4   5   6
 2020-05-11  0      0      40   0   0   0   0   0
 2020-05-12  14.6  14.6    40   0   0   0   0   0
 2020-05-13  22.7  37.3    40   0   0   0   0   0
@@ -198,48 +198,48 @@
 2020-05-28  13.9  279.2    3  37  35   2   0   0
 2020-05-29  13.3  292.5    3  37  35   4   0   0
 2020-05-30  15.0  307.5    2  38  37   6
-</code></pre><p>これを読み込んで図<a href="#org1bbbc53">1</a>をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図<a href="#org1bbbc53">1</a>のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。</p>
-<pre><code class="language-nil" data-lang="nil">set terminal pdfcairo transparent enhanced font &quot;Arial, 8&quot;
+</code></pre></div><p>これを読み込んで図<a href="#orgc112b7a">1</a>をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図<a href="#orgc112b7a">1</a>のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">set terminal pdfcairo transparent enhanced font <span style="color:#e6db74">&#34;Arial, 8&#34;</span>
 
 set grid x y
 set key left top
-set output '$out_file'
+set output <span style="color:#e6db74">&#39;$out_file&#39;</span>
 
 set xdata time
-set timefmt &quot;%Y-%m-%d&quot;
-set format x &quot;%m/%d&quot;
+set timefmt <span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span>
+set format x <span style="color:#e6db74">&#34;%m/%d&#34;</span>
 
-set yrange [0:100]
-set xrange [&quot;2020-05-10&quot;:&quot;2020-05-31&quot;]
+set yrange <span style="color:#f92672">[</span>0:100<span style="color:#f92672">]</span>
+set xrange <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;2020-05-10&#34;</span>:<span style="color:#e6db74">&#34;2020-05-31&#34;</span><span style="color:#f92672">]</span>
 
 set xtics nomirror
 set x2tics
 
-set title 'ベニバナインゲン（花豆）播種育苗記録（2020）' font &quot;Arial,13&quot;
-set xlabel 'Date（2020）' font &quot;Arial,10&quot;
-set x2label '積算温度( ℃日)' font &quot;Arial,10&quot;
-set ylabel '累積ステータス(%)'  font &quot;Arial,10&quot;
+set title <span style="color:#e6db74">&#39;ベニバナインゲン（花豆）播種育苗記録（2020）&#39;</span> font <span style="color:#e6db74">&#34;Arial,13&#34;</span>
+set xlabel <span style="color:#e6db74">&#39;Date（2020）&#39;</span> font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
+set x2label <span style="color:#e6db74">&#39;積算温度( ℃日)&#39;</span> font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
+set ylabel <span style="color:#e6db74">&#39;累積ステータス(%)&#39;</span>  font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
 
-## ラベルの書き方 = timefmtで指定した通りに指定する
-set label 1 &quot;播種(05/11)&quot; at &quot;2020-05-11&quot;,17 center
-set label 2 &quot;定植(05/30)&quot; at &quot;2020-05-30&quot;,17 center
+<span style="color:#75715e">## ラベルの書き方 = timefmtで指定した通りに指定する</span>
+set label <span style="color:#ae81ff">1</span> <span style="color:#e6db74">&#34;播種(05/11)&#34;</span> at <span style="color:#e6db74">&#34;2020-05-11&#34;</span>,17 center
+set label <span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#34;定植(05/30)&#34;</span> at <span style="color:#e6db74">&#34;2020-05-30&#34;</span>,17 center
 
-## 矢印の入れ方 = timefmtで指定した通りに指定する
-set arrow \
-   from '2020-05-11',14 \
-   to   '2020-05-11', 2\
-   linewidth 2 lc &quot;blue&quot;
+<span style="color:#75715e">## 矢印の入れ方 = timefmtで指定した通りに指定する</span>
+set arrow <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   from <span style="color:#e6db74">&#39;2020-05-11&#39;</span>,14 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   to   <span style="color:#e6db74">&#39;2020-05-11&#39;</span>, 2<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   linewidth <span style="color:#ae81ff">2</span> lc <span style="color:#e6db74">&#34;blue&#34;</span>
 
-set arrow \
-   from '2020-05-30',14 \
-   to   '2020-05-30', 2\
-   linewidth 2 lc &quot;blue&quot;
+set arrow <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   from <span style="color:#e6db74">&#39;2020-05-30&#39;</span>,14 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   to   <span style="color:#e6db74">&#39;2020-05-30&#39;</span>, 2<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   linewidth <span style="color:#ae81ff">2</span> lc <span style="color:#e6db74">&#34;blue&#34;</span>
 
-plot '$data_to_plot' \
-	 u 1:(column(5)/40*100):x2tic(3) w lp ps 0.5 pt 7 title '発芽',\
-      '' u 1:(column(6)/40*100):x2tic(3) w lp ps 0.5 title '子葉'
+plot <span style="color:#e6db74">&#39;$data_to_plot&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	 u 1:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>/40*100<span style="color:#f92672">)</span>:x2tic<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> w lp ps 0.5 pt <span style="color:#ae81ff">7</span> title <span style="color:#e6db74">&#39;発芽&#39;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>      <span style="color:#e6db74">&#39;&#39;</span> u 1:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>/40*100<span style="color:#f92672">)</span>:x2tic<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> w lp ps 0.5 title <span style="color:#e6db74">&#39;子葉&#39;</span>
 set output
-</code></pre><h2 id="今後の課題">今後の課題</h2>
+</code></pre></div><h2 id="今後の課題">今後の課題</h2>
 <ul>
 <li>できれば畑の温度を近似値ではなくて、温度ロガーで正確にリアルタイムに収集したいと思っています。安価な方法を探索中です。</li>
 <li>植物の状態を観察しカウントした数を「観察ノート（online）」に記入したら、その時点でのグラフが自動的に描出されるようにしたいと思います。</li>
@@ -248,7 +248,7 @@ set output
 <h2 id="おまけ">おまけ</h2>
 <h3 id="今日の花豆-2020-06-12">今日の花豆（2020/06/12）</h3>
 <p>播種からちょうど1か月経過した花豆の様子です。ツルの先端はボクの背丈ほどあります。豆の成長はほんとうに速い。「ジャックと豆の木」の童話が生まれた訳が分かりますｗ</p>
-<p><a id="org348adba"></a></p>
+<p><a id="orgf01c00e"></a></p>
 <figure>
     <img src="/today1.jpg"
          alt="図4:  播種後1か月目の花豆。" width="300px"/> <figcaption>
@@ -256,7 +256,7 @@ set output
         </figcaption>
 </figure>
 
-<p><a id="orgf164611"></a></p>
+<p><a id="orgd0d6726"></a></p>
 <figure>
     <img src="/today2.jpg"
          alt="図5:  花豆トンネルの風景。" width="300px"/> <figcaption>

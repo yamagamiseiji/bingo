@@ -101,7 +101,7 @@
 <p>コロナへの政府の対応に憤慨して <strong>give me a break!</strong> って叫ぶ感じで、この際、禁断の <strong>breakつき棒グラフ</strong> を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね（笑）</p>
 <h2 id="y軸にbreakを入れてみる">Y軸にbreakを入れてみる</h2>
 <p>こんな感じになります（金額はでたらめです）。</p>
-<p><a id="org36044b6"></a></p>
+<p><a id="org1456a5e"></a></p>
 <figure>
     <img src="/broken-histogram.png"
          alt="図1:  Breakを入れた棒グラフの例（納税額の推移）" width="90%"/> <figcaption>
@@ -109,7 +109,7 @@
         </figcaption>
 </figure>
 
-<p>Ledgerとgnuplotを組み合わせて図<a href="#org36044b6">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
+<p>Ledgerとgnuplotを組み合わせて図<a href="#org1456a5e">1</a>のような <strong>break</strong> つき棒グラフを描く方法を紹介します。</p>
 <h3 id="ledger-cliのクエリー">Ledger-cliのクエリー</h3>
 <p>税額の計算をするためのLedgerクエリーは次のとおりです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger reg --amount-data --collapse --monthly  ^expenses and %tax
@@ -142,21 +142,21 @@ set output <span style="color:#e6db74">&#39;$out_file&#39;</span>
 <li>
 <p>multiplotのためのパラメータを変数にして指定</p>
 <p>上下左右のマージンなどをこうして <strong>変数化</strong> することで、図のバランスの微調整が楽になります。</p>
-<pre><code class="language-nil" data-lang="nil">bm = 0.15    # bmargin
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">bm = 0.15    # bmargin
 lm = 0.12    # lmargin
 rm = 0.95    # rmargin
 gap = 0.03   # gap betweein 2 charts
 size = 0.75  # plot size
 kk = 0.5     # relative height of bottom plot
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 <h4 id="y軸の範囲-最小値-最大値-を変数にして指定">Y軸の範囲（最小値、最大値）を変数にして指定</h4>
 <p>上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。</p>
-<pre><code class="language-nil" data-lang="nil">y1 = 0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">y1 = 0
 y2 =  120000/1000
 y3 = 1000000/1000
 y4 = 1120000/1000
-</code></pre><h4 id="図のスタイルとy軸の数字のフォーマット">図のスタイルとY軸の数字のフォーマット</h4>
+</code></pre></div><h4 id="図のスタイルとy軸の数字のフォーマット">図のスタイルとY軸の数字のフォーマット</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">set style histogram
 set style data histograms
 set style fill transparent solid 0.8 border -1
@@ -205,8 +205,8 @@ unset multiplot
 </code></pre></div><p>こんな感じです。</p>
 <h3 id="細かいことですが">細かいことですが・・・</h3>
 <p>納税金額が <strong>ゼロの月</strong> では数字の'0&rsquo;を書かないようにします。それにはgnuplotの <strong>三項演算子</strong> を使います。その部分だけを抽出すると次のとおりです：</p>
-<pre><code class="language-nil" data-lang="nil">(column(2) != 0 ? (sprintf(&quot;%'d&quot;,(column(2)))):&quot;&quot;)
-</code></pre><p>gnuplotの三項演算子の記号は <span class="underline"><strong>? :</strong></span> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> !<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ? <span style="color:#f92672">(</span>sprintf<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%&#39;d&#34;</span>,<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>2<span style="color:#f92672">))))</span>:<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><p>gnuplotの三項演算子の記号は <span class="underline"><strong>? :</strong></span> です。Cと同じ働きをします。例えば <strong>a?b:c</strong> とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）</p>
 <p>つまり：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">colomn(2) != 0            （第2列の値がゼロではない）が真か偽か
 sprintf(&#34;%&#39;d&#34;,(column(2)))  真ならば、第2列の値に1000単位でカンマをつける

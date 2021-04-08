@@ -48,7 +48,7 @@ Ledgerには大きなメリットがたくさんありますが、その一つ�
   - *emacs* （自分の好みに調整された =init.el= も複写する）
 
 基本的にはこれだけで、Termuxのターミナル上で次のようなコマンドが動きます：
-#+begin_src
+#+begin_src sh
 $ ledger bal ガソリン -p jul -X JPY
 $ ledger reg farming -p aug
 $ mbal 交際費

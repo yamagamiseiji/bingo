@@ -31,7 +31,7 @@
 ソフトウエア環境は、Ubuntu16.04/Emacs25.3.2/Ledger3.1.1です。
 
 さてLedger本体のインストールはapt installで一発です：
-#+begin_src shell
+#+begin_src sh
 $ sudo apt install ledger
 #+end_src
 
@@ -78,7 +78,7 @@ Ledgerは柔軟性が高く、枠組み変更がとても簡単です。
 *** 仕訳帳はOpening Balanceから始まる
 仕訳帳ファイルは期首残高（Opening balance）の記帳（posting）から始めます。
 たとえばを次のように書きましょう（仮想データです）：
-#+begin_src
+#+begin_src sh
 2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        50000 JPY
@@ -115,7 +115,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 どのような形で仕訳帳に記帳する（posting）かを、具体例で説明します。
 
 - ATMを使って、ゆうちょ銀行から現金30,000円を引き出しました：
-	#+begin_src
+	#+begin_src sh
 	2019/04/10  ATMでキャッシング
 	    Assets:Cash
 	    Assets:ゆうちょ銀行                       -30000  JPY
@@ -123,7 +123,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	上の例では、「Assets:ゆうちょ銀行」がソース勘定[fn:account]（account）で、その上の「Assets:Cash」がターゲット勘定です。
 
 - その現金を使って、スタバでコーヒを飲みました：
-	#+begin_src
+	#+begin_src sh
 	2019/04/10  スタバ
 	    Expenses:交際費:Coffee                       780  JPY
 	    Assets:Cash
@@ -131,7 +131,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	つまり「Assets:Cash」というソースをつかって、「Coffee」という「交際費」に属する「経費」を「スタバ」（ターゲット）に支払いました。Cashアカウント欄には金額が書かれていませんが、Ledgerが複式簿記のルールに従って -780円とマイナスの金額を補完してくれます。
 
 - クレジットカードを使ってAmazonで本を買いました：
-	#+begin_src
+	#+begin_src sh
 	2019/04/10  Amazon
 	    Expenses:教養費:Books                       2780  JPY
 	    Liabilities:VisaCard
@@ -141,7 +141,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	ところで、上の2例ともExpensesがプラスの数字になっているのは？？？ですね。目まいがします。たしかに自分中心の視点からすると、ボクにはマイナスの金額が馴染みやすいですが、自分のお金がAmazonを経由して社会に還元されているので、まあ社会の立場からすれば、プラスという風でしょうか？
 
 - いよいよ給料日！ 振込先は三井住友銀行：
-	#+begin_src
+	#+begin_src sh
 	2019/04/25   株式会社ほげほげ
 	    Assets:三井住友銀行            
 	    Income:給与                 -250000  JPY
@@ -149,7 +149,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	自分の三井住友銀行口座（ターゲット口座）に、「Income:給与」（ソース口座）＝「株式会社ほげほげ」から25万円のサラリーが振り込まれました。ここで、25万円がマイナスになっているのは、またまた目まいがしますねｗ。要するに給料は自分にとってはプラスなのですが、雇用主である会社の視点から見れば、資産はマイナスになっているから、と考えましょう。複式簿記は、心理学的に言えば「自己視点」と「他者視点」を切り替えることが求められる感じがします。
 
 - さて給料が出たので居酒屋でビールを飲みました。支払いはVisaCard：
-	#+begin_src
+	#+begin_src sh
 	2019/04/26  居酒屋
 	    Expenses:交際費:Beer                        1900  JPY
 	    Liabilities:VisaCard
@@ -157,14 +157,14 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	VISAを使って、交際費としてビールを飲みました。VISAのアカウントには負債（Liabilites）として記録されて行きます。
 
 - 三井住友からゆうちょへ資金移動：
-	#+begin_src
+	#+begin_src sh
 	2019/04/26   三井住友からゆうちょへ資金移動
 	    Assets:ゆうちょ銀行
 	    Assets:三井住友銀行                      -150000 JPY
 	#+end_src
 
 - 以上をまとめると次のような内容です：
-	#+begin_src
+	#+begin_src sh
 	;
 	;    サンプルledger journalファイル (=sample.ledger)
 	;
@@ -213,7 +213,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 次のようにします：
 #+caption: 仕訳帳（sample.ledger）の全体バランスレポート
 #+name: list:1
-	#+begin_src shell
+	#+begin_src sh
 	$ ledger -f sample.ledger bal
 	
 	         999,220 JPY  Assets
@@ -249,7 +249,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 	1) 環境変数 /LEDGER_FILE/ でファイル名を指定する
 	2) ~/.legerrcファイルを作成し、その中に次の例のような行を書いておく：
-	#+begin_src
+	#+begin_src sh
 	--file ~/Dropbox/sample.Ledger
 	#+end_src
 
@@ -263,7 +263,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	「reg」はregisterの略です。金額の一番右側の列は、累計になります。
 
 - VISAの請求額を決済銀行（ゆうちょ銀行）から引き落とすトランザクションの書き方は次のとおりです：
-	#+begin_src
+	#+begin_src sh
 	2019/04/15=05/10   請求書への支払い(VISA)
 	    Liabilities:VisaCard               4680  JPY
 	    Assets:ゆうちょ銀行
@@ -271,7 +271,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 	VISAが、毎月15日締めで翌月10日引き落としだとすれば、こんな感じです。日程に =05/10= と書いてあるのは、それが「発効日」であることを示します。
 
 - VISAからの請求書に対して、自分の資産（ゆうちょ銀行）から資金が移動すると、その結果として、つぎのようなバランスになります：
-	#+begin_src
+	#+begin_src sh
 	$ ledger -f sample.ledger bal
 	
 	         994,540 JPY  Assets
@@ -328,7 +328,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 	Emacs本体の持つ検索機能では、パタンにマッチした「行」のみが表示されますが、Ledger-modeでのnarrowingでは、トランザクション単位で表示されるというのが味噌。 **/C-c C-f/** を叩くと、ミニバッファに'Regexp:'が表示されます。
 	ここで入力された文字列とマッチしたトランザクションが表示されます。たとえば、「ゆうちょ」を入力すると：
-#+begin_src
+#+begin_src sh
 2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        50000 JPY

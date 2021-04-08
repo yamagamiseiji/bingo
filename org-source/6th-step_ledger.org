@@ -44,9 +44,9 @@ Ledgerとgnuplotを組み合わせて図を描くと見てくれも悪くはな�
 - 2004年5月に、1株30ドルで50株購入し
 - 2005年8月に、1株50ドルで50株全株を売却した
 という場合のトランザクションの書き方を例示しています：
-#+begin_src
+#+begin_src sh
 2004/05/01 Stock purchase
-    Assets:Broker                     50 AAPL @ $30.00
+    Assets:Broker                     50 AAPL @ $30.00ファイル
     Expenses:Broker:Commissions        $19.95
     Assets:Broker                  $-1,519.95
 
@@ -58,7 +58,7 @@ Ledgerとgnuplotを組み合わせて図を描くと見てくれも悪くはな�
 #+end_src
 
 こうしておいて、balレポートを見ると次のとおりです：
-#+begin_src
+#+begin_src sh
 $ led bal
              $960.10  Assets:Broker
               $39.90  Expenses:Broker:Commissions
@@ -80,7 +80,7 @@ Google groupへの[[https://groups.google.com/forum/#!msg/ledger-cli/t8spw-5sXt8
 - 03/01に、525ドルに値上がりした
 
 それぞれのトランザクションの書き方は次のようになります：
-#+begin_src
+#+begin_src sh
 2018/12/31 Opening Balances
     Assets:Stocks                             2 AAPL @ $500.00
     Equity:Opening Balances
@@ -104,7 +104,7 @@ P 2019/03/01 AAPL $525.00
 #+end_src
 
 こうしておいてbalレポートを見ると：
-#+begin_src
+#+begin_src sh
 $ led bal -X '$'
             $1100.00  Assets
               $50.00    Checking
@@ -118,7 +118,7 @@ $ led bal -X '$'
 
 この場合には490ドルで購入した株が03/01には525ドルに値上がりしています。しかし売買は完了していませんので、いわゆる含み損益を抱えている事例となります。
 Ledgerでは、 =--unrealized= オプションを使えば、 *未実現* の含み益（＝評価益）、含み損（＝評価損）が計算できるということになります：
-#+begin_src
+#+begin_src sh
 $ led bal  -X '$' --unrealized
             $1100.00  Assets
               $50.00    Checking
@@ -141,7 +141,7 @@ $ led bal  -X '$' --unrealized
 ** ~/.prices.dbファイル
  =~/.prices.db= ファイルはシリーズ（5）でも紹介しました。そこでは円ドルなどの為替レートを保存しておくときに使いましたが、株価のデータ保存にも使います。
 中身はたとえば次のようになります：
-#+begin_src
+#+begin_src sh
 　　　：
 P 2019/07/19 09:23:06 USD JPY 107.4005
 P 2019/07/19 14:03:43 JT JPY 2,4510
@@ -172,7 +172,7 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
 * 各種レポート
 
 さて =~/.prices.db= は、株売買でどのように使われるのでしょうか。いま仮に次のようなトランザクションがあったとしましょう：
-#+begin_src
+#+begin_src sh
 05/01  purchase stocks
     Assets:Brokerage            100 丸全運 @ 3000.00 JPY
     Expenses:Brokerage:手数料       450 JPY
@@ -182,7 +182,7 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
 
 ** コモディティ総額のレポート
  =--quantity=, =-O= オプション（ディフォールト）を使うと次のようになります：
-#+begin_src
+#+begin_src sh
 $ led bal -O
          -300450 JPY
           100 丸全運  Assets:Brokerage
@@ -195,7 +195,7 @@ $ led bal -O
 
 ** コストのレポート
  =--basis=, =-B= オプションは、全ポスティングのコストcost basisをレポートします：
-#+begin_src
+#+begin_src sh
 $ led bal -B
             -450 JPY  Assets:Brokerage
              450 JPY  Expenses:Brokerage:手数料
@@ -206,7 +206,7 @@ $ led bal -B
 
 ** 株価の最新情報（データベース的に）に基づく計算結果をレポートする
  =--market=, =-V= オプションで以下の表示になります：
-#+begin_src
+#+begin_src sh
 $ led bal -V
            42050 JPY  Assets:Brokerage
              450 JPY  Expenses:Brokerage:手数料
@@ -216,11 +216,11 @@ $ led bal -V
 
 ** キャピタル・ゲインのレポート
  =--gain= =-G= オプションを使うと、3,000円で購入した丸全運の100株が、本日の株価でいくとどれほどのゲインになっているか（だけ）をみることができます：
-#+begin_src
+#+begin_src sh
 $ led bal -G
           42,500 JPY  Assets:Brokerage
 #+end_src
- =-V= とちがって手数料などは計算されません。純粋に株によるP&Lのみが表示されることになります。
+=-V= とちがって手数料などは計算されません。純粋に株によるP&Lのみが表示されることになります。
 * Acknowledgement
 
 # Local Variables:

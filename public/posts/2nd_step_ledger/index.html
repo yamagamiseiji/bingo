@@ -112,20 +112,20 @@
 <h3 id="日付けの手抜き入力">日付けの手抜き入力</h3>
 <h4 id="毎回-2019-と西暦まで入力するのがうざい">毎回、2019/と西暦まで入力するのがうざい</h4>
 <p>次のように、第1行目に <strong><code>Y 2019</code></strong> とか書くと、西暦年の入力は不要になります：</p>
-<pre><code class="language-nil" data-lang="nil">Y 2019
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Y <span style="color:#ae81ff">2019</span>
 05/01  * Petty Cash
 	Expenses:Cash
 	Assets:BKみずほ
-</code></pre><h4 id="日付けの半自動入力">日付けの半自動入力</h4>
+</code></pre></div><h4 id="日付けの半自動入力">日付けの半自動入力</h4>
 <p>けど、実際にはもっと便利な方法があります。</p>
 <p><strong><code>C-c C-a</code></strong> でミニバッファに「Transaction: 2019/05/」が表示されます。
 <strong><code>RET</code></strong> すると、今日の日付けが自動的にjournalに書き込まれます。記帳したいトランザクションの日付けが今日でなければ、その日付けを手入力します。いずれの場合にも、日付け順にみてしかるべき場所に、新規トランザクションの種（日付けのみ）が記入されます。</p>
 <h3 id="トランザクション名-アカウント名などの手抜き記帳">トランザクション名、アカウント名などの手抜き記帳</h3>
 <p><strong><code>TAB</code></strong> などによる補完や入力修正機能を使うと、キーを叩く回数を節約できます。たとえば次のようなトランザクションを記帳したいとしましょう：</p>
-<pre><code class="language-nil" data-lang="nil">2019/05/16 Amazon
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/05/16 Amazon
     Expenses:Grocery:Food
     Liabilities:VisaCard
-</code></pre><p>必要なキー入力は：</p>
+</code></pre></div><p>必要なキー入力は：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">C-c C-a RET am RET
 TAB e TAB g TAB ESC RET
 l TAB v TAB
@@ -136,7 +136,7 @@ l TAB v TAB
 <h3 id="コピペを活用">コピペを活用</h3>
 <p>Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
 <strong><code>C-c C-k</code></strong> するとEmacsの下半分に次のようなカレンダーが表示されます。</p>
-<p><a id="org5d26a58"></a></p>
+<p><a id="org1888619"></a></p>
 <figure>
     <img src="/emacs_calendar.png"
          alt="図1:  Emacs内に表示されるカレンダー" width="95%"/> <figcaption>
@@ -165,45 +165,45 @@ journal中の正しい日付け位置に複写されたトランザクション�
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars -p this momth
 </code></pre></div><p>これで、この1ヶ月間のクルマ関係経費になります。
 yesterday, this monthの他、次のような期間指定が可能です（詳しくはマニュアルを参照してください）：</p>
-<pre><code class="language-example" data-lang="example">october
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">october
 oct
-this week(day, month, quarter, year)
+this week<span style="color:#f92672">(</span>day, month, quarter, year<span style="color:#f92672">)</span>
 next week
 last week
 ;
 monthly
-monthly in 2004
+monthly in <span style="color:#ae81ff">2004</span>
 weekly from oct
 weekly from last month
 from sep to oct
 from 10/1 to 10/5
-monthly until 2005
+monthly <span style="color:#66d9ef">until</span> <span style="color:#ae81ff">2005</span>
 from apr
-until nov
+<span style="color:#66d9ef">until</span> nov
 last oct
 weekly last august
-</code></pre><h4 id="もっとこまかく期間を限定して経費を表示">もっとこまかく期間を限定して経費を表示</h4>
+</code></pre></div><h4 id="もっとこまかく期間を限定して経費を表示">もっとこまかく期間を限定して経費を表示</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars -b 04/01 -e 04/20
 </code></pre></div><p>この例では、04/01から06/30までの期間におけるクルマ関係経費を表示します。
 <strong><code>-b</code></strong> は <strong><code>-begin=*、 *</code>-e=</strong> は <strong><code>-end</code></strong> の略です。</p>
 <h3 id="register-report">Register report</h3>
 <p>ここまでのreportではすべて、バランス（残高）の金額だけが表示されます。例えば、上の最後の例（＝期間限定のクルマ関係経費バランス）では次のような結果になります：</p>
-<pre><code class="language-nil" data-lang="nil">$ ledger b cars -b 04/01 -e 04/20
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger b cars -b 04/01 -e 04/20
 	  30,890 JPY  Expenses:Cars
 	  15,530 JPY    ガソリン
 	   2,700 JPY    整備
 	  12,660 JPY    通行料金
 --------------------
 	  30,890 JPY
-</code></pre><p>この「b」を「r」にするだけで、バランス金額だけでなく、各トランザクションの日付や支出先などの詳細レポートが表示されます：</p>
-<pre><code class="language-nil" data-lang="nil">$ led r cars -b 04/01 -e 04/20
+</code></pre></div><p>この「b」を「r」にするだけで、バランス金額だけでなく、各トランザクションの日付や支出先などの詳細レポートが表示されます：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led r cars -b 04/01 -e 04/20
 
 19-Apr-04 ENEOS SS       Expenses:Cars:ガソリン    7,374 JPY   7,374 JPY
 19-Apr-11 沼田往復        Expenses:Cars:通行料金   10,640 JP   18,014 JPY
 19-Apr-15 シェル石油      Expenses:Cars:ガソリン    8,156 JP   26,170 JPY
 19-Apr-17 大師往復        Expenses:Cars:通行料金    2,020 JPY  28,190 JPY
 19-Apr-18 ENEOS SS       Expense:Cars:整備         2,700 JPY  30,890 JPY
-</code></pre><h3 id="その他いろいろ">その他いろいろ</h3>
+</code></pre></div><h3 id="その他いろいろ">その他いろいろ</h3>
 <h4 id="トランザクション名での絞り込み">トランザクション名での絞り込み</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -r @starbacks
 </code></pre></div><p>アカウント名ではなくて、特定のトランザクション（取引）先の名前で整理したいことがあります。上の例のように <strong><code>@</code></strong> （atのつもりですねｗ）をつけるとスタバでの支出のレポートを得ることができます。</p>

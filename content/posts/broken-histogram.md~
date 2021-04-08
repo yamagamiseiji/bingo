@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [Y軸にbreakを入れてみる](#y軸にbreakを入れてみる)
     - [Ledger-cliのクエリー](#ledger-cliのクエリー)
@@ -38,11 +38,11 @@ draft = false
 
 こんな感じになります（金額はでたらめです）。
 
-<a id="orgf2c273d"></a>
+<a id="org09f4743"></a>
 
-{{< figure src="/broken-histogram.png" caption="Figure 1: Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
+{{< figure src="/broken-histogram.png" caption="&#22259;1:  Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
 
-Ledgerとgnuplotを組み合わせて図[1](#orgf2c273d)のような **break** つき棒グラフを描く方法を紹介します。
+Ledgerとgnuplotを組み合わせて図[1](#org09f4743)のような **break** つき棒グラフを描く方法を紹介します。
 
 
 ### Ledger-cliのクエリー {#ledger-cliのクエリー}
@@ -100,7 +100,7 @@ set output '$out_file'
 
     上下左右のマージンなどをこうして **変数化** することで、図のバランスの微調整が楽になります。
 
-    ```nil
+    ```text
     bm = 0.15    # bmargin
     lm = 0.12    # lmargin
     rm = 0.95    # rmargin
@@ -114,7 +114,7 @@ set output '$out_file'
 
 上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。
 
-```nil
+```text
 y1 = 0
 y2 =  120000/1000
 y3 = 1000000/1000

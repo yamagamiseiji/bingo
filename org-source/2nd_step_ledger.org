@@ -25,7 +25,7 @@
 ** 日付けの手抜き入力
 *** 毎回、2019/と西暦まで入力するのがうざい
 次のように、第1行目に *=Y 2019=* とか書くと、西暦年の入力は不要になります：
-#+begin_src
+#+begin_src sh
 Y 2019
 05/01  * Petty Cash
 	Expenses:Cash
@@ -44,7 +44,7 @@ Y 2019
 ** トランザクション名、アカウント名などの手抜き記帳
  *=TAB=* などによる補完や入力修正機能を使うと、キーを叩く回数を節約できます。
 たとえば次のようなトランザクションを記帳したいとしましょう：
-#+begin_src 
+#+begin_src  sh
 2019/05/16 Amazon
     Expenses:Grocery:Food
     Liabilities:VisaCard
@@ -118,7 +118,7 @@ $ ledger b cars -p this momth
 #+end_src
 これで、この1ヶ月間のクルマ関係経費になります。
 yesterday, this monthの他、次のような期間指定が可能です（詳しくはマニュアルを参照してください）：
-#+begin_src example
+#+begin_src sh
 october
 oct
 this week(day, month, quarter, year) 
@@ -149,7 +149,7 @@ $ ledger b cars -b 04/01 -e 04/20
 ** Register report
 ここまでのreportではすべて、バランス（残高）の金額だけが表示されます。
 例えば、上の最後の例（＝期間限定のクルマ関係経費バランス）では次のような結果になります：
-#+begin_src
+#+begin_src sh
 $ ledger b cars -b 04/01 -e 04/20
           30,890 JPY  Expenses:Cars
           15,530 JPY    ガソリン
@@ -160,7 +160,7 @@ $ ledger b cars -b 04/01 -e 04/20
 #+end_src
 
 この「b」を「r」にするだけで、バランス金額だけでなく、各トランザクションの日付や支出先などの詳細レポートが表示されます：
-#+begin_src
+#+begin_src sh
 $ led r cars -b 04/01 -e 04/20
 
 19-Apr-04 ENEOS SS       Expenses:Cars:ガソリン    7,374 JPY   7,374 JPY

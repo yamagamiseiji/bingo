@@ -29,7 +29,7 @@ $ led b bank
 - 数値のタイプミス
 - トランザクションの転記もれ
 があるわけです。大量のトランザクションを見てそれを発見するのはとても大変です。そこで、とりあえず *Equity:Adjustments* というアカウントに収めることで、バランスを取ります：
-#+begin_src 
+#+begin_src  sh
 05/17 * Adjustments
     Assets:bankA      = 35,000 JPY
     Equity:Adjustments
@@ -53,26 +53,26 @@ $ led b Adjustments
 :end:
 
 まずはnanacoにお金をチャージします：
-#+begin_src
+#+begin_src sh
 2019/05/27 * nanacoチャージ
     Assets:nanacoCard           
     Assets:Cash                                -2,000 JPY
 #+end_src
 そしてお昼ごはん：
-#+begin_src
+#+begin_src sh
 2019/05/27 * セブンイレブン
     Expenses:Lunch                               698 JPY
     Assets:nanacoCard
 #+end_src
 チャージ時点でnanaco残高がゼロだったら、残高は1,302円になるはずですが、そんなことはめったにありません。今回は、1,469円になっていました。そこで、上に書いた[[#adjustment][「調整]]」をしておきます：
-#+begin_src
+#+begin_src sh
 2019/05/27 * 調整 nanaco
     Assets:nanacoCard           = 1,469 JPY
     Equity:Adjustments
 #+end_src
 
 つぎの問題は、nanacoなどでの少額の支出をどう扱うかです。家計簿では、カードにチャージしたところまでを転記して、あとは知らんぷりするのが良策かと・・・。カードで何を買ったかまでは管理しないという感じですね。ただし、家計全般を考えて、どうしても記録していた方がよい物を購入した時、たとえば、お酒への出費をコントローする必要性がある場合（おぅ、これは良い例だ！）には：
-#+begin_src
+#+begin_src sh
 2019/05/29  セブンイレブン
     Expenses:Drinks         2,500 JPY
     Assets:nanacoCard
@@ -82,13 +82,13 @@ $ led b Adjustments
 
 * 利子・利息の転記方法
 マイナス金利は国による民衆資産の窃盗（強盗？）という説があるそうですが、それにしても銀行にお金を預けているとスズメの涙レベルの利息がつきます。それを転記する方法：
-#+begin_src
+#+begin_src sh
 2019/06/05  銀行口座への利息
 	Assets:横浜銀行
 	Income:利息		-34 JPY
 #+end_src
 他に例を見たことが無いので、Incomeにして良いのかどうか分かりませんが、結果的にはこれで辻褄は合います：
-#+begin_src
+#+begin_src sh
 $ led b
          100,034 JPY  Assets:横浜銀行
         -100,000 JPY  Equity:Opening Balances
@@ -104,21 +104,21 @@ $ led b
 しかし、２ヶ月に１回とか、年に１回とかのトランザクションはテンプレートにするほうが面倒です。そこで、用意されているのが *periodical transaction* です。具体的には、Ledgerファイルの先頭に、定期的トランザクションの定義を転記します。
 
 次の例を見て下さい。これは *偶数月* に支給される年金（国民年金；NP）と（国家公務員年金;KKR）を定期的なトランザクションとして定義したものです（金額は仮想です）：
-#+begin_src
+#+begin_src sh
 ~ bimonthly from 2019/04/15 
     Assets:みずほ銀行
     Income:年金:KKR                           40,000 JPY
     Income:年金:NP                            30,000 JPY
 #+end_src
 次の例は、２ヶ月に１回、 *奇数月* に引き落とされる管理費と上下水道代です：
-#+begin_src
+#+begin_src sh
 ~ bimonthly from 2019/03/21
     Expenses:管理費                           40,000 JPY
     Expenses:公共:上下水道                     3,500 JPY
     Assets:みずほ銀行
 #+end_src
 そして、３番目は年に１回の諸会費の例です：
-#+begin_src
+#+begin_src sh
 ~ yearly    from 2019/03/01
     Expenses:諸会費:JAF                        4,000 JPY
     Expenses:諸会費:JPS	                       8,000 JPY
@@ -128,20 +128,20 @@ $ led b
 ** レポートの表示
 これらをLedgerファイルの先頭に書いておいて、次のようなコマンドを入力します。
 - IncomeとExpensesについて定期的（予算）のバランスをレポート：
-#+begin_src
+#+begin_src sh
 $ led budget ^income ^expenses
 #+end_src
 
 - 上のようにbudgetを定義していても、単にbal/regでのレポートには反映されません。bal/regでbudget（定期・予算）定義を反映させるには次のようにします：
-#+begin_src
+#+begin_src sh
 $ led bal --add-budget
 #+end_src
 - より詳細なregレポートを表示するには：
-#+begin_src
+#+begin_src sh
 $ led reg --add-budget
 #+end_src
 上のコマンドの結果の抜粋を示します：
-#+begin_src
+#+begin_src sh
 　　　：
 2019/04/01 Budget transaction    Assets:みずほ銀行         70,000 JPY   70,000 JPY
 2019/04/01 Budget transaction    Income:年金:KKR          -40,000 JPY   30,000 JPY

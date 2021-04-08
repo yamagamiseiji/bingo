@@ -156,55 +156,55 @@
 <p>これで、制度的には大小を問わずすべての事業者、それから政治団体などの収支のトラッキングと事後の検証がとても簡単にできるようになりました。にもかかわらず、領収書を何らかの形で保存することを <strong>義務化</strong> しようとしないのはまったく不思議ですね。</p>
 <p>さてLedger-cliでも、最近の多くの会計ソフトと同じように各トランザクションごとに、その元となる証憑書類をPDFなどの画像ファイルにして「添付」できます。Ledgerの場合には厳密に「添付」と言えるかどうか微妙ですが、書類をスキャンし <strong>画像ファイル</strong> にして保存し、そのファイルへのパスを <strong>コメント</strong> として記入することで、「添付」と同等の機能を実現できます。</p>
 <p>たとえばレシートをDropbox上に保存する場合には、次のようにそのURLを書いておきます：</p>
-<pre><code class="language-nil" data-lang="nil">2019/11/22 * セブンイレブン
-    ; https://www.dropbox.com/preview/hogehoge/receipts/sample.pdf?role=personal
-    Expenses:飲み物                           150 JPY
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/11/22 * セブンイレブン
+    ; https://www.dropbox.com/preview/hogehoge/receipts/sample.pdf?role<span style="color:#f92672">=</span>personal
+    Expenses:飲み物                           <span style="color:#ae81ff">150</span> JPY
     Assets:nanaco
-</code></pre><p>では実際にレシート画像を見るときにはどうするか？</p>
+</code></pre></div><p>では実際にレシート画像を見るときにはどうするか？</p>
 <p>当面は、 <code>M-x org-mode</code> でORGモードにしてURLをクリックすることにします。そうするとEmacs内の別窓にレシートが表示されます。ローカルなファイルとして保存した場合には：</p>
-<pre><code class="language-nil" data-lang="nil">; [[file:~/ledger-directory/receipt/sample.pdf]]
-</code></pre><p>これでORGモードにしてクリック＆ビューが可能です。なお、Ledger-modeにしたままでも、URLクリック＆ビューができるらしいですが、それは後日ということで・・・。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">; <span style="color:#f92672">[[</span>file:~/ledger-directory/receipt/sample.pdf<span style="color:#f92672">]]</span>
+</code></pre></div><p>これでORGモードにしてクリック＆ビューが可能です。なお、Ledger-modeにしたままでも、URLクリック＆ビューができるらしいですが、それは後日ということで・・・。</p>
 <p>レシートのURLやファイル名・パスなどを書いたコメントに次のようにtagをつけておくと、後日、検索をする時に便利です：</p>
-<pre><code class="language-nil" data-lang="nil">; :receipts:   [[file:~/ledger-directory/receipt/sample.pdf]]
-</code></pre><p>こうしておいて、 <code>led p %receipt</code> すれば、ファイル保存されているレシートとトランザクションが抽出できます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">; :receipts:   <span style="color:#f92672">[[</span>file:~/ledger-directory/receipt/sample.pdf<span style="color:#f92672">]]</span>
+</code></pre></div><p>こうしておいて、 <code>led p %receipt</code> すれば、ファイル保存されているレシートとトランザクションが抽出できます。</p>
 <p>政治家の政治資金など税金を使う仕事や、事業をしている場合には、上の例のような150円などという小額のレシートはもちろん、たとえ１円のレシートでもちゃんと保管すべきだと思います。</p>
 <p>市井の一市民の家計簿ではさすがにそこまでは不要。 <strong>大きな買い物</strong> をして、しばらくの間、証憑書類として領収書を保存しておきたいような場合に限って保存・記録したらよいと思います。</p>
 <h3 id="プリペイドカードと商品券-ギフト券-のトラッキングについて">プリペイドカードと商品券（ギフト券）のトラッキングについて</h3>
 <p><strong>プリペイドカード</strong> も <strong>商品券</strong> （ギフト券）もいわば小額のキャッシュのような側面があります。これらをきちんとトラッキングするのはベンジャミン・フランクリン的には意味のあることだと思います（笑）</p>
 <h3 id="プリペイドカード">プリペイドカード</h3>
 <p>これはとても簡単。 <code>Assets:プリペイドカード</code> アカウントの下に個別のプリペイドカード名をぶら下げます。わたしの場合には <code>Kuroneko</code> 、 <code>Suica</code> それから <code>nanaco</code> を設け、 <code>Suica</code> の下には自分用（me）と妻用（wife）アカウントを用意しています：</p>
-<pre><code class="language-nil" data-lang="nil">$ led bal プリカ --empty
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal プリカ --empty
 	  10,235 JPY  Assets:プリペイドカード
 	   2,300 JPY    Kuroneko
 	   3,701 JPY    Suica
-		   0      me
+		   <span style="color:#ae81ff">0</span>      me
 	   1,168 JPY      wife
 	   3,066 JPY    nanaco
 --------------------
 	  10,235 JPY
-</code></pre><p>balレポートに <code>--empty</code> オプションを付けているので、残高ゼロのmeのsuicaもリストされています。</p>
+</code></pre></div><p>balレポートに <code>--empty</code> オプションを付けているので、残高ゼロのmeのsuicaもリストされています。</p>
 <p>このシリーズ <a href="http://org2-wp.kgt-yamy.tk/2019/10/04/post-826/">(9)</a> でパソリを使って <strong>suica</strong> を読み取る方法を紹介しましたが、その後、読み取ったデータをCSVファイルにして見やすく表示するスクリプトの整備が終わり、現在とても便利に使っています。それらについては別の機会に紹介することにします。</p>
 <h3 id="商品券-ギフト券">商品券（ギフト券）</h3>
 <p>最初に現在手持ちの商品券の残高を <strong>期首残高</strong> （Opening Balance）として登録します。商品券も <code>Assets:商品券</code> アカウントの配下に次のようにアカウントを作っていきます：</p>
-<pre><code class="language-nil" data-lang="nil">2019/10/01 * Opening Balance
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/10/01 * Opening Balance
     ;  商品券
     Assets:商品券:デパート	 20,000 JPY
     Assets:商品券:VisaGift	 20,000 JPY
     Assets:商品券:JTB旅行券	100,000 JPY
-    Assets:商品券:Premium	      0 JPY
-    Assets:商品券:QUOカード	      0 JPY
+    Assets:商品券:Premium	      <span style="color:#ae81ff">0</span> JPY
+    Assets:商品券:QUOカード	      <span style="color:#ae81ff">0</span> JPY
     Equity:Opening Balance
-</code></pre><h4 id="商品券を入手した際の転記">商品券を入手した際の転記</h4>
+</code></pre></div><h4 id="商品券を入手した際の転記">商品券を入手した際の転記</h4>
 <p>商品券の入手方法や経路はさまざまです。考え始めるときりがありませんが、主な類型を次に例示します。</p>
 <!--list-separator-->
 <ul>
 <li>
 <p>ケース１＝ギフトでもらった</p>
 <p>一番多いのは商品券を <strong>ギフト</strong> としてもらうというケースでしょう。たとえばカーディーラーからもらったQUOカードは：</p>
-<pre><code class="language-nil" data-lang="nil">2019/11/10  QUOカード
-    Assets:商品券:QUOカード	500 JPY
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/11/10  QUOカード
+    Assets:商品券:QUOカード	<span style="color:#ae81ff">500</span> JPY
     Income:神奈川スバル		-500 JPY
-</code></pre><p>これは簡単ですね。</p>
+</code></pre></div><p>これは簡単ですね。</p>
 </li>
 </ul>
 <!--list-separator-->
@@ -212,11 +212,11 @@
 <li>
 <p>ケース２＝自費でカードを購入する</p>
 <p>逆に、QUOカードを自費で購入する際にはちょっと面倒です。QUOカードの場合には、3,000円以上の <strong>高額カード</strong> は額面と購入価格の間に差額がないので簡単ですけれど、額面が3,000円未満のカードでは、購入価格は <strong>額面プラスアルファ</strong> になります。たとえば500円カードは530円になります。これの転記例は：</p>
-<pre><code class="language-nil" data-lang="nil">2019/11/01  QUOカード購入先
-    Assets:商品券:QUOカード	500 JPY
-    Expenses:商品券差損		30 JPY
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/11/01  QUOカード購入先
+    Assets:商品券:QUOカード	<span style="color:#ae81ff">500</span> JPY
+    Expenses:商品券差損		<span style="color:#ae81ff">30</span> JPY
     Assets:Cash			-530 JPY
-</code></pre><p>ここでは、 <code>Expenses:商品券差損</code> というアカウントに差額を収納しています。</p>
+</code></pre></div><p>ここでは、 <code>Expenses:商品券差損</code> というアカウントに差額を収納しています。</p>
 </li>
 </ul>
 <!--list-separator-->
@@ -225,43 +225,43 @@
 <p>ケース３＝「プレミアム付き商品券」</p>
 <p><strong>消費税増税</strong> 対策の一つとして「プレミアム付き商品券」が2019年10月1日から入手できるようになりました。プレミアム賞品券は、額面25,000円の商品券を20,000円で購入できます。</p>
 <p><strong>差額の5,000円</strong> がどこから来るのか本当のところは知りませんが（ウソです。知ってます。ボクラの税金ですｗ）とりあえず発行元が市町村になっているので、次のように転記できます：</p>
-<pre><code class="language-nil" data-lang="nil">2019/11/03  プレミアム商品券購入
-   Assets:商品券:Premium    25000 JPY
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/11/03  プレミアム商品券購入
+   Assets:商品券:Premium    <span style="color:#ae81ff">25000</span> JPY
    Income:横浜市            -5000 JPY
    Assets:Cash             -20000 JPY
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 <h4 id="商品券を利用したショッピングの転記">商品券を利用したショッピングの転記</h4>
 <p>多くの商品券はキャッシュと同じように扱えます。けれどもプレミアム商品券は <strong>お釣りをもらえない</strong> というちょっと変わった決まりです。そんなプレミアム商品券の使用形態ごとの転記法の例は次のとおりです：</p>
-<pre><code class="language-nil" data-lang="nil">2019/11/11  商品券使用-1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/11/11  商品券使用-1
     ;　おつりなし　過不足なく商品券のみ使用
-    Expenses:Food		1500 JPY
+    Expenses:Food		<span style="color:#ae81ff">1500</span> JPY
     Assets:商品券:Premium
 
 2019/11/12  商品券使用-2
     ;　おつりなし　キャッシュとの合わせ技
-    Expenses:Food		1800 JPY
+    Expenses:Food		<span style="color:#ae81ff">1800</span> JPY
     Assets:商品券:Premium	-1000 JPY
     Assets:Cash			-800 JPY
 
 2019/11/13  商品券使用-3
     ; おつりを貰わず、損する買い物をした
-    Expenses:Food		2880 JPY
-    Expenses:商品券差損		120 JPY
+    Expenses:Food		<span style="color:#ae81ff">2880</span> JPY
+    Expenses:商品券差損		<span style="color:#ae81ff">120</span> JPY
     Assets:商品券:Premium	-3000 JPY
-</code></pre><p>上のケース３でも <code>Expenses:商品券差損</code> への収納を使うことになります。このアカウントを使うことで「 <strong>雑費</strong> 」に落としこまずに済みます。</p>
+</code></pre></div><p>上のケース３でも <code>Expenses:商品券差損</code> への収納を使うことになります。このアカウントを使うことで「 <strong>雑費</strong> 」に落としこまずに済みます。</p>
 <h4 id="商品券使用のトラッキング">商品券使用のトラッキング</h4>
 <p>買い物ごとに使用された <strong>商品券額</strong> のレポートは次のようにします：</p>
-<pre><code class="language-nil" data-lang="nil">$ led reg 商品券:premium -b 11/10
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led reg 商品券:premium -b 11/10
 2019/11/12 そうてつローゼン	Assets:商品券:Premium	-2,000 JPY	-2,000 JPY
 2019/11/13 FoodShow		Assets:商品券:Premium	-1,000 JPY	-3,000 JPY
 2019/11/14 イトーヨーカドー	Assets:商品券:Premium	-500 JPY	-3,500 JPY
-</code></pre><p>商品券を使った買い物の <strong>全額</strong> をレポートするには次のようにします：</p>
-<pre><code class="language-nil" data-lang="nil">$ led reg ^expenses and expr 'any(account =~ /assets:商品券/)' -b 11/10 -S date
+</code></pre></div><p>商品券を使った買い物の <strong>全額</strong> をレポートするには次のようにします：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led reg ^expenses and expr <span style="color:#e6db74">&#39;any(account =~ /assets:商品券/)&#39;</span> -b 11/10 -S date
 2019/11/12 そうてつローゼン    Expenses:Grocery:YOK      2,284 JPY   2,284 JPY
 2019/11/13 FoodShow           Expenses:交際費:Gifts     1,080 JPY    3,364 JPY
-2019/11/14 イトーヨーカドー    Expenses:交際費:Gifts       620 JPY    3,984 JPY
-</code></pre><p>これくらいまで商品券をトラッキングができれば、「 <strong>雑収入</strong> 」に格納するよりはすっきりしていると思います。</p>
+2019/11/14 イトーヨーカドー    Expenses:交際費:Gifts       <span style="color:#ae81ff">620</span> JPY    3,984 JPY
+</code></pre></div><p>これくらいまで商品券をトラッキングができれば、「 <strong>雑収入</strong> 」に格納するよりはすっきりしていると思います。</p>
 <h2 id="まとめ">まとめ</h2>
 <h3 id="まま子三兄弟">「まま子三兄弟」</h3>
 <p><strong>プリペイドカード</strong> と <strong>商品券（ギフト券）</strong> それから、前にこのシリーズで紹介した <strong>ポイント</strong> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 、この３つは <strong>一部の</strong> 経理の世界ではどちらかと言うと <strong>まま子扱い</strong> されています。まま子という言葉が <strong>PC</strong> 的に良くない言葉だとすれば、 <strong>庶子扱い</strong> でしょうか（笑）。</p>
@@ -274,7 +274,7 @@
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>ポイントのトラッキング このシリーズ<a href="http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/">(8)</a> でETCのトラッキング、<a href="http://org2-wp.kgt-yamy.tk/2019/10/04/post-826/">(9)</a> ではキャッシュレス還元の例を上げました。ちなみに、現在トラッキングしているポイントは次のとおりです： <code>nil $ led bal point --empty -X JPY 8,743 JPY Assets:Reward Points 4,388 JPY ANA 0 ETC 685 JPY キャッシュレス還元 4,170 JPY ヨドバシ -------------------- 8,743 JPY </code> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>ポイントのトラッキング このシリーズ<a href="http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/">(8)</a> でETCのトラッキング、<a href="http://org2-wp.kgt-yamy.tk/2019/10/04/post-826/">(9)</a> ではキャッシュレス還元の例を上げました。ちなみに、現在トラッキングしているポイントは次のとおりです： <code>sh $ led bal point --empty -X JPY 8,743 JPY Assets:Reward Points 4,388 JPY ANA 0 ETC 685 JPY キャッシュレス還元 4,170 JPY ヨドバシ -------------------- 8,743 JPY </code> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

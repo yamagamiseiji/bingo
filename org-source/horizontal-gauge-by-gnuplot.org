@@ -80,14 +80,14 @@ bashスクリプト内のledgerで算出した支出パーセントが格納さ�
 これについては必ずしも両者の間で引き渡ししなくても良いのですが、将来の汎用性のために書いておきました。
 
 そのパートだけを抜き出すと次のようになっています：
-#+begin_src
+#+begin_src sh
 gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
 	./simple-horizntl-gauge.plt
 #+end_src
 
 ** bashスクリプト
 
-#+begin_src bash
+#+begin_src sh
 #!/bin/bash
 #
 #  毎月の支出予算に対して当日までの支出金額がどれくらいになるかを

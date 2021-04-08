@@ -102,7 +102,7 @@
 <h2 id="忘年会シーズン">忘年会シーズン</h2>
 <p>忘年会シーズンですね。</p>
 <p>最近は <strong>会社の忘年会</strong> への風当たりが強くなってきています。とくに若い世代に不賛同の声が多いようです。その一方で、年長者には伝統的な行事のひとつとして継続して欲しいという気持ちがあるのも分かります。</p>
-<p><a id="org6291db0"></a></p>
+<p><a id="org8decd3f"></a></p>
 <figure>
     <img src="/ochoko-tokkuri.jpg" width="60%"/> 
 </figure>
@@ -125,14 +125,14 @@
 </code></pre></div><p>会費の支払い方法ごとに転記例をあげます。</p>
 <h3 id="現金ベースの割り勘のとき">現金ベースの割り勘のとき</h3>
 <p>現金ベースなら「おごり」「割り勘」のいずれにしても転記は簡単。単に自分が支払った金額を転記するだけです。たとえば今回の忘年会は均等割りでは <strong>5,336円</strong> になるけど、自分としてはキリの良い金額＝ <strong>5,400円</strong> を払ったというケースでは：</p>
-<pre><code class="language-nil" data-lang="nil">2019/12/20 * ファンシーレストラン
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/12/20 * ファンシーレストラン
    ; 4人で忘年会、21,345円を割り勘　
    Expenses:宴会費    5,400 JPY
    Assets:Cash
-</code></pre><p>個人的に「おごられた」場合には転記不要ですが、政治家とか後援会、政治団体に「おごられた」ら明細のコピーをもらって保管しておきましょうｗ</p>
+</code></pre></div><p>個人的に「おごられた」場合には転記不要ですが、政治家とか後援会、政治団体に「おごられた」ら明細のコピーをもらって保管しておきましょうｗ</p>
 <h3 id="太郎がクレジットカードで立替払いをしてくれた">太郎がクレジットカードで立替払いをしてくれた</h3>
 <p>この場合にも上と同じように支払った <strong>5,400円</strong> を転記するだけ。もし太郎への返金が遅れる、または遅れたようだったら <strong>未払金</strong> にしておいてもよいでしょう：</p>
-<pre><code class="language-nil" data-lang="nil">2019/12/20 * ファンシーレストラン
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/12/20 * ファンシーレストラン
    Expeses:忘年会       5,400 JPY
    Assets:未払金:太郎  -5,400 JPY
 ;
@@ -141,7 +141,7 @@
 2020/01/10 * 太郎に返金
     Assets:未払金:太郎   5,400 JPY
     Assets:Cash         -5,400 JPY
-</code></pre><p>こうしておけば、年末の締めの時に太郎への未払金が <strong>5,400円</strong> 残っていることがわかります：</p>
+</code></pre></div><p>こうしておけば、年末の締めの時に太郎への未払金が <strong>5,400円</strong> 残っていることがわかります：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ led bal
 	  -5,400 JPY  Assets:未払金:太郎
 	   5,400 JPY  Expeses:忘年会
@@ -150,7 +150,7 @@
 </code></pre></div><h3 id="自分のクレジットカードで全員分を立替払いした">自分のクレジットカードで全員分を立替払いした</h3>
 <p>とりあえず自分のカードを切って全額を支払いました。その際、
 <strong>21,345円</strong> を均等割りせずに、花子は飲まなかったので <strong>3,000円</strong> 、自分と太郎、次郎は割り勘で <strong>6,115円</strong> という風に <strong>ウエイトをつけた割り勘</strong> の場合：</p>
-<pre><code class="language-ledger" data-lang="ledger">2019/12/20 * ファンシーレストラン
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/12/20 * ファンシーレストラン
    ; 4人分 21,345円をクレカで立替払いした
    Expenses:宴会費          6,115 JPY
    Assets:未収金:太郎       6,115 JPY
@@ -175,7 +175,7 @@
     Assets:Cash              6,500 JPY
     Assets:未収金:次郎      -6,115 JPY
     Equity:Adjustments
-</code></pre><h4 id="balレポート">balレポート</h4>
+</code></pre></div><h4 id="balレポート">balレポート</h4>
 <p>上の転記についてタイミング別にbalレポートを見てみます。</p>
 <ul>
 <li><strong>忘年会当日</strong> のbalレポート：</li>

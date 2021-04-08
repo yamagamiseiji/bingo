@@ -81,16 +81,22 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Emacs &gt; org2blog &gt; WordPress &gt; freenom &gt; AWS
 </code></pre></div><p>しかし</p>
 <ol>
-<li>WordPress(WP)ではバージョンアップに追いつくのが大変</li>
-<li>サボっていると、画像ファイルが表示されないなどの <strong>トラブル</strong> が頻発</li>
-<li>トラブルがあっても自力で十分に対応できません（非力のため）</li>
-<li>SSL対応もしなくちゃならないし・・・</li>
-<li>AWSも最初の1年間はほぼ無料でありがたかったけど、その後は年間120ドルほどになって結構 <strong>負担</strong> が大きい</li>
+<li>org2blogがなかなか曲者でときどき言うことを聞かなくなったりします</li>
+<li>WordPressのバージョンアップが激しくてついていけない（涙）</li>
+<li>SSL対応をしなくてはと思いつつおっくうで着手せず気がかりでした</li>
+<li>AWSの無料サービス期間が終わって年間使用料金が <strong>重荷</strong> になってきました</li>
 </ol>
 <p>などなどから一念発起。この際、ブログ書きの流れをつぎのように変えようと思いました。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Emacs &gt; org-mode &gt; ox-hugo &gt; Hugo &gt; Netlify &gt; GitHub
-</code></pre></div><p>ところが始めてみるとあちこちに地雷や落とし穴が！ちゃんとした「新装開店」まで　まだ一山も二山もあるかと思います。</p>
+</code></pre></div><p>この流れだとコストとしてはNetlifyだけを心配すればよいわけですが、とうぜん
+<strong><span style="color: red"> 無料枠</span></strong> (starter)で行きます。ちなみにNetlifyの無料枠は次のようになっています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">転送量(bandwith)                     100G/月
+ビルド時間(build minutes)             300分/月
+フォール投稿(form submission)          100回/月
+リクエスト回数(serverless functions)   125,000回/月
+</code></pre></div><p>ふつうの善良な市民の個人ブログでこれを超えるようなことはちょっと考えられないです。とくにリクエスト回数が月に <strong>125,000回</strong> を超えるなんてことはまず心配無用、もしそんなことが起こればそれはまことにめでたいことです（笑）</p>
 <h2 id="四苦八苦ログ">四苦八苦ログ</h2>
+<p>ところが意気揚々と引っ越し作業を始めてみるとあちこちに <strong>地雷</strong> や <strong>落とし穴</strong> が！ちゃんとした「新装開店」まで　まだ一山も二山もあるかと思います。</p>
 <h3 id="最大の難関">最大の難関</h3>
 <p>NetlifyがGitHubレポジトリをデプロイするところでかなりはまりました。ウエッブで調べてみると、とても簡単だったという記事がある一方で、ひどくハマったという記事が英語でも日本語でも多数あります。それらを見ながらほんとうにいろいろやりました。</p>
 <p>文字通り四苦八苦しましたが、ついに <strong>2021/03/25</strong> に初デプロイ成功！。うまくいった理由は</p>
@@ -171,7 +177,7 @@ postsだったりpostだったり！それ以外にもテーマを変更した�
 
     </div>
     <div class="info post_meta">
-      <time datetime=2021年3月26日T00:00:00&#43;0900 class="date">2021年3月26日</time>
+      <time datetime=2021年4月1日T00:00:00&#43;0900 class="date">2021年4月1日</time>
       
         <ul class="tags">
         

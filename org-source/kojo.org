@@ -1,15 +1,15 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
 #+title: さようならWordPress
-#+date: 2021-03-26
+#+date: 2021-04-01
 #+language: ja
-
-#+link: file file+sys:../static/
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
 #+hugo_tags: Emacs hugo ox-hugo Netlify GitHub
 #+hugo_categories: comp
 
-#+hugo_custom_front_matter: :toc true
+#+link: file file+sys:../static/
+#+options: toc:nil
 #+draft: false
 
 これまで2年ほどブログ書きは下のようなフローでやってきました[fn:long-time-ago]。
@@ -17,20 +17,28 @@
 Emacs > org2blog > WordPress > freenom > AWS
 #+end_example
 しかし
-1) WordPress(WP)ではバージョンアップに追いつくのが大変
-2) サボっていると、画像ファイルが表示されないなどの *トラブル* が頻発
-3) トラブルがあっても自力で十分に対応できません（非力のため）
-5) SSL対応もしなくちゃならないし・・・
-6) AWSも最初の1年間はほぼ無料でありがたかったけど、その後は年間120ドルほどになって結構 *負担* が大きい
+1. org2blogがなかなか曲者でときどき言うことを聞かなくなったりします
+2. WordPressのバージョンアップが激しくてついていけない（涙）
+3. SSL対応をしなくてはと思いつつおっくうで着手せず気がかりでした
+4. AWSの無料サービス期間が終わって年間使用料金が *重荷* になってきました
 
 などなどから一念発起。この際、ブログ書きの流れをつぎのように変えようと思いました。
 #+begin_example
 Emacs > org-mode > ox-hugo > Hugo > Netlify > GitHub 
 #+end_example
+この流れだとコストとしてはNetlifyだけを心配すればよいわけですが、とうぜん
+*{{{color(red, 無料枠)}}}* (starter)で行きます。ちなみにNetlifyの無料枠は次のようになっています。
+#+begin_example
+転送量(bandwith)                     100G/月
+ビルド時間(build minutes)             300分/月
+フォール投稿(form submission)          100回/月
+リクエスト回数(serverless functions)   125,000回/月
+#+end_example
+ふつうの善良な市民の個人ブログでこれを超えるようなことはちょっと考えられないです。とくにリクエスト回数が月に *125,000回* を超えるなんてことはまず心配無用、もしそんなことが起こればそれはまことにめでたいことです（笑）
 
-ところが始めてみるとあちこちに地雷や落とし穴が！ 
-ちゃんとした「新装開店」まで　まだ一山も二山もあるかと思います。
 * 四苦八苦ログ
+ところが意気揚々と引っ越し作業を始めてみるとあちこちに *地雷* や *落とし穴* が！ 
+ちゃんとした「新装開店」まで　まだ一山も二山もあるかと思います。
 ** 最大の難関
 NetlifyがGitHubレポジトリをデプロイするところでかなりはまりました。
 ウエッブで調べてみると、とても簡単だったという記事がある一方で、

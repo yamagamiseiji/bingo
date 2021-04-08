@@ -38,7 +38,7 @@ draft = false
 
 さてLedger本体のインストールはapt installで一発です：
 
-```shell
+```sh
 $ sudo apt install ledger
 ```
 
@@ -90,7 +90,7 @@ Ledgerは柔軟性が高く、枠組み変更がとても簡単です。実際�
 
 仕訳帳ファイルは期首残高（Opening balance）の記帳（posting）から始めます。たとえばを次のように書きましょう（仮想データです）：
 
-```nil
+```sh
 2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        50000 JPY
@@ -132,7 +132,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   ATMを使って、ゆうちょ銀行から現金30,000円を引き出しました：
 
-    ```nil
+    ```sh
     2019/04/10  ATMでキャッシング
         Assets:Cash
         Assets:ゆうちょ銀行                       -30000  JPY
@@ -142,7 +142,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   その現金を使って、スタバでコーヒを飲みました：
 
-    ```nil
+    ```sh
     2019/04/10  スタバ
         Expenses:交際費:Coffee                       780  JPY
         Assets:Cash
@@ -152,7 +152,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   クレジットカードを使ってAmazonで本を買いました：
 
-    ```nil
+    ```sh
     2019/04/10  Amazon
         Expenses:教養費:Books                       2780  JPY
         Liabilities:VisaCard
@@ -164,7 +164,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   いよいよ給料日！ 振込先は三井住友銀行：
 
-    ```nil
+    ```sh
     2019/04/25   株式会社ほげほげ
         Assets:三井住友銀行
         Income:給与                 -250000  JPY
@@ -174,7 +174,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   さて給料が出たので居酒屋でビールを飲みました。支払いはVisaCard：
 
-    ```nil
+    ```sh
     2019/04/26  居酒屋
         Expenses:交際費:Beer                        1900  JPY
         Liabilities:VisaCard
@@ -184,7 +184,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   三井住友からゆうちょへ資金移動：
 
-    ```nil
+    ```sh
     2019/04/26   三井住友からゆうちょへ資金移動
         Assets:ゆうちょ銀行
         Assets:三井住友銀行                      -150000 JPY
@@ -192,7 +192,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 
 -   以上をまとめると次のような内容です：
 
-    ```nil
+    ```sh
     ;
     ;    サンプルledger journalファイル (=sample.ledger)
     ;
@@ -245,7 +245,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 次のようにします：
 
 <a id="code-snippet--list:1"></a>
-```shell
+```sh
 $ ledger -f sample.ledger bal
 
 	 999,220 JPY  Assets
@@ -292,7 +292,7 @@ $ ledger -f sample.ledger bal
 
     <!--listend-->
 
-    ```nil
+    ```sh
     --file ~/Dropbox/sample.Ledger
     ```
 
@@ -309,7 +309,7 @@ $ ledger -f sample.ledger bal
 
 -   VISAの請求額を決済銀行（ゆうちょ銀行）から引き落とすトランザクションの書き方は次のとおりです：
 
-    ```nil
+    ```sh
     2019/04/15=05/10   請求書への支払い(VISA)
         Liabilities:VisaCard               4680  JPY
         Assets:ゆうちょ銀行
@@ -319,7 +319,7 @@ $ ledger -f sample.ledger bal
 
 -   VISAからの請求書に対して、自分の資産（ゆうちょ銀行）から資金が移動すると、その結果として、つぎのようなバランスになります：
 
-    ```nil
+    ```sh
     $ ledger -f sample.ledger bal
 
     	 994,540 JPY  Assets
@@ -382,7 +382,7 @@ $ ledger -f sample.ledger bal
 
 <!--listend-->
 
-```nil
+```sh
 2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        50000 JPY

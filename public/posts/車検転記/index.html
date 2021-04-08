@@ -121,7 +121,7 @@
 </ul>
 <p>割りきって、これらをすべて「車両費」にする手もあるでしょうし、「特別費」にまとめる手もあり得ると思います。</p>
 <p>けれども自分としては、各支出のもつ多重な側面をできるだけ漏らさずすくい上げる形でトラッキングしたいと思い、 <strong>タグ</strong> を使って（<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>）つぎのようにしました：</p>
-<pre><code class="language-nil" data-lang="nil">apply tag 車検
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apply tag 車検
 apply tag NRE
 
 2019/12/02 * ディーラー
@@ -149,11 +149,11 @@ apply tag NRE
 
 end apply
 end apply
-</code></pre><p>Ledger-cli使用の日常場面では、「車両費」で検索する頻度が高いので、基本的には車検費用は「車両費」アカウントに収納しました。ただ、それだけでは「税金」という側面がみえにくいし、また「車検」というカテゴリでの抽出もできません。そこで車検関係トランザクションに「車検( <code>車検</code> )」と「税金( <code>tax</code> )」という <strong>タグ</strong> をつけました。</p>
+</code></pre></div><p>Ledger-cli使用の日常場面では、「車両費」で検索する頻度が高いので、基本的には車検費用は「車両費」アカウントに収納しました。ただ、それだけでは「税金」という側面がみえにくいし、また「車検」というカテゴリでの抽出もできません。そこで車検関係トランザクションに「車検( <code>車検</code> )」と「税金( <code>tax</code> )」という <strong>タグ</strong> をつけました。</p>
 <h3 id="使い勝手">使い勝手</h3>
 <p>たとえば単純に12月分の「車両費」を抽出したい時には <code>$ led b cars -p dec</code> と入力します：</p>
-<pre><code class="language-nil" data-lang="nil">	 101,159 JPY  Expenses:車両費
-	     717 JPY    Gasoline
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	 101,159 JPY  Expenses:車両費
+	     <span style="color:#ae81ff">717</span> JPY    Gasoline
 	  25,830 JPY    保険:自賠責
 	   1,000 JPY    手数料
 	  30,712 JPY    整備修繕
@@ -161,15 +161,15 @@ end apply
 	  10,100 JPY    駐車場賃料
 --------------------
 	 101,159 JPY
-</code></pre><p>これだと車検とは関係ない「ガソリン代」や「駐車場賃料」も入ってきます。純粋に車検費用だけを抽出したいときには車検タグを使います（ <code>$ led bal expense and %車検</code> ）：</p>
-<pre><code class="language-nil" data-lang="nil">	  90,342 JPY  Expenses:車両費
+</code></pre></div><p>これだと車検とは関係ない「ガソリン代」や「駐車場賃料」も入ってきます。純粋に車検費用だけを抽出したいときには車検タグを使います（ <code>$ led bal expense and %車検</code> ）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	  90,342 JPY  Expenses:車両費
 	  25,830 JPY    保険:自賠責
 	   1,000 JPY    手数料
 	  30,712 JPY    整備修繕
 	  32,800 JPY    重量税
 --------------------
 	  90,342 JPY
-</code></pre><ul>
+</code></pre></div><ul>
 <li>
 <p>今回の車検費仕訳では、車検タグの他に <strong>NRE</strong> というタグもつけました。これは「 <strong>特別費</strong> 」または「 <strong>一時的支出</strong> 」（Non Recurring Expenses; <strong>NRE</strong> ）用のタグです。こうすることで月々または年間を通して「経常的な経費」と「特別費」とを別々にトラッキングすることができます。たとえば：</p>
 <ul>

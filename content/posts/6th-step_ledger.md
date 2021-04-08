@@ -12,7 +12,7 @@ draft = false
 
 4月以降からのクルマに関係する経費（いわゆる「車両費」）の月ごとの推移を **積み上げ棒グラフ** の例図にしたものです。3月は一部だけデータがあったので、それもプロットしています。
 
-<a id="org4635a6e"></a>
+<a id="orgecfe43d"></a>
 
 {{< figure src="/rowstack-car-hist.jpg" caption="&#22259;1:  Ledgerとgnuplotを組み合わせてプロットした例図" width="90%" >}}
 
@@ -43,9 +43,9 @@ Ledgerとgnuplotを組み合わせて図を描くと見てくれも悪くはな�
 
 という場合のトランザクションの書き方を例示しています：
 
-```nil
+```sh
 2004/05/01 Stock purchase
-    Assets:Broker                     50 AAPL @ $30.00
+    Assets:Broker                     50 AAPL @ $30.00ファイル
     Expenses:Broker:Commissions        $19.95
     Assets:Broker                  $-1,519.95
 
@@ -58,7 +58,7 @@ Ledgerとgnuplotを組み合わせて図を描くと見てくれも悪くはな�
 
 こうしておいて、balレポートを見ると次のとおりです：
 
-```nil
+```sh
 $ led bal
 	     $960.10  Assets:Broker
 	      $39.90  Expenses:Broker:Commissions
@@ -83,7 +83,7 @@ Google groupへの[Pranesh Prakash](https://groups.google.com/forum/#!msg/ledger
 
 それぞれのトランザクションの書き方は次のようになります：
 
-```nil
+```sh
 2018/12/31 Opening Balances
     Assets:Stocks                             2 AAPL @ $500.00
     Equity:Opening Balances
@@ -108,7 +108,7 @@ P 2019/03/01 AAPL $525.00
 
 こうしておいてbalレポートを見ると：
 
-```nil
+```sh
 $ led bal -X '$'
 	    $1100.00  Assets
 	      $50.00    Checking
@@ -124,7 +124,7 @@ $ led bal -X '$'
 この場合には490ドルで購入した株が03/01には525ドルに値上がりしています。しかし売買は完了していませんので、いわゆる含み損益を抱えている事例となります。
 Ledgerでは、 `--unrealized` オプションを使えば、 **未実現** の含み益（＝評価益）、含み損（＝評価損）が計算できるということになります：
 
-```nil
+```sh
 $ led bal  -X '$' --unrealized
 	    $1100.00  Assets
 	      $50.00    Checking
@@ -150,7 +150,7 @@ $ led bal  -X '$' --unrealized
 
  `~/.prices.db` ファイルはシリーズ（5）でも紹介しました。そこでは円ドルなどの為替レートを保存しておくときに使いましたが、株価のデータ保存にも使います。中身はたとえば次のようになります：
 
-```nil
+```sh
 　　　：
 P 2019/07/19 09:23:06 USD JPY 107.4005
 P 2019/07/19 14:03:43 JT JPY 2,4510
@@ -187,7 +187,7 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
 
 さて `~/.prices.db` は、株売買でどのように使われるのでしょうか。いま仮に次のようなトランザクションがあったとしましょう：
 
-```nil
+```sh
 05/01  purchase stocks
     Assets:Brokerage            100 丸全運 @ 3000.00 JPY
     Expenses:Brokerage:手数料       450 JPY
@@ -201,7 +201,7 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
 
 `--quantity`, `-O` オプション（ディフォールト）を使うと次のようになります：
 
-```nil
+```sh
 $ led bal -O
 	 -300450 JPY
 	  100 丸全運  Assets:Brokerage
@@ -218,7 +218,7 @@ $ led bal -O
 
 `--basis`, `-B` オプションは、全ポスティングのコストcost basisをレポートします：
 
-```nil
+```sh
 $ led bal -B
 	    -450 JPY  Assets:Brokerage
 	     450 JPY  Expenses:Brokerage:手数料
@@ -231,7 +231,7 @@ $ led bal -B
 
 `--market`, `-V` オプションで以下の表示になります：
 
-```nil
+```sh
 $ led bal -V
 	   42050 JPY  Assets:Brokerage
 	     450 JPY  Expenses:Brokerage:手数料
@@ -244,7 +244,7 @@ $ led bal -V
 
 `--gain` `-G` オプションを使うと、3,000円で購入した丸全運の100株が、本日の株価でいくとどれほどのゲインになっているか（だけ）をみることができます：
 
-```nil
+```sh
 $ led bal -G
 	  42,500 JPY  Assets:Brokerage
 ```

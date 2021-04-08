@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [Adjustmentsを使おう](#adjustment)
 - [少額の現金の扱い](#petty_cash)
@@ -214,9 +214,9 @@ $ led reg --add-budget
 
 それで、「几帳面」と言うのは「帳面」をきちんとつけられることだと思っていましたが、どうやらそれは間違いで、「几帳」という「寝殿造りの間仕切り」の仕上げがとても丁寧だったことに由来するそうです。
 
-<a id="orgb90b8cd"></a>
+<a id="orgc7607a2"></a>
 
-{{< figure src="/kicho.jpg" caption="Figure 1: 几帳です。記帳ではありませんw" width="80%" >}}
+{{< figure src="/kicho.jpg" caption="&#22259;1:  几帳です。記帳ではありませんw" width="80%" >}}
 
 それはさておき、Ledgerではプレーンテキストで複式簿記の原データが簡単に入力できます。このことによってボクは生まれて初めてストレスなく帳簿のデータ入力ができるようになりました。自分の性格に問題があって、そもそも帳簿や帳面をつけることに適性がなかったのではなくて、ボクの性分にあった入力方法と出会わなかったからだ、と今は思っています。
 

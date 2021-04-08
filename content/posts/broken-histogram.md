@@ -38,11 +38,11 @@ draft = false
 
 こんな感じになります（金額はでたらめです）。
 
-<a id="org36044b6"></a>
+<a id="org1456a5e"></a>
 
 {{< figure src="/broken-histogram.png" caption="&#22259;1:  Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
 
-Ledgerとgnuplotを組み合わせて図[1](#org36044b6)のような **break** つき棒グラフを描く方法を紹介します。
+Ledgerとgnuplotを組み合わせて図[1](#org1456a5e)のような **break** つき棒グラフを描く方法を紹介します。
 
 
 ### Ledger-cliのクエリー {#ledger-cliのクエリー}
@@ -100,7 +100,7 @@ set output '$out_file'
 
     上下左右のマージンなどをこうして **変数化** することで、図のバランスの微調整が楽になります。
 
-    ```nil
+    ```text
     bm = 0.15    # bmargin
     lm = 0.12    # lmargin
     rm = 0.95    # rmargin
@@ -114,7 +114,7 @@ set output '$out_file'
 
 上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。
 
-```nil
+```text
 y1 = 0
 y2 =  120000/1000
 y3 = 1000000/1000
@@ -190,7 +190,7 @@ unset multiplot
 
 納税金額が **ゼロの月** では数字の'0'を書かないようにします。それにはgnuplotの **三項演算子** を使います。その部分だけを抽出すると次のとおりです：
 
-```nil
+```sh
 (column(2) != 0 ? (sprintf("%'d",(column(2)))):"")
 ```
 

@@ -111,7 +111,7 @@ A penny saved is a penny earned.
 
 たとえばレシートをDropbox上に保存する場合には、次のようにそのURLを書いておきます：
 
-```nil
+```sh
 2019/11/22 * セブンイレブン
     ; https://www.dropbox.com/preview/hogehoge/receipts/sample.pdf?role=personal
     Expenses:飲み物                           150 JPY
@@ -122,7 +122,7 @@ A penny saved is a penny earned.
 
 当面は、 `M-x org-mode` でORGモードにしてURLをクリックすることにします。そうするとEmacs内の別窓にレシートが表示されます。ローカルなファイルとして保存した場合には：
 
-```nil
+```sh
 ; [[file:~/ledger-directory/receipt/sample.pdf]]
 ```
 
@@ -130,7 +130,7 @@ A penny saved is a penny earned.
 
 レシートのURLやファイル名・パスなどを書いたコメントに次のようにtagをつけておくと、後日、検索をする時に便利です：
 
-```nil
+```sh
 ; :receipts:   [[file:~/ledger-directory/receipt/sample.pdf]]
 ```
 
@@ -150,7 +150,7 @@ A penny saved is a penny earned.
 
 これはとても簡単。 `Assets:プリペイドカード` アカウントの下に個別のプリペイドカード名をぶら下げます。わたしの場合には `Kuroneko` 、 `Suica` それから `nanaco` を設け、 `Suica` の下には自分用（me）と妻用（wife）アカウントを用意しています：
 
-```nil
+```sh
 $ led bal プリカ --empty
 	  10,235 JPY  Assets:プリペイドカード
 	   2,300 JPY    Kuroneko
@@ -171,7 +171,7 @@ balレポートに `--empty` オプションを付けているので、残高ゼ
 
 最初に現在手持ちの商品券の残高を **期首残高** （Opening Balance）として登録します。商品券も `Assets:商品券` アカウントの配下に次のようにアカウントを作っていきます：
 
-```nil
+```sh
 2019/10/01 * Opening Balance
     ;  商品券
     Assets:商品券:デパート	 20,000 JPY
@@ -193,7 +193,7 @@ balレポートに `--empty` オプションを付けているので、残高ゼ
 
     一番多いのは商品券を **ギフト** としてもらうというケースでしょう。たとえばカーディーラーからもらったQUOカードは：
 
-    ```nil
+    ```sh
     2019/11/10  QUOカード
         Assets:商品券:QUOカード	500 JPY
         Income:神奈川スバル		-500 JPY
@@ -207,7 +207,7 @@ balレポートに `--empty` オプションを付けているので、残高ゼ
 
     逆に、QUOカードを自費で購入する際にはちょっと面倒です。QUOカードの場合には、3,000円以上の **高額カード** は額面と購入価格の間に差額がないので簡単ですけれど、額面が3,000円未満のカードでは、購入価格は **額面プラスアルファ** になります。たとえば500円カードは530円になります。これの転記例は：
 
-    ```nil
+    ```sh
     2019/11/01  QUOカード購入先
         Assets:商品券:QUOカード	500 JPY
         Expenses:商品券差損		30 JPY
@@ -224,7 +224,7 @@ balレポートに `--empty` オプションを付けているので、残高ゼ
 
     **差額の5,000円** がどこから来るのか本当のところは知りませんが（ウソです。知ってます。ボクラの税金ですｗ）とりあえず発行元が市町村になっているので、次のように転記できます：
 
-    ```nil
+    ```sh
     2019/11/03  プレミアム商品券購入
        Assets:商品券:Premium    25000 JPY
        Income:横浜市            -5000 JPY
@@ -236,7 +236,7 @@ balレポートに `--empty` オプションを付けているので、残高ゼ
 
 多くの商品券はキャッシュと同じように扱えます。けれどもプレミアム商品券は **お釣りをもらえない** というちょっと変わった決まりです。そんなプレミアム商品券の使用形態ごとの転記法の例は次のとおりです：
 
-```nil
+```sh
 2019/11/11  商品券使用-1
     ;　おつりなし　過不足なく商品券のみ使用
     Expenses:Food		1500 JPY
@@ -262,7 +262,7 @@ balレポートに `--empty` オプションを付けているので、残高ゼ
 
 買い物ごとに使用された **商品券額** のレポートは次のようにします：
 
-```nil
+```sh
 $ led reg 商品券:premium -b 11/10
 2019/11/12 そうてつローゼン	Assets:商品券:Premium	-2,000 JPY	-2,000 JPY
 2019/11/13 FoodShow		Assets:商品券:Premium	-1,000 JPY	-3,000 JPY
@@ -271,7 +271,7 @@ $ led reg 商品券:premium -b 11/10
 
 商品券を使った買い物の **全額** をレポートするには次のようにします：
 
-```nil
+```sh
 $ led reg ^expenses and expr 'any(account =~ /assets:商品券/)' -b 11/10 -S date
 2019/11/12 そうてつローゼン    Expenses:Grocery:YOK      2,284 JPY   2,284 JPY
 2019/11/13 FoodShow           Expenses:交際費:Gifts     1,080 JPY    3,364 JPY
@@ -300,4 +300,4 @@ $ led reg ^expenses and expr 'any(account =~ /assets:商品券/)' -b 11/10 -S da
 
 ## Acknowledgement {#acknowledgement}
 
-[^fn:1]: ポイントのトラッキング このシリーズ[(8)](http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/) でETCのトラッキング、[(9)](http://org2-wp.kgt-yamy.tk/2019/10/04/post-826/) ではキャッシュレス還元の例を上げました。ちなみに、現在トラッキングしているポイントは次のとおりです： ```nil $ led bal point --empty -X JPY 8,743 JPY Assets:Reward Points 4,388 JPY ANA 0 ETC 685 JPY キャッシュレス還元 4,170 JPY ヨドバシ -------------------- 8,743 JPY ```
+[^fn:1]: ポイントのトラッキング このシリーズ[(8)](http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/) でETCのトラッキング、[(9)](http://org2-wp.kgt-yamy.tk/2019/10/04/post-826/) ではキャッシュレス還元の例を上げました。ちなみに、現在トラッキングしているポイントは次のとおりです： ```sh $ led bal point --empty -X JPY 8,743 JPY Assets:Reward Points 4,388 JPY ANA 0 ETC 685 JPY キャッシュレス還元 4,170 JPY ヨドバシ -------------------- 8,743 JPY ```

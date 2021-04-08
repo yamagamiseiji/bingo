@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [AndroidタブレットでLedger cli](#androidタブレットでledger-cli)
     - [環境条件](#環境条件)
@@ -77,21 +77,21 @@ $ ledger reg farming -p aug
 $ mbal 交際費
 ```
 
-最後の `mbal` はこの[シリーズ(4)](http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/)で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図[1](#org57170a4)のようになります。
+最後の `mbal` はこの[シリーズ(4)](http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/)で紹介したスクリプトです。上記コマンドを実行した時の画面イメージは図[1](#orgc1fd26d)のようになります。
 
-<a id="org57170a4"></a>
+<a id="orgc1fd26d"></a>
 
-{{< figure src="/termux-fig1.jpg" caption="Figure 1: AndroidタブレットのTermuxでubuntu／Ledgerが動く！" width="90%" >}}
+{{< figure src="/termux-fig1.jpg" caption="&#22259;1:  AndroidタブレットのTermuxでubuntu／Ledgerが動く！" width="90%" >}}
 
 画面下部のキーボードがHacker's Keyboardです。これはLinuxターミナル用にはとても便利。ただ残念なことに日本語対応していません。日本語入力が必要になったら、その都度キーボードを切り替えなければなりません。だれか日本語対応版を作ってくれないでしょうか？
 
 Termuxの細かい使い方はネット上によい紹介がたくさんありますので、そちらをごらんください。ここでは特に気に入っている機能（＝同時に **複数のセッション** を開く機能）だけ、紹介しておきます。
 
-新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって **スワイプ** します。すると図[2](#org4160d05)のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには **NEW SESSION** をタップします。
+新しいセッションを開きたい時には、現在起動中のTermux画面を左端から右に向かって **スワイプ** します。すると図[2](#org90170cb)のような窓が画面左上に開きます。既存のセッション名がこの窓に表示されます。新規セッションを開くには **NEW SESSION** をタップします。
 
-<a id="org4160d05"></a>
+<a id="org90170cb"></a>
 
-{{< figure src="/sshot2-termux.jpg" caption="Figure 2: Termuxで同時に複数セッションを開く" width="80%" >}}
+{{< figure src="/sshot2-termux.jpg" caption="&#22259;2:  Termuxで同時に複数セッションを開く" width="80%" >}}
 
 この機能があるので、わりに込み入った作業もTermux上で何とかこなすことができます。もう少し早くから知っていれば人生が違ったものになったのに・・・（言い過ぎですw）
 

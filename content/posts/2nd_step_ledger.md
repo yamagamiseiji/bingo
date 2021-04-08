@@ -45,7 +45,7 @@ draft = false
 
 次のように、第1行目に **`Y 2019`** とか書くと、西暦年の入力は不要になります：
 
-```nil
+```sh
 Y 2019
 05/01  * Petty Cash
 	Expenses:Cash
@@ -65,7 +65,7 @@ Y 2019
 
  **`TAB`** などによる補完や入力修正機能を使うと、キーを叩く回数を節約できます。たとえば次のようなトランザクションを記帳したいとしましょう：
 
-```nil
+```sh
 2019/05/16 Amazon
     Expenses:Grocery:Food
     Liabilities:VisaCard
@@ -92,7 +92,7 @@ l TAB v TAB
 Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
  **`C-c C-k`** するとEmacsの下半分に次のようなカレンダーが表示されます。
 
-<a id="org5d26a58"></a>
+<a id="org1888619"></a>
 
 {{< figure src="/emacs_calendar.png" caption="&#22259;1:  Emacs内に表示されるカレンダー" width="95%" >}}
 
@@ -153,7 +153,7 @@ $ ledger b cars -p this momth
 これで、この1ヶ月間のクルマ関係経費になります。
 yesterday, this monthの他、次のような期間指定が可能です（詳しくはマニュアルを参照してください）：
 
-```example
+```sh
 october
 oct
 this week(day, month, quarter, year)
@@ -188,7 +188,7 @@ $ ledger b cars -b 04/01 -e 04/20
 
 ここまでのreportではすべて、バランス（残高）の金額だけが表示されます。例えば、上の最後の例（＝期間限定のクルマ関係経費バランス）では次のような結果になります：
 
-```nil
+```sh
 $ ledger b cars -b 04/01 -e 04/20
 	  30,890 JPY  Expenses:Cars
 	  15,530 JPY    ガソリン
@@ -200,7 +200,7 @@ $ ledger b cars -b 04/01 -e 04/20
 
 この「b」を「r」にするだけで、バランス金額だけでなく、各トランザクションの日付や支出先などの詳細レポートが表示されます：
 
-```nil
+```sh
 $ led r cars -b 04/01 -e 04/20
 
 19-Apr-04 ENEOS SS       Expenses:Cars:ガソリン    7,374 JPY   7,374 JPY

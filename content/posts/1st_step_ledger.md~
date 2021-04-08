@@ -9,7 +9,7 @@ draft = false
 <div class="ox-hugo-toc toc">
 <div></div>
 
-<div class="heading">Table of Contents</div>
+<div class="heading">&#30446;&#27425;</div>
 
 - [はじめに](#はじめに)
 - [Ledgerのインストール](#ledgerのインストール)
@@ -38,7 +38,7 @@ draft = false
 
 さてLedger本体のインストールはapt installで一発です：
 
-```shell
+```sh
 $ sudo apt install ledger
 ```
 
@@ -265,7 +265,7 @@ $ ledger -f sample.ledger bal
 ```
 
 <div class="src-block-caption">
-  <span class="src-block-number"><a href="#code-snippet--list:1">Code Snippet 1</a></span>:
+  <span class="src-block-number"><a href="#code-snippet--list:1">ソースコード 1</a></span>:
   仕訳帳（sample.ledger）の全体バランスレポート
 </div>
 

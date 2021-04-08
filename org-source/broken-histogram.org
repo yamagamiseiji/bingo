@@ -77,23 +77,23 @@ set output '$out_file'
 #+end_src
 **** multiplotのためのパラメータを変数にして指定
 上下左右のマージンなどをこうして *変数化* することで、図のバランスの微調整が楽になります。
-#+begin_src
+#+begin_example
 bm = 0.15    # bmargin
 lm = 0.12    # lmargin
 rm = 0.95    # rmargin
 gap = 0.03   # gap betweein 2 charts
 size = 0.75  # plot size
 kk = 0.5     # relative height of bottom plot
-#+end_src
+#+end_example
 
 *** Y軸の範囲（最小値、最大値）を変数にして指定
 上下の図のY（金額）の最小値と最大値を指定します。1000で割るのはY軸目盛りの金額表示を千円単位にするためです。
-#+begin_src
+#+begin_example
 y1 = 0
 y2 =  120000/1000
 y3 = 1000000/1000
 y4 = 1120000/1000
-#+end_src
+#+end_example
 
 *** 図のスタイルとY軸の数字のフォーマット
 #+begin_src sh
@@ -152,7 +152,7 @@ unset multiplot
 
 ** 細かいことですが・・・
 納税金額が *ゼロの月* では数字の'0'を書かないようにします。それにはgnuplotの *三項演算子* を使います。その部分だけを抽出すると次のとおりです：
-#+begin_src
+#+begin_src sh
 (column(2) != 0 ? (sprintf("%'d",(column(2)))):"")
 #+end_src
 gnuplotの三項演算子の記号は _*? :*_ です。Cと同じ働きをします。例えば *a?b:c* とすると「aが真ならば、2番めの引数（b）が評価され、その値が返され、真でなければ3番めの引数（c）が評価され、その値が返されます」（gnuplot 5.2マニュアル）

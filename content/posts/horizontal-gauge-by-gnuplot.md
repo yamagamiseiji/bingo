@@ -33,9 +33,9 @@ draft = false
 
 > （例えば）２月１日から２月２０日までの累積支出額が、月額支出予算の何パーセントに当たるのかを可視化したい
 
-予算消化率の可視化については[前回の投稿](http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/)で、GNOME端末での **プログレッシブ・バーグラフ** を紹介しました。今回はそれよりももう少しグラッフィックに図[1](#orgbfe67b3)のような水平ゲージを描きます。
+予算消化率の可視化については[前回の投稿](http://org2-wp.kgt-yamy.tk/2020/01/31/post-892/)で、GNOME端末での **プログレッシブ・バーグラフ** を紹介しました。今回はそれよりももう少しグラッフィックに図[1](#orgb98e5ac)のような水平ゲージを描きます。
 
-<a id="orgbfe67b3"></a>
+<a id="orgb98e5ac"></a>
 
 {{< figure src="/horizontal-gauge.png" caption="&#22259;1:  当日までの予算消化率をプロットする水平ゲージ" width="400px" >}}
 
@@ -47,9 +47,9 @@ draft = false
 
 ### ネットには見当たらない？ {#ネットには見当たらない}
 
-当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[2](#orgbb8a88a)のような **計器盤** 風のゲージ（[出典](https://angularscript.com/angular-gauge-chart-library/)）もgnuplotで描いた例を見つけることができませんでした。
+当初、gnuplotによる水平ゲージ表示例をネット上で探してみましたが、探し方が悪いのか見当たりませんでした。水平ゲージだけでなく、図[2](#org57f0bd5)のような **計器盤** 風のゲージ（[出典](https://angularscript.com/angular-gauge-chart-library/)）もgnuplotで描いた例を見つけることができませんでした。
 
-<a id="orgbb8a88a"></a>
+<a id="org57f0bd5"></a>
 
 {{< figure src="/gauge-chart-library.png" caption="&#22259;2:  計器盤風ゲージチャートの例" width="200px" >}}
 
@@ -90,7 +90,7 @@ bashスクリプト内のledgerで算出した支出パーセントが格納さ�
 
 そのパートだけを抜き出すと次のようになっています：
 
-```nil
+```sh
 gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
 	./simple-horizntl-gauge.plt
 ```
@@ -98,7 +98,7 @@ gnuplot -e "percent='$pct'; fig_title='% of Monthly Budget'"\
 
 ### bashスクリプト {#bashスクリプト}
 
-```bash
+```sh
 #!/bin/bash
 #
 #  毎月の支出予算に対して当日までの支出金額がどれくらいになるかを

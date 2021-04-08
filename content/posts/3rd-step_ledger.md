@@ -43,7 +43,7 @@ $ led b bank
 
 があるわけです。大量のトランザクションを見てそれを発見するのはとても大変です。そこで、とりあえず **Equity:Adjustments** というアカウントに収めることで、バランスを取ります：
 
-```nil
+```sh
 05/17 * Adjustments
     Assets:bankA      = 35,000 JPY
     Equity:Adjustments
@@ -70,7 +70,7 @@ $ led b Adjustments
 
 まずはnanacoにお金をチャージします：
 
-```nil
+```sh
 2019/05/27 * nanacoチャージ
     Assets:nanacoCard
     Assets:Cash                                -2,000 JPY
@@ -78,7 +78,7 @@ $ led b Adjustments
 
 そしてお昼ごはん：
 
-```nil
+```sh
 2019/05/27 * セブンイレブン
     Expenses:Lunch                               698 JPY
     Assets:nanacoCard
@@ -86,7 +86,7 @@ $ led b Adjustments
 
 チャージ時点でnanaco残高がゼロだったら、残高は1,302円になるはずですが、そんなことはめったにありません。今回は、1,469円になっていました。そこで、上に書いた[「調整](#adjustment)」をしておきます：
 
-```nil
+```sh
 2019/05/27 * 調整 nanaco
     Assets:nanacoCard           = 1,469 JPY
     Equity:Adjustments
@@ -94,7 +94,7 @@ $ led b Adjustments
 
 つぎの問題は、nanacoなどでの少額の支出をどう扱うかです。家計簿では、カードにチャージしたところまでを転記して、あとは知らんぷりするのが良策かと・・・。カードで何を買ったかまでは管理しないという感じですね。ただし、家計全般を考えて、どうしても記録していた方がよい物を購入した時、たとえば、お酒への出費をコントローする必要性がある場合（おぅ、これは良い例だ！）には：
 
-```nil
+```sh
 2019/05/29  セブンイレブン
     Expenses:Drinks         2,500 JPY
     Assets:nanacoCard
@@ -107,7 +107,7 @@ $ led b Adjustments
 
 マイナス金利は国による民衆資産の窃盗（強盗？）という説があるそうですが、それにしても銀行にお金を預けているとスズメの涙レベルの利息がつきます。それを転記する方法：
 
-```nil
+```sh
 2019/06/05  銀行口座への利息
 	Assets:横浜銀行
 	Income:利息		-34 JPY
@@ -115,7 +115,7 @@ $ led b Adjustments
 
 他に例を見たことが無いので、Incomeにして良いのかどうか分かりませんが、結果的にはこれで辻褄は合います：
 
-```nil
+```sh
 $ led b
 	 100,034 JPY  Assets:横浜銀行
 	-100,000 JPY  Equity:Opening Balances
@@ -133,7 +133,7 @@ $ led b
 
 次の例を見て下さい。これは **偶数月** に支給される年金（国民年金；NP）と（国家公務員年金;KKR）を定期的なトランザクションとして定義したものです（金額は仮想です）：
 
-```nil
+```sh
 ~ bimonthly from 2019/04/15
     Assets:みずほ銀行
     Income:年金:KKR                           40,000 JPY
@@ -142,7 +142,7 @@ $ led b
 
 次の例は、２ヶ月に１回、 **奇数月** に引き落とされる管理費と上下水道代です：
 
-```nil
+```sh
 ~ bimonthly from 2019/03/21
     Expenses:管理費                           40,000 JPY
     Expenses:公共:上下水道                     3,500 JPY
@@ -151,7 +151,7 @@ $ led b
 
 そして、３番目は年に１回の諸会費の例です：
 
-```nil
+```sh
 ~ yearly    from 2019/03/01
     Expenses:諸会費:JAF                        4,000 JPY
     Expenses:諸会費:JPS	                       8,000 JPY
@@ -167,7 +167,7 @@ $ led b
 
 <!--listend-->
 
-```nil
+```sh
 $ led budget ^income ^expenses
 ```
 
@@ -175,7 +175,7 @@ $ led budget ^income ^expenses
 
 <!--listend-->
 
-```nil
+```sh
 $ led bal --add-budget
 ```
 
@@ -183,13 +183,13 @@ $ led bal --add-budget
 
 <!--listend-->
 
-```nil
+```sh
 $ led reg --add-budget
 ```
 
 上のコマンドの結果の抜粋を示します：
 
-```nil
+```sh
 　　　：
 2019/04/01 Budget transaction    Assets:みずほ銀行         70,000 JPY   70,000 JPY
 2019/04/01 Budget transaction    Income:年金:KKR          -40,000 JPY   30,000 JPY
@@ -214,7 +214,7 @@ $ led reg --add-budget
 
 それで、「几帳面」と言うのは「帳面」をきちんとつけられることだと思っていましたが、どうやらそれは間違いで、「几帳」という「寝殿造りの間仕切り」の仕上げがとても丁寧だったことに由来するそうです。
 
-<a id="orgc7607a2"></a>
+<a id="orgcb4b8fb"></a>
 
 {{< figure src="/kicho.jpg" caption="&#22259;1:  几帳です。記帳ではありませんw" width="80%" >}}
 
