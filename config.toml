@@ -5,18 +5,19 @@ copyright = "Copyright (c) 2008 - 2014, Steve Francia; all rights reserved."
 theme = "mixedpaper"
 
 canonifyurls = false
-paginate = 5
-languageCode = "ja-jp"
+paginate = 10
+languageCode = "ja"
 enableRobotsTXT = true
 
-summaryLength = 80 # Configure how long the post summary should be on the homepage.
+summaryLength = 80 # Configure how long the post summary
 pygmentsCodeFences = true
 # pygmentsUseClasses = true
 # pygmentsStyle = "manni"
 hasCJKLanguage = true # 日本語文字数を正しくカウントさせるため必要
-
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
 googleAnalytics = ""
+disableKinds = ["RSS", "sitemap"] # index.xml(RSS), sitemap.xmlを作らない
+enableEmoji = true
 
 [taxonomies]
 tag = "tags"
@@ -36,6 +37,7 @@ mainSections = [
 listPaginate = 20
 postLicense = ""
 pygmentsUseClasses = true
+
 
 
 [params.comment]
