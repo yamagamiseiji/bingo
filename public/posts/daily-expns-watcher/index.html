@@ -32,6 +32,19 @@
   
   
     
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
   
 </head>
 
@@ -105,7 +118,7 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">月々の支出目標（予算）に向けて日々の累積支出額がどのように推移しているか
 その動きをモニターする
 </code></pre></div><p>まずは例図をみてください（金額はでたらめです）。</p>
-<p><a id="org6be5d78"></a></p>
+<p><a id="orgfe9e69e"></a></p>
 <figure>
     <img src="/budget-watcher-sample.png"
          alt="図1:  予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。" width="90%"/> <figcaption>
@@ -215,7 +228,7 @@ set output
 <pre><code class="language-nil" data-lang="nil">plot '/home/hogehoge/tmp-togetsu.dat'\
    using 1:2:(f($1)) w filledcurves below title '予算以下' lc rgb &quot;skyblue&quot;,\
 　　：
-</code></pre><p>引っかかったのは、 <code>f($1)</code> の <code>$1</code> がbashとgnuplotの間で <strong>もめ事</strong> を起こすこと。そのために <code>gnuplot &lt;&lt; EOF</code> スタイルでgnuplotスクリプトを素直にbashに埋め込むことができませんでした。それを迂回するためにこんな形でしのいでいます。回避できるので大きな問題ではありませんが、簡単にエスケープ？する方法が他にもあるんだとは思いますが・・・（笑）</p>
+</code></pre><p>引っかかったのは、 <code>f($1)</code> の <code>$1</code> がbashとgnuplotの間で <strong>もめ事</strong> を起こすこと。そのために <code>gnuplot &lt;&lt; EOF</code> スタイルでgnuplotスクリプトを素直にbashに埋め込むことができませんでした。それを迂回するためにこんな形でしのいでいます。回避できるので大きな問題ではありませんが、簡単にエスケープ？する方法が他にもあるんだとは思いますが・・・😄</p>
 <h3 id="追記-上記-もめ事-解決しました">（追記）上記「もめ事」解決しました！</h3>
 <p><a href="https://groups.google.com/forum/m/#!topic/comp.graphics.apps.gnuplot/JCNS96hGaIg">こちらのサイト</a> にすばらしい情報がありました。gnuplotの <code>column()</code> 関数を使う方法です。たとえば次のようにします：</p>
 <pre><code class="language-nil" data-lang="nil">（旧）   using ($2*0.5):0:($2*0.5):(0.35):yticlabels(1)\

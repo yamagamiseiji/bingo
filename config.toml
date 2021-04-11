@@ -15,9 +15,10 @@ pygmentsCodeFences = true
 # pygmentsStyle = "manni"
 hasCJKLanguage = true # 日本語文字数を正しくカウントさせるため必要
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
-googleAnalytics = ""
+googleAnalytics = "UA-194281784-1"
 disableKinds = ["RSS", "sitemap"] # index.xml(RSS), sitemap.xmlを作らない
 enableEmoji = true
+
 
 [taxonomies]
 tag = "tags"

@@ -31,18 +31,18 @@ draft = false
 
 ところで、この **中断線** は英語では **break** といいます。途中でカットされた棒グラフは **histogram with break** でしょうか。
 
-コロナへの政府の対応に憤慨して **give me a break!** って叫ぶ感じで、この際、禁断の **breakつき棒グラフ** を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね（笑）
+コロナへの政府の対応に憤慨して **give me a break!** って叫ぶ感じで、この際、禁断の **breakつき棒グラフ** を描いてみようと思い、やってみました。くれぐれも良い子は真似をしないでくださいね:wink:
 
 
 ## Y軸にbreakを入れてみる {#y軸にbreakを入れてみる}
 
 こんな感じになります（金額はでたらめです）。
 
-<a id="org1456a5e"></a>
+<a id="org0c8c40e"></a>
 
 {{< figure src="/broken-histogram.png" caption="&#22259;1:  Breakを入れた棒グラフの例（納税額の推移）" width="90%" >}}
 
-Ledgerとgnuplotを組み合わせて図[1](#org1456a5e)のような **break** つき棒グラフを描く方法を紹介します。
+Ledgerとgnuplotを組み合わせて図[1](#org0c8c40e)のような **break** つき棒グラフを描く方法を紹介します。
 
 
 ### Ledger-cliのクエリー {#ledger-cliのクエリー}

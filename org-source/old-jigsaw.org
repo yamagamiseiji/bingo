@@ -27,15 +27,19 @@
 あとの問題はブレード（替刃）。
 最近のジグソーブレードの主流はボッシュ（B）タイプと呼ばれるもので、取付部は左図のような格好をしています。本体への取り付けはワンタッチでできます。しかしボクの旧式ジグソーは *貫通穴止め* タイプで、ブレードにはネジで止める穴があいています（右図）。
 
+#+caption: タイプB（ボッシュ）（左）と貫通穴止め（右）ブレード
+#+name: blades
+#+attr_html: :width 10%
+[[file:typeB-blade.png]]　　　[[file:kantuana-Type.png]]
 
-#+begin_export html
-<figure class="gazo-box">
-<div align="center">
-<img src="pics/typeB-blade.png" width="15%">  　  <img src="pics/kantuana-Type.png" width="15%" >
-<figcaption>Fig2: タイプB（ボッシュ）（左）と貫通穴止め（右）ブレード</figcaption>
-</div>
-</figure>
-#+end_export
+# #+begin_export html
+# <figure class="gazo-box">
+# <div align="center">
+#   <imag src="/kantuana-Type.png" width="15%" >
+# <figcaption>Fig2: タイプB（ボッシュ）（左）と貫通穴止め（右）ブレード</figcaption>
+# </div>
+# </figure>
+# #+end_export
 
 このタイプのブレードの在庫が工具箱の中にあるかどうか探しました。
 箱の隅に一本だけホコリまみれだけど *未使用* のB&D製ブレードを発見しましたが、目が荒くて合板をきれいに丸く切り抜く作業には使えそうもありません。
@@ -88,7 +92,7 @@
 #+end_example
 ？？？ブレードと勘違いをされたのでしょうか。ま、仕方ないと思います。
 
-*cutting guide* を使うと、それに頼って刃の進みが速くなりがちで失敗することもあります。ガイドが無いと *墨線* に沿って少しずつ刃を進めたり引いたりするのでかえってきれいに切れたりします。負け惜しみです（笑）
+*cutting guide* を使うと、それに頼って刃の進みが速くなりがちで失敗することもあります。ガイドが無いと *墨線* に沿って少しずつ刃を進めたり引いたりするのでかえってきれいに切れたりします。負け惜しみです:smile:
 
 * Ackknowledgement
   
