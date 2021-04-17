@@ -1,0 +1,96 @@
++++
+title = "Ledger出力の列崩壊"
+author = ["YAMAGAMI"]
+date = 2021-04-20T00:00:00+09:00
+tags = ["ledger", "account"]
+categories = ["comp"]
+draft = false
++++
+
+Ledger-cliは小規模ビジネスや団体、研究費、家庭の経理こんなに便利なツールは無いとくにサイエンス系、理系の人たちには福音といっても言い過ぎではない
+
+いくら称賛しても称賛しきれないほど素晴らしいツール
+
+しかし日本ではあまり使われている気配がない。一つは伝統的な「貸し方」「借り方」という概念を使わない複式簿記になにか不安とか馴染みがないとか、
+
+もう一つは、日本語とアルファベットが混在したbalance出力の金額列のカラムが整列しない。カラム崩壊してしまうことも関係ある？
+
+たとえばこんなふうに
+
+```nil
+　　：
+  Parking                      8,590 JPY
+  Toll                       320,260 JPY
+  保険                         164,150 JPY
+    任意保険                     138,320 JPY
+    自賠責                       25,830 JPY
+  整備修繕                       211,404 JPY
+  税金                         112,800 JPY
+    手数料                        1,000 JPY
+　　：
+```
+
+これではどんなに素晴らしい会計・経理システムでも、見た目から、ちょっとね、ということになる。
+
+2年間ほどは、まぁいいかと目をつぶっていたが、Ledgerで計算をする範囲が拡大するにつれて、結果の表示のカラム崩壊はだんだんと我慢ができなくなってきた。
+
+ところがこの問題は、Ledgerの問題というだけではく、UTFのコードの問題。（参考資料）
+
+2年間放置していたのは、これにかかずらわるのを避けていたから。
+
+繰り返しになるが、しかし我慢ができなくなった。ので、どれほど暴力的であろうとも、ブサイクであろうとも、ともかく出力のカラム列を整列させたい、ということで、一つの方法を使うようになった。それをここで紹介する。:sweat_smile:
+
+```nil
+#!/bin/bash
+set -eu
+#
+#  列崩壊のないbalance出力を得る
+#
+ledger bal cars --no-total  --balance-format \
+       '%-.24((depth_spacer)+(partial_account))\n' \
+       -o ./tmp-acnt.txt
+#
+ledger b cars --no-total --balance-format  \
+       '%(justify(scrub(display_total), 15, -1, true, color))\n' \
+       -o ./tmp-amount.txt
+##### 列崩壊防止のため一旦SJISに
+iconv -f UTF-8 -t SHIFT-JIS ./tmp-acnt.txt | \
+    cut -b 1-24 | iconv -f SHIFT-JIS -t UTF-8 > ./tmp-24.txt
+#
+paste -d' ' ./tmp-24.txt ./tmp-amount.txt > ./tmp-pretty.txt
+#####
+cat ./tmp-pretty.txt
+exit 0
+```
+
+ミソは、 `cut -b 1-24` の数字部分。これが大きいとTABの混入とか変なことが起こる。
+ `display_total` の文字数15も割に重要。これも小さくしすぎると列崩壊する。
+
+
+## 列崩壊防止の実施前後のちがい<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-02-25 木&gt;</span></span> {#列崩壊防止の実施前後のちがい}
+
+```nil
+＜防止策　実施前＞
+　　：
+  Parking                      8,590 JPY
+  Toll                       320,260 JPY
+  保険                         164,150 JPY
+    任意保険                     138,320 JPY
+    自賠責                       25,830 JPY
+  整備修繕                       211,404 JPY
+  税金                         112,800 JPY
+    手数料                        1,000 JPY
+　　：
+
+＜防止策　実施後＞
+　　：
+  Parking                      8,590 JPY
+  Toll                       320,260 JPY
+  保険                       164,150 JPY
+    任意保険                 138,320 JPY
+    自賠責                    25,830 JPY
+  整備修繕                   211,404 JPY
+  税金                       112,800 JPY
+    手数料                     1,000 JPY
+　　：
+```

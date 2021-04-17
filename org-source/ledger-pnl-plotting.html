@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-04-17 土 17:24 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>投資信託の評価損益を見える化する</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">投資信託の評価損益を見える化する</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org642c84f">1. 投資とLedger-cli</a></li>
+<li><a href="#org8e08641">2. 投資信託の「評価損益」の可視化</a></li>
+<li><a href="#org73f0f7b">3. 日々の基準価額をどうやって取得するか</a></li>
+<li><a href="#orgf57a1bd">4. Ledgerの出番</a></li>
+<li><a href="#org0f7f6f2">5. ちょっとしたコツ</a></li>
+<li><a href="#codes">6. Appendix:  コードの要点</a></li>
+<li><a href="#org7069842">7. Acknowledgements:</a></li>
+<li><a href="#org43650d7">8. Footnotes:</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org642c84f" class="outline-2">
+<h2 id="org642c84f"><span class="section-number-2">1</span> 投資とLedger-cli</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<b>Ledger-cli</b> の広範囲な使われ方の中で、
+もちろんメインの領域は <b>経理・会計</b> 分野ですが、
+その他に <b>時間マネージメント</b> や <b>在庫管理</b> などにも活用されています。
+</p>
+
+<p>
+メインの領域の中でもLedgerを個人もしくは小規模な団体の <b>投資</b> モニターに使うのはいわば <b>王道</b> の一つです。投資管理のために有効な機能がいろいろと備わっています。
+</p>
+
+<p>
+すでに「<a href="https://bred-in-bingo.netlify.app/posts/6th-step_ledger/">プレーンテキストファイルで「複式」家計簿（6）</a>」で <b>株式</b> についてLedgerの基本的な機能を紹介しました。ここでは投資信託を例にとって投資の可視化例をお話します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8e08641" class="outline-2">
+<h2 id="org8e08641"><span class="section-number-2">2</span> 投資信託の「評価損益」の可視化</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+日々の「 <b>基準価額</b> 」は投資信託を提供している会社のホームページで公開されています。しかし「 <b>評価損益</b> 」、とくにその推移の可視化は個々人にまかされているというのが一般的かもしれません(注<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>)。
+</p>
+
+<p>
+株式でも投資信託でも評価損益の計算そのものはとても簡単。使う計算は <b>加減乗除</b> だけなので、ユーザレベルで自分で使いやすく「見える化」するのは <b>gnuplot</b> などを使って自動的に作図することも含めて、さほど難しくはありません
+</p>
+
+
+<p>
+投資信託を購入したときの基準価額（ <b>簿記単価</b> ）と本日の基準価額の差を求めて、
+保有している「 <b>口数</b> 」を掛け算すれば当日の評価損益になります(注<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>)。
+</p>
+
+<p>
+一つの例を上げます。
+</p>
+
+<p>
+いま <b>架空の投信</b> を3種（AAA投信, BBB投信, CCC投信）保有しているとします。評価損益の推移は図<a href="#orgb1a61bc">1</a>のようにプロットできます。
+</p>
+
+<div id="orgb1a61bc" class="figure">
+<p><img src="../static/out-pnl-it-monthly.jpg" alt="out-pnl-it-monthly.jpg" width="95%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>期間を1ヶ月に指定した場合の投資信託評価損益の推移。赤いラインは3投資信託の合計損益（架空の損益です）。</p>
+</div>
+
+<p>
+図<a href="#orgb1a61bc">1</a>では期間幅（＝X軸）を1ヶ月にしていますが、起動時のオプションでweekly, monthly, 3months, 6months の中から一つを選択できるようにしてあります。3ヶ月分のデータをプロットするときのスクリプトの起動方法は次のとおりです。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ time pnl-it-plotter 3
+real    0m0.206s
+user    0m0.156s
+sys     0m0.069s
+</pre>
+</div>
+<p>
+上のブロックでは <code>time</code> コマンドを使って起動から図が表示されるまでの所要時間も表示しています(注<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>)。コードの要点は<a href="#codes">下記</a> に紹介しました。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org73f0f7b" class="outline-2">
+<h2 id="org73f0f7b"><span class="section-number-2">3</span> 日々の基準価額をどうやって取得するか</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+株価の終値もそうですが投資信託の「基準価額」を毎日きちんと取得するにはそれなりの工夫が必要です。
+</p>
+
+<p>
+一番簡単なのは、夕方に信託会社のホームページを見て当日の価額を <b>書きとめる</b> 方法です。
+保有する投資信託の本数が少数の場合には、この方法でもなんとかなります。
+しかし「片手」近い数になると目で見て手で入力する方法はミスも起こるし現実的ではありません。
+</p>
+
+<p>
+最も確実な方法は、 <code>cron</code> で定時的にホームページから <code>curl</code> を使って価額データベースに収納していく方法です。これも技術的な難易度は高くはありません。しかしその方法を公けにするのははばかられます。信託会社の顧客であっても、そのホームページから価額をスクレーピングすることが法律的に許容されるかどうか微妙な点がわが国（＝情報化における <b>極東のガラパゴス</b> ）にはあります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf57a1bd" class="outline-2">
+<h2 id="orgf57a1bd"><span class="section-number-2">4</span> Ledgerの出番</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+さて実はここまでのプロセスにはLedgerの出番はありません。Ledgerが提供する <code>.prices.db</code> というコモディティの価格データベースを使っているだけです。
+</p>
+
+<p>
+いったんこの価格データベースに日々の価額や株価が収納されれば、Ledgerはそれを使ってゲインやマーケット価格、元本などの情報を計算し抽出してくれます。
+評価損益などの具体的な金額をコマンドラインから <b>瞬時</b> に得たい、そんな時にこそLedgerの本領とパワーが発揮されます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0f7f6f2" class="outline-2">
+<h2 id="org0f7f6f2"><span class="section-number-2">5</span> ちょっとしたコツ</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+トランザクション内で投資信託をどう扱うかによって、
+コマンドラインから投資信託の現状を把握する際の <b>クエリ</b> （検索・抽出コマンド）の方法がきまります。
+</p>
+
+<p>
+Ledger内で投資信託の <b>名称</b> をハンドリングする方法は基本的には次の３つです。
+</p>
+<ol class="org-ol">
+<li><b>アカウント</b> にする方法</li>
+<li><b>コモディティ</b> にする方法</li>
+<li><b>タグの値(value)</b> にする方法</li>
+</ol>
+
+<p>
+汎用性があって使いやすく、多くのユーザが採用しているのは上の2)と3)を合わせた次のような方法です。
+</p>
+</div>
+<div id="outline-container-org347cd43" class="outline-3">
+<h3 id="org347cd43"><span class="section-number-3">5.1</span> 購入時の転記のしかた</h3>
+<div class="outline-text-3" id="text-5-1">
+<pre class="example" id="orgc4aa2be">
+ABC信託会社から 「AAA信託」を単価12,500円で40口、
+合計金額＝500,000円で購入した。手数料は0円。
+</pre>
+<p>
+これを転記するには次のようにします。
+</p>
+<pre class="example">
+2020/01/10 ABC信託会社
+    ; fund: AAA信託
+    Expenses:Trusts:cmsn         　            0 JPY
+    Assets:Trusts            40 AAA信託 @ 12,500 JPY
+    Assets:abcBank                      -500,000 JPY
+</pre>
+<p>
+2行目で <code>fund</code> というタグに <code>AAA信託</code> という値(value)を与えています。これは必須ではありませんがあとで検索のときにこのタグと値を使います。
+</p>
+
+<p>
+4行目で <code>AAA信託</code> が <b>コモディティ</b> （通貨単位commodity）のように使われています。
+Ledgerのコモディティはとても広い概念です。この場合には
+<code>40 AAA信託</code> という形で資産を表現します。 <code>@@</code> マークは合計金額を意味します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2a36e6a" class="outline-3">
+<h3 id="org2a36e6a"><span class="section-number-3">5.2</span> 評価損益のクエリ</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+評価損益（ゲイン）を得たいときには次のようにします：
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ ledger bal ^assets and trust --gain --account=commodity 
+         -72,029 JPY  AAA&#25237;&#20449;:Assets:Trusts
+          14,163 JPY  BBB&#25237;&#20449;:Assets:Trusts
+          43,862 JPY  CCC&#25237;&#20449;:Assets:Trusts
+--------------------
+         -14,005 JPY
+</pre>
+</div>
+<p>
+このコマンドラインクエリは短縮形にすると<br />
+<code>$ led b ^assets and trust -G -a commodity</code> になります。
+</p>
+
+<p>
+投信の中から一つだけ抽出してゲインを得たいときにはさっきのタグと値(value)を使います。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ ledger bal  ^assets and trust and %<span style="color: #BA36A5;">fund</span>=CCC --account=commodity --gain
+         43,862 JPY  CCC&#25237;&#20449;:Assets:Trusts
+</pre>
+</div>
+<p>
+<code>%fund=CCC</code> で <code>fund</code> というタグでかつ <code>CCC</code> という文字列を持つ値が抽出されます。どうしてもタグを使うのがいやな人は次のように <code>--limit=</code> を使えばタグ無しでのクエリが可能です。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ ledger bal trust --limit=<span style="color: #008000;">"commodity =~ /CCC/"</span>  --gain
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2ab0f09" class="outline-3">
+<h3 id="org2ab0f09"><span class="section-number-3">5.3</span> 売却時の転記のしかた</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+「保有していたAAA信託の半分＝20口だけ売却（単価18,000円で）した」ときの転記は次のとおりです。
+</p>
+<pre class="example">
+2021/04/10 ABC信託会社
+    ; fund: AAA信託
+    Expenses:Trusts:cmsn                   1,300 JPY
+    Assets:Trusts           -20 AAA信託 @ 18,000 JPY
+    Assets:abcBank                       358,700 JPY
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-codes" class="outline-2">
+<h2 id="codes"><span class="section-number-2">6</span> Appendix:  コードの要点</h2>
+<div class="outline-text-2" id="text-codes">
+<p>
+bashスクリプトとgnuplotのリテラシーを持っている方なら図<a href="#orgb1a61bc">1</a>を見ただけですぐにかけるかと思いますが、自分への備忘もかねて要点だけ記しておきます。
+</p>
+</div>
+<div id="outline-container-orgbd7b467" class="outline-3">
+<h3 id="orgbd7b467"><span class="section-number-3">6.1</span> bashパート</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+bashパートでは、投資信託名および簿記単価、口数を「3次元配列」っぽく(注<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>)データ化しておきます（数値は乱数です）。
+</p>
+<pre class="example">
+fund_list=(
+	"AAA 12090 111.9427"
+	"BBB 11439 104.8205"
+	"CCC 30125 28.5414"
+	"DDD 13392 122.4732"
+	"EEE 15298 130.9514"
+)
+</pre>
+<p>
+当日の価額は <code>.prices.db</code> から読み込みます。これで評価損益を算出します。投資信託の数が増えても（減っても）配列定義のパートだけを変更するだけで対応できます。
+</p>
+
+<p>
+X軸の期間は入力された期間のキーワード（w,m,3,6）を <code>case文</code> で仕分けます。
+</p>
+</div>
+</div>
+<div id="outline-container-org502bbad" class="outline-3">
+<h3 id="org502bbad"><span class="section-number-3">6.2</span> gnuplotパート</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+gnuplotのX軸関係のパラメータは全部変数化しておいてbashから引き継いでいます。
+</p>
+<pre class="example">
+# 時間軸の設定
+  set xdata time
+  set timefmt "%Y%m%d"
+  set format x "${x_format}"
+# xticsの設定
+  unset mxtic
+  set xtics format "${x_format}"
+  set xtics "${xtics1}", ${xtics2}, "${xtics3}" 
+  set xtics  font "Arial, 10"
+# X軸の設定
+  set xrange ["${xrange1}":"${xrange3}"]
+  set xlabel '${xlabel}' font "Arial,12"
+</pre>
+<p>
+これ以外のパートは単純な折れ線グラフです。
+</p>
+
+<p>
+各折れ線グラフの最終ポイントにだけ価格をラベルとして印字するところは次のように <b>三項演算子</b> を使っています：
+</p>
+<pre class="example">
+　　：
+  '' using 1:((column(1)==${latest_date}) ? column(2): 1/0):(sprintf("%'d", column(2))) \
+	 w labels font "Arial, 8" offset 0., +0.7 textcolor rgb "dark-green" notitle,\
+　　：
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7069842" class="outline-2">
+<h2 id="org7069842"><span class="section-number-2">7</span> Acknowledgements:</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li><a href="https://groups.google.com/g/ledger-cli">GoogleGroup; Ledger</a></li>
+<li><a href="http://www.gnuplot.info/docs_4.6/gnuplot-ja.pdf">gnuplot日本語マニュアル</a></li>
+<li><a href="https://www.ledger-cli.org/docs.html">Ledger Docs</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org43650d7" class="outline-2">
+<h2 id="org43650d7"><span class="section-number-2">8</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+会社によっては、それも可視化して提供しているところもあるかも。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+厳密には <b>有効数字</b> の問題があって、単純に <b>価額ｘ口数</b> では正確な評価損益を得ることはできませんが、そのあたりになると話が細かいので今回は省略します。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+bashでコマンド、スクリプトの実行時間測定をしています。実際には、スクリプトはこの図を書くだけではなくて、基準価額のデータベースを更新したり、USBやクラウドにデータをバックアップしたりするなどの処理もしていますので200msecほどかかっています。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+　Bashスクリプトは公式には配列には対応していませんが「配列もどき」の使い方はできます。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-04-16 金 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-04-17 土 17:24</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
