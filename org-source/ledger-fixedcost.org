@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-04-24 13:21:24 yamagami>
+#           Time-stamp: <2021-04-24 15:11:18 yamagami>
 #+title: Ledger --- 固定費のトラッキング
 #+date: [2021-04-24 ]
 #+language: ja
@@ -9,7 +9,7 @@
 #+hugo_section: posts
 #+hugo_tags: ledger accounting
 #+hugo_categories: comp
-#+options: toc:nil
+#+options: toc:1
 #+draft: false
 
 Ledger-cliを使ってこれは便利！というような小技を一つずつ紹介する企画の第1弾です。
