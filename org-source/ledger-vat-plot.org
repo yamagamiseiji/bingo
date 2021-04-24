@@ -1,0 +1,492 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2021-04-24 13:22:30 yamagami>
+#+title: 消費税の取扱い
+#+date: [2021-05-01 ]
+#+language: ja
+
+#+link: file file+sys:../static/
+
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: accounting ledger gnuplot
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+100年に1度というパンデミックの中、消費税を減税するなどの施策が期待されていたのは泡沫（うたかた）の夢だったようです。
+
+パンデミックに対するわが国の政府の対応は、他国の政府に比べて様々な指標において最低です。わが国で政治に関与している人たちに *欠如* しているのは、国民の生命財産を守るという最低限の目的意識、政策の失敗があったら担当者が責任を負うという気概（腹を切れとは言いませんが）。有り余っているのは、自己保身と権力欲、その根底にあるのは金欲です。情けない限りです。
+
+* とろこで消費税
+小売レベルのレシートでは「内税」が趨勢になったと言えます。
+「内税化」はまさに政府の望むところ、
+内税にすれば税負担を意識させずに国民の財布からお金を抜くことができます。
+
+抜くときだけ抜いておいて、生命財産の危機に陥った国民を救うためには（我々から抜いた金なのに）還元しようという意図がないという盗賊以下の倫理性の低さ。
+
+* 意地でも税金を把握してやる！
+Ledgerファイルの(test.ledger)冒頭部に次の4行を追記しましょう。そうすれば消費税を「ざくっと」把握できます。
+#+begin_src
+= /^Expenses:Grocery:food/
+    (Expenses:VAT)                   .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                   .09090909090909090909
+#+end_src
+これはLedgerの *自動転記* （automated transaction）記法で書かれています。\\
+第１番目のトランザクションは次のような意味になります。
+#+begin_quote
+「これ以降のトランザクションにおいて、すべてのExpenses:Grocery:foodアカウントは、その支出額に .07407407407407407407 を乗じた金額を（Expenses:VAT)という仮想アカウントの支出として転記しなさい」
+#+end_quote
+*.07407407407407407407* という数字にはコモディティ＝通貨記号がありません。これは0.08/1.08 の値、つまり内税で表示された金額を1.08で割って0.08を掛けた定数です。この定数をもとの金額に掛けなさい、という意味になります。
+
+第2番めのトランザクションは、8%課税対象のfoodと租税公課 *以外* の支出アカウントには消費税が10%になることをLedgerに教えています(注[fn:二重課税])。
+
+日々の生活では普通に「内税」ベースで家計簿・帳簿をつけていきます。
+#+begin_src
+account Expenses:VAT
+account Expenses:Meals
+account Expenses:衛生費
+account Assets:Bank
+account Assets:Cash
+account Expenses:Grocery:Food
+;;
+= /^Expenses:Grocery:food/
+    (Expenses:VAT)                  .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                  .09090909090909090909
+;;
+2020/03/08 * カーディーラ
+    Expenses:Cars                             47,300 JPY 
+    Assets:Cash
+
+2020/03/08 * KFC
+    Expenses:Meals                                638 JPY
+    Assets:Bank
+
+2020/03/08 * ヨーカドー
+    Expenses:Grocery:food                        4,201 JPY
+    Assets:Cash
+
+2020/03/08 * ドラッグストア
+    Expenses:衛生費　         (floor( 780 JPY * 1.10))
+    Expenses:Grocery:food     (floor( 452 JPY * 1.08))
+    Assets:Cash
+#+end_src
+
+そうしておいてふつーにクエリをたたくと次のようになります。
+#+begin_src sh
+＜1. 税込みの支出総額を知りたい＞
+$ led b ^expenses -f test.ledger 
+          58,268 JPY  Expenses
+          47,300 JPY    Cars
+           4,689 JPY    Grocery:food
+             638 JPY    Meals
+           4,783 JPY    VAT
+             858 JPY    衛生費　
+--------------------
+          58,268 JPY
+
+＜2. 税抜きの支出総額を知りたい＞
+$ led b ^expenses and not vat -f test.ledger 
+          53,485 JPY  Expenses
+          47,300 JPY    Cars
+           4,689 JPY    Grocery:food
+             638 JPY    Meals
+             858 JPY    衛生費　
+--------------------
+          53,485 JPY
+
+＜3. 消費税の総額を知りたい＞
+$ ledger bal vat -f test.ledger
+           4,783 JPY  Expenses:VAT
+
+＜4. KFCの消費税を知りたい＞
+$ ledger reg vat and @KFC -f test.ledger 
+2020/03/08 KFC                  (Expenses:VAT)               58 JPY       58 JPY
+	  #+end_src
+上の2. では、VATが仮想アカウントなので、 ~and not vat~ の代わりに
+~--real~ とか ~--actual~ とかしても結果は同じです。
+
+* 自動転記+仮想アカウント
+Ledgerファイルのトップに消費税の定義を書いておくだけで、トランザクションごとにいちいち消費税のエントリを書かなくても、全トランザクションについて仮想アカウントで税の金額を計算してくれる、これはほんとうに強力な機能です。
+
+この機能は消費税計算だけでなく広い応用範囲があります。くわしくは（こちら）をご覧ください。
+
+** ちょっと困ったことが
+これは自動転記の問題というよりも仮想アカウントの問題（または仕様？）かもしれませんが、上記の(Expenses:VAT)という仮想アカウントはeffective dateをrespectしてくれません。
+次のような水道料金のトランザクションで説明します。水道料金は毎月ではなくて2ヶ月分がまとめて徴収されます。
+#+begin_src
+account Assets:Bank
+account Expenses:VAT
+account Expenses:水道
+account Expenses:Grocery:Food
+;;
+= /^Expenses:Grocery:food/
+    (Expenses:VAT)                  .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                  .09090909090909090909
+;;
+2021/03/01 * 水道料金
+    Expenses:水道               2,574 JPY ; [=2021/01/01]
+    Expenses:水道               2,574 JPY ; [=2021/02/01]
+    Assets:Bank
+#+end_src
+金額の右側にある ~;[=2021/01/01]~ はこれが1月徴収分であることを示しています。
+さてこのファイル(water.ledger)に対して次のようなクエリを発行すると次のようになります：
+#+begin_src
+＜1. 実アカウント＝水道についてのクエリ  ==>  effective date が表示されない＞
+$ led r 水道 -f water.ledger
+2021/03/01 水道料金   Expenses:水道             2,574 JPY    2,574 JPY
+　　　　　　　　　　　　 Expenses:水道             2,574 JPY    5,148 JPY
+＜2. 実アカウント＝水道についてのクエリ ==> effectiveが効いて effective dateが表示される＞
+$ led r 水道 -f water.ledger  --effective
+2021/01/01 水道料金    Expenses:水道             2,574 JPY    2,574 JPY
+2021/02/01 水道料金    Expenses:水道             2,574 JPY    5,148 JPY
+
+＜3. 仮想アカウント＝VATについてのクエリ  ==>  effective date が表示されない＞＞
+$ led r vat -f water.ledger
+2021/03/01 水道料金  (Expenses:VAT)              234 JPY      234 JPY
+　                  (Expenses:VAT)              234 JPY      468 JPY
+＜4. 仮想アカウント＝VATについてのクエリ  ==>  --effectiveは効かない＞
+$ led r vat -f water.ledger --effective
+2021/03/01 水道料金   (Expenses:VAT)              234 JPY      234 JPY
+　　　　　　　　　　　　　(Expenses:VAT)              234 JPY      468 JPY
+#+end_src
+上の中で 2. だけが正解。つまり3月に支払った料金は1月、2月按分されたことが表示されています。それ以外はこの按分が表示されていません。
+
+つまり2ヶ月分がまとめて請求される水道料金などに含まれる消費税が（総額はあっているのですが）2ヶ月に按分されて表現されません。これは結構困った問題です。たとえば毎月ごとの水道料金を調べると水道料金がゼロの月と2ヶ月分の月が交替して出てきます。
+
+現在、いろいろ調べ得ていますが未だに解決方法はわかりません。
+** なので
+effective dateを使って支出を按分している場合には、automated TXNで仮想アカウントを使う方法は避けたほうが良いということになります。その代替としていまは =juzei_plotter= を用意して使っている。
+
+* Footnotes:
+[fn:二重課税] みなさんご存知の通り、ガソリン税や酒税やたばこ税は「税に税をかける」悪名高き *二重課税* になっています。しかし今の所、所得税や住民税には消費税はかかっていません。そのうちこれらに平気で「いけしゃーしゃー」と課税される日がきておかしくない国ですがねｗ
+
+
+
+
+
+
+
+* COMMENT しかし消費税をどれほど財布から抜かれているか、意識したい
+ということで、<2021-04-18 日>
+=vat-rolling_plotter= を作成（まだベータ版）。
+
+きちんと税を把握したとしても、
+実際にはそのデータを使ってなにか生産的ことができるか？
+ただむかつくだけ、
+なんだけど、実際には税を個々人に認識させることは国がいちばん嫌がっていること、
+知らないうちに、わけもわからぬように、人々の財布からお金を抜き取る
+それが目的だから、こんちくしょうー、負けるものかといううことでトライしてみる。
+
+ざくっと行って、消費税は総支出金額の10％ほどになる計算。その他に、
+所得税とか住民税とか、重量税とかガソリン税、酒税などを抜かれるので、
+重税感ははんぱじゃあない。
+
+そのくせ、国民の生命財産への最大の危機であるパンデミックにおいて、
+国民への還元はほとんど無いというふざけた税行政。gotoじゃなくてgohellだよ。
+
+** ベータ版のコード<2021-04-18 日>
+#+begin_src
+#!/bin/bash
+set -eu      #   Time-stamp: <2021-04-18 19:01:43 yamagami>
+#
+#  重税プロッター（月ごとに消費税として徴収される金の推移）
+#
+source func-symbolic-link-maker.sh # シンボリンク作成関数
+source func-xlabel-maker.sh # xlabel関数
+#
+from_date=$(date -d '-18 month' "+%Y/%m/01")
+to_date=$(date '+%Y/%m/%d')
+
+# xlabel関数のコール（引数は始期と終期）
+xlabel-maker "${from_date}" "${to_date}"
+#
+
+##  消費税計算
+# 8%
+ledger reg ^Expenses and food -M --collapse\
+       -b "${from_date}" -e "${to_date}" \
+       --date-format "%Y%m%d"\
+       --format "%d %(floor(quantity(amount)))\n"\
+        -o ./tmp-8pcnt-expns.txt
+
+# all expenses besides (food or 租税公課)
+ledger reg ^Expenses and not \( food or 租税公課 \)  -M --collapse\
+       -b "${from_date}" -e "${to_date}"\
+       --date-format "%Y%m%d"\
+       --format "%d %(floor(quantity(amount)))\n"\
+       -o ./tmp-10pcnt-expns.txt
+#
+## 2つのファイルから1行ずつ読み込む、その際、スペースを捨てない！！
+cp /dev/null ./tmp-vat.csv
+    PRE_IFS=$IFS
+    IFS=$'\n'
+    while IFS= read -r line1 && IFS= read -r line2 <&3;
+    do
+	# 8%,10%　税対象「消費金額」を算出
+	date_col=$(echo "${line1}"    | awk -F' ' '{print $1}')
+	pcnt8_expns=$(echo "${line2}" | awk -F' ' '{print $2}')
+	pcnt10_expns=$(echo "${line1}"| awk -F' ' '{print $2}')
+	# 「消費税金額」を抽出
+        pcnt8_vat=$(awk  "BEGIN {print ${pcnt8_expns}/1.08 * 0.08}" )
+	pcnt10_vat=$(awk "BEGIN {print ${pcnt10_expns}/1.10 * 0.1}" )
+	#  vat両者を合計して vat-all を算出
+	vat_all=$(awk "BEGIN {print ${pcnt8_vat} + ${pcnt10_vat} }" )
+	#
+	echo "${date_col}","${vat_all}" >> ./tmp-vat.csv
+	#
+    done < ./tmp-10pcnt-expns.txt 3< ./tmp-8pcnt-expns.txt
+    IFS=$PRE_IFS
+    
+## 
+storage_dir=~/local-ledger-directory/出力保管庫
+#
+data_to_plot=./tmp-vat.csv
+base_fname=vat-rolling
+out_file="${storage_dir}/out-${base_fname}_$(date '+%Y%m%d').pdf"
+##
+startym=$(date -d '-18 month' +"%Y/%m")
+xrange1=$(date -d '-18 months' '+%Y%m01')
+xrange2=$(date -d '2 weeks' '+%Y%m%d')
+xtics1="$(date -d '-18 months' '+%Y%m%d')"
+#xtics2="2628000"
+xtics3="$(date -d '1 day'  '+%Y%m%d')"
+##
+gnuplot <<EOF
+# ターミナル設定
+  set terminal pdfcairo transparent enhanced font "Arial,10"
+# 区切り記号設定
+  set datafile separator ","
+# style
+  set style fill transparent solid 0.5 noborder
+# 凡例の位置
+  set key inside right top font "Arial, 12"
+#  数値に3桁ごとにカンマ（最大8桁）
+  set decimal locale
+  set format x "%'4.0f"
+# 図のタイトル
+  set title "消費税  (${startym}〜$(date +"%Y/%m/%d"))" font 'Arial,14'
+# X軸
+#   時間軸の設定
+  set timefmt "%Y%m%d"
+  set xdata time
+  set format x "%b"
+#   目盛りの設定
+  unset mxtics
+  set xtics timedate    # 目盛りも時間だよ宣言
+  set xtics format "%b" # 目盛りに適用されるフォーマット指示
+  set xrange ["${xrange1}":"${xrange2}"]  # フルの基礎フォーマットで指定
+  set xtics "${xtics1}", 2628000, "${xtics3}"
+#
+  set xtics font "Arial,8"
+  unset mxtics
+  set xlabel "${xlabel_date}" font "Arial,10"
+# Y軸
+  set ylabel offset 2
+  set ylabel "Amount（円）" font "Arial,10"
+  set yrange[0:]
+  set ytics font "Arial,8"
+  set mytics 2 
+  set decimal locale
+  set format y "%'6.0f"
+# グリッド設定
+  set grid xtics ytics
+# マージン設定
+#  set lmargin at screen 0.2
+# 図中の書き込み
+#
+# set label 1 font "Arial,11"
+# 出力ファイル名の指定
+  set output '$out_file'
+# 下の行をコメントアウトすると
+#  ~/.gnuplot で定義したカスタマイズされた色巡回が使われる
+set colorsequence default  #podo #classic, podo, default
+#
+plot  "$data_to_plot" using 1:2 with linespoints title "消費税"  pt 7 ps 0.4 lw 2
+
+set output
+EOF
+#
+current_dir=$(pwd); cd $storage_dir || exit   ##
+
+# シンボリックリンク作成関数の呼び出し（引数注意）
+symbolic-link-maker "${base_fname}"
+
+# 2. クラウド保存
+cp  -u "$hotfile"  ~/MEGAsync/Ledger-dir/出力保管庫/
+cp  -u "$hotfile"  ~/Dropbox/Ledger_related/出力保管庫/
+
+# 一時ファイル削除 （不要）
+cd "$current_dir" || exit
+#rm ./tmp-*
+
+#  親プロセスが all-chart-update_plotter ならばmupdfしない
+#            * sed でキャレット表記の^@のNULL文字を削除
+awk '{print $1}'  /proc/"$PPID"/cmdline | sed -e "s/\x0/\n/g"  > ./tmp-oyadare.txt
+#
+if [[ $(cat ./tmp-oyadare.txt) == *Makefile* ]]; then
+    # 文字列一致  do nothing'
+    :
+else
+    # 文字列　不一致 のとき、端末に表示
+    mupdf "$out_file" &
+fi
+rm ./tmp-oyadare.txt
+exit 0
+#+end_src
+
+
+* COMMENT 古い記事原稿
+消費税増税後、いろいろと困ったことが起こっています。
+増税によって経済が停滞するというマクロの問題だけでなく、
+ミクロな計簿の記帳の面でもかなり面倒なことが起こっています。
+一番の問題は商店のレシートが店によって内税、外税の2タイプがあることでしょう。
+
+* COMMENT 帳簿のつけかたの２ポリシー
+消費税を帳簿内でどう扱うかついては次の2つのアプローチがあります。
+** (1) 消費税を別立てで転記する
+*=Tax:消費税=* というアカウント（費目）を立てて、消費税をそこに収納します。
+これが家計簿だけでなくて会計帳簿一般の本来の姿でしょうね。
+消費税を別立てアカウントにすれば、月ごと、年ごとに消費税でどれくらいの金額が税金として吸い上げられているかをきちんと把握することができます。（税負担のあまりの大きさを目の当たりにして *絶望* するリスクはありますw）
+
+この場合、内税のレシートでは、商品価格から消費税を計算・分離して転記しなければなりません。商品によって8％と10％の違いもありますし、小数点以下の金額の扱い方によって合計金額と個別の商品、消費税の合計が合わなくなることもあります。
+** (2) 消費税を商品価格に埋め込んで転記
+*=Tax:消費税=* というアカウント（費目）を使わずに記帳します。
+
+この場合、外税のレシートでは商品に消費税を加算して商品価格として転記しなければなりません。
+
+上の２つのいずれの場合にも、買い物した商品が税率8％の食料品だけとか、あるいは税率10％の衛生用品だけとかなら作業は簡単です。
+しかしこれらが混在しているときには本当に面倒。
+そこで、Ledger-cliでこの手間を軽減するにはどうしたらよいか、トライアルをしてみました。
+** 道案内
+- (1) 消費税額を転記する :: 商品の税抜き価格と消費税を仕分けた帳簿にする必要がある、そうしたいという人は[[#税転記必要][こちら]]をどうぞ。
+- (2)  消費税は商品価格に埋め込む :: 消費税を取り立てて別扱いする必要がない、支出の額の中に埋め込んだ方が良い人は[[#税不要転記][こちら]]をどうぞ。
+
+* COMMENT 消費税を商品価格に埋め込む転記をする場合
+:properties:
+:CUSTOM_ID: 税不要転記
+:END:
+
+** お店のレシートが内税の場合
+これがいちばん簡単です。各費目（アカウント）の税込み価格を書くだけですから：
+#+begin_src  
+2020/11/01 * スーパうちぜい
+    Expenses:食料品        3245 JPY
+    Assets:Cash    
+#+end_src
+#+RESULTS:
+:            -3245 JPY  Assets:Cash
+:             3245 JPY  Expenses:食料品
+: --------------------
+:                    0
+
+** お店のレシートが外税の場合
+税別価格がレシートに書かれているのに、それを使わず税込みで転記するということ。したがって、税別価格に税金を上乗せした金額を計算して、それを商品価格として記帳することになります。その際の計算には、Ledger-cliに用意されている *切り捨て関数（floor）* を使います：
+#+begin_src 
+2020/11/01 * スーパそとぜい
+     Expenses:食料品           ( floor( 3005 JPY * 1.08 ))
+     Assets:Cash                 -3245 JPY
+#+end_src
+
+#+RESULTS:
+:            -3245 JPY  Assets:Cash
+:             3245 JPY  Expenses:食料品
+: --------------------
+:                    0
+
+* COMMENT 消費税額を転記する
+:properties:
+:CUSTOM_ID: 税転記必要
+:END:
+
+消費税額の算出では、小数点以下を四捨五入するのではなくて、切り捨て処理することが一般的です。Ledger-cliには便利な *切り捨て関数（floor）* が用意されていますので、それを使います。
+*** お店のレシートが外税の場合
+外税レシートでは商品の *税抜き価格* が書かれています。それに税率をかければ *消費税額* になります。
+#+begin_src 
+2020/11/02 * スーパーそとぜい
+     Expenses:食料品    3005 JPY
+     Tax:消費税         ( floor ( 3005 JPY * 0.08))      
+     Assets:Cash       -3245 JPY
+#+end_src
+
+#+RESULTS:
+:            -3245 JPY  Assets:Cash
+:             3005 JPY  Expenses:食料品
+:              240 JPY  Tax:消費税
+: --------------------
+:                    0
+
+外税レシートでも、個々の商品ごとに消費税がべつべつに書かれていることはむしろまれ？　税率8％、10％商品ごとの合計の消費税が書かれていることが多いです。これは消費者にとっては小数点以下の切り捨てによって数円はお得になっていると思いますが・・・。しかし帳簿をつける際には、この点がネックになりかねません。その対策は、後ほど。。。。
+
+*** お店のレシートが内税の場合
+レシート上には *税込み価格* しかないのに、帳簿につける際には、税抜き価格と消費税を分けて転記するわけですから、これがいちばん手間がかかります。
+#+begin_src 
+2020/11/01 * スーパーうちぜい
+     Expenses:食料品        3005 JPY
+     Tax:消費税             ( floor  (( 3245 JPY / 1.08 ) * 0.08 ))
+     Assets:Cash                -3245 JPY
+#+end_src
+
+#+RESULTS:
+:            -3245 JPY  Assets:Cash
+:             3005 JPY  Expenses:食料品
+:              240 JPY  Tax:消費税
+: --------------------
+:                    0
+
+* COMMENT 税率8%,10%の混在パタン
+ドラッグストアでは食料品（税率8%）も医薬品（税率10%）も売っています。
+レシートが外税で消費税を別立てにする場合の転記例を示します：
+#+begin_src 
+2020/11/02 * ドラッグそとぜい
+    Expenses:衛生費                                  1080 JPY 
+    Tax:消費税                     (floor ( 1080 JPY * 0.10 ))
+    ; 除菌ジェル
+    Expenses:Meals:Lunch                ( 320 JPY + 120 JPY )
+    Tax:消費税           ( floor (320 JPY + 120 JPY ) * 0.08)
+    Expenses:食料品:Snack                  ( 140 JPY * 1.08 )
+    Tax:消費税                     ( floor( 140 JPY * 0.08 ))
+    Expenses:食料品:飲料        162 JPY
+    Tax:消費税                   13 JPY       
+    Liabilities:visa                              - 2000 JPY
+#+end_src
+
+#+RESULTS:
+#+begin_example
+            1833 JPY  Expenses
+             440 JPY    Meals:Lunch
+            1080 JPY    衛生費
+             313 JPY    食料品
+             151 JPY      Snack
+             162 JPY      飲料
+           -2000 JPY  Liabilities:visa
+             167 JPY  Tax:消費税
+--------------------
+                   0
+#+end_example
+
+=飲料= の費目欄は、四捨五入による丸め誤差（1円）を吸収させるために、あえて空欄にしています。しかし、問題発生。
+
+飲料に対する消費税を計算しなければならない。
+
+175円を1.08で割って商品価格162円を算出し、175-162=13円を消費税にするという計算が必要。
+
+* COMMENT 結論です
+正しい帳簿は消費税を別立てしたものだと思います。
+しかし、上の混在例のような場合、
+トランザクションごとに =vat     ( floor( 1338 JPY * 0.08))= などと記述するのはとても面倒。
+
+そこで残念ながら、帳簿に =Tax:消費税= を別立てで入れることはギブアップ。
+
+* COMMENT automated transactionによる記帳のこころみ<2021-04-18 日>
+これもだめ
+
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
