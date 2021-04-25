@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#   Time-stamp: <2021-04-24 13:22:06 yamagami>
+#   Time-stamp: <2021-04-25 21:42:01 yamagami>
 #+title: Ledger出力の列崩壊を回避する
 #+date: [2021-05-01 ]
 #+language: ja
@@ -35,8 +35,8 @@ Ledger-cliは
 
 たとえばこんなふうに：
 （）
-どうも列崩壊は治ったらしひ（汗）
-
+どうも列崩壊は治ったらしひ
+かと思ったが、やはり治っていない。
 
 
 
@@ -75,9 +75,9 @@ exit 0
 #+end_src
 ミソは、 =cut -b 1-24= の数字部分。これが大きいとTABの混入とか変なことが起こる。
  =display_total= の文字数15も割に重要。これも小さくしすぎると列崩壊する。
-** 列崩壊防止の実施前後のちがい<2021-02-25 木>
+** 列崩壊防止の実施前後のちがい
 #+begin_src
-　　：
+   ：
   Parking                      8,590 JPY
   Toll                       320,260 JPY
   保険                       164,150 JPY
@@ -86,10 +86,8 @@ exit 0
   整備修繕                   211,404 JPY
   税金                       112,800 JPY
     手数料                     1,000 JPY
-　　：
+   ：
 #+end_src
-
-
 
 
 
