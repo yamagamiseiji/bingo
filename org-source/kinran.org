@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-04-29 11:01:26 yamagami>
+#           Time-stamp: <2021-04-29 12:05:45 yamagami>
 #+title: キンラン
 #+date: [2021-04-29 ]
 #+language: ja
@@ -85,7 +85,7 @@ DNA解析は植物を絶滅の縁から救出するための有効な手段に�
 * Footnotes:
 [fn:市民の森] 横浜市民の森については [[https://www.city.yokohama.lg.jp/kurashi/machizukuri-kankyo/midori-koen/midori_up/1mori/forest/guidemap.html][こちら]]を見てください。合計24か所もあるんですね。
 
-[fn:販売できる] 環境庁が絶滅危惧種に指定しも苗の売買はできるんですね。ようするに「指定しただけ」で、あとは「自粛」しなさい、お金はだしませんということでしょうか。コロナと同じ？:disappointed: 
+[fn:販売できる] 環境庁が絶滅危惧種に指定しても苗の売買はできるんですね。ようするに「指定しただけ」で、あとは「自粛」しなさい、お金はだしませんということでしょうか。コロナと同じ？:disappointed: 
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
