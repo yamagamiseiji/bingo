@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-04-25 21:41:30 yamagami>
+#           Time-stamp: <2021-04-29 15:32:32 yamagami>
 #+title: 消費税の取扱い
 #+date: [2021-05-01 ]
 #+language: ja
@@ -51,36 +51,44 @@ Ledgerファイルの(test.ledger)冒頭部に次の4行を追記しましょう
 第2番めのトランザクションは、8%課税対象のfoodと租税公課 *以外* の支出アカウントでは消費税が10%になることをLedgerに教えています(注[fn:二重課税])。
 
 日々のトランザクションを記帳するときには普通に「内税」ベースで書いて行きます。
+
 #+begin_src
-account Expenses:VAT
-account Expenses:Meals
-account Expenses:衛生費
-account Assets:Bank
 account Assets:Cash
-account Expenses:Grocery:Food
-;;
-= /^Expenses:Grocery:food/
-    (Expenses:VAT)                  .07407407407407407407
+account Expenses:Drugs
+account Expenses:Elec
+account Expenses:Food
+account Expenses:Meals
+account Expenses:VAT  ;; これは仮想アカウント
+account Liabilities:Visa
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+= /^Expenses:Food/
+    (Expenses:VAT)                    .07407407407407407407
 = /^Expenses/ and not ( /food/ or /租税公課/ )
-    (Expenses:VAT)                  .09090909090909090909
-;;
-2020/03/08 * カーディーラ
-    Expenses:Cars                             47,300 JPY 
+    (Expenses:VAT)                   .09090909090909090909
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+2021/03/08 * KFC 
+    ; eating inside KFC shold pay 10% VAT
+    Expenses:Meals                                500 JPY
+    Liabilities:Visa
+
+2021/03/08 * McDonald's
+    ; takeout food = 8%
+    Expenses:Food                                635 JPY
+    Liabilities:Visa
+
+2021/03/08 * ハックドラッグ
+    ; 外税レシート
+    Expenses:Drugs              (floor ( 2,380 JPY * 1.10 ))
+    Expenses:Grocery:food       (floor ( 644 JPY * 1.08))
     Assets:Cash
 
-2020/03/08 * KFC
-    Expenses:Meals                                638 JPY
-    Assets:Bank
-
-2020/03/08 * ヨーカドー
-    Expenses:Grocery:food                        4,201 JPY
-    Assets:Cash
-
-2020/03/08 * ドラッグストア
-    Expenses:衛生費　         (floor( 780 JPY * 1.10))
-    Expenses:Grocery:food     (floor( 452 JPY * 1.08))
+2021/03/08 * イトーヨーカドー
+    Expenses:Food                        3,199 JPY
     Assets:Cash
 #+end_src
+
 
 クエリはつぎの通りです。
 #+begin_src sh
@@ -489,8 +497,22 @@ exit 0
 これもだめ
 
 
+* COMMENT transaction
+;; 消費税計算　テスト
+;;　　トランザクションが全てウチ税になっている場合にはautomatedでいける
+;;　　外税の場合には floor関数を使って税金を加えた金額を出しておく
+;;
+
+; 2021/03/15 * 電気代
+;     Expenses:Elec                              14500 JPY ; [=2021/04/01]
+;     Expenses:Elec                              14500 JPY ; [=2021/05/01]
+;     Assts:Bank
+  
 
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
 # End:
+
+
+

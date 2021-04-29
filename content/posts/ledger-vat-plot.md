@@ -43,33 +43,39 @@ Ledgerファイルの(test.ledger)冒頭部に次の4行を追記しましょう
 日々のトランザクションを記帳するときには普通に「内税」ベースで書いて行きます。
 
 ```nil
-account Expenses:VAT
-account Expenses:Meals
-account Expenses:衛生費
-account Assets:Bank
 account Assets:Cash
-account Expenses:Grocery:Food
-;;
-= /^Expenses:Grocery:food/
-    (Expenses:VAT)                  .07407407407407407407
+account Expenses:Drugs
+account Expenses:Elec
+account Expenses:Food
+account Expenses:Meals
+account Expenses:VAT  ;; これは仮想アカウント
+account Liabilities:Visa
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+= /^Expenses:Food/
+    (Expenses:VAT)                    .07407407407407407407
 = /^Expenses/ and not ( /food/ or /租税公課/ )
-    (Expenses:VAT)                  .09090909090909090909
-;;
-2020/03/08 * カーディーラ
-    Expenses:Cars                             47,300 JPY
+    (Expenses:VAT)                   .09090909090909090909
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+2021/03/08 * KFC
+    ; eating inside KFC shold pay 10% VAT
+    Expenses:Meals                                500 JPY
+    Liabilities:Visa
+
+2021/03/08 * McDonald's
+    ; takeout food = 8%
+    Expenses:Food                                635 JPY
+    Liabilities:Visa
+
+2021/03/08 * ハックドラッグ
+    ; 外税レシート
+    Expenses:Drugs              (floor ( 2,380 JPY * 1.10 ))
+    Expenses:Grocery:food       (floor ( 644 JPY * 1.08))
     Assets:Cash
 
-2020/03/08 * KFC
-    Expenses:Meals                                638 JPY
-    Assets:Bank
-
-2020/03/08 * ヨーカドー
-    Expenses:Grocery:food                        4,201 JPY
-    Assets:Cash
-
-2020/03/08 * ドラッグストア
-    Expenses:衛生費　         (floor( 780 JPY * 1.10))
-    Expenses:Grocery:food     (floor( 452 JPY * 1.08))
+2021/03/08 * イトーヨーカドー
+    Expenses:Food                        3,199 JPY
     Assets:Cash
 ```
 
