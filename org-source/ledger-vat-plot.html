@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-04-29 木 21:02 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ledger &#x2013; 消費税の書き方</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Ledger &#x2013; 消費税の書き方</h1>
+
+<div id="outline-container-orgeff63a5" class="outline-2">
+<h2 id="orgeff63a5"><span class="section-number-2">1</span> 消費税のレシート</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+わが国では1989年から消費税が導入されましたが、
+今年(2021年）の4月から商品・サービス類の「 <b>総額表示</b> 」が義務化されました。
+すでに実態としては小売レベルの値段札やレシートは実際には「 <b>内税</b> 」表示が主流です。
+内税にすれば税負担を意識させずに庶民のお財布から税金を抜くことができます。
+</p>
+
+<p>
+ところで家計レベルでは消費税を含めて税金の額をきちんと計算する必要はありません。
+内税のまま記帳して消費金額に埋め込んでしまうのが普通でしょう。
+</p>
+
+<p>
+しかし <b>消費税以外</b> の税金は家計レベルでも把握されていることが多いと思います。
+たとえば所得税や住民税、固定資産税、それから自動車関係の税金、酒税などは通年で合算するとかなりの金額になります。
+</p>
+
+<p>
+消費税もこれらの税金とくらべて遜色のない金額が取られています。
+日々少しずつだからピンとこないだけです。
+家計でもできれば簡単かつ正確に消費税として徴収されている金額を把握したいものです。
+</p>
+
+<p>
+多くの家計簿アプリや簡易経理システムでは、消費税を取り出してその金額を取得する機能が組み込まれていません(注<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>)。Ledgerをつかえば簡単にできます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1542294" class="outline-2">
+<h2 id="org1542294"><span class="section-number-2">2</span> 自動転記+仮想アカウント</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+ここでは（<a href="https://bred-in-bingo.netlify.app/posts/ledger-fixedcost/">固定費</a>と同じように） <b>自動転記</b> (automated transaction)＋ <b>仮想アカウント</b> (virtual account)で消費税を算出する方法を説明します。
+</p>
+
+<p>
+Ledgerファイルの(test.ledger)冒頭部に次の <b>4行</b> を追記しましょう。
+</p>
+<pre class="example">
+= /^Expenses:Food/
+    (Expenses:VAT)                   .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                   .09090909090909090909
+</pre>
+<p>
+これはLedgerの <b>自動転記</b> （automated transaction）記法で書かれています。<br />
+第１番目のトランザクションは次のような意味になります。
+</p>
+<blockquote>
+<p>
+「これ以降のトランザクションにおいて、すべてのExpenses:Foodアカウントは、その支出額に .07407407407407407407 を乗じた金額を（Expenses:VAT)という仮想アカウントの支出として転記しなさい」
+</p>
+</blockquote>
+<p>
+<b>.07407407407407407407</b> という数字にはコモディティ＝通貨記号がありません。これは0.08/1.08 の値、つまり内税で表示された金額を1.08で割って0.08を掛けた <b>定数</b> です。「この定数を元の金額に掛けなさい」という意味になります。
+</p>
+
+<p>
+第2番めのトランザクションは、8%課税対象のfoodと租税公課 <b>以外</b> の支出には消費税が10%になることをLedgerに教えています(注<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>)。
+</p>
+</div>
+
+<div id="outline-container-org74987ca" class="outline-3">
+<h3 id="org74987ca"><span class="section-number-3">2.1</span> サンプルLedgerファイル</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+日々のトランザクションを記帳するときには普通に「内税」ベースで転記します。つぎの
+<code>sample.ledger</code> ファイルでは
+「ハックドラッグ」だけが「外税」の例になっています。
+</p>
+<pre class="example">
+= /^Expenses:Food/
+    (Expenses:VAT)                    .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                   .09090909090909090909
+;;
+2021/03/08 * KFC 
+    ; 店内で食べたのでVAT=10%
+    Expenses:Meals                                500 JPY
+    Liabilities:Visa
+
+2021/03/08 * McDonald's
+    ; テイクアウトだったのでVAT=8%
+    Expenses:Food                                635 JPY
+    Liabilities:Visa
+
+2021/03/08 * ハックドラッグ
+    ; 外税レシート
+    Expenses:Drugs              (floor ( 2,380 JPY * 1.10 ))
+    Expenses:Grocery:food       (floor ( 644 JPY * 1.08 ))
+    Assets:Cash
+
+2021/03/08 * イトーヨーカドー
+    Expenses:Food                        3,199 JPY
+    Assets:Cash
+</pre>
+<p>
+<code>(floor ( 2,380 JPY * 1.10 ))</code> の <code>floor</code> は小数点以下の切り捨て関数です。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0978ab1" class="outline-3">
+<h3 id="org0978ab1"><span class="section-number-3">2.2</span> クエリの例</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+この <code>sample.ledger</code> に対するクエリ例は次の通りです。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">&#65308;1. &#31246;&#36796;&#12415;&#12398;&#25903;&#20986;&#32207;&#38989;&#12434;&#30693;&#12426;&#12383;&#12356;&#65310;
+$ ledger bal ^expenses -f sample.ledger 
+             8,214 JPY  Expenses
+             2,618 JPY    Drugs
+             3,834 JPY    Food
+               695 JPY    Grocery:food
+               500 JPY    Meals
+               567 JPY    VAT
+  --------------------
+             8,214 JPY
+&#65308;2. &#28040;&#36027;&#31246;&#38989;&#12434;&#30693;&#12426;&#12383;&#12356;&#65310;
+$ ledger reg vat -f sample.ledger
+2021/03/08 KFC             (Expenses:VAT)         45 JPY       45 JPY
+2021/03/08 McDonald<span style="color: #008000;">'s      (Expenses:VAT)         47 JPY       92 JPY</span>
+<span style="color: #008000;">2021/03/08 &#12495;&#12483;&#12463;&#12489;&#12521;&#12483;&#12464;    (Expenses:VAT)        238 JPY      330 JPY</span>
+<span style="color: #008000;">2021/03/08 &#12452;&#12488;&#12540;&#12520;&#12540;&#12459;&#12489;&#12540;   (Expenses:VAT)        237 JPY      567 JPY</span>
+
+<span style="color: #008000;">&#65308;3. &#31246;&#25244;&#12365;&#12398;&#25903;&#20986;&#32207;&#38989;&#12434;&#30693;&#12426;&#12383;&#12356;&#65310;</span>
+<span style="color: #008000;">$ ledger bal ^expenses and not vat -f sample.ledger</span>
+<span style="color: #008000;">             7,647 JPY  Expenses</span>
+<span style="color: #008000;">             2,618 JPY    Drugs</span>
+<span style="color: #008000;">             3,834 JPY    Food</span>
+<span style="color: #008000;">               695 JPY    Grocery:food</span>
+<span style="color: #008000;">               500 JPY    Meals</span>
+<span style="color: #008000;">  --------------------</span>
+<span style="color: #008000;">             7,647 JPY</span>
+</pre>
+</div>
+<p>
+上の <code>例3.</code> では、VATが <b>仮想アカウント</b> なので、 <code>and not vat</code> の代わりに
+<code>--real</code> とか <code>--actual</code> とかしても結果は同じです。
+</p>
+
+<p>
+Ledgerファイルのトップに消費税の定義を書いておくだけで、トランザクションごとにいちいち消費税のエントリを書かなくても、全トランザクションについて仮想アカウントで税の金額を計算してくれる、これはほんとうに強力な機能です。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org389bda3" class="outline-2">
+<h2 id="org389bda3"><span class="section-number-2">3</span> 注意するところ</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+「<a href="https://bred-in-bingo.netlify.app/posts/ledger-fixedcost/">Ledger — 固定費のトラッキング</a>」でも紹介したように、自動転記+仮想アカウントによる方法には <b>aux-date</b> をrespectしてくれないという不都合があります(注<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>)。そこまで細かいことを気にせずに使う限りでは、この方法はとても簡単です。
+</p>
+
+<p>
+消費税アカウントは仮想アカウントなので、他の経理計算には影響を与えません。とりあえずLedgerファイルの冒頭に <b>4行</b> を追加して使ってみると良いと思います。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4df544c" class="outline-2">
+<h2 id="org4df544c"><span class="section-number-2">4</span> 最後に</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+なお、Ledgerでのクエリ( <code>juzei_plotter</code> )
+</p>
+<pre class="example">
+$ ledger bal ..........
+</pre>
+
+
+<p>
+Ledgerによる消費税の取り扱いについては、書き溜めた下書きがこの5倍〜10倍もあります。話が細かくなりすぎるので、ここでは思いっきり短く要点だけに絞って書きました。もしかしたら絞りすぎたかもしれません。それについては後日のフォローということでご容赦ください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ea6964" class="outline-2">
+<h2 id="org4ea6964"><span class="section-number-2">5</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+網羅的に調べたわけではありませんが、消費税率が2つあることに対応する製品（<a href="https://mrs.living.jp/k_life/topics/3801819">軽減税率電卓（カシオ）</a>など）やアプリ（<a href="https://www.iwstd.com/blog/interest/kakeibo/receipi/">レシーピ！</a> など）いろいろありますね。
+けどLedgerのように帳簿の冒頭に4行追加するだけで後は全自動というのは他になさそうな気がします（あったらごめんなさい）。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+みなさんご存知の通り、ガソリン税や酒税やタバコ税は「税に税をかける」悪名高き <b>二重課税</b> になっています。しかし今のところ、所得税や住民税には消費税はかかっていません。まだ独立した司法が日本で活きていた時代＝2010年には最高裁で「年金型生保に二重課税　所得税は違法　国が逆転敗訴」と二重課税が違法の判決がでましたが、そのうち、どんなものにも <b>裁量行政</b> で課税される日が来てもおかしくないような気がします。:sunglasses:
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+この「自動転記＋仮想アカウント」でaux-dateを扱う方法をご存知であればぜひ教えて頂きたいと思います。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-04-29 木 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-04-29 木 21:02</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
