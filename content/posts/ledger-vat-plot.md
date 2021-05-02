@@ -7,6 +7,22 @@ categories = ["comp"]
 draft = false
 +++
 
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">&#30446;&#27425;</div>
+
+- [総額表示の義務化](#総額表示の義務化)
+- [自動転記+仮想アカウント](#自動転記-plus-仮想アカウント)
+- [注意するところ](#注意するところ)
+- [最後に](#最後に)
+- [Footnotes:](#footnotes)
+
+</div>
+<!--endtoc-->
+
+
+
 ## 総額表示の義務化 {#総額表示の義務化}
 
 消費税が導入されたのは1989年です。

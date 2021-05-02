@@ -7,6 +7,24 @@ categories = ["comp"]
 draft = false
 +++
 
+<div class="ox-hugo-toc toc">
+<div></div>
+
+<div class="heading">&#30446;&#27425;</div>
+
+- [総額表示の義務化](#総額表示の義務化)
+- [自動転記+仮想アカウント](#自動転記-plus-仮想アカウント)
+    - [サンプルLedgerファイル](#サンプルledgerファイル)
+    - [クエリの例](#クエリの例)
+- [注意するところ](#注意するところ)
+- [最後に](#最後に)
+- [Footnotes:](#footnotes)
+
+</div>
+<!--endtoc-->
+
+
+
 ## 総額表示の義務化 {#総額表示の義務化}
 
 消費税が導入されたのは1989年です。
@@ -96,7 +114,7 @@ $ ledger bal ^expenses -f sample.ledger
 	     8,214 JPY
 ＜2. 消費税額を知りたい＞
 $ ledger reg vat -f sample.ledger
-2021/03/08 カフェ         (Expenses:VAT)         45 JPY       45 JPY
+2021/03/08 カフェ　         (Expenses:VAT)         45 JPY       45 JPY
 2021/03/08 McDonald's      (Expenses:VAT)         47 JPY       92 JPY
 2021/03/08 ハックドラッグ    (Expenses:VAT)        238 JPY      330 JPY
 2021/03/08 イトーヨーカドー   (Expenses:VAT)        237 JPY      567 JPY

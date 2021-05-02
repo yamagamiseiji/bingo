@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-04-30 20:14:09 yamagami>
+#           Time-stamp: <2021-05-02 16:47:02 yamagami>
 #+title: Ledger -- 消費税のあつかい
 #+date: [2021-04-30 ]
 #+language: ja
@@ -11,7 +11,7 @@
 #+hugo_tags: accounting ledger
 #+hugo_categories: comp
 
-#+options: toc:nil
+#+options: toc:1
 #+draft: false
 
 * 総額表示の義務化
