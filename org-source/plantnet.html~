@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-05-06 木 20:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ヤマエンゴサク</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">ヤマエンゴサク</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1372aac">1. 山延胡索をみつけました</a></li>
+<li><a href="#orgb6b76ff">2. 花の名前をしらべるアプリ</a></li>
+<li><a href="#org5ef6831">3. Ackknowledgement:</a></li>
+<li><a href="#orgaae65f1">4. Footnotes:</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1372aac" class="outline-2">
+<h2 id="org1372aac"><span class="section-number-2">1</span> 山延胡索をみつけました</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+きれいな <b>ヤマエンゴサク</b> （山延胡索）が数カ所に数株ずつまとまっているのを見つけました。
+ロケーションは群馬県片品村の標高1,000メートルの場所です。
+</p>
+
+<p>
+花の形が「長いトンガリ帽子をかぶったヒトの顔」のようでとてもかわいい。
+また少し場所が変わると花の色や葉の形が変わるのがおもしろいです。
+</p>
+
+
+<div id="org094d423" class="figure">
+<p><img src="../static/ヤマエンゴサク.jpg" alt="ヤマエンゴサク.jpg" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>ヤマエンゴサク(山延胡索)＠片品村</p>
+</div>
+
+<p>
+この花の名前は家内から教えてもらいました。
+名前でいろいろ検索したところなかなか興味深い性質をもっているんですね。
+</p>
+<ul class="org-ul">
+<li>葉の形態や色が <b>変異しやすい</b> こと</li>
+<li>根茎には <b>毒</b> があるがそれを漢方に使うこともあること</li>
+<li><b>野生のシカ</b> が林床植生を破壊してガレ場にしてしまっても、ヤマエンゴサクは生き残る数少ない植物の一つであること（崎尾他,2013）</li>
+</ul>
+
+<p>
+最後の点ですが、ヤマエンゴサクは早めに地上部が枯れてしまうために、シカの食害からかろうじて免れているようです。他の草や木がほとんど食い尽くされても生き残れるという幸運(注<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>)にめぐまれています。
+</p>
+
+<p>
+なお図<a href="#org094d423">1</a>
+の写真を撮った場所はこれまでシカの襲撃は受けていません。ヤマエンゴサク以外にも希少な山野草を見ることができます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb6b76ff" class="outline-2">
+<h2 id="orgb6b76ff"><span class="section-number-2">2</span> 花の名前をしらべるアプリ</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+「物の名前」って不思議ですよね。
+「名前」は大昔から洋の東西を問わずたくさんの哲学者たちの関心をひきつけて来ました。
+面白い参考書や文献をリストするだけで何ページにもなります(注<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>)。
+また、ヒトの子どもが事物に固有の名前があることを「生まれつき」知っているかのように
+見えるのも興味深い現象です(注<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>)。
+</p>
+
+<p>
+話題を「花」にもどしましょう。
+</p>
+
+<p>
+いまはスマホに対応した便利なアプリがたくさんあります。
+中でもつい最近になってすっかりファンになったのが <b>Pl@ntNet</b> というアプリ。主な特長はつぎのとおりです。
+</p>
+
+<ul class="org-ul">
+<li>無料</li>
+<li>27,000種を超える植物が登録されている</li>
+<li>専門家だけでなく市民のcontributor参加者のちからを集結させようとする姿勢</li>
+<li>APIが公開されている</li>
+</ul>
+
+<p>
+単純に花の名前（学名と一部の植物については和名）だけを検索できる点と、
+まだ登録されていない植物だったら自分で撮影した画像をあらたにデータベースに登録（コントリビュート）できるという点、
+も気に入っています。
+</p>
+
+<p>
+それから開発主体はフランスの植物学系の研究施設で、一般の人々から得られる映像データを植物科学の進歩につなげようとする <b>citizen science project</b> です。商売っ気がいっさいないのがさわやかです:smile:
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5ef6831" class="outline-2">
+<h2 id="org5ef6831"><span class="section-number-2">3</span> Ackknowledgement:</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>崎尾 均, 久保 満佐子, 川西 基博, 比嘉 基紀 (2013).  <a href="https://www.jstage.jst.go.jp/article/jjsrt/39/2/39_226/_pdf/-char/ja">秩父山地におけるニホンジカの採食が林床植生に与える影響</a> 日本緑化工学会誌, 2013, 39 巻, 2 号, p. 226-231.</li>
+<li>村岡晋一 (2020). 名前の哲学　講談社選書メチエ, 講談社.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaae65f1" class="outline-2">
+<h2 id="orgaae65f1"><span class="section-number-2">4</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+野生動物の「人権」を守る運動をしている <b>動物愛護団体</b> は内外にたくさんあります。少数派ですが、なかには個人攻撃や業務妨害も辞さないというテロリストまがいの過激な集団もあります。一方、 <b>野生植物</b> の愛護団体はそれに比べると総じて紳士的でおとなしい。両者の「活動性」の差が行政への影響力の差となって、
+結果として北関東の広い範囲で、林床がシカの食害で地肌があらわになるほど荒らされているとう状況をもたらしたと思います。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+村岡晋一 (2020). 名前の哲学　講談社選書メチエ, 講談社.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+乳幼児に、ある人工的で新奇な事物を見せて、でたらめな語を教えるというむちゃくちゃな実験が過去にはありました。幼児は「最初の出会いのたった1回の名前付け経験」でその事物とその名前を記憶する可能性があります。子どもを対象とした安直な実験はとても危険です。生涯にわたって影響が残る可能性があります。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-05-06 木 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-05-06 木 20:55</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
