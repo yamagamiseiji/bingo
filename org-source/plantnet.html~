@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
 <head>
-<!-- 2021-05-06 木 20:55 -->
+<!-- 2021-05-06 木 21:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ヤマエンゴサク</title>
@@ -223,16 +223,16 @@
 <h2>&#30446;&#27425;</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1372aac">1. 山延胡索をみつけました</a></li>
-<li><a href="#orgb6b76ff">2. 花の名前をしらべるアプリ</a></li>
-<li><a href="#org5ef6831">3. Ackknowledgement:</a></li>
-<li><a href="#orgaae65f1">4. Footnotes:</a></li>
+<li><a href="#orgf0817f1">1. 山延胡索をみつけました</a></li>
+<li><a href="#org1871d8c">2. 花の名前をしらべるアプリ</a></li>
+<li><a href="#org834a259">3. Ackknowledgement:</a></li>
+<li><a href="#org9eb68dc">4. Footnotes:</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1372aac" class="outline-2">
-<h2 id="org1372aac"><span class="section-number-2">1</span> 山延胡索をみつけました</h2>
+<div id="outline-container-orgf0817f1" class="outline-2">
+<h2 id="orgf0817f1"><span class="section-number-2">1</span> 山延胡索をみつけました</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 きれいな <b>ヤマエンゴサク</b> （山延胡索）が数カ所に数株ずつまとまっているのを見つけました。
@@ -245,7 +245,7 @@
 </p>
 
 
-<div id="org094d423" class="figure">
+<div id="org1f3c3f7" class="figure">
 <p><img src="../static/ヤマエンゴサク.jpg" alt="ヤマエンゴサク.jpg" />
 </p>
 <p><span class="figure-number">&#22259;1:  </span>ヤマエンゴサク(山延胡索)＠片品村</p>
@@ -266,14 +266,14 @@
 </p>
 
 <p>
-なお図<a href="#org094d423">1</a>
+なお図<a href="#org1f3c3f7">1</a>
 の写真を撮った場所はこれまでシカの襲撃は受けていません。ヤマエンゴサク以外にも希少な山野草を見ることができます。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb6b76ff" class="outline-2">
-<h2 id="orgb6b76ff"><span class="section-number-2">2</span> 花の名前をしらべるアプリ</h2>
+<div id="outline-container-org1871d8c" class="outline-2">
+<h2 id="org1871d8c"><span class="section-number-2">2</span> 花の名前をしらべるアプリ</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 「物の名前」って不思議ですよね。
@@ -289,7 +289,17 @@
 
 <p>
 いまはスマホに対応した便利なアプリがたくさんあります。
-中でもつい最近になってすっかりファンになったのが <b>Pl@ntNet</b> というアプリ。主な特長はつぎのとおりです。
+中でもつい最近になってすっかりファンになったのが <b>Pl@ntNet</b> というアプリ。
+</p>
+
+<div id="org799b2fa" class="figure">
+<p><img src="../static/plantnet-icon.png" alt="plantnet-icon.png" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>Pl@ntNetのアイコン</p>
+</div>
+
+<p>
+主な特長はつぎのとおりです。
 </p>
 
 <ul class="org-ul">
@@ -311,8 +321,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5ef6831" class="outline-2">
-<h2 id="org5ef6831"><span class="section-number-2">3</span> Ackknowledgement:</h2>
+<div id="outline-container-org834a259" class="outline-2">
+<h2 id="org834a259"><span class="section-number-2">3</span> Ackknowledgement:</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>崎尾 均, 久保 満佐子, 川西 基博, 比嘉 基紀 (2013).  <a href="https://www.jstage.jst.go.jp/article/jjsrt/39/2/39_226/_pdf/-char/ja">秩父山地におけるニホンジカの採食が林床植生に与える影響</a> 日本緑化工学会誌, 2013, 39 巻, 2 号, p. 226-231.</li>
@@ -321,8 +331,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgaae65f1" class="outline-2">
-<h2 id="orgaae65f1"><span class="section-number-2">4</span> Footnotes:</h2>
+<div id="outline-container-org9eb68dc" class="outline-2">
+<h2 id="org9eb68dc"><span class="section-number-2">4</span> Footnotes:</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 </div>
@@ -349,7 +359,7 @@
 <div id="postamble" class="status">
 <p class="date">&#26085;&#20184;: 2021-05-06 木 00:00</p>
 <p class="author">&#33879;&#32773;: YAMAGAMI</p>
-<p class="date">Created: 2021-05-06 木 20:55</p>
+<p class="date">Created: 2021-05-06 木 21:07</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
