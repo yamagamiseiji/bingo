@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-05-13 20:30:10 yamagami>
+#           Time-stamp: <2021-05-13 20:43:07 yamagami>
 #+title: Ledger -- Emacs内でレシート参照
 #+date: [2021-05-13 ]
 #+language: ja
@@ -69,7 +69,7 @@ NPO法人のみならず多くの正式な会計報告では *領収書* はも�
 ** Emacs内でレシート画像を見る方法
 上のソースコード[[osusume]] のようなトランザクションを書いておけば、
 *Emacsの中で* このレシート画像を表示できます。
-使うのはEmacsにビルドインされている =ffa-bindings= です。
+使うのはEmacsにビルトインされている =ffap-bindings= です。
 
 *** init.elの設定
 次の1行を =.emacs.d/init.el= の適当な場所に追加します。
