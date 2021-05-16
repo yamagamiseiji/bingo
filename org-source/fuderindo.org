@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-05-16 12:05:25 yamagami>
+#           Time-stamp: <2021-05-16 14:05:22 yamagami>
 #+title: フデリンドウ
 #+date: [ 2021-05-16 ]
 #+language: ja
@@ -19,7 +19,7 @@
 #+attr_html: :width 60%
 [[file:fuderindo-20160505.jpg]]
 
-枯れ葉の中からちいさな花を見つけたときには、あまりの可憐さに思わず *妖精降臨* :heart:
+枯れ葉の中からちいさな花を見つけたときには、あまりの可憐さに *妖精降臨* かと:heart:
 
 最初、名前が分からず山野草図鑑からも見つけられませんでした。ご近所（と言っても100メートルほどあります）の山野草に詳しい村の長老の女性に見ていただいたら「ああ、フデリンドウ」と軽く即答。さほど珍しい花ではないとのこと。
 
