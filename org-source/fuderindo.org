@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-05-16 14:05:22 yamagami>
+#           Time-stamp: <2021-05-16 14:09:13 yamagami>
 #+title: フデリンドウ
 #+date: [ 2021-05-16 ]
 #+language: ja
@@ -50,7 +50,7 @@
 毎日、１日に何回も腰をかがめて目をこらして探していましたがだめでした。
 家内ともども淋しい思いをしていました。
 
-* 天使 再び降臨！
+* 妖精 再び降臨！
 ところが
 5月6日の午後、今までとはちがうの場所＝同じ畑の土手の反対側、10数メートルほど離れた場所に2株を発見 :exclamation:
 #+caption: 今年（2021年5月）の2株のうちの1つ
