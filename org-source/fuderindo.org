@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-05-16 16:00:00 yamagami>
+#           Time-stamp: <2021-05-19 21:26:40 yamagami>
 #+title: フデリンドウ
 #+date: [ 2021-05-16 ]
 #+language: ja
@@ -64,6 +64,13 @@
 
 ちいさな小さな花なのに見ているだけでにやにやしてきます。
 気持ちをほぐしてくれます。根が薬になると言いますが花も立派な *向精神薬* です。:smiley:
+
+* おまけ（2021/05/19追記）
+図[[fude]]は2021年5月19日、小雨降る曇天の午後3時すぎのフデリンドウの写真です。日照が無いとこんな風に花を閉じています。この姿をみるとたしかに「筆」の穂先に見えますね。
+#+caption: 名前に「筆」がついたわけ
+#+name: fude
+#+attr_html: :width 60%
+[[file:フデリンドウ20210519.jpg]]
 
 * Acknowledgement
 - 野島大志, 中井静子, 横山潤 (2011).   [[https://yamagata.repo.nii.ac.jp/?action=repository_uri&item_id=3247&file_id=17&file_no=1][ 分子同定に基づくフデリンドウと菌根菌の対応関係の解析]] 山形大学理学部裏磐梯湖沼実験所報, 18, 42-42.
