@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-05-28 20:36:02 yamagami>
+#           Time-stamp: <2021-06-03 11:17:17 yamagami>
 #+title: 花豆2021
-#+date: [2021-05-28 ]
+#+date: [2021-06-28 ]
 #+language: ja
 
 #+link: file file+sys:../static/

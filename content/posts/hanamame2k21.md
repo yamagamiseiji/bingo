@@ -1,7 +1,7 @@
 +++
 title = "花豆2021"
 author = ["YAMAGAMI"]
-date = 2021-05-28T00:00:00+09:00
+date = 2021-06-28T00:00:00+09:00
 tags = ["farming"]
 categories = ["comp"]
 draft = false
@@ -14,7 +14,7 @@ draft = false
 -   05/28に定植した、05/13に播種したが定植までにちゃんと生育したのは28/41のみ
 -   グラフ
 
-<a id="orgab6d741"></a>
+<a id="orge08735d"></a>
 
 {{< figure src="/hanamame発芽推移2k21.jpg" caption="&#22259;1:  今年の花豆播種から定植までの経過（ _N=41_ ）" width="80%" >}}
 
