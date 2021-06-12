@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-06-10 木 21:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IKEAのシンクでガーデンシンク</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">IKEAのシンクでガーデンシンク</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgff070d1">1. 安価な簡易ガーデンシンク</a></li>
+<li><a href="#orgea4f0ab">2. 使用した部材</a></li>
+<li><a href="#orgf72308b">3. 補足説明</a></li>
+<li><a href="#orgb21bd35">4. なぜガーデンシンク？</a></li>
+<li><a href="#orgb07d1f6">5. Footnotes:</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgff070d1" class="outline-2">
+<h2 id="orgff070d1"><span class="section-number-2">1</span> 安価な簡易ガーデンシンク</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<b>IKEA</b> のシンク( <b>FYNDIG</b> =はめ込み式シンク１ボウル；4,900円)を使って
+<b>お金</b> と <b>時間</b> をかけずに簡易なガーデンシンクを作りましたので紹介します。
+</p>
+
+<p>
+まずは外観を見てください（図<a href="#orgfb1cfba">1</a>）。
+</p>
+
+<div id="orgfb1cfba" class="figure">
+<p><img src="../static/FYNDIG単体外観.jpg" alt="FYNDIG単体外観.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>IKEAシンクを使った簡単ガーデンシンク</p>
+</div>
+
+<p>
+この写真を見ただけでほとんどの方は「へぇ～」「あぁそうか」とお分かりいただけると思います。<br />
+シンクを入れた収穫コンテナの下にもう一つコンテナを置き、その下にコンクリートブロックを2個置くだけです。
+</p>
+
+<p>
+これに <b>散水ノズルスタンド</b> を取りつけると図<a href="#orgba3d6d5">2</a>のようになります。
+これで作業はおわりです。<span style="color: red">赤丸</span>についての説明は「<a href="#orgb7382dd">3.2</a>」節をみてください。
+</p>
+
+<div id="orgba3d6d5" class="figure">
+<p><img src="../static/FYNDIG-SNS80.jpg" alt="FYNDIG-SNS80.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>IKEAのシンクと収穫カゴで畑の流し</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgea4f0ab" class="outline-2">
+<h2 id="orgea4f0ab"><span class="section-number-2">2</span> 使用した部材</h2>
+<div class="outline-text-2" id="text-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">部材名</th>
+<th scope="col" class="org-left">入手先など</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ステンレスシンク</td>
+<td class="org-left"><a href="https://www.ikea.com/jp/ja/p/fyndig-inset-sink-1-bowl-stainless-steel-s89158006/">IKEA FYNDIG はめ込み式シンク1ボウル, 46cmx40cm</a></td>
+</tr>
+
+<tr>
+<td class="org-left">散水ノズルスタンド</td>
+<td class="org-left"><a href="https://www.amazon.co.jp/gp/product/B087C61MQ6/ref=ppx_yo_dt_b_asin_image_o00_s00?ie=UTF8&amp;psc=1">JEJアステージ(JEJ Astage 散水ノズルスタンド SNS-80</a></td>
+</tr>
+
+<tr>
+<td class="org-left">採集コンテナx2</td>
+<td class="org-left">どこのホームセンターでも売ってます。ちなみに図<a href="#orgfe93afc">3</a> は<a href="https://www.cainz.com/shop/g/g4936695342056/?utm_content=31&amp;utm_term=&amp;utm_medium=cpc&amp;utm_source=google&amp;utm_campaign=hl_mi_di_al_00_ssc&amp;gclid=Cj0KCQjwzYGGBhCTARIsAHdMTQwXiei5M9HZl3uyosi0zUEcqxQCYihcsS4s-k_FjVgGV8uDUR7ymGcaAtanEALw_wcB">KAINZ</a>のものです</td>
+</tr>
+</tbody>
+</table>
+
+<div id="orgfe93afc" class="figure">
+<p><img src="../static/採集コンテナ.jpg" alt="採集コンテナ.jpg" width="50%" />
+</p>
+<p><span class="figure-number">&#22259;3:  </span>ガーデンシンクの台として使った採集コンテナ（KAINZ）</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf72308b" class="outline-2">
+<h2 id="orgf72308b"><span class="section-number-2">3</span> 補足説明</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+最大の <b>ミソ</b> はIKEAのFYNDIGシンクが図<a href="#orgfe93afc">3</a>の採集コンテナに <b>ぱこっ</b> とはまること。ほぼあつらえたようなハマり具合です(注<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>):smile:<br />
+</p>
+</div>
+
+<div id="outline-container-org57d383c" class="outline-3">
+<h3 id="org57d383c"><span class="section-number-3">3.1</span> ステンレスシンク</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+FYNDIGは天板をくり抜いてはめ込み式で組み立てるシンクです(注<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>)が、
+排水系の標準付属品以外の余計なものは何もついていません。
+サイズは46x40cm。価格は排水系付属品込みで4,900円（税込み）。
+</p>
+
+<p>
+ガーデンシンク専用の台付きシンクは、ネットやホームセンターで多くの製品が販売されています。価格とステンレスの <b>しっかり感</b> でこれを選びました。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb7382dd" class="outline-3">
+<h3 id="orgb7382dd"><span class="section-number-3">3.2</span> 散水ノズルスタンド</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+簡単な仕掛けですが、これがあるのと無いのとでは使い勝手が大ちがいです。
+採集コンテナは <b>板厚</b> が薄いので、図<a href="#orgba3d6d5">2</a>の
+<span style="color: red">赤丸</span>のように適当な木片（濃い茶色の直方体）を何本かの結束バンドでとめておきます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org772d690" class="outline-3">
+<h3 id="org772d690"><span class="section-number-3">3.3</span> 採集コンテナ</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+積み上げることを前提にしてありますから、下の段のコンテナとはカチっとハマって横ずれなどは起きません。下の段のコンテナは30年ほども昔のものだと思います。色もあせているし紫外線でプラスティックがザラザラになっていますが、問題なく使えます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4822e7d" class="outline-3">
+<h3 id="org4822e7d"><span class="section-number-3">3.4</span> 排水ホースの引き出しかた</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+採集コンテナから排水ホース（FYNDIGの標準付属品）を引き出すための穴は、 <b>ニッパ</b> でパチンパチンと切って空けます。採集コンテナの強度に影響を与えないようにコンテナのフレーム部分を避けて <b>メッシュの部分</b> に穴がくるようにしましょう。
+</p>
+
+<p>
+排水パイプは適当に <b>結束バンド</b> で採集コンテナに固定しておきます<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb21bd35" class="outline-2">
+<h2 id="orgb21bd35"><span class="section-number-2">4</span> なぜガーデンシンク？</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+かねてから畑に1台ガーデンシンクがほしいなぁと思っていました。<br />
+野菜を洗ったり、泥のついた手を洗ったり、作物に散水するためにじょうろに水を張ったりする他、BBQをやる際の食器や食材を洗ったり・・・。
+その都度、屋内にもどりキッチンのシンクを使うのはとても面倒くさい。
+</p>
+
+<p>
+一番の問題は、当地では冬期には <b>積雪がメートル単位</b> になります。
+小洒落たガーデンシンクを屋外に作っても、ひと冬で壊れてしまいます。
+なので第一条件は
+</p>
+<pre class="example" id="org475d6ac">
+冬になったら簡単に分解して物置に格納できること
+</pre>
+<p>
+それプラス、とにかく <b>お金</b> と <b>手間ひま</b> をかけずにすぐに使えること。
+</p>
+
+<p>
+ネットやホームセンターで探索していましたが、
+IKEAのFYNDIGがこんなふうに使えることで、長年の懸案が解決しました。ほんとうにしあわせです
+:satisfied:
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb07d1f6" class="outline-2">
+<h2 id="orgb07d1f6"><span class="section-number-2">5</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+シンクの短辺の方はぴったりはまります。長辺の方は採集コンテナの方が10cmほど大きいです。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+実は、2x4の端材のストックがあったので、それを使って天板を作ろうと思っていましたが、IKEAでシンクを購入した時に、たまたまクルマ荷室に空の採集コンテナが1個乗っていて、その上にポンと乗っけたらカパっとハマったので「ん？」と思った次第です
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+冬前に解体する際には、結束バンドをニッパで切るとすぐにバラバラになります。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: [ 2021-06-10 ]</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-06-10 木 21:06</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
