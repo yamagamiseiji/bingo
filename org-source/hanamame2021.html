@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-06-15 火 21:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ムラサキ花豆のひと口メモ</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">ムラサキ花豆のひと口メモ</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga9ee991">1. ムラサキ花豆（ベニバナインゲン）</a>
+<ul>
+<li><a href="#org3c770d6">1.1. 食べ方</a></li>
+<li><a href="#orgb23d75f">1.2. 種まき</a></li>
+<li><a href="#orgc1f8f54">1.3. その後の成長は「ジャックと豆の木」</a></li>
+<li><a href="#orgd54aa85">1.4. 花豆の敵</a></li>
+<li><a href="#orgee535cb">1.5. 収穫</a></li>
+</ul>
+</li>
+<li><a href="#org28ddb5a">2. 文献</a></li>
+<li><a href="#org8e73cb9">3. Footnotes:</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga9ee991" class="outline-2">
+<h2 id="orga9ee991"><span class="section-number-2">1</span> ムラサキ花豆（ベニバナインゲン）</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+「豆好き」の方ならムラサキ花豆のことをよくご存知ですが、
+全国民にあまねく知られているというレベルには達していません。
+</p>
+
+<p>
+ボクの生まれ故郷の広島県の方に差し上げると、みなさんから
+「見たことない」「どうやって食べるの」と聞かれます。
+</p>
+
+<p>
+初めて目にするとその大きさにびっくりされる方が多いようです。
+花豆は乾燥させた状態でも大人の <b>親指第1関節</b> までの大きさがあります（図<a href="#orgba5f243">1</a>）。
+</p>
+
+<div id="orgba5f243" class="figure">
+<p><img src="../static/親指と花豆.jpg" alt="親指と花豆.jpg" width="50%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>乾燥した花豆と親指</p>
+</div>
+
+<p>
+煮豆にすると、さらに数十%も膨張します:sunglasses:
+</p>
+
+<p>
+花豆の原産地はメキシコ高原でわが国には江戸末期に伝来しました。当時は朱色で大きな花を楽しむ <b>観賞用</b> だったようです。
+食用栽培は明治になって <b>札幌農学校</b> (注<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>)で始まったとのことです。
+</p>
+
+<p>
+本州では標高が1,000メートル以上の冷涼な場所でないと実はつきません（花は咲きますが）。
+</p>
+</div>
+
+<div id="outline-container-org3c770d6" class="outline-3">
+<h3 id="org3c770d6"><span class="section-number-3">1.1</span> 食べ方</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<b>煮豆</b> にして食べるのが一般的ですが、甘納豆のようにしてお茶請けにするとか、 <b>赤飯</b> の中に入れる地方もあるようです。
+</p>
+
+<p>
+洋風の食べ方だと、図<a href="#org5b14a4d">2</a>のようにパウンドケーキに入れて焼いても美味しいです。
+</p>
+
+<div id="org5b14a4d" class="figure">
+<p><img src="../static/花豆ケーキbisected.jpg" alt="花豆ケーキbisected.jpg" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>花豆ケーキ</p>
+</div>
+
+<p>
+ちょっと変わったところでは白インゲンの代わりに使って <b>カスレ</b> (フランス風煮込み料理)にもできます。
+<b>コンポート</b> にするとフレンチのデザートにもなります(注<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>)。 
+</p>
+
+<p>
+なお、<a href="https://www.gene.affrc.go.jp/databases-plant_images_detail.php?plno=5420390009">農業生物ジーンバンク</a> によれば世界中ではつぎのように利用されているそうです。
+</p>
+<blockquote>
+<p>
+温帯の国では，柔らかい若莢をスライスして料理に使われることが多い (Purseglove,1974)。中央アメリカでは未熟，完熟種子を食べるほか，塊根を茹でて食べることもある。時に，鑑賞用として栽培される。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgb23d75f" class="outline-3">
+<h3 id="orgb23d75f"><span class="section-number-3">1.2</span> 種まき</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+豆を平らな面に並べて厚みのある（＝丸みがあって大きい）ものを選んでタネにします。
+かつては北群馬では花豆は <b>直植え</b> でいきなり畑に植えるのが一般的でした。
+しかし最近は、発芽したての双葉のときに <b>シカ</b> や <b>カモシカ</b> に食われる頻度が高くなっています。若芽をやられると苗は100%枯れてしまいます。害獣からの <b>食害</b> を避けるために、7,8年ほど前からポットで育苗するようにしています。
+</p>
+
+<p>
+タネをポットにまくときには豆の <b>ヘソを下</b> にして、親指と人差し指でつまんで人差し指第2関節まで押し込みます。その後かるく転圧すると覆土はおよそ３cmほどになります。
+</p>
+
+<p>
+時期的には、例年ゴールデンウィーク明けの5月10日前後に <b>横浜</b> で10cmのポットに1粒ずつまきます。横浜で育苗する理由は、花豆が発芽するには播種後の <b>蓄積温度</b> が140℃に達することが必要（有馬,1989）とされていることから、温暖な地域で育苗すると発芽を早めることができるからです。この蓄積温度＝140℃については2020年に自分なりに実際に確認しました（<a href="https://bred-in-bingo.netlify.app/posts/hanamame-sprouting/">こちら</a>）。140℃に達すると多くのタネが発芽しますが、発芽時期の <b>個体差</b> は大きく発芽同時性は低いようです。それでも2週間ほどでほぼ発芽が揃います(注<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>)。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc1f8f54" class="outline-3">
+<h3 id="orgc1f8f54"><span class="section-number-3">1.3</span> その後の成長は「ジャックと豆の木」</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+育苗日数はおよそ <b>20日</b> 、5月末には北群馬の畑に定植します。播種後１ヶ月でツルの先端は <b>大人の背丈</b> ほどになります。
+苗の株間距離を1メートルにしてもあっという間にトンネルのネットに隙間なくツルが巻き付いてきます。成長の速さには毎年驚かされます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd54aa85" class="outline-3">
+<h3 id="orgd54aa85"><span class="section-number-3">1.4</span> 花豆の敵</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+ある程度大きくなると幸いなことにシカもサルもイノシシも花豆に害を及ぼすことはありません(注<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>)。こわいのは生育初期の <b>霜害</b> 。これにあたると苗はほとんど絶滅します。
+</p>
+
+<p>
+あと、株元のマルチの下に <b>アリ</b> が巣を作るとやがてその株は枯れてしまいます。これまで市販のアリ駆除のエサをまいたりいろいろやりましたが、あまり有効なものは見つかっていません。ここ数年は、 <b>コーヒのカス</b> を乾燥させたものを巣の入り口や内部にまき散らす方法をとっています。これはかなり成功率が高いです。
+しばらくするとアリの姿が消えます(注<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>)。
+</p>
+
+<p>
+温暖化のためでしょうか、近年 秋の <b>台風</b> で花豆のトンネルが壊されることが時々あります。
+収量が減るだだけではなく、トンネル支柱のパイプが折れたりひん曲がったりして経済的なダメージが大きいです。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgee535cb" class="outline-3">
+<h3 id="orgee535cb"><span class="section-number-3">1.5</span> 収穫</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+図<a href="#org6e3f8ca">3</a>は昨年9月に干しざるに広げて乾燥させているところ。この前に、サヤがついたままで日に当ててサヤがカラカラに乾くまで乾燥させます。
+</p>
+
+<div id="org6e3f8ca" class="figure">
+<p><img src="../static/花豆収穫20200906.jpg" alt="花豆収穫20200906.jpg" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;3:  </span>花豆の乾燥中</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org28ddb5a" class="outline-2">
+<h2 id="org28ddb5a"><span class="section-number-2">2</span> 文献</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li><a href="https://www.jstage.jst.go.jp/article/hokurikucs/54/0/54_44/_pdf">岡部ほか(2019)</a>  野辺山高原におけるベニバナインゲンの栽培方法に関する一考察</li>
+<li><a href="https://core.ac.uk/reader/148776610">有馬(1986)</a> ベニバナインゲンの栽培方法</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8e73cb9" class="outline-2">
+<h2 id="org8e73cb9"><span class="section-number-2">3</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+「札幌農学校」は現在の北海道大学の前身。ちょっとプライベートに因縁を感じます:smile:
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+花豆のレシピ集としては<a href="https://www.picuki.com/tag/%E3%83%99%E3%83%8B%E3%83%90%E3%83%8A%E3%82%A4%E3%83%B3%E3%82%B2%E3%83%B3">こちら</a>がすばらしいです。花豆好きの方はぜひごらんになったら良いと思います。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+早めに発芽させたい事情がある場合には、播種の前に5,6時間真水につけるとか、豆の皮に傷をつけるとかの方法があるそうです。今年は前者の <b>浸種</b> (seeds soaking)をやってみようと思います。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+花豆の実は生で食べると吐き気、嘔吐、下痢、腹痛等の消化器症状をおこします。毒性成分はレクチン（タンパク質）とのこと。獣害が無いのはこれと関係があるのでしょうか？<br />
+(参考資料)<a href="https://www.mhlw.go.jp/topics/syokuchu/poison/higher_det_19.html">自然毒のリスクプロファイル：高等植物：ベニバナインゲン(厚生労働省)</a> 
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+<b>芝生</b> にも大きな山アリが巣を作って困っていましたが、棒切れなどでコーヒカスを巣穴に入れ込むと効果があります。アリが死ぬわけではなくて、別の場所に移動するだけのようですので、他の場所に作られたらまたコーヒカス攻撃する感じです。2,3回やっているうちにあきらめて芝生から別の場所に行くようです。:wink:
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-04-14 水 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-06-15 火 21:00</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

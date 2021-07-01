@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-07-01 木 14:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>花豆2021 &#x2013;  播種から定植まで</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">花豆2021 &#x2013;  播種から定植まで</h1>
+
+<div id="outline-container-org9f30f0b" class="outline-2">
+<h2 id="org9f30f0b"><span class="section-number-2">1</span> 今年は最低の年でした</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+図<a href="#org6187b25">1</a> は今年の花豆の播種から定植までの経過です。
+横軸は <b>積算温度</b> （℃）で縦軸は種・苗の <b>状態の累積%</b> です。
+緑のラインは累積発芽率、青のラインは <b>初生葉</b> (注<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>)が開いた累積パーセント(<b>初生葉率</b>) です。
+</p>
+
+<div id="org6187b25" class="figure">
+<p><img src="../static/hanamame発芽推移2k21.jpg" alt="hanamame発芽推移2k21.jpg" width="80%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>21021年の花豆播種から定植までの経過（ <i>N=41</i> ）</p>
+</div>
+
+<p>
+結果は：
+</p>
+<pre class="example" id="org23c35ee">
+今年の初生葉率はこれまでで最低！
+定植日(05/28)までに初生葉まで到達し定植できた苗数（率）は28/41（68.3%)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org839b202" class="outline-2">
+<h2 id="org839b202"><span class="section-number-2">2</span> 経過</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+今年も播種の日程と場所は例年通りでした。
+05/13(<b>day0</b>)に横浜で41ポットに播種しました。
+<a href="https://www.marcheaozora.com/?pid=139360736">こちら</a>の記事にしたがって、初めて種を播種前に6時間 <b>水浸</b> してみました。<br />
+図<a href="#org6187b25">1</a>を見ると、 <b>day6</b> に
+<b>積算温度</b> が140℃になると種の半数が発芽しています。これは例年と同じですし、
+有馬(1975)の知見にも一致していますが、水浸による発芽促進効果は見られませんでした。<br />
+同日 (<b>day6</b>)に北群馬（片品村）に移動しました。
+しかしその後、発芽率と初生葉率が停滞し、最終的には初生葉率が70%を下回るという惨憺たる結果になりました。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3ae2539" class="outline-2">
+<h2 id="org3ae2539"><span class="section-number-2">3</span> 苗が足りない！</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+発芽と初生葉率の状態を見ていて、どう考えても5月末までに必要な苗数(＝32苗)が揃いそうもなかったので、
+大急ぎで追加の種を撒きました。<br />
+第1回追加は10ポット(05/24)、第2回追加は7ポット(05/31)でした。どちらも発芽が悪くハラハラしました。しかし、06/07にはなんとか不足分の4苗を畑に定植することができました。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6cff2e6" class="outline-2">
+<h2 id="org6cff2e6"><span class="section-number-2">4</span> 原因は寒波？</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+今年は5月中旬から下旬にかけて、北関東から東北地方の広い範囲でリンゴやサクランボなどがひどい冷害・霜害にあって大きな被害を受けました。
+個人的にも、なんとなく5月中下旬の北群馬は寒かったような印象があります。
+そこで05/19以降の北群馬が、平年に比べてどの程度寒かったかを確認するために <b>アメダス</b> のデータを見てみました。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgee94870" class="outline-2">
+<h2 id="orgee94870"><span class="section-number-2">5</span> アメダスデータをみると・・・</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+群馬県の藤原アメダス(注<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>)の気温データを<a href="https://www.data.jma.go.jp/obd/stats/etrn/view/daily_a1.php?prec_no=42&amp;block_no=1222&amp;year=2021&amp;month=5&amp;day=&amp;view=">気象庁のページ</a>からもらってきて、今年の5月の日々の気温変動を <b>過去30年</b> (1991〜2020年)の平均気温と比べて見ました（図<a href="#org9a4dfc5">2</a>）。
+</p>
+
+<div id="org9a4dfc5" class="figure">
+<p><img src="../static/2k21日平均気温.jpg" alt="2k21日平均気温.jpg" width="100%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>日平均気温の平年（1991〜2020年の平均）との比較（群馬県藤原アメダス）</p>
+</div>
+
+<p>
+これを見ると、意外にも2021年が極端に低温だったようには見えません。05/19以降では2日間（05/26, 05/27）は平年より低温ですが、極端な低温には見えません。
+</p>
+
+<p>
+地元の農家のみなさんが、今年は夜の低温がきつい、という話をされていたのを思い出し、
+もしかしたら平均気温ではなくて <b>最低気温</b> が関係しているのかも？と思い、今年の5月の最低気温と過去30年の最低気温とを比べてみました（図<a href="#org22b3dd0">3</a>）。
+</p>
+
+<div id="org22b3dd0" class="figure">
+<p><img src="../static/最低気温比較.jpg" alt="最低気温比較.jpg" width="100%" />
+</p>
+<p><span class="figure-number">&#22259;3:  </span>今年の最低気温と過去30年の最低気温の比較（群馬県藤原アメダス）</p>
+</div>
+
+
+<p>
+この図を見ると、05/26だけはガクンと落ちてはいますが、その日を除けば今年の最低気温がとくに平年に比べて顕著に低いという風には見えません(注<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>)。
+</p>
+
+<p>
+どうも低温は今年の発芽率の低さの <b>主な原因</b> ではないようです(注<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>)。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org030aa18" class="outline-2">
+<h2 id="org030aa18"><span class="section-number-2">6</span> では何が原因？</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+寒波のせいではないとしたら、何でしょうか。<br />
+一つの可能性は、
+もしかしたら今年は花豆の <b>種の品質</b> が良くなかったのかもしれません。今年も例年どおり農協で1kgの種を購入し、それをガラステーブルの上に広げて厚みと大きさの順に40数粒の種を選びました。しかし目視では判別できない何か別の要因があった可能性はあります。
+</p>
+
+<p>
+その他に思いつくのは、今年初めて試みた播種前の種の <b>6時間水浸</b> 。
+これについて、GoogleScholoarでちょっとあたって見ました。そうすると次のような記述がありました（<a href="https://core.ac.uk/reader/148776610">有馬,1986</a>）:
+</p>
+<blockquote>
+<p>
+播種前に水浸してはいけない。初が不良になったり不揃いになる危険がある。英国の資料によると水浸中に病菌が種子に蔓延するという。
+</p>
+</blockquote>
+<p>
+どうやら花豆の種を種まき前に水浸するのは芳しくないようです。
+</p>
+
+<p>
+具体的なデータがどうなっているかもっと詳しく知りたかったのですが、有馬(1986)論文にも「英国の資料」が何かは書かれていませんし、
+GoogleScholarで検索しても、花豆の種を水浸することが発芽にどんな影響を及ぼすか、というような <b>素朴な</b> 問題をあつかった論文は見つけることができませんでした(注<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>)。
+</p>
+
+<p>
+ま、紳士危うきに近寄らずということで、今後は面白半分に新しいことをやるのは控えようと思います:sweat:
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4699745" class="outline-2">
+<h2 id="org4699745"><span class="section-number-2">7</span> 開花しました</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+こんなふうに紆余曲折がありましたが、ありがたいことに今年も例年通り開花しました。
+</p>
+
+<div id="orgc6a9de8" class="figure">
+<p><img src="../static/花豆開花20210701.jpg" alt="花豆開花20210701.jpg" width="80%" />
+</p>
+<p><span class="figure-number">&#22259;4:  </span>梅雨の曇り空と花豆の花</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0f9e82d" class="outline-2">
+<h2 id="org0f9e82d"><span class="section-number-2">8</span> Acknowledgment</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>有馬博 (1987). ベニバナインゲンの栽培方法. 信州大学農学部農場報告, (4), 1-11.</li>
+
+<li>Ogilvie, L., &amp; Mulligan, B. O. (1935). Vegetable Diseases: A Survey of Recent Work at Long Ashton. Scientific Horticulture, 3, 119-125.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org797f001" class="outline-2">
+<h2 id="org797f001"><span class="section-number-2">9</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+豆の発芽にはいろいろなタイプがあるようです。たとえば
+<a href="https://www.mame.or.jp/syurui/photogallery/shutuga.html">豆の出芽(公益財団法人 日本豆類協会)</a>
+によれば、花豆は双葉（子葉）は地上には出ず地下にとどまったまま上胚軸が伸びるタイプの中でも初生葉を展開した後に本葉を出す部類に入るので、
+最初に開く2枚の葉のことを俗に双葉（子葉）と言いますが、
+花豆の場合には正しくは <b>初生葉</b> （はつしょうよう）と言うべきものです。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+畑の場所は片品村ですが最も近い場所のアメダスが <b>藤原</b> になります。標高差が250メートル超ありますので、畑のほうが平均温度は1.5℃程度低いと思います。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+生物には生育の過程でいろいろな形のcritical periodがあります。もしかしたら種にとって発芽前のある特定のタイミングでの温度が特別に重要な効果があるのかもしれません。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+基本的には気温が低くても発芽日が遅れるだけです。しかし今年のように <b>day9</b> 以降、まったく発芽が進行しなかったというのは初めての経験でした。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+もっと時間をかけて綿密に調べればあったのでしょうが・・・。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-07-01 木 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-07-01 木 14:06</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
