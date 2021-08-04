@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-08-04 13:05:51 yamagami>
+#           Time-stamp: <2021-08-04 13:14:10 yamagami>
 #+title: クサキョウチクトウ ー おいらん草
-#+date: [2021-07-31 ]
+#+date: [2021-08-04 ]
 #+language: ja
 #+link: file file+sys:../static/
 
@@ -51,7 +51,7 @@
 [fn:kotentaikei]   [[http://base1.nijl.ac.jp/~nkbthdb/][日本古典文学体系（岩波）]] を対象にした全文検索。大学内などからだけアクセス可能です。そのうち図書館で館内の端末またはWifiを使って調べてみます。
 
 ** 古い順では
-あくまで *ざくっと* 検索した結果です。他にもたくさんありそうです。
+あくまで *ざくっと* 検索した結果です。もっと古い文献もありそうです。
 
 1. 長塚節 「土」  1910年（明治43）
     #+begin_quote
