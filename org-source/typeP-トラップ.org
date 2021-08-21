@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-08-16 13:28:40 yamagami>
+#           Time-stamp: <2021-08-21 20:45:07 yamagami>
 #+title: スズメバチトラップ -- ver. 2021
-#+date: [2021-08-16 ]
+#+date: [2021-08-21 ]
 #+language: ja
 #+link: file file+sys:../static/
 
@@ -14,12 +14,11 @@
 #+draft: false
 
 * Ver.2021トラップ
-
 ずいぶん昔からペットボトルでいろいろなタイプのスズメバチトラップを自作し使っていますが、どのタイプのトラップにも共通する問題がありました。
 #+begin_example
 せっかくトラップに入ったのに
 飛び回っているうちに
-偶然出口を見つけて *脱出* してしまう
+偶然出口を見つけて脱出してしまう
 #+end_example
 とくにトラップ内に蛾やハチの死骸が溜まってくると、
 誘引液に溺れにくくなって逃げ出しやすくなります。
