@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-08-21 20:45:07 yamagami>
+#           Time-stamp: <2021-08-21 20:50:04 yamagami>
 #+title: スズメバチトラップ -- ver. 2021
-#+date: [2021-08-21 ]
+#+date: [2021-08-21]
 #+language: ja
 #+link: file file+sys:../static/
 
@@ -38,7 +38,6 @@
 
 図[[fig1]]だけでおよその作り方はお分かりいただけると思いますが、
 詳しくは「[[#sanko-siryo]]」節をごらんください。
-
 
 なお、
 *市販のスズメバチトラップ* （注[fn:市販品]）の多くは入口の形状を工夫することで、ハチの脱出を抑止するようになっています。コストが気にならない場合には市販の製品も選択肢の一つです。
