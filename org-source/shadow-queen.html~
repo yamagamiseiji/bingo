@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-09-14 火 18:34 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>むらさき色のポテト &#x2014; シャドークィーン</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">むらさき色のポテト &#x2014; シャドークィーン</h1>
+
+<div id="outline-container-org2e3fbfb" class="outline-2">
+<h2 id="org2e3fbfb"><span class="section-number-2">1</span> </h2>
+<div class="outline-text-2" id="text-1">
+<p>
+2021年は天候不順のために北海道などでジャガイモの作柄が良くないようです。
+</p>
+
+<p>
+わが家では4種のジャガイモ（メークイン、インカノメザメ、キタアカリとシャドークイーン）を少しずつ作っていますが、さいわいなことにほぼ平年以上の作柄になりました。
+</p>
+
+<p>
+なかでも <b>シャドークィーン</b> はとてもたくさんできました。
+</p>
+
+<p>
+シャドークィーン栽培は今年で3年目です。
+前年の夏前に収穫したイモを種芋にして、翌年の6月に植え付けています。
+</p>
+
+<p>
+シャドークイーンは普段スーパーなどではあまり見かけませんが、
+どんなジャガイモかもう少し詳しく知りたい方は、
+この記事の巻末にある<a href="#shadowQ-what">参考資料</a>をごらんください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0c6d4e9" class="outline-2">
+<h2 id="org0c6d4e9"><span class="section-number-2">2</span> シャドークィーンの食べ方</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+外形はメークインに似た長楕円形ですが、
+外皮はほとんど <b><span style="color: black">真っ黒</span></b> 、果肉は濃い <b><span style="color: purple">ムラサキ</span></b> 色 。外見からはとてもジャガイモにはみえません :sweat:
+</p>
+
+<p>
+食味はメークインと男爵の中間風でしょうか。個性的な色からすると意外にふつうのジャガイモ味。なので、色を活かすような食べ方が推奨されているようです。
+調理法によってはとてもきれいな刺し色になります。
+</p>
+
+
+
+<p>
+写真を撮るのを忘れなかった料理例です。
+</p>
+</div>
+
+<div id="outline-container-org079f13d" class="outline-4">
+<h4 id="org079f13d"><span class="section-number-4">2.0.1</span> ポタージュ</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<p>
+牛乳の量次第でむらさきの濃さが変わります。ほんとうにきれいな色です。  
+</p>
+
+<div id="org888f312" class="figure">
+<p><img src="../static/ポタージュ.jpg" alt="ポタージュ.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>シャドークィーンのポタージュ</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org59a52f4" class="outline-4">
+<h4 id="org59a52f4"><span class="section-number-4">2.0.2</span> コロッケ</h4>
+<div class="outline-text-4" id="text-2-0-2">
+<p>
+シャドークィーンはコロッケにすると色がきれいなだけでなく、果肉の持ち味が生きる感じ。
+おいしいです。シャドークィーンは <b>俵型</b> です。
+左の平べったい丸いコロッケはインカノメザメで、中は明るい黄色。
+</p>
+
+<div id="org3040260" class="figure">
+<p><img src="../static/コロッケ.jpg" alt="コロッケ.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>シャドークィーンのコロッケ</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbec1a94" class="outline-4">
+<h4 id="orgbec1a94"><span class="section-number-4">2.0.3</span> ポテトチップス</h4>
+<div class="outline-text-4" id="text-2-0-3">
+<p>
+電子レンジでチンするポテトチップス器でつくりました。レンジにセットする <b>前</b> に <b>塩</b> を振ることさえ忘れなければ、簡単にノンオイルのポテトチップスができます。実物はもう少しムラサキっぽいですが、証明がLEDなので変に黒っぽくなってしまいました。
+</p>
+
+<div id="org39946bc" class="figure">
+<p><img src="../static/ポテトチップス.jpg" alt="ポテトチップス.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;3:  </span>シャドークィーンとインカのメザメのチップス</p>
+</div>
+
+
+
+<p>
+<br />
+</p>
+
+<p>
+<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-shadowQ-what" class="outline-2">
+<h2 id="shadowQ-what"><span class="section-number-2">3</span> （参考資料）シャドークイーンって？</h2>
+<div class="outline-text-2" id="text-shadowQ-what">
+<p>
+Google Scholarでシャドークィーンの育種に関する論文を見つけました（<a href="https://agriknowledge.affrc.go.jp/RN/2010782509.pdf">森ほか,2009</a>）。
+</p>
+
+<p>
+この論文によれば、シャドークイーンは<br />
+<b>1993年</b> に北海道農業試験場ばれいしょ育種研究室（現北海道農業研究センター)で育種が始まり、 <b>2005年</b> には種商法に基づく品種登録申請がなされ「 <b>ばれいしょ農林57号</b> 」として農林水産省の農作物新品種命名登録されています。2007年からは急速に普及しています。
+</p>
+
+<p>
+シャドークイーンの食味や色の特性などについては、次のように書かれています。
+</p>
+<blockquote>
+<p>
+「シャドークィーン」は、水煮時の煮崩れが「男爵薯」と同様で中程度、水煮時の食味は「男爵薯」並に優れる。
+「インカパープル」や「キタムラサキ」と同様に、水煮や蒸しにより加熱するとアントシアニン系の紫色は退色するが、調理品が熱い状態でも紫の色調は残り、放冷するとさらに色調が戻る。
+また、油を用いたフライ料理では紫色が残るが、やや濃すぎる色調となり、褐変は中程度である。
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-orgc572d2a" class="outline-3">
+<h3 id="orgc572d2a"><span class="section-number-3">3.1</span> アントシアニンが豊富</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+森ら(2009)によれば、<br />
+アントシアニン色素成分には、 <b>抗酸化能</b> などの機能性(五十嵐ほか,2000)があります。それに加えてジャガイモは一般に <b>抗インフルエンザ活性</b> (Hayashi et al. 2003)や
+ <b>ヒト胃癌細胞のアポトーシス誘導効果</b> (Hayashi et al. 2006)
+などの機能性が確認されています。
+</p>
+
+<p>
+シャドークイーンは他の有色ジャガイモに比べて数倍のアントシアニンを含有しているそうです（表 <a href="#org287957e">1</a>）。
+</p>
+
+<table id="org287957e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">&#34920;1:</span> 有色バレイショ品種のアントシアニン色素含有（mg/g生いも）。森ほか(2009）より改変。</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">品種名</th>
+<th scope="col" class="org-left">平均値</th>
+<th scope="col" class="org-right">標準偏差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">インカレッド</td>
+<td class="org-left">1.59a</td>
+<td class="org-right">0.50</td>
+</tr>
+
+<tr>
+<td class="org-left">ノーザンルビー</td>
+<td class="org-left">1.85ab</td>
+<td class="org-right">0.50</td>
+</tr>
+
+<tr>
+<td class="org-left">インカパープル</td>
+<td class="org-left">2.04ab</td>
+<td class="org-right">0.60</td>
+</tr>
+
+<tr>
+<td class="org-left">キタムラサキ</td>
+<td class="org-left">2.54b</td>
+<td class="org-right">0.74</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>シャドークィーン</b></td>
+<td class="org-left">7.40c</td>
+<td class="org-right">2.19</td>
+</tr>
+</tbody>
+</table>
+<p>
+表の中の数値は、2001年から2005年までの5年間の測定値の平均と標準偏差です。同じアルファベット同士では平均値の有意差はありません。つまりシャドークイーンは他の有色ジャガイモ4種とは飛び離れてアントシアニン色素が多く含まれていることになります。
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd807293" class="outline-2">
+<h2 id="orgd807293"><span class="section-number-2">4</span> References</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>森元幸他 (2009).　有色パレイショ品種「キタムラサキ」,「ノーザンルビー」および「シャドークイーン」の育成　育種研究, <i>11</i>, 145-153.</li>
+
+<li>五十嵐喜治・佐藤充克・寺原典彦・津田考範・津志田藤二郎・梶本修身 (2000)． アントシアニンの生体調節機能　大庭理一郎・五十嵐喜治・津久井亜紀夫(編著)　アントシアニン食品の色と健康　第1版　（pp.103－186)　健畠社</li>
+
+<li>Hayashi, K., Mori, M.,  Knox-Matutani, Y., Suzutani, T., Ogasawara, M., Yoshida, I., Hosokawa, K., and Tsukui, A. (2003). <i>Food Science and Technology Research, 9</i>, 242-244.</li>
+
+<li>Hayashi, K., Hibasami,H., Murakami, T., Terahara, N., Mori, M., and Tsukui,A.  (2000). <i>Food Science and Technology Research, 12</i>, 22-26.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-09-14 火 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-09-14 火 18:34</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
