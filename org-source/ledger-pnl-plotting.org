@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#   Time-stamp: <2021-05-03 18:51:08 yamagami>
+#   Time-stamp: <2021-10-17 09:23:54 yamagami>
 #+title: 投資信託の評価損益を「見える化」する
-#+date: [2021-04-16 ]
+#+date: [2021-10-17 ]
 #+language: ja
 
 #+link: file file+sys:../static/
@@ -40,7 +40,7 @@
 #+attr_html: :width 95%
 [[file:out-pnl-it-monthly.jpg]]
 
-図[[fig1]]では期間幅（＝X軸）を1ヶ月にしていますが、起動時のオプションでweekly, monthly, 3months, 6months の中から一つを選択できるようにしてあります。3ヶ月分のデータをプロットするときのスクリプトの起動方法は次のとおりです。
+図[[fig1]]では期間幅（＝X軸）を1ヶ月にしていますが、起動時のオプションでweekly, monthly, 3months, 6months, yearly の中から一つを選択できるようにしてあります。3ヶ月分のデータをプロットするときのスクリプトの起動方法は次のとおりです[fn:options]。
 #+begin_src sh
 $ time pnl-it-plotter 3
 real    0m0.206s
@@ -50,6 +50,7 @@ sys     0m0.069s
 上の例では =time= コマンドを使って起動から図が表示されるまでの所要時間も表示しています(注[fn:時間測定])。コードの要点は[[#codes][下記]] に紹介しました。
 
 # なお、図[[fig1]]では単純に評価損益の推移だけを見るようにしています。それ以外の情報、たとえば保有している投資信託の口数や原価などは一切表示していません。
+[fn:options] =pnl-it-plotter= の起動オプションは [m]onthly, [3]months, [6]months, [yearly]。先頭1文字だけの指定も可です。
 
 * 日々の基準価額をどうやって取得するか
 株価の終値もそうですが投資信託の基準価額も毎日きちんと取得するにはそれなりの工夫が必要です。
@@ -180,6 +181,10 @@ gnuplotのX軸関係のパラメータは全部変数化しておいてbashか�
 - [[http://www.gnuplot.info/docs_4.6/gnuplot-ja.pdf][gnuplot日本語マニュアル]]
 - [[https://www.ledger-cli.org/docs.html][Ledger Docs]]
 
+* 更新履歴
+- 2021/04/16 :: 新規投稿日
+- 2021/10/17 :: =pnl-it-plotter= のオプションに yearly を追加
+  
 * Footnotes:
 [fn:会社によっては] 会社によっては、それも可視化して提供しているところもあるかも。
 
