@@ -1,7 +1,7 @@
 +++
 title = "むらさき色のポテト — シャドークイーン"
 author = ["YAMAGAMI"]
-date = 2021-10-16T00:00:00+09:00
+date = 2021-10-17T00:00:00+09:00
 tags = ["farming", "food"]
 categories = ["comp"]
 draft = false
@@ -15,9 +15,9 @@ draft = false
 
 なかでも **シャドークイーン** は豊作でした。:heart:
 
-シャドークイーンは外形はメークインに似た **長楕円形** ですが、外皮はほとんど **<span style="color: black">真っ黒</span>** 。外見からはとてもジャガイモにはみえません(図[1](#org6e6e88b)) :sweat: 。果肉は濃い **<span style="color: purple">ムラサキ</span>** 色です。
+シャドークイーンは外形はメークインに似た **長楕円形** ですが、外皮はほとんど **<span style="color: black">真っ黒</span>** 。外見からはとてもジャガイモにはみえません(図[1](#org3fa534e)) :sweat: 。果肉は濃い **<span style="color: purple">ムラサキ</span>** 色です。
 
-<a id="org6e6e88b"></a>
+<a id="org3fa534e"></a>
 
 {{< figure src="/shadowQ生イモ.jpg" caption="&#22259;1:  シャドークイーンの生いも" width="70%" >}}
 
@@ -52,7 +52,7 @@ draft = false
 
 **:purple_heart: by K** さんから頂きました。
 
-<a id="org7fb503c"></a>
+<a id="orgc532bd5"></a>
 
 {{< figure src="/5chw1Ie_.jpg" caption="&#22259;3:  シャドークイーンのシェパーズパイ" width="70%" >}}
 
@@ -87,7 +87,7 @@ draft = false
 
 この料理では、小さなジャガイモは大きなジャガイモをカットして煮るよりもずぅーっと美味しくなりますよ。
 
-<a id="orgbbda962"></a>
+<a id="org377d29f"></a>
 
 {{< figure src="/南仏風鶏とニンニクのオリーブオイル煮.jpg" caption="&#22259;5:  南仏風鶏とニンニクのオリーブオイル煮" width="70%" >}}
 
@@ -220,9 +220,9 @@ draft = false
 
 ## シャドークイーンの花 {#シャドークイーンの花}
 
-シャドークイーンの花はちょっと変わっています（図[14](#org27d9b70)）。
+シャドークイーンの花はちょっと変わっています（図[14](#orgbf31838)）。
 
-<a id="org27d9b70"></a>
+<a id="orgbf31838"></a>
 
 {{< figure src="/シャドークィーンの花.jpg" caption="&#22259;14:  シャドークイーンの花" width="70%" >}}
 
