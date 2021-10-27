@@ -1,0 +1,60 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2021-10-21 19:05:26 yamagami>
+#+title: パラソル ホワイト トップ？
+#+date: [2021-10-30]
+#+language: ja
+
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: 自然誌 横浜
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: true
+
+*
+横浜市旭区の公園内の散策路
+
+午後の木漏れ日がスポットのようにあたっている
+
+#+caption: 遠景
+#+attr_html: :width 90%
+[[file:群生umbellata.jpg]]
+
+場所は桧山公園 所在地：神奈川県横浜市旭区若葉台2-1-14　
+
+ズームアップすると図[[zoom-up]]のような花が咲いている場所があった。
+#+caption: 名前不詳の花
+#+name: zoom-up
+#+attr_html: :width 70%
+[[file:Doellingeria_umbellata.jpg]]
+
+
+この花がわりに広い範囲に渡ってカバリングのように咲き誇っている。
+地面をおおっている
+
+英語名=tall flat topped white aster, parasol whitetop ?
+
+* 名前
+Pl@ntNetで調べたら
+学名=Doellingeria umbellata
+が一番高確率。
+
+日本名をしらべたが不明
+
+そこで　Google lens でみると
+- ヨメナという野菊？
+も候補になる
+
+
+いまのところ、確定できず。
+
+
+
+
+* Footnotes:
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

@@ -15,9 +15,9 @@ draft = false
 
 なかでも **シャドークイーン** は豊作でした。:heart:
 
-シャドークイーンは外形はメークインに似た **長楕円形** ですが、外皮はほとんど **<span style="color: black">真っ黒</span>** 。外見からはとてもジャガイモにはみえません(図[1](#org1d2eaba)) :sweat: 。果肉は濃い **<span style="color: purple">ムラサキ</span>** 色です。
+シャドークイーンは外形はメークインに似た **長楕円形** ですが、外皮はほとんど **<span style="color: black">真っ黒</span>** 。外見からはとてもジャガイモにはみえません(図[1](#orgee21c3a)) :sweat: 。果肉は濃い **<span style="color: purple">ムラサキ</span>** 色です。
 
-<a id="org1d2eaba"></a>
+<a id="orgee21c3a"></a>
 
 {{< figure src="/shadowQ生イモ.jpg" caption="&#22259;1:  シャドークイーンの生いも" width="70%" >}}
 
@@ -38,19 +38,19 @@ draft = false
 キタアカリとシャドークイーンの2種類のポテトをニョッキにして色と味を楽しもうと思いました。
  **味** の方は **大成功** でとても美味しかったですが、 **色** の方は **失敗**  :sob:
 
-最初は自家製のトマトソースをからめてみました（図[2](#orgb3074d6)）が、シャドークイーン本来の<span style="color: purple">ムラサキ</span>がトマトソースの鮮烈な <span style="color: red">赤</span>に埋没してしまいました。
+最初は自家製のトマトソースをからめてみました（図[2](#org21167b3)）が、シャドークイーン本来の<span style="color: purple">ムラサキ</span>がトマトソースの鮮烈な <span style="color: red">赤</span>に埋没してしまいました。
 
-<a id="orgb3074d6"></a>
+<a id="org21167b3"></a>
 
 {{< figure src="/gnocchi-w-tomato.jpg" caption="&#22259;2:  トマトソースのニョッキ" width="70%" >}}
 
-では、というのでジェノベーゼソース（注[^fn:1])にしてみました（図[3](#org5507b6f)）。こちらもシャドークイーンが **こんにゃく** のように見えます :cry:
+では、というのでジェノベーゼソース（注[^fn:1])にしてみました（図[3](#orgbc9b71a)）。こちらもシャドークイーンが **こんにゃく** のように見えます :cry:
 
-<a id="org5507b6f"></a>
+<a id="orgbc9b71a"></a>
 
 {{< figure src="/gnocchi-w-genovese.jpg" caption="&#22259;3:  ジェノベーゼのニョッキ" width="70%" >}}
 
-味はどちらも最高だったですが・・・「 **色の道** 」はむずかしい :sweat:
+味はどちらも最高だったですが・・・。「 **色の道** 」はむずかしい :sweat:
 
 
 ### (2) **R** さんの シャドークイーンのミルフィーユ 　<font size="2" color="green">(2021/10/17 updated)</font> {#2--r-さんの-シャドークイーンのミルフィーユ}
@@ -72,7 +72,7 @@ draft = false
 
 **:purple_heart: by K** さんから頂きました。
 
-<a id="org16df566"></a>
+<a id="org003e8bc"></a>
 
 {{< figure src="/5chw1Ie_.jpg" caption="&#22259;5:  シャドークイーンのシェパーズパイ" width="70%" >}}
 
@@ -107,7 +107,7 @@ draft = false
 
 この料理では、小さなジャガイモは大きなジャガイモをカットして煮るよりもずぅーっと美味しくなりますよ。
 
-<a id="orga85f137"></a>
+<a id="org5403820"></a>
 
 {{< figure src="/南仏風鶏とニンニクのオリーブオイル煮.jpg" caption="&#22259;7:  南仏風鶏とニンニクのオリーブオイル煮" width="70%" >}}
 
@@ -240,9 +240,9 @@ draft = false
 
 ## シャドークイーンの花 {#シャドークイーンの花}
 
-シャドークイーンの花はちょっと変わっています（図[16](#org3d7a486)）。
+シャドークイーンの花はちょっと変わっています（図[16](#orge074c8a)）。
 
-<a id="org3d7a486"></a>
+<a id="orge074c8a"></a>
 
 {{< figure src="/シャドークィーンの花.jpg" caption="&#22259;16:  シャドークイーンの花" width="70%" >}}
 
@@ -262,7 +262,7 @@ draft = false
 
 ## Footnotes: {#footnotes}
 
-[^fn:1]: 使ったのはコストコのジェノベーゼソース（図[4](#org0726987)）。とてもおいしくコスパも抜群です。 <a id="org0726987"></a> {{< figure src="/costco-genovese.jpg" width="20%" >}}
+[^fn:1]: 使ったのはコストコのジェノベーゼソース（図[4](#org2c0cf3b)）。とてもおいしくコスパも抜群です。 <a id="org2c0cf3b"></a> {{< figure src="/costco-genovese.jpg" width="20%" >}}
 [^fn:2]: 写真の出典は [Good Design Award 2018](https://www.g-mark.org/award/describe/48368) です。 {{< figure src="/asahi-superdry.jpg" width="15%" >}}
 [^fn:3]: ひき肉の炒め方は家内が通っていたリヨン料理のお教室で教わった **Leçon 1** だそうです。
 [^fn:4]: 右スミにちらっと見えているのはベイナスのチーズ焼き。晩夏のわが家の主食です :wink:
