@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-09-25 18:45:02 yamagami>
+#           Time-stamp: <2021-10-30 08:55:05 yamagami>
 #+title: Ledger -- 銀行csvをledgerファイルにする
-#+date: [2021-10-30]
+#+date: [2021-12-30]
 #+language: ja
 #+link: file file+sys:../static/
 

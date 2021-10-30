@@ -1,0 +1,26 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/yamagami/peace-blog/bingo/org-source/ledger-odometer.org
+
+
+* 資料
+:PROPERTIES:
+:custom_id: note利用
+:ARCHIVE_TIME: 2021-10-30 土 10:10
+:ARCHIVE_FILE: ~/peace-blog/bingo/org-source/ledger-odometer.org
+:ARCHIVE_CATEGORY: ledger-odometer
+:END:
+
+次のように、
+コメントまたは単なるメモとして走行距離を書いておく方法があります。
+#+begin_src
+2021/10/29 コバック
+   ; オイル交換:
+   ; 56,000 km
+   Expenses:Cars:整備修繕             5,610 JPY
+   Liabilities:Visa   
+#+end_src
+これが最も簡単な走行距離管理です。これでも
+
+

@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-10-21 19:05:26 yamagami>
+#           Time-stamp: <2021-10-30 08:56:03 yamagami>
 #+title: パラソル ホワイト トップ？
-#+date: [2021-10-30]
+#+date: [2021-12-30]
 #+language: ja
 
 #+link: file file+sys:../static/
