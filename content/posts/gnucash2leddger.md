@@ -1,7 +1,7 @@
 +++
 title = "Ledger — GnuCashからのデータ インポート"
 author = ["YAMAGAMI"]
-date = 2021-11-28T00:00:00+09:00
+date = 2021-11-29T00:00:00+09:00
 tags = ["ledger", "GnuCash", "複式簿記", "Android", "bash"]
 categories = ["comp"]
 draft = false
@@ -28,8 +28,8 @@ Ledger-cliのトランザクションを書くための手段＝ **メモパッ�
 
 GnuCashを使おうと思った動機は：
 
--   Emacs/Ledger-cliの入ったPCを常に持って歩けるわけではないこと
--   領収書やレシートが常にもらえるわけではないこと
+-   Emacs/Ledger-cliの入ったPCを常に持って歩くことはできないこと
+-   領収書やレシートをもらえないケースがあること
 
 の2つです。[^fn:1]
 
@@ -72,16 +72,16 @@ GnuCashトップ画面の左上にあるメニューアイコン（ **≡** ）�
 
 {{< figure src="/gnucash設定menu.jpg" caption="&#22259;1:  GnuCashのメニュー" width="40%" >}}
 
-上のメニューから「設定」を選び、設定画面（図[2](#orgad16536)）を開きます。設定が必要なのはこの4,5項目だけです。
+上のメニューから「設定」を選び、設定画面（図[2](#orgf75306e)）を開きます。設定が必要なのはこの4,5項目だけです。
 
-<a id="orgad16536"></a>
+<a id="orgf75306e"></a>
 
 {{< figure src="/gnucash-export.jpg" caption="&#22259;2:  GnuCash for Androidの取引のエクスポート画面" width="70%" >}}
 
 設定が終わったら、画面右上の「エクスポート」をタップします。これでエクスポートは完了です。
 
 あとは出来上がったCSVを「[参考資料（β版ソースコード）](#siryo)」節で紹介した
-`gnucash2ledger` を使ってLedgerタイプのトランザクションに整形しなおすだけです。
+`gnucash2ledger.sh` を使ってLedgerタイプのトランザクションに整形しなおすだけです。
 
 
 ## `gnucash2ledger.sh` の使い方 {#gnucash2ledger-dot-sh-の使い方}

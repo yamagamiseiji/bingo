@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-11-29 13:23:02 yamagami>
+#           Time-stamp: <2021-11-29 18:30:42 yamagami>
 #+title: Ledger --- GnuCashからのデータ インポート
-#+date: [2021-11-28 ]
+#+date: [2021-11-29 ]
 #+language: ja
 
 #+link: file file+sys:../static/
@@ -31,8 +31,8 @@ Ledger-cliと「組み合わせ」て使ってみます
 Ledger-cliのトランザクションを書くための手段＝ *メモパッド* として使ってみようと思います。
 
 GnuCashを使おうと思った動機は：
-- Emacs/Ledger-cliの入ったPCを常に持って歩けるわけではないこと
-- 領収書やレシートが常にもらえるわけではないこと
+- Emacs/Ledger-cliの入ったPCを常に持って歩くことはできないこと
+- 領収書やレシートをもらえないケースがあること
 の2つです。[fn:manual]
 
 [fn:manual]  Ledger-cliの公式マニュアルにも、GnuCashをLedgerのデータ入力に使うことがgood alternative として推奨されています。
@@ -108,7 +108,7 @@ GnuCashトップ画面の左上にあるメニューアイコン（ *≡* ）で
 これでエクスポートは完了です。
 
 あとは出来上がったCSVを「[[#siryo][参考資料（β版ソースコード）]]」節で紹介した
-=gnucash2ledger= を使ってLedgerタイプのトランザクションに整形しなおすだけです。
+=gnucash2ledger.sh= を使ってLedgerタイプのトランザクションに整形しなおすだけです。
 
 * =gnucash2ledger.sh= の使い方
 ターミナル内で =gnucash2ledger.sh= を起動します。
