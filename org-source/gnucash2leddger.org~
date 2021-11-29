@@ -1,0 +1,206 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2021-11-28 21:24:59 yamagami>
+#+title: Ledger --- GnuCashからデータをインポートする
+#+date: [2021-11-28 ]
+#+language: ja
+
+#+link: file file+sys:../static/
+
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger GnuCash 
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+* GnuCashとは
+#+attr_html: :width 70%
+[[file:android-gnucash-icon.png]]
+
+GnuCashはオープンソースの複式簿記による経理ソフトです。
+Ledger-cliに比べると日本国内にも一定数のユーザがいる気配がします :smile:
+
+今回は
+#+begin_example
+アンドロイド版のGnuCashをLedger-cliと「組み合わせ」て使ってみます
+#+end_example
+
+** 具体的には
+Ledger-cliのためにトランザクションを書くためのメモパッド＝ *手段* として使ってみようと思います。
+
+
+
+
+さすがのOECDの最後進国ジャパンでも、 *おもて経済* では、ほとんど100%の支出に対してきちんとレシートとか領収書が戻ってきます。
+
+しかしいまだに現金払いで、かつレシートをもらえない「取引」も少なくはありません。たとえば
+#+begin_quote
+葬儀の香典や祝い事のご祝儀とか\\
+屋台で一杯飲んだときとか\\
+神社でお賽銭を投げたとか\\
+チップや「おひねり」を出したとか\\
+政治屋に裏献金したとか\\
+etc ...
+#+end_quote
+これらを後で思い出しながら転記しようと思っても、
+なかなか正確には思い出せませんよね。
+
+支出の都度、手帳にメモを残せれば良いがそれもなかなかできない。
+
+かつてはボールペンで左手の親指の根本に金額を書き込んでいました。
+しかし最近ではコロナ禍であちこちに手指消毒用のアルコール液がおいてあります。
+仲間と一緒についつい手を消毒すると、
+大事な数字のメモはアルコールで瞬時に消えてしまいます。
+
+
+手帳の代わりに、タブレット（またはスマホ）で記帳しておいて、旅行や出張が終わった痕で、自分のPCにそれらのトランザクションをインポートできれば、
+性格がずぼらな上に、記憶力が減退し始めたオヂサンたちでも（無いよりはましな）元帳ができます。
+
+
+
+AndroidのGnuCashを
+- Ledgerのトランザクションを補助的に記帳するためだけにつかう
+- PCではemacsでトランザクションを作成する
+- PCが手元にない場合とか、
+- レシートさえあれば、当日入力しなくともまとめて作業可能
+- レシートの無い取引き、現金払いの、買い物、チップなどを記録するのに、あれば便利
+- PCのある場所、時間のある機会に、 =gnucash2ledger.sh= を起動すれば、とりあえず記帳ができる
+
+- GnuCashも複式簿記　分析ツールも色々あるようだが、あくまで記帳のための道具にする
+  
+- GnuCashで記帳したトランザクションをCSVでエクスポート(Dropbox)
+- LinuxPCで =gnucash2ledger.sh= を動かして
+  - CSVファイルをLedger風のトランザクションに整形し保存する
+  - それをコピペまたはファイルごと、Ledgerファイルに読み込む
+
+
+既に色々な人が同様のプログラムを作っている =gnucash2ledger= など。
+
+自分の環境にあった簡単で単機能なプログラムが欲しかった。Pythonも使わず、
+
+* AndroidタブレットへのGnuCashのインストールと設定
+Googleストアからダウンロードするだけ。
+設定は、自分のアカウントシステム（勘定科目構造）をタブレットのGnuCashに作り上げる。
+どうやらXMLでエクスポートできるらしいが、Ledgerのver.3には対応していないらしいので、
+手動でアカウントシステムを入力した。
+
+時間は1時間ちょっと。
+勘定科目構造を細部まで完全に設定する必要はない。
+稀にしか発生しないトランザクションに関係するアカウントは、それが発生したときにGnuCashに作ればよい、ので。
+
+準備作業はそれだけ。
+
+* エクスポート
+
+
+  
+設定は図[[export]]にある２，３項目だけ。
+#+caption: GnuCash for Android のエクスポート画面
+#+name: export
+#+attr_html: :width 70%
+[[file:gnucash-export.jpg]]
+
+設定が終わった後、エスクポートするには画面右上の「エクスポート」をタップ。
+
+
+* =gnucash2ledger= の使い方
+とてもシンプル。タブレットのGnuCashでエスクポートした後、
+=gnucash2ledger.sh= を起動するだけ。
+
+前提は
+- CSVファイルがGnuCashからDropboxにエクスポートされていることだけ。
+
+#+begin_example
+$ gnucash2leddger.sh 
+ ** Saved in IMPed-TXN-f-GnuCash/20211128.ledger
+
+$ cd  IMPed-TXN-f-GnuCash
+$ cat 20211128.ledger 
+2021/11/24 NEXCO
+    Expenses:Cars:Toll 	3420 JPY
+    Liabilities:OricoCard
+
+2021/11/24 ENEOS SS
+    Expenses:Cars:Gasoline 	6156 JPY
+    Liabilities:EneosCard
+
+2021/11/26 ダイエー
+    Expenses:Grocery:Food:YOk 	1112 JPY
+    Liabilities:ResonaVisa:seiji
+   ：
+#+end_example
+
+
+
+* 参考資料（β版ソースコード）
+ubuntu20.04でスクリプトを書きました。    
+ベータ版ですが、動きます。
+  #+begin_src
+#!/bin/bash
+set -eu  # Time-stamp: <2021-11-28 21:22:00 yamagami>
+#
+#    GnuCashからDropboxにエクスポートされたCSVを
+#    ledger-cliトランザクションに変換する
+#
+
+## 変数定義
+commodity='JPY'
+drop_dir='/home/yamagami/Dropbox/アプリ/GnuCash Android'
+storage_dir='/home/yamagami/local-ledger-directory/IMPed-TXN-f-GnuCash'
+
+## ファイル初期設定
+cp /dev/null ./tmp-transaction.ledger
+
+## Dropboxから最新のGnuCash CSVファイルを抽出する
+latest_csv=$(ls -1t "${drop_dir}"/*.csv|head -1)
+
+## ヘッダー行を削除
+sed '1d' "${latest_csv}" > ./gnucash.csv
+
+## ダブルクォーテーションに挟まれた文字列中のカンマを外す
+gawk -F"\"" '{x=$2;gsub(",","",x);print $1"\""x"\""$3}' ./gnucash.csv > ./tmp-no-comma.csv
+
+## ここから本体
+while read odd_line && read even_line
+do
+    # トランザクション1行目を作る
+    date=$(date -d  `echo ${odd_line} | awk -F"," '{print $1}'`  '+%Y/%m/%d')
+    payee=$(echo ${odd_line}| awk -F"," '{print $4}')
+    #
+    echo "${date} ${payee}" > ./tmp-1st-line.txt
+
+    # トランザクション2行目を作る
+    target_acnt=$(echo ${odd_line} | awk -F"," '{print $10}' )
+    amount=$(echo `echo "${odd_line}" | awk -F"," '{print $13}'` |sed 's/\.[0-9,]*$//g')
+    # JPYを追加
+    j_amount="${amount} ${commodity}"
+    echo -e "    "${target_acnt} "\t"${j_amount} > ./tmp-2nd-line.txt
+
+    ## トランザクション3行目を作る
+    source_acnt=$(echo "${even_line}" | awk -F"," '{print $10}')
+    echo -e "    ${source_acnt}\\n" > ./tmp-3rd-line.txt
+
+    ## 合体して最終的なLedgerファイルにする
+    cat ./tmp-1st-line.txt ./tmp-2nd-line.txt ./tmp-3rd-line.txt  >> ./tmp-transaction.ledger
+
+done < ./tmp-no-comma.csv
+
+# インポートデータの保存
+c_date=$(date '+%Y%m%d')
+cp ./tmp-transaction.ledger ${storage_dir}/${c_date}.ledger
+echo "** Saved in IMPed-TXN-f-GnuCash/${c_date}.ledger"
+
+# 一時ファイルの削除
+rm ./tmp-*.csv
+rm ./tmp-*.txt
+rm ./gnucash.csv
+rm ./tmp-transaction.ledger
+exit 0
+  #+end_src
+
+
+  
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
