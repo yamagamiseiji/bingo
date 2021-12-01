@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-11-29 18:30:42 yamagami>
+#           Time-stamp: <2021-12-01 12:24:23 yamagami>
 #+title: Ledger --- GnuCashからのデータ インポート
-#+date: [2021-11-29 ]
+#+date: [2021-11-30]
 #+language: ja
 
 #+link: file file+sys:../static/
@@ -28,7 +28,10 @@ Ledger-cliと「組み合わせ」て使ってみます
 #+end_example
 
 ** 具体的には
-Ledger-cliのトランザクションを書くための手段＝ *メモパッド* として使ってみようと思います。
+Ledger-cliのトランザクションを書くための手段＝ *メモパッド* として使ってみようと思います[fn:memopad]。
+
+[fn:memopad] GnuCashはメモパッドに *限定* して使うことにしました。GnuCashにも分析・レポート機能がついていますが、Ledger-cli＋GnuPlotなどで自分が欲しい機能はそこそこ揃えましたので・・・。
+
 
 GnuCashを使おうと思った動機は：
 - Emacs/Ledger-cliの入ったPCを常に持って歩くことはできないこと
@@ -38,7 +41,7 @@ GnuCashを使おうと思った動機は：
 [fn:manual]  Ledger-cliの公式マニュアルにも、GnuCashをLedgerのデータ入力に使うことがgood alternative として推奨されています。
 
 
-*おもて経済* の取引では、さすがのOECD最後進国ジャパンでも、ほぼ100%の支出に対してきちんとレシートとか領収書が戻ってきます。
+*おもて経済* の取引では、さすがのOECD内のガラパゴス国ジャパンでも、ほぼ100%の支出に対してきちんとレシートとか領収書が戻ってきます。
 
 しかし、いまだに *現金払い限定* で、かつレシートをもらえない「取引」も少なくはありません。たとえば[fn:no-receipts]
 #+begin_quote
@@ -47,7 +50,7 @@ GnuCashを使おうと思った動機は：
 神社への初穂料や玉串料\\
 お坊さんへのお布施\\
 チップや「おひねり」\\
-政治屋への裏献金\\
+政治屋さんへの裏献金\\
 etc ...
 #+end_quote
 これらの支出のたびごとに、 *手帳* にメモを残せる几帳面な性格なら問題はありませんが、
@@ -72,7 +75,7 @@ etc ...
 
 使い始めるためには、自分の *アカウント* （勘定科目）構造をGnuCashに入力します[fn:account-kozo]。
 
-[fn:account-kozo] GnuCashでは複数のセットのアカウント（勘定科目）構造を持てるようです。プライベートな家計簿用とビジネス用、学協会用などに分けて経理ができるのでちょっと便利かも。
+[fn:account-kozo] GnuCashでは複数のセットのアカウント（勘定科目）構造を持てるようです。プライベートな家計簿用とビジネス用、学協会用などに分けて経理ができるので便利かも。
 
 
 Ledgerのアカウント構造は、XMLでGnuCashにエクスポートできるのかと思いましたが、ver.3 *以降* のLedgerには対応していないようでした[fn:ver3]。手動でやっても小一時間で終わるので、手入力しました[fn:wakimichi]。
@@ -115,7 +118,9 @@ GnuCashトップ画面の左上にあるメニューアイコン（ *≡* ）で
 #+begin_example
 $ gnucash2leddger.sh 
  ** Saved in IMPed-TXN-f-GnuCash/20211129.ledger
-
+#+end_example
+コンバートされたLedger向けのトランザクションはつぎのような感じになります：
+#+begin_example
 $ cd  IMPed-TXN-f-GnuCash
 $ cat 20211129.ledger 
 2021/11/24 NEXCO
@@ -230,7 +235,6 @@ exit 0
   #+end_src
 
 * Footnotes:
-
 
   
 # Local Variables:
