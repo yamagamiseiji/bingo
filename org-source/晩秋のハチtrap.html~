@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2021-12-08 水 10:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>晩秋のスズメバチトラップ  &#x2014; 意外な成果と来季以降への示唆</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">晩秋のスズメバチトラップ  &#x2014; 意外な成果と来季以降への示唆</h1>
+
+<div id="outline-container-orgd38a5a2" class="outline-2">
+<h2 id="orgd38a5a2"><span class="section-number-2">1</span> はじめに</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+これまで長年にわたって、スズメバチトラップは
+<b>4月から5月頃</b> に仕掛け始め、夏の終わりには撤去していました。
+</p>
+
+<p>
+2021年、初めてこの「おきて」を破り、
+</p>
+<pre class="example" id="orgd53b14f">
+11月初旬にスズメバチ トラップを仕掛け直しました。
+</pre>
+<p>
+この記事では、その経緯と成果などについて紹介します。
+</p>
+</div>
+
+<div id="outline-container-orgd89252c" class="outline-3">
+<h3 id="orgd89252c"><span class="section-number-3">1.1</span> キイロスズメバチの巣が！</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+母屋の北東の角地に樹高およそ15メートルの <b>桑の木</b> があります。
+2021年10月の末に、
+その10メートルほどの高さの枝に
+ <b>キイロスズメバチ</b> の大きな巣があるのを偶然 発見しました。
+</p>
+
+<p>
+きっかけは、
+巨木化した桑の木、その7,8メートルよりも低いところの枝の <b>整枝・剪定</b> をしていた時のこと、作業中に頻繁にスズメバチが周りをウロウロ飛び回ることに気づきました。
+</p>
+
+<p>
+ちょっと変だなとよくよく樹上を見ると、下からは見えにくい場所に大きな巣があった！というわけです。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org52f7063" class="outline-3">
+<h3 id="org52f7063"><span class="section-number-3">1.2</span> さて どうするか？</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+いろいろ調べた結果、
+</p>
+<ol class="org-ol">
+<li>高い場所にある樹上の巣は、下を歩く人間にはさほど影響はないだろう</li>
+<li>季節的には秋口（10月末）なので、間もなく巣は放棄されるだろう</li>
+</ol>
+<p>
+ということから、
+本格的なハチの駆除や巣の撤去などはせずに、様子見をすることにしました。
+</p>
+
+<p>
+しかし、
+目と鼻の距離にある畑の地面に、多いときには7，8匹のキイロスズメバチが這い回ったり低く飛んだりしています。畑の脇の <b>ハナモモ</b> の木から落果した実が畑に落ちて腐敗・発酵したニオイに誘われて飛来するようです。
+また農機具をしまっている倉庫の中に入ってきたり、
+芝生の上を飛んだり、
+と例年にない頻度でハチが飛び回っていて、かなり <b>うっとうしい</b> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org44d642a" class="outline-3">
+<h3 id="org44d642a"><span class="section-number-3">1.3</span> そこで</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+既に完全撤去していたハチトラップをもう一度仕掛け直してみることにしました。
+うるさいハチの数が少しでも減れば仕事がしやすいかな？というわけです。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge8ea77e" class="outline-2">
+<h2 id="orge8ea77e"><span class="section-number-2">2</span> トラップ設置時期など</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+設置期間は <b>16日間</b> でした。
+</p>
+<ul class="org-ul">
+<li><b>11月05日（day 0）</b> 　日没後に3個のトラップを設置。場所は桑の木から5メートルほど離れた白樺の枝（2個）、15メートルほど離れた白樺の枝（1個）</li>
+<li><b>11月21日（day 15）</b> 　全トラップを取り外して中のハチをバケツに入れてフタをし保管<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
+<li><b>11月23日（day 17）</b> 　バケツからハチを誘引液ごと虫取り網に受け、網からハチだけを取り出して、 <b>手押し一輪車</b> の荷台に撒いて写真撮影</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4185070" class="outline-2">
+<h2 id="org4185070"><span class="section-number-2">3</span> 捕獲したハチのカウント</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+カウント用に撮影した写真は次の図<a href="#org743697d">1</a>, <a href="#org5119da3">2</a> です。
+</p>
+
+<p>
+ハチの死骸を一輪車の荷台にできるだけ重ならないように拡げて撒いた後、 <b>水槽用ピンセット</b> （24cm）を使って 重なったハチを見えやすいように置き換え、写真を撮りました。
+</p>
+
+<p>
+全部のハチを一挙に荷台に並べると、数が多すぎて死骸の重なりが多くなり、写真でのカウントが難しくなると判断して、半分ずつ2回に分けて撮影しました。
+</p>
+
+<p>
+写真をA4の用紙に印刷して、数え終わったハチに修正液ペンで白い点を付け、10匹ごとにその範囲を修正液の白い線で囲みました。
+</p>
+
+<div id="org743697d" class="figure">
+<p><img src="../static/20211201_Part1.jpg" alt="20211201_Part1.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>1回目の撮影。約210匹</p>
+</div>
+
+
+<div id="org5119da3" class="figure">
+<p><img src="../static/20211201_Part2.jpg" alt="20211201_Part2.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>2回目の撮影。約250匹</p>
+</div>
+
+<p>
+その結果、合計捕獲数はおよそ <b>460匹</b> となりました。
+</p>
+
+<p>
+その内、女王蜂クラスだけをピンセットで抽出して撮影したのが
+図<a href="#org29978cd">3</a>です。
+</p>
+
+<div id="org29978cd" class="figure">
+<p><img src="../static/女王バチ.jpg" alt="女王バチ.jpg" width="70%" />  
+</p>
+<p><span class="figure-number">&#22259;3:  </span>女王蜂クラスの7匹。ワークベンチ上にベニヤ板の端材を乗せて撮影。右側のベンチ板幅は12.0cmです。</p>
+</div>
+
+<p>
+右側の3匹の身長を <b>Gimp</b> の等倍ピクセル画像上でざっくり測定したところ
+</p>
+<pre class="example" id="orgfeeb5de">
+57mm　 63mm　 49mm
+</pre>
+<p>
+平均身長は <b>56.3mm</b> 。死後硬直（？）で体が曲がっているので、実際にはもう少し大きかったと思います（怖！）
+</p>
+
+<p>
+この他に、無数の <b>クロスズメバチ</b> （黒くて小柄、腹に白い模様）が捕獲されましたがカウントしませんでした。春先や夏前と違って <b>蛾</b> や <b>ハエ</b> はほとんど捕まっていません。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2a38c96" class="outline-2">
+<h2 id="org2a38c96"><span class="section-number-2">4</span> 検討・今後の展望</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+スズメバチに関する多くのサイトには、次のような注意事項が書かれています：
+</p>
+<pre class="example" id="orgadecceb">
+夏以降には トラップを使わない
+巣のそばに トラップを置かない
+</pre>
+<p>
+なぜか については、どのサイトもほぼ同じ理由をあげています。
+</p>
+<ul class="org-ul">
+<li>トラップ設置のタイミングは、女王蜂を捕獲できるので巣作りの始まる直前の4月から5月が好適</li>
+<li>夏以降は働き蜂が多くなるので捕獲しても効果がうすい</li>
+<li>秋口からはハチの攻撃性が高まるのでトラップは危険</li>
+<li>巣の近くだと採れすぎて始末に困る　 <i>etc.</i></li>
+</ul>
+
+<p>
+こうした注意事項に従えば、秋口に家の近くに巣を張られた場合には
+</p>
+<ul class="org-ul">
+<li>専門業者に4,5万円を支払って駆除するか</li>
+<li>冬が来てハチが自然消滅し、巣が放棄されるのを待つか</li>
+</ul>
+<p>
+どちらかです。多くの人はお金を払って駆除するでしょう。それはそれで一つの正しい方策だと思いますが、今回の経験からすれば、トラップを仕掛け直すのも悪くない選択肢かもしれません。
+</p>
+</div>
+
+<div id="outline-container-org5d478df" class="outline-3">
+<h3 id="org5d478df"><span class="section-number-3">4.1</span> 晩秋のトラップの有効性？</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+今回、経験したことは
+</p>
+<ul class="org-ul">
+<li>1週間から10日ほどで、巣の蜂の大半を捕獲することができました</li>
+<li>2週間ほどで、巣から出入りするハチは観察されなくなりました</li>
+<li>日中気温が十数度程度に上がっても、周辺を飛び回るハチはいなくなりました</li>
+</ul>
+<p>
+その結果、人が日常生活をする上での差しさわりは全くなくなりました。
+</p>
+
+<p>
+夏から秋以降に、生活圏の近くに蜂の巣を見つけたときには、
+巣の近くに、容量の大きな誘引液を持つトラップを数個以上仕掛けることで、
+短期間で大量のスズメバチを捕獲・駆除することができることがわかりました。
+</p>
+
+<p>
+寒波が来てハチが自然消滅した可能性も残されていますが、
+初夏前のトラップ設置を第1の好機とすれば、晩秋の設置もそれなりの有効性を持つ第2の好機と言えると思います。
+（完）
+<br />
+</p>
+
+<p>
+<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-資料1" class="outline-2">
+<h2 id="資料1"><span class="section-number-2">5</span> （参考資料１）トラップと誘引液レシピ</h2>
+<div class="outline-text-2" id="text-資料1">
+</div>
+
+<div id="outline-container-org9396d44" class="outline-3">
+<h3 id="org9396d44"><span class="section-number-3">5.1</span> トラップの種類と個数</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+使用したトラップは3個でした。
+</p>
+
+<p>
+１つはペットボトルで手作りの<a href="https://bred-in-bingo.netlify.app/posts/typep-%E3%83%88%E3%83%A9%E3%83%83%E3%83%97/">OneWayスズメバチトラップ</a>、
+残りの2つは市販のスズメバチトラップで、<a href="https://www.amazon.co.jp/%E3%82%B7%E3%83%9E%E3%83%80-ProBuster-%E6%A5%AD%E5%8B%99%E7%94%A8-%E3%82%B9%E3%82%BA%E3%83%A1%E3%83%90%E3%83%81%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC-%E8%AA%98%E5%BC%95%E6%8D%95%E7%8D%B2%E5%99%A8/dp/B01DSV73WU/ref=sr_1_1?adgrpid=103548399505&amp;gclid=Cj0KCQiAqbyNBhC2ARIsALDwAsDFMUIyCuF8w5M2acIXvdVQIucwxhF554b_9F7tBUa2Q5XVVXyrTxoaAl7wEALw_wcB&amp;hvadid=447944332961&amp;hvdev=c&amp;hvlocphy=1009343&amp;hvnetw=g&amp;hvqmt=b&amp;hvrand=13807914514417416607&amp;hvtargid=kwd-356973876474&amp;hydadcr=13741_11175735&amp;jp-ad-ap=0&amp;keywords=%E3%82%B9%E3%82%BA%E3%83%A1%E3%83%90%E3%83%81%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC&amp;qid=1638876628&amp;sr=8-1">シマダProBustoer業務用スズメバチバスター誘引捕獲器</a>。
+3個とも、誘引液は表<a href="#org3a83873">1</a> のレシピを使用しました。
+</p>
+<table id="org3a83873" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">&#34920;1:</span> 晩秋のレシピ</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">材料</th>
+<th scope="col" class="org-left">量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ぶどうジュース</td>
+<td class="org-left">900cc</td>
+</tr>
+
+<tr>
+<td class="org-left">日本酒</td>
+<td class="org-left">300cc</td>
+</tr>
+
+<tr>
+<td class="org-left">ホワイトリカー</td>
+<td class="org-left">100cc</td>
+</tr>
+
+<tr>
+<td class="org-left">酢</td>
+<td class="org-left">200cc</td>
+</tr>
+
+<tr>
+<td class="org-left">砂糖</td>
+<td class="org-left">200g</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">合計</td>
+<td class="org-left">≒1,700cc</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<br />
+</p>
+
+<p>
+１つはペットボトルで手作りの[[
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e965ce" class="outline-2">
+<h2 id="org6e965ce"><span class="section-number-2">6</span> （参考資料２）　捕獲状況</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org2b663a2" class="outline-3">
+<h3 id="org2b663a2"><span class="section-number-3">6.1</span> day 1　 (11月06日)</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+正午ころ、設置後わずか半日なのに驚くほどの多数のハチが入っていました。図<a href="#org7eec5c5">4</a> は巣から一番遠い場所（15メートルほど）に設置した自作の
+<a href="https://bred-in-bingo.netlify.app/posts/typep-%E3%83%88%E3%83%A9%E3%83%83%E3%83%97/">OneWayスズメバチトラップ</a>。入口に細工がしてあって、一旦入ったら出にくい仕掛けになっています。
+</p>
+
+<div id="org7eec5c5" class="figure">
+<p><img src="../static/h-trap20211105.jpg" alt="h-trap20211105.jpg" width="70%" />  
+</p>
+<p><span class="figure-number">&#22259;4:  </span>自作のOneWayトラップ（三番機）</p>
+</div>
+
+<p>
+この三番機よりも多くのハチが捕獲されていたのは、巣のある桑の木に一番近い白樺にかけたトラップ。1トラップあたり30匹から40匹、つまり半日で合計して百数十匹が捕獲されたことになります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf173470" class="outline-3">
+<h3 id="orgf173470"><span class="section-number-3">6.2</span> Day-2（11月07日）</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+設置後2日目。図<a href="#orge5d505d">5</a>は巣に近い白樺の枝にかけた一番機と二番機の写真。
+ハチの死骸が誘引液の半分ほどになっています。
+</p>
+
+<div id="orge5d505d" class="figure">
+<p><img src="../static/h-trap20211107.jpg" alt="h-trap20211107.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;5:  </span>Day-2　</p>
+</div>
+
+<p>
+図<a href="#org54098fc">6</a> は自作OneWayトラップ（三番機）の2日目の状態。
+</p>
+
+<div id="org54098fc" class="figure">
+<p><img src="../static/oneway-trap20211107.jpg" alt="oneway-trap20211107.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;6:  </span>Day-2のOneWayトラップ</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8d56059" class="outline-3">
+<h3 id="org8d56059"><span class="section-number-3">6.3</span> Day-12（11月18日）</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+3つのトラップともほぼ容器はハチの死骸で満杯状態になりました。誘引液の底までハチが詰まっている状態。
+</p>
+
+<div id="org13297ee" class="figure">
+<p><img src="../static/一番機20211117.jpg" alt="一番機20211117.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;7:  </span>一番機</p>
+</div>
+
+
+<div id="org7800f66" class="figure">
+<p><img src="../static/二番機20211117.jpg" alt="二番機20211117.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;8:  </span>二番機</p>
+</div>
+
+
+<div id="org9afc99e" class="figure">
+<p><img src="../static/oneway-trap20211117.jpg" alt="oneway-trap20211117.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;9:  </span>三番機（Oneway トラップ）</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94184eb" class="outline-3">
+<h3 id="org94184eb"><span class="section-number-3">6.4</span> Day-14 （11月20日）</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+誘引液にハチが入りすぎて、液に浸ることが無くなったので、あらたに誘引液を追加調合し、図<a href="#org77c01af">10</a> のようなスポイトを用いて、トラップを木に掛けたままで誘引液を補充・追加しました。
+</p>
+
+<div id="org77c01af" class="figure">
+<p><img src="../static/水槽用スポイト.jpg" alt="水槽用スポイト.jpg" width="40%" />
+</p>
+<p><span class="figure-number">&#22259;10:  </span>誘引液を補充・追加するために使用した水槽用スポイト</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+トラップからバケツに蜂を移すときには、刺されないように細心の注意が必要です。(1) トラップを軽く揺すってみて、中に動くハチがいるようだったら、トラップ内にハチ用殺虫剤を噴霧します。(2) バケツに誘引液ごと移したら直ちにフタを閉めます。(3) フタをしたバケツは2, 3日間、子どもなどが手を触れない場所に保管します。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2021-12-08 水 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2021-12-08 水 10:53</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
