@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-12-21 18:41:19 yamagami>
+#           Time-stamp: <2021-12-23 16:33:53 yamagami>
 #+title: rtcwake+cronでノートPCを定時にオンオフする
 #+date: [ 2021-12-21 ]
 #+language: ja
@@ -199,6 +199,20 @@ $ sudo rtcwake -m disable
 =rtcwake= のマニュアルには =-m off= も「たいていの場合には動く」とあります。しかし安定的に自動復帰するかどうかは、PCごとにテストしてみることが必要です。
 
 =-m mem= にすれば、おおかたのPCで問題なく自動復帰すると思います。
+
+** =-m mem= でも・・・<font size="2" color="green">(2021/12/23追記)</font>
+=-m mem= でスリープ状態の時に一度でもフタを開くとシステムが復帰します[fn:インジケータ]。そのときの =rtcwake= の状態を見ると：
+#+begin_example
+% sudo rtcwake -m show
+アラーム: off
+#+end_example
+つまり、フタを空ける前にセットされていた自動復帰の設定は =disable= になります。
+
+自動復帰の設定をしたPCを *いじった* ときには、必ず =rtcwake -m show= して状態を確認した方が良いでしょう。
+
+[fn:インジケータ] この挙動はPCによって違う可能性があります。X230の場合には、スリープ状態のときにはフタにあるステータス インジケータの三日月マーク（下図の[1]）が緑に点灯します。この時にフタを開けるとシステムが復帰するのがデフォルトです。
+#+attr_html: :width 25%
+[[file:x230-status-indicator.jpg]]
 
 ** =rtcwake= メッセージの分かりにくさ
 =-m show= した例をあげます：
