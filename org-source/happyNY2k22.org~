@@ -1,0 +1,20 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2022-01-02 13:45:17 yamagami>
+#+title: ２０２２年　年頭のごあいさつ
+#+date: [2022-01-01]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: 年賀　年頭　
+#+hugo_categories: soc
+
+#+options: toc:nil
+#+draft: false
+
+* 2022年（令和4年）年頭のごあいさつ
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

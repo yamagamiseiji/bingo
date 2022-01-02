@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-10-30 08:59:52 yamagami>
+#           Time-stamp: <2021-12-30 19:39:14 yamagami>
 #+title: 外科用ハサミでニンニクの根切り
-#+date: [2021-12-30 ]
+#+date: [2022-01-30 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -9,7 +9,7 @@
 #+hugo_tags: farming ニンニク 根切り
 #+hugo_categories: comp
 #+options: toc:nil
-#+draft: false
+#+draft: true
 
 * 
 ニンニクを収穫した後、わりに面倒なのが *根切り* の作業です。
