@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-01-02 15:04:51 yamagami>
+#           Time-stamp: <2022-01-07 19:08:51 yamagami>
 #+title: ２０２２年 年初のごあいさつ
 #+date: [2022-01-01]
 #+language: ja
@@ -31,6 +31,9 @@
 
 \\
 みなさまにおかれましては どうぞ健康で平和な日々をお過ごしくださいますよう お祈り申し上げます。
+#+caption: 2022年元旦。妻の手作りの「和風・フレンチ・イタリアンおせち」。個々のうまさだけでなくバランスが最高でした。これに舌鼓を打っていて 危うくオンライン新年会に遅刻するところでした :smile:
+#+attr_html: :width 70%
+[[file:おせち2022.jpg]]
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)

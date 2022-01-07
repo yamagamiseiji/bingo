@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-01-04 火 13:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>住所・郵便番号の検索スクリプト（私家版）</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">住所・郵便番号の検索スクリプト（私家版）</h1>
+
+<div id="outline-container-org5c77e51" class="outline-2">
+<h2 id="org5c77e51"><span class="section-number-2">1</span> つくったわけ</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+年末に年賀状の宛名データが壊れました<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+それを復旧させる作業をやっていて、
+郵便番号と住所のどちらからでもお互いに検索できる道具が欲しくなりました。
+</p>
+
+<p>
+そこで大急ぎで作ったのが <b><code>postal-coder.sh</code></b> 。
+とても単純で原始的ですが、
+とりあえずこれで過去3年間の年賀状をめくりながら、
+宛名ファイルを作り直し、宛名印刷を完了することができました。
+</p>
+
+<p>
+宛名印刷が終わった後、
+日本郵便の郵便番号データベースは月に1回のペースで更新されることを知りました。
+そこで毎月定期的に郵便番号データをダウンロードし
+ <code>postal-coder.sh</code> に合った形式にデータを整形するスクリプト <b><code>fabr-postalcode-DB</code></b> を作りました。
+</p>
+
+<p>
+その2本のスクリプトの概要を紹介します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga20233c" class="outline-2">
+<h2 id="orga20233c"><span class="section-number-2">2</span> スクリプト</h2>
+<div class="outline-text-2" id="text-2">
+<dl class="org-dl">
+<dt><code>postal-coder.sh</code></dt><dd>住所から郵便番号、郵便番号から住所、事業所名から郵便番号と住所をゲットする。コードは <a href="#postal-coder-code">こちら</a>。</dd>
+
+<dt><code>fabr-postalcode-DB.sh</code></dt><dd>日本郵便のデータベースをダウロードし <code>postal-coder.sh</code> 用にデータを整形する。コードは <a href="#fabr-postalcode-code">こちら</a>。</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org93594bd" class="outline-2">
+<h2 id="org93594bd"><span class="section-number-2">3</span> スクリプト postal-coder.sh</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org7fe9335" class="outline-3">
+<h3 id="org7fe9335"><span class="section-number-3">3.1</span> 使用例</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-orgda0b11d" class="outline-4">
+<h4 id="orgda0b11d"><span class="section-number-4">3.1.1</span> 住所 <b>→</b> 郵便番号</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<pre class="example" id="orgfea50db">
+$ postal-coder.sh 緑区鴨居
+2260003  神奈川県横浜市緑区鴨居
+2260004  神奈川県横浜市緑区鴨居町
+</pre>
+<p>
+検索語の住所にヒットする住所が複数あれば全部表示します。まちがって「東京都」と入力すると破滅的な数の行が表示されます :smile:
+データベース中にヒットする住所が無ければ 
+<code>** Not found. Do it agin.</code> を表示して停止します。
+</p>
+</div>
+</div>
+<div id="outline-container-orgda7ff21" class="outline-4">
+<h4 id="orgda7ff21"><span class="section-number-4">3.1.2</span> 郵便番号 <b>→</b> 住所</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<pre class="example" id="org8e3e1b4">
+$ postal-coder.sh 7290111
+7290111 広島県福山市今津町
+</pre>
+<p>
+データベースに存在しない郵便番号の場合には <code>** Not found. Do it agin.</code> を表示して停止します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org52b1d22" class="outline-4">
+<h4 id="org52b1d22"><span class="section-number-4">3.1.3</span> 事業所名 <b>→</b> 郵便番号・住所</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<pre class="example" id="org8a5e6bd">
+$ postal-coder.sh 培風館
+1028260  株式会社　培風館 東京都千代田区九段南４丁目３−１２
+</pre>
+<p>
+支店・支社が複数あれば、それらも全部表示します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcbde72e" class="outline-4">
+<h4 id="orgcbde72e"><span class="section-number-4">3.1.4</span> 郵便番号 <b>→</b> 事業者名</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<pre class="example" id="orga20d9a0">
+2148580  学校法人　専修大学 神奈川県川崎市多摩区東三田２丁目１−１
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaf4262f" class="outline-2">
+<h2 id="orgaf4262f"><span class="section-number-2">4</span> スクリプト fabr-postalcode-DB.sh</h2>
+</div>
+
+<div id="outline-container-orga9b162f" class="outline-2">
+<h2 id="orga9b162f"><span class="section-number-2">5</span> 参考資料（コード）</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-postal-coder-code" class="outline-3">
+<h3 id="postal-coder-code"><span class="section-number-3">5.1</span> postal-coder.sh</h3>
+<div class="outline-text-3" id="text-postal-coder-code">
+<pre class="example">
+#!/bin/bash
+#  Postal-coder.sh
+#      郵便番号 =&gt; 住所
+#      住所     =&gt; 郵便番号・住所
+#      事業所名 =&gt;  郵便番号・住所
+
+if [ $# = 0 ]; then
+    read -rp "住所/郵便番号/事業者名を入力してください： " keyin
+else
+    keyin=$1    
+fi
+#  keyinに半角ハイフンが含まれていたら削除
+keyin=${keyin/-/}
+
+#
+#  入力判定（郵便番号 or 住所/事業所名)
+# 
+if [[ "${keyin}" =~ ^[0-9]+$ ]]; then   # keyinが数字のみかどうか
+    #  keyinの桁数をチェック ７桁限定
+    if [ ${#keyin} != 7 ]; then
+	echo "** 郵便番号の桁数は7です."
+	exit 0
+    fi
+    ##  郵便番号から　住所/事業所名を得る
+    #
+    all_japan_file=$HOME/郵便番号/ALL-JAPAN.csv
+    #
+    zipcode="${keyin}"
+    adrs=$(grep ${zipcode} ${all_japan_file} )
+    adrs_only=$(echo ${adrs} |cut -c 8-)
+    #
+    if [ -n "${adrs}" ]; then
+	echo -e "\e[31m${zipcode}\e[m ${adrs_only}"
+	exit 0
+    else
+	echo '** 郵便番号 not found. Do it agin.'
+	exit 0
+    fi
+fi
+#
+##  住所/事業所名から　郵便番号
+#
+ippan_file=$HOME/郵便番号/essential-ippan.csv
+jigyosho_file=$HOME/郵便番号/essential-jigyosho.csv
+
+# 一般住所データから検索
+grep "${keyin}" "${ippan_file}" &gt; ./tmp-ippan-koho.txt
+if [ -s ./tmp-ippan-koho.txt ]; then    
+    #
+    while read line
+    do
+	zipcode=$(echo "${line}" | cut -b 1-7)
+	adrs_koho=$(echo "${line}" | cut -b 8-)
+	echo -e "\e[31m${zipcode}\e[m  ${adrs_koho}"
+    done &lt; ./tmp-ippan-koho.txt
+    rm ./tmp-ippan-koho.txt
+    exit 0
+
+else
+    grep "${keyin}" "${jigyosho_file}" &gt; ./tmp-jigyosho-koho.txt
+    #     ####### 事業所にデータがある場合
+    if [ -s ./tmp-jigyosho-koho.txt ]; then
+    #
+    while read line
+    do
+	zipcode=$(echo "${line}" | cut -b 1-7)
+	adrs_koho=$(echo "${line}" | cut -b 8-)
+	echo -e "\e[31m${zipcode}\e[m ${adrs_koho}"
+    done &lt; ./tmp-jigyosho-koho.txt
+    rm ./tmp-*.txt
+    exit 0
+    fi
+# 作業ファイル削除
+    rm ./tmp-*.txt
+fi
+#
+# 入力　みつからず
+#
+echo '** 入力データ not found. Do it again.'
+exit 0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-fabr-postalcode-code" class="outline-3">
+<h3 id="fabr-postalcode-code"><span class="section-number-3">5.2</span> fabr-postalcode-DB</h3>
+<div class="outline-text-3" id="text-fabr-postalcode-code">
+<pre class="example">
+#!/bin/bash
+set -eu    # Time-stamp: &lt;2022-01-01 14:09:26 yamagami&gt;
+#
+#   wget postal-db file  from 郵政HP  KEN_ALL.CSV, JIGYOSHO.CSV
+#          ATTN: 郵政のローマ字表記　「しょ」を syo 　当方は当然 sho 
+#          ATTN: 郵政のデータ更新日は毎月末
+#
+wrk_dir=$HOME/郵便番号                   # 作業ディレクトリ
+ippan_zip=${wrk_dir}/KEN_ALL.CSV         # 一般住所の郵便番号DB
+jigyosho_zip=${wrk_dir}/JIGYOSYO.CSV     # 事業所の郵便番号DB
+ken_all_log=${wrk_dir}/log-KEN_ALL.txt   # ken_all.zip  取得時ログ  
+jigyosho_log=${wrk_dir}/log-JIGYOSHO.txt # jigyosyo.zip 取得時ログ  
+
+#  一般住所 郵便番号zipのダウンロード
+#   データ更新無し（つまりログ中に 304 Not Modifiedがあれば）flagを立てる
+wget -N -P "${wrk_dir}"/   https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken_all.zip --output-file="${ken_all_log}"
+
+# ダウンロードが省略されたときフラグを立てる
+if grep -q 304 "${ken_all_log}" ; then
+    flag_ken_change=1
+else
+    flag_ken_change=0
+fi
+
+#  事業所 郵便番号のダウンロード
+#
+wget -N -P "${wrk_dir}"/  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip --output-file="${jigyosho_log}"
+
+# ダウンロードが省略されたときフラグを立てる
+if grep -q 304 "${jigyosho_log}" ; then
+    flag_jigyosho_change=1
+else
+    flag_jigyosho_change=0
+fi
+
+##　 ken_all
+if [ ${flag_ken_change} = 0 ]; then
+    unzip -u -q "${wrk_dir}"/ken_all.zip
+    nkf -w --overwrite "${wrk_dir}"/KEN_ALL.CSV
+    #
+    cp /dev/null "${wrk_dir}/essential-ippan.csv"
+    while read line
+    do
+	esntl_line=$(echo ${line} | cut -d "," -f 3,7-9 |\
+		     sed -e 's/"//g' -e 's/,//g')
+	echo ${esntl_line} &gt;&gt; "${wrk_dir}/essential-ippan.csv"
+    done &lt; "${ippan_zip}"
+fi
+
+##  jigyosho
+if [ ${flag_jigyosho_change} = 0 ]; then
+    unzip -u "${wrk_dir}"/jigyosyo.zip
+    nkf -w --overwrite "${wrk_dir}"/JIGYOSYO.CSV
+    #
+    cp /dev/null "${wrk_dir}"/essential-jigyosho.csv
+    while read line
+    do
+	esntl_line=$(echo ${line} | awk -F"," '{print $8, $3, $4 $5 $6 $7}'| sed -e 's/"//g')
+	echo "${esntl_line}" &gt;&gt; "${wrk_dir}"/essential-jigyosho.csv
+    done &lt; "${jigyosho_zip}"
+fi
+
+##  連結
+##  ken_all または jigyosho のどちらかが更新された
+#     （＝ダウンロード省略されなかった）とき 連結作業を行う
+#   更新ゼロの時には何もしない。  
+
+if [ ${flag_ken_change} = 0 ] || [ ${flag_jigyosho_change} = 0 ] ; then
+    cat  "${wrk_dir}"/essential-ippan.csv "${wrk_dir}"/essential-jigyosho.csv \
+	 &gt; "${wrk_dir}"/ALL-JAPAN.csv
+    if [  ${flag_ken_change} = 0 ]; then
+	echo '** KEN_ALL データ 更新'
+    fi
+    if [  ${flag_jigyosho_change} = 0 ] ; then
+	echo '** JIGYOSYO データ　更新'
+    fi
+else
+    echo '** 郵便番号関係データ　更新なし'
+fi
+exit 0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgda5f26c" class="outline-2">
+<h2 id="orgda5f26c"><span class="section-number-2">6</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+バックアップはとってありましたが、2019年のものしか残っていませんでした。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-01-02 日 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-01-04 火 13:51</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

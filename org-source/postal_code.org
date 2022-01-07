@@ -1,23 +1,284 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-01-02 14:16:36 yamagami>
-#+title: 郵便番号
-#+date: [2022-01-30 ]
+#           Time-stamp: <2022-01-07 19:07:49 yamagami>
+#+title: 住所・郵便番号の検索スクリプト（私家版）
+#+date: [2022-01-08 ]
 #+language: ja
-
 #+link: file file+sys:../static/
 
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+hugo_tags: xxxxx yyyyy zzzzz
+#+hugo_tags: shell script 郵便番号
 #+hugo_categories: comp
-
 #+options: toc:nil
-#+draft: true
+#+draft: false
 
-郵便番号データのハンドリング
+* つくったわけ
+年末に年賀状の宛名データが壊れました[fn:バックアップは]。
+それを復旧させる作業をやっていて、
+郵便番号と住所のどちらからでもお互いに検索できる道具が欲しくなりました[fn:市販ソフト]。
 
+そこで大急ぎで作ったのが *=postal-coder.sh=* 。
+とても単純で原始的ですが、
+とりあえずこれで過去3年間の年賀状をめくりながら、
+宛名ファイルを作り直し、宛名印刷を完了することができました[fn:csvベース]。
 
+宛名印刷が終わった後、
+日本郵便の郵便番号データベースは月に1回のペースで更新されることを知りました。
+そこで毎月定期的に郵便番号データをダウンロードし
+ =postal-coder.sh= に合った形式にデータを整形するスクリプト *=fabr-postalcode-DB=* を作りました。
 
+その2本のスクリプトの概要を紹介します。
+
+[fn:バックアップは] バックアップはとってありましたが、CSVフォーマットで2019年のものしか残っていませんでした。
+
+[fn:市販ソフト] 市販の住所録・宛名印刷ソフトでは備わっているのが当たり前のありきたりな機能です。
+
+[fn:csvベース] 残っていたCSVファイルをEmacsのCSVモードで読み込み、それに追記・修正を加えるという形で行いました。復旧したデータも当然CSVです。
+
+* スクリプト  
+- =postal-coder.sh= :: 住所から郵便番号、郵便番号から住所、事業所名から郵便番号と住所をゲットする。コードは [[#postal-coder-code][こちら]]。
+
+- =fabr-postalcode-DB.sh= :: 日本郵便のデータベースをダウロードし =postal-coder.sh= 用にデータを整形する。コードは [[#fabr-postalcode-code][こちら]]。
+
+* スクリプト postal-coder.sh
+** 使用例
+*** 住所 *→* 郵便番号  
+#+begin_example
+$ postal-coder.sh 緑区鴨居
+2260003  神奈川県横浜市緑区鴨居
+2260004  神奈川県横浜市緑区鴨居町
+#+end_example
+検索語の住所にヒットする住所が複数あれば全部表示します。まちがって「東京都」と入力すると破滅的な数の行が表示されます :smile:
+データベース中にヒットする住所が無ければ 
+~** Not found. Do it agin.~ を表示して停止します。
+*** 郵便番号 *→* 住所
+#+begin_example
+$ postal-coder.sh 7290111
+7290111 広島県福山市今津町
+#+end_example
+データベースに存在しない郵便番号の場合には ~** Not found. Do it agin.~ を表示して停止します。
+
+*** 事業所名 *→* 郵便番号・住所
+#+begin_example
+$ postal-coder.sh 培風館
+1028260  株式会社　培風館 東京都千代田区九段南４丁目３−１２
+#+end_example
+支店・支社が複数あれば、それらも全部表示します。
+
+*** 郵便番号 *→* 事業者名
+    #+begin_example
+2148580  学校法人　専修大学 神奈川県川崎市多摩区東三田２丁目１−１
+    #+end_example
+
+* スクリプト fabr-postalcode-DB.sh
+毎月05日の21：02に日本郵便のDBに更新があったかどうかをチェックします。
+2022/01/05には次のようなログが残っていますので、両方のDBとも更新が無かったことになるます。
+  #+begin_src
+$ cat log-JIGYOSHO.txt 
+--2022-01-05 21:02:01--  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/j
+igyosyo.zip
+www.post.japanpost.jp (www.post.japanpost.jp) をDNSに問いあわせています... 43.25
+3.212.144
+www.post.japanpost.jp (www.post.japanpost.jp)|43.253.212.144|:443 に接続していま
+す... 接続しました。
+HTTP による接続要求を送信しました、応答を待っています... 304 Not Modified
+ファイル `/home/yamagami/Dropbox/郵便番号/jigyosyo.zip' はサーバ側で変更されてい
+ませんでした。ダウンロードを省略します。
+
+$ cat log-KEN_ALL.txt 
+--2022-01-05 21:02:01--  https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken
+_all.zip
+www.post.japanpost.jp (www.post.japanpost.jp) をDNSに問いあわせています... 43.25
+3.212.144
+www.post.japanpost.jp (www.post.japanpost.jp)|43.253.212.144|:443 に接続していま
+す... 接続しました。
+HTTP による接続要求を送信しました、応答を待っています... 304 Not Modified
+ファイル `/home/yamagami/Dropbox/郵便番号/ken_all.zip' はサーバ側で変更されてい
+ませんでした。ダウンロードを省略します。
+  #+end_src
+もし更新があった場合、一般郵便番号データは 1.7M 事業所名データは 0.7M 程度。
+回線速度次第だが、まぁそんなに大きな負担ではない。
+  
+* 参考資料（コード）
+** postal-coder.sh
+    :PROPERTIES:
+    :custom_id: postal-coder-code
+    :END:
+    #+begin_src
+#!/bin/bash
+#  Postal-coder.sh
+#      郵便番号 => 住所
+#      住所     => 郵便番号・住所
+#      事業所名 =>  郵便番号・住所
+
+if [ $# = 0 ]; then
+    read -rp "住所/郵便番号/事業者名を入力してください： " keyin
+else
+    keyin=$1    
+fi
+#  keyinに半角ハイフンが含まれていたら削除
+keyin=${keyin/-/}
+
+#
+#  入力判定（郵便番号 or 住所/事業所名)
+# 
+if [[ "${keyin}" =~ ^[0-9]+$ ]]; then   # keyinが数字のみかどうか
+    #  keyinの桁数をチェック ７桁限定
+    if [ ${#keyin} != 7 ]; then
+	echo "** 郵便番号の桁数は7です."
+	exit 0
+    fi
+    ##  郵便番号から　住所/事業所名を得る
+    #
+    all_japan_file=$HOME/郵便番号/ALL-JAPAN.csv
+    #
+    zipcode="${keyin}"
+    adrs=$(grep ${zipcode} ${all_japan_file} )
+    adrs_only=$(echo ${adrs} |cut -c 8-)
+    #
+    if [ -n "${adrs}" ]; then
+	echo -e "\e[31m${zipcode}\e[m ${adrs_only}"
+	exit 0
+    else
+	echo '** 郵便番号 not found. Do it agin.'
+	exit 0
+    fi
+fi
+#
+##  住所/事業所名から　郵便番号
+#
+ippan_file=$HOME/郵便番号/essential-ippan.csv
+jigyosho_file=$HOME/郵便番号/essential-jigyosho.csv
+
+# 一般住所データから検索
+grep "${keyin}" "${ippan_file}" > ./tmp-ippan-koho.txt
+if [ -s ./tmp-ippan-koho.txt ]; then    
+    #
+    while read line
+    do
+	zipcode=$(echo "${line}" | cut -b 1-7)
+	adrs_koho=$(echo "${line}" | cut -b 8-)
+	echo -e "\e[31m${zipcode}\e[m  ${adrs_koho}"
+    done < ./tmp-ippan-koho.txt
+    rm ./tmp-ippan-koho.txt
+    exit 0
+
+else
+    grep "${keyin}" "${jigyosho_file}" > ./tmp-jigyosho-koho.txt
+    #     ####### 事業所にデータがある場合
+    if [ -s ./tmp-jigyosho-koho.txt ]; then
+    #
+    while read line
+    do
+	zipcode=$(echo "${line}" | cut -b 1-7)
+	adrs_koho=$(echo "${line}" | cut -b 8-)
+	echo -e "\e[31m${zipcode}\e[m ${adrs_koho}"
+    done < ./tmp-jigyosho-koho.txt
+    rm ./tmp-*.txt
+    exit 0
+    fi
+# 作業ファイル削除
+    rm ./tmp-*.txt
+fi
+#
+# 入力　みつからず
+#
+echo '** 入力データ not found. Do it again.'
+exit 0
+    #+end_src
+  
+** fabr-postalcode-DB
+    :PROPERTIES:
+    :custom_id: fabr-postalcode-code
+    :END:
+    #+begin_src
+#!/bin/bash
+set -eu    # Time-stamp: <2022-01-01 14:09:26 yamagami>
+#
+#   wget postal-db file  from 郵政HP  KEN_ALL.CSV, JIGYOSHO.CSV
+#          ATTN: 郵政のローマ字表記　「しょ」を syo 　当方は当然 sho 
+#          ATTN: 郵政のデータ更新日は毎月末
+#
+wrk_dir=$HOME/郵便番号                   # 作業ディレクトリ
+ippan_zip=${wrk_dir}/KEN_ALL.CSV         # 一般住所の郵便番号DB
+jigyosho_zip=${wrk_dir}/JIGYOSYO.CSV     # 事業所の郵便番号DB
+ken_all_log=${wrk_dir}/log-KEN_ALL.txt   # ken_all.zip  取得時ログ  
+jigyosho_log=${wrk_dir}/log-JIGYOSHO.txt # jigyosyo.zip 取得時ログ  
+
+#  一般住所 郵便番号zipのダウンロード
+#   データ更新無し（つまりログ中に 304 Not Modifiedがあれば）flagを立てる
+wget -N -P "${wrk_dir}"/   https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken_all.zip --output-file="${ken_all_log}"
+
+# ダウンロードが省略されたときフラグを立てる
+if grep -q 304 "${ken_all_log}" ; then
+    flag_ken_change=1
+else
+    flag_ken_change=0
+fi
+
+#  事業所 郵便番号のダウンロード
+#
+wget -N -P "${wrk_dir}"/  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip --output-file="${jigyosho_log}"
+
+# ダウンロードが省略されたときフラグを立てる
+if grep -q 304 "${jigyosho_log}" ; then
+    flag_jigyosho_change=1
+else
+    flag_jigyosho_change=0
+fi
+
+##　 ken_all
+if [ ${flag_ken_change} = 0 ]; then
+    unzip -u -q "${wrk_dir}"/ken_all.zip
+    nkf -w --overwrite "${wrk_dir}"/KEN_ALL.CSV
+    #
+    cp /dev/null "${wrk_dir}/essential-ippan.csv"
+    while read line
+    do
+	esntl_line=$(echo ${line} | cut -d "," -f 3,7-9 |\
+		     sed -e 's/"//g' -e 's/,//g')
+	echo ${esntl_line} >> "${wrk_dir}/essential-ippan.csv"
+    done < "${ippan_zip}"
+fi
+
+##  jigyosho
+if [ ${flag_jigyosho_change} = 0 ]; then
+    unzip -u "${wrk_dir}"/jigyosyo.zip
+    nkf -w --overwrite "${wrk_dir}"/JIGYOSYO.CSV
+    #
+    cp /dev/null "${wrk_dir}"/essential-jigyosho.csv
+    while read line
+    do
+	esntl_line=$(echo ${line} | awk -F"," '{print $8, $3, $4 $5 $6 $7}'| sed -e 's/"//g')
+	echo "${esntl_line}" >> "${wrk_dir}"/essential-jigyosho.csv
+    done < "${jigyosho_zip}"
+fi
+
+##  連結
+##  ken_all または jigyosho のどちらかが更新された
+#     （＝ダウンロード省略されなかった）とき 連結作業を行う
+#   更新ゼロの時には何もしない。  
+
+if [ ${flag_ken_change} = 0 ] || [ ${flag_jigyosho_change} = 0 ] ; then
+    cat  "${wrk_dir}"/essential-ippan.csv "${wrk_dir}"/essential-jigyosho.csv \
+	 > "${wrk_dir}"/ALL-JAPAN.csv
+    if [  ${flag_ken_change} = 0 ]; then
+	echo '** KEN_ALL データ 更新'
+    fi
+    if [  ${flag_jigyosho_change} = 0 ] ; then
+	echo '** JIGYOSYO データ　更新'
+    fi
+else
+    echo '** 郵便番号関係データ　更新なし'
+fi
+exit 0
+    #+end_src
+
+* Footnotes:
+
+  
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
 # End:
+
+
