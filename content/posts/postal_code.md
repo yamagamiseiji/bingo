@@ -1,7 +1,7 @@
 +++
-title = "住所・郵便番号の検索スクリプト（私家版）"
+title = "郵便番号・住所の簡易検索スクリプト"
 author = ["YAMAGAMI"]
-date = 2022-01-08T00:00:00+09:00
+date = 2022-01-15T00:00:00+09:00
 tags = ["shell", "script", "郵便番号"]
 categories = ["comp"]
 draft = false
@@ -9,58 +9,59 @@ draft = false
 
 ## つくったわけ {#つくったわけ}
 
-年末に年賀状の宛名データが壊れました[^fn:1]。それを復旧させる作業をやっていて、郵便番号と住所のどちらからでもお互いに検索できる道具が欲しくなりました[^fn:2]。
+2021年の年末に **年賀状** の宛名データが壊れました[^fn:1]。その復旧作業をやっているときに、郵便番号と住所の **どちらから** でもお互いにコマンドラインで検索できる道具が欲しくなりました[^fn:2]。
 
-そこで大急ぎで作ったのが **`postal-coder.sh`** 。とても単純で原始的ですが、とりあえずこれで過去3年間の年賀状をめくりながら、宛名ファイルを作り直し、宛名印刷を完了することができました[^fn:3]。
+そこで大急ぎで作ったのが **`postal-coder.sh`** 。とても単純 素朴ですが、とりあえずこれで過去3年間の年賀状をめくりながら、宛名ファイル（CSV）を作り直し[^fn:3]、なんとか宛名印刷を完了することができました[^fn:4]。
 
-宛名印刷が終わった後、日本郵便の郵便番号データベースは月に1回のペースで更新されることを知りました。そこで毎月定期的に郵便番号データをダウンロードし
- `postal-coder.sh` に合った形式にデータを整形するスクリプト **`fabr-postalcode-DB`** を作りました。
+宛名印刷が終わった後、日本郵便の郵便番号データは月に1回のペースで更新されることを知りました。そこで毎月1回、定期的に郵便番号データをダウンロードし、
+ **`postal-coder.sh`** に合った形式にデータを整形するスクリプト **`fabr-postalcode-DB.sh`** を作りました。
 
-その2本のスクリプトの概要を紹介します。
+その2本のスクリプトについて自分用の備忘も兼ねて概要を紹介します。
 
 
 ## スクリプト {#スクリプト}
 
 `postal-coder.sh`
-: 住所から郵便番号、郵便番号から住所、事業所名から郵便番号と住所をゲットする。コードは [こちら](#postal-coder-code)。
+: 住所から郵便番号、郵便番号から住所あるいは事業所名、事業所名から郵便番号と住所を検索して表示します（コードは [こちら](#postal-coder-code)）。
 
 
 `fabr-postalcode-DB.sh`
-: 日本郵便のデータベースをダウロードし `postal-coder.sh` 用にデータを整形する。コードは [こちら](#fabr-postalcode-code)。
+: 日本郵便のデータをダウロードし `postal-coder.sh` 用にデータを整形します（おおざっぱなフローは[こちら](#org804939c)）。
 
 
-## スクリプト postal-coder.sh {#スクリプト-postal-coder-dot-sh}
+## postal-coder.shスクリプト {#postal-coder-dot-shスクリプト}
 
 
 ### 使用例 {#使用例}
 
+ターミナル上では郵便番号出力は<span style="color:red">赤字</span>で表示されます。
+
 
 #### 住所 **→** 郵便番号 {#住所-郵便番号}
 
-```text
+```shell
 $ postal-coder.sh 緑区鴨居
 2260003  神奈川県横浜市緑区鴨居
 2260004  神奈川県横浜市緑区鴨居町
 ```
 
-検索語の住所にヒットする住所が複数あれば全部表示します。まちがって「東京都」と入力すると破滅的な数の行が表示されます :smile:
-データベース中にヒットする住所が無ければ
+検索語にヒットする住所が複数あれば全部表示します。うっかり「東京都」と入力すると破滅的な数の行が表示されます(やってみたら **4046行** :astonished: ）。データ中にヒットする住所が無ければ
 `** Not found. Do it agin.` を表示して停止します。
 
 
 #### 郵便番号 **→** 住所 {#郵便番号-住所}
 
-```text
+```shell
 $ postal-coder.sh 7290111
 7290111 広島県福山市今津町
 ```
 
-データベースに存在しない郵便番号の場合には `** Not found. Do it agin.` を表示して停止します。
+データに存在しない郵便番号の場合には `** Not found. Do it agin.` を表示して停止します。
 
 
 #### 事業所名 **→** 郵便番号・住所 {#事業所名-郵便番号-住所}
 
-```text
+```shell
 $ postal-coder.sh 培風館
 1028260  株式会社　培風館 東京都千代田区九段南４丁目３−１２
 ```
@@ -70,17 +71,46 @@ $ postal-coder.sh 培風館
 
 #### 郵便番号 **→** 事業者名 {#郵便番号-事業者名}
 
-```text
+```shell
+$ postal-coder.sh 2148580
 2148580  学校法人　専修大学 神奈川県川崎市多摩区東三田２丁目１−１
 ```
 
 
-## スクリプト fabr-postalcode-DB.sh {#スクリプト-fabr-postalcode-db-dot-sh}
+#### 応用問題（おまけ） {#応用問題-おまけ}
 
-毎月05日の21：02に日本郵便のDBに更新があったかどうかをチェックします。
-2022/01/05には次のようなログが残っていますので、両方のDBとも更新が無かったことになるます。
+（Ex.1）虎ノ門ヒルズ３５階の郵便番号を知りたい：
 
-```nil
+```shell
+$ postal-coder.sh 虎ノ門ヒルズ | grep ３５
+1056435  東京都港区虎ノ門虎ノ門ヒルズビジネスタワー（３５階）
+1056335  東京都港区虎ノ門虎ノ門ヒルズ森タワー（３５階）
+```
+
+虎ノ門ヒルズには「ビジネスタワー」と「森タワー」があったんですね :sweat_smile:
+
+日本郵便のDBでは数字はすべて **全角数字** が使われています。 `grep` する際には、上のようにハナから全角文字で検索するか、次のように `nkf -Z` のひと手間かけて半角化しましょう。
+
+```shell
+$ postal-coder.sh 虎ノ門ヒルズ | nkf -Z | grep 35
+1056435  東京都港区虎ノ門虎ノ門ヒルズビジネスタワー(35階)
+1056335  東京都港区虎ノ門虎ノ門ヒルズ森タワー(35階)
+```
+
+<br />
+
+
+## fabr-postalcode-DB.shスクリプト {#fabr-postalcode-db-dot-shスクリプト}
+
+毎月1回、cronで事業所名データ（ `jigyosyo.zip` ）と全国郵便番号データ( `ken_all.zip` )に更新があったかどうかをチェックします。
+
+もし更新があったら、
+zipファイルをダウンロードして解凍し、 **`postal-coder.sh`** スクリプトで使えるように整形して保存します。全国郵便番号データ( `ken_all.zip` )は **1.7MB** 、事業所名データ( `jigyosyo.zip` )は **0.7MB** 程度なので、回線的にもそれほど大きな負担はないと思います。
+
+2022年1月5日には事業所名データ（ `jigyosyo.zip` ）にも 全国郵便番号データ( `ken_all.zip` )にも更新がありませんでした。次のようなログが残っていました。
+
+```shell
+（log-JIGYOSHO.txt）
 $ cat log-JIGYOSHO.txt
 --2022-01-05 21:02:01--  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/j
 igyosyo.zip
@@ -89,30 +119,23 @@ www.post.japanpost.jp (www.post.japanpost.jp) をDNSに問いあわせていま�
 www.post.japanpost.jp (www.post.japanpost.jp)|43.253.212.144|:443 に接続していま
 す... 接続しました。
 HTTP による接続要求を送信しました、応答を待っています... 304 Not Modified
-ファイル `/home/yamagami/Dropbox/郵便番号/jigyosyo.zip' はサーバ側で変更されてい
-ませんでした。ダウンロードを省略します。
-
-$ cat log-KEN_ALL.txt
---2022-01-05 21:02:01--  https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken
-_all.zip
-www.post.japanpost.jp (www.post.japanpost.jp) をDNSに問いあわせています... 43.25
-3.212.144
-www.post.japanpost.jp (www.post.japanpost.jp)|43.253.212.144|:443 に接続していま
-す... 接続しました。
-HTTP による接続要求を送信しました、応答を待っています... 304 Not Modified
-ファイル `/home/yamagami/Dropbox/郵便番号/ken_all.zip' はサーバ側で変更されてい
-ませんでした。ダウンロードを省略します。
+ファイル `jigyosyo.zip' はサーバ側で変更されていませんでした。
+ダウンロードを省略します。
 ```
 
-もし更新があった場合、一般郵便番号データは 1.7M 事業所名データは 0.7M 程度。回線速度次第だが、まぁそんなに大きな負担ではない。
+アップデートがなければほとんど何もせずスクリプトは終わります（図[1](#org804939c)）。
+
+（完）
 
 
-## 参考資料（コード） {#参考資料-コード}
+## 参考資料（ `postal-coder.sh` コード） {#参考資料-postal-coder-dot-sh-コード}
+
+緊急避難的なコードですがとりあえず **自家用** には動いています。小ぎれいにしたいところや変なところがたくさんありますが、それは後ほど改修ということであしからず・・・。
 
 
 ### postal-coder.sh {#postal-coder-code}
 
-```nil
+```bash
 #!/bin/bash
 #  Postal-coder.sh
 #      郵便番号 => 住所
@@ -196,94 +219,18 @@ exit 0
 ```
 
 
-### fabr-postalcode-DB {#fabr-postalcode-code}
+### fabr-postalcode-DB.shのフローチャート {#fabr-postalcode-db-dot-shのフローチャート}
 
-```nil
-#!/bin/bash
-set -eu    # Time-stamp: <2022-01-01 14:09:26 yamagami>
-#
-#   wget postal-db file  from 郵政HP  KEN_ALL.CSV, JIGYOSHO.CSV
-#          ATTN: 郵政のローマ字表記　「しょ」を syo 　当方は当然 sho
-#          ATTN: 郵政のデータ更新日は毎月末
-#
-wrk_dir=$HOME/郵便番号                   # 作業ディレクトリ
-ippan_zip=${wrk_dir}/KEN_ALL.CSV         # 一般住所の郵便番号DB
-jigyosho_zip=${wrk_dir}/JIGYOSYO.CSV     # 事業所の郵便番号DB
-ken_all_log=${wrk_dir}/log-KEN_ALL.txt   # ken_all.zip  取得時ログ
-jigyosho_log=${wrk_dir}/log-JIGYOSHO.txt # jigyosyo.zip 取得時ログ
+<a id="org804939c"></a>
 
-#  一般住所 郵便番号zipのダウンロード
-#   データ更新無し（つまりログ中に 304 Not Modifiedがあれば）flagを立てる
-wget -N -P "${wrk_dir}"/   https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken_all.zip --output-file="${ken_all_log}"
+{{< figure src="/fabr-postalcode-DB.sh.jpg" caption="&#22259;1:  `fabr-postalcode-DB.sh` のフローチャート。 `fabr` はfabricateの短縮です。" width="70%" >}}
 
-# ダウンロードが省略されたときフラグを立てる
-if grep -q 304 "${ken_all_log}" ; then
-    flag_ken_change=1
-else
-    flag_ken_change=0
-fi
-
-#  事業所 郵便番号のダウンロード
-#
-wget -N -P "${wrk_dir}"/  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip --output-file="${jigyosho_log}"
-
-# ダウンロードが省略されたときフラグを立てる
-if grep -q 304 "${jigyosho_log}" ; then
-    flag_jigyosho_change=1
-else
-    flag_jigyosho_change=0
-fi
-
-##　 ken_all
-if [ ${flag_ken_change} = 0 ]; then
-    unzip -u -q "${wrk_dir}"/ken_all.zip
-    nkf -w --overwrite "${wrk_dir}"/KEN_ALL.CSV
-    #
-    cp /dev/null "${wrk_dir}/essential-ippan.csv"
-    while read line
-    do
-	esntl_line=$(echo ${line} | cut -d "," -f 3,7-9 |\
-		     sed -e 's/"//g' -e 's/,//g')
-	echo ${esntl_line} >> "${wrk_dir}/essential-ippan.csv"
-    done < "${ippan_zip}"
-fi
-
-##  jigyosho
-if [ ${flag_jigyosho_change} = 0 ]; then
-    unzip -u "${wrk_dir}"/jigyosyo.zip
-    nkf -w --overwrite "${wrk_dir}"/JIGYOSYO.CSV
-    #
-    cp /dev/null "${wrk_dir}"/essential-jigyosho.csv
-    while read line
-    do
-	esntl_line=$(echo ${line} | awk -F"," '{print $8, $3, $4 $5 $6 $7}'| sed -e 's/"//g')
-	echo "${esntl_line}" >> "${wrk_dir}"/essential-jigyosho.csv
-    done < "${jigyosho_zip}"
-fi
-
-##  連結
-##  ken_all または jigyosho のどちらかが更新された
-#     （＝ダウンロード省略されなかった）とき 連結作業を行う
-#   更新ゼロの時には何もしない。
-
-if [ ${flag_ken_change} = 0 ] || [ ${flag_jigyosho_change} = 0 ] ; then
-    cat  "${wrk_dir}"/essential-ippan.csv "${wrk_dir}"/essential-jigyosho.csv \
-	 > "${wrk_dir}"/ALL-JAPAN.csv
-    if [  ${flag_ken_change} = 0 ]; then
-	echo '** KEN_ALL データ 更新'
-    fi
-    if [  ${flag_jigyosho_change} = 0 ] ; then
-	echo '** JIGYOSYO データ　更新'
-    fi
-else
-    echo '** 郵便番号関係データ　更新なし'
-fi
-exit 0
-```
+<br />
 
 
 ## Footnotes: {#footnotes}
 
 [^fn:1]: バックアップはとってありましたが、CSVフォーマットで2019年のものしか残っていませんでした。
-[^fn:2]: 市販の住所録・宛名印刷ソフトでは備わっているのが当たり前のありきたりな機能です。
-[^fn:3]: 残っていたCSVファイルをEmacsのCSVモードで読み込み、それに追記・修正を加えるという形で行いました。復旧したデータも当然CSVです。
+[^fn:2]: 市販の住所録・宛名印刷ソフトでは備わっているのが当たり前のありきたりな機能です。けど重たいアプリを起動したり、ウエッブページを開いて検索したりするのは（若者言葉では）「だるい」ものですから・・・。
+[^fn:3]: 宛名データがとりあえず復旧した後に、そのデータについて郵便番号と住所が一致しているかどうかをチェックする作業を行いました。スクリプトにするほどでもなく、ワンライナーですが、注意深く入力したつもりでも多くのタイプミスがあることを改めて思い知らされました。
+[^fn:4]: 残っていたCSVファイルをEmacsのCSVモードで読み込み、それに追記・修正を加えるという形で行いました。復旧したデータも当然CSVです。なお宛名の印刷途中で自宅のインクジェット プリンタ＝Canon **iP7230** (2012年製)が **`B200`** エラーを吐いて止まるというシリアスなトラブルが発生。これも何とか迂回して、やっとこさで印刷が終わりました。今年の年賀状発送はほんとうに大変でした :sweat:

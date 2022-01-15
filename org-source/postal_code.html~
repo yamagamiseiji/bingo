@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
 <head>
-<!-- 2022-01-04 火 13:51 -->
+<!-- 2022-01-11 火 21:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>住所・郵便番号の検索スクリプト（私家版）</title>
+<title>郵便番号・住所の簡易検索スクリプト</title>
 <meta name="author" content="YAMAGAMI" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -218,29 +218,29 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">住所・郵便番号の検索スクリプト（私家版）</h1>
+<h1 class="title">郵便番号・住所の簡易検索スクリプト</h1>
 
-<div id="outline-container-org5c77e51" class="outline-2">
-<h2 id="org5c77e51"><span class="section-number-2">1</span> つくったわけ</h2>
+<div id="outline-container-org57fd1d3" class="outline-2">
+<h2 id="org57fd1d3"><span class="section-number-2">1</span> つくったわけ</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-年末に年賀状の宛名データが壊れました<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
-それを復旧させる作業をやっていて、
-郵便番号と住所のどちらからでもお互いに検索できる道具が欲しくなりました。
+2021年の年末に年賀状の宛名データが壊れました<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+その復旧作業をやっているときに、
+郵便番号と住所のどちらからでもお互いにコマンドラインで検索できる道具が欲しくなりました<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>。
 </p>
 
 <p>
 そこで大急ぎで作ったのが <b><code>postal-coder.sh</code></b> 。
-とても単純で原始的ですが、
+とても単純 素朴ですが、
 とりあえずこれで過去3年間の年賀状をめくりながら、
-宛名ファイルを作り直し、宛名印刷を完了することができました。
+宛名ファイル（CSV）を作り直し<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>、なんとか宛名印刷を完了することができました<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>。
 </p>
 
 <p>
 宛名印刷が終わった後、
-日本郵便の郵便番号データベースは月に1回のペースで更新されることを知りました。
-そこで毎月定期的に郵便番号データをダウンロードし
- <code>postal-coder.sh</code> に合った形式にデータを整形するスクリプト <b><code>fabr-postalcode-DB</code></b> を作りました。
+日本郵便の郵便番号データは月に1回のペースで更新されることを知りました。
+そこで毎月1回、定期的に郵便番号データをダウンロードし
+ <b><code>postal-coder.sh</code></b> に合った形式にデータを整形するスクリプト <b><code>fabr-postalcode-DB.sh</code></b> を作りました。
 </p>
 
 <p>
@@ -249,57 +249,61 @@
 </div>
 </div>
 
-<div id="outline-container-orga20233c" class="outline-2">
-<h2 id="orga20233c"><span class="section-number-2">2</span> スクリプト</h2>
+
+<div id="outline-container-orgf66d857" class="outline-2">
+<h2 id="orgf66d857"><span class="section-number-2">2</span> スクリプト</h2>
 <div class="outline-text-2" id="text-2">
 <dl class="org-dl">
-<dt><code>postal-coder.sh</code></dt><dd>住所から郵便番号、郵便番号から住所、事業所名から郵便番号と住所をゲットする。コードは <a href="#postal-coder-code">こちら</a>。</dd>
+<dt><code>postal-coder.sh</code></dt><dd>住所から郵便番号、郵便番号から住所あるいは事業所名、事業所名から郵便番号と住所をゲットします（コードは <a href="#postal-coder-code">こちら</a>）。</dd>
 
-<dt><code>fabr-postalcode-DB.sh</code></dt><dd>日本郵便のデータベースをダウロードし <code>postal-coder.sh</code> 用にデータを整形する。コードは <a href="#fabr-postalcode-code">こちら</a>。</dd>
+<dt><code>fabr-postalcode-DB.sh</code></dt><dd>日本郵便のデータをダウロードし <code>postal-coder.sh</code> 用にデータを整形します（おおざっぱなフローは<a href="#org2f7fea2">こちら</a>）。</dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-org93594bd" class="outline-2">
-<h2 id="org93594bd"><span class="section-number-2">3</span> スクリプト postal-coder.sh</h2>
+<div id="outline-container-orgd1b9c93" class="outline-2">
+<h2 id="orgd1b9c93"><span class="section-number-2">3</span> postal-coder.shスクリプト</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org7fe9335" class="outline-3">
-<h3 id="org7fe9335"><span class="section-number-3">3.1</span> 使用例</h3>
+<div id="outline-container-orgefa5564" class="outline-3">
+<h3 id="orgefa5564"><span class="section-number-3">3.1</span> 使用例</h3>
 <div class="outline-text-3" id="text-3-1">
+<p>
+ターミナル上では郵便番号出力は&lt;span style="color:red"&gt;赤字&lt;/span&gt;で表示されます。
+</p>
 </div>
-<div id="outline-container-orgda0b11d" class="outline-4">
-<h4 id="orgda0b11d"><span class="section-number-4">3.1.1</span> 住所 <b>→</b> 郵便番号</h4>
+<div id="outline-container-orgde3df5a" class="outline-4">
+<h4 id="orgde3df5a"><span class="section-number-4">3.1.1</span> 住所 <b>→</b> 郵便番号</h4>
 <div class="outline-text-4" id="text-3-1-1">
-<pre class="example" id="orgfea50db">
+<pre class="example" id="orgc863d2c">
 $ postal-coder.sh 緑区鴨居
 2260003  神奈川県横浜市緑区鴨居
 2260004  神奈川県横浜市緑区鴨居町
 </pre>
 <p>
-検索語の住所にヒットする住所が複数あれば全部表示します。まちがって「東京都」と入力すると破滅的な数の行が表示されます :smile:
-データベース中にヒットする住所が無ければ 
+検索語の住所にヒットする住所が複数あれば全部表示します。うっかり「東京都」と入力すると破滅的な数の行が表示されます(やってみたら <b>4046行</b> ！) :sweat: 
+データ中にヒットする住所が無ければ 
 <code>** Not found. Do it agin.</code> を表示して停止します。
 </p>
 </div>
 </div>
-<div id="outline-container-orgda7ff21" class="outline-4">
-<h4 id="orgda7ff21"><span class="section-number-4">3.1.2</span> 郵便番号 <b>→</b> 住所</h4>
+<div id="outline-container-org84dec5d" class="outline-4">
+<h4 id="org84dec5d"><span class="section-number-4">3.1.2</span> 郵便番号 <b>→</b> 住所</h4>
 <div class="outline-text-4" id="text-3-1-2">
-<pre class="example" id="org8e3e1b4">
+<pre class="example" id="orgc8ae830">
 $ postal-coder.sh 7290111
 7290111 広島県福山市今津町
 </pre>
 <p>
-データベースに存在しない郵便番号の場合には <code>** Not found. Do it agin.</code> を表示して停止します。
+データに存在しない郵便番号の場合には <code>** Not found. Do it agin.</code> を表示して停止します。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org52b1d22" class="outline-4">
-<h4 id="org52b1d22"><span class="section-number-4">3.1.3</span> 事業所名 <b>→</b> 郵便番号・住所</h4>
+<div id="outline-container-org5757457" class="outline-4">
+<h4 id="org5757457"><span class="section-number-4">3.1.3</span> 事業所名 <b>→</b> 郵便番号・住所</h4>
 <div class="outline-text-4" id="text-3-1-3">
-<pre class="example" id="org8a5e6bd">
+<pre class="example" id="org626b1e2">
 $ postal-coder.sh 培風館
 1028260  株式会社　培風館 東京都千代田区九段南４丁目３−１２
 </pre>
@@ -309,24 +313,94 @@ $ postal-coder.sh 培風館
 </div>
 </div>
 
-<div id="outline-container-orgcbde72e" class="outline-4">
-<h4 id="orgcbde72e"><span class="section-number-4">3.1.4</span> 郵便番号 <b>→</b> 事業者名</h4>
+<div id="outline-container-org154577b" class="outline-4">
+<h4 id="org154577b"><span class="section-number-4">3.1.4</span> 郵便番号 <b>→</b> 事業者名</h4>
 <div class="outline-text-4" id="text-3-1-4">
-<pre class="example" id="orga20d9a0">
+<pre class="example" id="org8d443de">
+$ postal-coder.sh 2148580
 2148580  学校法人　専修大学 神奈川県川崎市多摩区東三田２丁目１−１
 </pre>
 </div>
 </div>
+
+<div id="outline-container-org384fc08" class="outline-4">
+<h4 id="org384fc08"><span class="section-number-4">3.1.5</span> 応用問題（おまけ）</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<p>
+（Ex.1）虎ノ門ヒルズ３５階の郵便番号を知りたい：
+</p>
+<pre class="example" id="org653f4c4">
+$ postal-coder.sh 虎ノ門ヒルズ | grep ３５
+1056435  東京都港区虎ノ門虎ノ門ヒルズビジネスタワー（３５階）
+1056335  東京都港区虎ノ門虎ノ門ヒルズ森タワー（３５階）
+</pre>
+<p>
+虎ノ門ヒルズには「ビジネスタワー」と「森タワー」があったんですね :sweat: 
+</p>
+
+<p>
+日本郵便のDBでは数字はすべて <b>全角数字</b> が使われています。 <code>grep</code> する際には、上のようにハナから全角文字で検索するか、次のように <code>nkf -Z</code> のひと手間かけて半角化しましょう。
+</p>
+<pre class="example" id="org2e8109c">
+$ postal-coder.sh 虎ノ門ヒルズ | nkf -Z | grep 35
+1056435  東京都港区虎ノ門虎ノ門ヒルズビジネスタワー(35階)
+1056335  東京都港区虎ノ門虎ノ門ヒルズ森タワー(35階)
+</pre>
+
+
+<p>
+<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6ec2bc7" class="outline-2">
+<h2 id="org6ec2bc7"><span class="section-number-2">4</span> fabr-postalcode-DB.shスクリプト</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+このスクリプトでは  
+毎月1回、cronで事業所名データ（ <code>jigyosyo.zip</code> ）と全国郵便番号データ( <code>ken_all.zip</code> )に更新があったかどうかをチェックします。
+</p>
+
+<p>
+もし更新があったら、
+zipファイルをダウンロードして解凍し、 <b><code>postal-coder.sh</code></b> スクリプトで使えるように整形して保存します。全国郵便番号データ( <code>ken_all.zip</code> )は <b>1.7MB</b> 、事業所名データ( <code>jigyosyo.zip</code> )は <b>0.7MB</b> 程度なので、回線的にもそれほど大きな負担はないと思います。
+</p>
+
+<p>
+2022年1月5日には事業所名データ（ <code>jigyosyo.zip</code> ）にも 全国郵便番号データ( <code>ken_all.zip</code> )にも更新が無かったことを示すメッセージがログに残っていました。
+</p>
+<pre class="example" id="org5ba22f2">
+（log-JIGYOSHO.txt）
+$ cat log-JIGYOSHO.txt 
+--2022-01-05 21:02:01--  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/j
+igyosyo.zip
+www.post.japanpost.jp (www.post.japanpost.jp) をDNSに問いあわせています... 43.25
+3.212.144
+www.post.japanpost.jp (www.post.japanpost.jp)|43.253.212.144|:443 に接続していま
+す... 接続しました。
+HTTP による接続要求を送信しました、応答を待っています... 304 Not Modified
+ファイル `/home/yamagami/Dropbox/郵便番号/jigyosyo.zip' はサーバ側で変更されてい
+ませんでした。ダウンロードを省略します。
+</pre>
+<p>
+アップデートがなければほとんど何もせずスクリプトは終わります（図<a href="#org2f7fea2">1</a>）。
+</p>
+
+
+<p>
+（完）
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgaf4262f" class="outline-2">
-<h2 id="orgaf4262f"><span class="section-number-2">4</span> スクリプト fabr-postalcode-DB.sh</h2>
-</div>
-
-<div id="outline-container-orga9b162f" class="outline-2">
-<h2 id="orga9b162f"><span class="section-number-2">5</span> 参考資料（コード）</h2>
+<div id="outline-container-orgf0577f1" class="outline-2">
+<h2 id="orgf0577f1"><span class="section-number-2">5</span> 参考資料（ <code>postal-coder.sh</code> コード）</h2>
 <div class="outline-text-2" id="text-5">
+<p>
+緊急避難的なコードですがとりあえず自家用には動いています。変なところ、小ぎれいにしたいところもたくさんありますが、それは後ほどということであしからず・・・。
+</p>
 </div>
 <div id="outline-container-postal-coder-code" class="outline-3">
 <h3 id="postal-coder-code"><span class="section-number-3">5.1</span> postal-coder.sh</h3>
@@ -416,97 +490,24 @@ exit 0
 </div>
 </div>
 
-<div id="outline-container-fabr-postalcode-code" class="outline-3">
-<h3 id="fabr-postalcode-code"><span class="section-number-3">5.2</span> fabr-postalcode-DB</h3>
-<div class="outline-text-3" id="text-fabr-postalcode-code">
-<pre class="example">
-#!/bin/bash
-set -eu    # Time-stamp: &lt;2022-01-01 14:09:26 yamagami&gt;
-#
-#   wget postal-db file  from 郵政HP  KEN_ALL.CSV, JIGYOSHO.CSV
-#          ATTN: 郵政のローマ字表記　「しょ」を syo 　当方は当然 sho 
-#          ATTN: 郵政のデータ更新日は毎月末
-#
-wrk_dir=$HOME/郵便番号                   # 作業ディレクトリ
-ippan_zip=${wrk_dir}/KEN_ALL.CSV         # 一般住所の郵便番号DB
-jigyosho_zip=${wrk_dir}/JIGYOSYO.CSV     # 事業所の郵便番号DB
-ken_all_log=${wrk_dir}/log-KEN_ALL.txt   # ken_all.zip  取得時ログ  
-jigyosho_log=${wrk_dir}/log-JIGYOSHO.txt # jigyosyo.zip 取得時ログ  
+<div id="outline-container-orgbb07047" class="outline-3">
+<h3 id="orgbb07047"><span class="section-number-3">5.2</span> fabr-postalcode-DB.shのフローチャート</h3>
+<div class="outline-text-3" id="text-5-2">
 
-#  一般住所 郵便番号zipのダウンロード
-#   データ更新無し（つまりログ中に 304 Not Modifiedがあれば）flagを立てる
-wget -N -P "${wrk_dir}"/   https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken_all.zip --output-file="${ken_all_log}"
+<div id="org2f7fea2" class="figure">
+<p><img src="../static/fabr-postalcode-DB.sh.jpg" alt="fabr-postalcode-DB.sh.jpg" width="70%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span><code>fabr-postalcode-DB.sh</code> のフローチャート</p>
+</div>
 
-# ダウンロードが省略されたときフラグを立てる
-if grep -q 304 "${ken_all_log}" ; then
-    flag_ken_change=1
-else
-    flag_ken_change=0
-fi
-
-#  事業所 郵便番号のダウンロード
-#
-wget -N -P "${wrk_dir}"/  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip --output-file="${jigyosho_log}"
-
-# ダウンロードが省略されたときフラグを立てる
-if grep -q 304 "${jigyosho_log}" ; then
-    flag_jigyosho_change=1
-else
-    flag_jigyosho_change=0
-fi
-
-##　 ken_all
-if [ ${flag_ken_change} = 0 ]; then
-    unzip -u -q "${wrk_dir}"/ken_all.zip
-    nkf -w --overwrite "${wrk_dir}"/KEN_ALL.CSV
-    #
-    cp /dev/null "${wrk_dir}/essential-ippan.csv"
-    while read line
-    do
-	esntl_line=$(echo ${line} | cut -d "," -f 3,7-9 |\
-		     sed -e 's/"//g' -e 's/,//g')
-	echo ${esntl_line} &gt;&gt; "${wrk_dir}/essential-ippan.csv"
-    done &lt; "${ippan_zip}"
-fi
-
-##  jigyosho
-if [ ${flag_jigyosho_change} = 0 ]; then
-    unzip -u "${wrk_dir}"/jigyosyo.zip
-    nkf -w --overwrite "${wrk_dir}"/JIGYOSYO.CSV
-    #
-    cp /dev/null "${wrk_dir}"/essential-jigyosho.csv
-    while read line
-    do
-	esntl_line=$(echo ${line} | awk -F"," '{print $8, $3, $4 $5 $6 $7}'| sed -e 's/"//g')
-	echo "${esntl_line}" &gt;&gt; "${wrk_dir}"/essential-jigyosho.csv
-    done &lt; "${jigyosho_zip}"
-fi
-
-##  連結
-##  ken_all または jigyosho のどちらかが更新された
-#     （＝ダウンロード省略されなかった）とき 連結作業を行う
-#   更新ゼロの時には何もしない。  
-
-if [ ${flag_ken_change} = 0 ] || [ ${flag_jigyosho_change} = 0 ] ; then
-    cat  "${wrk_dir}"/essential-ippan.csv "${wrk_dir}"/essential-jigyosho.csv \
-	 &gt; "${wrk_dir}"/ALL-JAPAN.csv
-    if [  ${flag_ken_change} = 0 ]; then
-	echo '** KEN_ALL データ 更新'
-    fi
-    if [  ${flag_jigyosho_change} = 0 ] ; then
-	echo '** JIGYOSYO データ　更新'
-    fi
-else
-    echo '** 郵便番号関係データ　更新なし'
-fi
-exit 0
-</pre>
+<p>
+<br />
+</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgda5f26c" class="outline-2">
-<h2 id="orgda5f26c"><span class="section-number-2">6</span> Footnotes:</h2>
+<div id="outline-container-org61dfea3" class="outline-2">
+<h2 id="org61dfea3"><span class="section-number-2">6</span> Footnotes:</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 </div>
@@ -515,16 +516,28 @@ exit 0
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-バックアップはとってありましたが、2019年のものしか残っていませんでした。
+バックアップはとってありましたが、CSVフォーマットで2019年のものしか残っていませんでした。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+市販の住所録・宛名印刷ソフトでは備わっているのが当たり前のありきたりな機能です。けど重たいアプリを起動したり、ウエッブページを開いて検索したりするのは（若者言葉では）「だるい」。たかが郵便番号と住所ですから・・・。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+宛名データがとりあえず復旧した後に、そのデータについて郵便番号と住所が一致しているかどうかをチェックする作業を行いました。スクリプトにするほどでもなく、ワンライナーですが、注意深く入力した積りでもタイプミスがあることを改めて思い知らされました。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+残っていたCSVファイルをEmacsのCSVモードで読み込み、それに追記・修正を加えるという形で行いました。復旧したデータも当然CSVです。なお宛名の印刷途中で自宅のインクジェット プリンタ＝Canon <b>iP7230</b> (2012年製)が <b><code>B200</code></b> エラーを吐いて止まるというシリアスなトラブルが発生。これも何とか迂回して、やっとこさで印刷が終わりました。今年の年賀状発送はほんとうに大変でした :sweat:
 </p></div></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">&#26085;&#20184;: 2022-01-02 日 00:00</p>
+<p class="date">&#26085;&#20184;: 2022-01-11 火 00:00</p>
 <p class="author">&#33879;&#32773;: YAMAGAMI</p>
-<p class="date">Created: 2022-01-04 火 13:51</p>
+<p class="date">Created: 2022-01-11 火 21:19</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
