@@ -1,0 +1,347 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2022-01-16 16:35:22 yamagami>
+#+title: 人名を仮名書きするときの表記ゆれ --- こまった問題です
+#+date: [2022-01-15]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: 表記ゆれ ひらがな 姓名 名義
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false* アイデア
+- 住所録DBに、正規化したひらがな読みのレコードを追加
+- 実際には、正規化したひらがなレコードにCSVデータの中の漢字氏名(1)、郵便番号(8), 住所１(9), 住所２(10)　を付け足す
+- 検索のさいには　慣例的なひらがなで検索する eg. 「いいづか」、「なかじま」　など。
+- それを受け取って、正規化したひらがな「いいつか」「なかしま」を検索語として、DBの「正規化ひらがな」を検索
+- 出力には、候補として中島、中嶋などを表示する
+
+** コード
+#+begin_src bash
+#!/bin/bash
+set -eu    # Time-stamp: <2022-01-14 21:27:46 yamagami>
+# 
+#
+. func-define-normalization-rule.sh
+. func-normalize-names.sh
+#
+define-normalization-rule
+
+# 正規化された名前のひらがな読みをレコードとして含むデータファイル
+data_file=./new-2k22.txt
+#
+read -rp '姓名(の一部)をひらがなで入力してください： ' keyin
+
+# $keyinを正規化
+normal_name=$(normalize-names "${keyin}")
+
+#  検索
+grep ${normal_name} ${data_file} > ./hit-list.txt
+
+awk -F" " '{print $2, $3, $4, $5 $6}'  ./hit-list.txt 
+#+end_src
+
+
+
+* きっかけ
+- 年賀状宛名データが壊れて、修復した
+- そのために郵便番号と住所を相互に検索できるツールを作り、出来上がった名簿データをチェックする際に、問題発生、
+- よみのかな書きの表記ゆれがあって　
+。。。こんなのはどうでも良い？
+
+
+- 細かいことは少しずつ書き足しますが、とりあえず要点だけをアップします。
+* 正書法がない日本語
+日本語一般に言えることだが、なかでも氏名の表記ってほんとうに無政府状態。
+
+名前漢字に異字が多いこともそうだが、氏名のローマ字表記やひらがな（カタカナ）表記が
+自由奔放上代、ただしい書き方がなくて、もじどおりぐじゃぐじゃ。
+
+これで不便をかこっている業界はたくさんあると思います。電話番号簿とか戸籍とかに始まり、同窓会名簿などでも、ちゃんとしたよみ仮名の正書法があれば、
+ミスが少なくり情報化を進めることができます。
+
+個人の住所録（数百件程度）という小さなデータの中でも時として混乱が起きます。
+
+ここでは、個人の住所録レベルのデータを念頭に、簡便な方法で姓名の読みのゆらぎを、
+抑える方法を紹介します。
+
+
+* その前に表記ゆれの出現頻度
+表６は高橋・岩瀬(1992)　による3,000万件の氏名データに基づく、
+表記ゆれの出現頻度。
+#+attr_html: :width 70%
+[[file:tbl6-高橋1992.jpg]]
+
+これによれば、「連接部・後項・連濁」によるゆれが64.0%　で最大。つぎが「連接部前項・母音」が8.9%。
+「ぢ／じ、づ／ず」が2.4%, 「おう／おお」が1.3% 
+
+* 自家用の表記ゆれ防止の設計ポリシイ
+
+表記ゆれバスター
+
+もとより１００パーセントのゆらぎ解決を目指すものではないので、とうめん
+- 連濁　を解消
+- つぎに「ぢ／じ、づ／ず」が2.4%, 「おう／おお」が1.3% などを解消することで
+
+およそ６５％はOKになる。残りの３５％は、例外処理で手動のテンプレート＝
+「ゆれの正規化規則」を作ればよい。
+という考え。
+
+
+高橋克巳, 梅村恭司. (1995)に紹介されている電話番号案内におけるカナ表記のゆれ対策の例
+は次の通り。
+#+begin_export html
+<img src="https://dl.dropboxusercontent.com/s/9m1mz6iwle3kqvt/tbl2-高橋・梅村1995.jpg?dl=0" alt="tbl2 番号案内におけるかな表記の揺れ対策例" width="90%">
+#+end_export
+
+
+* 以上を参考にしながら、
+およそ６５％はOKになる。残りの３５％は、例外処理で手動のテンプレート＝
+「ゆれの正規化規則」を作ればよい。
+  
+
+** 清濁混同
+濁音をすべて清音に変換
+- 「が・ざ・だ・ば行」を「か・さ・た・は行」に
+- 半濁音「ぱぴぷぺぽ」はどうする？　人名に含まれているかしら？　「三平」とか「あんぽ」とかある。。。　これも全部清音化しよう。
+
+sedで一発でできる  see =Bash sed:清音を濁音に変換=
+** 拗音・促音
+- 小書きをすべて大書きに変換 
+これもsedで一発.  see =Bash sed:拗音・促音を大書きに=
+
+** じ・ぢ & ず・づ混同
+すべて「じ」「ず」に変換
+sed 一発　=Bash sed: 「ぢづ」を「じず」に変換=
+
+
+* 関数を2つ用意する
+** 姓名かなのゆらぎの正規化ルールを定義する関数
+**define-normalization-rule**
+#+begin_src bash
+#!/bin/bash
+#
+#  ひらがな姓名における　ゆらぎ正規化ルールを定義する関数
+#  
+function define-normalization-rule () {
+#
+################# 正規化テンプレート定義
+# 例外定義　　この下の定義で対処できないゆらぎを解消する例外処理
+cat <<EOT>> "./reigai-1.sed"
+s/づか/つか/
+s/づき/つき/
+EOT
+
+# 小書き==> 大書き
+cat << EOT >> "./kogaki2ogaki.sed"
+y/ぃゃゅょゎっぁ/いやゆよわつあ/
+EOT
+
+# 「ぢづ」==> 「じず」へ
+cat << EOT >> "./didu2jiju.sed"
+y/ぢづ/じず/
+EOT
+
+# 濁音・半濁音を清音に
+cat << EOT >> "./voiced2voiceless.sed"
+y/がぎぐげご/かきくけこ/
+y/ざじずぜぞ/さしすせそ/
+y/だでど/たてと/
+y/ばびぶべぼ/はひふへほ/
+y/ぱぴぷぺぽ/はひふへほ/
+EOT
+}
+#+end_src
+
+
+** 上のルールを使って姓名よみのゆらぎを正規化する関数
+**normalize-names**
+#+begin_src bash
+#!/bin/bash
+set -eu   # Time-stamp: <2022-01-14 16:39:21 yamagami>
+#
+#   姓名の読み方のゆらぎを（出来る範囲内で）抑えるために
+#   姓名を正規化normalizeする関数
+#　　　引数は１つだけ、ひらがなの姓名１行
+# 
+function normalize-names (){
+
+# まずは例外から
+
+echo $1 | sed -f ./reigai-1.sed > ./tmp-reigai.out
+
+# 拗音・促音==> 大書き
+sed -f ./kogaki2ogaki.sed ./tmp-reigai.out > ./tmp-oogaki.out
+
+# 「ぢづ」==> 「じず」
+sed -f ./didu2jiju.sed ./tmp-oogaki.out > ./tmp-didu.out
+
+#  濁音・半濁音==> 清音
+sed -f ./voiced2voiceless.sed  ./tmp-didu.out > ./tmp-seion.out
+
+#
+cp ./tmp-seion.out tmp-final.out
+cat ./tmp-final.out
+#
+#rm ./tmp-reigai.out ./tmp-didu.out ./tmp-seion.out ./tmp-oogaki.out 
+}
+#+end_src
+
+
+* 関数の使い方サンプル
+** 準備
+- 住所録DBに、正規化したひらがな読みのレコードを追加
+- 実際には、正規化したひらがなレコードにCSVデータの中の漢字氏名(1)、郵便番号(8), 住所１(9), 住所２(10)　を付け足す
+
+** よみの入力を正規化し、上のデータから検索する
+- 検索のさいには　慣例的なひらがなで検索する eg. 「いいづか」、「なかじま」　など。
+- それを受け取って、正規化したひらがな「いいつか」「なかしま」を検索語として、DBの「正規化ひらがな」を検索
+- 出力には、候補として中島、中嶋などを表示する
+
+** コード
+#+begin_src bash
+#!/bin/bash
+#
+. func-define-normalization-rule.sh
+. func-normalize-names.sh
+#
+define-normalization-rule
+
+# 正規化された名前のひらがな読みをレコードとして含むデータファイル
+data_file=./new-2k22.txt
+#
+read -rp '姓名(の一部)をひらがなで入力してください： ' keyin
+
+# $keyinを正規化
+normal_name=$(normalize-names "${keyin}")
+
+#  検索
+grep ${normal_name} ${data_file} > ./hit-list.txt
+
+awk -F" " '{print $2, $3, $4, $5 $6}'  ./hit-list.txt 
+#+end_src
+** 使用例
+
+
+** バッチ・一括変換
+#+begin_src bash
+#!/bin/bash
+#
+#  姓名のひらがな表記のゆらぎを正規化する関数を呼ぶ　スクリプト例
+#  ＝バッチ・一括的にファイル内からひらがな姓名を呼び出し正規化する用例
+#
+. func-define-normalization-rule.sh   # ゆらぎ正規化ルールを定義する関数
+. func-normalize-names.sh             # ゆらぎを正規化する関数
+
+# ひらがな姓名の正規化ルールを定義する
+define-normalization-rule 
+
+##
+#file_to_process="./sample.txt"
+file_to_process="./hiragana-list.txt"
+#
+while read line
+do
+    # 姓名よみのゆらぎを正規化する
+    normalize-names "${line}"
+
+done < "${file_to_process}"
+exit 0
+#+end_src
+
+*** サンプルデータ
+**sample.txt**
+#+begin_src
+いいづか　いっぺい
+こうづき　ぽんた
+かながわ　ひょうた
+なかじま　ごんた
+がまごおり　ひゃくべえ
+やまざき　ごんべぃ
+#+end_src
+
+
+* 今後の問題＝スルーした点
+*** 問題
+- 清濁混同で濁音を先に直してしまうと、じず混同が効かなくなる。
+- じず混同を直した後に、清濁混同を直すと「しす」になってしまう
+- ので、「じず」だけは清濁混同から除外する必要がある
+
+** 長音の混同
+
+正規化のなかでこの中に含まれていなのは、「長音の正規化」
+#+attr_html: :width 50%
+[[file:長音の正規化法.jpg]]
+
+   
+これがやっかい。例を上げると：
+#+begin_src 
+トウヤマ, トオヤマ
+アンドウ, アンドー
+サトウ, サトオ, サトー
+ケイコ、ケーコ、ケエコ
+#+end_src
+正規化したとあるが、どうやったの？論文を見ると・・・
+#+begin_export html
+<img src="https://dl.dropboxusercontent.com//s/tpzvn690rhx6v15/%E9%95%B7%E9%9F%B3%E6%AD%A3%E8%A6%8F%E5%8C%96%E6%B3%95.jpg?dl=0" alt="" width="50">
+#+end_export
+*** これをコードにするのは面倒
+なので当面、スルーする。
+
+** その他
+#+begin_export html
+<img src="https://dl.dropboxusercontent.com/s/srrmq8e9f7hqbju/%E9%9F%B3%E5%A4%89%E5%BD%A2%E6%AD%A3%E8%A6%8F%E5%8C%96%E6%B3%95.jpg?dl=0" alt="3.2 音の変形,混入対策" width="50%">
+#+end_export
+
+
+* 参考資料
+  :PROPERTIES:
+  :custom_id: siryo
+  :END:
+
+* References
+** 人名｜表記 | ゆれ
+宮部博, 大山実, & 本郷郁夫. (1983).\\
+　名義検索システム-電話番号案内業務への適用.\\
+　情報処理学会論文誌, 24(4), 421-428.
+#+begin_export html
+<img src="https://dl.dropboxusercontent.com/s/yltg12frpx7mzpp/tbl2-%E5%AE%AE%E9%83%A8%E4%BB%961983.png?dl=0" alt="tbl2 読みの曖昧さによる問題" width="50%" class="jop-noMdConv">
+#+end_export
+
+
+戸部美春, 武藤信夫, & 山本康二. (1990). \\
+　高付加価値型番号案内システム (CUPID) の電話帳検索方式 (高付加価値型番号案内システム&lt; 特集&gt;). \\
+　NTT R & D, 39(6), p841-850.　（インタ＝ネット公開なし）
+
+   
+高橋克巳, & 岩瀬成人. (1992).
+　人名の読みからの検索法.
+　情報処理学会研究報告自然言語処理 (NL), 1992(74 (1992-NL-091)), 25-32.
+　([https://ipsj.ixsq.nii.ac.jp/ej/index.php?active\_action=repository\_view\_main\_item\_detail&page\_id=13&block\_id=8&item\_id=13848&item_no=1](https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&page_id=13&block_id=8&item_id=13848&item_no=1))
+
+高橋克巳, 梅村恭司. (1995).
+　人名のかな表記のゆれに基づく近似文字列照合法.
+　情報処理学会論文誌 8, 1906 - 1915.
+　[https://ipsj.ixsq.nii.ac.jp/ej/index.php?active\_action=repository\_view\_main\_item\_detail&page\_id=13&block\_id=8&item\_id=13848&item_no=1](https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&page_id=13&block_id=8&item_id=13848&item_no=1)
+
+#+begin_export html
+<img src="https://dl.dropboxusercontent.com/s/9m1mz6iwle3kqvt/tbl2-高橋・梅村1995.jpg?dl=0" alt="tbl2 番号案内におけるかな表記の揺れ対策例" width="90%">
+#+end_export
+
+
+横尾昭男, 宮崎正弘, 池原悟, 白井論, & 阿部さつき. (1997).
+　日英機械翻訳のための単語辞書.
+　情報処理学会研究報告自然言語処理 (NL), 1997(69dl.dropboxusercontent.com (1997-NL-120)), 37-44.
+　[https://ipsj.ixsq.nii.ac.jp/ej/?action=pages\_view\_main&active\_action=repository\_view\_main\_item\_detail&item\_id=48957&item\_no=1&page\_id=13&block_id=8](https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=48957&item_no=1&page_id=13&block_id=8)
+
+[file:///home/yamagami/ダウンロード/IPSJ-JNL2404005.pdf](file:///home/yamagami/%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89/IPSJ-JNL2404005.pdf)
+
+* Footnotes:
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
+
+

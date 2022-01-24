@@ -1,0 +1,166 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2022-01-24 10:35:14 yamagami>
+#+title: 逆ウォッチ曲線をgnuplotで描く
+#+date: [2022-01-24]
+#+language: ja
+
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: 株 gnuplot bash
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+株の *出来高* をX軸、 *終値* をY軸にとってプロットした図を *逆ウォッチ曲線* と言います。名前からは海外で作られた株価チャート分析手法のように見えますが、実は日本で開発されたもののようです（[[https://www.google.co.jp/books/edition/%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E5%88%86%E6%9E%90%E3%81%AE%E7%9C%9F%E5%AE%9F%E6%99%AE%E5%8F%8A%E7%89%88/UjuSSEFKPZQC?hl=ja&gbpv=1&dq=%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E5%88%86%E6%9E%90%E3%80%80%E7%9C%9F%E5%AE%9F%E3%80%80%E6%99%AE%E5%8F%8A%E7%89%88+inauthor:%E5%90%89%E8%A6%8B+inauthor:%E4%BF%8A%E5%BD%A6&printsec=frontcover][吉見, 2006]]）[fn:英語名]。
+
+[fn:英語名] 「逆ウォッチ曲線」のただしい英語名を調べようとググってみました。しかし英語の記事では、それらしい単語がほとんど出てきません。日本語の記事では anti watch curve, counter colock curve, contrary watch curve などと書かれていますが、どれが定訳かわかりませんでした。上で引用した吉見氏は counter clock curve を採用されていました。ようするに「反時計回り曲線」ということなんですね。
+
+
+逆ウォッチ曲線については、ネット上に良い紹介記事がたくさんあります
+（例えば[[http://trade.smbcnikko.co.jp/html/ez3d_gyakuwatch.html][日興イージートレード]], [[https://kabu.com/investment/guide/technical/17.html][auカブコム証券 第17回 逆ウォッチ曲線]], [[https://www.daiwa.jp/glossary/YST0378.html][大和証券 逆ウォッチ曲線]] など）。またgnuplotで逆ウォッチ曲線を描くことに関しては
+[[https://ameblo.jp/moveofsunday/entry-12323759436.html][こちら]]などに記事があります。
+
+\\
+
+ここでは 細かい説明は省略して
+*gnuplot* で図[[sample]] のような逆ウォッチ曲線を描く方法の *骨子* だけを紹介します。
+#+caption: 逆ウォッチ曲線の例図
+#+name: sample
+#+attr_html: :width 90%
+[[file:sample-gyaku-watch-curve.jpg]]
+
+図[[sample]]では *期間* が100日間になっていますが、起動時に任意の日数を指定できます。
+*銘柄名* は起動時に銘柄一覧から選択します。
+図のタイトル＝「逆ウォッチ」の左側に銘柄名が印字されますが例図では消してあります。
+
+
+<font color="red">赤丸</font> がスタート点、<font color="blue">青丸</font>が終点です。
+
+* スクリプトの概要
+以下、順を追って説明します。
+** データファイルを作ります  
+逆ウォッチ曲線を描きたい会社の株価と出来高のデータを用意します。次のような感じです（図[[sample]] とは関係ありません）。
+#+begin_example
+(日付)　（出来高）（株価）
+　:         :       :
+2022-01-18 2007200 2537.0
+2022-01-19 2514600 2493.0
+2022-01-20 2612300 2525.0
+2022-01-21 2011100 2540.5
+#+end_example
+日付(*d* ate), 出来高(*v* olume), 株価(*p* rice) の３列で構成されているので *dvp* データと呼びます。
+
+** 移動平均を計算します
+上のdvpデータ( =./tmp-dvp.dat= )から =awk= を使って窓サイズ *25日* で移動平均を求め、別ファイル（ =./tmp-out.dat= ）に格納します。
+#+begin_src sh
+# 移動平均計算パート
+input_file=./tmp-dvp.dat
+window_size=25
+i=${window_size}
+#
+cp /dev/null ./tmp-out.dat
+wc_l=$( cat ${input_file} | wc -l )
+#
+while [ $i -lt $(( $wc_l )) ]
+do
+    head -n $i ${input_file} | tail -n ${window_size} > ./tmp.dat
+    awk '{a+=$2}{b+=$3} END{print $1, a/NR,b/NR;}' tmp.dat >> ./tmp-out.dat
+    i=$(( $i + 1 ))
+done
+#+end_src
+このコードは[[https://ccsr.aori.u-tokyo.ac.jp/~obase/awk.html][こちら]]を参考にさせていただきました。
+
+** gnuplot用の変数をbashスクリプト内で設定します
+gnuplotに引き渡す変数やファイル名などをbashスクリプト内で準備します。
+#+begin_src bash
+cp ./tmp-out.dat ${wrk_dir}/data-to-plot.dat
+data_to_plot=${wrk_dir}/data-to-plot.dat
+#
+from_date=$(date -d "${days} days ago" '+%Y/%m/%d')
+latest=$(tail -1  ${wrk_dir}/revcd-${stock}-dvp.csv | awk '{print $1}')
+to_date=$(date -d  ${latest} '+%Y/%m/%d')
+#
+mytitle=${stock_name}"　逆ウオッチ曲線"
+#+end_src
+
+** gnuplotをコールするパート
+bashスクリプト内でgnuplotを呼び出すパートです。   
+   #+begin_src bash
+#  gnuplotのコール
+gnuplot -e \
+　　"fig_title='$mytitle';\
+	days='$days';\
+	start_date='$from_date';\
+	end_date='${to_date}'"\
+	~/bin/counter-clock-curve.plt
+   #+end_src
+** gnuplotスクリプト本体
+=counter-clock-curve.plt= の中身です。変数の書き方がgnuplotスクリプト内とbashスクリプト内でちょっと異なっていますので注意してください。
+
+gnuplotの *配列* を使って描出します。出来高は数百万株になることがありますので、
+1000で割った値にしてY軸のlabelに x1000の注記をいれました。
+#+begin_src bash
+  data_to_plot='./data-to-plot.dat'
+#
+  stats data_to_plot  using 2:3 nooutput
+  xmax = ( STATS_max_x/1000 * 1.05 ) 
+  xmin = ( STATS_min_x/1000 * 0.95 )
+  ymax = ( STATS_max_y * 1.05 )
+  ymin = ( STATS_min_y * 0.95 )
+
+# タイトル
+  set title fig_title."（".days."日間)"  font "Arial, 14"
+
+# ターミナル設定
+  set terminal pdfcairo transparent enhanced font "Arial, 12"
+# スタイル設定
+  set style fill transparent solid border
+  set boxwidth 0.6 relative
+
+# 数値表現の設定
+  set decimal locale
+  set format x "%'5.0f"
+  set format y "%'5.0f"
+  set xlabel "出来高（x1,000）" font "Arial, 12"
+  set ylabel "終値（円）" font "Arial, 12"
+#
+  N = STATS_records
+  array X[N]
+  array Y[N]
+
+  stats data_to_plot  using (X[$0+1] = $2, Y[$0+1] = $3, 0) nooutput
+
+  set xrange[xmin:xmax]
+  set yrange[ymin:ymax]
+  set colorsequence default
+#
+  set output "./tmp-out.pdf"
+#
+  plot Y using (X[$1]/1000):(Y[$1]) w lp pt 7 ps 0.25 notitle ,\
+     '' using (X[1]/1000):(Y[1]) w lp pt 7 ps 0.6 lt rgbcolor 'red' title start_date,\
+     '' using (X[N]/1000):(Y[N]) w lp pt 7 ps 0.6 lt rgbcolor 'blue' title end_date
+
+set output
+pause -1
+#+end_src
+
+このコードは[[https://ss.scphys.kyoto-u.ac.jp/person/yonezawa/contents/program/gnuplot/array_true.html][こちら]]を参考にしました。
+
+* まとめ
+コードの要点となる部分だけを抜き出して紹介しました。これ以外にも、ウエブサイトからデータを取得するパートやUI（ユーザーインターフェイス）のパート、それから他の株価のデータ処理スクリプト類との帳合をとるパートなどがありますが、煩瑣になるので省略しました。あしからず・・・。
+
+
+なお逆ウォッチ曲線の考え方や利用方法はよく分かるのですが、これを使って売買判断をした場合のパフォーマンスがどうなるか、シミュレーションでも良いから調べた結果があればそれをを知りたいと思っています。
+
+一般の科学分野、とくに基礎科学の分野ではすべての情報は公開されることが原則です。
+けれども株や投資などお金に関わる知見や技術は、たいがいの情報は非公開です。
+まぁ公開すると、投資に関わるいろいろな業種が成り立たないわけですから仕方ないとは思いますが・・・。
+
+* Footnotes:
+  
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

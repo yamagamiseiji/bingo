@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-01-18 火 13:52 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>人名を仮名書きするときの表記ゆれ &#x2014; こまった問題です</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">人名を仮名書きするときの表記ゆれ &#x2014; こまった問題です</h1>
+<ul class="org-ul">
+<li>住所録DBに、正規化したひらがな読みのレコードを追加</li>
+<li>実際には、正規化したひらがなレコードにCSVデータの中の漢字氏名(1)、郵便番号(8), 住所１(9), 住所２(10)　を付け足す</li>
+<li>検索のさいには　慣例的なひらがなで検索する eg. 「いいづか」、「なかじま」　など。</li>
+<li>それを受け取って、正規化したひらがな「いいつか」「なかしま」を検索語として、DBの「正規化ひらがな」を検索</li>
+<li>出力には、候補として中島、中嶋などを表示する</li>
+</ul>
+
+<div id="outline-container-org81b2a50" class="outline-3">
+<h3 id="org81b2a50"><span class="section-number-3">0.1</span> コード</h3>
+<div class="outline-text-3" id="text-0-1">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #006FE0;">set</span> -eu    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Time-stamp: &lt;2022-01-14 21:27:46 yamagami&gt;</span>
+<span style="color: #8D8D84;"># </span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #006FE0;">.</span> func-define-normalization-rule.sh
+<span style="color: #006FE0;">.</span> func-normalize-names.sh
+<span style="color: #8D8D84;">#</span>
+define-normalization-rule
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#27491;&#35215;&#21270;&#12373;&#12428;&#12383;&#21517;&#21069;&#12398;&#12402;&#12425;&#12364;&#12394;&#35501;&#12415;&#12434;&#12524;&#12467;&#12540;&#12489;&#12392;&#12375;&#12390;&#21547;&#12416;&#12487;&#12540;&#12479;&#12501;&#12449;&#12452;&#12523;</span>
+<span style="color: #BA36A5;">data_file</span>=./new-2k22.txt
+<span style="color: #8D8D84;">#</span>
+<span style="color: #006FE0;">read</span> -rp <span style="color: #008000;">'&#22995;&#21517;(&#12398;&#19968;&#37096;)&#12434;&#12402;&#12425;&#12364;&#12394;&#12391;&#20837;&#21147;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&#65306; '</span> keyin
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">$keyin&#12434;&#27491;&#35215;&#21270;</span>
+<span style="color: #BA36A5;">normal_name</span>=$(<span style="color: #FF1493;">normalize-names</span> <span style="color: #008000;">"${keyin}"</span>)
+
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#26908;&#32034;</span>
+grep ${<span style="color: #BA36A5;">normal_name</span>} ${<span style="color: #BA36A5;">data_file</span>} &gt; ./hit-list.txt
+
+awk -F<span style="color: #008000;">" "</span> <span style="color: #008000;">'{print $2, $3, $4, $5 $6}'</span>  ./hit-list.txt 
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf00e64b" class="outline-2">
+<h2 id="orgf00e64b"><span class="section-number-2">1</span> きっかけ</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>年賀状宛名データが壊れて、修復した</li>
+<li>そのために郵便番号と住所を相互に検索できるツールを作り、出来上がった名簿データをチェックする際に、問題発生、</li>
+<li>よみのかな書きの表記ゆれがあって　</li>
+</ul>
+<p>
+。。。こんなのはどうでも良い？
+</p>
+
+
+<ul class="org-ul">
+<li>細かいことは少しずつ書き足しますが、とりあえず要点だけをアップします。</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8ca4d1f" class="outline-2">
+<h2 id="org8ca4d1f"><span class="section-number-2">2</span> 正書法がない日本語</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+日本語一般に言えることだが、なかでも氏名の表記ってほんとうに無政府状態。
+</p>
+
+<p>
+名前漢字に異字が多いこともそうだが、氏名のローマ字表記やひらがな（カタカナ）表記が
+自由奔放上代、ただしい書き方がなくて、もじどおりぐじゃぐじゃ。
+</p>
+
+<p>
+これで不便をかこっている業界はたくさんあると思います。電話番号簿とか戸籍とかに始まり、同窓会名簿などでも、ちゃんとしたよみ仮名の正書法があれば、
+ミスが少なくり情報化を進めることができます。
+</p>
+
+<p>
+個人の住所録（数百件程度）という小さなデータの中でも時として混乱が起きます。
+</p>
+
+<p>
+ここでは、個人の住所録レベルのデータを念頭に、簡便な方法で姓名の読みのゆらぎを、
+抑える方法を紹介します。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org815fbf1" class="outline-2">
+<h2 id="org815fbf1"><span class="section-number-2">3</span> その前に表記ゆれの出現頻度</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+表６は高橋・岩瀬(1992)　による3,000万件の氏名データに基づく、
+表記ゆれの出現頻度。
+</p>
+
+<div id="org9c82b54" class="figure">
+<p><img src="../static/tbl6-高橋1992.jpg" alt="tbl6-高橋1992.jpg" width="70%" />
+</p>
+</div>
+
+<p>
+これによれば、「連接部・後項・連濁」によるゆれが64.0%　で最大。つぎが「連接部前項・母音」が8.9%。
+「ぢ／じ、づ／ず」が2.4%, 「おう／おお」が1.3% 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org92e184c" class="outline-2">
+<h2 id="org92e184c"><span class="section-number-2">4</span> 自家用の表記ゆれ防止の設計ポリシイ</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+表記ゆれバスター
+</p>
+
+<p>
+もとより１００パーセントのゆらぎ解決を目指すものではないので、とうめん
+</p>
+<ul class="org-ul">
+<li>連濁　を解消</li>
+<li>つぎに「ぢ／じ、づ／ず」が2.4%, 「おう／おお」が1.3% などを解消することで</li>
+</ul>
+
+<p>
+およそ６５％はOKになる。残りの３５％は、例外処理で手動のテンプレート＝
+「ゆれの正規化規則」を作ればよい。
+という考え。
+</p>
+
+
+<p>
+高橋克巳, 梅村恭司. (1995)に紹介されている電話番号案内におけるカナ表記のゆれ対策の例
+は次の通り。
+</p>
+<img src="https://dl.dropboxusercontent.com/s/9m1mz6iwle3kqvt/tbl2-高橋・梅村1995.jpg?dl=0" alt="tbl2 番号案内におけるかな表記の揺れ対策例" width="90%">
+</div>
+</div>
+
+
+<div id="outline-container-org0ad12ee" class="outline-2">
+<h2 id="org0ad12ee"><span class="section-number-2">5</span> 以上を参考にしながら、</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+およそ６５％はOKになる。残りの３５％は、例外処理で手動のテンプレート＝
+「ゆれの正規化規則」を作ればよい。
+</p>
+</div>
+
+
+<div id="outline-container-orge4cc691" class="outline-3">
+<h3 id="orge4cc691"><span class="section-number-3">5.1</span> 清濁混同</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+濁音をすべて清音に変換
+</p>
+<ul class="org-ul">
+<li>「が・ざ・だ・ば行」を「か・さ・た・は行」に</li>
+<li>半濁音「ぱぴぷぺぽ」はどうする？　人名に含まれているかしら？　「三平」とか「あんぽ」とかある。。。　これも全部清音化しよう。</li>
+</ul>
+
+<p>
+sedで一発でできる  see <code>Bash sed:清音を濁音に変換</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org1e26fa3" class="outline-3">
+<h3 id="org1e26fa3"><span class="section-number-3">5.2</span> 拗音・促音</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>小書きをすべて大書きに変換</li>
+</ul>
+<p>
+これもsedで一発.  see <code>Bash sed:拗音・促音を大書きに</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3e8b6de" class="outline-3">
+<h3 id="org3e8b6de"><span class="section-number-3">5.3</span> じ・ぢ &amp; ず・づ混同</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+すべて「じ」「ず」に変換
+sed 一発　=Bash sed: 「ぢづ」を「じず」に変換=
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb76032a" class="outline-2">
+<h2 id="orgb76032a"><span class="section-number-2">6</span> 関数を2つ用意する</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org77cba20" class="outline-3">
+<h3 id="org77cba20"><span class="section-number-3">6.1</span> 姓名かなのゆらぎの正規化ルールを定義する関数</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+<b><b>define-normalization-rule</b></b>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#12402;&#12425;&#12364;&#12394;&#22995;&#21517;&#12395;&#12362;&#12369;&#12427;&#12288;&#12422;&#12425;&#12366;&#27491;&#35215;&#21270;&#12523;&#12540;&#12523;&#12434;&#23450;&#32681;&#12377;&#12427;&#38306;&#25968;</span>
+<span style="color: #8D8D84;">#  </span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">define-normalization-rule</span> () {
+<span style="color: #8D8D84;">#</span>
+<span style="color: #8D8D84;">################# </span><span style="color: #8D8D84; font-style: italic;">&#27491;&#35215;&#21270;&#12486;&#12531;&#12503;&#12524;&#12540;&#12488;&#23450;&#32681;</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20363;&#22806;&#23450;&#32681;&#12288;&#12288;&#12371;&#12398;&#19979;&#12398;&#23450;&#32681;&#12391;&#23550;&#20966;&#12391;&#12365;&#12394;&#12356;&#12422;&#12425;&#12366;&#12434;&#35299;&#28040;&#12377;&#12427;&#20363;&#22806;&#20966;&#29702;</span>
+cat &lt;&lt;EOT&gt;&gt; <span style="color: #008000;">"./reigai-1.sed"</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">s/&#12389;&#12363;/&#12388;&#12363;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">s/&#12389;&#12365;/&#12388;&#12365;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">EOT</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#23567;&#26360;&#12365;==&gt; &#22823;&#26360;&#12365;</span>
+cat &lt;&lt; EOT &gt;&gt; <span style="color: #008000;">"./kogaki2ogaki.sed"</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12355;&#12419;&#12421;&#12423;&#12430;&#12387;&#12353;/&#12356;&#12420;&#12422;&#12424;&#12431;&#12388;&#12354;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">EOT</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12300;&#12386;&#12389;&#12301;==&gt; &#12300;&#12376;&#12378;&#12301;&#12408;</span>
+cat &lt;&lt; EOT &gt;&gt; <span style="color: #008000;">"./didu2jiju.sed"</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12386;&#12389;/&#12376;&#12378;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">EOT</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#28609;&#38899;&#12539;&#21322;&#28609;&#38899;&#12434;&#28165;&#38899;&#12395;</span>
+cat &lt;&lt; EOT &gt;&gt; <span style="color: #008000;">"./voiced2voiceless.sed"</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12364;&#12366;&#12368;&#12370;&#12372;/&#12363;&#12365;&#12367;&#12369;&#12371;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12374;&#12376;&#12378;&#12380;&#12382;/&#12373;&#12375;&#12377;&#12379;&#12381;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12384;&#12391;&#12393;/&#12383;&#12390;&#12392;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12400;&#12403;&#12406;&#12409;&#12412;/&#12399;&#12402;&#12405;&#12408;&#12411;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">y/&#12401;&#12404;&#12407;&#12410;&#12413;/&#12399;&#12402;&#12405;&#12408;&#12411;/</span>
+<span style="color: #0000ff; background-color: #EEF5FE;">EOT</span>
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb595068" class="outline-3">
+<h3 id="orgb595068"><span class="section-number-3">6.2</span> 上のルールを使って姓名よみのゆらぎを正規化する関数</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<b><b>normalize-names</b></b>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #006FE0;">set</span> -eu   <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Time-stamp: &lt;2022-01-14 16:39:21 yamagami&gt;</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#22995;&#21517;&#12398;&#35501;&#12415;&#26041;&#12398;&#12422;&#12425;&#12366;&#12434;&#65288;&#20986;&#26469;&#12427;&#31684;&#22258;&#20869;&#12391;&#65289;&#25233;&#12360;&#12427;&#12383;&#12417;&#12395;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#22995;&#21517;&#12434;&#27491;&#35215;&#21270;normalize&#12377;&#12427;&#38306;&#25968;</span>
+<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">&#12288;&#12288;&#12288;&#24341;&#25968;&#12399;&#65297;&#12388;&#12384;&#12369;&#12289;&#12402;&#12425;&#12364;&#12394;&#12398;&#22995;&#21517;&#65297;&#34892;</span>
+<span style="color: #8D8D84;"># </span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">normalize-names</span> (){
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12414;&#12378;&#12399;&#20363;&#22806;&#12363;&#12425;</span>
+
+<span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">1</span> | sed -f ./reigai-1.sed &gt; ./tmp-reigai.out
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#25303;&#38899;&#12539;&#20419;&#38899;==&gt; &#22823;&#26360;&#12365;</span>
+sed -f ./kogaki2ogaki.sed ./tmp-reigai.out &gt; ./tmp-oogaki.out
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12300;&#12386;&#12389;&#12301;==&gt; &#12300;&#12376;&#12378;&#12301;</span>
+sed -f ./didu2jiju.sed ./tmp-oogaki.out &gt; ./tmp-didu.out
+
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#28609;&#38899;&#12539;&#21322;&#28609;&#38899;==&gt; &#28165;&#38899;</span>
+sed -f ./voiced2voiceless.sed  ./tmp-didu.out &gt; ./tmp-seion.out
+
+<span style="color: #8D8D84;">#</span>
+cp ./tmp-seion.out tmp-final.out
+cat ./tmp-final.out
+<span style="color: #8D8D84;">#</span>
+<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">rm ./tmp-reigai.out ./tmp-didu.out ./tmp-seion.out ./tmp-oogaki.out </span>
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org219c3b7" class="outline-2">
+<h2 id="org219c3b7"><span class="section-number-2">7</span> 関数の使い方サンプル</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgc7b66dc" class="outline-3">
+<h3 id="orgc7b66dc"><span class="section-number-3">7.1</span> 準備</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>住所録DBに、正規化したひらがな読みのレコードを追加</li>
+<li>実際には、正規化したひらがなレコードにCSVデータの中の漢字氏名(1)、郵便番号(8), 住所１(9), 住所２(10)　を付け足す</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org253707d" class="outline-3">
+<h3 id="org253707d"><span class="section-number-3">7.2</span> よみの入力を正規化し、上のデータから検索する</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>検索のさいには　慣例的なひらがなで検索する eg. 「いいづか」、「なかじま」　など。</li>
+<li>それを受け取って、正規化したひらがな「いいつか」「なかしま」を検索語として、DBの「正規化ひらがな」を検索</li>
+<li>出力には、候補として中島、中嶋などを表示する</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga548b10" class="outline-3">
+<h3 id="orga548b10"><span class="section-number-3">7.3</span> コード</h3>
+<div class="outline-text-3" id="text-7-3">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #006FE0;">.</span> func-define-normalization-rule.sh
+<span style="color: #006FE0;">.</span> func-normalize-names.sh
+<span style="color: #8D8D84;">#</span>
+define-normalization-rule
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#27491;&#35215;&#21270;&#12373;&#12428;&#12383;&#21517;&#21069;&#12398;&#12402;&#12425;&#12364;&#12394;&#35501;&#12415;&#12434;&#12524;&#12467;&#12540;&#12489;&#12392;&#12375;&#12390;&#21547;&#12416;&#12487;&#12540;&#12479;&#12501;&#12449;&#12452;&#12523;</span>
+<span style="color: #BA36A5;">data_file</span>=./new-2k22.txt
+<span style="color: #8D8D84;">#</span>
+<span style="color: #006FE0;">read</span> -rp <span style="color: #008000;">'&#22995;&#21517;(&#12398;&#19968;&#37096;)&#12434;&#12402;&#12425;&#12364;&#12394;&#12391;&#20837;&#21147;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&#65306; '</span> keyin
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">$keyin&#12434;&#27491;&#35215;&#21270;</span>
+<span style="color: #BA36A5;">normal_name</span>=$(<span style="color: #FF1493;">normalize-names</span> <span style="color: #008000;">"${keyin}"</span>)
+
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#26908;&#32034;</span>
+grep ${<span style="color: #BA36A5;">normal_name</span>} ${<span style="color: #BA36A5;">data_file</span>} &gt; ./hit-list.txt
+
+awk -F<span style="color: #008000;">" "</span> <span style="color: #008000;">'{print $2, $3, $4, $5 $6}'</span>  ./hit-list.txt 
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2594713" class="outline-3">
+<h3 id="org2594713"><span class="section-number-3">7.4</span> 使用例</h3>
+</div>
+
+
+<div id="outline-container-orgddffa65" class="outline-3">
+<h3 id="orgddffa65"><span class="section-number-3">7.5</span> バッチ・一括変換</h3>
+<div class="outline-text-3" id="text-7-5">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#22995;&#21517;&#12398;&#12402;&#12425;&#12364;&#12394;&#34920;&#35352;&#12398;&#12422;&#12425;&#12366;&#12434;&#27491;&#35215;&#21270;&#12377;&#12427;&#38306;&#25968;&#12434;&#21628;&#12406;&#12288;&#12473;&#12463;&#12522;&#12503;&#12488;&#20363;</span>
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#65309;&#12496;&#12483;&#12481;&#12539;&#19968;&#25324;&#30340;&#12395;&#12501;&#12449;&#12452;&#12523;&#20869;&#12363;&#12425;&#12402;&#12425;&#12364;&#12394;&#22995;&#21517;&#12434;&#21628;&#12403;&#20986;&#12375;&#27491;&#35215;&#21270;&#12377;&#12427;&#29992;&#20363;</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #006FE0;">.</span> func-define-normalization-rule.sh   <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12422;&#12425;&#12366;&#27491;&#35215;&#21270;&#12523;&#12540;&#12523;&#12434;&#23450;&#32681;&#12377;&#12427;&#38306;&#25968;</span>
+<span style="color: #006FE0;">.</span> func-normalize-names.sh             <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12422;&#12425;&#12366;&#12434;&#27491;&#35215;&#21270;&#12377;&#12427;&#38306;&#25968;</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12402;&#12425;&#12364;&#12394;&#22995;&#21517;&#12398;&#27491;&#35215;&#21270;&#12523;&#12540;&#12523;&#12434;&#23450;&#32681;&#12377;&#12427;</span>
+define-normalization-rule 
+
+<span style="color: #8D8D84;">##</span>
+<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">file_to_process="./sample.txt"</span>
+<span style="color: #BA36A5;">file_to_process</span>=<span style="color: #008000;">"./hiragana-list.txt"</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #0000FF;">while </span><span style="color: #006FE0;">read</span> line
+<span style="color: #0000FF;">do</span>
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#22995;&#21517;&#12424;&#12415;&#12398;&#12422;&#12425;&#12366;&#12434;&#27491;&#35215;&#21270;&#12377;&#12427;</span>
+    normalize-names <span style="color: #008000;">"${line}"</span>
+
+<span style="color: #0000FF;">done</span> &lt; <span style="color: #008000;">"${file_to_process}"</span>
+<span style="color: #0000FF;">exit</span> 0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgaaf4d57" class="outline-4">
+<h4 id="orgaaf4d57"><span class="section-number-4">7.5.1</span> サンプルデータ</h4>
+<div class="outline-text-4" id="text-7-5-1">
+<p>
+<b><b>sample.txt</b></b>
+</p>
+<pre class="example">
+いいづか　いっぺい
+こうづき　ぽんた
+かながわ　ひょうた
+なかじま　ごんた
+がまごおり　ひゃくべえ
+やまざき　ごんべぃ
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org53afbfc" class="outline-2">
+<h2 id="org53afbfc"><span class="section-number-2">8</span> 今後の問題＝スルーした点</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-orgfdb3d76" class="outline-4">
+<h4 id="orgfdb3d76"><span class="section-number-4">8.0.1</span> 問題</h4>
+<div class="outline-text-4" id="text-8-0-1">
+<ul class="org-ul">
+<li>清濁混同で濁音を先に直してしまうと、じず混同が効かなくなる。</li>
+<li>じず混同を直した後に、清濁混同を直すと「しす」になってしまう</li>
+<li>ので、「じず」だけは清濁混同から除外する必要がある</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3e9f6a7" class="outline-3">
+<h3 id="org3e9f6a7"><span class="section-number-3">8.1</span> 長音の混同</h3>
+<div class="outline-text-3" id="text-8-1">
+<pre class="example" id="org8b09b8b">
+長音については、母音を重ねることを原則とするが
+エ列のイ音、オ列のゥ音も長音に混同されやすいため、
+エ列の長音とエ列のイ音、オ列の長音とオ列のウはそれぞれ
+「イ」音と「ウ」音に正規化して処理する。すなわち
+- エ列の後の長音「ー、イ、エ」→「イ」に正規化
+- オ列の後の長音「ー、オ、ウ」→「ウ」に正規化
+
+（例）
+遠山：トウヤマ、トオヤマ、トーヤマ　→　トウヤマ
+</pre>
+
+
+<p>
+正規化のなかでこの中に含まれていなのは、「長音の正規化」
+</p>
+
+<div id="orgd9ac5fd" class="figure">
+<p><img src="../static/長音の正規化法.jpg" alt="長音の正規化法.jpg" width="50%" />
+</p>
+</div>
+
+
+<p>
+これがやっかい。例を上げると：
+</p>
+<pre class="example">
+トウヤマ, トオヤマ
+アンドウ, アンドー
+サトウ, サトオ, サトー
+ケイコ、ケーコ、ケエコ
+</pre>
+<p>
+正規化したとあるが、どうやったの？論文を見ると・・・
+</p>
+<img src="https://dl.dropboxusercontent.com//s/tpzvn690rhx6v15/%E9%95%B7%E9%9F%B3%E6%AD%A3%E8%A6%8F%E5%8C%96%E6%B3%95.jpg?dl=0" alt="" width="50">
+</div>
+<div id="outline-container-orgc2e7332" class="outline-4">
+<h4 id="orgc2e7332"><span class="section-number-4">8.1.1</span> これをコードにするのは面倒</h4>
+<div class="outline-text-4" id="text-8-1-1">
+<p>
+なので当面、スルーする。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org41587a3" class="outline-3">
+<h3 id="org41587a3"><span class="section-number-3">8.2</span> その他</h3>
+<div class="outline-text-3" id="text-8-2">
+<img src="https://dl.dropboxusercontent.com/s/srrmq8e9f7hqbju/%E9%9F%B3%E5%A4%89%E5%BD%A2%E6%AD%A3%E8%A6%8F%E5%8C%96%E6%B3%95.jpg?dl=0" alt="3.2 音の変形,混入対策" width="50%">
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-siryo" class="outline-2">
+<h2 id="siryo"><span class="section-number-2">9</span> 参考資料</h2>
+<div class="outline-text-2" id="text-siryo">
+</div>
+</div>
+
+<div id="outline-container-org5cc6226" class="outline-2">
+<h2 id="org5cc6226"><span class="section-number-2">10</span> References</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-org0744bec" class="outline-3">
+<h3 id="org0744bec"><span class="section-number-3">10.1</span> 人名｜表記 | ゆれ</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+宮部博, 大山実, &amp; 本郷郁夫. (1983).<br />
+　名義検索システム-電話番号案内業務への適用.<br />
+　情報処理学会論文誌, 24(4), 421-428.
+</p>
+<img src="https://dl.dropboxusercontent.com/s/yltg12frpx7mzpp/tbl2-%E5%AE%AE%E9%83%A8%E4%BB%961983.png?dl=0" alt="tbl2 読みの曖昧さによる問題" width="50%" class="jop-noMdConv">
+
+
+<p>
+戸部美春, 武藤信夫, &amp; 山本康二. (1990). <br />
+　高付加価値型番号案内システム (CUPID) の電話帳検索方式 (高付加価値型番号案内システム&amp;lt; 特集&amp;gt;). <br />
+　NTT R &amp; D, 39(6), p841-850.　（インタ＝ネット公開なし）
+</p>
+
+
+<p>
+高橋克巳, &amp; 岩瀬成人. (1992).
+　人名の読みからの検索法.
+　情報処理学会研究報告自然言語処理 (NL), 1992(74 (1992-NL-091)), 25-32.
+　([<a href="https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&amp;page%5C_id=13&amp;block%5C_id=8&amp;item%5C_id=13848&amp;item_no=1">https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&amp;page%5C_id=13&amp;block%5C_id=8&amp;item%5C_id=13848&amp;item_no=1</a>](<a href="https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&amp;page_id=13&amp;block_id=8&amp;item_id=13848&amp;item_no=1">https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&amp;page_id=13&amp;block_id=8&amp;item_id=13848&amp;item_no=1</a>))
+</p>
+
+<p>
+高橋克巳, 梅村恭司. (1995).
+　人名のかな表記のゆれに基づく近似文字列照合法.
+　情報処理学会論文誌 8, 1906 - 1915.
+　[<a href="https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&amp;page%5C_id=13&amp;block%5C_id=8&amp;item%5C_id=13848&amp;item_no=1">https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&amp;page%5C_id=13&amp;block%5C_id=8&amp;item%5C_id=13848&amp;item_no=1</a>](<a href="https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&amp;page_id=13&amp;block_id=8&amp;item_id=13848&amp;item_no=1">https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&amp;page_id=13&amp;block_id=8&amp;item_id=13848&amp;item_no=1</a>)
+</p>
+
+<img src="https://dl.dropboxusercontent.com/s/9m1mz6iwle3kqvt/tbl2-高橋・梅村1995.jpg?dl=0" alt="tbl2 番号案内におけるかな表記の揺れ対策例" width="90%">
+
+
+<p>
+横尾昭男, 宮崎正弘, 池原悟, 白井論, &amp; 阿部さつき. (1997).
+　日英機械翻訳のための単語辞書.
+　情報処理学会研究報告自然言語処理 (NL), 1997(69dl.dropboxusercontent.com (1997-NL-120)), 37-44.
+　[<a href="https://ipsj.ixsq.nii.ac.jp/ej/?action=pages%5C_view%5C_main&amp;active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&amp;item%5C_id=48957&amp;item%5C_no=1&amp;page%5C_id=13&amp;block_id=8">https://ipsj.ixsq.nii.ac.jp/ej/?action=pages%5C_view%5C_main&amp;active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&amp;item%5C_id=48957&amp;item%5C_no=1&amp;page%5C_id=13&amp;block_id=8</a>](<a href="https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&amp;active_action=repository_view_main_item_detail&amp;item_id=48957&amp;item_no=1&amp;page_id=13&amp;block_id=8">https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&amp;active_action=repository_view_main_item_detail&amp;item_id=48957&amp;item_no=1&amp;page_id=13&amp;block_id=8</a>)
+</p>
+
+<p>
+[<a href="file:///home/yamagami/ダウンロード/IPSJ-JNL2404005.pdf">file:///home/yamagami/ダウンロード/IPSJ-JNL2404005.pdf</a>](<a href="file:///home/yamagami/%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89/IPSJ-JNL2404005.pdf">file:///home/yamagami/%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89/IPSJ-JNL2404005.pdf</a>)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org88b4d96" class="outline-2">
+<h2 id="org88b4d96"><span class="section-number-2">11</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-01-15 土 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-01-18 火 13:52</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

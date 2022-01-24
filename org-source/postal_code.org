@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-01-15 10:49:27 yamagami>
+#           Time-stamp: <2022-01-24 10:45:52 yamagami>
 #+title: 郵便番号・住所の簡易検索スクリプト
 #+date: [2022-01-15 ]
 #+language: ja
@@ -22,7 +22,7 @@
 とりあえずこれで過去3年間の年賀状をめくりながら、
 宛名ファイル（CSV）を作り直し[fn:作り直し]、なんとか宛名印刷を完了することができました[fn:csvベース]。
 
-宛名印刷が終わった後、
+宛名印刷が終わった後、y
 日本郵便の郵便番号データは月に1回のペースで更新されることを知りました。
 そこで毎月1回、定期的に郵便番号データをダウンロードし、
  *=postal-coder.sh=* に合った形式にデータを整形するスクリプト *=fabr-postalcode-DB.sh=* を作りました。
@@ -54,13 +54,13 @@ $ postal-coder.sh 緑区鴨居
 #+end_src
 検索語にヒットする住所が複数あれば全部表示します。うっかり「東京都」と入力すると破滅的な数の行が表示されます(やってみたら *4046行* :astonished: ）。
 データ中にヒットする住所が無ければ 
-~** Not found. Do it agin.~ を表示して停止します。
+~** Not found.~ を表示して停止します。
 *** 郵便番号 *→* 住所
 #+begin_src shell
 $ postal-coder.sh 7290111
 7290111 広島県福山市今津町
 #+end_src
-データに存在しない郵便番号の場合には ~** Not found. Do it agin.~ を表示して停止します。
+データに存在しない郵便番号の場合には ~** Not found.~ を表示して停止します。
 
 *** 事業所名 *→* 郵便番号・住所
 #+begin_src shell
@@ -161,7 +161,7 @@ if [[ "${keyin}" =~ ^[0-9]+$ ]]; then   # keyinが数字のみかどうか
 	echo -e "\e[31m${zipcode}\e[m ${adrs_only}"
 	exit 0
     else
-	echo '** 郵便番号 not found. Do it agin.'
+	echo '** 郵便番号 not found. Do it again.'
 	exit 0
     fi
 fi
