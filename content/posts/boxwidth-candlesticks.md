@@ -1,0 +1,144 @@
++++
+title = "gnuplotでローソク足の箱幅を出来高に応じて変える"
+author = ["YAMAGAMI"]
+date = 2022-02-04T00:00:00+09:00
+tags = ["gnuplot", "candlesticks", "ローソク足", "出来高", "箱幅"]
+categories = ["comp"]
+draft = false
++++
+
+ローソク足の箱幅を当日の **出来高** に応じて可変にしてみました[^fn:1]。ある会社のゴールデンクロス前後あたりを抽出して描いた図は次の通りです。
+
+<a id="org34f5649"></a>
+
+{{< figure src="/50days-candle.png" caption="&#22259;1:  ローソク足の幅を出来高の指標とした例図" width="100%" >}}
+
+このように描くと、たしかに **市場エネルギー**&nbsp;[^fn:2]の大小と変動が直感的に分かりやすいような気がします。
+
+-   <font color='red'>赤</font>い箱は<font color='red'>赤字</font>で値下がり、<font color='blue'>青</font>い箱は<font color='blue'>青空</font>で値上がりを示しています
+-   ローソク足の箱幅(boxwidth)のためのデータ列は、期間中の最大出来高を **0.99**, 最小出来高を **0.09** になるように変換したものとなっています
+-   出来高の最大値、最小値はこの図の期間中ではなくて過去1年間のデータに基づいています
+
+
+## 描き方 {#描き方}
+
+gnuplotマニュアルの「2-35 candlesticks」の項には次のような記述があります。
+
+> 長方形の幅はコマンド set boxwidth で制御できますが、以前の gnuplotへの後方互換性として、boxwidth パラメータが設定されていない場合はset bars < width> で制御されるようになっています。
+>
+> これの代わりに、箱ひげ (box-and-whisker) のグループ化に関する明示的な ****幅の指定を、追加の 6 番目のデータで指定できます**** 。その幅は、x座標と同じ単位で与えなければいけません。
+
+つまり
+x軸が時間軸の場合には、幅指定の単位は秒換算された **UNIX時間** にする必要があります。
+
+しかし今回のローソク足プロットでは、土日祝日の休業日を詰めて表示するために
+`everyNth` 関数を導入していました。この関数の「副作用」で、x軸は時間ではなくて文字列になっています。そのため 幅指定を0〜1.0の間で変動する数値でおこなうことができました :smiley:
+
+
+### データファイルの構成 {#データファイルの構成}
+
+株価データファイル（ `HOGE-dohlcv.dat` ）の当該期間中の出来高( _volume_ )を
+0.09〜0.99 の間で変動する **相対箱幅** ( _boxwidth_ ）に変換しました（式1）。
+\\[
+boxwidth = \Bigl\\{\frac{(volume - min)}{(max - min)} + 0.1 \Bigr\\} \times 0.9　　　　(1)
+\\]
+
+<br />
+
+計算のためのコードは「[相対箱幅を求める](#幅計算)」節を参照してください。
+
+得られた **相対箱幅** をデータファイルの第9列に `paste` で貼り付けました。
+
+```nil
+#日付      始値   高値    安値   終値　　　出来高　　MA25    MA75    相対箱幅
+2021-11-18 2332.0 2354.0 2320.0 2339.5 1798600 2395.48 2350.03 0.181684
+2021-11-19 2381.0 2488.5 2372.0 2484.5 4652700 2401.82 2351.91 0.501463
+2021-11-22 2440.0 2476.5 2435.5 2454.0 2628600 2404.36 2353.37 0.274679
+2021-11-24 2438.0 2500.0 2419.0 2431.5 2990400 2405.82 2356.15 0.315216
+    :
+```
+
+
+## gnuplot Code {#gnuplot-code}
+
+gnuplotスクリプト内でやることは、次の行の `using` 相対箱幅のデータ列である `:9` を追加する変更だけです。
+
+```nil
+plot using 0:2:3:4:5:9:($5 < $2?1:2):xticlabels(everyNth(0,1,10)) \
+	      linecolor variable notitle  w candlesticks,\
+```
+
+参考にしたURLはこちら。
+
+
+### 最低限のgnuplotスクリプト {#最低限のgnuplotスクリプト}
+
+```bash
+reset
+  set terminal  pngcairo size 1280, 960 font "Arial, 16"
+  set output "out.png"
+#
+  data_to_plot='./50day-hoge.dat'
+#
+  set style fill solid
+#  土日を除外するための関数
+  everyNth(countCol,labelCol, N) = \
+    ((int(column(countCol)) % N == 0) ? stringcolumn(labelCol) : "" )
+#  Y軸の数値に3桁ごとにカンマ（最大8桁）
+  set decimal locale
+  set format y "%'8.0f"
+  set ylabel "株価(円)" font "Arial, 16"
+  set ytics font 'Arial, 16'
+#  軸の設定
+  set mytics 2
+  set xtics rotate by 270 font 'Arial, 16'
+  set grid ytics mytics
+#  箱に色をつけるための下準備
+  set linetype 1 lc rgb 'red'
+  set linetype 2 lc rgb 'blue'
+#
+  plot data_to_plot\
+       using 0:2:3:4:5:9:($5 < $2?1:2):xticlabels(everyNth(0,1,10)) \
+	      linecolor variable notitle  w candlesticks,\
+     ''  using 0:7:xticlabels(everyNth(0,1,10))\
+       w line lc rgb 'web-green' title '25-day',\
+     ''   using 0:8:xticlabels(everyNth(0,1,10))\
+       w line lc rgb 'sienna1' title '75-day'
+pause -1
+```
+
+（完）
+
+
+## 参考資料 {#siryo}
+
+
+### 相対箱幅を求める {#幅計算}
+
+bashスクリプト内で計算しますので、awkを使っています。
+
+
+#### 出来高の最大値、最小値 {#出来高の最大値-最小値}
+
+```nil
+# 最大値を求める
+v_max=$(awk 'NR==1 {max=$1} {if($1>max) max=$1} END{print max}'\
+	${data_dir}/tmp-vol.dat )
+#最小値を求める
+v_min=$(awk 'BEGIN{min=100000000} {if($1 !="" && min>$1) min=$1} END{print min}' ${data_dir}/tmp-vol.dat)
+```
+
+
+#### 相対箱幅計算 {#相対箱幅計算}
+
+上の式１にしたがって、日毎の相対箱幅 `${box_width}` を計算します。
+
+```nil
+box_width=$(awk "BEGIN {print (((${vol}-${v_min})/(${v_max}-${v_min})+0.1)*0.9)}")
+```
+
+
+## Footnotes: {#footnotes}
+
+[^fn:1]: この件、2022/01/31のブログ記事[「ローソク足と移動平均をgnuplotで描く」](https://bred-in-bingo.netlify.app/posts/maandcandlesticks/)で、今後の課題の一つに上げていました。手こずる予感がありましたが、この改変はとてもすんなり行きました。
+[^fn:2]: 出来高と値動きが株式市場のエネルギーを反映するという意味です。

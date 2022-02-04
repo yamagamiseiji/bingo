@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-02-03 木 21:31 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>gnuplotでローソク足の箱幅を出来高の指標にする</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">gnuplotでローソク足の箱幅を出来高の指標にする</h1>
+<p>
+2022/01/31の記事「ローソク足と移動平均をgnuplotで描く」で、やりたいと言っていた件
+</p>
+
+<p>
+意外にすんなりできました。
+</p>
+
+
+<p>
+図<a href="#org6e67731">1</a>は出力例です。
+</p>
+<ul class="org-ul">
+<li>&lt;font color='red'&gt;赤&lt;/font&gt;い箱は&lt;font color='red'&gt;赤字&lt;/font&gt;で値下がり、&lt;font color='blue'&gt;青&lt;/font&gt;い箱は&lt;font color='blue'&gt;青空&lt;/font&gt;で値上がりを示しています。</li>
+<li>ローソク足の箱幅(boxwidth)のためのデータ列を
+期間中の最大出来高を 0.99, 最小出来高を0.09になるように変換しました</li>
+</ul>
+
+
+<div id="org6e67731" class="figure">
+<p><img src="../static/50days-boxwidth-double-curves.png" alt="50days-boxwidth-double-curves.png" width="100%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>ローソク足の幅を出来高に応じて変えた例図</p>
+</div>
+
+<ul class="org-ul">
+<li>出来高の最大値、最小値は、この図の期間中ではなくて過去1年間のデータに基づいています</li>
+</ul>
+<div id="outline-container-orge929e23" class="outline-2">
+<h2 id="orge929e23"><span class="section-number-2">1</span> データの構成</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+大元の株価データファイル（ <code>HOGE-dohlcv.dat</code> ）の当該期間中の出来高( <i>volume</i> )の
+最小出来高と最大出来高を元に、日毎の <b>相対箱幅</b> ( <i>boxwidth</i> ）の値を0.09〜0.99 の間となるように次式で変換しました。
+\[
+boxwidth = \Bigl\{\frac{(volume - min)}{(max - min)} + 0.1 \Bigr\} \times 0.9
+\]
+</p>
+
+
+<p>
+得られた <b>相対箱幅</b> を次のようにデータファイルの第9列に貼り付け（paste）しました。
+</p>
+<pre class="example">
+#日付      始値   高値    安値   終値　　出来高　MA25    MA75    箱幅
+2021-11-18 2332.0 2354.0 2320.0 2339.5 1798600 2395.48 2350.03 0.181684
+2021-11-19 2381.0 2488.5 2372.0 2484.5 4652700 2401.82 2351.91 0.501463
+2021-11-22 2440.0 2476.5 2435.5 2454.0 2628600 2404.36 2353.37 0.274679
+2021-11-24 2438.0 2500.0 2419.0 2431.5 2990400 2405.82 2356.15 0.315216
+    :
+</pre>
+<p>
+この第9列のデータを使って、箱幅を決めるためのコードは「<a href="#siryo">3</a>」を参照してください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0831f4f" class="outline-2">
+<h2 id="org0831f4f"><span class="section-number-2">2</span> gnuplot Code</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+ポイントは次の1行：
+</p>
+<pre class="example">
+using 0:2:3:4:5:9:($5 &lt; $2?1:2):xticlabels(everyNth(0,1,10)) \
+	  linecolor variable notitle  w candlesticks,\
+</pre>
+<p>
+candlesticksスタイルでもhoge, moge スタイルと同じように、widthの設定ができるんですね。
+参考にしたURLはこちら。
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-bash">reset
+  <span style="color: #006FE0;">set</span> terminal  pngcairo size 1280, 960 font <span style="color: #008000;">"Arial, 16"</span>
+  <span style="color: #006FE0;">set</span> output <span style="color: #008000;">"out.png"</span>
+<span style="color: #8D8D84;">#</span>
+  <span style="color: #BA36A5;">data_to_plot</span>=<span style="color: #008000;">'./50day-hoge.dat'</span>
+<span style="color: #8D8D84;">#</span>
+  <span style="color: #006FE0;">set</span> style fill solid
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#22303;&#26085;&#12434;&#38500;&#22806;&#12377;&#12427;&#12383;&#12417;&#12398;&#38306;&#25968;</span>
+  everyNth(countCol,labelCol, N) = <span style="color: #008000;">\</span>
+    ((int(column(countCol)) % N == 0) ? stringcolumn(labelCol) : <span style="color: #008000;">""</span> )
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">Y&#36600;&#12398;&#25968;&#20516;&#12395;3&#26689;&#12372;&#12392;&#12395;&#12459;&#12531;&#12510;&#65288;&#26368;&#22823;8&#26689;&#65289;</span>
+  <span style="color: #006FE0;">set</span> decimal locale
+  <span style="color: #006FE0;">set</span> format y <span style="color: #008000;">"%'8.0f"</span>
+  <span style="color: #006FE0;">set</span> ylabel <span style="color: #008000;">"&#26666;&#20385;(&#20870;)"</span> font <span style="color: #008000;">"Arial, 16"</span>
+  <span style="color: #006FE0;">set</span> ytics font <span style="color: #008000;">'Arial, 16'</span>
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#36600;&#12398;&#35373;&#23450;</span>
+  <span style="color: #006FE0;">set</span> mytics 2
+  <span style="color: #006FE0;">set</span> xtics rotate by 270 font <span style="color: #008000;">'Arial, 16'</span>
+  <span style="color: #006FE0;">set</span> grid ytics mytics
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#31665;&#12395;&#33394;&#12434;&#12388;&#12369;&#12427;&#12383;&#12417;&#12398;&#19979;&#28310;&#20633;</span>
+  <span style="color: #006FE0;">set</span> linetype 1 lc rgb <span style="color: #008000;">'red'</span>
+  <span style="color: #006FE0;">set</span> linetype 2 lc rgb <span style="color: #008000;">'blue'</span>
+<span style="color: #8D8D84;">#  </span>
+  plot data_to_plot<span style="color: #008000;">\</span>
+       using 0:2:3:4:5:9:($<span style="color: #BA36A5;">5</span> &lt; $<span style="color: #BA36A5;">2</span>?1:2):xticlabels(everyNth(0,1,10)) <span style="color: #008000;">\</span>
+              linecolor variable notitle  w candlesticks,<span style="color: #008000;">\</span>
+     <span style="color: #008000;">''</span>  using 0:7:xticlabels(everyNth(0,1,10))<span style="color: #008000;">\</span>
+       w line lc rgb <span style="color: #008000;">'web-green'</span> title <span style="color: #008000;">'25-day'</span>,<span style="color: #008000;">\</span>
+     <span style="color: #008000;">''</span>   using 0:8:xticlabels(everyNth(0,1,10))<span style="color: #008000;">\</span>
+       w line lc rgb <span style="color: #008000;">'sienna1'</span> title <span style="color: #008000;">'75-day'</span>
+pause -1
+</pre>
+</div>
+
+<p>
+（完）
+</p>
+</div>
+</div>
+
+<div id="outline-container-siryo" class="outline-2">
+<h2 id="siryo"><span class="section-number-2">3</span> 参考資料</h2>
+<div class="outline-text-2" id="text-siryo">
+</div>
+
+<div id="outline-container-org7749041" class="outline-3">
+<h3 id="org7749041"><span class="section-number-3">3.1</span> 出来高の最大値、最小値</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+awkで算出します。   
+</p>
+<pre class="example">
+# 最大値を求める
+v_
+max=$(awk 'NR==1 {max=$1} {if($1&gt;max) max=$1} END{print max}'\
+	${data_dir}/tmp-vol.dat )
+#最小値を求める
+v_min=$(awk 'BEGIN{min=100000000} {if($1 !="" &amp;&amp; min&gt;$1) min=$1} END{print min}' ${data_dir}/tmp-vol.dat)
+</pre>
+</div>
+</div>
+<div id="outline-container-org581b312" class="outline-3">
+<h3 id="org581b312"><span class="section-number-3">3.2</span> 箱幅</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+日毎の箱幅 <code>${box_width}</code> も <code>${v_max}, ${v_min}</code> を使ってawkで求めます。
+</p>
+<pre class="example">
+box_width=$(awk "BEGIN {print (((${vol}-${v_min})/(${v_max}-${v_min})+0.1)*0.9)}")
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org8d0914d" class="outline-3">
+<h3 id="org8d0914d"><span class="section-number-3">3.3</span> gnuplot マニュアルから</h3>
+<div class="outline-text-3" id="text-3-3">
+<blockquote>
+<p>
+長方形の幅はコマンド set boxwidth で制御できますが、以前の gnuplotへの後方互換性として、boxwidth パラメータが設定されていない場合はset bars &lt; width&gt; で制御されるようになっています。
+</p>
+
+<p>
+これの代わりに、箱ひげ (box-and-whisker) のグループ化に関する明示的な <b><b>幅の指定を、追加の 6 番目のデータで指定できます</b></b> 。その幅は、x 座標と同 じ単位で与えなければいけません。
+</p>
+</blockquote>
+<p>
+X軸が時間軸だと、箱幅はめんどうくさい計算になりますが、 <code>everyNth</code> 関数でX軸を文字列にした副作用で、６番目のデータを単純な数値データとして使えたのがラッキー。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd10c4c3" class="outline-2">
+<h2 id="orgd10c4c3"><span class="section-number-2">4</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-02-03 木 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-02-03 木 21:31</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
