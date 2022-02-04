@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-01-31 11:51:00 yamagami>
+#           Time-stamp: <2022-02-04 13:23:12 yamagami>
 #+title: ローソク足と移動平均をgnuplotで描く
 #+date: [2022-01-31]
 #+language: ja
@@ -169,7 +169,9 @@ X軸は文字列扱いになっています。
   
 **** 箱の幅を拡げる方法
  =set boxwidth= を使いました。次は幅を使って *出来高* の多い少ないを表現する *EquiVolume* チャートを描いててみようと思っています。
-  
+
+ *(2020/02/04 追記)* EquiVolumeはわりに簡単にできました。「[[https://bred-in-bingo.netlify.app/posts/boxwidth-candlesticks/][gnuplotでローソク足の箱幅を出来高に応じて変える]] 」をご覧ください。
+ 
 **** 土日など非営業日を *詰めて* プロットする方法
 :PROPERTIES:
 :custom_id: weekday-only

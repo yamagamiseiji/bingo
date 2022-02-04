@@ -20,15 +20,15 @@ draft = false
 
 始めたら あちこちに落とし穴（「[今後の課題など](#kabe)」節）があって、けっこうハマりました :sweat:
 
-しかし、なんとか図[1](#org10a0cea)のような図が描けるようになりました。ある会社のおよそ１年間の株価データをプロットして見ました。
+しかし、なんとか図[1](#org376825e)のような図が描けるようになりました。ある会社のおよそ１年間の株価データをプロットして見ました。
 
-<a id="org10a0cea"></a>
+<a id="org376825e"></a>
 
 {{< figure src="/yatta-1.png" caption="&#22259;1:  Gnuplotで描いたローソク足と25日,75日移動平均" width="100%" >}}
 
-図[2](#org608e3e6)は 図[1](#org10a0cea)の一部を拡大表示したものです。
+図[2](#orgc35f676)は 図[1](#org376825e)の一部を拡大表示したものです。
 
-<a id="org608e3e6"></a>
+<a id="orgc35f676"></a>
 
 {{< figure src="/kakudai.png" caption="&#22259;2:  上の図の一部を拡大" width="100%" >}}
 
@@ -86,7 +86,7 @@ draft = false
 
 ### gnuplotスクリプト {#gnuplotスクリプト}
 
-図[1](#org10a0cea), [2](#org608e3e6)を描出する　gnuplotスクリプト（ `double-curve.plt` ）は次のとおりです。
+図[1](#org376825e), [2](#orgc35f676)を描出する　gnuplotスクリプト（ `double-curve.plt` ）は次のとおりです。
 
 ```bash
 reset
@@ -160,6 +160,8 @@ X軸は文字列扱いになっています。
 
     `set boxwidth` を使いました。次は幅を使って **出来高** の多い少ないを表現する **EquiVolume** チャートを描いててみようと思っています。
 
+    **(2020/02/04 追記)** EquiVolumeはわりに簡単にできました。「[gnuplotでローソク足の箱幅を出来高に応じて変える](https://bred-in-bingo.netlify.app/posts/boxwidth-candlesticks/) 」をご覧ください。
+
 <!--list-separator-->
 
 -  土日など非営業日を **詰めて** プロットする方法
@@ -230,5 +232,5 @@ done
 ## Footnotes: {#footnotes}
 
 [^fn:1]: gnuplotでの重ね書きの記事がぜんぜん無いわけではありません。 [Generating charts with Gnuplot](https://spare-time-trading.com/en/know-how-en/106-generating-charts-with-gnuplot)ではgnuplotですばらしい `ichimoku` 出力を描く方法が公開されています。下図の通り、ほとんど完璧な分析チャートです。 {{< figure src="/DAX_light2.png" width="80%" >}} しかし、ここまでの情報は自分には多すぎます。簡単にローソク足と移動平均だけの描出例を探していました。そうした例は、Pythonなどを使ったものはありましたが、gnuplotでは見つかりませんでした。gnuplotのユーザには株の分析チャートのニーズが高くないのか、あるいはgnuplotユーザは自力でなんでも描ける人が多いので、解説記事の需要がないのかもしれません :smile:
-[^fn:2]: ローソク分析は、山形県酒田市出身の米商人である本間宗久(図[3](#orga5966a7))が創案したそうですが、その真偽を巡っては議論もあります。しかしいずれにしてもローソク足分析が日本で発生し広まったのは間違いないようです。 <a id="orga5966a7"></a> {{< figure src="/本間宗久.jpg" caption="&#22259;3: 本間宗久（1724年(享保9年)〜1805年（享和3年））の肖像画(早坂豊蔵；作画年1900年)。出典は[酒田市立図書館/光丘文庫デジタルアーカイブ](https://trc-adeac.trc.co.jp/WJ11F0/WJJS07U/0620415100/0620415100200020/mp200750/?Word=%e6%9c%ac%e9%96%93%e5%ae%97%e4%b9%85)。" width="30%" >}}
+[^fn:2]: ローソク分析は、山形県酒田市出身の米商人である本間宗久(図[3](#org4ba421a))が創案したそうですが、その真偽を巡っては議論もあります。しかしいずれにしてもローソク足分析が日本で発生し広まったのは間違いないようです。 <a id="org4ba421a"></a> {{< figure src="/本間宗久.jpg" caption="&#22259;3: 本間宗久（1724年(享保9年)〜1805年（享和3年））の肖像画(早坂豊蔵；作画年1900年)。出典は[酒田市立図書館/光丘文庫デジタルアーカイブ](https://trc-adeac.trc.co.jp/WJ11F0/WJJS07U/0620415100/0620415100200020/mp200750/?Word=%e6%9c%ac%e9%96%93%e5%ae%97%e4%b9%85)。" width="30%" >}}
 [^fn:3]: 移動平均の日数は、各国の株式市場の営業日などの事情で変わってくるようです。[Investopedia](https://www.investopedia.com/ask/answers/122414/what-are-most-common-periods-used-creating-moving-average-ma-lines.asp)によれば、もっとも一般的なのは **5, 10, 20, 50日** だそうです。
