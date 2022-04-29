@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
 <head>
-<!-- 2022-04-29 金 16:17 -->
+<!-- 2022-04-29 金 16:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ledger帳簿とクレジットカード利用明細との照合確認</title>
@@ -220,8 +220,8 @@
 <div id="content">
 <h1 class="title">Ledger帳簿とクレジットカード利用明細との照合確認</h1>
 
-<div id="outline-container-orga952714" class="outline-2">
-<h2 id="orga952714"><span class="section-number-2">1</span> 帳簿の照合確認</h2>
+<div id="outline-container-org3b00e7a" class="outline-2">
+<h2 id="org3b00e7a"><span class="section-number-2">1</span> 帳簿の照合確認</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <b>帳簿</b> へのデータ入力は、どんなに細心の注意を払って作業してもタイプミスをゼロにすることはできません。
@@ -242,8 +242,8 @@
 </p>
 </div>
 
-<div id="outline-container-orgbf3b1ed" class="outline-3">
-<h3 id="orgbf3b1ed"><span class="section-number-3">1.1</span> 照合確認の方法</h3>
+<div id="outline-container-org365982d" class="outline-3">
+<h3 id="org365982d"><span class="section-number-3">1.1</span> 照合確認の方法</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 これまでは、
@@ -289,8 +289,8 @@ PCの画面上に明細書のPDFを表示しながら、
 </div>
 </div>
 
-<div id="outline-container-org1a8a959" class="outline-2">
-<h2 id="org1a8a959"><span class="section-number-2">2</span> まずは操作法の紹介から</h2>
+<div id="outline-container-orgd5ca4c1" class="outline-2">
+<h2 id="orgd5ca4c1"><span class="section-number-2">2</span> まずは操作法の紹介から</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 クレカのサイトから利用明細書（CSV）をダウンロードします。
@@ -316,7 +316,7 @@ PCの画面上に明細書のPDFを表示しながら、
 これを実行すると次のような日付と金額のデータだけの
 単純なフォーマットのファイルが生成されます。
 </p>
-<pre class="example" id="org97a6df2">
+<pre class="example" id="orgb992a63">
 20220227 600
 20220227 930
 20220227 950
@@ -345,14 +345,14 @@ PCの画面上に明細書のPDFを表示しながら、
 もし2つのファイルに不一致があれば、 <code>colordiff</code> が次のような出力を表示します。
 </p>
 
-<div id="org06f0772" class="figure">
+<div id="org4f2cbed" class="figure">
 <p><img src="https://dl.dropboxusercontent.com/s/mjxx5gm3m3srdst/colordiff-screenshot-output.png" alt="colordiff-screenshot-output.png" width="90%" />
 </p>
 <p><span class="figure-number">&#22259;2:  </span>colordiffによるクレカ明細書（左）とLedger出力（右）</p>
 </div>
 </div>
-<div id="outline-container-org337846d" class="outline-3">
-<h3 id="org337846d"><span class="section-number-3">2.1</span> 図<a href="#org06f0772">2</a>の読み方</h3>
+<div id="outline-container-org3c0cb4a" class="outline-3">
+<h3 id="org3c0cb4a"><span class="section-number-3">2.1</span> 図<a href="#org4f2cbed">2</a>の読み方</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 右の列は、自分が入力した帳簿に基づいてLedgerで算出した日付と利用金額のデータです。
@@ -360,7 +360,7 @@ PCの画面上に明細書のPDFを表示しながら、
 </p>
 
 <p>
-図<a href="#org06f0772">2</a>は次のようなことを示しています：
+図<a href="#org4f2cbed">2</a>は次のようなことを示しています：
 </p>
 <ul class="org-ul">
 <li><b>3月3日</b> の右列＝1,510円は　1,812円に修正しなければならない（<span style="color: blue"> 青い｜</span>）</li>
@@ -385,8 +385,8 @@ PCの画面上に明細書のPDFを表示しながら、
 </div>
 
 
-<div id="outline-container-orgc73f73e" class="outline-2">
-<h2 id="orgc73f73e"><span class="section-number-2">3</span> スクリプトの概要紹介</h2>
+<div id="outline-container-org2277b7d" class="outline-2">
+<h2 id="org2277b7d"><span class="section-number-2">3</span> スクリプトの概要紹介</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 2つのスクリプトとも短く簡単なものです。
@@ -394,8 +394,8 @@ PCの画面上に明細書のPDFを表示しながら、
 </p>
 </div>
 
-<div id="outline-container-orgfe4cead" class="outline-3">
-<h3 id="orgfe4cead"><span class="section-number-3">3.1</span> パソコンの環境</h3>
+<div id="outline-container-org29b0d12" class="outline-3">
+<h3 id="org29b0d12"><span class="section-number-3">3.1</span> パソコンの環境</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 パソコンはLenovo ThinkPad X230(MEM=8G, SSD=180G), OSはUbuntu20.04です。
@@ -409,13 +409,13 @@ PCの画面上に明細書のPDFを表示しながら、
 </div>
 </div>
 
-<div id="outline-container-orgfa9d15f" class="outline-3">
-<h3 id="orgfa9d15f"><span class="section-number-3">3.2</span> ダウンロードした明細書CSVファイルの項目構成</h3>
+<div id="outline-container-org2aa65c6" class="outline-3">
+<h3 id="org2aa65c6"><span class="section-number-3">3.2</span> ダウンロードした明細書CSVファイルの項目構成</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 各行は次のような構成になっています。
 </p>
-<pre class="example" id="orgc8fb4cf">
+<pre class="example" id="org2a9fa69">
 2022年3月2日,ダイエートウカイチバ,*,本人,2022年4月,アド,1,1,"\1,110",,,"\0","\1,110","\0"
 </pre>
 <p>
@@ -425,11 +425,11 @@ PCの画面上に明細書のPDFを表示しながら、
 </div>
 </div>
 
-<div id="outline-container-org10e111f" class="outline-3">
-<h3 id="org10e111f"><span class="section-number-3">3.3</span> CSV明細書から日付と金額だけを抽出するスクリプト</h3>
+<div id="outline-container-org742204b" class="outline-3">
+<h3 id="org742204b"><span class="section-number-3">3.3</span> CSV明細書から日付と金額だけを抽出するスクリプト</h3>
 </div>
-<div id="outline-container-org275da4d" class="outline-3">
-<h3 id="org275da4d"><span class="section-number-3">3.4</span> <code>date-amount抽出-f-orico明細.sh</code></h3>
+<div id="outline-container-org0590f64" class="outline-3">
+<h3 id="org0590f64"><span class="section-number-3">3.4</span> <code>date-amount抽出-f-orico明細.sh</code></h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 （ソースコードは  <a href="#src-date-amount">5.1</a>節参照）
@@ -443,7 +443,7 @@ PCの画面上に明細書のPDFを表示しながら、
 <li><code>diff-orico.sh</code> (次節)で使えるフォーマットにして./tmp-Meisai-out.csv を生成・保存</li>
 <li>ファイルの中身はこんな感じ：</li>
 </ul>
-<pre class="example" id="org8ad0bbd">
+<pre class="example" id="org7766d7b">
 2022/03/30,18000
 2022/03/30,498
 2022/03/30,650
@@ -478,8 +478,8 @@ PCの画面上に明細書のPDFを表示しながら、
 </div>
 </div>
 
-<div id="outline-container-org75c3733" class="outline-3">
-<h3 id="org75c3733"><span class="section-number-3">3.5</span> <code>diff-orico.sh</code> で2つのファイルを照合する</h3>
+<div id="outline-container-orgb4b6f23" class="outline-3">
+<h3 id="orgb4b6f23"><span class="section-number-3">3.5</span> <code>diff-orico.sh</code> で2つのファイルを照合する</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 （コードは <a href="#diff-src">5.2</a> 節参照）
@@ -495,8 +495,8 @@ PCの画面上に明細書のPDFを表示しながら、
 </div>
 
 
-<div id="outline-container-orgbbad176" class="outline-4">
-<h4 id="orgbbad176"><span class="section-number-4">3.5.1</span> 1. Ledgerパート</h4>
+<div id="outline-container-orga05c2ce" class="outline-4">
+<h4 id="orga05c2ce"><span class="section-number-4">3.5.1</span> 1. Ledgerパート</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 基本的なLedgerのクエリは <code>ledger reg ^liab and orico</code> になります。
@@ -507,10 +507,10 @@ PCの画面上に明細書のPDFを表示しながら、
 </p>
 
 <p>
-Oricoは「毎月末締め」ですが、Orico ETCカードは「毎月15日締め」。たとえば支払日が4月27日の明細書では表<a href="#orge54baf5">1</a>のようになります。
+Oricoは「毎月末締め」ですが、Orico ETCカードは「毎月15日締め」。たとえば支払日が4月27日の明細書では表<a href="#orgac74065">1</a>のようになります。
 </p>
 
-<table id="orge54baf5" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgac74065" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">&#34920;1:</span> 支払日が4月27日の「利用期間」</caption>
 
 <colgroup>
@@ -539,7 +539,7 @@ Oricoは「毎月末締め」ですが、Orico ETCカードは「毎月15日締�
 </div>
 
 <ol class="org-ol">
-<li><a id="orgac43762"></a>Ledgerによる金額計算<br />
+<li><a id="orgd328508"></a>Ledgerによる金額計算<br />
 <div class="outline-text-5" id="text-3-5-1-1">
 <p>
 上に述べた理由で、金額計算パートを2つにしています。
@@ -563,7 +563,7 @@ ledger reg  ^liab and orico and <span style="color: #008000;">\(</span>@nexco or
 </div>
 </li>
 
-<li><a id="orgac92275"></a>補足説明 1<br />
+<li><a id="orga8259eb"></a>補足説明 1<br />
 <div class="outline-text-5" id="text-3-5-1-2">
 <p>
 両クエリ式の3行目 <code>--date-format="%Y%m%d"</code> で、日付フォーマットを 20220301 風にします。
@@ -575,7 +575,7 @@ ledger reg  ^liab and orico and <span style="color: #008000;">\(</span>@nexco or
 </p>
 </div>
 </li>
-<li><a id="org16f9e3c"></a>補足説明 2<br />
+<li><a id="orgd3b8ef7"></a>補足説明 2<br />
 <div class="outline-text-5" id="text-3-5-1-3">
 <p>
 「メイン金額」のクエリ式の中の <code>not \(@口座 or @nexco or @首都高\)</code> ですが、 <code>@口座</code> を除外しないと、次のような
@@ -597,8 +597,8 @@ Oricoカードの「口座振替」（銀行口座からの引き落とし）ト
 </ol>
 </div>
 
-<div id="outline-container-orgda7b6b2" class="outline-4">
-<h4 id="orgda7b6b2"><span class="section-number-4">3.5.2</span> 2. 照合パート</h4>
+<div id="outline-container-orgcd05b1a" class="outline-4">
+<h4 id="orgcd05b1a"><span class="section-number-4">3.5.2</span> 2. 照合パート</h4>
 <div class="outline-text-4" id="text-3-5-2">
 <p>
 ここでは <code>colordiff</code> を用いて、   
@@ -625,12 +625,12 @@ Oricoカードの「口座振替」（銀行口座からの引き落とし）ト
 </div>
 </div>
 
-<div id="outline-container-org4519809" class="outline-2">
-<h2 id="org4519809"><span class="section-number-2">4</span> 評価と今後の課題</h2>
+<div id="outline-container-orgf329fae" class="outline-2">
+<h2 id="orgf329fae"><span class="section-number-2">4</span> 評価と今後の課題</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org601034a" class="outline-3">
-<h3 id="org601034a"><span class="section-number-3">4.1</span> 評価</h3>
+<div id="outline-container-orgd09be0c" class="outline-3">
+<h3 id="orgd09be0c"><span class="section-number-3">4.1</span> 評価</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 この簡単な工夫で、明細書と帳簿の照合・確認作業は従来よりもはるかに短時間で済むようになりました。
@@ -648,12 +648,12 @@ Oricoカードの「口座振替」（銀行口座からの引き落とし）ト
 </div>
 </div>
 
-<div id="outline-container-org583b346" class="outline-3">
-<h3 id="org583b346"><span class="section-number-3">4.2</span> 今後の課題</h3>
+<div id="outline-container-orgdc16cb5" class="outline-3">
+<h3 id="orgdc16cb5"><span class="section-number-3">4.2</span> 今後の課題</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-org4f48b54" class="outline-4">
-<h4 id="org4f48b54"><span class="section-number-4">4.2.1</span> 細かい点について</h4>
+<div id="outline-container-orgd965d6d" class="outline-4">
+<h4 id="orgd965d6d"><span class="section-number-4">4.2.1</span> 細かい点について</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <ul class="org-ul">
 <li>現行では2つの小さなスクリプトを起動していますが、これは一つにまとめる予定です</li>
@@ -664,11 +664,11 @@ Oricoカードの「口座振替」（銀行口座からの引き落とし）ト
 </div>
 
 
-<div id="outline-container-orgbdd118d" class="outline-4">
-<h4 id="orgbdd118d"><span class="section-number-4">4.2.2</span> ちょっと大きな問題</h4>
+<div id="outline-container-org4826cc8" class="outline-4">
+<h4 id="org4826cc8"><span class="section-number-4">4.2.2</span> ちょっと大きな問題</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <ul class="org-ul">
-<li>日付と金額だけではなく、 <b><b>支払先</b></b> も照合の対象にするシステムとしては完成度が高いと思います</li>
+<li>日付と金額だけではなく、 <b><b>支払先</b></b> も照合の対象にする方がシステムとしては完成度が高いと思います</li>
 <li>けれども残念ながら <b><b>日本語</b></b> で支払先を照合の対象にするのは、みずから底なし沼に足を踏み込むようなもの :sweat:</li>
 <li>なにしろ日本語には、確立した <b><b>正書法</b></b> というものがありません。漢字、ひらがな、カタカナ、ローマ字と文字種がたくさんある上に、それぞれの文字種においても確定した表記ルールがありません。</li>
 <li>いわば無政府状態、カオス、悪魔のような状態ですので、いずれの日にか日本国またはアカデミーが正書法を確立してくれるまでは手を出さない（出せない）！と思っています :sunglasses:</li>
@@ -679,8 +679,8 @@ Oricoカードの「口座振替」（銀行口座からの引き落とし）ト
 </div>
 
 
-<div id="outline-container-org6170a73" class="outline-2">
-<h2 id="org6170a73"><span class="section-number-2">5</span> 参考資料（ソースコード）</h2>
+<div id="outline-container-org961c57d" class="outline-2">
+<h2 id="org961c57d"><span class="section-number-2">5</span> 参考資料（ソースコード）</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 上で紹介した2つのシェルスクリプトのソースコード。
@@ -819,8 +819,8 @@ rm tmp-toll.csv tmp-main-orico.csv
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa02581" class="outline-2">
-<h2 id="orgfa02581"><span class="section-number-2">6</span> Footnotes:</h2>
+<div id="outline-container-org8dc57d7" class="outline-2">
+<h2 id="org8dc57d7"><span class="section-number-2">6</span> Footnotes:</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 </div>
@@ -840,7 +840,7 @@ Ledger-cliでは、支払先をタイプミスした時に警告またはエラ�
 Ledger-cliでは最悪の場合には次のようにして「調整」を行うことができます。くわしくはLedgerのマニュアルを見てください。
 </p>
 
-<div id="org04210d2" class="figure">
+<div id="org74e6820" class="figure">
 <p><img src="../static/adjustment-sample.png" alt="adjustment-sample.png" width="100%" />
 </p>
 </div></div></div>
@@ -855,7 +855,7 @@ CSV内データにカンマが含まれている場合には、&lt;font color=re
 
 <div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
 もちろんsortして揃えることも可能ですが、これとは別のスクリプトで別の使い方をする関係上、
-あえてデータフォーマットを<a href="#org97a6df2">1</a>と同一にしていません。
+あえてデータフォーマットを<a href="#orgb992a63">1</a>と同一にしていません。
 </p></div></div>
 
 
@@ -864,7 +864,7 @@ CSV内データにカンマが含まれている場合には、&lt;font color=re
 <div id="postamble" class="status">
 <p class="date">&#26085;&#20184;: 2022-04-28 木 00:00</p>
 <p class="author">&#33879;&#32773;: YAMAGAMI</p>
-<p class="date">Created: 2022-04-29 金 16:17</p>
+<p class="date">Created: 2022-04-29 金 16:27</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
