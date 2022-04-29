@@ -1,7 +1,7 @@
 +++
 title = "パラソル ホワイト トップ？"
 author = ["YAMAGAMI"]
-date = 2022-03-30T00:00:00+09:00
+date = 2022-05-30T00:00:00+09:00
 tags = ["自然誌", "横浜"]
 categories = ["comp"]
 draft = false
@@ -17,9 +17,9 @@ draft = false
 
 場所は桧山公園 所在地：神奈川県横浜市旭区若葉台2-1-14　
 
-ズームアップすると図[2](#orgf181a0e)のような花が咲いている場所があった。
+ズームアップすると図[2](#org8dee54a)のような花が咲いている場所があった。
 
-<a id="orgf181a0e"></a>
+<a id="org8dee54a"></a>
 
 {{< figure src="/Doellingeria_umbellata.jpg" caption="&#22259;2:  名前不詳の花" width="70%" >}}
 

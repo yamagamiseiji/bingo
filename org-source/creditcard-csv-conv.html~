@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-04-29 金 16:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ledger帳簿とクレジットカード利用明細との照合確認</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Ledger帳簿とクレジットカード利用明細との照合確認</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6760892">1. 帳簿の照合確認</a>
+<ul>
+<li><a href="#org266c71a">1.1. 照合確認の方法</a></li>
+</ul>
+</li>
+<li><a href="#org2853365">2. まずは操作法の紹介から</a>
+<ul>
+<li><a href="#orgd617a51">2.1. 図fig2の読み方</a></li>
+</ul>
+</li>
+<li><a href="#org5f59d34">3. スクリプトの概要紹介</a>
+<ul>
+<li><a href="#orgea5d7c6">3.1. パソコンの環境</a></li>
+<li><a href="#org18f4ec9">3.2. ダウンロードした明細書CSVファイルの項目構成</a></li>
+<li><a href="#org0a3cccc">3.3. CSV明細書から日付と金額だけを抽出するスクリプト</a></li>
+<li><a href="#org37267ff">3.4. <code>date-amount抽出-f-orico明細.sh</code></a></li>
+<li><a href="#org1e42ca7">3.5. <code>diff-orico.sh</code> で2つのファイルを照合する</a>
+<ul>
+<li><a href="#org5046372">3.5.1. 1. Ledgerパート</a></li>
+<li><a href="#orgb37ad96">3.5.2. 2. 照合パート</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgcaefc54">4. 評価と今後の課題</a>
+<ul>
+<li><a href="#orgf4be90d">4.1. 評価</a></li>
+<li><a href="#orga52d822">4.2. 今後の課題</a>
+<ul>
+<li><a href="#org6c7cd40">4.2.1. 細かい点について</a></li>
+<li><a href="#org8c0110d">4.2.2. ちょっと大きな問題</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgcc32711">5. 参考資料（ソースコード）</a>
+<ul>
+<li><a href="#src-date-amount">5.1. <code>date-amount抽出-f-orico明細.sh</code> コード</a></li>
+<li><a href="#diff-src">5.2. <code>diff-orico.sh</code> コード</a></li>
+</ul>
+</li>
+<li><a href="#org153362d">6. Footnotes:</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6760892" class="outline-2">
+<h2 id="org6760892"><span class="section-number-2">1</span> 帳簿の照合確認</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<b>帳簿</b> へのデータ入力は、どんなに細心の注意を払って作業してもタイプミスをゼロにすることはできません。
+</p>
+
+<p>
+ただし
+<b>日付</b> は月をまたいだりしない限り多少のミスは許容できます<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+
+<p>
+また <b>支払先</b> については、そもそもショップの正式名称、通り名などがクレジットカードの明細書上の略称と異なっていることがあります。支払先は（特に日本語では）「表記ゆれ」エラーが起こりがちな項目ですが、Ledger-cliでは対応策が用意されています<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>ので、これもさほど心配することはありません。
+</p>
+
+<p>
+問題なのは <b>金額</b> 。これは1円でも間違えると、あとあと面倒なことが起こります<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
+帳簿と利用明細書の金額をきちんと照合・確認することは経理・帳簿付けの基本中の基本です。
+</p>
+</div>
+
+<div id="outline-container-org266c71a" class="outline-3">
+<h3 id="org266c71a"><span class="section-number-3">1.1</span> 照合確認の方法</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+これまでは、
+PCの画面上に明細書のPDFを表示しながら、
+その隣にLedgerファイルに基づいて算出した当該クレカの日々の支出額を表示し、
+その両者を見比べるという方法をとっていました。
+</p>
+
+<p>
+明細書はPDFですが印刷物イメージ。
+一方、コンピュータ上のスプレッドシートやリスト表示されたデータは明細書の印刷物イメージとはさまざまな点で別物です。
+知覚的に大きく異なるこの両者を照合するのは心理的にはかなり高負荷な作業です。
+</p>
+
+<p>
+とりわけある一定の年齢以上になると、
+視力だけでなく眼の奥にある大事な臓器（脳）も
+こうした作業のチカラが落ちてきます。
+ということで、毎月毎月、明細書とLedgerの帳簿の計算結果がなかなか一致しません。
+</p>
+
+<p>
+これまでそれなりに工夫はしてきました。
+たとえば、印刷物イメージの明細書とをできるだけ似た形にして提示するとか、注視点の移動距離と頻度を下げるとか・・・。にもかかわらず、作業の苦痛はそろそろぼちぼち限界です :sweat: 
+</p>
+
+<p>
+<br />
+しばらく試行錯誤していましたが、最近になってようやく自分なりの方法が確立しました。
+それをここで紹介します。
+</p>
+<blockquote>
+<p>
+明細書データのCSVデータをダウンロードして取得し<br />
+そこから日付と金額だけを抽出して<br />
+照合しやすいフォーマットのCSVファイルにする。<br />
+もう一方のLedgerデータもそれと同じフォーマットにする。<br />
+<br />
+そうしておいて<span style="color: red">必殺colordiff</span>を使う
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2853365" class="outline-2">
+<h2 id="org2853365"><span class="section-number-2">2</span> まずは操作法の紹介から</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+クレカのサイトから利用明細書（CSV）をダウンロードします。
+</p>
+
+<p>
+会社によって明細書のCSVファイルの形式はさまざまです。
+ここでは、私が使っているカード＝ <b>Costco Global Card (Orico MasterCard)</b> を例にとってお話します。
+</p>
+
+<p>
+ターミナで次のコマンドを入力します<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ date-amount&#25277;&#20986;-f-orico&#26126;&#32048;.sh HOGExxxxxxxxxxxxx.csv
+</pre>
+</div>
+<p>
+<code>HOGE</code> で始まる文字列はOricoのCSV形式の明細書です。
+</p>
+
+<p>
+これを実行すると次のような日付と金額のデータだけの
+単純なフォーマットのファイルが生成されます。
+</p>
+<pre class="example" id="org1c6f1b7">
+20220227 600
+20220227 930
+20220227 950
+20220301 6960
+20220302 1110
+　　：
+</pre>
+
+<p>
+これが出来たら、次に <code>diff-orico.sh</code> スクリプトを起動します。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ diff-orico.sh
+</pre>
+</div>
+
+<p>
+このスクリプトは
+</p>
+<ol class="org-ol">
+<li>明細書と同期間のクレカ支出データをLedgerを使って作ります</li>
+<li>それと明細書データとを照合します</li>
+</ol>
+
+<p>
+もし2つのファイルに不一致があれば、 <code>colordiff</code> が次のような出力を表示します。
+</p>
+
+<div id="orgb1f9b33" class="figure">
+<p><img src="https://dl.dropboxusercontent.com/s/mjxx5gm3m3srdst/colordiff-screenshot-output.png" alt="colordiff-screenshot-output.png" width="90%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>colordiffによるクレカ明細書（左）とLedger出力（右）</p>
+</div>
+</div>
+<div id="outline-container-orgd617a51" class="outline-3">
+<h3 id="orgd617a51"><span class="section-number-3">2.1</span> 図<a href="#orgb1f9b33">2</a>の読み方</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+右の列は、自分が入力した帳簿に基づいてLedgerで算出した日付と利用金額のデータです。
+左の列はダウンロードした明細書の日付と金額のデータです。こちらが常に「正解」になります。
+</p>
+
+<p>
+図<a href="#orgb1f9b33">2</a>は次のようなことを示しています：
+</p>
+<ul class="org-ul">
+<li><b>3月3日</b> の右列＝1,510円は　1,812円に修正しなければならない（<span style="color: blue"> 青い｜</span>）</li>
+<li><b>3月5日</b> には2,300円の支出があったのに記帳漏れになっているので要追加（<span style="color: red">赤い\<</span>）</li>
+<li><b>3月9日</b> の右列＝1,140円は、このクレカによる支出ではないので削除する（<span style="color: green"> 緑の></span>）</li>
+</ul>
+
+<p>
+左右不一致の箇所は、EmacsでLedgerファイルを開いて修正して行きます。
+修正作業後に <code>diff-orico.sh</code> を実行して次のような（味も素っ気もない）メッセージがでたら、めでたく照合・確認作業は終了です。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">** Meisai &#12392; Ledger &#12399;&#23436;&#20840;&#12395;&#19968;&#33268;
+</pre>
+</div>
+
+<p>
+照合・確認の所要時間は、明細書の行数が50行〜100行程度なら（エラー件数によりますが）10分程度でしょうか。たいへんな効率化です ✌️
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5f59d34" class="outline-2">
+<h2 id="org5f59d34"><span class="section-number-2">3</span> スクリプトの概要紹介</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+2つのスクリプトとも短く簡単なものです。
+流し読みでお分かりいただけると思います。
+</p>
+</div>
+
+<div id="outline-container-orgea5d7c6" class="outline-3">
+<h3 id="orgea5d7c6"><span class="section-number-3">3.1</span> パソコンの環境</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+パソコンはLenovo ThinkPad X230(MEM=8G, SSD=180G), OSはUbuntu20.04です。
+おもなソフトのバージョンは次のとおりです：
+</p>
+<ul class="org-ul">
+<li>GNU bash, バージョン 5.0.17(1)-release (x86<sub>64</sub>-pc-linux-gnu)</li>
+<li>Emacs26.3</li>
+<li>Ledger 3.1.3-20190331</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org18f4ec9" class="outline-3">
+<h3 id="org18f4ec9"><span class="section-number-3">3.2</span> ダウンロードした明細書CSVファイルの項目構成</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+各行は次のような構成になっています。
+</p>
+<pre class="example" id="orgd328fbf">
+2022年3月2日,ダイエートウカイチバ,*,本人,2022年4月,アド,1,1,"\1,110",,,"\0","\1,110","\0"
+</pre>
+<p>
+どのクレカ会社でも、基本的にはほぼ同じような構成ですが、
+カタカナが半角だったり全角だったり、全レコードがダブルクォーテーションで囲まれていたりいなかったりとか、項目の順番が違っていたりします<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a3cccc" class="outline-3">
+<h3 id="org0a3cccc"><span class="section-number-3">3.3</span> CSV明細書から日付と金額だけを抽出するスクリプト</h3>
+</div>
+<div id="outline-container-org37267ff" class="outline-3">
+<h3 id="org37267ff"><span class="section-number-3">3.4</span> <code>date-amount抽出-f-orico明細.sh</code></h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+（ソースコードは  <a href="#src-date-amount">5.1</a>節参照）
+</p>
+
+<p>
+ダウンロードしたCSV明細書から、 <b>日付と金額だけ</b> を抽出してファイル化します。
+</p>
+<ul class="org-ul">
+<li>引数はOricoのCSVファイル名</li>
+<li><code>diff-orico.sh</code> (次節)で使えるフォーマットにして./tmp-Meisai-out.csv を生成・保存</li>
+<li>ファイルの中身はこんな感じ：</li>
+</ul>
+<pre class="example" id="org21f1649">
+2022/03/30,18000
+2022/03/30,498
+2022/03/30,650
+2022/03/30,1681
+2022/03/30,7643
+2022/03/30,1279
+</pre>
+
+<p>
+このファイルでは、
+</p>
+<ul class="org-ul">
+<li>日付のフォーマットは <code>%Y/%m/%d</code> です</li>
+<li>またCSVの区切データとしてカンマを使っています</li>
+<li>同一日の利用金額を昇順にソートすることもやっていません。ダウンロードしたCSVファイルのデータ順のままです<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>。</li>
+</ul>
+
+<p>
+なお、CSVファイルの数値データの中に3桁ごとのカンマが含まれていると、CSV区切記号としてのカンマと区別ができなくなります。それを回避するには <b><b>組込変数 <code>FPAT</code></b></b> (Fields Pattern)を使います。
+</p>
+
+<p>
+これを使えば、次のように数値データにカンマが含まれていても、awkでカラム位置を指定すると、ちゃんと抽出できます。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">awk -v <span style="color: #BA36A5;">FPAT</span>=<span style="color: #008000;">'([^,]+)|(\"[^\"]+\")'</span> <span style="color: #008000;">'{print $9}'</span> ./tmp-orico.csv 
+</pre>
+</div>
+<p>
+<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1e42ca7" class="outline-3">
+<h3 id="org1e42ca7"><span class="section-number-3">3.5</span> <code>diff-orico.sh</code> で2つのファイルを照合する</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+（コードは <a href="#diff-src">5.2</a> 節参照）
+</p>
+
+<p>
+このスクリプトは2つの仕事をします。
+</p>
+<ol class="org-ol">
+<li>一つはLedger-cliで、Oricoカードの明細書期間と同じ期間のregisterレポートを取得し、それを <code>./tmp-Ledger-out.csv</code> ファイルにして保存すること</li>
+<li>もう一つは、先の <code>date-amount抽出-f-orico明細.sh</code> で生成した <code>./tmp-Meisai-out.csv</code> と、 <code>./-Ledger-out.csv</code> ファイルとを照合すること。</li>
+</ol>
+</div>
+
+
+<div id="outline-container-org5046372" class="outline-4">
+<h4 id="org5046372"><span class="section-number-4">3.5.1</span> 1. Ledgerパート</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+基本的なLedgerのクエリは <code>ledger reg ^liab and orico</code> になります。
+</p>
+
+<p>
+これだけで済めばよいのですが、ちょっと面倒なことがあります。わたしはOricoカードの <b>ETCカード</b> をクルマに積んでいます。そのETCの締め日がOricoカードと同じではないのです。
+</p>
+
+<p>
+Oricoは「毎月末締め」ですが、Orico ETCカードは「毎月15日締め」。たとえば支払日が4月27日の明細書では表<a href="#orgff9a199">1</a>のようになります。
+</p>
+
+<table id="orgff9a199" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">&#34920;1:</span> 支払日が4月27日の「利用期間」</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">カード</th>
+<th scope="col" class="org-left">&lt;c&gt;利用期間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Orico MasterCard</td>
+<td class="org-left">3月1日〜3月31日</td>
+</tr>
+
+<tr>
+<td class="org-left">Orico ETC</td>
+<td class="org-left">2月15日〜3月15日</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<ol class="org-ol">
+<li><a id="org425407a"></a>Ledgerによる金額計算<br />
+<div class="outline-text-5" id="text-3-5-1-1">
+<p>
+上に述べた理由で、金額計算パートを2つにしています。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">orico&#12398;&#12513;&#12452;&#12531;&#37329;&#38989;&#35336;&#31639;</span>
+ledger reg  ^liab and orico and not <span style="color: #008000;">\(</span>@&#21475;&#24231; or @nexco or @&#39318;&#37117;&#39640;<span style="color: #008000;">\)</span><span style="color: #008000;">\</span>
+       -b ${<span style="color: #BA36A5;">b_date</span>} -e ${<span style="color: #BA36A5;">e_date</span>}<span style="color: #008000;">\</span>
+       --date-format=<span style="color: #008000;">"%Y%m%d"</span><span style="color: #008000;">\</span>
+       --format <span style="color: #008000;">"%d %(abs(quantity(scrub(display_amount))))\n"</span><span style="color: #008000;">\</span>
+       --output ./tmp-main-orico.csv
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#36890;&#34892;&#26009;&#37329;&#65288;&#39318;&#37117;&#39640;,NEXCO)&#12398;&#35336;&#31639;</span>
+ledger reg  ^liab and orico and <span style="color: #008000;">\(</span>@nexco or @&#39318;&#37117;&#39640;<span style="color: #008000;">\)</span><span style="color: #008000;">\</span>
+       -b ${<span style="color: #BA36A5;">nexco_b_date</span>} -e ${<span style="color: #BA36A5;">nexco_e_date</span>}<span style="color: #008000;">\</span>
+       --date-format=<span style="color: #008000;">"%Y%m%d"</span><span style="color: #008000;">\</span>
+       --format <span style="color: #008000;">"%d %(abs(quantity(scrub(display_amount))))\n"</span><span style="color: #008000;">\</span>
+       --output ./tmp-toll.csv
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org8894755"></a>補足説明 1<br />
+<div class="outline-text-5" id="text-3-5-1-2">
+<p>
+両クエリ式の3行目 <code>--date-format="%Y%m%d"</code> で、日付フォーマットを 20220301 風にします。
+</p>
+
+<p>
+2行目 <code>--format "%d %(abs(quantity(scrub(display_amount))))\n"</code> で、
+日付（%d）の後ろに金額(display<sub>amount</sub>)を絶対値にして（マイナス符号を取って）表示しています。
+</p>
+</div>
+</li>
+<li><a id="org5a9d5ed"></a>補足説明 2<br />
+<div class="outline-text-5" id="text-3-5-1-3">
+<p>
+「メイン金額」のクエリ式の中の <code>not \(@口座 or @nexco or @首都高\)</code> ですが、 <code>@口座</code> を除外しないと、次のような
+Oricoカードの「口座振替」（銀行口座からの引き落とし）トランザクションが含まれてしまいます。下のクエリを見てください。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">$ led p ^liab and orico and @&#21475;&#24231; --tail 1
+2022/03/28 &#21475;&#24231;&#25391;&#26367; Orico
+    ; Invoice: invoices/orico/20220315-orico.pdf
+    Liabilities:OricoCard                 49,887 JPY
+    Assets:Bank
+</pre>
+</div>
+<p>
+なお、 <code>@口座</code> というのは、支払先（payee）に「口座」という文字が含まれていることを意味します。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgb37ad96" class="outline-4">
+<h4 id="orgb37ad96"><span class="section-number-4">3.5.2</span> 2. 照合パート</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+ここでは <code>colordiff</code> を用いて、   
+./tmp-Meisai-out.csv と ./tmp-Ledger-out.csv の2つのファイルを比較します。
+<code>colordiff</code> は <code>diff</code> のカラー版です。
+</p>
+
+<p>
+実質的な中身は次の1行だけです。
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">colordiff -y --width=50 ./tmp-Meisai-out.csv ./tmp-Ledger-out.csv
+</pre>
+</div>
+<p>
+オプションの意味は次のとおりです。
+</p>
+<dl class="org-dl">
+<dt><code>-y</code> </dt><dd><code>--side-by-side</code> ,つまり比較する2ファイルを左右に並べて(side-by-side)に表示します</dd>
+<dt><code>--width=50</code>  </dt><dd>表示するカラム幅を50文字分にします</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcaefc54" class="outline-2">
+<h2 id="orgcaefc54"><span class="section-number-2">4</span> 評価と今後の課題</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgf4be90d" class="outline-3">
+<h3 id="orgf4be90d"><span class="section-number-3">4.1</span> 評価</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+この簡単な工夫で、明細書と帳簿の照合・確認作業は従来よりもはるかに短時間で済むようになりました。
+</p>
+
+<p>
+うまく行ったおもな要因は
+</p>
+<ul class="org-ul">
+<li>対象とするレコードを日付と金額だけに限定したこと</li>
+<li>Ledger-cliの出力フォーマット機能の豊富さ</li>
+<li>組込変数FPATのおかげでCSVファイルをシェルスクリプトで扱いやすくなったこと</li>
+<li>diffに色をつけたcolordiffの出力の見やすさ</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga52d822" class="outline-3">
+<h3 id="orga52d822"><span class="section-number-3">4.2</span> 今後の課題</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-org6c7cd40" class="outline-4">
+<h4 id="org6c7cd40"><span class="section-number-4">4.2.1</span> 細かい点について</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li>現行では2つの小さなスクリプトを起動していますが、これは一つにまとめる予定です</li>
+<li>クレカごとに一つずつ専用の照合確認スクリプトを持つのが良策だと思います</li>
+<li>照合が短時間で終わるのは良いのですが、終わったときのご褒美メッセージがあまりにも素っ気なくて、何か仕事をやった感がありません。もう少し派手に、がんばったね！的なメッセージに変更したいです :wink:</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org8c0110d" class="outline-4">
+<h4 id="org8c0110d"><span class="section-number-4">4.2.2</span> ちょっと大きな問題</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<ul class="org-ul">
+<li>日付と金額だけではなく、 <b><b>支払先</b></b> も照合の対象にするシステムとしては完成度が高いと思います</li>
+<li>けれども残念ながら日本語で支払先を照合の対象にするのは、みずから底なし沼に足を踏み込むようなもの :sweat:</li>
+<li>なにしろ日本語には、確立した <b><b>正書法</b></b> というものがありません。漢字、ひらがな、カタカナ、ローマ字と文字種がたくさんある上に、それぞれの文字種においても確定した表記ルールがありません。</li>
+<li>いわば無政府状態、カオス、悪魔のような状態ですので、日本国またはアカデミーが正書法を確立してくれる日が来るまでは手を出さない（出せない）！と思っています :sunglasses:</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgcc32711" class="outline-2">
+<h2 id="orgcc32711"><span class="section-number-2">5</span> 参考資料（ソースコード）</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+上で紹介した2つのシェルスクリプトのソースコード。
+</p>
+</div>
+<div id="outline-container-src-date-amount" class="outline-3">
+<h3 id="src-date-amount"><span class="section-number-3">5.1</span> <code>date-amount抽出-f-orico明細.sh</code> コード</h3>
+<div class="outline-text-3" id="text-src-date-amount">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #006FE0;">set</span> -eu
+<span style="color: #8D8D84;">#</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">FPAT &#12434;&#29992;&#12356;&#12383;Orico invoice&#12398;CSV&#22793;&#25563;, invoice&#12398;Pretty Print and save.</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#30701;&#32302;&#29256;&#65306;date, amount &#12398;&#12415;&#12434;&#25277;&#20986;&#12377;&#12427;</span>
+<span style="color: #8D8D84;">#  </span>
+<span style="color: #BA36A5;">orico_dir</span>=<span style="color: #008000;">"(your-path-to-invoice-dir)/orico"</span>
+<span style="color: #BA36A5;">f_date</span>=$(<span style="color: #FF1493;">date</span> <span style="color: #008000;">"+%Y%m15"</span>)
+<span style="color: #8D8D84;">#</span>
+<span style="color: #0000FF;">case</span> $<span style="color: #BA36A5;">#</span><span style="color: #0000FF;"> in</span>
+    0)
+        <span style="color: #006FE0;">read</span> -r -p <span style="color: #008000;">"CSV&#12501;&#12449;&#12452;&#12523;&#21517; : "</span> keyin ;;
+    1)
+        <span style="color: #BA36A5;">keyin</span>=$<span style="color: #BA36A5;">1</span> ;;
+    * )
+        <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"** error.  Do it again."</span>
+        <span style="color: #0000FF;">exit</span> 1 ;;
+<span style="color: #0000FF;">esac</span>
+<span style="color: #8D8D84;">#</span>
+    <span style="color: #0000FF;">if</span> [[ ! -e ${<span style="color: #BA36A5;">keyin</span>} ]]; <span style="color: #0000FF;">then</span>
+        <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"** ${keyin} not found. Do it again."</span>
+        <span style="color: #0000FF;">exit</span> 1
+    <span style="color: #0000FF;">fi</span>
+<span style="color: #8D8D84;">#</span>
+<span style="color: #BA36A5;">csv_fname</span>=$<span style="color: #BA36A5;">keyin</span>
+
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">NKF&#12391;sjis--utf&#22793;&#25563;</span>
+nkf -w --overwrite ${<span style="color: #BA36A5;">csv_fname</span>}
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#12504;&#12483;&#12480;&#12540;&#65288;10&#34892;&#65289;&#12392;&#26411;&#23614;&#12398;&#31354;&#34892;&#12434;&#21066;&#38500;&#12377;&#12427;</span>
+tail -n +11 ${<span style="color: #BA36A5;">csv_fname</span>} | sed -r <span style="color: #008000;">"/^\r?$/d"</span> &gt; ./tmp-orico.csv
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">&#12459;&#12521;&#12512;9(&#37329;&#38989;)&#12434;&#25277;&#20986;&#12375;&#12289;&#12459;&#12531;&#12510;&#12392;&#20870;&#35352;&#21495;&#12289;&#12480;&#12502;&#12523;&#12463;&#12458;&#12540;&#12488;&#12434;&#21066;&#38500;</span>
+awk -v <span style="color: #BA36A5;">FPAT</span>=<span style="color: #008000;">'([^,]+)|(\"[^\"]+\")'</span> <span style="color: #008000;">'{print $9}'</span> ./tmp-orico.csv &gt; ./tmp-9.csv
+sed -i -e <span style="color: #008000;">'s/,//g'</span> -e <span style="color: #008000;">'s/\\//g'</span> -e <span style="color: #008000;">'s/"//g'</span> ./tmp-9.csv 
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">&#26085;&#20184;&#65288;&#12459;&#12521;&#12512;&#65297;&#65289;&#12434;&#25277;&#20986;</span>
+awk <span style="color: #008000;">'BEGIN {FS=",";OFS=","} {print $1}'</span> ./tmp-orico.csv &gt; ./tmp-1.csv
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#26085;&#20184;&#20013;&#12398;&#24180;,&#26376;,&#26085;&#12434;&#21066;&#38500;&#12375;&#12383;&#12487;&#12540;&#12479;&#12434; ./tmp-1.csv &#12395;&#26360;&#12365;&#25147;&#12377;</span>
+sed -i -e <span style="color: #008000;">'s/\([0-9]\+\)&#24180;\ \?\([0-9]\+\)&#26376;\ \?\([0-9]\+\)&#26085;/\1\/\2\/\3/g'</span> ./tmp-1.csv
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">&#26085;&#20184;&#12392;&#37329;&#38989;&#12434;paste&#12375;&#12390; ./tmp-19.csv</span>
+paste -d<span style="color: #008000;">" "</span> ./tmp-1.csv ./tmp-9.csv &gt; ./tmp-19.csv
+<span style="color: #8D8D84;">#</span>
+<span style="color: #0000FF;">while </span><span style="color: #006FE0;">read</span> -r line
+<span style="color: #0000FF;">do</span>
+    <span style="color: #BA36A5;">date</span>=$(<span style="color: #FF1493;">echo</span> ${<span style="color: #BA36A5;">line</span>} | cut -d<span style="color: #008000;">" "</span> -f1 | date -f - <span style="color: #008000;">'+%Y%m%d'</span>)
+    <span style="color: #BA36A5;">amount</span>=$(<span style="color: #FF1493;">echo</span> ${<span style="color: #BA36A5;">line</span>} | cut -d<span style="color: #008000;">" "</span> -f2)
+    <span style="color: #006FE0;">echo</span> -e ${<span style="color: #BA36A5;">date</span>} ${<span style="color: #BA36A5;">amount</span>}
+<span style="color: #0000FF;">done</span> &lt; ./tmp-19.csv &gt; ${<span style="color: #BA36A5;">orico_dir</span>}/tmp-Meisai-out.csv
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20108;&#37325;&#12477;&#12540;&#12488;&#12399; diff-orico.sh&#20869;&#12391;&#23455;&#26045;</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20316;&#26989;&#12501;&#12449;&#12452;&#12523;&#12398;&#21066;&#38500; ( tmp- &#12398;&#24460;&#12429;&#12364;&#22823;&#25991;&#23383;&#12398;&#12501;&#12449;&#12452;&#12523;&#12399;&#28040;&#12373;&#12394;&#12356;&#65289;</span>
+rm ./tmp-[a-z,0-9]*
+<span style="color: #0000FF;">exit</span> 0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-diff-src" class="outline-3">
+<h3 id="diff-src"><span class="section-number-3">5.2</span> <code>diff-orico.sh</code> コード</h3>
+<div class="outline-text-3" id="text-diff-src">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<span style="color: #006FE0;">set</span> -eu
+<span style="color: #8D8D84;"># </span>
+<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">&#12288;Orico&#12459;&#12540;&#12489;&#12398;&#25903;&#25173;&#26126;&#32048;</span>
+<span style="color: #8D8D84;">#    </span><span style="color: #8D8D84; font-style: italic;">&#26126;&#32048;(meisai)&#26085;&#20184;&#12289;&#37329;&#38989;(./tmp-Meisai-out.csv)&#12288;&#12392;</span>
+<span style="color: #8D8D84;">#    </span><span style="color: #8D8D84; font-style: italic;">Ledger &#12398;&#26085;&#20184;&#12289;&#37329;&#38989;(./tmp-Ledger -out.csv) &#12392;&#12434; diff&#12377;&#12427;</span>
+<span style="color: #BA36A5;">meisai_date</span>=<span style="color: #008000;">"20"</span> <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26126;&#32048;&#30330;&#34892;&#26085;</span>
+<span style="color: #BA36A5;">curr_day</span>=$(<span style="color: #FF1493;">date</span> <span style="color: #008000;">'+%d'</span>)
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#26399;&#38291;&#22793;&#25968;&#12434; orico&#26126;&#32048;&#30330;&#34892;&#26085;&#12391;&#12354;&#12427;20&#26085;&#12434;&#36942;&#12366;&#12383;&#12363;&#12393;&#12358;&#12363;&#12391;&#27770;&#12417;&#12427;</span>
+<span style="color: #0000FF;">if</span> [ $<span style="color: #BA36A5;">curr_day</span> -ge <span style="color: #008000;">"${meisai_date}"</span> ]; <span style="color: #0000FF;">then</span>
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Orico&#12398;period&#22793;&#25968;</span>
+    <span style="color: #BA36A5;">b_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'1 month ago'</span> <span style="color: #008000;">"+%Y/%m/01"</span>)
+    <span style="color: #BA36A5;">e_date</span>=$(<span style="color: #FF1493;">date</span> <span style="color: #008000;">"+%Y/%m/01"</span>)
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">NEXCO&#12398;period&#22793;&#25968;</span>
+    <span style="color: #BA36A5;">nexco_b_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'2 month ago'</span> <span style="color: #008000;">"+%Y/%m/15"</span>)
+    <span style="color: #BA36A5;">nexco_e_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'1 month ago'</span> <span style="color: #008000;">"+%Y/%m/16"</span>) <span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">attn!</span>
+<span style="color: #0000FF;">else</span>
+    <span style="color: #006FE0;">echo</span> <span style="color: #008000;">'20&#26085;&#20197;&#21069;'</span>
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Orico&#12398;period&#22793;&#25968;</span>
+    <span style="color: #BA36A5;">b_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'2 month ago'</span> <span style="color: #008000;">"+%Y/%m/01"</span>)
+    <span style="color: #BA36A5;">e_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'1 month ago'</span> <span style="color: #008000;">"+%Y/%m/01"</span>)
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">NEXCO&#12398;period&#22793;&#25968;</span>
+    <span style="color: #BA36A5;">nexco_b_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'3 month ago'</span> <span style="color: #008000;">"+%Y/%m/15"</span>)
+    <span style="color: #BA36A5;">nexco_e_date</span>=$(<span style="color: #FF1493;">date</span> -d <span style="color: #008000;">'2 month ago'</span> <span style="color: #008000;">"+%Y/%m/16"</span>) <span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">attn!</span>
+<span style="color: #0000FF;">fi</span>
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">Ledger</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#36890;&#34892;&#26009;&#37329;&#12398;&#35336;&#31639;</span>
+ledger reg  ^liab and orico and <span style="color: #008000;">\(</span>@nexco or @&#39318;&#37117;&#39640;<span style="color: #008000;">\)</span><span style="color: #008000;">\</span>
+       -b ${<span style="color: #BA36A5;">nexco_b_date</span>} -e ${<span style="color: #BA36A5;">nexco_e_date</span>}<span style="color: #008000;">\</span>
+       --date-format=<span style="color: #008000;">"%Y%m%d"</span><span style="color: #008000;">\</span>
+       --format <span style="color: #008000;">"%d %(abs(quantity(scrub(display_amount))))\n"</span><span style="color: #008000;">\</span>
+       -o ./tmp-toll.csv
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">orico&#12398;&#12513;&#12452;&#12531;&#37329;&#38989;&#35336;&#31639;</span>
+ledger reg  ^liab and orico and not <span style="color: #008000;">\(</span>@&#21475;&#24231; or @nexco or @&#39318;&#37117;&#39640;<span style="color: #008000;">\)</span><span style="color: #008000;">\</span>
+       -b ${<span style="color: #BA36A5;">b_date</span>} -e ${<span style="color: #BA36A5;">e_date</span>}<span style="color: #008000;">\</span>
+       --date-format=<span style="color: #008000;">"%Y%m%d"</span><span style="color: #008000;">\</span>
+       --format <span style="color: #008000;">"%d %(abs(quantity(scrub(display_amount))))\n"</span><span style="color: #008000;">\</span>
+       -o ./tmp-main-orico.csv
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">Meisai  (oricoCSV&#22793;&#25563;.sh&#12391;&#35336;&#31639;&#12373;&#12428;&#12383; ./tmp-Meisai-out.csv &#12434;&#20351;&#12358;</span>
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">&#12418;&#12392;&#12398;&#24418;&#24335;&#12399; 2022/02/27,600  &#12394;&#12398;&#12391;&#12289;&#25972;&#24418;&#12377;&#12427;</span>
+sed -i -e <span style="color: #008000;">'s/\///g'</span> -e <span style="color: #008000;">'s/,/ /g'</span>  ./tmp-Meisai-out.csv
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12477;&#12540;&#12488;&#65288;&#21516;&#19968;&#26085;&#20184;&#20869;&#12391;&#37329;&#38989;&#12398;&#26119;&#38918;&#12395;&#65289;</span>
+sort -k 1,1 -k 2n  ./tmp-Meisai-out.csv -o ./tmp-Meisai-out.csv
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#19978;&#12398;2&#12501;&#12449;&#12452;&#12523;&#12434;&#32080;&#21512;</span>
+cat ./tmp-toll.csv ./tmp-main-orico.csv &gt; ./tmp-Ledger-out.csv
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#12477;&#12540;&#12488;&#65288;&#21516;&#19968;&#26085;&#20184;&#20869;&#12391;&#37329;&#38989;&#12398;&#26119;&#38918;&#12395;&#65289;</span>
+sort -k 1,1 -k 2n ./tmp-Ledger-out.csv -o ./tmp-Ledger-out.csv
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">colordiff&#12377;&#12427;</span>
+<span style="color: #8D8D84;">#  </span><span style="color: #8D8D84; font-style: italic;">diff&#12398;&#32066;&#20102;&#12467;&#12540;&#12489;&#21462;&#12426;&#20986;&#12377;&#12383;&#12417;&#12384;&#12369;&#12395;&#12289;diff&#12434;&#31354;&#25171;&#12385;&#12377;&#12427;</span>
+<span style="color: #0000FF;">if</span> diff -q --width=50 ./tmp-Meisai-out.csv ./tmp-Ledger-out.csv<span style="color: #008000;">\</span>
+        &gt; /dev/null ; <span style="color: #0000FF;">then</span>
+    <span style="color: #006FE0;">echo</span> <span style="color: #008000;">'** Meisai &#12392; Ledger &#12399;&#23436;&#20840;&#12395;&#19968;&#33268;'</span>
+<span style="color: #0000FF;">else</span>
+    <span style="color: #006FE0;">printf</span> <span style="color: #008000;">"\e[1m%10s \t %16s\e[m\n"</span> <span style="color: #008000;">" &lt;MEISAI&gt;"</span> <span style="color: #008000;">"&lt;LEDGER&gt;"</span>
+    colordiff -y --width=50 ./tmp-Meisai-out.csv ./tmp-Ledger-out.csv
+    <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">echo -e "\n"</span>
+<span style="color: #0000FF;">fi</span>
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">&#19968;&#26178;&#12501;&#12449;&#12452;&#12523;&#21066;&#38500;</span>
+rm tmp-toll.csv tmp-main-orico.csv 
+<span style="color: #0000FF;">exit</span> 0
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org153362d" class="outline-2">
+<h2 id="org153362d"><span class="section-number-2">6</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+日付は実際のショッピング日とクレカ上の決済日とは異なることもありえます。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Ledger-cliでは、支払先をタイプミスすると警告またはエラーを発生させることができます。 <code>--strict</code>, <code>--pedantic</code>, <code>--check-payees</code> などのオプションが用意されていますので、Ledger帳簿内で支払先名称が「表記ゆらぎ」を起こす確率はかなり小さいと考えられます。詳しくはLedgerマニュアルを参照してください。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+Ledger-cliでは最悪の場合には次のようにして調整を行うことができます。くわしくはLedgerのマニュアルを見てください。
+</p>
+
+<div id="org1bf1810" class="figure">
+<p><img src="../static/adjustment-sample.png" alt="adjustment-sample.png" width="95%" />
+</p>
+</div></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+コマンド名が長ったらしいですけど、Linuxターミナルにはコマンド入力補完機能があります。この <code>date-amount抽出-f-orico明細.sh</code> コマンドを実行するディレクトリ内では <code>./da</code> の4ストロークだけで残りの綴は完全に補完されます。またデータファイル名も保管されますので、最初の2文字の入力で30数文字あるデータファイル名が完全補完されます。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+CSV内データにカンマが含まれている場合には、&lt;font color=red&gt;全カラム&lt;/font&gt;をダブルクオートで囲むというルールがあるようですが、Oricoではカンマを含む項目だけをダブルクォーテーションで囲んでいます。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+もちろんsortして揃えることも可能ですが、これとは別のスクリプトで別の使い方をする関係上、
+あえて<a href="#org1c6f1b7">1</a>と同一にしていません。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-04-28 木 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-04-29 金 16:01</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
