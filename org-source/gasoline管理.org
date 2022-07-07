@@ -1,0 +1,96 @@
+#+title: Leder-cliでガソリン給油量を管理する
+#+date: [2022-07-07]
+#+language: ja
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: commodity Ledger-cli gasoline
+#+hugo_categories: comp
+#+options: toc:nil num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+
+Ledger-cliを使えばガソリンへの **支出金額** を管理するのはとても簡単です。ガソリン支出を特定のアカウント、たとえば **=Expenses:Cars:Gasoline=** に割り付けておくだけです。
+
+5月1日から31日までのガソリン支出を知りたいときには：
+#+begin_src sh
+$ ledger reg gasoline -b 05/01 -e 06/01
+2022/05/10 ENEOS SS             Expenses:Cars:Gasoline    6,414 JPY    6,414 JPY
+2022/05/17 ENEOS SS             Expenses:Cars:Gasoline    2,496 JPY    8,910 JPY
+2022/05/31 ENEOS SS             Expenses:Cars:Gasoline    7,173 JPY   16,083 JPY
+#+end_src
+
+* ところが・・・
+ふとしたことから
+#+begin_quote
+月々のガソリンへの支出金額ではなくて **給油量** （リッター）を把握し レポートする必要が生じました
+#+end_quote
+
+\\
+
+2019年以降、Ledgerのトランザクションでは次のように **給油量** と **単価** をコメントで記録していました。
+#+begin_src
+2022/05/10 ENEOS SS
+    ; 39.59L @162円
+    Expenses:Cars:Gasoline                 6,414 JPY
+    Liabilities:EneosCard
+#+end_src
+
+このコメントにある **=39.59L=** という給油量を、Ledgerで計算対象とすることは（たぶん）できません。
+
+そこで次のように、ガソリンの給油量単位（L；リッター）をLedgerの **コモディティ** [fn:commodity] にし、その後ろに =@= をつけて単価を書きます[fn:script]：
+#+begin_src
+2022/05/10 * ENEOS SS
+    Expenses:Cars:Gasoline             39.59 L @ 162 JPY
+    Liabilities:EneosCard                     -6,414 JPY
+#+end_src
+
+[fn:commodity] Ledgerのコモディティの一般的な使い方はドルやユーロなどの **通貨単位** ですが、この例のように =L= にしたりできる柔軟性があります。
+
+
+トランザクションをこんな風に書き換えたら、ガソリンの給油量（L）をレポートしたいときにはつぎのようにします：
+#+begin_src sh
+<例１>
+$ ledger reg  gas -f my_ledger.dat -b 05/01 -e 06/01 -X L
+2022/05/10 ENEOS SS       Expenses:Cars:Gasoline        39.59 L        39.59 L
+2022/05/17 ENEOS SS       Expenses:Cars:Gasoline        15.22 L        54.81 L
+2022/05/31 ENEOS SS       Expenses:Cars:Gasoline        44.83 L        99.64 L
+#+end_src
+
+[fn:script] この修正を手作業で行うと必ずミスが起こります。簡単なbashスクリプトを書いて書き換えましょう。
+
+
+ここで
+=-X L= オプションは =--exchange L= の短縮形で、 =L= （リッター）というコモディティ単位でレポートしなさいという意味になります。
+
+このオプションを書かないとデフォルトのコモディティ(JPY)で表示されます。
+#+begin_src sh
+<例２>
+$ ledger r gas -f my_ledger.dat
+2022/05/10 ENEOS SS             Expenses:Cars:Gasoline    6,414 JPY    6,414 JPY
+2022/05/17 Commodities revalued <Revalued>                   79 JPY    6,493 JPY
+2022/05/17 ENEOS SS             Expenses:Cars:Gasoline    2,496 JPY    8,989 JPY
+2022/05/20 Commodities revalued <Revalued>               -3,617 JPY    5,371 JPY
+2022/05/23 Commodities revalued <Revalued>                3,508 JPY    8,879 JPY
+2022/05/31 Commodities revalued <Revalued>                 -110 JPY    8,770 JPY
+2022/05/31 ENEOS SS             <Adjustment>                 -1 JPY    8,769 JPY
+　　　　　　　　　　　　　           Expenses:Cars:Gasoline    7,173 JPY   15,942 JPY
+#+end_src
+
+それだけでなく、上のように =<Revalued>= や
+=<Adjustment>= が表示されます。それを抑止するには =--no-revalued= オプションをつけます:
+#+begin_src  sh
+<例３>
+$ led r gas -f my_ledger.dat --no-revalued
+2022/05/10 ENEOS SS             Expenses:Cars:Gasoline    6,414 JPY    6,414 JPY
+2022/05/17 ENEOS SS             Expenses:Cars:Gasoline    2,496 JPY    8,989 JPY
+2022/05/31 ENEOS SS             Expenses:Cars:Gasoline    7,173 JPY   15,942 JPY
+#+end_src
+
+* まとめ
+以上です。簡単すぎてスミマセン :sweat:  
+
+* Footnotes:
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

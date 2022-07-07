@@ -1,74 +1,148 @@
 +++
-title = "Ledger出力の列崩壊を回避する"
+title = "Ledger-cliのregisterレポートのカラム崩壊"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
-tags = ["ledger", "account"]
+date = 2022-08-10T00:00:00+09:00
+tags = ["ledger-cli", "カラム崩壊"]
 categories = ["comp"]
 draft = false
 +++
 
-Ledger-cliは
+## Ledger-cliは さいこーです・・・ {#ledger-cliは-さいこーです}
 
-小規模ビジネスや団体、研究費、家庭の経理こんなに便利なツールは無いとくにサイエンス系、理系の人たちには福音といっても言い過ぎではない
+Ledger-cliは2003年に ****John Wiegley**** さんによって創られたきわめて高機能・多機能な ****プレインテキスト**** ベースの ****複式簿記**** 経理ソフト。
 
-いくら称賛しても称賛しきれないほど素晴らしいツール
+小規模ビジネスやNPOなどの団体、家計簿、研究費の経理・管理を行うときには「神アプリ」です。しかもオープンソースでフリー。サイエンス系の人たちにはこれ以上のものはない「福音」だと思います。
 
-しかし日本では多く使われている気配がない。
+けれども、わが国ではユーザは多くないようです。
 
-最大の理由は、伝統的な「貸し方」「借り方」という概念を使わない複式簿記になにか不安とか馴染みがないとか、
+なぜでしょうか？
 
-他にもいくつかの理由があるが、そのうちの一つ日本語とアルファベットが混在したbalance出力の金額列のカラムが整列しない。
+一つは、「貸し方」「借り方」という伝統的な概念を使わない複式簿記に馴染みがないからかも知れません。
 
-カラム崩壊してしまうことも関係あるかもしれない。
+日本語での参考資料が書籍でもホームページ上にも、からなずしも多くないことも関係しているかも知れません。
 
-たとえばこんなふうに：（）どうも列崩壊は治ったらしひかと思ったが、やはり治っていない。
+あともう一つの可能性は、勘定科目（account）や支払先（payee）内に日本語とアルファベットが混在していると、そのregisterレポート出力に ****カラム崩壊**** が起こることに関係があるかもしれません[^fn:1]。
 
-2年間ほどは、まぁいいかと目をつぶっていたが、Ledgerで計算をする範囲が拡大するにつれて、結果の表示のカラム崩壊はだんだんと我慢ができなくなってきた。
 
-ところがこの問題は、Ledgerの問題というだけではく、UTFのコードの問題。（参考資料）
+## カラム崩壊例 {#カラム崩壊例}
 
-2年間放置していたのは、これにかかずらわるのを避けていたから。
+激しく崩壊するのは、ターミナル幅が80文字と狭く、勘定科目(account)がマルチバイト混在しているときです。
 
-繰り返しになるが、しかし我慢ができなくなった。ので、どれほど暴力的であろうとも、ブサイクであろうとも、ともかく出力のカラム列を整列させたい、ということで、一つの方法を使うようになった。それをここで紹介する。:sweat_smile:
+Ledger-cliの
+`--account-width`, `--abbrev-len` などのオプションを使って、何とか整列させてようと思っても、なかなか手に負えない状態になります。
+
+`--wide` オプションをつけて、ターミナル幅を拡げて132文字にすれば少なくとも私のLedgerファイルについてはカラム崩壊は起こりません。なので、カラム崩壊のためにLedger-cliを使うのを止めるというほど致命的な障害ではありません。
+
+希望はとてもささやかなものです。
+
+> せめて、日付、支払先、金額の3つを並べた時には、金額列が ****右揃え**** になって欲しい
+
+だけです。
+
+たとえば、
+`"^expenses and cars"` について次のようなフォーマット文でregisterレポートを表示してみましょう。
+
+```text
+$ ledger reg ^expenses and cars -b 01/20\
+   --format "%d %-40P %(ansify_if(justify(scrub(display_amount), 15,\
+   15 + int(prepend_width), true, color)))\n"
+```
+
+-   当然のことながら、マルチバイト文字を含まないアルファベットのみで構成されたトランザクションではカラムは完璧に整列します。
+-   ところが、支払先（payee）に日本語、アルファベットが混在していると、次の図 [1](#orgd9b56a6)のように残念な結果になります。
+
+<a id="orgd9b56a6"></a>
+
+{{< figure src="/screenshot-ugly.png" caption="&#22259;1:  Ledger-cliの標準出力" width="90%" >}}
+
+これでは、どこかに報告書として出すのではなく、ごく私的に結果を見るだけだとしても、ちょっと苦しい。
+
+
+### せめてこんな感じになって欲しい {#せめてこんな感じになって欲しい}
+
+<a id="org2939fa4"></a>
+
+{{< figure src="/screenshot-pp.png" caption="&#22259;2:  カラム崩壊を抑えた出力のイメージ" width="90%" >}}
+
+抜本的な対策はとても無理ですが、とりあえず迂回的で（姑息な？）やり方でなんとかしのいでいます[^fn:2]。ここではそれを紹介します。
+
+
+## 苦し紛れの迂回策 {#苦し紛れの迂回策}
+
+目的は、勘定科目名(account名)は表示せず、日付、支払先、金額の3項目だけをカラム崩壊なしで表示することにあります。
+
+原理と仕掛けはとても簡単です：
+
+> 1.  date+payee(日付+支払先)を固定長にするための関数を用意する
+> 2.  固定長にされたdate+payeeの右側に、支出金額を右寄せにして表示する
+
+
+### カラム崩壊を抑える関数 dp-file\_justifier {#カラム崩壊を抑える関数-dp-file-justifier}
+
+date,payeeファイルを右寄せするためのシンプルな関数です[^fn:3]。
 
 ```nil
 #!/bin/bash
-set -eu
+# date,payeeファイル(dp-file)を行末にスペースを埋めて固定長にする関数
+#   引数　1. 入力ファイル ./tmp-dp.txt　
+#        2. 出力ファイル ./tmpt-fixed-dp-file.txt
+
+function dp-file_justifier () {
+    local CUTOUT_BYTES=40
+    # tmp-payee.txtを一旦SJISにし40バイト切り出してUTFに戻す
+    iconv -f UTF-8 -t SHIFT-JIS ./tmp-dp.txt\
+       | cut -b 1-${CUTOUT_BYTES} \
+       | iconv -f SHIFT-JIS -t UTF-8  > ./tmp-fixed-dp.txt
+}
+```
+
+
+### 補足説明 {#補足説明}
+
+-   関数内のローカル変数は `${CUTOUT_BYTES}` のみです
+-   切り出しバイト数は支払先（payee）の文字長に応じて適宜、変更が必要です
+-   `./tmp-dp.txt, ./tmp-fixed-dp.txt` はグローバルな名前です
+
+
+### 上の関数を呼び出す親スクリプト例 {#上の関数を呼び出す親スクリプト例}
+
+```nil
+#!/bin/bash
 #
-#  列崩壊のないbalance出力を得る
-#
-ledger bal cars --no-total  --balance-format \
-       '%-.24((depth_spacer)+(partial_account))\n' \
-       -o ./tmp-acnt.txt
-#
-ledger bal cars --no-total --balance-format  \
-       '%(justify(scrub(display_total), 15, -1, true, color))\n' \
-       -o ./tmp-amount.txt
-## 列崩壊防止のため一旦SJISに変換
-iconv -f UTF-8 -t SHIFT-JIS ./tmp-acnt.txt | \
-    cut -b 1-24 | iconv -f SHIFT-JIS -t UTF-8 > ./tmp-24.txt
-#
-paste -d' ' ./tmp-24.txt ./tmp-amount.txt > ./tmp-pretty.txt
-##
-cat ./tmp-pretty.txt
+source  func-dp-file_justifier.sh
+#　
+from_date='2022/05/01'
+to_date=$(date "+%Y/%m/%d")
+
+# 日付(date)と支払先(payee)を取得し tmp-dp.txt へ保存
+ledger reg ^expenses -b "${from_date}" -e "${to_date}"\
+   --real --no-revalued\
+   --format "%d %-40P\n"\
+   -o ./tmp-dp.txt
+
+# 関数コール（tmp-dp.txt から tmp-fixed-dp.txt を作る）
+dp-file_justifier
+
+# 金額amountを右寄せして tmp-amont.txt に保存
+ledger reg ^expenses -b "${from_date}"  -e "${to_date}"\
+   --format "%(ansify_if(justify(scrub(display_amount), 15, 15 + int(prepend_width), true, color)))\n"\
+   -o tmp-amount.txt
+
+# pasteで date,payee,amount(dpa)のpretty printファイルを生成
+paste -d" " ./tmp-fixed-dp.txt ./tmp-amount.txt\
+   > ./pretty-print-dpa.txt
 exit 0
 ```
 
-ミソは、 `cut -b 1-24` の数字部分。これが大きいとTABの混入とか変なことが起こる。
- `display_total` の文字数15も割に重要。これも小さくしすぎると列崩壊する。
+こんな感じで、苦しまぎれですがカラム崩壊を回避しています。
+
+マルチバイト文字のバイト長やキャラクターの数は管理できても、画面上（または紙の上）で占める物理的な「長さ」をきちんと揃えるのは（bashでは）なかなかむずかしいようです。
+
+どなたか Ledger-cliで使えそうな良い方法があれば教えて頂きたいと思います。
 
 
-## 列崩壊防止の実施前後のちがい {#列崩壊防止の実施前後のちがい}
+## Footnotes: {#footnotes}
 
-```nil
- ：
-Parking                      8,590 JPY
-Toll                       320,260 JPY
-保険                       164,150 JPY
-  任意保険                 138,320 JPY
-  自賠責                    25,830 JPY
-整備修繕                   211,404 JPY
-税金                       112,800 JPY
-  手数料                     1,000 JPY
- ：
-```
+[^fn:1]: バランスレポートのときには、価格（amount）の列が一番左のに来て、勘定科目（account）の列が右端にくるのでカラム崩壊は起こりません。
+[^fn:2]: UTFでは、バイト数と文字数が単純に対応してるわけではないので、この方法で常にすべてのトランザクションのカラムが整列するわけではありません。この方法では「ほぼほぼ」カラムが整列してくれることを目指しています。もし完璧を求めるならもっと大掛かりな仕掛けが必要だと思います。
+[^fn:3]: [こちら](https://teratail.com/questions/70409)を参考にさせていただきました。

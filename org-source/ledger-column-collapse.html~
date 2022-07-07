@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
 <head>
-<!-- 2022-06-10 金 20:43 -->
+<!-- 2022-05-26 木 21:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ledger-cliのregisterレポートのカラム崩壊</title>
+<title>registerレポートのカラム崩壊をなんとかする</title>
 <meta name="author" content="YAMAGAMI" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -218,23 +218,26 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">Ledger-cliのregisterレポートのカラム崩壊</h1>
+<h1 class="title">registerレポートのカラム崩壊をなんとかする</h1>
 
-<div id="outline-container-orged45e19" class="outline-2">
-<h2 id="orged45e19"><span class="section-number-2">1</span> Ledger-cliは さいこーです・・・</h2>
+<div id="outline-container-orgd056cfa" class="outline-2">
+<h2 id="orgd056cfa"><span class="section-number-2">1</span> Ledger-cliは さいこーです・・・</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Ledger-cliは2003年に <b><b>John Wiegley</b></b> さんによって創られた
-きわめて高機能・多機能な <b><b>プレインテキスト</b></b> ベースの <b><b>複式簿記</b></b> 経理ソフト。
+Ledger-cliは John Wiegleyさんによって創られた
+きわめて高機能・多機能なプレインテキストベースの複式簿記経理ソフト。
 </p>
 
 
+
 <p>
-小規模ビジネスやNPOなどの団体、家計簿、研究費の経理・管理を行うときには「神アプリ」です。しかもオープンソースでフリー。サイエンス系の人たちにはこれ以上のものはない「福音」だと思います。
+小規模ビジネスや団体、家庭の経理、研究費の管理などには
+これ以上のものは無いと思います。神ソフトです。
+とくにサイエンス系の人たちには「福音」ですね。
 </p>
 
 <p>
-けれども、わが国ではユーザは多くないようです。
+けれどもわが国ではユーザは多くないようです。
 </p>
 
 <p>
@@ -242,120 +245,89 @@ Ledger-cliは2003年に <b><b>John Wiegley</b></b> さんによって創られ�
 </p>
 
 <p>
-一つは、「貸し方」「借り方」という伝統的な概念を使わない複式簿記に馴染みがないからかも知れません。
+一つは、伝統的な「貸し方」「借り方」という概念を使わない複式簿記に馴染みがないからかも知れません。
 </p>
 
 <p>
-日本語での参考資料が書籍でもホームページ上にも、からなずしも多くないことも関係しているかも知れません。
-</p>
-
-<p>
-あともう一つの可能性は、
-勘定科目（account）や支払先（payee）内に日本語とアルファベットが混在していると、そのregisterレポート出力に <b><b>カラム崩壊</b></b> が起こることに関係があるかもしれません<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+もう一つの可能性は、
+勘定科目（account）や支払先（payee）内に日本語とアルファベットが混在していると、そのregisterレポート出力がカラムが崩壊することに関係があるかもしれません。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org361be53" class="outline-2">
-<h2 id="org361be53"><span class="section-number-2">2</span> カラム崩壊例</h2>
+<div id="outline-container-org34e1fa3" class="outline-2">
+<h2 id="org34e1fa3"><span class="section-number-2">2</span> カラム崩壊</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-激しく崩壊するのは、ターミナル幅が80文字と狭く、
-勘定科目(account)がマルチバイト混在しているときです。
+Ledger-cliは
 </p>
-
-<p>
-Ledger-cliの
-<code>--account-width</code>, <code>--abbrev-len</code> などのオプションを使って、何とか整列させてようと思っても、なかなか手に負えない状態になります。
-</p>
-
-<p>
-<code>--wide</code> オプションをつけて、ターミナル幅を拡げて132文字にすれば少なくとも私のLedgerファイルについてはカラム崩壊は起こりません。
-なので、カラム崩壊のためにLedger-cliを使うのを止めるというほど致命的な障害ではありません。
-</p>
-
-<p>
-希望はとてもささやかなものです。
-</p>
-<blockquote>
-<p>
-せめて、日付、支払先、金額の3つを並べた時には、金額列が <b><b>右揃え</b></b> になって欲しい
-</p>
-</blockquote>
-<p>
-だけです。
-</p>
-
-<p>
-たとえば、
-<code>"^expenses and cars"</code> について次のようなフォーマット文でregisterレポートを表示してみましょう。
-</p>
-<pre class="example" id="org13e7cf4">
+<ul class="org-ul">
+<li><code>"^expenses and cars"</code> のregisterレポートを書く例：</li>
+</ul>
+<pre class="example" id="orgdfa7dc8">
 $ ledger reg ^expenses and cars -b 01/20\
    --format "%d %-40P %(ansify_if(justify(scrub(display_amount), 15,\
    15 + int(prepend_width), true, color)))\n"
 </pre>
 <ul class="org-ul">
-<li>当然のことながら、マルチバイト文字を含まないアルファベットのみで構成されたトランザクションではカラムは完璧に整列します。</li>
-<li>ところが、支払先（payee）に日本語、アルファベットが混在していると、次の図 <a href="#org9c78b32">1</a>のように残念な結果になります。</li>
+<li>payeeがシングルバイト文字とマルチバイト文字が混在</li>
+<li>こんな風になる Is file name okey?</li>
+<li>マルチバイト文字を含まないアルファベットのみで構成されたトランザクションならば、完璧にカラムは整列します。</li>
+<li>ところが、日本語、アルファベットが混在していると、次の図 <a href="#org83f51bd">1</a>のように残念な結果になります。</li>
 </ul>
 
-<div id="org9c78b32" class="figure">
+
+<div id="org83f51bd" class="figure">
 <p><img src="../static/screenshot-ugly.png" alt="screenshot-ugly.png" width="90%" />
 </p>
 <p><span class="figure-number">&#22259;1:  </span>Ledger-cliの標準出力</p>
 </div>
-
-<p>
-これでは、どこかに報告書として出すのではなく、ごく私的に結果を見るだけだとしても、
-ちょっと苦しい。
-</p>
 </div>
 
-<div id="outline-container-orge4d15aa" class="outline-3">
-<h3 id="orge4d15aa"><span class="section-number-3">2.1</span> せめてこんな感じになって欲しい</h3>
+
+
+<div id="outline-container-orge02ba97" class="outline-3">
+<h3 id="orge02ba97"><span class="section-number-3">2.1</span> せめてこんな感じにしたいわけです</h3>
 <div class="outline-text-3" id="text-2-1">
 
-<div id="org31e35d6" class="figure">
+<div id="org4601c6a" class="figure">
 <p><img src="../static/screenshot-pp.png" alt="screenshot-pp.png" width="90%" />
 </p>
 <p><span class="figure-number">&#22259;2:  </span>カラム崩壊を抑えた出力のイメージ</p>
 </div>
 
-
 <p>
-抜本的な対策はとても無理ですが、とりあえず迂回的で（姑息な？）やり方でなんとかしのいでいます<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>。ここではそれを紹介します。
+根本的な対策は手に余りますが、迂回的なやり方でなんとかなります<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
 </p>
 </div>
 </div>
 </div>
 
-
-<div id="outline-container-orgd585f5a" class="outline-2">
-<h2 id="orgd585f5a"><span class="section-number-2">3</span> 苦し紛れの迂回策</h2>
+<div id="outline-container-orga0c9059" class="outline-2">
+<h2 id="orga0c9059"><span class="section-number-2">3</span> 苦し紛れの迂回策</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 目的は、勘定科目名(account名)は表示せず、日付、支払先、金額の3項目だけをカラム崩壊なしで表示することにあります。
 </p>
 
 <p>
-原理と仕掛けはとても簡単です：
+仕掛けはとても簡単です：
 </p>
 <blockquote>
-<ol class="org-ol">
+<ul class="org-ul">
 <li>date+payee(日付+支払先)を固定長にするための関数を用意する</li>
-<li>固定長にされたdate+payeeの右側に、支出金額を右寄せにして表示する</li>
-</ol>
+<li>固定長にされたdate+payeeの右側に、金額を右寄せにして表示する</li>
+</ul>
 </blockquote>
 </div>
 
-<div id="outline-container-org693c3b9" class="outline-3">
-<h3 id="org693c3b9"><span class="section-number-3">3.1</span> カラム崩壊を抑える関数 dp-file<sub>justifier</sub></h3>
+<div id="outline-container-orgc80b040" class="outline-3">
+<h3 id="orgc80b040"><span class="section-number-3">3.1</span> カラム崩壊を抑える関数 dp-file<sub>justifier</sub></h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
-date,payeeファイルを右寄せするためのシンプルな関数です<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
+date,payeeファイルを右寄せするためのシンプルな関数です。
+<a href="https://teratail.com/questions/70409">こちら</a>を参考にさせていただきました。
 </p>
-
 <pre class="example">
 #!/bin/bash
 # date,payeeファイル(dp-file)を行末にスペースを埋めて固定長にする関数
@@ -364,7 +336,7 @@ date,payeeファイルを右寄せするためのシンプルな関数です<sup
 
 function dp-file_justifier () {
     local CUTOUT_BYTES=40
-    # tmp-payee.txtを一旦SJISにし40バイト切り出してUTFに戻す
+    # tmp-payee.txtを一旦SJISに
     iconv -f UTF-8 -t SHIFT-JIS ./tmp-dp.txt\
        | cut -b 1-${CUTOUT_BYTES} \
        | iconv -f SHIFT-JIS -t UTF-8  &gt; ./tmp-fixed-dp.txt
@@ -372,22 +344,23 @@ function dp-file_justifier () {
 </pre>
 </div>
 </div>
-<div id="outline-container-org2193997" class="outline-3">
-<h3 id="org2193997"><span class="section-number-3">3.2</span> 補足説明</h3>
+<div id="outline-container-orgfafed8b" class="outline-3">
+<h3 id="orgfafed8b"><span class="section-number-3">3.2</span> 補足説明</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>関数内のローカル変数は <code>${CUTOUT_BYTES}</code> のみです</li>
-<li>切り出しバイト数は支払先（payee）の文字長に応じて適宜、変更が必要です</li>
+<li>切り出しバイト数は支払先（payee）の文字長に応じて適宜、変更してください</li>
 <li><code>./tmp-dp.txt, ./tmp-fixed-dp.txt</code> はグローバルな名前です</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgfc5b021" class="outline-3">
-<h3 id="orgfc5b021"><span class="section-number-3">3.3</span> 上の関数を呼び出す親スクリプト例</h3>
+<div id="outline-container-org0568b77" class="outline-3">
+<h3 id="org0568b77"><span class="section-number-3">3.3</span> 上の関数を呼び出す親スクリプト例</h3>
 <div class="outline-text-3" id="text-3-3">
 <pre class="example">
 #!/bin/bash
+set -eu
 #
 source  func-dp-file_justifier.sh
 #　
@@ -405,35 +378,36 @@ dp-file_justifier
 
 # 金額amountを右寄せして tmp-amont.txt に保存
 ledger reg ^expenses -b "${from_date}"  -e "${to_date}"\
+   --no-revalued --real\
    --format "%(ansify_if(justify(scrub(display_amount), 15, 15 + int(prepend_width), true, color)))\n"\
    -o tmp-amount.txt
-
 # pasteで date,payee,amount(dpa)のpretty printファイルを生成
 paste -d" " ./tmp-fixed-dp.txt ./tmp-amount.txt\
    &gt; ./pretty-print-dpa.txt
 exit 0
 </pre>
-<p>
-こんな感じで、苦しまぎれですがカラム崩壊を回避しています。
-</p>
+</div>
+</div>
 
-<p>
-マルチバイト文字のバイト長やキャラクターの数は管理できても、
-画面上（または紙の上）で占める物理的な「長さ」をきちんと揃えるのは
-（bashでは）なかなかむずかしいようです。
-</p>
-
-<p>
-どなたか Ledger-cliで使えそうな
-良い方法があれば教えて頂きたいと思います。
-</p>
+<div id="outline-container-org90668dc" class="outline-3">
+<h3 id="org90668dc"><span class="section-number-3">3.4</span> 補足説明</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li><code>--real --no-revalued</code> オプションは、Ledgerファイルの中で、仮想アカウントを使用せず、VAT（消費税）などを自動転記で算出していない場合には不要。</li>
+<li><code>justify</code> では。。。</li>
+</ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc1336b9" class="outline-2">
-<h2 id="orgc1336b9"><span class="section-number-2">4</span> Footnotes:</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org59faecd" class="outline-2">
+<h2 id="org59faecd"><span class="section-number-2">4</span> Ledger-cliは</h2>
+</div>
+
+
+<div id="outline-container-org12a0ca7" class="outline-2">
+<h2 id="org12a0ca7"><span class="section-number-2">5</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-5">
 </div>
 </div>
 <div id="footnotes">
@@ -441,24 +415,16 @@ exit 0
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-バランスレポートのときには、価格（amount）の列が一番左のに来て、勘定科目（account）の列が右端にくるのでカラム崩壊は起こりません。
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 UTFでは、バイト数と文字数が単純に対応してるわけではないので、この方法で常にすべてのトランザクションのカラムが整列するわけではありません。この方法では「ほぼほぼ」カラムが整列してくれることを目指しています。もし完璧を求めるならもっと大掛かりな仕掛けが必要だと思います。
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
-<a href="https://teratail.com/questions/70409">こちら</a>を参考にさせていただきました。
 </p></div></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">&#26085;&#20184;: 2022-06-10 金 00:00</p>
+<p class="date">&#26085;&#20184;: 2022-05-26 木 00:00</p>
 <p class="author">&#33879;&#32773;: YAMAGAMI</p>
-<p class="date">Created: 2022-06-10 金 20:43</p>
+<p class="date">Created: 2022-05-26 木 21:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

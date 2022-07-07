@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-05-16 月 21:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ノートPC のDC電源ジャック交換 &#x2013; ThinkPad X230</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">ノートPC のDC電源ジャック交換 &#x2013; ThinkPad X230</h1>
+<p>
+長年にわたり
+lenovoのノートPC＝ThinkPad X230を複数台使いまわしています。
+そのうちの1台がバッテリーが充電されなくなりました。
+いまメインで使っているノートPCでホスト名は <b><b>ikuta</b></b> <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>と言います。
+</p>
+
+
+<div id="outline-container-org3d5c20f" class="outline-2">
+<h2 id="org3d5c20f"><span class="section-number-2">1</span> 故障の症状・原因</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org7128cb7" class="outline-3">
+<h3 id="org7128cb7"><span class="section-number-3">1.1</span> 症状</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+ACアダプタを接続して使っていましたが、画面上の充電中マークが表示されなくなって、充電不能になりました。AC電源プラグを抜いてバッテリーだけで起動すれば問題なく使えますので、バッテリー関係の障害ではありません。またACアダプターの問題ではないことも、アダプターを別のものに繋ぎ変えて確認しました。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org57a622d" class="outline-3">
+<h3 id="org57a622d"><span class="section-number-3">1.2</span> 故障箇所</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+故障箇所は <b><b>DC電源ジャック</b></b> 。
+ACアダプタのDCプラグを挿すための穴で、ThinkPad X230でも
+たいがいのノートPCと同じように背後にあります。
+</p>
+
+<div id="orge3c5763" class="figure">
+<p><img src="../static/X230電源ジャック.jpg" alt="X230電源ジャック.jpg" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>X230のDC電源ジャック</p>
+</div>
+
+<p>
+以前から、このジャックにACアダプタからのプラグを挿すと、ゆるゆるグラグラしていて気にはなっていました。
+要するにこいつが接触不良を起こしたというわけです。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2c32b87" class="outline-2">
+<h2 id="org2c32b87"><span class="section-number-2">2</span> 修理方法の模索</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+まずは購入先の <b><b>ソフマップ</b></b> に電話してみました。
+とても丁寧な電話応対でした。
+ソフマップ本体では昔から修理そのものはしておらず、
+メーカにつなぐ仲介をするだけだそうですが、
+しかしX230はメーカ段階で既に補修用の部品の保有期間も過ぎているし、
+修理期間も過ぎているためにソフマップでは対応不能の回答でした。
+</p>
+
+<p>
+次に、ThinkPadなどの修理を広く手がけているパソコン修理の専門業者をネットで探し、メールで症状を説明して見積もりを依頼してみました。
+そうしたら、数時間後には見積もりが届きましたが 19,960円（税別） :surprised: 。
+その会社によれば、他の会社では3万から5万が普通だそうですが、想像を数倍上回る値付け。
+</p>
+
+<p>
+当初、甘い考えで数千円程度の出費なら有償修理をしてみようと思っていましたが、みごとに挫折。
+</p>
+
+<p>
+その後、そもそもDC電源ジャックがどの程度入手しやすい部品なのかを調べてみましたら、
+色々な通販サイト（Amazon, Yahoo, メルカリなど）で簡単に買えそうな感じでした。
+</p>
+
+<p>
+そこで結論
+</p>
+<blockquote>
+<p>
+自力でX230を分解し故障部品を交換しよう！
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-orgdb4d9ed" class="outline-3">
+<h3 id="orgdb4d9ed"><span class="section-number-3">2.1</span> 故障部品の購入</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+安いサイトでは数百円レベル、高いところでは数千円レベルと値段の差がとても大きかったですが、納期の速さと値段の2つを勘案して今回はAmazonから入手しました。1,020円でした。
+</p>
+
+<p>
+下の写真が本体から取り出した故障部品です。
+DC電源ジャックとケーブルが一体化しています。
+</p>
+
+<div id="org5f68de6" class="figure">
+<p><img src="../static/DC電源ジャック.jpg" alt="DC電源ジャック.jpg" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;2:  </span>X230のDC電源ジャック（取り外したもの）</p>
+</div>
+
+
+
+<div id="orga3044d4" class="figure">
+<p><img src="../static/DC-jack_X230.jpg" alt="DC-jack_X230.jpg" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;3:  </span>eBayから届いた固定金具つきの電源ジャック</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org51edb91" class="outline-3">
+<h3 id="org51edb91"><span class="section-number-3">2.2</span> マザーボード取り出しまでの分解手順</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+ネット上にはX230の分解手順を説明したサイトがたくさんあります。
+その中で、今回 参考にしたのは、
+[Lenovo Thinkpad x230 Motherboard Replacement](<a href="https://www.ifixit.com/Guide/Lenovo+Thinkpad+x230+Motherboard+Replacement/72850">https://www.ifixit.com/Guide/Lenovo+Thinkpad+x230+Motherboard+Replacement/72850</a>)。
+</p>
+
+<p>
+とても分かりやすい手順説明ですが、すこし分かりづらかったのは次の2点：
+</p>
+<dl class="org-dl">
+<dt><b><b>Setp 20</b></b> </dt><dd>説明文として <code>Unlock white seal and disconnect blue cable from upper corner.</code> とありますが、この「白いシールのロックを外す」がよく分かりませんでした。けれども、ここを取り外さなくともDC電源ジャックの交換はできそうだったのでスルーしました :smile:</dd>
+<dt><b><b>Step 25</b></b></dt><dd>マザーボードを取り外す際に、どこからか小さな基盤（5mm x 15mm程度）がカランと落ちました。どこに装着されていたものか色々考えましたが、わかりません。そこで、もう一台別のX230を分解してマザーボードが見えるようにして探して、ようやく分かって事なきを得ました。そのパーツは、このサイトのマザーボードには装着されていないパーツでした。</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4970d74" class="outline-2">
+<h2 id="org4970d74"><span class="section-number-2">3</span> 試験運転</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+最初にバッテリーを入れずにACアダプタからの給電で起動し、問題なく起動することを確認。それからバッテリーを入れてバッテリーに充電されることも確認しました。
+すべて問題なく動いたので、ホットしたのですが・・・。
+</p>
+
+<p>
+数回、テストしていると、取り付けたDC電源ジャック部品（黄色いボックス）が本体の奥の方にめり込んで、プラグを挿しても通電されなくなりました。 :o
+</p>
+
+<p>
+そこでもう一度マザーボードまで分解して、なんとかジャック部品が奥にめり込んで行かないようにする方法を考えました。もしかしたら黄色いボックスを本体に固定する爪とかフックがあるのではないかと別のX230で見てみましたがよくわかりませんでした。
+</p>
+
+<p>
+そこで、黄色いボックスとファンケースの間の隙間に、プラスティックの切れ端を細工して挟み込み、絶縁テープで動かないように固定して再度、テストしてみました。
+</p>
+
+<p>
+そうしたら、今度はとても快調！　抜き差しを繰り返しても奥に引っ込んでいくことも無くなり、ようやくのことで安定して電源がつながるようになりました。
+</p>
+
+<p>
+この点に関して、ちょっと追加で調査してみたら、どうもX230のこのパーツを本体に固定するための小さな金具のような部品があるようす。この写真にそのような金具が写っています。これを本体の底板にネジで留めて黄色いボックスを上から抑え込んで固定するようです。
+</p>
+
+<div id="org05600db" class="figure">
+<p><img src="../static/x230-parts.png" alt="x230-parts.png" width="40%" />
+</p>
+</div>
+
+<p>
+今回、ジャックが故障したX230は、もともと中古で購入したものですが、
+初めからこれが装着されていませんでした。
+</p>
+
+<p>
+これを入手しようと思ったら、ちょっと不安なAliExpressとかに発注しなければならないかも？
+eBayにあった。16ドル（送料込み）とちょっと高いし、6月1日着と時間がかかるが、まぁ、AliExpressよりはましかな？
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgcefde62" class="outline-2">
+<h2 id="orgcefde62"><span class="section-number-2">4</span> Bottom line is&#x2026;</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>X230はネット上に分解情報が豊富で、しかも多くの部品も未だにふつうに入手できます</li>
+<li>Windowsを動かすのは非力かもしれませんが、SSDにすればUbuntuならパワー不足もあまり気にはなりません。</li>
+<li>実は・・・、X230の保有台数を数えると6台！最悪の場合には徐々に <b><b>部品取り</b></b> にしていきながらあと５年ほどは持たせたいと思っています。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1dc50d7" class="outline-2">
+<h2 id="org1dc50d7"><span class="section-number-2">5</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+ノートパソコンのホスト名は地名をつけて、その土地の風景写真を画面の背景にしています。ikutaは川崎市多摩区生田で背景画面は桝形山城址公園。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-05-16 月 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-05-16 月 21:19</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

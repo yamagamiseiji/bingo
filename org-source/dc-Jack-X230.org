@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-04-29 15:44:59 yamagami>
+#           Time-stamp: <2022-06-10 19:24:39 yamagami>
 #+title: ノートPC のDC電源ジャック交換 -- ThinkPad X230
-#+date: [2022-05-10]
+#+date: [2022-12-31]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -9,7 +9,7 @@
 #+hugo_tags: computer DIY
 #+hugo_categories: comp
 #+options: toc:nil
-#+draft: false
+#+draft: true
 
 長年にわたり
 lenovoのノートPC＝ThinkPad X230を複数台使いまわしています。
@@ -65,6 +65,12 @@ DC電源ジャックとケーブルが一体化しています。
 #+name: fig1
 #+attr_html: :width 60%
 [[file:DC電源ジャック.jpg]]
+
+
+#+caption: eBayから届いた固定金具つきの電源ジャック
+#+name: fig3
+#+attr_html: :width 60%
+[[file:DC-jack_X230.jpg]]
 
 ** マザーボード取り出しまでの分解手順
 ネット上にはX230の分解手順を説明したサイトがたくさんあります。
