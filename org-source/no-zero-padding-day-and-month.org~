@@ -1,0 +1,111 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2021-04-16 11:55:17 yamagami>
+#+title: Gnuplotで月、日をゼロ埋めしない方法
+#+date: [2022-09-03 ]
+#+language: ja
+#+link: file file+sys:../static/
+
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: gnuplot ledger 
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+* 
+描きたかったのは図[[fig1]]のように
+X軸の「月」をゼロ埋めしない数字にしたチャート[fn:padding]。
+
+[fn:padding] 正しくは「左ゼロ埋め」とか「前ゼロ埋め」でしょうか。英語の *zero padding* をそのままカタカナにして「ゼロパディング」の言い方が多いようです。またゼロ埋めしないことは *zero suppress* （ゼロサプレス）ということもあるようですが、ここでは「ゼロ埋め」で統一しました。
+
+
+#+caption: X軸の目盛りの月がゼロ埋めされていない
+#+name: fig1
+#+attr_html: :width 90%
+[[https://dl.dropboxusercontent.com/s/fdjzi6fnxlc17e5/single-digit-month-sample.svg"]]
+
+
+Bashでは、 =%-m= と書けばゼロ埋めされない月になります。
+なのでGnuplotでも簡単にできると思ったのですが、
+しばらくやり方が分かりませんでした😳
+
+Gnuplotのマニュアルを見ると、軸が「月」の場合、次のようなフォーマットがあります。
+| フォーマット | 説明                         | 例                  |
+|--------------+------------------------------+---------------------|
+| %b or %h     | 月の省略名                   | Jan, Feb...          |
+| %B           | 月のフルネーム               | January, February.. |
+| %m           | 月のゼロ埋めされた数字       | 01,02...            |
+
+当然のことながら =*%-m= にしてもBashのようにはなりません :sweat:
+
+　
+
+Gnuplotユーザにはゼロ埋めしない月を軸の目盛りに書くニーズがないのか、
+それとも自分のネット検索の方法が悪いのか、いずれにしても
+日本語での関係記事を見つけることができず、
+数年間ほど放置していました。
+
+
+
+最近になって、あらためて英語ページも含めて探してみたら、ちゃんとありました。
+参考にした記事は[[https://stackoverflow.com/questions/62410451/single-digit-month-and-day-format-specifier-in-gnuplot-5-2][こちら]]などです。
+
+
+* サンプルデータとコード
+
+データはLedger-cliで算出した月ごとの水光熱費のサンプルデータです[fn:ledger-query]。
+#+begin_src 
+2021-10-01 18257
+2021-11-01 21196
+2021-12-01 20420
+2022-01-01 23295
+2022-02-01 23741
+2022-03-01 21057
+2022-04-01 21540
+2022-05-01 24144
+2022-06-01 17953
+2022-07-01 18296
+2022-08-01 16668
+2022-09-01 1055
+#+end_src
+
+[fn:ledger-query] クエリは =$ledger reg ^Expenses and 水光熱費 --amount-data --monthly  --collapse --begin 2021/10/01 --current > ./tmp-all-UC.csv= 。
+
+
+上の参考ページのおかげで、図[[fig1]]は次のようにして簡単に描けました :smile:
+#+begin_src sh
+#!/bin/gnuplot
+set xdata time
+set timefmt "%Y-%m-%d"
+set format x "%01m" time
+# date -d "2021/10/01" "+%s" ==> 1633014000最近になって、あらためて英語ページも含めて探してみた
+set xrange [1633014000:]
+
+plot './tmp-all-UC.csv' u 1:2 w linespoints
+pause -1
+#+end_src
+上の例では、
+xrangeをセットしないと、なぜか一ヶ月前の =2021/09/01= からプロットされましたので、
+描出開始日をunixtime化しておいて =set xrange= してます。
+
+* おまけ
+**Y軸** が月の場合にゼロ埋めなしで描く方法について、おもしろい記事がありました。
+https://stackoverflow.com/questions/65086109/how-to-plot-month-numbers-in-gnuplot-5-4
+
+* ちなみに
+図[[fig2]]は過去25ヶ月分のわが家の水光熱費のサンプルチャートです。
+X軸の月の数字をゼロ埋め無しにしたおかげで、
+これまでよりもはるかに見やすくなりました。
+
+#+attr_html: :width 90%
+#+name: fig2
+[[file:out-tmp_20220903.svg]]
+
+
+* Footnotes:
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

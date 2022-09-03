@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
 #   Time-stamp: <2022-07-07 21:42:51 yamagami>
 #+title: Ledger-cliのregisterレポートのカラム崩壊
-#+date: [2022-08-10]
+#+date: [2022-10-10]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/

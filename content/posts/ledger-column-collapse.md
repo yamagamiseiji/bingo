@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliのregisterレポートのカラム崩壊"
 author = ["YAMAGAMI"]
-date = 2022-08-10T00:00:00+09:00
+date = 2022-10-10T00:00:00+09:00
 tags = ["ledger-cli", "カラム崩壊"]
 categories = ["comp"]
 draft = false
@@ -49,9 +49,9 @@ $ ledger reg ^expenses and cars -b 01/20\
 ```
 
 -   当然のことながら、マルチバイト文字を含まないアルファベットのみで構成されたトランザクションではカラムは完璧に整列します。
--   ところが、支払先（payee）に日本語、アルファベットが混在していると、次の図 [1](#orgd9b56a6)のように残念な結果になります。
+-   ところが、支払先（payee）に日本語、アルファベットが混在していると、次の図 [1](#orgfa8c7e9)のように残念な結果になります。
 
-<a id="orgd9b56a6"></a>
+<a id="orgfa8c7e9"></a>
 
 {{< figure src="/screenshot-ugly.png" caption="&#22259;1:  Ledger-cliの標準出力" width="90%" >}}
 
@@ -60,7 +60,7 @@ $ ledger reg ^expenses and cars -b 01/20\
 
 ### せめてこんな感じになって欲しい {#せめてこんな感じになって欲しい}
 
-<a id="org2939fa4"></a>
+<a id="org2011566"></a>
 
 {{< figure src="/screenshot-pp.png" caption="&#22259;2:  カラム崩壊を抑えた出力のイメージ" width="90%" >}}
 
