@@ -37,7 +37,7 @@
 
 
 * マイナポイントは一時所得
-国税庁によればマイナポイントのアカウント（勘定科目名）は **一時所得** （[[https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1490qa.htm][No.1490 一時所得 Q&A ]]）です。そこでLedgerのアカウント名は **Inocme:一時所得** にしました。
+国税庁によればマイナポイントは **一時所得** （[[https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1490qa.htm][No.1490 一時所得 Q&A ]]）です。そこでLedgerのアカウント（勘定科目）名は **Inocme:一時所得** にしました。
 
 マイナポイントに対応するたくさんの決済サービスのうち **nanaco** と **Oricoポイント** の2つの例をあげて説明します。
 

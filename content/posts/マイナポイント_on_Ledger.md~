@@ -164,7 +164,7 @@ CostcoでOricoのクレジットカードとCostcoプリペイドカードを **
 
 -  マイナポイントの残高（balance）
 
-    ```nil
+    ```text
     $ ledger bal  @マイナポイント
     	  15,000 JPY  Assets:Reward Point:Orico
     	 -15,000 JPY  Income:一時所得
