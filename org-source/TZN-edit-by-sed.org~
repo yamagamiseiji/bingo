@@ -1,0 +1,74 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2021-04-16 11:55:17 yamagami>
+#+title: Ledger-cliのトランザクション中のアカウント名をsedで一括変更
+#+date: [2022-10-07 ]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger-cli sed accounts
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+* Ledger-cliのアカウント名を変更したい
+過去にさかのぼって、Ledger-cliのアカウント名（勘定科目名）を変更したくなることがあります。
+
+たとえば次のように **CableTV** というアカウント名を変更して **StreamTV:Netflix** にしたい：
+#+begin_example
+＜変更前＞
+2019/07/15 Netflix
+    Expenses:教養娯楽費:CableTV             1,296 JPY
+    Liabilitie:Visa
+
+＜変更後＞
+2019/07/15 Netflix
+    Expenses:教養娯楽費:StreamTV:Netflix    1,296 JPY
+    Liabilitie:Visa
+#+end_example
+
+**CableTV** には、NetflixだけではなくてHuluとかiTSCOMとかも含まれていますので、
+単純に =sed 's/CableTV/StreamTV:Netflix/g'= するわけには行きません。
+
+
+
+#+begin_quote
+文字列Netflixの「次の行」にCableTVがあったら
+
+それをStreamTV:Netflixに変更する
+#+end_quote
+
+これをやりたいわけです。
+手動で変更するのは最悪で、件数が多いとかならずタイプミスが起こります。
+
+どうしたら良いかと思っていたら、sedにはちゃんと方法がある 
+んですね[fn:sed-site]。
+
+[fn:sed-site] 参考にさせていただいたサイトは [sedのお勉強2 特定文字列に一致した次の行を操作するスクリプト](https://foxtrot0304.hatenablog.com/entry/2015/12/09/015537)　です🙏
+
+  
+* やったことは・・・
+#+begin_example
+$ sed -e '/Netflix/{n;s/CableTV/StreamTV:Netflix/}' original-ledger.dat > new-ledger.dat
+#+end_example
+つまり
+**{n;}** を使うだけ:sweat:
+
+これでもともとのLedgerデータファイル中の
+**Netflix** という文字列がある行の<font color=red>次の行</font>にある **CableTV** が **StreamTV:Netflix** に置換されました。めでたしめでたし！
+
+
+sedで行をまたいだ文字列を置換できることが分かりましたので、
+過去のトランザクション中のアカウント名の変更がこれまで以上に簡単にできるようになりました。タイプミス リスクも大幅に減ります。
+
+Ledger-cliが複式簿記を
+Ledger-cliがデータとしてプレーンテキストであること
+Bash/sed のすばらしさ、に感謝いっぱいです。
+
+* Footnotes:
+ 
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

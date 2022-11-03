@@ -1,0 +1,179 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Last updated : 2022/11/02
+#+title: Ledger-cliでマイナポイントを転記
+#+date: [2022-11-01 ]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger-cli マイナポイント 
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+* マイナポイント
+マイナンバーカードの普及や活用を促進し消費を活性化するために、
+国によってマイナンバーカードにポイントが付与される事業が行われています[fn:法律は]。
+申込期限は2023年2月末までです。ポイントの付与条件と金額はつぎのとおりです。  
+- 第1弾は新規登録で5,000円
+- 第2弾は健康保険証としての利用申込と公金受取口座登録でそれぞれ7,500円、合計15,000円
+これらを合計すると最大20,000円分のポイントがもらえるわけです。
+
+[fn:法律は] マイナポイントはネットなどで盛んに広報されています。一体どのような法律に基づいてこの事業が行われているのか知りたくて調べてみましたがよく分かりません。総務省の「マイナポイント利用規約」というのはあるのですが・・・。誰か教えてください。
+
+
+#+attr_html: :width 40%
+#+caption: マイナポイントのロゴ（出典:総務省HP）
+[[file:logo_yoko_pc.png]]
+
+新規登録以外はトラブらなければ申込は短時間で終わります[fn:トラブル]。
+
+ここでは、付与されたポイントを[[https://www.ledger-cli.org/][Ledger-cli]]（＝プレーンテキストベースの複式簿記ソフト＝）向けのトランザクション記述例を紹介します。
+
+[fn:トラブル] マイナカードを読み取ることのできる **スマホ** があればトラブルことはほとんど無いのかも知れません。わが家にはスマホが1台もなく2時間ほどハマりました:sweat:
+
+
+* マイナポイントは一時所得
+国税庁によればマイナポイントは **一時所得** （[[https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1490qa.htm][No.1490 一時所得 Q&A ]]）なので、Ledgerのアカウント（勘定科目）名は **Inocme:一時所得** にします。
+
+マイナポイントに対応するたくさんの決済サービスのうち、**nanaco** と **Oricoポイント** の2つの例をあげて説明します。
+
+* nanaco
+#+attr_html: :width 30%
+[[file:0869_nanaco_logo.jpg]]
+
+nanacoを決済サービスにすると、マイナポイント取得の手続きも簡単だし、Ledgerでのトランザクションの書き方もシンプル。使い勝手の良さもピカイチでしょう。
+
+nanacoでは、申し込みから2,3日後にはマイナポイントがnanacoに
+「 **センターお預かり** 」として格納されます。
+
+この状態を **Assets:e-money:nanaco** として記帳します。
+
+その後、ユーザが **残高照会** するか、nanacoに **現金をチャージ** すると、
+「センターお預かり」からnanacoポイントに移されて使用可能になります。
+
+*** マイナポイント取得時の転記例
+#+begin_src text
+2022/11/01 マイナポイント取得
+   Income:一時所得                       -15,000 JPY
+   Assets:e-money:nanaco
+#+end_src
+**Income** の受け皿になるアカウントは **Assets:e-money:nanaco** 。もし別の家族もnanacoを持っていて、区別する必要があれば、このアカウントの後ろに名前を追加します。たとえば：
+#+begin_src text    
+  Assets:e-moeny:nanaco:太郎
+#+end_src    
+
+次のトランザクションでは **e-money** の15,000円のなかの10,000円分をプリペイドカードnanacoのポイントに交換します。
+#+begin_src
+2022/11/02　ポイント交換
+   Assets:e-money:nanaco              10,000 JPY
+   Assets:プリペイドカード:nanaco
+#+end_src
+nanacoに交換されると、それを使って市中で買い物に使えるようになります。
+
+*** 支出時の転記
+nanacoを使って買い物をしたときには：    
+#+begin_src  text   
+2022/12/01 イトーヨーカドー
+   Expenses:食費             　           1,450 JPY
+   Assets:プリペイドカード:nanaco
+#+end_src
+
+* Oricoポイント
+マイナポイントをOricoポイントにする最大のメリットは **Costcoのプリペイドカード** （5,000円）に交換できること。Costco会員には便利です[fn:非会員]。
+
+#+attr_html: :width 35%
+#+caption: 出典（Oricoポイントゲートウエイのポイント交換ページ）
+[[file:Costcoプリペイドカード.png]]
+
+[fn:非会員] 非会員でもCostcoプリペイドカードがあれば、カウンターでワンデーパスを発酵してもらえます。ただし、商品は非会員価格（＋5％）になります。またCostco会員を退会して1年未満の人、過去にワンデーパスを利用したことのある人にはパスは発行されません。
+
+ちょっと残念なのは、マイナポイントが付与されてOricoポイントに反映されるのは毎月20日の締め日頃まで待たなければならないということ。
+
+*** マイナポイント取得時の転記例
+#+begin_src  text
+2022/11/01 マイナポイント取得
+   Income:一時所得                     -15,000 JPY
+   Assets:Reward Point:Orico
+#+end_src	
+Oricoポイントは **Reward Point:Orico** を受け皿にしました。このアカウント（勘定科目）名が既に存在していたからです。もちろんアカウント名は自分の好みで自由に付け替えることができます。
+
+付与されたOricoポイントをCostcoプリペイドカードと交換するには：
+#+begin_src  text
+2022/11/20 ポイント交換
+   Assets:Reward Point:Orico     -5,000 JPY
+   Assets:プリペイドカード:Costco 
+#+end_src   
+
+*** 支出時の転記
+CostcoでOricoカードとCostcoプリペイドカードを併用したときには：
+#+begin_src text
+2022/12/10 Costco
+   Expenses:食費                      8,900 JPY
+   Assets:プリペイドカード:Costco      -5,000 JPY
+   Liability:OricoCard               -3,900 JPY
+#+end_src
+
+* クエリの例
+*** サンプルledgerファイル
+#+begin_src  text
+2022/10/01 * マイナポイント取得
+    Income:一時所得                          -20,000 JPY
+    Assets:Reward Point:Orico
+	
+2022/10/02 * ポイント交換
+    ; Costcoプリペイドカードへ
+    Assets:Reward Point:Orico                 -5,000 JPY
+    Assets:プリペイドカード:Costco
+
+2022/10/03 * ポイント交換
+    ; nanacoプリペイドカードへ    
+    Assets:Reward Point:Orico                 -3,000 JPY
+    Assets:プリペイドカード:nanaco    
+
+2022/10/20 * イトーヨーカドー
+    Expenses:食費                              2,000 JPY
+    Assets:プリペイドカード:nanaco
+
+2022/11/01 * Costco
+    Expenses:食費                              9,000 JPY
+    Assets:プリペイドカード:Costco             -2,500 JPY
+    Liability:OricoCard
+#+end_src
+   
+** クエリ
+**** プリペイドカードの残高（balance)
+#+begin_src text
+$ ledger bal プリペイド 
+           3,500 JPY  Assets:プリペイドカード
+           2,500 JPY    Costco
+           1,000 JPY    nanaco
+--------------------
+           3,500 JPY
+#+end_src  
+**** クレカ Orico Cardの負債残高
+#+begin_src text
+$ ledger bal orico -l "any( account =~ /liab/ )"
+      -6,500 JPY  Liability:OricoCard
+#+end_src
+**** プリペイドカードのregister表示
+#+begin_src text
+$ led reg プリペイド -f test.ledger
+2022/10/02 ポイント交換         Assets:プリペイドカード:Costco    5,000 JPY    5,000 JPY
+2022/10/03 ポイント交換         Assets:プリペイドカード:nanaco    3,000 JPY    8,000 JPY
+2022/11/01 イトーヨーカドー     Assets:プリペイドカード:nanaco   -2,000 JPY    6,000 JPY
+2022/11/20 Costco               Assets:プリペイドカード:Costco   -2,500 JPY    3,500 JPY
+#+end_src
+
+
+* あとがき
+健康保険証としての利用申込は、いずれデフォルトになりそうな雰囲気なので、まぁ不安と不満はあるがやっておこう、
+
+
+* Footnotes:
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
