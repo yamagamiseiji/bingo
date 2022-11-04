@@ -25,7 +25,7 @@ draft = false
 
 ## マイナポイントは一時所得 {#マイナポイントは一時所得}
 
-国税庁によればマイナポイントのアカウント（勘定科目名）は ****一時所得**** （[No.1490 一時所得 Q&A ](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1490qa.htm)）です。そこでLedgerのアカウント名は ****Inocme:一時所得**** にしました。
+国税庁によればマイナポイントは ****一時所得**** （[No.1490 一時所得 Q&A ](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1490qa.htm)）です。そこでLedgerのアカウント（勘定科目）名は ****Inocme:一時所得**** にしました。
 
 マイナポイントに対応するたくさんの決済サービスのうち ****nanaco**** と ****Oricoポイント**** の2つの例をあげて説明します。
 
@@ -38,7 +38,7 @@ nanacoを決済サービスにすると、マイナポイント取得の手続�
 
 申し込みから2,3日後にはマイナポイントがnanacoに「 ****センターお預かり**** 」として格納されます。
 
-この状態をLedger-cliで ****Assets:e-money:nanaco**** として記帳します。
+この状態をLedger-cliで ****Assets:nanacoセンターポイント**** として記帳します。
 
 その後、ユーザが ****残高照会**** するか、nanacoに ****現金をチャージ**** すると、「センターお預かり」からnanacoポイントに移されて使用可能になります。
 
@@ -48,20 +48,20 @@ nanacoを決済サービスにすると、マイナポイント取得の手続�
 ```text
 2022/11/01 マイナポイント取得
    Income:一時所得                       -15,000 JPY
-   Assets:e-money:nanaco
+   Assets:nanacoセンターポイント
 ```
 
-****Income**** の受け皿になるアカウントは ****Assets:e-money:nanaco**** 。もし別の家族もnanacoを持っていて、区別する必要があれば、このアカウントの後ろに名前を追加します。たとえば：
+****Income**** の受け皿になるアカウントは ****Assets:nanacoセンターポイント**** 。もし別の家族もnanacoを持っていて、区別する必要があれば、このアカウントの後ろに名前を追加します。たとえば：
 
 ```text
-Assets:e-moeny:nanaco:太郎
+Assets:nanacoセンターポイント:太郎
 ```
 
-次のトランザクションでは ****e-money**** の15,000円の内の10,000円分をプリペイドカードnanacoのポイントに交換します。
+次のトランザクションでは ****nanacoセンターポイント**** の15,000円の内の10,000円分をプリペイドカードnanacoのポイントに交換します。
 
 ```text
 2022/11/02　ポイント交換
-   Assets:e-money:nanaco              10,000 JPY
+   Assets:nanacoセンターポイント              10,000 JPY
    Assets:プリペイドカード:nanaco
 ```
 

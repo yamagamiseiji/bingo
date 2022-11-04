@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Last updated : 2022/11/03
+#           Last updated : 2022/11/04
 #+title: Ledger-cliでマイナポイントをトラッキングする
 #+date: [2022-11-03 ]
 #+language: ja
@@ -50,7 +50,7 @@ nanacoを決済サービスにすると、マイナポイント取得の手続�
 申し込みから2,3日後にはマイナポイントがnanacoに
 「 **センターお預かり** 」として格納されます。
 
-この状態をLedger-cliで **Assets:e-money:nanaco** として記帳します。
+この状態をLedger-cliで **Assets:nanacoセンターポイント** として記帳します。
 
 その後、ユーザが **残高照会** するか、nanacoに **現金をチャージ** すると、
 「センターお預かり」からnanacoポイントに移されて使用可能になります。
@@ -59,17 +59,17 @@ nanacoを決済サービスにすると、マイナポイント取得の手続�
 #+begin_src text
 2022/11/01 マイナポイント取得
    Income:一時所得                       -15,000 JPY
-   Assets:e-money:nanaco
+   Assets:nanacoセンターポイント
 #+end_src
-**Income** の受け皿になるアカウントは **Assets:e-money:nanaco** 。もし別の家族もnanacoを持っていて、区別する必要があれば、このアカウントの後ろに名前を追加します。たとえば：
+**Income** の受け皿になるアカウントは **Assets:nanacoセンターポイント** 。もし別の家族もnanacoを持っていて、区別する必要があれば、このアカウントの後ろに名前を追加します。たとえば：
 #+begin_src text    
-  Assets:e-moeny:nanaco:太郎
+  Assets:nanacoセンターポイント:太郎
 #+end_src    
 
-次のトランザクションでは **e-money** の15,000円の内の10,000円分をプリペイドカードnanacoのポイントに交換します。
+次のトランザクションでは **nanacoセンターポイント** にある15,000円の内の10,000円分をプリペイドカードnanacoのポイントに交換します。
 #+begin_src text
 2022/11/02　ポイント交換
-   Assets:e-money:nanaco              10,000 JPY
+   Assets:nanacoセンターポイント              10,000 JPY
    Assets:プリペイドカード:nanaco
 #+end_src
 nanacoに交換されると、それを使って市中で買い物に使えるようになります。
