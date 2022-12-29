@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
 #           Time-stamp: <2021-04-16 11:55:17 yamagami>
 #+title: Ledger-cliのトランザクション中のアカウント名をsedで一括変更
-#+date: [2022-11-30 ]
+#+date: [2022-12-31 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -10,7 +10,7 @@
 #+hugo_categories: comp
 
 #+options: toc:nil
-#+draft: false
+#+draft: true
 
 * Ledger-cliのアカウント名を変更したい
 Ledger-cli はいつでも自由にアカウント名（勘定科目名）やアカウント構造を変更できます

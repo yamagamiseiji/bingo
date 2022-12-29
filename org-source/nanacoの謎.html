@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-12-07 水 08:29 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>nanacoのナゾ</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">nanacoのナゾ</h1>
+
+<div id="outline-container-org98afbff" class="outline-2">
+<h2 id="org98afbff"><span class="section-number-2">1</span> nanacoのなぞ</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<b><b>nanaco</b></b> は広く流通し使える店も＃１？
+自分もナナコカードを昔から持っていて、かつては非常に頻繁に利用していた
+</p>
+
+<ul class="org-ul">
+<li>使い方としては、セブンイレブンに買い物に入り、レジでnanacoカードで支払う、足りなくなれば数千円をチャージする。それだけ。</li>
+<li>ごーく稀に、レジでポイントをどうしますか？と言われると、あ移してください、と言う、それだけ</li>
+
+<li>nanacoに入っている現金は5千円程度で、万を超える金額をいれたことはない。</li>
+<li>nanacoは小銭petty cashを財布から出すのが面倒、おつりをもらって財布やズボンにしまうのが面倒</li>
+<li>これがnanacoの存在理由のすべてでした。</li>
+
+<li>現在では仕事で市内を移動したりすることもなく、そもそもコンビニで買い物をすることもほとんど無くなった。</li>
+<li>nanacoはほとんど死蔵状態というのが実情</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0ae0930" class="outline-2">
+<h2 id="org0ae0930"><span class="section-number-2">2</span> ところが！</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>マイナカードの第1弾、第2弾などで、妻がnanacoにマイナポイントを収納したいということで、人生ではじめてnanacoの仕組みを勉強した</li>
+<li>これがびっくり！</li>
+<li>何がびっくりか？</li>
+<li>一言でいうと、何という複雑な仕組みなのだ！</li>
+<li>仕組み＝構造、機能、概念、すべての意味で超複雑</li>
+<li>自分の小銭かわりの使い方はnanacoの全機能の1000分の一だね</li>
+<li>言葉／概念の使い方もわざと混同が起こるようになっている（後述）</li>
+</ul>
+
+<p>
+数日間、nanacoの仕組み勉強をしたがまだ分かったところはわずか。しかもその理解で正しいかどうか、確証が得られていない
+</p>
+<ul class="org-ul">
+<li>そのわけは、ポイントの動きをリアルタイムにモニターするのが大変、というか仕組みとしてそれが出来ないことにある。</li>
+<li>あとは、自分の認知力が落ちてきて理解できなくなっている？</li>
+<li></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4a673a4" class="outline-2">
+<h2 id="org4a673a4"><span class="section-number-2">3</span> nanaco内のポイント・マネーの動きの整理</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+現時点での自分の理解が正しいかどうか自信はありません、
+</p>
+
+<p>
+nanaco内の「お金」の動きを <b><b>複式簿記</b></b> （Ledger-cli）で記述、そのための第1歩。
+</p>
+</div>
+<div id="outline-container-orgfa21d7b" class="outline-3">
+<h3 id="orgfa21d7b"><span class="section-number-3">3.1</span> 勘定科目（account; A/C）</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+nanacoの4要素表はnanacoアプリのスクリーンショット（図）に
+あるとおりです。
+</p>
+
+
+<div id="org7229b57" class="figure">
+<p><img src="https://dl.dropboxusercontent.com/s/gki8ok3b385zzg6/%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg" alt="%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg" width="60%" />
+</p>
+<p><span class="figure-number">&#22259;1:  </span>nanacoアプリのスクリーンショット</p>
+</div>
+
+
+
+<p>
+&lt;div align=center&gt;
+&lt;img src="<img src="https://dl.dropboxusercontent.com/s/gki8ok3b385zzg6/%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg" alt="%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg" />" alt="" width="80%"&gt;&lt;/div&gt;
+</p>
+
+<ul class="org-ul">
+<li>ここにある4要素をそれぞれ次のようなA/C名にする
+<ul class="org-ul">
+<li>カード内　マネー残高　card-em</li>
+<li>カード内　ポイント残高  card-pts</li>
+<li>センターお預り分　マネー残高  center-em</li>
+<li>センターお預かり分　ポイント残高  center-pts</li>
+</ul></li>
+</ul>
+
+<p>
+A/Cの樹状図    
+ これを樹状図にすると次のとおり：
+  &lt;div align=center&gt;
+&lt;img src="<img src="https://dl.dropboxusercontent.com/s/1rg2qntwa15jkum/tree-nanaco.png" alt="tree-nanaco.png" />" alt="" width="100%"&gt; &lt;/div&gt;
+</p>
+
+<ul class="org-ul">
+<li>nanacoギフトも使うので`gift-pts`を追加している</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6637b02" class="outline-2">
+<h2 id="org6637b02"><span class="section-number-2">4</span> クエリ例</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-sh">
+
+$ ledger  bal nanaco
+           3,104 JPY  Assets:e-money:nanaco
+           3,095 JPY    card-em
+                   0    center-em
+               9 JPY    center-pts
+                   0    gift-pts
+--------------------
+           3,104 JPY
+
+ $ ledger  bal nanaco and card-em
+           3,095 JPY  Assets:e-money:nanaco:card-em
+
+$ ledger  reg nanaco and card-em
+2022/10/20 nanaco&#12481;&#12515;&#12540;&#12472;       As:e-mon:nanac:card-em    3,000 JPY    3,000 JPY
+2022/10/20 &#12475;&#12502;&#12531;&#12452;&#12524;&#12502;&#12531;       As:e-mon:nanac:card-em   -1,050 JPY    1,950 JPY
+2022/11/15 &#12510;&#12463;&#12489;&#12490;&#12523;&#12489;         As:e-mon:nanac:card-em     -855 JPY    1,095 JPY
+2022/11/24 nanaco&#20869;&#31227;&#21205;         As:e-mon:nanac:card-em    2,000 JPY    3,095 JPY
+
+$ ledger  reg nanaco and center
+2022/10/20 &#12475;&#12502;&#12531;&#12452;&#12524;&#12502;&#12531;       (A:e-:nana:center-pts)        5 JPY        5 JPY
+2022/11/22 nanaco&#20869;&#31227;&#21205;         As:e-m:nanac:center-em    2,000 JPY    2,005 JPY
+2022/11/24 nanaco&#20869;&#31227;&#21205;         As:e-m:nanac:center-em   -2,000 JPY        5 JPY
+2022/12/10 &#12510;&#12463;&#12489;&#12490;&#12523;&#12489;         (A:e-:nana:center-pts)        4 JPY        9 JPY
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orge9ae4e0" class="outline-2">
+<h2 id="orge9ae4e0"><span class="section-number-2">5</span> TXN例</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-sh">
+
+<span style="color: #006FE0;">alias</span> <span style="color: #BA36A5;">nanaco</span>=Assets:e-money:nanaco
+<span style="color: #006FE0;">alias</span> orico-pts=Assets:e-money:Orico
+;; 
+2022/10/17 * &#35519;&#25972; Orico
+    orico-pts                                 11,400 JPY
+    Equity Adjustments
+
+2022/10/20 * nanaco&#12481;&#12515;&#12540;&#12472;
+    ; &#12475;&#12502;&#12531;&#12452;&#12524;&#12502;&#12531;&#12391;nanaco&#12395;&#29694;&#37329;&#12481;&#12515;&#12540;&#12472; 
+    nanaco:card-em                             3,000 JPY
+    Assets:Cash:&#23567;&#37549;                          -3,000 JPY
+
+2022/10/20 * &#12475;&#12502;&#12531;&#12452;&#12524;&#12502;&#12531;
+    ; &#12509;&#12452;&#12531;&#12488;&#21363;&#26085;&#21453;&#26144;
+    Expenses:Grocery                           1,050 JPY
+    nanaco:card-em                            -1,050 JPY
+    (nanaco:center-pts)                            5 JPY
+
+2022/11/15 * &#12510;&#12463;&#12489;&#12490;&#12523;&#12489;
+    ; &#12509;&#12452;&#12531;&#12488;&#12399;&#32716;&#26376;10&#26085;AM:6&#26178;&#12395;&#21453;&#26144;
+    Expenses:Food                                855 JPY
+    nanaco:card-em                              -855 JPY
+    (nanaco:center-pts)                            4 JPY ; [2022/12/10]
+
+2022/11/20 * Orico&#12509;&#12452;&#12531;&#12488;&#20132;&#25563;
+    ; orico --&gt; nanaco gift
+    orico:pts                                 -2,000 JPY
+    nanaco:gift-pts                            2,000 JPY
+
+2022/11/22 * nanaco&#20869;&#31227;&#21205;
+    ; &#12462;&#12501;&#12488; --&gt; &#12475;&#12531;&#12479;&#12540;&#20869;&#38651;&#23376;&#12510;&#12493;&#12540;
+    nanaco:gift-pts                           -2,000 JPY
+    nanaco:center-em                           2,000 JPY
+
+2022/11/24 * nanaco&#20869;&#31227;&#21205;
+    ; &#27531;&#39640;&#30906;&#35469;&#12391;nanaco&#20869;&#31227;&#21205; --&gt; &#12459;&#12540;&#12489;&#20869;&#38651;&#23376;&#12510;&#12493;&#12540;
+    nanaco:center-em                          -2,000 JPY
+    nanaco:card-em                             2,000 JPY
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3d1f022" class="outline-2">
+<h2 id="org3d1f022"><span class="section-number-2">6</span> bottom line is&#x2026;</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>ほどんど誰にとっても意味のある情報ではない:sunglasses:</li>
+<li>収容可能な最大金額が10万円。普通は数千円のみ</li>
+<li>ポイントが溜まるといっても、普通の使い方だと10万円使っても500円！</li>
+<li>しかも使う店（場所）によっては毎月1度しかポイントが更新されないというだるさ</li>
+<li>会員メニューでできることがほとんどない（スマホアプリならもうちょっとできることが多いようだが）</li>
+
+<li>それをトラッキングしたいというのは、やっぱりちょっと変</li>
+<li>nanacoはブラックボックス＝petty cash扱いにして、そこから先は追跡・分析しないというのが正常なヒトの行動だと思う</li>
+<li>TXNとしてはこんな感じ：</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">2022/11/10 nanaco&#12395;&#20837;&#37329;
+   Assets:nanaco           5,000 JPY
+   Assets:&#23567;&#37549;            -5,000 JPY
+
+2022/11/20 &#12475;&#12502;&#12531;&#12452;&#12524;&#12502;&#12531;
+   Expenses:Food           1,230 JPY
+   Assets:nanaco          -1,230 JPY
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>しかし、わけがわからん　というのが気に入らなくてとりあえずちゃんとトラッキングしてみたいということで</li>
+<li>脅迫経症的:sweat:</li>
+
+<li>言い訳：マイナポイントをnanacoで使うと、最大2万円ほどが収納される</li>
+<li>それがどう動くかは、ちょっと確認したいなぁ</li>
+<li></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0b2e3db" class="outline-2">
+<h2 id="org0b2e3db"><span class="section-number-2">7</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-12-07 水 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-12-07 水 08:29</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

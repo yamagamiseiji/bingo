@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2022-12-29 木 15:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>nanacoをLedger-cliで複式簿記トラッキング</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">nanacoをLedger-cliで複式簿記トラッキング</h1>
+
+<div id="outline-container-orgd8c2c10" class="outline-2">
+<h2 id="orgd8c2c10"><span class="section-number-2">1</span> nanacoはトップランナー！</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+nanacoを知らないヒトはいませんよね。
+</p>
+
+<p>
+「<a href="https://retailguide.tokubai.co.jp/trend/31578/">リテールガイド</a>」によれば、nanacoの発行枚数は <b><b>7,520万枚</b></b> (2022/02現在）、nanaco利用な店舗数は956,000件（2022/06末現在）。
+</p>
+
+<p>
+ボクも1枚持っています :smile:
+</p>
+<div align=left>
+<img src="https://dl.dropboxusercontent.com/s/p1czmnknrzzmpm5/senior_nanaco.jpg" alt="" width="50%"><figure caption>図1. nanacoカード（シニア用）</figure>
+</div>
+<p>
+コンビニなどで小銭入れの代わりに使えて本当に便利です。
+</p>
+
+<p>
+国のマイナポイント事業のキャッシュレス決済サービスにもなりました。
+そこでnanacoをマイナポイント受取り口座にしてみました。
+</p>
+</div>
+
+<div id="outline-container-orgfecfc98" class="outline-3">
+<h3 id="orgfecfc98"><span class="section-number-3">1.1</span> nanacoで はまった:sweat:</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+nanacoは小銭レベルの少額プリペイドカードなので、仕組みは簡単素朴だと思ったのが間違いの始まり。nanacoのポイントとお金の動きをLedger-cliで <b><b>複式簿記的</b></b> にトラッキングしようとしてハマりました。
+</p>
+<ul class="org-ul">
+<li>仕組みが思ったよりも複雑</li>
+<li>ポイントと電子マネーの移動をリアルタイムに追跡できない<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
+</ul>
+
+<p>
+いろいろ試行錯誤した結果、パーフェクトではありませんが、ようやく そこそこのレベルでnanacoのポイントと電子マネーをトラッキングできるようになりました。
+</p>
+
+<p>
+ここではそれを紹介します。
+細かく解説的に書くと長くなりますので、この記事は複式簿記とLedger-cliについてある程度のリテラシーをお持ちの方をイメージターゲットにしています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge054e21" class="outline-3">
+<h3 id="orge054e21"><span class="section-number-3">1.2</span> 勘定科目（アカウント）設定</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orgee08855" class="outline-4">
+<h4 id="orgee08855"><span class="section-number-4">1.2.1</span> nanacoポイントと電子マネーの構造</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+図2はnanacoアプリのスクリーンショットです。
+</p>
+<div align=left>
+<img src="https://dl.dropboxusercontent.com/s/gki8ok3b385zzg6/%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg]]" alt="" width="60%">
+<figure caption>図2. nanacoアプリのスクリーンショット</figure>
+
+<p>
+この図からnanacoは次の4つの要素から構成されていることが分かります。
+</p>
+<ol class="org-ol">
+<li>カード内　マネー残高</li>
+<li>カード内　ポイント残高</li>
+<li>センター預り内　マネー残高</li>
+<li>センター預か内　ポイント残高</li>
+</ol>
+
+
+<p>
+上の構成要素を次の図3のように複式簿記の <b><b>勘定科目</b></b> にします。
+</p>
+<div align=left><img src="https://dl.dropboxusercontent.com/s/pkwva7kup1xp177/nanaco-AC-tree.png" alt="" width="60%"></div>
+<figure caption>図3. nanaco関係の勘定科目樹状図</figure>
+<p>
+要するに nanacoの最上位の勘定科目（アカウント）は <b><b>Assets</b></b> (資産)、その下に <b><b>e-money</b></b> （電子マネー）<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>を置き、さらにその下にnanacoがあるという構造です。
+</p>
+
+<p>
+ここで
+</p>
+<ul class="org-ul">
+<li><code>card</code> は「カード内」、 <code>center</code> は「センター預り内」です</li>
+<li><code>em</code> はElectoronic Money（電子マネー）、 <code>pts</code> はポイントです</li>
+<li>nanaco内の勘定科目（アカウント）のコモディティ（通貨単位）は <code>card_em</code> （カード内電子マネー）だけが「日本円」 <code>JPY</code> です。あとのアカウントはすべて「ポイント」 <code>pts</code> にします</li>
+<li><code>JPY</code> と <code>pts</code> との交換率は1:1です(<code>C 1 JPY = 1 pts</code>)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5817932" class="outline-4">
+<h4 id="org5817932"><span class="section-number-4">1.2.2</span> 日本語でもOKです</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+こうした勘定科目（アカウント）の階層構造をLedger-cliでは半角コロン <code>:</code> で連結して
+</p>
+<pre class="example">
+Assets:e-money:nanaco:card_em
+</pre>
+<p>
+のように記述します。もちろん これを日本語表記して
+</p>
+<pre class="example">
+資産:電子マネー:ナナコ:カード内電子マネー
+</pre>
+<p>
+と書くこともできます。
+</p>
+
+<p>
+記帳の時に毎回日本語変換キーを叩くのが面倒なので、ボクはアカウント名にはできるだけ日本語を使わないようにしています。単なる好みの問題です<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
+</p>
+
+<p>
+さて とりあえずこれだけの勘定科目を用意すれば、nanacoのお金とポイントの流れをそれなりにトラッキングすることができます。下に例をあげます。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6febcc" class="outline-2">
+<h2 id="orgf6febcc"><span class="section-number-2">2</span> nanacoのledger-cliトランザクション例</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+この例で記述しているのは、次のようなnanacoのポイントと電子マネーの流れ：
+</p>
+<ol class="org-ol">
+<li>最初に <code>Opening Balance</code> で nanaco各要素の勘定科目の初期値を宣言</li>
+<li>nanacoでマイナポイントを受け取り、それを電子マネーに交換</li>
+<li>nanaco電子マネーを使って買い物（セブンイレブンとマクドナルド）</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-txt">account Assets:e_money:nanaco
+account Expenses:Grocery
+;
+alias nanaco=Assets:e_money:nanaco
+alias food=Expenses:Grocery
+alias lunch=Expenses:Meals:Lunch
+;;
+2022/12/13 * Opening Balance
+    nanaco:card_em                              1788 JPY
+    Equity:Opening Balance
+2022/12/13 * Opening Balance
+    [nanaco:card_pts]                             38 pts
+    Equity:Opening Balance
+2022/12/13 * Opening Balance 
+    nanaco:center_em                               0 JPY
+    Equity:Opening Balance
+2022/12/13 * Opening Balance 
+    nanaco:center_pts                              0 pts
+    Equity:Opening Balance
+
+2022/12/13 * nanacoチャージ
+    ; セブンイレブンのレジにてcard points を em へチャージ
+    nanaco:card_em                                38 JPY
+    [nanaco:card_pts]                            -38 pts
+
+2022/12/15 * マイナポイント取得
+    ; 付与されたポイント＝電子マネーをnancoセンター(預り)に収納
+    Income:一時所得                          -15,000 JPY
+    nanaco:center_pts                         15,000 pts
+
+2022/11/02 * nanacoポイント交換
+    ; nanacoセンター(預り)ポイントを nanacoマネーに交換 
+    nanaco:center_pts                        -10,000 pts
+    nanaco:card_em                            10,000 JPY
+
+2022/12/21 * セブンイレブン
+    ; 税抜き支払額の 0.5% のポイント付与
+    food                                        1862 JPY
+    nanaco:card_em                             -1862 JPY
+    (nanaco:card_pts)                              8 pts
+
+2022/12/22 * マクドナルド
+    ; 毎月10日 6:00AM に前月末までのポイントが付与される
+	; 税込み!! 200円ごとに1ポイント
+    lunch                                        850 JPY
+    nanaco:card_em                              -850 JPY
+    (nanaco:card_pts)                              4 pts ;[2023/01/10] 
+</pre>
+</div>
+</div>
+<div id="outline-container-orgbbeb209" class="outline-3">
+<h3 id="orgbbeb209"><span class="section-number-3">2.1</span> 補足説明</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>トランザクションの冒頭2行の <code>account</code> 行で勘定科目を宣言しています。次の3行の <code>alias</code> 行は勘定科目のエリアス（短縮別名）を定義しています</li>
+<li>トランザクション最下行の右端にある <code>;[2023/10/10]</code> はnanacoポイントが反映される日付けを記述しています<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></li>
+<li>ポイント更新のタイミングの詳細については[nanaco 使い方ページ](<a href="https://www.nanaco-net.jp/how-to/save_point/shopping.html">https://www.nanaco-net.jp/how-to/save_point/shopping.html</a>)を参照してください</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgbbc17d6" class="outline-2">
+<h2 id="orgbbc17d6"><span class="section-number-2">3</span> クエリの例</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+上のトランザクション（ <code>nanaco.ledger</code> ファイル) のあるディレクトリ内に、次のような内容のファイル（ <code>init.ledger</code> ）を置きます。
+その中でLedgerのデータファイル名などの基本情報を定義しています。
+</p>
+<div class="org-src-container">
+<pre class="src src-txt">--file ./nanaco.ledger
+--sort date
+--effective
+--date_format %Y/%m/%d
+</pre>
+</div>
+<p>
+こうしておけば、そのディレクトリ内で、Ledger起動時に <code>--init-file init.ledger</code> のオプションだけを指定すれば済むようになります。
+</p>
+</div>
+
+<div id="outline-container-orgfa68800" class="outline-3">
+<h3 id="orgfa68800"><span class="section-number-3">3.1</span> nanacoのbalanceレポート</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+balanceレポートでは <code>pts</code>, <code>JPY</code> のコモディティが並立して表記されます
+</p>
+<div class="org-src-container">
+<pre class="src src-txt">$ led bal nanaco --init-file init.ledger
+	   9,014 JPY
+	   5,012 pts  Assets:e_money:nanaco
+	   9,014 JPY    card_em
+	      12 pts    card_pts
+	   5,000 pts    center_pts
+--------------------
+	   9,014 JPY
+	   5,012 pts
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgef5fc91" class="outline-4">
+<h4 id="orgef5fc91"><span class="section-number-4">3.1.1</span> &#x2013;exchange JPY オプション</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+コモディティ <code>pts</code> は <code>JPY</code> に換算して表記されます
+</p>
+<div class="org-src-container">
+<pre class="src src-txt">$ led bal nanaco --init-file init.ledger --exchange JPY
+	  14,026 JPY  Assets:e_money:nanaco
+	   9,014 JPY    card_em
+	      12 JPY    card_pts
+	   5,000 JPY    center_pts
+--------------------
+	  14,026 JPY
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org18712af" class="outline-4">
+<h4 id="org18712af"><span class="section-number-4">3.1.2</span> ポイントのトラッキング</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+nanacoのポイントだけをトラッキングしてレジスター表示
+</p>
+<pre class="example">
+$ ledger reg nanaco and pts --init-file init.ledger
+</pre>
+<div align=left>
+<img src="https://dl.dropboxusercontent.com/s/7ykhhv9hnw24dh1/nanaco_and_pts.png" alt="" width="100%"></div>
+</div>
+</div>
+<div id="outline-container-orgf2e1038" class="outline-4">
+<h4 id="orgf2e1038"><span class="section-number-4">3.1.3</span> 電子マネーのトラッキング</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+nanacoの電子マネーだけをトラッキングしてレジスター表示    
+</p>
+<pre class="example">
+$ ledger reg nanaco and _em --init-file init.ledger 
+</pre>
+<div align=center>
+<img src="https://dl.dropboxusercontent.com/s/0bg4wz96bjk57dh/nanaco_and_em.png" alt="" width="100%"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org15a9878" class="outline-2">
+<h2 id="org15a9878"><span class="section-number-2">4</span> まとめ</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+nanacoカードに収納可能な金額は最大10万円ほどです。自分では普段は数千円ほどしか入れてません:sweat: nanacoは小銭入れ代わりに使うのが一番の使い方だと思います。
+</p>
+
+<p>
+<span style="color: red">ポイントが溜まる</span>とか<span style="color: red">お得</span>とか言われますが、nanaco最大キャパの10万円を使っても、せいぜい500円ほどの「おまけ」がつくだけです<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>。
+</p>
+
+<p>
+ボクのように数千円入っていれば安心というような使い方をしている人間に付与されるポイントはほんとうに微々たるものです。
+それを厳密にトラッキングする意味は家計・経理の面から言えばほとんど無意味です。
+</p>
+
+<p>
+ここでは、敢えて複式簿記でnanaco内外のポイントとお金の動きをトラックしてみましたが、
+「やろうと思えばここまでは出来る」というほどの意味しか無いと思います:sunglasses:
+</p>
+</div>
+
+<div id="outline-container-org8759119" class="outline-3">
+<h3 id="org8759119"><span class="section-number-3">4.1</span> むしろ</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+家計簿的には、nanacoを内部構造まで忠実に勘定科目化するのではなく、nanacoを単一の勘定科目にしておいて
+</p>
+<ul class="org-ul">
+<li>nanaco内部はブラックボックスにして</li>
+<li>そこから先の細かいリワードポイントなどは追跡・分析せず</li>
+<li>コンビニでチャージした現金とか買い物の結果だけを記帳し（ポイントも記帳しない）</li>
+<li>しばらく使って、溜まったポイントをチャージしたりした結果、nanaco内の電子マネーの誤差が蓄積してきたら</li>
+<li>年に1回くらいの頻度でつぎのようなトランザクションを書いて <b><b>調整</b></b> する</li>
+</ul>
+
+<p>
+という感じ。たとえばある日（2023/10/10)、nanacoの電子マネーが3,510円になっていることを確認したら：
+</p>
+<pre class="example">
+2023/10/10 nanacoポイント調整
+   Assets:e-money:nanaco                  =3,510 JPY
+   Equity Adjustments 
+</pre>
+<p>
+これだけでOKです。これがnanacoとの妥当な付き合い方かと思います。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb00d9eb" class="outline-2">
+<h2 id="orgb00d9eb"><span class="section-number-2">5</span> Footnotes:</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">&#33050;&#27880;: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+nanacoアプリだけではなく、スマホアプリならもうちょっとできそうですが、ボクのようにスマホを持たずガラケーとタブレットで暮らしている人間にはその恩恵は届きません。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<b><b>e-money</b></b> アカウント内にはnanacoの他に、ANA, Costco, Kuroneko, Orico, Suica などがぶら下がっています。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+単なる「好み」だけではなく、Ledger-cliではマルチバイト文字を使ったアカウント名にすると、レポートが <b><b>列崩壊</b></b> します。列崩壊を全面的に解消するのはとても大変です。どうしても列崩壊を避けたいときには、文字コードを「小手先でいぢくる」uglyな関数を介在させています:sweat:
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+これはLedger-cliの独特の書式で、 <b><b>Effective/Aux date</b></b> です。詳しくは<a href="https://www.ledger-cli.org/3.0/doc/ledger3.html">マニュアル</a>を見てください。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+nanacoは支払った金額のウチ、基本的には税抜きの金額だけがポイント付与のベースになってますし、ポイントがつかない商品やサービスもありますので、<span style="color: red">10万円で300円台のオマケ</span>と考えた方が良いかも知れません。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2022-12-29 木 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2022-12-29 木 15:49</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

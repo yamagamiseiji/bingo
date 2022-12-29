@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliのトランザクション中のアカウント名をsedで一括変更"
 author = ["YAMAGAMI"]
-date = 2022-11-30T00:00:00+09:00
+date = 2022-12-31T00:00:00+09:00
 tags = ["ledger-cli", "sed", "accounts"]
 categories = ["comp"]
 draft = false
@@ -46,7 +46,7 @@ $ sed -e '/Netflix/{n;s/CableTV/StreamTV:Netflix/}' original-ledger.dat > new-le
 ****{n;}**** を使うだけ:sweat:
 
 これでもともとのLedgerデータファイル中の
-****Netflix**** という文字列がある行の<font color=red>次の行</font>にある ****CableTV**** が ****StreamTV:Netflix**** に置換されました。めでたしめでたし！
+****Netflix**** という文字列がある行の&lt;font color=red&gt;次の行&lt;/font&gt;にある ****CableTV**** が ****StreamTV:Netflix**** に置換されました。めでたしめでたし！
 
 sedで行をまたいだ文字列を置換できることが分かりましたので、過去のトランザクション中のアカウント名の変更がこれまで以上に簡単にできるようになりました。タイプミス リスクも大幅に減ります。
 
@@ -57,4 +57,4 @@ Bash/sed のすばらしさ、に感謝いっぱいです。
 
 ## Footnotes: {#footnotes}
 
-[^fn:1]: 参考にさせていただいたサイトは [sedのお勉強2 特定文字列に一致した次の行を操作するスクリプト](<https://foxtrot0304.hatenablog.com/entry/2015/12/09/015537>) です🙏
+[^fn:1]: 参考にさせていただいたサイトは [sedのお勉強2 特定文字列に一致した次の行を操作するスクリプト](<https://foxtrot0304.hatenablog.com/entry/2015/12/09/015537>)　です🙏

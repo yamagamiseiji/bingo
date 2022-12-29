@@ -1,0 +1,267 @@
++++
+title = "nanacoをLedger-cliで複式簿記トラッキング"
+author = ["YAMAGAMI"]
+tags = ["ledger-cli", "マイナポイント", "nanaco", "複式簿記"]
+categories = ["comp"]
+draft = false
++++
+
+2022/12/17 11:04:37
+
+2022/12/26 19:14:30
+
+ここでは
+****Ledger-cli**** を使って ****複式簿記**** で
+nanacoカードの ****ポイント**** と ****電子マネー**** の動きをトラッキングしてみます。
+
+<a id="figure--my-senior-nanaco"></a>
+
+{{< figure src="/senior_nanaco.jpg" caption="<span class=\"figure-number\">&#22259;1:  </span>nanacoカード(色がくすんでいる。撮影し直し)" width="70%" >}}
+
+はぁ〜！ 何のために？とかは後回しにして、とりあえず方法を紹介します。
+
+
+## まずは nanaco　舐めたらあかんで！ {#まずは-nanaco-舐めたらあかんで}
+
+今回初めてnanacoの仕組みを ****勉強**** しましたが、とにかく ****むずかしい**** :exclamation:
+nanacoってのは、ごくごく少額の ****petty cash**** （小銭）だけを扱うものだから、仕組みも超単純なもんだろ、と思ってました。
+
+それがびっくり！　とんでもない複雑さ！
+
+正直言って、じつは今もって自分がnanacoをただしく理解している自信はありません。
+
+
+## nanaco内のポイントとマネー {#nanaco内のポイントとマネー}
+
+まずは基礎知識その１＝ ****nanacoの構造**** から・・・。
+
+
+#### nanacoポイントと電子マネーの構造 {#nanacoポイントと電子マネーの構造}
+
+図[2](#figure--fig1)はnanacoアプリのスクリーンショットです。
+
+<a id="figure--fig1"></a>
+
+{{< figure src="https://dl.dropboxusercontent.com/s/gki8ok3b385zzg6/%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg" caption="<span class=\"figure-number\">&#22259;2:  </span>nanacoアプリのスクリーンショット" width="80%" >}}
+
+図[2](#figure--fig1) からnanacoは次の4つの要素から構成されていることが分かります[^fn:1]
+
+1.  カード内　マネー残高
+2.  カード内　ポイント残高
+3.  センター預り内　マネー残高
+4.  センター預か内　ポイント残高
+
+これらの構成要素を複式簿記にのせるために次のような ****勘定科目**** にします。
+
+
+#### 勘定科目（アカウント) {#勘定科目-アカウント}
+
+nanacoの4要素をそれぞれ次の表のような勘定科目（アカウント）名にします。
+
+| nanaco                   | 勘定科目名         | 解題              |
+|--------------------------|---------------|-----------------|
+| 1. カード内　マネー残高  | ****card_em****    | in card E-money   |
+| 2. カード内　ポイント残高 | ****card_pts****   | in card points    |
+| 3. センターお預り分        マネー残高 | ****center_em****  | in center E-money |
+| 4. センターお預かり分      ポイント残高 | ****center_pts**** | in center points  |
+
+
+#### 勘定科目の樹状図 {#勘定科目の樹状図}
+
+nanacoの上位にある勘定科目も含めて樹状図にすると次のようになります[^fn:2]。
+
+<div align=left>
+<img src="https://dl.dropboxusercontent.com/s/pkwva7kup1xp177/nanaco-AC-tree.png" alt="" width="50%"> </div>
+
+nanacoの最上位の勘定科目（アカウント）は ****Assets(資産)**** 、その下に ****e-money**** 一般を置き、さらにその下にnanacoがあるという構造。
+
+こうしたアカウント構造をLedger-cliでは
+
+```nil
+Assets:e-money:nanaco:card_em
+```
+
+のように記述します。もちろん、これを日本語表記して
+
+```nil
+資産:電子マネー：ナナコ:card_em
+```
+
+と書くこともできます。ただ、自分は記帳の時に毎回日本語変換キーを叩くのが面倒なので、カウント名にはできるだけ日本語を避けるようにしています。単なる好みの問題です。
+
+さてとりあえず、これだけの勘定科目を用意すれば、さすがのnanacoも、その内外のお金とかポイントの動きをきちんとトラッキングすることができます。
+
+
+## トランザクション例 {#トランザクション例}
+
+最初の2行で、長たらしい勘定科目名に短い別名（エリアス）をつけています。
+
+```sh
+alias nanaco=Assets:e-money:nanaco
+alias orico-pts=Assets:e-money:Orico
+;;
+
+2022/10/20 * nanacoチャージ
+    ; セブンイレブンでnanacoに現金チャージ
+    nanaco:card_em                             3,000 JPY
+    Assets:Cash:小銭                          -3,000 JPY
+
+2022/10/20 * セブンイレブン
+    ; セブンで買い物。ポイントは即日反映される
+    Expenses:Grocery                           1,050 JPY
+    nanaco:card_em                            -1,050 JPY
+    (nanaco:center_pts)                            5 JPY
+
+2022/11/15 * マクドナルド
+    ; マックでランチ。ポイントは翌月10日AM:6時まで反映されない
+    Expenses:Food                                855 JPY
+    nanaco:card_em                              -855 JPY
+    (nanaco:center_pts)                            4 JPY;[2022/12/10]
+
+2022/11/17 * 調整 Orico
+    ; Oricoポイントの初期設定
+    orico-pts                                 11,400 JPY
+    Equity Adjustments
+
+2022/11/20 * Oricoポイント交換
+    ; orico --> nanaco gift
+    orico:pts                                 -2,000 JPY
+    nanaco:gift-pts                            2,000 JPY
+
+2022/11/22 * nanaco内移動
+    ; nanacoギフト --> センター内電子マネー
+    nanaco:gift-pts                           -2,000 JPY
+    nanaco:center_em                           2,000 JPY
+
+2022/11/24 * nanaco内移動
+    ; レジで残高確認してnanaco内移動 --> カード内電子マネー
+    nanaco:center_em                          -2,000 JPY
+    nanaco:card_em                             2,000 JPY
+```
+
+
+#### 補足説明 {#補足説明}
+
+
+## クエリ例 {#クエリ例}
+
+上のトランザクションに対して ****balanceレポート****, ****registerレポート**** を求めた出力例：
+
+```sh
+＜balanceレポート＞
+$ ledger bal nanaco
+	   3,104 JPY  Assets:e-money:nanaco
+	   3,095 JPY    card_em
+		   0    center_em
+	       9 JPY    center_pts
+		   0    gift-pts
+--------------------
+	   3,104 JPY
+
+＜registerレポート＞
+$ ledger  bal nanaco and card_em
+	     3,095 JPY  Assets:e-money:nanaco:card_em
+
+$ ledger reg nanaco and card_em
+2022/10/20 nanacoチャージ       As:e-mon:nanac:card_em    3,000 JPY    3,000 JPY
+2022/10/20 セブンイレブン       As:e-mon:nanac:card_em   -1,050 JPY    1,950 JPY
+2022/11/15 マクドナルド         As:e-mon:nanac:card_em     -855 JPY    1,095 JPY
+2022/11/24 nanaco内移動         As:e-mon:nanac:card_em    2,000 JPY    3,095 JPY
+
+$ ledger reg nanaco and center
+2022/10/20 セブンイレブン       (A:e-:nana:center_pts)        5 JPY        5 JPY
+2022/11/22 nanaco内移動         As:e-m:nanac:center_em    2,000 JPY    2,005 JPY
+2022/11/24 nanaco内移動         As:e-m:nanac:center_em   -2,000 JPY        5 JPY
+2022/12/10 マクドナルド         (A:e-:nana:center_pts)        4 JPY        9 JPY
+```
+
+
+## bottom line is... {#bottom-line-is-dot-dot-dot}
+
+ま、こんな具合にnanacoの内外の電子マネー、ポイントをトラッキングできますよ、というだけのもの。
+
+
+### しかし！ {#しかし}
+
+nanacoが収容可能な最大金額は10万円。普通はポイントと電子マネーを合わせても数千円程度入れておく。
+
+ポイントが溜まるとかお得とか言われますが、nanaco最大キャパの10万円を使ってもふつうは500円ほどの「おまけ」がつくだけ。
+
+ボクのように数千円入っていれば、まず安心というような使い方をしている人間にはポイントはほんとうに微々たるものです。
+
+それを厳密にトラッキングする意味は、お金の面から言えばほとんどナンセンスです。
+
+さらに悪いことに、nanaco内外の動きをリアルタイム（までは行かなくても当日内）に補足することができない。
+
+nanacoを使う店（場所）によっては毎月1度しかポイントのデータが更新されないという \*\*dullさ\*\*　また会員メニューでできることがほとんどありません。
+
+スマホアプリならもうちょっとできることが多いようですが、ボクのようにスマホを持たずガラケーとタブレットで暮らしている人間にはその恩恵は届きません。
+
+ブログに書いておいて、いまさらなんですが、この内容はほとんどのヒトにとってほとんど有意味な情報を含んでいません。
+
+
+### bottom line {#bottom-line}
+
+nanacoをこんな風にトラッキングしたいというのは、偏執狂ですよね:sweat:
+   それをトラッキングしたいというのは、やっぱりちょっと変
+
+
+### ただしいnanacoとの付き合い方 {#ただしいnanacoとの付き合い方}
+
+-   nanacoは「出し入れの便利な小銭入れ」として使う
+-   nanacoの内部はブラックボックスにして、チャージした先は ****unknown**** とか、\*\*petty cash\*\* 扱いにして、そこから先は追跡・分析しないというのがただしい付き合い方だとおもいます。誤差が蓄積してきたらLedgerの ****Equity Adjustments**** で調整してつじつまを合わせる。それが一番かと思います。
+
+ただしいTXNとしてはこんな感じ：
+
+```sh
+2022/11/10 nanacoに入金
+   Assets:nanaco           5,000 JPY
+   Assets:小銭            -5,000 JPY
+
+2022/11/20 セブンイレブン
+   Expenses:Food           1,230 JPY
+   Assets:nanaco          -1,230 JPY
+```
+
+-   しかし、わけがわからん　というのが気に入らなくてとりあえずちゃんとトラッキングしてみたいということで
+-   脅迫経症的:sweat:
+
+-   言い訳：マイナポイントをnanacoで使うと、最大2万円ほどが収納される
+-   それがどう動くかは、ちょっと確認したいなぁ
+
+
+## nanacoのなぞ {#nanacoのなぞ}
+
+****nanaco**** は広く流通し使える店も＃１？自分もナナコカードを昔から持っていて、かつては非常に頻繁に利用していた
+
+-   使い方としては、セブンイレブンに買い物に入り、レジでnanacoカードで支払う、足りなくなれば数千円をチャージする。それだけ。
+-   ごーく稀に、レジでポイントをどうしますか？と言われると、あ移してください、と言う、それだけ
+
+-   nanacoに入っている現金は5千円程度で、万を超える金額をいれたことはない。
+-   nanacoは小銭petty cashを財布から出すのが面倒、おつりをもらって財布やズボンにしまうのが面倒
+-   これがnanacoの存在理由のすべてでした。
+
+-   現在では仕事で市内を移動したりすることもなく、そもそもコンビニで買い物をすることもほとんど無くなった。
+-   nanacoはほとんど死蔵状態というのが実情
+
+
+## ところが！ {#ところが}
+
+-   マイナカードの第1弾、第2弾などで、妻がnanacoにマイナポイントを収納したいということで、人生ではじめてnanacoの仕組みを勉強した
+-   これがびっくり！
+-   何がびっくりか？
+-   一言でいうと、何という複雑な仕組みなのだ！
+-   仕組み＝構造、機能、概念、すべての意味で超複雑
+-   自分の小銭かわりの使い方はnanacoの全機能の1000分の一だね
+-   言葉／概念の使い方もわざと混同が起こるようになっている（後述）
+
+数日間、nanacoの仕組み勉強をしたがまだ分かったところはわずか。しかもその理解で正しいかどうか、確証が得られていない
+
+-   そのわけは、ポイントの動きをリアルタイムにモニターするのが大変、というか仕組みとしてそれが出来ないことにある。
+-   あとは、自分の認知力が落ちてきて理解できなくなっている？
+
+
+## Footnotes: {#footnotes}
+
+[^fn:1]: : ギフトポイントを入れると5要素。それは後で説明。
+[^fn:2]: ：図では第5の要素としてnanacoギフト＝ ****gift-pts**** も付け加えています。
