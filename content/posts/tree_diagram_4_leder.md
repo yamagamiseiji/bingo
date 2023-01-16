@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliのアカウント構造を樹状図にする"
 author = ["YAMAGAMI"]
-date = 2023-01-16T00:00:00+09:00
+date = 2023-01-17T00:00:00+09:00
 tags = ["ledger-cli", "複式簿記", "tree", "アカウント構造", "mkdir"]
 categories = ["comp"]
 draft = false

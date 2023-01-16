@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
 #           Last updated : 2022/12/29
 #+title: Ledger-cliのアカウント構造を樹状図にする
-#+date: [2023-01-16]
+#+date: [2023-01-17]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
