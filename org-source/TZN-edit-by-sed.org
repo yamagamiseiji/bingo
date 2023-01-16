@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2021-04-16 11:55:17 yamagami>
+#           Time-stamp: <2023-01-16 20:15:05 yamagami>
 #+title: Ledger-cliのトランザクション中のアカウント名をsedで一括変更
 #+date: [2022-12-31 ]
 #+language: ja
@@ -10,7 +10,7 @@
 #+hugo_categories: comp
 
 #+options: toc:nil
-#+draft: true
+#+draft: false
 
 * Ledger-cliのアカウント名を変更したい
 Ledger-cli はいつでも自由にアカウント名（勘定科目名）やアカウント構造を変更できます
@@ -57,7 +57,7 @@ $ sed -e '/Netflix/{n;s/CableTV/StreamTV:Netflix/}' original-ledger.dat > new-le
 **{n;}** を使うだけ:sweat:
 
 これでもともとのLedgerデータファイル中の
-**Netflix** という文字列がある行の<font color=red>次の行</font>にある **CableTV** が **StreamTV:Netflix** に置換されました。めでたしめでたし！
+**Netflix** という文字列がある行の{{{color(red 次の行)}}}にある **CableTV** が **StreamTV:Netflix** に置換されました。めでたしめでたし！
 
 
 sedで行をまたいだ文字列を置換できることが分かりましたので、

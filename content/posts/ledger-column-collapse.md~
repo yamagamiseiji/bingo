@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliのregisterレポートのカラム崩壊"
 author = ["YAMAGAMI"]
-date = 2022-12-20T00:00:00+09:00
+date = 2023-01-10T00:00:00+09:00
 tags = ["ledger-cli", "カラム崩壊"]
 categories = ["comp"]
 draft = false
@@ -49,20 +49,20 @@ $ ledger reg ^expenses and cars -b 01/20\
 ```
 
 -   当然のことながら、マルチバイト文字を含まないアルファベットのみで構成されたトランザクションではカラムは完璧に整列します。
--   ところが、支払先（payee）に日本語、アルファベットが混在していると、次の図 [1](#org4a2c885)のように残念な結果になります。
+-   ところが、支払先（payee）に日本語、アルファベットが混在していると、次の図 [1](#figure--ugly-shot)のように残念な結果になります。
 
-<a id="org4a2c885"></a>
+<a id="figure--ugly-shot"></a>
 
-{{< figure src="/screenshot-ugly.png" caption="&#22259;1:  Ledger-cliの標準出力" width="90%" >}}
+{{< figure src="/screenshot-ugly.png" caption="<span class=\"figure-number\">&#22259;1:  </span>Ledger-cliの標準出力" width="90%" >}}
 
 これでは、どこかに報告書として出すのではなく、ごく私的に結果を見るだけだとしても、ちょっと苦しい。
 
 
 ### せめてこんな感じになって欲しい {#せめてこんな感じになって欲しい}
 
-<a id="orgebf4cea"></a>
+<a id="figure--pretty-shotpayeeが"></a>
 
-{{< figure src="/screenshot-pp.png" caption="&#22259;2:  カラム崩壊を抑えた出力のイメージ" width="90%" >}}
+{{< figure src="/screenshot-pp.png" caption="<span class=\"figure-number\">&#22259;2:  </span>カラム崩壊を抑えた出力のイメージ" width="90%" >}}
 
 抜本的な対策はとても無理ですが、とりあえず迂回的で（姑息な？）やり方でなんとかしのいでいます[^fn:2]。ここではそれを紹介します。
 
@@ -77,7 +77,7 @@ $ ledger reg ^expenses and cars -b 01/20\
 > 2.  固定長にされたdate+payeeの右側に、支出金額を右寄せにして表示する
 
 
-### カラム崩壊を抑える関数 dp-file\_justifier {#カラム崩壊を抑える関数-dp-file-justifier}
+### カラム崩壊を抑える関数 dp-file_justifier {#カラム崩壊を抑える関数-dp-file-justifier}
 
 date,payeeファイルを右寄せするためのシンプルな関数です[^fn:3]。
 

@@ -1,7 +1,7 @@
 +++
 title = "山菜をオーブンで"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
+date = 2023-12-31T00:00:00+09:00
 tags = ["oven"]
 categories = ["food"]
 draft = false

@@ -1,7 +1,7 @@
 +++
 title = "ノートPC のDC電源ジャック交換 – ThinkPad X230"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
+date = 2023-12-31T00:00:00+09:00
 tags = ["computer", "DIY"]
 categories = ["comp"]
 draft = false
@@ -24,7 +24,7 @@ ACアダプタを接続して使っていましたが、画面上の充電中マ
 故障箇所は ****DC電源ジャック**** 。
 ACアダプタのDCプラグを挿すための穴で、ThinkPad X230でもたいがいのノートPCと同じように背後にあります。
 
-{{< figure src="/X230電源ジャック.jpg" caption="&#22259;1:  X230のDC電源ジャック" width="60%" >}}
+{{< figure src="/X230電源ジャック.jpg" caption="<span class=\"figure-number\">&#22259;1:  </span>X230のDC電源ジャック" width="60%" >}}
 
 以前から、このジャックにACアダプタからのプラグを挿すと、ゆるゆるグラグラしていて気にはなっていました。要するにこいつが接触不良を起こしたというわけです。
 
@@ -51,13 +51,13 @@ ACアダプタのDCプラグを挿すための穴で、ThinkPad X230でもたい
 下の写真が本体から取り出した故障部品です。
 DC電源ジャックとケーブルが一体化しています。
 
-<a id="orgb1e0577"></a>
+<a id="figure--fig1"></a>
 
-{{< figure src="/DC電源ジャック.jpg" caption="&#22259;2:  X230のDC電源ジャック（取り外したもの）" width="60%" >}}
+{{< figure src="/DC電源ジャック.jpg" caption="<span class=\"figure-number\">&#22259;2:  </span>X230のDC電源ジャック（取り外したもの）" width="60%" >}}
 
-<a id="orga0d013c"></a>
+<a id="figure--fig3"></a>
 
-{{< figure src="/DC-jack_X230.jpg" caption="&#22259;3:  eBayから届いた固定金具つきの電源ジャック" width="60%" >}}
+{{< figure src="/DC-jack_X230.jpg" caption="<span class=\"figure-number\">&#22259;3:  </span>eBayから届いた固定金具つきの電源ジャック" width="60%" >}}
 
 
 ### マザーボード取り出しまでの分解手順 {#マザーボード取り出しまでの分解手順}

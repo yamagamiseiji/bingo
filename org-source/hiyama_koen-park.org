@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-06-10 19:21:52 yamagami>
+#           Time-stamp: <2023-01-16 18:14:54 yamagami>
 #+title: パラソル ホワイト トップ？
-#+date: [2022-12-31]
+#+date: [2023-12-31]
 #+language: ja
 
 #+link: file file+sys:../static/
@@ -12,8 +12,6 @@
 
 #+options: toc:nil
 #+draft: true
-
-*
 
 横浜市旭区の公園内の散策路
 

@@ -1,7 +1,7 @@
 +++
 title = "ノートPC のDC電源ジャック交換 – ThinkPad X230"
 author = ["YAMAGAMI"]
-date = 2022-05-16T00:00:00+09:00
+date = 2022-12-31T00:00:00+09:00
 tags = ["computer", "DIY"]
 categories = ["comp"]
 draft = false
@@ -51,11 +51,11 @@ ACアダプタのDCプラグを挿すための穴で、ThinkPad X230でもたい
 下の写真が本体から取り出した故障部品です。
 DC電源ジャックとケーブルが一体化しています。
 
-<a id="org395638b"></a>
+<a id="orgb1e0577"></a>
 
 {{< figure src="/DC電源ジャック.jpg" caption="&#22259;2:  X230のDC電源ジャック（取り外したもの）" width="60%" >}}
 
-<a id="org7c5b37d"></a>
+<a id="orga0d013c"></a>
 
 {{< figure src="/DC-jack_X230.jpg" caption="&#22259;3:  eBayから届いた固定金具つきの電源ジャック" width="60%" >}}
 

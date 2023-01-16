@@ -43,10 +43,10 @@ $ sed -e '/Netflix/{n;s/CableTV/StreamTV:Netflix/}' original-ledger.dat > new-le
 ```
 
 つまり
-****{n;}**** を使うだけ:sweat:
+****{n;}**** を使うだけ&#128517;
 
 これでもともとのLedgerデータファイル中の
-****Netflix**** という文字列がある行の&lt;font color=red&gt;次の行&lt;/font&gt;にある ****CableTV**** が ****StreamTV:Netflix**** に置換されました。めでたしめでたし！
+****Netflix**** という文字列がある行の<span style="color: red 次の行"></span>にある ****CableTV**** が ****StreamTV:Netflix**** に置換されました。めでたしめでたし！
 
 sedで行をまたいだ文字列を置換できることが分かりましたので、過去のトランザクション中のアカウント名の変更がこれまで以上に簡単にできるようになりました。タイプミス リスクも大幅に減ります。
 

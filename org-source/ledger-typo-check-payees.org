@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-01-02 14:13:36 yamagami>
+#           Time-stamp: <2023-01-16 19:52:36 yamagami>
 #+title: Ledger --- 支払先のタイプミスをチェックする
-#+date: [2022-12-31 ]
+#+date: [2023-12-31 ]
 #+language: ja
 
 #+link: file file+sys:../static/

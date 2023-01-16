@@ -1,7 +1,7 @@
 +++
 title = "Ledger – 銀行csvをledgerファイルにする"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
+date = 2023-12-31T00:00:00+09:00
 tags = ["accounting", "ledger"]
 categories = ["comp"]
 draft = false
@@ -20,7 +20,7 @@ draft = false
 
 -   Ledger-cliは、トランザクションはテキストファイル。したがってcsvからLedgerに適合するように変換するのはさほど難しくはない
 -   csvデータの構造が銀行によって異なっている。
--   主要な取引銀行については、csv-->Ledger-cliのトランザクションへ形式変換するスクリプトを作るのは、そんなに大掛かりな作業ではない。
+-   主要な取引銀行については、csv--&gt;Ledger-cliのトランザクションへ形式変換するスクリプトを作るのは、そんなに大掛かりな作業ではない。
 -   しかし、それも面倒ならば
 -   reckonを使ってみるのも　ありかも。
 -   で、紹介。
@@ -30,7 +30,6 @@ draft = false
 
 -   [Git reckon](https://github.com/cantino/reckon)
 -   ruby/rubyreckonのインストールを確認
-
     ```nil
     $ ruby -v
     ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]
@@ -38,12 +37,10 @@ draft = false
     3.1.2
     ```
 -   インストール
-
     ```nil
     $ gem install --user reckon
     ```
 -   warning
-
     ```nil
     WARNING:  You don't have /home/yamagami/.gem/ruby/2.7.0/bin in your PATH,
     	  gem executables will not run.
@@ -58,17 +55,15 @@ $ reckon -f hamagin_20210918093428.csv -o output.ledger
 ```
 
 -   WARNING
-
     ```nil
     W, [2021-09-18T09:51:41.931030 #18784]  WARN -- : Skipping row: '?????????t, ???x?????z?i?~?j, ???a?????z?i?~?j, ???????c???i?~?j, ????' that doesn't have a valid date
     ```
--   半角カタカナでバグっている -->   `nkf --overwrite -w hoge.csv`
+-   半角カタカナでバグっている --&gt;   `nkf --overwrite -w hoge.csv`
 -   WARNING
-
     ```nil
     W, [2021-09-18T09:58:00.673340 #19054]  WARN -- : Skipping row: '2021-08-02, 12409, クレジツト   トヨタフアイナンス, 10775583, ' that doesn't have a valid date
     ```
--   日付のフォーマットで蹴られた　--> `sed -e -i 's/-/\//g' moge.csv`
+-   日付のフォーマットで蹴られた　--&gt; `sed -e -i 's/-/\//g' moge.csv`
 
 
 #### こんな感じだが・・・ {#こんな感じだが}

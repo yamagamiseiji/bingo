@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2022-06-10 19:22:48 yamagami>
+#           Time-stamp: <2023-01-16 18:13:16 yamagami>
 #+title: 外科用ハサミでニンニクの根切り
-#+date: [2022-12-31 ]
+#+date: [2023-12-31 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
