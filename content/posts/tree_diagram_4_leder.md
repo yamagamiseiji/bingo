@@ -1,62 +1,69 @@
 +++
 title = "Ledger-cliのアカウント構造を樹状図にする"
 author = ["YAMAGAMI"]
-date = 2023-01-17T00:00:00+09:00
+date = 2023-01-19T00:00:00+09:00
 tags = ["ledger-cli", "複式簿記", "tree", "アカウント構造", "mkdir"]
 categories = ["comp"]
 draft = false
 +++
 
-2023年の新年早々、ふとしたことから こんな図が書きたくなりました。
+2023年の新年早々、ふとしたことから こんな図が必要になりました。
 
-{{< figure src="/1st-sample.png" width="70%" >}}
+{{< figure src="/1st-sample.png" width="50%" >}}
 
-要するに ****ledger-cli**** のアカウント（勘定科目）構造を ****樹状図**** にするということ。
+****ledger-cli**** のアカウント（勘定科目）構造を ****樹状図**** にしたいということです。
 
-もしかしたらledger-cliに備え付けのコマンドとかオプションがあるかもしれないと思い、ちょっと検索してみましたが見当たりません。
+もしかしたらledger-cliに備え付けのコマンドとかオプションがあるかもしれないと思い検索してみましたが見当たりません。
 
-ということで、この樹状図を書く方法を数日前から考えていました。基本的な考え方は：
+そこで急いで自前で用意することにしました。基本的な方針はつぎのとおりです。
 
--   アカウント一覧を表示するledger-cliの ****accounts**** を使う
--   表示されたアカウント構造を ****mkdir**** してディレクトリ構造にする
--   それを ****treeコマンド****[^fn:1] を使って表示する
-
-途中で変なところではまったりして一時混乱していましたが、最終的には
-
--   Ledgerの ****accounts**** コマンドの出力を1行ずつ読む
--   各行ごとにコロンをスラッシュに変換する
--   それを配列か何かに格納しておいて ****mkdir -p**** する
-
-という方針を採用しました。この方針にしてからは、コーディングの時間は1時間未満 :smile:
-
-とても短く簡単なスクリプトができました。
+1.  Ledger-cliの `accounts` コマンドを使ってアカウント（勘定科目）一覧を表示します。出力（抜粋）は下のような感じです。
+    ```nil
+    　　：
+    Expenses:Cars:Gasoline
+    Expenses:Cars:Parking
+    Expenses:Cars:Toll
+    Expenses:Cars:保険:任意保険
+    Expenses:Cars:保険:自賠責
+    　：
+    ```
+2.  この出力を1行ずつ読み込んでコロンをスラッシュに変換します。
+    ```nil
+    　　：
+    Expenses/Cars/Gasoline
+    Expenses/Cars/Parking
+    Expenses/Cars/Toll
+    Expenses/Cars/保険/任意保険
+    Expenses/Cars/保険/自賠責
+    　：
+    ```
+3.  これを `mkdir -p` に読ませて、ディレクトリ・サブディレクトリ構造を作ります
+4.  それを `tree` コマンド[^fn:1] を使って表示します
 
 
 ## コード {#コード}
 
-アイデア的には
+具体的な方法はつぎのとおりです。
 
 -   任意の場所に ****ACCOUNT**** という親ディレクトリを作る
--   その配下にサブアカウント（下位勘定科目）名のサブディレクトリを作る
--   Ledger-cliの標準的な引数をそのまま流用して樹状図に書き出す範囲を絞り込む
--   ****tree**** を使って樹状図を書く
+-   樹状図に書き出す範囲（期間、アカウントなど）は原則としてledger-cliにビルトインされているオプションを使って絞り込む
+-   ディレクトリ階層＝アカウントの深度だけはledger-cliの `--depth` ではなくて `tree` コマンドの `-L` オプションで指定する（なぜそうするかは「[（補）アカウント深度だけtreeを使うわけ](#why_tree)」節を参照してください）。
 
-というもの。
+<!--listend-->
 
 ```sh
 #!/bin/bash
-#
 #  LedgerのA/C構造を樹状図にするスクリプト
 #  Ledgerのパラメータがそのまま使える
 
-base_dir="どこか任意のpath"
+base_dir="/home/yamagami/local-ledger-directory/test-arena/tree-diagram-drawing"
 
 ## 引数文字列受け
 if [ $# = 0 ]; then
     echo "WARNING: Ledgerのオプションが使えます"
     echo "         引数なしだと樹状図が長大になります"
-    read -n 1 -r -p "引数で絞りこみますか？ [y/n] : " keyin
-    case $keyin in
+    read -n 1 -r -p "引数で絞りこみますか？ [y/n] : " yn
+    case "${yn}" in
 	Y|y) echo -e
 	     read -r -p "ledger --acounts オプション : " param ;;
 	*) : ;;
@@ -65,28 +72,42 @@ else
     param=$*
 fi
 
-## accounts.datの取得・加工
+## 入力された引数に"--depth n"がある場合
+#  それを削除して、nをtree表示時の tree -L に食わせる
+if [[ -n $(echo "${param}" | grep '\--depth') ]]; then
+    depth_level=$(echo ${param}\
+	     | sed -e "s/.*--depth \([0-9]*\).*/\1/")
+    str_to_delete="--depth ${depth_level}"
+    param=$(echo "${param}" | sed -e "s/${str_to_delete}//g" )
+else
+    depth_level="0"
+fi
+
+## accounts.dat を作る
 ledger accounts ${param} --count\
        > ${base_dir}/accounts.dat
 
 awk -i inplace  -F" " '{print $2}' ${base_dir}/accounts.dat
 
-## ここから本体　これだけ
-#      リセット ACCOUNT
+## ここから本体
+#   リセット ACCOUNT
 cd ${base_dir} || exit 0
 rm -rf ACCOUNT/
 mkdir -p ACCOUNT
 cd ACCOUNT || exit 0
-
+#   ディレクトリ、サブディレクトリを作る
 while read -r line ; do
-    dir_path=$(echo "${line}" | sed -e 's/:/\//g')
+    dir_path=$(echo $line | sed -e 's/:/\//g')
     mkdir -p "${dir_path[@]}"
-
 done < ${base_dir}/accounts.dat
-#   tree diagram drawing
-cd ${base_dir} || exit 0
-tree -d ACCOUNT
 
+## Tree 出力
+cd ${base_dir} || exit 0
+if [[ "${depth_level}" = 0 ]]; then
+    tree -d ACCOUNT
+else
+    tree -d ACCOUNT -L ${depth_level}
+fi
 exit 0
 ```
 
@@ -94,31 +115,31 @@ exit 0
 ## サンプル出力 {#サンプル出力}
 
 
-#### 引数なしで起動したとき {#引数なしで起動したとき}
+#### １. 引数なしで起動したとき {#１-dot-引数なしで起動したとき}
 
 ```sh
 $ tree-it.sh
 ```
 
-{{< figure src="/no-params.png" width="70%" >}}
+{{< figure src="/no-params.png" width="50%" >}}
 
-ここで ****n**** を選んで ****絞り込み無し**** にすると、全期間にわたって全アカウントがアカウントの全深度について表示されます。情報量が多すぎて使い物になりません。
+ここで ****n**** を選んで ****絞り込み無し**** にすると、全期間にわたって全アカウントが全深度について表示されます。情報量が多すぎてとても使い物になりません。
 
 したがって基本的には、次の例のように起動時に引数で ****絞りこみ**** をする使い方になります。
 
 
-#### 引数つきで起動した例１ {#引数つきで起動した例１}
+#### ２. 引数つきで起動した例１ {#２-dot-引数つきで起動した例１}
 
 期間を2022/12/01からに指定し、アカウント深度２で「支出 or 資産 or 負債」で絞り込んだ例：
 
 ```sh
-$ tree-it.sh ^expenses or ^assets or ^liab -b 2022/12/01 --depth 2
+$ tree-it.sh ^assets or ^liab -b 2022/12/01 --depth 2
 ```
 
-{{< figure src="/exp-liab-ass..png" width="70%" >}}
+{{< figure src="/tree-fig2.png" width="50%" >}}
 
 
-#### 引数つきで起動した例２ {#引数つきで起動した例２}
+#### ３. 引数つきで起動した例２ {#３-dot-引数つきで起動した例２}
 
 期間を2022/06/01からに指定し、支出の中で外食(Meals) と 食料品(Grocery）をアカウント深度５で絞り込んだ例：
 
@@ -126,16 +147,81 @@ $ tree-it.sh ^expenses or ^assets or ^liab -b 2022/12/01 --depth 2
 $ tree-it.sh ^Expenses and \( meals or grocery \) --depth 5 -b 2022/06/01
 ```
 
-{{< figure src="/grc-and-meal.png" width="70%" >}}
+{{< figure src="/grc-and-meal.png" width="50%" >}}
 
 
 ## 今後の展望など {#今後の展望など}
 
-****tree-it.sh**** では、Ledgerの ****accounts**** コマンドで ****--count**** オプションをつけています。これを使うと、クエリされたアカウントの出現頻度が得られますので、出現頻度で絞りこんでアカウントの樹状図を書くことができます。
+****tree-it.sh**** では、Ledgerの `accounts` コマンドで `--count` オプションをつけています。これを使うと、クエリされたアカウントの出現頻度が得られますので、出現頻度で絞りこんでアカウントの樹状図を書くことができます。
 
-このスクリプトでは、ほとんどの機能はledger-cliに ****おんぶに抱っこ**** 状態です。使えば使うほど、Ledger-cliの適用範囲の広さと奥深さを感じます。
+このスクリプトでは、 `--depth` を除いてほとんどの機能はledger-cliに ****おんぶに抱っこ**** 状態です。使えば使うほど、ledger-cliの適用範囲の広さと奥深さを感じます。
+
+
+## （補）アカウント深度だけtreeを使うわけ {#why_tree}
+
+
+### ledger accounts の引数における --depth の挙動 {#ledger-accounts-の引数における-depth-の挙動}
+
+`ledger accounts` に引数をつけて起動するときに、引数に `--depth` をつけ加えると、ちょっと考えていたのとちがう結果になります。
+
+たとえば `ledger accounts` で ****Assets**** を2023年1月1日以降についてクエリすると次のようになります：
+
+```sh
+$ ledger accounts ^assets -b 2023/01/10
+```
+
+```nil
+Assets:Bank:boy:chk
+Assets:Bank:yucho:sogo:hinako
+Assets:Cash
+Assets:Cash:hinako
+Assets:Cash:小銭
+Assets:Reimbursement
+Assets:e-money:REG_coupon
+Assets:e-money:nanaco:card_em:hinako
+Assets:e-money:nanaco:card_pts:hinako
+```
+
+これはOKですよね。1月10日から当日までに使った ****Assests**** アカウントがリストアップされています。ところがこれに `--depth 2` を足したクエリ：
+
+```sh
+$ led accounts ^assets -b 2023/01/10 --depth 2
+```
+
+これをやると結果は次の2行だけになります。
+
+```nil
+Assets:Cash
+Assets:Reimbursement
+```
+
+あらら！ですよね。　これはまずい &#128517;
+
+つまり、1月10日以降 今日までに使用した ****Assets**** （資産）アカウントの内、アカウントの深さ（depth）が ****ちょうど2のアカウントだけ**** リストされたということ。深さが3以上のアカウントはリストされません[^fn:2]。
+
+期待していたのは、次のような結果です。
+
+```nil
+Assets:Bank
+Assets:Cash
+Assets:Reimbursement
+Assets:e-money
+```
+
+
+### 対応策 {#対応策}
+
+そこで
+`--depth` オプションが指定されたときには、そのまま使うのではなく、自分の期待に合った動きをしてくれるようにスクリプトに手をいれました。具体的には：
+
+-   `--depth n` が引数に含まれていたら、それを<span style="color: red">削除</span>する
+-   `n` は変数（$depth_ledvel）に保存しておいて、tree コマンドの引数として `-L ${depth_level}` のようにして使う[^fn:3]
+
+これで外見上は `--depth` でアカウント階層の深さが指定されたとおりに見えます。
 
 
 ## Footnotes: {#footnotes}
 
-[^fn:1]: ubuntuには標準ではインストールされていないので apt install tree します。
+[^fn:1]: `tree` は標準ではubuntuにインストールされていないので `apt install tree` します。
+[^fn:2]: `--depth` のこの仕様はよく考えてみれば理由があるにはありますが、自分の視点の素朴な予想と異なっていたわけです。
+[^fn:3]: `tree` コマンドでは `-L` オプションによって、ディレクトリ階層の「深さ」、つまり表示するディレクトリの深さを指定できます。
