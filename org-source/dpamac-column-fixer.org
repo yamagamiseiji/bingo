@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-02-08 14:05:22 yamagami>
+# Time-stamp: <2023-02-08 14:46:00 yamagami>
 #+title: Ledger-cliのレジスターレポートのカラム崩壊を防止する
 #+date: [2023-02-08]
 #+language: ja
@@ -52,7 +52,7 @@ Ledgerのフォーマット機能を使ってカラム指定しても、やっ�
 ここでは **シェルスクリプト関数** で
 Ledge-cliのレジスターレポートのカラム崩壊を防止する一つの試みを紹介します。
 
-これを使えば、上の例のように **乱れた出力** を整列させることができます（図3）。
+これを使えば、 **乱れた出力** を整列させることができます（図3）。
 #+caption: シェルスクリプト関数（カラム整列関数）を使って整列させた出力例
 #+attr_html: :width 90%
 [[file:fixer-applied.png]]
