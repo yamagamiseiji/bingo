@@ -1,0 +1,184 @@
+#+setupfile: /home/yamagami/org/macros-org/org-macros.setup
+#                Time-stamp: <2023-02-07 16:49:29 yamagami>
+#+title: Ledger-cliのレジスターレポートのカラム崩壊を防止する関数
+#+date: [2023-02-07]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger-cli 複式簿記 レジスターレポート　列崩壊　
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+
+**Ledger-cli** では、
+トランザクションに
+日本語の勘定科目（account）名や支払い先（payees）が含まれていると、
+レジスターレポートのカラムが乱れます[fn:single-byte]。
+
+[fn:single-byte] このカラム崩壊はマルチバイト文字特有の症状です。
+英文字だけの場合にはとても美しくカラムが整列します。
+
+
+たとえば次のようにフォーマットを指定せずにデフォルトのLedgerレジスターレポートを求めると
+#+begin_src
+$ ledger reg ^Expenses -b 2023/02/03 --current
+#+end_src
+結果は下の図のようになります。勘定科目名と支払い金額、それから合計金額が列崩壊します[fn:eigo_ok]。
+
+[fn:eigo_ok]　シングルバイト文字だけのTXNだと、Ledgerはかなり頭が良くて、ターミナルの幅を斟酌して支払先の名称やアカウント名を自動的に短縮形にして列が崩壊するのを防止してくれます。
+
+
+#+attr_html: :width 90%
+[[file:no-format-reg-report.png]]
+
+Ledgerのフォーマット文を使ってカラム指定しても、やっぱりマルチバイト文字では **カラム崩壊** を修正することはできません。
+
+勘定科目名と支払金額列の位置を逆にし、合計金額列を割愛し、Ledgerのフォーマット文で細かく指定しても、事態は改善しません。
+
+#+caption: そのまんま
+#+attr_html: :width 90%
+[[file:without-fixer.png]]
+
+* カラム整列関数を使うと・・・
+ここで紹介するLedger-cli用 **カラム整列関数** を使うと、上のように乱れた出力が下のようにきちんと整列します。
+
+#+caption: カラム整列関数を使った
+#+attr_html: :width 90%
+[[file:fixer-applied.png]]
+
+経理・会計の世界だけでなく、どんな部門・領域でもこのようなカラム崩壊は許容されませんよね。こうでなくちゃあと思いますが、実はマルチバイトにきちんと対応するのは結構たいへんなようです。
+
+
+* カラム整列関数の説明
+関数を動かすためには、PC[fn:ubuntu2004]に =SHIFT_JIS= ロケールを追加することが必要です[fn:sjis-how2]。
+
+要点はつぎのとおりです。
+- =export LC_ALL=ja_JP.sjis= と =export LC_ALL=ja_JP.utf8= とではさまれたパートで文字列操作を行います。
+- ターミナルの横幅は80カラム（自由に変更可能です）
+- 整列表示するのは、日付、支払先、金額、最後に勘定科目の4項目です。合計金額は80カラム内に収納するのは大変なので除外しています
+- Ledgerのレジスタークエリは関数の外から変数 =$QUERY= で与えます
+- =./out-dpamac.txt= に整列したテキストファイルが出力されます
+
+
+[fn:ubuntu2004] PCはThinkPad X230, Ubuntu20.04です。
+
+[fn:sjis-how2] 「[[https://zenn.dev/tmtms/articles/202205-locale][LinuxでシフトJISが使えた]]」などのサイトを参照してください。
+
+
+* コード
+** func-dpaAC-column-fixer.sh 関数  
+#+begin_src sh
+  #!/bin/bash
+  #    date,payees,amount,A/C をカラム整列する関数
+  #
+    function dpaAC-column-fixer.sh(){
+	# ターミナルの横幅=80用の設定
+	DP_width=34 #date,payeeの幅
+	AM_width=18 #amountの幅
+	AC_width=26 #accountの幅
+	#
+	ledger reg --current ${QUERY}\
+	       --no-revalued --real\
+	       --format='%(format_date(date, "%Y/%m/%d"))&%(payee)&%(display_amount)&%(account)\n'\
+	       > ./tmp-dpaAC.txt
+	#
+	if [ ! -s ./tmp-dpaAC.txt ]; then
+	       echo "** No Expenses."
+	       return
+	fi
+	## payees,accountsを短縮するルールリスト
+	sed -e "s/Assets/Ass/g;\
+		s/Balance/Bal/g;\
+		s/Expenses/Expns/g;\
+		s/Gardening/Gardn/g;\
+		s/Grocery/Groc/g;\
+		s/Household/HH/g;\
+		s/Income/Inc/g;\
+		s/Insurance/Ins/g;\
+		s/Liabilities/Liab/g;\
+		s/Reimbursement/Reimb/g;\
+		s/学習センター/学習CNTR/g"\
+	    < ./tmp-dpaAC.txt > ./short-AC.txt
+
+	# short-AC.txtを一旦SJISに変換し sjis.txt に
+	iconv -c -f UTF-8 -t SHIFT_JISX0213 ./short-AC.txt\
+	      > ./sjis.txt
+	export LC_ALL=ja_JP.sjis
+	#
+	while read -r line; do
+	       DP=$(echo "${line}"\
+		 | cut -d'&' -f 1-2\
+		 | sed -e 's/&/ /g')
+	       AMOUNT=$(echo "${line}"\
+		 | cut -d'&' -f 3)
+	       AC=$(echo "${line}"\
+		 | cut -d'&' -f 4)
+	       #
+	       printf "%-${DP_width}b%${AM_width}b  \e[34m%-${AC_width}b\e[m\n"\
+		       "${DP:0:${DP_width}}"\
+		       "${AMOUNT:0:${AM_width}}"\
+		       "${AC:0:${AC_width}}"
+	done < ./sjis.txt > ./out-sjis.txt
+
+	# out-sjis.txt を UTF-8 に戻して out-dpamac.txt に
+	export LC_ALL=ja_JP.utf8
+	iconv -f SHIFT_JISX0213  -t UTF-8 ./out-sjis.txt\
+	      > ./out-dpamac.txt
+	cat ./out-dpamac.txt
+	# 一時ファイル削除
+	rm tmp-*.txt ./sjis.txt ./out-sjis.txt ./short-AC.txt
+    }
+#+end_src
+*** 補足説明
+ Ledgerのフォーマット文で、出力項目（日付や支払先など）の区切記号として =&= を使っています。通常はスペースまたはタブですが、支払先の中にスペースが含まれている場合がありますので、スペースを項目の区切に使うことはできません[fn:@mark]。
+
+
+[fn:@mark] 区切を =@= や =|= にすると、SJISのコードがぶつかって混乱を起こしかねません。
+
+** 上の関数を呼び出す例
+#+begin_src sh
+#!/bin/bash
+#
+#   dpaAC-column-fixer.sh  コールテスト
+#
+source "./func-dpaAC-column-fixer.sh"
+#
+if [ -n "$*" ]; then
+    QUERY=$*
+else
+    # default to
+    QUERY="^Expenses -p today"
+fi
+#
+dpaAC-column-fixer.sh
+exit 0
+#+end_src
+
+* 今後の展望など
+- ターミナルの幅次第では、合計金額を入れることができます。
+- 当面、 =today= というスクリプト内で使います。
+
+[[https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/][ぼちぼちですが可視化してます]] (2020/01/30) の「おまけ」節で紹介した =today= というスクリプト内でこの関数を使って当日の支出トランザクションを表示するのに使おうと思っています。
+
+=today= では、カラム崩壊したレジスターレポートをそのまま表示していました。もっぱら自分の転記作業をチェックする用途なので、多少列が壊れていても良しとしていました。
+
+現在、この =today= の出力をウェブに流し込んでいつでも、どこでも（タブレットなどからでも）当日の支出を目で確認できるようにしたいと思っています。
+すでに =today= では
+1. 当月の月始めから当日までの累積支出金額の折れ線と予算直線とを描いた =budget-watch= チャート
+2. 当月の月始めから当日までのクレジットカード負債残高折れ線をプロットした =credit-card-balance-tracking= チャート
+の2枚も表示するようにしています。
+
+それとの釣り合いで、カラム崩壊した支出レポートをウエッブ化するのはちょっと恥ずかしい。ということで、ちょっと本気でカラム崩壊をなんとかしたいと思って作ったのが、この関数です。
+   
+
+その場合、カラム崩壊したレポートを
+
+
+
+
+* Footnotes:
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

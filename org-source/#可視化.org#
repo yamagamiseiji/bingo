@@ -1,0 +1,66 @@
+#+title: ぼちぼちですが可視化してます
+#+date: [2020-01-31 日 12:29]
+#+language: ja
+
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger emacs accounting viz gnuplot
+#+hugo_categories: comp
+
+#+options: toc:2 num:nil author:nil
+#+link: file file+sys:../static/
+#+draft: false
+
+ここでは、
+ *Ledger-cli* （3.11）と *Gnuplot* （5.28）および *bash* （on ubuntu16.04）の組み合わせで描いた各種グラフのとりあえず「 *見た目* 」だけを紹介します。中身の説明とかソースなどは後日、GitHubとかに上げます。https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/
+** 二次元プロットの例
+図[[sample-fig1]]は経理情報を可視化するための自作スクリプトによる出力例です。
+
+#+caption: 経理情報可視化スクリプトの出力例。金額が見えないように意図的に解像度を下げています。
+#+name: sample-fig1
+#+attr_org: :width 450px
+#+attr_html: :width 450px
+[[file:small-work.png]]
+
+これらのグラフは、元帳にある（4月1日から）当日までの全トランザクション（取引）から、Ledgerのクエリー機能をつかって分析したいデータを抽出し、それをGnuplotの要求する形式に整形してプロットしています。
+
+かなり面倒な整形や計算をしているグラフもありますが、すべてワンクリック（またはコマンドラインからのコマンド入力）によって、ほとんど *瞬時* に表示されます。
+
+Ledgerの計算速度には目を見張るものがあります。C++の効果かしら？　それからGnuplotの描画スピードもすごい。元帳のポスティング行数は5,000行以上もあるのに、グラフが出てくるのを心理的に「待つ」ということがありません。PCはLenovo/X230というかなり型落ちのノートなんですが・・・。
+
+** 3Dプロットの例
+
+次の図[[3dsample]]は、Ledger＋gnuplotによる3Dプロットの例図（試作品）です。
+縦軸の金額にはボカシを入れています。
+
+#+caption: 上位5位までのアカウント（勘定）の支出推移
+#+name: 3dsample
+#+attr_org: :width 450px
+#+attr_html: :width 450px
+[[file:fence-plot-sample.png]]
+
+アカウンティングの世界で3Dプロットが普及していないのは、3Dの図から視覚的に多くの情報を抽出するのが思いの外むずかしいからかも知れません。しかしこれをマウスでクリクリ回して様々な視点から *アニメーション* で見えるようにすると、新たな傾向が見えてきて、「おぉ！」と言う感じになります。それはまた後日ということで・・・
+
+
+** （おまけ）日々の支出状況をみるtodayスクリプト
+
+日々の記帳作業のあと、(1) その日の入力を確認するため、(2) 月々の支出予定金額に対して現在の支出がどれくらいの割合になっているかを一目で見るために、 *=today=* という *ターミナル* 上で動く小さなスクリプトを作って愛用しています。図[[today-snap]]の下の方には、 =$ ledger bal ^expenses -p today= と =reg= の出力を表示していますが、省略しています。
+
+#+caption: =today= スクリプトのスクリーンショット。金額はダミーです。
+#+name: today-snap
+#+attr_org: :Width 450px
+#+attr_html: :Width 450px
+[[file:snapshot-today.png]]
+
+*可視化* というにはお恥ずかしい限りですが、
+せめてもの罪滅ぼしで、予算達成率を *プログレスバー* にしました。また本来なら必要な長さのバーを静的に表示すれば良いのですが、あえてバーがゼロから目標値まで伸びていくようにしています。さらに上のように予算を超えた場合にはバーを *赤* くします。90%を超えると *黄* 色になるという風にして遊んでいますw
+
+** Acknowledgement
+次のサイトがとても役に立ちました。
+- [[https://www.sundialdreams.com/report-scripts-for-ledger-cli-with-gnuplot/][ Report Scripts for Ledger CLI with Gnuplot]]
+- [[https://github.com/cbdevnet/ledger-reports][ledger-reports]]
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
