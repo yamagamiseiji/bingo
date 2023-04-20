@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliのregisterレポートのカラム崩壊"
 author = ["YAMAGAMI"]
-date = 2023-03-10T00:00:00+09:00
+date = 2050-03-10T00:00:00+09:00
 tags = ["ledger-cli", "カラム崩壊"]
 categories = ["comp"]
 draft = false

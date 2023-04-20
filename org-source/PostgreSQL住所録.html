@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<!-- 2023-03-21 火 09:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PostgreSQL住所録</title>
+<meta name="author" content="YAMAGAMI" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">PostgreSQL住所録</h1>
+
+<div id="outline-container-org85c0527" class="outline-2">
+<h2 id="org85c0527"><span class="section-number-2">1</span> 概要</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+携帯電話（ガラケー）、Google Contacts、年賀状ソフト（筆王）など、あちこちに散在している氏名・連絡先データを「名寄せ」して一本化し、PostgreSQLのテーブルにしてちゃんと管理・運用してみようという企画。
+</p>
+
+<p>
+データ件数は500件ほどです。小規模で個人的な住所録の整理整頓した作業メモです。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge67a481" class="outline-2">
+<h2 id="orge67a481"><span class="section-number-2">2</span> 方針</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>出来上がったPostgreSQLターブルからのデータ抽出をどうするかの方針を立てる</li>
+<li>各種の氏名・連絡先データをCSVデータとしてエクスポート</li>
+<li>それぞれのCSVをクリーニング、整列、整形</li>
+<li>PostgreSQLのインストールと初期設定</li>
+<li>一本化したCSVをPostgreSQLにエキスポート</li>
+<li>検索・結果表示のフロントエンドをBashスクリプト化する</li>
+</ol>
+</div>
+
+<div id="outline-container-org5be6280" class="outline-3">
+<h3 id="org5be6280"><span class="section-number-3">2.1</span> サンプル操作画面</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+&lt;div align=center&gt;&lt;img src="<img src="https://dl.dropboxusercontent.com/s/pk7jglvd538mckm/contacts-search-sample-1.png" alt="contacts-search-sample-1.png" />" alt="" width="100%"&gt;&lt;/div&gt;
+</p>
+
+
+
+
+<p>
+取りかかった当初は、たかが住所録、1週間もあれば余裕で終わると思っていました。しかし甘かった。
+</p>
+
+<p>
+第一にハマったのはデータの洗浄・加工・整形。重複があるし、新旧が不明だし、タイポもある。また半角カタカナが混じっていたり、ダブルクオートでくくってあったり・・・。とんでもないカオスでした。
+</p>
+
+<p>
+最大の問題は、日本語表記法の多様性というかブレの大きさ。そもそも、クエリ語を漢字、ひらがな、カタカナ、ローマ字のどれにすべきかで悩み、いろいろ試行錯誤しました。最終的には、ヘボン式ローマ字を使うことにしました。それには表記ブレのない姓名ローマ字表記が前提になります。
+</p>
+
+<p>
+今回は大きな流れとしては次のようにしてローマ字姓名データを作りました。
+</p>
+<ol class="org-ol">
+<li>姓名漢字から仮名読みデータをつくる(gmigemo)</li>
+<li>かな読みをヘボンローマ字に変換する(uconv)</li>
+<li>さらに細かくローマ字表記法を調整する(sed)</li>
+</ol>
+
+<p>
+このローマ字姓名データを検索キーとしたPostgreSQL検索をBashスクリプト内に埋め込むことで、ターミナルから住所情報検索が簡単にできるようになりました。
+</p>
+
+<p>
+姓名、姓または名（の一部でも可）をローマ字入力すると、あいまい検索の結果を得ます。
+</p>
+<ol class="org-ol">
+<li>まずはメールアドレスと電話番号を2つずつ表示する</li>
+<li>さらに詳細情報が必要ならば、
+「メールアドレス（最大5件）、電話番号（最大5件）、郵便番号と住所」</li>
+</ol>
+<p>
+　を選択表示できます。
+</p>
+
+<p>
+原データのCSVテーブル整形・作成はBashでコツコツやりました。明らかに不要だと思われるデータは削除して残ったデータ件数は約500件でした。この程度の件数でも、csvtoolとかが無ければシェルスクリプトでやるのは無理だったと思います。
+</p>
+
+<p>
+データがいったんPostgreSQL内におさまれば、あとの操作（編集、追加、削除など）はPostgreSQL内で楽にできます。やれやれ！です。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org07d89a6" class="outline-2">
+<h2 id="org07d89a6"><span class="section-number-2">3</span> contacts-search.sh</h2>
+</div>
+
+
+<div id="outline-container-org093588d" class="outline-2">
+<h2 id="org093588d"><span class="section-number-2">4</span> 段取り</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org1efdc9d" class="outline-3">
+<h3 id="org1efdc9d"><span class="section-number-3">4.1</span> インストール</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>apt install</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0da89c7" class="outline-3">
+<h3 id="org0da89c7"><span class="section-number-3">4.2</span> ログインと基本操作</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>セミコロンを忘れずに！</li>
+<li>改行はignoreされる</li>
+<li>コマンドのアルファベットは大文字、小文字は無視される</li>
+<li>\q and exit</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8e2213b" class="outline-3">
+<h3 id="org8e2213b"><span class="section-number-3">4.3</span> テーブル作成</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>CSVファイルのデータテーブルを作る
+<ul class="org-ul">
+<li>作る道具は何でもOK（Excel,emacs,Libreoffice&#x2026;)</li>
+</ul></li>
+<li>テーブル名を決める (mytable)</li>
+<li>カラムの名前＝ヘッダーをつける (順番はともかくよく考えて！）
+<ul class="org-ul">
+<li>略字にしない（あとでASでエリアスを作れる）</li>
+<li>アルファベット</li>
+<li>スペース、ハイフンは使わない</li>
+<li>大文字も使わない etc</li>
+</ul></li>
+<li>カラムのデータタイプを決める
+<ul class="org-ul">
+<li>電話番号や郵便番号はnumericにせずvarcharにする(アタマに0が来るとX）</li>
+<li>空にできないカラムはNOT NULLにする</li>
+</ul></li>
+<li>\COPYをつかう　
+<ul class="org-ul">
+<li>フルパスにする</li>
+<li>permissionでこけることがある（親DIRは　drwxr-xr-x）</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org078048e" class="outline-3">
+<h3 id="org078048e"><span class="section-number-3">4.4</span> 確認作業</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li>`SELECT *`してみる</li>
+</ul>
+<p>
+``` sql
+contacts=#SELECT * FROM mytable; 
+contacts=# select * from contacts;
+```
+これで全カラムが入っていればOK。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgabe2d04" class="outline-3">
+<h3 id="orgabe2d04"><span class="section-number-3">4.5</span> おわり</h3>
+</div>
+
+<div id="outline-container-orga284445" class="outline-3">
+<h3 id="orga284445"><span class="section-number-3">4.6</span> 補足</h3>
+<div class="outline-text-3" id="text-4-6">
+<ul class="org-ul">
+<li>電話番号は固定電話か携帯電話かは、sedで区別可能なので分ける必要はない</li>
+<li>Emailアドレスもカラムで指定しなくても、全部のデータ行の中から、sedで抽出できる</li>
+<li>郵便番号から住所１は抽出できるので、別にその変換機能をプログラム化してあれば、住所１は不要</li>
+<li>住所３（アパート部屋番号）などは必要なら追加すればよい</li>
+<li>クエリの利便を考えると、ローマ字のフルネームカラムがよい。曖昧検索で</li>
+</ul>
+<p>
+`WHERE latin<sub>fullname</sub> ~ 'suzuki ho'`のようになクエリが可能になる。
+</p>
+<ul class="org-ul">
+<li>件数の多い住所録だと姓と名とで別々に検索する方がよい。其の際には`WHERE family<sub>name</sub> = 'suzuki' || given<sub>name</sub> = 'taro'`のようにすることになる。</li>
+<li>カラムはあとで随時 追加可能。たとえば旧姓(maiden<sub>name</sub>　＋maiden<sub>name</sub><sub>yomi</sub>) なら</li>
+</ul>
+<p>
+``` sql
+ALTER TABLE mytable ADD COLUMN maiden<sub>name</sub> varchar; 
+```
+</p>
+<ul class="org-ul">
+<li>其のカラムにデータ(田中花子さんの旧姓＝佐藤)を追加するには次のようにする：</li>
+</ul>
+<p>
+``` sql
+UPDATE mytable SET maiden<sub>name</sub>='佐藤',maiden<sub>name</sub><sub>yomi</sub>='sato' WHERE latin<sub>fullname</sub>='tanaka hanako'; 
+```
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org2b0d2be" class="outline-2">
+<h2 id="org2b0d2be"><span class="section-number-2">5</span> SNSメモ</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+2023/03/18 16:42:02
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2023-03-21 火 00:00</p>
+<p class="author">&#33879;&#32773;: YAMAGAMI</p>
+<p class="date">Created: 2023-03-21 火 09:09</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

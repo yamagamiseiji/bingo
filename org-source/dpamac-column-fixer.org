@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-02-08 14:46:00 yamagami>
+# Time-stamp: <2023-02-08 19:18:12 yamagami>
 #+title: Ledger-cliのレジスターレポートのカラム崩壊を防止する
 #+date: [2023-02-08]
 #+language: ja
@@ -176,6 +176,7 @@ exit 0
 ところで現在、この =today= の出力をウェブに流し込んで「いつでも、どこでも」（タブレットなどから）当日の支出をひと目で確認できるように改訂することを計画しています。
 すでに =today= では
 1. 当月の月始めから当日までの **支出予算と累積支出額** とをプロット =budget-watch= チャート[fn:sample]
+
 2. 当月の月始めから当日までの **クレジットカード負債残高** をプロットした =credit-cards-balance-tracking= チャート
 の2枚も表示するようにしています。
 

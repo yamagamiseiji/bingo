@@ -1,0 +1,180 @@
++++
+title = "Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用"
+author = ["YAMAGAMI"]
+date = 2023-04-20T00:00:00+09:00
+tags = ["ledger-cli", "複式簿記", "bash", "case", "getopts", "フロントエンド"]
+categories = ["comp"]
+draft = false
++++
+
+****自家用**** の
+****Ledger-cli**** 向けフロントエンド スクリプト(Bash)が数十本あります。それらのスクリプトでは日付けに関する３つの引数、すなわち ****始期、終期、間隔**** (****-b, -e, -p****)を入力します。たとえば次の例では、収入と支出、それからその差額（損益）を1枚にまとめたチャートを 2023/02/28までの12ヶ月間だけプロットします。
+
+```text
+$ I-and-E_plotter -e 2023/02/28 -p 12m
+```
+
+これらのスクリプトでは、引数の有無によって処理が2の3乗（=8条件）に分岐します。
+
+3つの引数が相互に独立していれば条件分岐のコーディングも簡単ですが、この場合には、引数間に
+\\[
+終期 -  始期  = 間隔
+\\]
+の関係があります。また入力が省略された場合のデフォルトの扱いもバラバラです。こうした条件分岐をIF〜THEN〜ELIF〜FI で書こうとするとアタマがぐじゃぐじゃになります。
+
+ここでは錯乱状態に陥らずに 誰でも分岐コードが書ける一つの方法を紹介します。
+
+
+### 概要の説明 {#概要の説明}
+
+-   起動時に ****-b, -e, -p**** の引数が指定されたかどうかを" ****1 / 0**** "化し、3つの引数の有無を" ****1 0 1**** "のような形の文字列にして変数 ****$RESP**** に収納
+-   case文で8通りの条件分岐を記述・管理
+
+-   ****-b**** と ****-e**** はLedger-cliのそれらと同じ意味 で ****begin**** と ****end**** 。 ****-p**** はperiod ですが、Ledgerとはちょっと意味合いが異なっていて文字どおりの「期間」つまりbegin からendまでの間隔(日にち、月数、または年数)を意味します。たとえば
+    -   20日間なら ****-p 20d****
+    -   3ヶ月間なら ****-p 3m****
+    -   4年間なら ****-p 4y**** 　のように書きます[^fn:1]。
+
+-   この始期、終期、間隔はスクリプトによって、引数ゼロでもよいし、どれか一つだけ指定すれば良い場合あるし、少なくとも２つを必要とすることもあります。引数が省略されたときには、多くの場合デフォルト値が使われます。
+    -   例えば ****-p 6m**** だけが指定されていて ****-b**** も ****-e**** も指定されてない時には、 ****-e**** は ****today**** をデフォルトとします
+    -   ****-e**** だけが指定されているときには ****-p**** は ****25m**** をデフォルトとします[^footnote_25m]
+
+[^footnote_25m]: 多くのチャートでX 軸は ****25ヶ月**** をデフォルト値として使用しています。25ヶ月だと ****3年前**** の同月からデータが表示されるからです。
+
+
+## 各条件ごとの処理例 {#各条件ごとの処理例}
+
+スクリプトによって少しずつ処理内容が異なります。これは一つの例です。
+
+| RESP変数 | 引数状態  | 処理                       | 備考          |
+|:------:|-------|--------------------------|-------------|
+| 0 0 0  | NO args   | e=today, p=25m             |               |
+| 0 0 1  | p only    | b=null, e=today            |               |
+| 0 1 0  | e only    | b=null, p=25m              |               |
+| 0 1 1  | e &amp; p | b=null                     |               |
+| 1 0 0  | b only    | e=today                    |               |
+| 1 0 1  | b &amp; p | if (b+p)&gt;today, e=today | b yields to p |
+| 1 1 0  | b &amp; e | if e&gt;today, e=today     | b yields to e |
+| 1 1 1  | ALL args  | if (e-b)≠p, null p        |               |
+
+
+## 組み込み方 {#組み込み方}
+
+-   2の3乗の分岐の処理を行う部分は関数（ ****func-two-cubes-arg-analyser.sh**** ）にします
+-   関数の引数はデフォルトの年月日数（ ****$DFLT_MONTH**** )
+-   関数の呼び出し元に返すのは ****$b_date, $e_date, $period****
+
+
+### 関数のサンプルコード {#関数のサンプルコード}
+
+こんな風に書けばまぁまぁ読めるしデバッグも簡単 :smile:
+
+```sh
+#!/bin/bash
+#
+# function two-cubes-arg-analysier.sh
+#      2x2x2の条件分岐分析器
+#
+function two-cubes-arg-analyser.sh(){
+    source func-period-converter.sh
+
+    DFLT_MONTH=$1
+    local RESP
+    local TODAY=$(date '+%Y/%m/%d')
+
+    if [ "$b" = "" ]; then b="0"; fi
+    if [ "$e" = "" ]; then e="0"; fi
+    if [ "$p" = "" ]; then p="0"; fi
+
+    RESP="$b $e $p"
+
+    case $RESP in
+	"0 0 0") # echo "No args"
+	    e_date=$TODAY
+	    period="$DFLT_MONTH" ;;
+	"0 0 1") # echo "p arg only"
+	    b_date=""
+	    e_date=$TODAY ;;
+	"0 1 0") # echo "e arg only"
+	    b_date=""
+	    period="$DFLT_MONTH" ;;
+	"0 1 1") # echo "e and p args"
+	    b_date="" ;;
+	"1 0 0") # echo "b arg only"
+	    e_date=$TODAY ;;
+	"1 0 1") # echo "b and p args"
+	    period-converter.sh $period $e_date
+	    # b+p をTODAYと比較
+	    left_part=$(date -d "${b_date} +${nume} ${dmy}" '+%Y%m%d')
+	    if [[ "${left_part}" > "${TODAY//'/'}" ]]; then
+		e_date=$TODAY
+		b_date=""
+	    fi;;
+	"1 1 0") # echo "b and e args"
+	    if [[ "${e_date//'/'}" > "${TODAY//'/'}" ]]; then
+		e_date=$TODAY
+	    fi;;
+	"1 1 1") # echo "ALL args"
+	    period=""
+	    ;;
+	*) exit 0 ;;
+    esac
+}
+```
+
+
+## 関数呼び出しのサンプルコード {#関数呼び出しのサンプルコード}
+
+```sh
+#!/bin/bash
+set -eu
+#
+#  call test for fonction two-cubes-arg-analysier.sh
+#
+source ./func-two-cubes-arg-analyser.sh
+
+b=""; b_date=""
+e=""; e_date=""
+p=""; period=""
+
+while getopts e:b:p: args; do
+    case $args in
+	b) b_date="$OPTARG"; if [ -z "$b_date" ]; then b=0; else b=1; fi ;;
+	e) e_date="$OPTARG"; if [ -z "$e_date" ]; then e=0; else e=1; fi ;;
+	p) period="$OPTARG"; if [ -z "$period" ]; then p=0; else p=1; fi ;;
+	*) exit 0 ;;
+    esac
+done
+
+dflt_month=25m  # 関数の引数＝デフォルト年月数（y,m,d）
+two-cubes-arg-analyser.sh $dflt_month
+
+echo "b_date =" $b_date
+echo "e_date =" $e_date
+echo "period =" $period
+
+exit 0
+```
+
+
+### 補足説明など {#補足説明など}
+
+-   ****getopts**** はBashの組込みコマンド、 ****$OPTARG**** も組込みのシェル変数です。
+-   この方法は分岐数がもっと多くなっても対応できます。
+-   これがLedger-cliユーザにとってversability（汎用性）があるかどうか分かりませんが、アイデアだけは他の場所で使えるかもしれません。
+
+[^fn:1]: `20d` などは数字とアルファベットに仕分ける関数を使って、dateコマンドで使えるように変換します。
+
+    ```sh
+    function period-converter.sh(){
+        # 連想配列宣言
+        declare -A keymap=(
+    	["d"]="days"
+    	["m"]="months"
+    	["y"]="years"
+        )
+        numer=$(echo $period | sed -e 's/[^0-9]//g')
+        alpha=$(echo $period | sed -e 's/[^dmyDMY]//g')
+        dmy=${keymap[$alpha]}
+      }
+    ```
