@@ -1,6 +1,6 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-04-26 20:30:22 yamagami>
-#+title: Bashで2x2x2の条件分岐 --- Ledger-cliのフロントエンド用-- Ledger-cliのフロントエンドで使う
+# Time-stamp: <2023-04-26 20:32:21 yamagami>
+#+title: Bashで2x2x2の条件分岐 --- Ledger-cliのフロントエンド用
 #+date: [2023-04-26]
 #+language: ja
 #+link: file file+sys:../static/
