@@ -1,7 +1,7 @@
 +++
-title = "Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用"
+title = "Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用– Ledger-cliのフロントエンドで使う"
 author = ["YAMAGAMI"]
-date = 2023-04-20T00:00:00+09:00
+date = 2023-04-26T00:00:00+09:00
 tags = ["ledger-cli", "複式簿記", "bash", "case", "getopts", "フロントエンド"]
 categories = ["comp"]
 draft = false
