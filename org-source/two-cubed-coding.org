@@ -1,8 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-04-20 16:01:53 yamagami>
-#+title: Bashで2x2x2の条件分岐 --- Ledger-cliのフロントエンド用
-#+subtitle: -- Ledger-cliのフロントエンドで使います
-#+date: [2023-04-20]
+# Time-stamp: <2023-04-26 20:23:13 yamagami>
+#+title: Bashで2x2x2の条件分岐 --- Ledger-cliのフロントエンド用-- Ledger-cliのフロントエンドで使う
+#+date: [2023-04-26]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
