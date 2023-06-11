@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-04-26 20:32:21 yamagami>
+# Time-stamp: <2023-06-11 10:46:41 yamagami>
 #+title: Bashで2x2x2の条件分岐 --- Ledger-cliのフロントエンド用
 #+date: [2023-04-26]
 #+language: ja
@@ -172,6 +172,8 @@ exit 0
 - **getopts** はBashの組込みコマンド、 **$OPTARG** も組込みのシェル変数です。
 - この方法は分岐数がもっと多くなっても対応できます。
 - これがLedger-cliユーザにとってversability（汎用性）があるかどうか分かりませんが、アイデアだけは他の場所で使えるかもしれません。
+
+
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
