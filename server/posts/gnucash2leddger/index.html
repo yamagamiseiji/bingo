@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger — GnuCashからのデータ インポート | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger — GnuCashからのデータ インポート</h2>
+    <div class="post_content">
+      <h2 id="gnucashとは">GnuCashとは</h2>
+<p><strong>GnuCash</strong> はオープンソースの <strong>複式簿記</strong> による経理ソフトです。
+Ledger-cliに比べると日本国内にも相当数のユーザが存在している気配があります 😄</p>
+<figure>
+    <img src="/android-gnucash-icon.png" width="70%"/> 
+</figure>
+
+<p>今回は</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">アンドロイド版のGnuCashを
+Ledger-cliと「組み合わせ」て使ってみます
+</code></pre></div><h3 id="具体的には">具体的には</h3>
+<p>Ledger-cliのトランザクションを書くための手段＝ <strong>メモパッド</strong> として使ってみようと思います<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>GnuCashを使おうと思った動機は：</p>
+<ul>
+<li>Emacs/Ledger-cliの入ったPCを常に持って歩くことはできないこと</li>
+<li>領収書やレシートをもらえないケースがあること</li>
+</ul>
+<p>の2つです。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p><strong>おもて経済</strong> の取引では、さすがのOECD内のガラパゴス国ジャパンでも、ほぼ100%の支出に対してきちんとレシートとか領収書が戻ってきます。</p>
+<p>しかし、いまだに <strong>現金払い限定</strong> で、かつレシートをもらえない「取引」も少なくはありません。たとえば<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<blockquote>
+<p>葬儀の香典や祝い事のご祝儀<br />
+屋台で一杯飲んだとき<br />
+神社への初穂料や玉串料<br />
+お坊さんへのお布施<br />
+チップや「おひねり」<br />
+政治屋さんへの裏献金<br />
+etc &hellip;</p>
+</blockquote>
+<p>これらの支出のたびごとに、 <strong>手帳</strong> にメモを残せる几帳面な性格なら問題はありませんが、
+<strong>ふつうの人</strong> が後で思い出しながら転記しようと思っても、なかなかむずかしいです。</p>
+<p>少し前までは、ボールペンで左手の <strong>手の甲</strong> に金額を書き込んでいました。最近はコロナ禍であちこちに手指消毒用のアルコール液が置いてあります。メモしたことを忘れて消毒すると、大事なメモはアルコールで跡形もなく消えてしまいます。</p>
+<p><strong>手帳</strong> または <strong>手の甲</strong> にメモ書きする代わりに、タブレット（スマホ）で記帳しておいて、旅行や出張が終わった後に、自分のPCにそれらのトランザクションをインポートできれば、記憶力が減退し始めたスボラな性格の自分でも、いくらかちゃんとした転記ができるようになるかも知れません。 😉</p>
+<h2 id="gnucashのインストールと設定">GnuCashのインストールと設定</h2>
+<p>インストールは <strong>Google Playストア</strong> からダウンロードするだけ。</p>
+<p>使い始めるためには、自分の <strong>アカウント</strong> （勘定科目）構造をGnuCashに入力します<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<p>Ledgerのアカウント構造は、XMLでGnuCashにエクスポートできるのかと思いましたが、ver.3 <strong>以降</strong> のLedgerには対応していないようでした<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。手動でやっても小一時間で終わるので、手入力しました<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。</p>
+<p>その際、アカウント（勘定科目）を細部まで完全に用意する必要はありません。まずはよく使うトランザクションに関係するアカウントだけを先に入力して、そうでないアカウントは、取引が発生したときにその都度一つずつ作ります。</p>
+<p>準備作業はこれだけです。</p>
+<h2 id="gnucashからのエクスポート">GnuCashからのエクスポート</h2>
+<p>GnuCashトップ画面の左上にあるメニューアイコン（ <strong>≡</strong> ）で次のようなメニューを開きます。</p>
+<figure>
+    <img src="/gnucash%e8%a8%ad%e5%ae%9amenu.jpg"
+         alt="図1:  GnuCashのメニュー" width="40%"/> <figcaption>
+            <p>図1:  GnuCashのメニュー</p>
+        </figcaption>
+</figure>
+
+<p>上のメニューから「設定」を選び、設定画面（図<a href="#org840fe05">2</a>）を開きます。設定が必要なのはこの4,5項目だけです。</p>
+<p><a id="org840fe05"></a></p>
+<figure>
+    <img src="/gnucash-export.jpg"
+         alt="図2:  GnuCash for Androidの取引のエクスポート画面" width="70%"/> <figcaption>
+            <p>図2:  GnuCash for Androidの取引のエクスポート画面</p>
+        </figcaption>
+</figure>
+
+<p>設定が終わったら、画面右上の「エクスポート」をタップします。これでエクスポートは完了です。</p>
+<p>あとは出来上がったCSVを「<a href="#siryo">参考資料（β版ソースコード）</a>」節で紹介した
+<code>gnucash2ledger.sh</code> を使ってLedgerタイプのトランザクションに整形しなおすだけです。</p>
+<h2 id="gnucash2ledger-dot-sh-の使い方"><code>gnucash2ledger.sh</code> の使い方</h2>
+<p>ターミナル内で <code>gnucash2ledger.sh</code> を起動します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ gnucash2leddger.sh
+ ** Saved in IMPed-TXN-f-GnuCash/20211129.ledger
+</code></pre></div><p>コンバートされたLedger向けのトランザクションはつぎのような感じになります：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ cd  IMPed-TXN-f-GnuCash
+$ cat 20211129.ledger
+2021/11/24 NEXCO
+    ; 沼田IC～青梅IC
+    Expenses:Cars:Toll 	3420 JPY
+    Liabilities:OricoCard
+
+2021/11/24 ENEOS SS
+    Expenses:Cars:Gasoline 	6156 JPY
+    Liabilities:EneosCard
+
+2021/11/26 ダイエー
+    ; バナナなど
+    Liabilities:ResonaVisa:seiji 	-1112 JPY
+    Expenses:Grocery:Food:YOk
+   ：
+</code></pre></div><h3 id="補足-注記">補足・注記</h3>
+<ul>
+<li>こうして作成したトランザクションをLedgerファイルの本体にコピペするなどして使います。</li>
+<li>上の出力例ではアカウント名がすべて英文字ですが、これは単なる偶然です</li>
+<li>金額のカラム位置が揃っていませんが、EmacsのLedger-modeを使えば簡単に揃います</li>
+<li>ソースターゲットの行の金額はインポートしていません。</li>
+</ul>
+<p><br /></p>
+<h2 id="siryo">参考資料（β版ソースコード）</h2>
+<p>GnuCashからLedgerにデータを移行するためのプログラムは、たとえばPythonをつかった<a href="https://github.com/MatzeB/pygnucash/blob/master/gnucash2ledger.py">gnucash2ledger.py</a> とか、すでにいくつか存在しています。</p>
+<p>今回のスクリプトは <strong>bash</strong> で短時間に書いたものです。先人のすぐれたプログラムのように多機能で広い適用範囲を持つものではありません。自分が使う最低限の機能だけを素朴にコーディングしました。ベータ版ですがとりあえず動いています 😄</p>
+<pre><code class="language-nil" data-lang="nil">#!/bin/bash
+set -eu  # Time-stamp: &lt;2021-11-29 09:33:29 yamagami&gt;
+#
+#    GnuCashからDropboxにエクスポートされたCSVを
+#    ledger-cliトランザクションに変換する
+#
+
+## 変数定義
+commodity='JPY'
+drop_dir='/home/yamagami/Dropbox/アプリ/GnuCash Android'
+storage_dir='/home/yamagami/local-ledger-directory/IMPed-TXN-f-GnuCash'
+
+## ファイル初期設定
+cp /dev/null ./tmp-transaction.ledger
+
+## Dropboxから最新のGnuCash CSVファイルを抽出する
+latest_csv=$(ls -1t &quot;${drop_dir}&quot;/*.csv|head -1)
+
+## ヘッダー行を削除
+sed '1d' &quot;${latest_csv}&quot; &gt; ./gnucash.csv
+
+## ダブルクォーテーションに挟まれた文字列中のカンマを外す
+gawk -F&quot;\&quot;&quot; '{x=$2;gsub(&quot;,&quot;,&quot;&quot;,x);print $1&quot;\&quot;&quot;x&quot;\&quot;&quot;$3}' ./gnucash.csv &gt; ./tmp-no-comma.csv
+
+## ここから本体 (2行ずつ読み出す)
+while read odd_line &amp;&amp; read even_line
+do
+    # トランザクション1行目
+    date=$(date -d  `echo ${odd_line} | awk -F&quot;,&quot; '{print $1}'`  '+%Y/%m/%d')
+    payee=$(echo ${odd_line} | awk -F&quot;,&quot; '{print $4}')
+    #
+    echo &quot;${date} ${payee}&quot; &gt; ./tmp-1st-line.txt
+
+    # notesがあれば追加する
+    notes=$(echo ${odd_line} | awk -F&quot;,&quot; '{print $5}')
+    if [ -n &quot;${notes}&quot; ]; then
+	flg_notes='Y'
+	echo &quot;    ; ${notes}&quot; &gt; ./tmp-notes.txt
+    else
+	flg_notes=''
+    fi
+
+    # トランザクション2行目
+    target_acnt=$(echo ${odd_line} | awk -F&quot;,&quot; '{print $10}' )
+    amount=$(echo `echo &quot;${odd_line}&quot; | awk -F&quot;,&quot; '{print $13}'` |sed 's/\.[0-9,]*$//g')
+    # JPYを追加
+    j_amount=&quot;${amount} ${commodity}&quot;
+    echo -e &quot;    &quot;${target_acnt} &quot;\t&quot;${j_amount} &gt; ./tmp-2nd-line.txt
+
+    ## トランザクション3行目
+    source_acnt=$(echo &quot;${even_line}&quot; | awk -F&quot;,&quot; '{print $10}')
+    echo -e &quot;    ${source_acnt}\\n&quot; &gt; ./tmp-3rd-line.txt
+
+    ## 合体してLedgerファイルにする
+    if [ -z &quot;${flg_notes}&quot; ]; then
+	cat ./tmp-1st-line.txt ./tmp-2nd-line.txt ./tmp-3rd-line.txt  &gt;&gt; ./tmp-transaction.ledger
+    else
+	cat ./tmp-1st-line.txt ./tmp-notes.txt ./tmp-2nd-line.txt ./tmp-3rd-line.txt  &gt;&gt; ./tmp-transaction.ledger
+    fi
+#
+done &lt; ./tmp-no-comma.csv
+
+# インポートデータの保存
+c_date=$(date '+%Y%m%d')
+cp ./tmp-transaction.ledger ${storage_dir}/${c_date}.ledger
+echo &quot;** Saved in IMPed-TXN-f-GnuCash/${c_date}.ledger&quot;
+
+# 一時ファイルの削除
+rm ./tmp-*.csv
+rm ./tmp-*.txt
+rm ./gnucash.csv
+rm ./tmp-transaction.ledger
+exit 0
+</code></pre><h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>GnuCashはメモパッドに <strong>限定</strong> して使うことにしました。GnuCashにも分析・レポート機能がついていますが、Ledger-cli＋GnuPlotなどで自分が欲しい機能はそこそこ揃えましたので・・・。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Ledger-cliの公式マニュアルにも、GnuCashをLedgerのデータ入力に使うことがgood alternative として推奨されています。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>ケース的にも金額的にも宗教関係とか政治関係とかが多いですね。あと最近では一部の学校法人関係もこの <strong>黒経済</strong> の仲間かも？ 😎 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>GnuCashでは複数のセットのアカウント（勘定科目）構造を持てるようです。プライベートな家計簿用とビジネス用、学協会用などに分けて経理ができるので便利かも。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>もしかしたら最新のGnuCashではできるようになったのかも知れません。未確認です。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>本題からは外れますが、手入力のしさすさは、Androidにインストールしたキーボードによって決まります。アカウント名のように英綴りと日本語が混在する場合、自分に使いやすかったのは <a href="https://play.google.com/store/apps/details?id=com.touchtype.swiftkey&amp;hl=ja&amp;gl=US">Microsoft SwiftKeyキーボード</a> です。 <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年11月30日T00:00:00&#43;0900 class="date">2021年11月30日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnucash">GnuCash</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98">複式簿記</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/android">Android</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/bash">bash</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/shadow-queen/" class="prev">むらさき色のポテト — シャドークイーン</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/%E6%99%A9%E7%A7%8B%E3%81%AE%E3%83%8F%E3%83%81trap/" class="next">晩秋のスズメバチトラップ  — 意外な成果</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger-cliのアカウント構造を樹状図にする | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger-cliのアカウント構造を樹状図にする</h2>
+    <div class="post_content">
+      <p>2023年の新年早々、ふとしたことから こんな図が必要になりました。</p>
+<figure>
+    <img src="/1st-sample.png" width="50%"/> 
+</figure>
+
+<p><strong><strong>ledger-cli</strong></strong> のアカウント（勘定科目）構造を <strong><strong>樹状図</strong></strong> にしたいということです。</p>
+<p>もしかしたらledger-cliに備え付けのコマンドとかオプションがあるかもしれないと思い検索してみましたが見当たりません。</p>
+<p>そこで急いで自前で用意することにしました。基本的な方針はつぎのとおりです。</p>
+<ol>
+<li>Ledger-cliの <code>accounts</code> コマンドを使ってアカウント（勘定科目）一覧を表示します。出力（抜粋）は下のような感じです。
+<pre><code class="language-nil" data-lang="nil">　　：
+Expenses:Cars:Gasoline
+Expenses:Cars:Parking
+Expenses:Cars:Toll
+Expenses:Cars:保険:任意保険
+Expenses:Cars:保険:自賠責
+　：
+</code></pre></li>
+<li>この出力を1行ずつ読み込んでコロンをスラッシュに変換します。
+<pre><code class="language-nil" data-lang="nil">　　：
+Expenses/Cars/Gasoline
+Expenses/Cars/Parking
+Expenses/Cars/Toll
+Expenses/Cars/保険/任意保険
+Expenses/Cars/保険/自賠責
+　：
+</code></pre></li>
+<li>これを <code>mkdir -p</code> に読ませて、ディレクトリ・サブディレクトリ構造を作ります</li>
+<li>それを <code>tree</code> コマンド<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> を使って表示します</li>
+</ol>
+<h2 id="コード">コード</h2>
+<p>具体的な方法はつぎのとおりです。</p>
+<ul>
+<li>任意の場所に <strong><strong>ACCOUNT</strong></strong> という親ディレクトリを作る</li>
+<li>樹状図に書き出す範囲（期間、アカウントなど）は原則としてledger-cliにビルトインされているオプションを使って絞り込む</li>
+<li>ディレクトリ階層＝アカウントの深度だけはledger-cliの <code>--depth</code> ではなくて <code>tree</code> コマンドの <code>-L</code> オプションで指定する（なぜそうするかは「<a href="#why_tree">（補）アカウント深度だけtreeを使うわけ</a>」節を参照してください）。</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#  LedgerのA/C構造を樹状図にするスクリプト</span>
+<span style="color:#75715e">#  Ledgerのパラメータがそのまま使える</span>
+
+base_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/yamagami/local-ledger-directory/test-arena/tree-diagram-drawing&#34;</span>
+
+<span style="color:#75715e">## 引数文字列受け</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    echo <span style="color:#e6db74">&#34;WARNING: Ledgerのオプションが使えます&#34;</span>
+    echo <span style="color:#e6db74">&#34;         引数なしだと樹状図が長大になります&#34;</span>
+    read -n <span style="color:#ae81ff">1</span> -r -p <span style="color:#e6db74">&#34;引数で絞りこみますか？ [y/n] : &#34;</span> yn
+    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>yn<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> in
+	Y|y<span style="color:#f92672">)</span> echo -e
+	     read -r -p <span style="color:#e6db74">&#34;ledger --acounts オプション : &#34;</span> param ;;
+	*<span style="color:#f92672">)</span> : ;;
+    <span style="color:#66d9ef">esac</span>
+<span style="color:#66d9ef">else</span>
+    param<span style="color:#f92672">=</span>$*
+<span style="color:#66d9ef">fi</span>
+
+<span style="color:#75715e">## 入力された引数に&#34;--depth n&#34;がある場合</span>
+<span style="color:#75715e">#  それを削除して、nをtree表示時の tree -L に食わせる</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -n <span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>param<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | grep <span style="color:#e6db74">&#39;\--depth&#39;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    depth_level<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>param<span style="color:#e6db74">}</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	     | sed -e <span style="color:#e6db74">&#34;s/.*--depth \([0-9]*\).*/\1/&#34;</span><span style="color:#66d9ef">)</span>
+    str_to_delete<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--depth </span><span style="color:#e6db74">${</span>depth_level<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    param<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>param<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | sed -e <span style="color:#e6db74">&#34;s/</span><span style="color:#e6db74">${</span>str_to_delete<span style="color:#e6db74">}</span><span style="color:#e6db74">//g&#34;</span> <span style="color:#66d9ef">)</span>
+<span style="color:#66d9ef">else</span>
+    depth_level<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>
+<span style="color:#66d9ef">fi</span>
+
+<span style="color:#75715e">## accounts.dat を作る</span>
+ledger accounts <span style="color:#e6db74">${</span>param<span style="color:#e6db74">}</span> --count<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       &gt; <span style="color:#e6db74">${</span>base_dir<span style="color:#e6db74">}</span>/accounts.dat
+
+awk -i inplace  -F<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span> <span style="color:#e6db74">${</span>base_dir<span style="color:#e6db74">}</span>/accounts.dat
+
+<span style="color:#75715e">## ここから本体</span>
+<span style="color:#75715e">#   リセット ACCOUNT</span>
+cd <span style="color:#e6db74">${</span>base_dir<span style="color:#e6db74">}</span> <span style="color:#f92672">||</span> exit <span style="color:#ae81ff">0</span>
+rm -rf ACCOUNT/
+mkdir -p ACCOUNT
+cd ACCOUNT <span style="color:#f92672">||</span> exit <span style="color:#ae81ff">0</span>
+<span style="color:#75715e">#   ディレクトリ、サブディレクトリを作る</span>
+<span style="color:#66d9ef">while</span> read -r line ; <span style="color:#66d9ef">do</span>
+    dir_path<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo $line | sed -e <span style="color:#e6db74">&#39;s/:/\//g&#39;</span><span style="color:#66d9ef">)</span>
+    mkdir -p <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>dir_path[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">done</span> &lt; <span style="color:#e6db74">${</span>base_dir<span style="color:#e6db74">}</span>/accounts.dat
+
+<span style="color:#75715e">## Tree 出力</span>
+cd <span style="color:#e6db74">${</span>base_dir<span style="color:#e6db74">}</span> <span style="color:#f92672">||</span> exit <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>depth_level<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    tree -d ACCOUNT
+<span style="color:#66d9ef">else</span>
+    tree -d ACCOUNT -L <span style="color:#e6db74">${</span>depth_level<span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">fi</span>
+exit <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="サンプル出力">サンプル出力</h2>
+<h4 id="１-dot-引数なしで起動したとき">１. 引数なしで起動したとき</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ tree-it.sh
+</code></pre></div><figure>
+    <img src="/no-params.png" width="50%"/> 
+</figure>
+
+<p>ここで <strong><strong>n</strong></strong> を選んで <strong><strong>絞り込み無し</strong></strong> にすると、全期間にわたって全アカウントが全深度について表示されます。情報量が多すぎてとても使い物になりません。</p>
+<p>したがって基本的には、次の例のように起動時に引数で <strong><strong>絞りこみ</strong></strong> をする使い方になります。</p>
+<h4 id="２-dot-引数つきで起動した例１">２. 引数つきで起動した例１</h4>
+<p>期間を2022/12/01からに指定し、アカウント深度２で「支出 or 資産 or 負債」で絞り込んだ例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ tree-it.sh ^assets or ^liab -b 2022/12/01 --depth <span style="color:#ae81ff">2</span>
+</code></pre></div><figure>
+    <img src="/tree-fig2.png" width="50%"/> 
+</figure>
+
+<h4 id="３-dot-引数つきで起動した例２">３. 引数つきで起動した例２</h4>
+<p>期間を2022/06/01からに指定し、支出の中で外食(Meals) と 食料品(Grocery）をアカウント深度５で絞り込んだ例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ tree-it.sh ^Expenses and <span style="color:#ae81ff">\(</span> meals or grocery <span style="color:#ae81ff">\)</span> --depth <span style="color:#ae81ff">5</span> -b 2022/06/01
+</code></pre></div><figure>
+    <img src="/grc-and-meal.png" width="50%"/> 
+</figure>
+
+<h2 id="今後の展望など">今後の展望など</h2>
+<p><strong><strong>tree-it.sh</strong></strong> では、Ledgerの <code>accounts</code> コマンドで <code>--count</code> オプションをつけています。これを使うと、クエリされたアカウントの出現頻度が得られますので、出現頻度で絞りこんでアカウントの樹状図を書くことができます。</p>
+<p>このスクリプトでは、 <code>--depth</code> を除いてほとんどの機能はledger-cliに <strong><strong>おんぶに抱っこ</strong></strong> 状態です。使えば使うほど、ledger-cliの適用範囲の広さと奥深さを感じます。</p>
+<h2 id="why_tree">（補）アカウント深度だけtreeを使うわけ</h2>
+<h3 id="ledger-accounts-の引数における-depth-の挙動">ledger accounts の引数における &ndash;depth の挙動</h3>
+<p><code>ledger accounts</code> に引数をつけて起動するときに、引数に <code>--depth</code> をつけ加えると、ちょっと考えていたのとちがう結果になります。</p>
+<p>たとえば <code>ledger accounts</code> で <strong><strong>Assets</strong></strong> を2023年1月1日以降についてクエリすると次のようになります：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger accounts ^assets -b 2023/01/10
+</code></pre></div><pre><code class="language-nil" data-lang="nil">Assets:Bank:boy:chk
+Assets:Bank:yucho:sogo:hinako
+Assets:Cash
+Assets:Cash:hinako
+Assets:Cash:小銭
+Assets:Reimbursement
+Assets:e-money:REG_coupon
+Assets:e-money:nanaco:card_em:hinako
+Assets:e-money:nanaco:card_pts:hinako
+</code></pre><p>これはOKですよね。1月10日から当日までに使った <strong><strong>Assests</strong></strong> アカウントがリストアップされています。ところがこれに <code>--depth 2</code> を足したクエリ：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led accounts ^assets -b 2023/01/10 --depth <span style="color:#ae81ff">2</span>
+</code></pre></div><p>これをやると結果は次の2行だけになります。</p>
+<pre><code class="language-nil" data-lang="nil">Assets:Cash
+Assets:Reimbursement
+</code></pre><p>あらら！ですよね。　これはまずい 😅</p>
+<p>つまり、1月10日以降 今日までに使用した <strong><strong>Assets</strong></strong> （資産）アカウントの内、アカウントの深さ（depth）が <strong><strong>ちょうど2のアカウントだけ</strong></strong> リストされたということ。深さが3以上のアカウントはリストされません<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>期待していたのは、次のような結果です。</p>
+<pre><code class="language-nil" data-lang="nil">Assets:Bank
+Assets:Cash
+Assets:Reimbursement
+Assets:e-money
+</code></pre><h3 id="対応策">対応策</h3>
+<p>そこで
+<code>--depth</code> オプションが指定されたときには、そのまま使うのではなく、自分の期待に合った動きをしてくれるようにスクリプトに手をいれました。具体的には：</p>
+<ul>
+<li><code>--depth n</code> が引数に含まれていたら、それを<span style="color: red">削除</span>する</li>
+<li><code>n</code> は変数（$depth_ledvel）に保存しておいて、tree コマンドの引数として <code>-L ${depth_level}</code> のようにして使う<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ul>
+<p>これで外見上は <code>--depth</code> でアカウント階層の深さが指定されたとおりに見えます。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><code>tree</code> は標準ではubuntuにインストールされていないので <code>apt install tree</code> します。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><code>--depth</code> のこの仕様はよく考えてみれば理由があるにはありますが、自分の視点の素朴な予想と異なっていたわけです。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><code>tree</code> コマンドでは <code>-L</code> オプションによって、ディレクトリ階層の「深さ」、つまり表示するディレクトリの深さを指定できます。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2023年1月19日T00:00:00&#43;0900 class="date">2023年1月19日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98">複式簿記</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/tree">tree</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E6%A7%8B%E9%80%A0">アカウント構造</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/mkdir">mkdir</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/tzn-edit-by-sed/" class="prev">Ledger-cliのトランザクション中のアカウント名をsedで一括変更</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/dpamac-column-fixer/" class="next">Ledger-cliのレジスターレポートのカラム崩壊を防止する</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

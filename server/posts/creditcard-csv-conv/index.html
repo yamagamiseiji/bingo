@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger帳簿とクレジットカード利用明細との照合確認 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger帳簿とクレジットカード利用明細との照合確認</h2>
+    <div class="post_content">
+      <h2 id="帳簿の照合確認">帳簿の照合確認</h2>
+<p><strong>帳簿</strong> へのデータ入力は、どんなに細心の注意を払って作業してもタイプミスをゼロにすることはできません。</p>
+<p>ただし
+<strong>日付</strong> は月をまたいだりしない限り多少のミスは許容できます<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>また <strong>支払先</strong> については、そもそもショップの正式名称、通り名などがクレジットカードの明細書上の略称と異なっていることがあります。支払先は（特に日本語では）「表記ゆれ」エラーが起こりがちな項目ですが、Ledger-cliでは対応策が用意されています<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>ので、これもさほど心配することはありません。</p>
+<p>問題なのは <strong>金額</strong> 。これは1円でも間違えると、あとあと面倒なことが起こります<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。帳簿と利用明細書の金額をきちんと照合・確認することは経理・帳簿付けの基本中の基本ですが、「言うは易し行うは難し」です。</p>
+<h3 id="照合確認の方法">照合確認の方法</h3>
+<p>これまでは、
+PCの画面上に明細書のPDFを表示しながら、その隣にLedgerファイルに基づいて算出した当該クレカの日々の支出額を表示し、その両者を <strong><strong>見比べる</strong></strong> という方法をとっていました。</p>
+<p>明細書はPDFですが印刷物イメージ。一方、コンピュータ上のスプレッドシートやリスト表示されたデータは明細書の印刷物イメージとはさまざまな点で別物です。知覚的に大きく異なるこの両者を照合するのは心理的にはかなり高負荷な作業です。</p>
+<p>とりわけある一定の年齢以上になると、視力だけでなく眼の奥にある大事な臓器（脳）もこうした作業のチカラが落ちてきます。ということで、毎月毎月、明細書とLedgerの帳簿の計算結果がなかなか一致しません。</p>
+<p>これまでそれなりに工夫はしてきました。たとえば印刷物イメージの明細書とをできるだけ似た形にして提示するとか、注視点の移動距離と頻度を下げるとか・・・。にもかかわらず、作業の苦痛はそろそろぼちぼち限界 😓</p>
+<p><br />
+しばらく試行錯誤していましたが、最近になってようやく自分なりの方法が確立しました。それを紹介します。</p>
+<blockquote>
+<p>明細書データのCSVデータをダウンロードして取得し<br />
+そこから日付と金額だけを抽出して<br />
+照合しやすいフォーマットのCSVファイルにする。<br />
+もう一方のLedgerデータもそれと同じフォーマットにする。<br />
+<br />
+そうしておいて<span style="color: red">必殺colordiff</span>を使う</p>
+</blockquote>
+<h2 id="まずは操作法の紹介から">まずは操作法の紹介から</h2>
+<p>クレカのサイトから利用明細書（CSV）をダウンロードします。</p>
+<p>会社によって明細書のCSVファイルの形式はさまざまです。ここでは、私が使っているカード＝ <strong>Costco Global Card (Orico MasterCard)</strong> を例にとってお話します。</p>
+<p>ターミナで次のコマンドを入力します<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ date-amount抽出-f-orico明細.sh HOGExxxxxxxxxxxxx.csv
+</code></pre></div><p><code>HOGE</code> で始まる文字列はOricoのCSV形式の明細書です。</p>
+<p>これを実行すると次のような日付と金額のデータだけの単純なフォーマットのファイルが生成されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">20220227 600
+20220227 930
+20220227 950
+20220301 6960
+20220302 1110
+　　：
+</code></pre></div><p>これが出来たら、次に <code>diff-orico.sh</code> スクリプトを起動します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ diff-orico.sh
+</code></pre></div><p>このスクリプトは</p>
+<ol>
+<li>明細書と同期間のクレカ支出データをLedgerを使って作ります</li>
+<li>それと明細書データとを照合します</li>
+</ol>
+<p>もし2つのファイルに不一致があれば、 <code>colordiff</code> が次のような出力を表示します。</p>
+<p><a id="orga731f33"></a></p>
+<figure>
+    <img src="https://dl.dropboxusercontent.com/s/mjxx5gm3m3srdst/colordiff-screenshot-output.png"
+         alt="図1:  colordiffによるクレカ明細書（左）とLedger出力（右）" width="90%"/> <figcaption>
+            <p>図1:  colordiffによるクレカ明細書（左）とLedger出力（右）</p>
+        </figcaption>
+</figure>
+
+<h3 id="図-27--orga731f33--の読み方">図<a href="#orga731f33">1</a>の読み方</h3>
+<p>右の列は、自分が入力した帳簿に基づいてLedgerで算出した日付と利用金額のデータです。左の列はダウンロードした明細書の日付と金額のデータです。こちらが常に「正解」になります。</p>
+<p>図<a href="#orga731f33">1</a>は次のようなことを示しています：</p>
+<ul>
+<li><strong>3月3日</strong> の右列＝1,510円は　1,812円に修正しなければならない（<span style="color: blue"> 青い｜</span>）</li>
+<li><strong>3月5日</strong> には2,300円の支出があったのに記帳漏れになっているので要追加（<span style="color: red">赤い&lt;</span>）</li>
+<li><strong>3月9日</strong> の右列＝1,140円は、このクレカによる支出ではないので削除する（<span style="color: green"> 緑の&gt;</span>）</li>
+</ul>
+<p>左右不一致の箇所は、EmacsでLedgerファイルを開いて修正して行きます。修正作業後に <code>diff-orico.sh</code> を実行して次のような（味も素っ気もない）メッセージがでたら、めでたく照合・確認作業は終了です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">** Meisai と Ledger は完全に一致
+</code></pre></div><p>照合・確認の所要時間は、明細書の行数が50行〜100行程度なら（エラー件数によりますが）10分程度でしょうか。たいへんな効率化です ✌️</p>
+<h2 id="スクリプトの概要紹介">スクリプトの概要紹介</h2>
+<p>2つのスクリプトとも短く簡単なものです。流し読みでお分かりいただけると思います。</p>
+<h3 id="パソコンの環境">パソコンの環境</h3>
+<p>パソコンはLenovo ThinkPad X230(MEM=8G, SSD=180G), OSはUbuntu20.04です。おもなソフトのバージョンは次のとおりです：</p>
+<ul>
+<li>GNU bash, バージョン 5.0.17(1)-release (x86_64-pc-linux-gnu)</li>
+<li>Emacs26.3</li>
+<li>Ledger 3.1.3-20190331</li>
+</ul>
+<h3 id="ダウンロードした明細書csvファイルの項目構成">ダウンロードした明細書CSVファイルの項目構成</h3>
+<p>各行は次のような構成になっています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2022年3月2日,ダイエートウカイチバ,*,本人,2022年4月,アド,1,1,&#34;\1,110&#34;,,,&#34;\0&#34;,&#34;\1,110&#34;,&#34;\0&#34;
+</code></pre></div><p>どのクレカ会社でも、基本的にはほぼ同じような構成ですが、カタカナが半角だったり全角だったり、全レコードがダブルクォーテーションで囲まれていたりいなかったりとか、項目の順番が違っていたりします<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。</p>
+<h3 id="csv明細書から日付と金額だけを抽出するスクリプト">CSV明細書から日付と金額だけを抽出するスクリプト</h3>
+<h3 id="date-amount抽出-f-orico明細-dot-sh"><code>date-amount抽出-f-orico明細.sh</code></h3>
+<p>（ソースコードは  <a href="#src-date-amount"><code>date-amount抽出-f-orico明細.sh</code> コード</a>節参照）</p>
+<p>ダウンロードしたCSV明細書から、 <strong>日付と金額だけ</strong> を抽出してファイル化します。</p>
+<ul>
+<li>引数はOricoのCSVファイル名</li>
+<li><code>diff-orico.sh</code> (次節)で使えるフォーマットにして./tmp-Meisai-out.csv を生成・保存</li>
+<li>ファイルの中身はこんな感じ：</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2022/03/30,18000
+2022/03/30,498
+2022/03/30,650
+2022/03/30,1681
+2022/03/30,7643
+2022/03/30,1279
+</code></pre></div><p>このファイルでは、</p>
+<ul>
+<li>日付のフォーマットは <code>%Y/%m/%d</code> です</li>
+<li>またCSVの区切データとしてカンマを使っています</li>
+<li>同一日の利用金額を昇順にソートすることもやっていません。ダウンロードしたCSVファイルのデータ順のままです<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。</li>
+</ul>
+<p>なお、CSVファイルの数値データの中に3桁ごとのカンマが含まれていると、CSV区切記号としてのカンマと区別ができなくなります。それを回避するには <strong><strong>組込変数 <code>FPAT</code></strong></strong> (Fields Pattern)を使います。</p>
+<p>これを使えば、次のように数値データにカンマが含まれていても、awkでカラム位置を指定すると、ちゃんと抽出できます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">awk -v FPAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;([^,]+)|(\&#34;[^\&#34;]+\&#34;)&#39;</span> <span style="color:#e6db74">&#39;{print $9}&#39;</span> ./tmp-orico.csv
+</code></pre></div><p><br /></p>
+<h3 id="diff-orico-dot-sh-で2つのファイルを照合する"><code>diff-orico.sh</code> で2つのファイルを照合する</h3>
+<p>（コードは <a href="#diff-src"><code>diff-orico.sh</code> コード</a> 節参照）</p>
+<p>このスクリプトは2つの仕事をします。</p>
+<ol>
+<li>一つはLedger-cliで、Oricoカードの明細書期間と同じ期間のregisterレポートを取得し、それを <code>./tmp-Ledger-out.csv</code> ファイルにして保存すること</li>
+<li>もう一つは、先の <code>date-amount抽出-f-orico明細.sh</code> で生成した <code>./tmp-Meisai-out.csv</code> と、 <code>./-Ledger-out.csv</code> ファイルとを照合すること。</li>
+</ol>
+<h4 id="1-dot-ledgerパート">1. Ledgerパート</h4>
+<p>基本的なLedgerのクエリは <code>ledger reg ^liab and orico</code> になります。</p>
+<p>これだけで済めばよいのですが、ちょっと面倒なことがあります。わたしはOricoカードの <strong>ETCカード</strong> をクルマに積んでいます。そのETCの締め日がOricoカードと同じではないのです。</p>
+<p>Oricoは「毎月末締め」ですが、Orico ETCカードは「毎月15日締め」。たとえば支払日が4月27日の明細書では表<a href="#table--tbl1">1</a>のようになります。</p>
+<p><a id="table--tbl1"></a></p>
+<div class="table-caption">
+  <span class="table-number"><a href="#table--tbl1">&#34920; 1</a></span>:
+  支払日が4月27日の「利用期間」
+</div>
+<table>
+<thead>
+<tr>
+<th>カード</th>
+<th><c>利用期間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orico MasterCard</td>
+<td>3月1日〜3月31日</td>
+</tr>
+<tr>
+<td>Orico ETC</td>
+<td>2月15日〜3月15日</td>
+</tr>
+</tbody>
+</table>
+<!--list-separator-->
+<ul>
+<li>
+<p>Ledgerによる金額計算</p>
+<p>上に述べた理由で、金額計算パートを2つにしています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># oricoのメイン金額計算</span>
+ledger reg  ^liab and orico and not <span style="color:#ae81ff">\(</span>@口座 or @nexco or @首都高<span style="color:#ae81ff">\)\
+</span><span style="color:#ae81ff"></span>       -b <span style="color:#e6db74">${</span>b_date<span style="color:#e6db74">}</span> -e <span style="color:#e6db74">${</span>e_date<span style="color:#e6db74">}</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --date-format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%Y%m%d&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --format <span style="color:#e6db74">&#34;%d %(abs(quantity(scrub(display_amount))))\n&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --output ./tmp-main-orico.csv
+
+<span style="color:#75715e"># 通行料金（首都高,NEXCO)の計算</span>
+ledger reg  ^liab and orico and <span style="color:#ae81ff">\(</span>@nexco or @首都高<span style="color:#ae81ff">\)\
+</span><span style="color:#ae81ff"></span>       -b <span style="color:#e6db74">${</span>nexco_b_date<span style="color:#e6db74">}</span> -e <span style="color:#e6db74">${</span>nexco_e_date<span style="color:#e6db74">}</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --date-format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%Y%m%d&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --format <span style="color:#e6db74">&#34;%d %(abs(quantity(scrub(display_amount))))\n&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --output ./tmp-toll.csv
+</code></pre></div></li>
+</ul>
+<!--list-separator-->
+<ul>
+<li>
+<p>補足説明 1</p>
+<p>両クエリ式の3行目 <code>--date-format=&quot;%Y%m%d&quot;</code> で、日付フォーマットを 20220301 風にします。</p>
+<p>2行目 <code>--format &quot;%d %(abs(quantity(scrub(display_amount))))\n&quot;</code> で、日付（%d）の後ろに金額(display_amount)を絶対値にして（マイナス符号を取って）表示しています。</p>
+</li>
+</ul>
+<!--list-separator-->
+<ul>
+<li>
+<p>補足説明 2</p>
+<p>「メイン金額」のクエリ式の中の <code>not \(@口座 or @nexco or @首都高\)</code> ですが、 <code>@口座</code> を除外しないと、次のような
+Oricoカードの「口座振替」（銀行口座からの引き落とし）トランザクションが含まれてしまいます。下のクエリを見てください。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led p ^liab and orico and @口座 --tail <span style="color:#ae81ff">1</span>
+2022/03/28 口座振替 Orico
+    ; Invoice: invoices/orico/20220315-orico.pdf
+    Liabilities:OricoCard                 49,887 JPY
+    Assets:Bank
+</code></pre></div><p>なお、 <code>@口座</code> というのは、支払先（payee）に「口座」という文字が含まれていることを意味します。</p>
+</li>
+</ul>
+<h4 id="2-dot-照合パート">2. 照合パート</h4>
+<p>ここでは <code>colordiff</code> を用いて、
+./tmp-Meisai-out.csv と ./tmp-Ledger-out.csv の2つのファイルを比較します。
+<code>colordiff</code> は <code>diff</code> のカラー版です。</p>
+<p>実質的な中身は次の1行だけです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">colordiff -y --width<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> ./tmp-Meisai-out.csv ./tmp-Ledger-out.csv
+</code></pre></div><p>オプションの意味は次のとおりです。</p>
+<dl>
+<dt><code>-y</code></dt>
+<dd><code>--side-by-side</code> ,つまり比較する2ファイルを左右に並べて(side-by-side)に表示します</dd>
+<dt><code>--width=50</code></dt>
+<dd>表示するカラム幅を50文字分にします</dd>
+</dl>
+<h2 id="評価と今後の課題">評価と今後の課題</h2>
+<h3 id="評価">評価</h3>
+<p>この簡単な工夫で、明細書と帳簿の照合・確認作業は従来よりもはるかに短時間で済むようになりました。</p>
+<p>うまく行ったおもな要因は</p>
+<ul>
+<li>対象とするレコードを日付と金額だけに限定したこと</li>
+<li>Ledger-cliの出力フォーマット機能の豊富さ</li>
+<li>組込変数FPATのおかげでCSVファイルをシェルスクリプトで扱いやすくなったこと</li>
+<li>diffに色をつけたcolordiffの出力の見やすさ</li>
+</ul>
+<h3 id="今後の課題">今後の課題</h3>
+<h4 id="細かい点について">細かい点について</h4>
+<ul>
+<li>現行では2つの小さなスクリプトを起動していますが、これは一つにまとめる予定です</li>
+<li>クレカごとに一つずつ専用の照合確認スクリプトを持つのが良策だと思います</li>
+<li>照合が短時間で終わるのは良いのですが、終わったときのご褒美メッセージがあまりにも素っ気なくて、何か <strong><strong>仕事をやった感</strong></strong> がありません。もう少し派手に、がんばったね！的なメッセージに変更したいです 😉</li>
+</ul>
+<h4 id="ちょっと大きな問題">ちょっと大きな問題</h4>
+<ul>
+<li>日付と金額だけではなく、 <strong><strong>支払先</strong></strong> も照合の対象にする方がシステムとしては完成度が高いと思います</li>
+<li>けれども残念ながら <strong><strong>日本語</strong></strong> で支払先を照合の対象にするのは、みずから底なし沼に足を踏み込むようなもの 😓</li>
+<li>なにしろ日本語には、確立した <strong><strong>正書法</strong></strong> というものがありません。漢字、ひらがな、カタカナ、ローマ字と文字種がたくさんある上に、それぞれの文字種においても確定した表記ルールがありません。</li>
+<li>いわば無政府状態、カオス、悪魔のような状態ですので、いずれの日にか日本国またはアカデミーが正書法を確立してくれるまでは手を出さない（出せない）！と思っています 😎</li>
+</ul>
+<h2 id="参考資料-ソースコード">参考資料（ソースコード）</h2>
+<p>上で紹介した2つのシェルスクリプトのソースコード。</p>
+<h3 id="src-date-amount"><code>date-amount抽出-f-orico明細.sh</code> コード</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>set -eu
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#   FPAT を用いたOrico invoiceのCSV変換, invoiceのPretty Print and save.</span>
+<span style="color:#75715e">#   短縮版：date, amount のみを抽出する</span>
+<span style="color:#75715e">#</span>
+orico_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;(your-path-to-invoice-dir)/orico&#34;</span>
+f_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%Y%m15&#34;</span><span style="color:#66d9ef">)</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">case</span> $# in
+    0<span style="color:#f92672">)</span>
+	read -r -p <span style="color:#e6db74">&#34;CSVファイル名 : &#34;</span> keyin ;;
+    1<span style="color:#f92672">)</span>
+	keyin<span style="color:#f92672">=</span>$1 ;;
+    * <span style="color:#f92672">)</span>
+	echo <span style="color:#e6db74">&#34;** error.  Do it again.&#34;</span>
+	exit <span style="color:#ae81ff">1</span> ;;
+<span style="color:#66d9ef">esac</span>
+<span style="color:#75715e">#</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> ! -e <span style="color:#e6db74">${</span>keyin<span style="color:#e6db74">}</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+	echo <span style="color:#e6db74">&#34;** </span><span style="color:#e6db74">${</span>keyin<span style="color:#e6db74">}</span><span style="color:#e6db74"> not found. Do it again.&#34;</span>
+	exit <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#</span>
+csv_fname<span style="color:#f92672">=</span>$keyin
+
+<span style="color:#75715e">#  NKFでsjis--utf変換</span>
+nkf -w --overwrite <span style="color:#e6db74">${</span>csv_fname<span style="color:#e6db74">}</span>
+<span style="color:#75715e">#  ヘッダー（10行）と末尾の空行を削除する</span>
+tail -n +11 <span style="color:#e6db74">${</span>csv_fname<span style="color:#e6db74">}</span> | sed -r <span style="color:#e6db74">&#34;/^\r?</span>$<span style="color:#e6db74">/d&#34;</span> &gt; ./tmp-orico.csv
+
+<span style="color:#75715e">## カラム9(金額)を抽出し、カンマと円記号、ダブルクオートを削除</span>
+awk -v FPAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;([^,]+)|(\&#34;[^\&#34;]+\&#34;)&#39;</span> <span style="color:#e6db74">&#39;{print $9}&#39;</span> ./tmp-orico.csv &gt; ./tmp-9.csv
+sed -i -e <span style="color:#e6db74">&#39;s/,//g&#39;</span> -e <span style="color:#e6db74">&#39;s/\\//g&#39;</span> -e <span style="color:#e6db74">&#39;s/&#34;//g&#39;</span> ./tmp-9.csv
+
+<span style="color:#75715e">## 日付（カラム１）を抽出</span>
+awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;,&#34;;OFS=&#34;,&#34;} {print $1}&#39;</span> ./tmp-orico.csv &gt; ./tmp-1.csv
+<span style="color:#75715e">#  日付中の年,月,日を削除したデータを ./tmp-1.csv に書き戻す</span>
+sed -i -e <span style="color:#e6db74">&#39;s/\([0-9]\+\)年\ \?\([0-9]\+\)月\ \?\([0-9]\+\)日/\1\/\2\/\3/g&#39;</span> ./tmp-1.csv
+<span style="color:#75715e">## 日付と金額をpasteして ./tmp-19.csv</span>
+paste -d<span style="color:#e6db74">&#34; &#34;</span> ./tmp-1.csv ./tmp-9.csv &gt; ./tmp-19.csv
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">while</span> read -r line
+<span style="color:#66d9ef">do</span>
+    date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span> | cut -d<span style="color:#e6db74">&#34; &#34;</span> -f1 | date -f - <span style="color:#e6db74">&#39;+%Y%m%d&#39;</span><span style="color:#66d9ef">)</span>
+    amount<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span> | cut -d<span style="color:#e6db74">&#34; &#34;</span> -f2<span style="color:#66d9ef">)</span>
+    echo -e <span style="color:#e6db74">${</span>date<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>amount<span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">done</span> &lt; ./tmp-19.csv &gt; <span style="color:#e6db74">${</span>orico_dir<span style="color:#e6db74">}</span>/tmp-Meisai-out.csv
+<span style="color:#75715e"># 二重ソートは diff-orico.sh内で実施</span>
+<span style="color:#75715e"># 作業ファイルの削除 ( tmp- の後ろが大文字のファイルは消さない）</span>
+rm ./tmp-<span style="color:#f92672">[</span>a-z,0-9<span style="color:#f92672">]</span>*
+exit <span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="diff-src"><code>diff-orico.sh</code> コード</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>set -eu
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#　Oricoカードの支払明細</span>
+<span style="color:#75715e">#    明細(meisai)日付、金額(./tmp-Meisai-out.csv)　と</span>
+<span style="color:#75715e">#    Ledger の日付、金額(./tmp-Ledger -out.csv) とを diffする</span>
+meisai_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;20&#34;</span> <span style="color:#75715e"># 明細発行日</span>
+curr_day<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#39;+%d&#39;</span><span style="color:#66d9ef">)</span>
+<span style="color:#75715e">#  期間変数を orico明細発行日である20日を過ぎたかどうかで決める</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $curr_day -ge <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>meisai_date<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    <span style="color:#75715e"># Oricoのperiod変数</span>
+    b_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;1 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/01&#34;</span><span style="color:#66d9ef">)</span>
+    e_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#34;+%Y/%m/01&#34;</span><span style="color:#66d9ef">)</span>
+    <span style="color:#75715e"># NEXCOのperiod変数</span>
+    nexco_b_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;2 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/15&#34;</span><span style="color:#66d9ef">)</span>
+    nexco_e_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;1 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/16&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#75715e">## attn!</span>
+<span style="color:#66d9ef">else</span>
+    echo <span style="color:#e6db74">&#39;20日以前&#39;</span>
+    <span style="color:#75715e"># Oricoのperiod変数</span>
+    b_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;2 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/01&#34;</span><span style="color:#66d9ef">)</span>
+    e_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;1 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/01&#34;</span><span style="color:#66d9ef">)</span>
+    <span style="color:#75715e"># NEXCOのperiod変数</span>
+    nexco_b_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;3 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/15&#34;</span><span style="color:#66d9ef">)</span>
+    nexco_e_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#39;2 month ago&#39;</span> <span style="color:#e6db74">&#34;+%Y/%m/16&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#75715e">## attn!</span>
+<span style="color:#66d9ef">fi</span>
+
+<span style="color:#75715e">## Ledger</span>
+<span style="color:#75715e"># 通行料金の計算</span>
+ledger reg  ^liab and orico and <span style="color:#ae81ff">\(</span>@nexco or @首都高<span style="color:#ae81ff">\)\
+</span><span style="color:#ae81ff"></span>       -b <span style="color:#e6db74">${</span>nexco_b_date<span style="color:#e6db74">}</span> -e <span style="color:#e6db74">${</span>nexco_e_date<span style="color:#e6db74">}</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --date-format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%Y%m%d&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --format <span style="color:#e6db74">&#34;%d %(abs(quantity(scrub(display_amount))))\n&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       -o ./tmp-toll.csv
+
+<span style="color:#75715e"># oricoのメイン金額計算</span>
+ledger reg  ^liab and orico and not <span style="color:#ae81ff">\(</span>@口座 or @nexco or @首都高<span style="color:#ae81ff">\)\
+</span><span style="color:#ae81ff"></span>       -b <span style="color:#e6db74">${</span>b_date<span style="color:#e6db74">}</span> -e <span style="color:#e6db74">${</span>e_date<span style="color:#e6db74">}</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --date-format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%Y%m%d&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       --format <span style="color:#e6db74">&#34;%d %(abs(quantity(scrub(display_amount))))\n&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       -o ./tmp-main-orico.csv
+
+<span style="color:#75715e">## Meisai  (oricoCSV変換.shで計算された ./tmp-Meisai-out.csv を使う</span>
+<span style="color:#75715e">#  もとの形式は 2022/02/27,600  なので、整形する</span>
+sed -i -e <span style="color:#e6db74">&#39;s/\///g&#39;</span> -e <span style="color:#e6db74">&#39;s/,/ /g&#39;</span>  ./tmp-Meisai-out.csv
+<span style="color:#75715e"># ソート（同一日付内で金額の昇順に）</span>
+sort -k 1,1 -k 2n  ./tmp-Meisai-out.csv -o ./tmp-Meisai-out.csv
+<span style="color:#75715e"># 上の2ファイルを結合</span>
+cat ./tmp-toll.csv ./tmp-main-orico.csv &gt; ./tmp-Ledger-out.csv
+<span style="color:#75715e"># ソート（同一日付内で金額の昇順に）</span>
+sort -k 1,1 -k 2n ./tmp-Ledger-out.csv -o ./tmp-Ledger-out.csv
+
+<span style="color:#75715e">## colordiffする</span>
+<span style="color:#75715e">#  diffの終了コード取り出すためだけに、diffを空打ちする</span>
+<span style="color:#66d9ef">if</span> diff -q --width<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> ./tmp-Meisai-out.csv ./tmp-Ledger-out.csv<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	&gt; /dev/null ; <span style="color:#66d9ef">then</span>
+    echo <span style="color:#e6db74">&#39;** Meisai と Ledger は完全に一致&#39;</span>
+<span style="color:#66d9ef">else</span>
+    printf <span style="color:#e6db74">&#34;\e[1m%10s \t %16s\e[m\n&#34;</span> <span style="color:#e6db74">&#34; &lt;MEISAI&gt;&#34;</span> <span style="color:#e6db74">&#34;&lt;LEDGER&gt;&#34;</span>
+    colordiff -y --width<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> ./tmp-Meisai-out.csv ./tmp-Ledger-out.csv
+    <span style="color:#75715e">#echo -e &#34;\n&#34;</span>
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">## 一時ファイル削除</span>
+rm tmp-toll.csv tmp-main-orico.csv
+exit <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>日付は実際のショッピング日とクレカ上の決済日とは異なることもありえます。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Ledger-cliでは、支払先をタイプミスした時に警告またはエラーを発生させることができます。そのためめの <code>--strict</code>, <code>--pedantic</code>, <code>--check-payees</code> などのオプションが用意されています。Ledger帳簿内で支払先名称が「表記ゆらぎ」を起こす確率はかなり小さいと考えられます。詳しくはLedgerマニュアルを参照してください。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Ledger-cliでは最悪の場合には次のようにして「調整」を行うことができます。くわしくはLedgerのマニュアルを見てください。 <figure>
+    <img src="/adjustment-sample.png" width="100%"/> 
+</figure>
+ <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>コマンド名が長ったらしいですが、Linuxターミナルにはコマンド入力補完機能があります。この <code>date-amount抽出-f-orico明細.sh</code> コマンドを実行するディレクトリ内では <code>./da</code> の4ストロークだけで残りのつづりは完全に補完されます。またデータファイル名も保管されますので、最初の2文字の入力で30数文字あるデータファイル名が完全補完されます。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>CSV内データにカンマが含まれている場合には、<font color=red>全カラム</font>をダブルクオートで囲むというルールがあるようですが、Oricoではカンマを含む項目だけがダブルクォーテーションで囲まれています。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>もちろんsortして揃えることも可能ですが、これとは別のスクリプトで別の使い方をする関係上、あえてデータフォーマットを<a href="#org4e14b01">1</a>と同一にしていません。 <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年4月28日T00:00:00&#43;0900 class="date">2022年4月28日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/csv">csv</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/bankbook">bankbook</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/boxwidth-candlesticks/" class="prev">gnuplotでローソク足の箱幅を出来高に応じて変える</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/gasoline%E7%AE%A1%E7%90%86/" class="next">Leder-cliでガソリン給油量を管理する</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

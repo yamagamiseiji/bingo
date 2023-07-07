@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    プレーンテキストファイルで「複式」家計簿（5） | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">プレーンテキストファイルで「複式」家計簿（5）</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E5%86%8D%E8%A8%AA-%E5%80%9F%E6%96%B9-%E8%B2%B8%E6%96%B9">再訪　「借方」「貸方」</a>
+<ul>
+<li><a href="#%E8%8B%B1%E8%AA%9E%E3%81%A7%E3%82%82%E3%81%9F%E3%81%84%E3%81%B8%E3%82%93%E3%81%AE%E3%82%88%E3%81%86%E3%81%A7%E3%81%99">英語でもたいへんのようです</a></li>
+<li><a href="#ledger-cli-%E3%81%A7%E3%81%AF">Ledger cli では</a></li>
+</ul>
+</li>
+<li><a href="#tag%E3%81%AF%E4%BE%BF%E5%88%A9-%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84%E6%89%8B%E3%81%AF%E7%84%A1%E3%81%84">tagは便利！ 使わない手は無い！</a></li>
+<li><a href="#%E5%A4%96%E5%9B%BD%E9%80%9A%E8%B2%A8%E3%81%AE%E6%89%B1%E3%81%84">外国通貨の扱い</a>
+<ul>
+<li><a href="#%E3%81%BE%E3%81%9A%E3%81%AF%E4%B8%8A%E3%81%AE%E4%BE%8B%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E9%87%91%E9%A1%8D%E3%81%AE%E5%BE%8C%E3%82%8D%E3%81%AB%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E6%9B%B8%E3%81%84%E3%81%9F%E5%A0%B4%E5%90%88">まずは上の例のようにアカウントの金額の後ろにレートを書いた場合</a></li>
+<li><a href="#dot-prices-dot-db-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E4%BD%BF%E3%81%86">~/.prices.db ファイルを使う</a></li>
+</ul>
+</li>
+<li><a href="#apply_account">apply account の使い勝手</a></li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<h2 id="再訪-借方-貸方">再訪　「借方」「貸方」</h2>
+<p>このシリーズ（４）でもお話しましたが、「借方」「貸方」という語について考えれば考えるほど目まいと頭痛がしてきます。</p>
+<p>しかし理屈はともかく、「借方」「貸方」を仕訳帳の <strong>右</strong> に書くか <strong>左</strong> に書くかについては、とても面白い「丸暗記の仕方」があることを最近知りました（笑）。大学入試の受験生向けに、いろいろな覚え方の秘訣集が出版されていますが、それと同じような暗記法があるんですね。</p>
+<p>多くの複式簿記入門書に図として紹介されていますし、ネット上にも掲載されています（たとえば <a href="https://boki.popnavi.net/005/post%5F8.html">複式簿記入門講座</a> など）。要するに「借方」の「 <strong>り</strong> 」が「 <strong>左はね</strong> 」になるから「左に書く」、「貸方」の「 <strong>し</strong> 」が「 <strong>右はね</strong> 」になるから「右に書く」というおぼえ方（笑）。このそもそもの発案者が誰でどの本に書かれたものか、ちょっと興味がありますが、ま、それはそれとして、これで誰でも仕訳帳の左右どちらに書くかは、しっかりと記憶できます。</p>
+<p>ところで、この「借方」「貸方」という日本語の生い立ちはなかなか由緒正しいもののようです。福澤諭吉が「 <strong>帳合之法</strong> 」（1873）で使い始めたのが最初とのこと。</p>
+<p><a id="orgb74ddfc"></a></p>
+<figure>
+    <img src="/s-choainoho-hyoshi.jpg"
+         alt="図1:  「帳合之法」福澤諭吉（1873）表紙" width="90%"/> <figcaption>
+            <p>図1:  「帳合之法」福澤諭吉（1873）表紙</p>
+        </figcaption>
+</figure>
+
+<p>「帳合之法」は国会図書館でデジタル化した原本をキンドルストアで購入できました！良い時代になったもんです。話は逸れますが、有名な（？）「古来から日本においては、学者は必ず貧乏である。金持ちは必ず無学である。」の文言がこの本の冒頭にあったんですね。</p>
+<p><a id="org246a830"></a></p>
+<figure>
+    <img src="/s-choainoho-page02.jpg"
+         alt="図2:  「帳合之法」2ページ" width="90%"/> <figcaption>
+            <p>図2:  「帳合之法」2ページ</p>
+        </figcaption>
+</figure>
+
+<h3 id="英語でもたいへんのようです">英語でもたいへんのようです</h3>
+<p>ところで、どうやら英語を母国語とする人たちにとっても、この <strong>debit</strong> と <strong>credit</strong> は難関のようです。先日Ledger cliに関するGoogle groupで偶然、<a href="https://groups.google.com/d/msg/ledger-cli/k0ZRUfBWvL4/Dr4GXTGKCQAJ">Martin Blaisさんの投稿</a> (2016/02/07)を見かけました。</p>
+<p>その投稿の直前に <strong>debit</strong> と <strong>credit</strong> をめぐって混乱しているユーザからの質問があって、それ（=その「苦しみ」）を受けての投稿です。日本語にすると（拙訳）つぎのような感じでしょうか？</p>
+<blockquote>
+<p>苦しみから自分自身を解放しましょう：「借方」「貸方」という言葉遣いを脳みそから洗い流してください。あるのはアカウント（account;勘定）のみ。以上。</p>
+</blockquote>
+<p>英語の原文（ママ）は次のとおりです：</p>
+<blockquote>
+<p>Save yourself some pain: Flush your brain from the &ldquo;debit&rdquo; and &ldquo;credit&rdquo; terminology.</p>
+<p>Your have accounts. Period.</p>
+</blockquote>
+<p>ぜひこの先の部分も含めて一読をおすすめしたいと思います。コンパクトながら、ボクのような初心者には眼からウロコ的な説明です。</p>
+<h3 id="ledger-cli-では">Ledger cli では</h3>
+<p>このシリーズで紹介しているLedgerでは、ポリシーとして意図的に「借方（Debit）」「貸方（Credit）」の語を使わないようにしているようです。Blaisさんの言うとおり、使わなくても、あるいはもしかしたら使わないほうが一般のユーザは助かるのかも知れません。</p>
+<h2 id="tagは便利-使わない手は無い">tagは便利！ 使わない手は無い！</h2>
+<p>家計簿や帳簿をつける際には、しばしば費目や科目（アカウント）の追加・修正あるいは組み換えが必要になります。一般の会計ソフトでは、その作業は結構たいへんです。</p>
+<p>しかし、Ledgerは柔軟性が高いので、アカウントの名称や構造をお気楽に変更できます。帳簿をつけ始める際に、アカウントのカテゴリ体系をきちんと設計しなくても、とりあえずの枠で始めれば良いわけです。これがLedgerを使うことの大きなメリットの一つです。</p>
+<p>しかし、それでも次から次へと構造を変えるのはできれば避けるほうが望ましいでしょう。</p>
+<p>たとえばある支出アカウントが新規に発生したとしましょう。もし今後とも、そのアカウントを含むトランザクションが高頻度で発生するならば、新規カテゴリを作成すれば良いでしょう。たまにしか発生しない場合には、その支出に新しい科目カテゴリを割り当てるのは転記の際に混乱をもたらす原因になりますし、元帳がゴチャゴチャう小るさいものになってしまいます。（次のシリーズで紹介しますが、アカウントの整理には <code>accounts</code> コマンドが有効です）</p>
+<p>そんな場合に便利なのが <strong>tag</strong> です。使いかたは簡単です。トランザクションまたはそれの構成要素であるアカウントに適宜タグをつければよいだけ。それで、 <code>bal/reg</code> でレポートを作成する際に、そのタグを使って計算することができます。いま次のようなトランザクションがあるとします：</p>
+<pre><code class="language-nil" data-lang="nil">05/15   Book 1st.
+    Expenses:教養娯楽:Books     1950 JPY
+    Liabilities:Visa
+</code></pre><p>このトランザクションで購入した本は、実際には <strong>教養娯楽</strong> 目的ではなくて、知人への <strong>プレゼント</strong> 用だったとします。しかも数年に1回程度しか、そうしたことが発生しないとすれば、次のように、この支出に <strong>presents</strong> というタグをつけます：</p>
+<pre><code class="language-nil" data-lang="nil">05/15   Book 1st.
+    Expenses:教養娯楽:Books     1950 JPY
+    ; :presents:
+    Liabilities:Visa
+</code></pre><p>タグ付けのルールは</p>
+<ul>
+<li>コメント（；）の後ろに2つのコロンの間に、スペースを入れずにタグとなる語を入れる</li>
+<li>トランザクションへのタグ付けは、第1行目のPayeeの後ろにタグコードを書く</li>
+<li>アカウントへのタグ付けは、（上の例のように）当該アカウントの次の行にタグコードを書く</li>
+</ul>
+<p>これだけです。階層的で多層構造のタグも使えますが、とりあえずは単層の例を示しました。 <strong>tag</strong> を参照してレポートするには、次のように <code>%</code> の後ろにタグ語を書きます：</p>
+<pre><code class="language-nil" data-lang="nil">$ led bal %presents
+      1,950 JPY  Expenses:教養娯楽:Books
+
+$ led reg %presents
+2019/05/15 Book 1st.       Expenses:教養娯楽:Books     1,950 JPY     1,950 JPY
+</code></pre><p>もちろんタグ語は正規表現を受け付けます。</p>
+<p><strong>tag</strong> をつかうと良さそうな例としては、</p>
+<ol>
+<li>個人的なビジネスと私生活に関わる支出がある場合</li>
+<li>別荘と本宅とで二重生活（？）をしている場合</li>
+<li>家族旅行に関わる支出がある場合</li>
+</ol>
+<p>などで、かつ、それらを独立にカテゴリ化して別計算するほどでもないケースなどでしょうか。本格的にビジネスと私生活を分けなければならない場合などには、後述する<a href="#apply_account">apply account</a> を使うことになります。</p>
+<h2 id="外国通貨の扱い">外国通貨の扱い</h2>
+<p>たとえばAmazon USAで洋書を購入すると、代金は米ドル建てで支払うことになります。しかし一般的には、日本円ベースのクレジットカードから支払うケースが多いかと思います。そのような場合の転記の仕方は次の通りです：</p>
+<pre><code class="language-nil" data-lang="nil">2019/07/08   Amazon US
+    Expenses:Books                  27.97 USD @ 108.04 JPY
+    Liabilities:Visa
+</code></pre><p>これで、27.97ドルの洋書を買いました、支払いはVisaです、当日の円ドルレートは180.04円でしたということになります。この書き方がもっとも基本的なやりかたですが、
+<a href="https://www.convalesco.org/articles/2016/11/01/fetching-ledger-exchange-rates.html">https://www.convalesco.org/articles/2016/11/01/fetching-ledger-exchange-rates.html</a>　によい説明があります。それに基づいて、例を上げながら補足的に説明をします。</p>
+<h3 id="まずは上の例のようにアカウントの金額の後ろにレートを書いた場合">まずは上の例のようにアカウントの金額の後ろにレートを書いた場合</h3>
+<p>balレポートさせると次のようになります：</p>
+<pre><code class="language-nil" data-lang="nil">$ led bal
+	   27.97 USD  Expenses:Books
+	  -27.97 USD  Liabilities:VisaCard
+--------------------
+		   0
+</code></pre><p>ドルベースでのバランスが表示されます。もし、すべてを円換算した結果のレポートを出したい場合には、 <code>-X JPY</code> オプションを追加します：</p>
+<pre><code class="language-nil" data-lang="nil">$ led bal -X JPY
+	   3,013 JPY  Expenses:Books
+	  -3,013 JPY  Liabilities:VisaCard
+--------------------
+		   0
+</code></pre><p>すると、さっきの円ドルレートに基づいてすべて円に換算されたバランスが表示されます。</p>
+<p>わたしたちの多くは大半の生活を円ベースで暮らしているわけですので、その場合にはこのように</p>
+<ul>
+<li>アカウントの後ろに円ドル換算のデータを追加し</li>
+<li>レポートは円のみベースで出す</li>
+</ul>
+<p>というのが合理的なやりかただと思います。</p>
+<p>しかし、中にはひんぱんに色々な国の通貨を使って経済生活をしている方もいます。その場合にはこの方法ではなくて、次の方法、つまり日々の為替換算データをデータベースファイルにして、それに基づいて計算するような形でLedgerを使う方が良いと思います。</p>
+<h3 id="dot-prices-dot-db-ファイルを使う">~/.prices.db ファイルを使う</h3>
+<p><code>.prices.db</code> はディフォールトのファイル名ですが、 <code>--price-db</code> オプションでの指定は必須です。次のように <code>~/.ledgerrc</code> ファイルに追記しておきましょう：</p>
+<pre><code class="language-nil" data-lang="nil">　　：
+--color
+--date-format %Y/%m/%d
+--price-db ~/.prices.db
+　　：
+</code></pre><p>実際の <code>~/.prices.db</code> ファイルの中身は、円ドルの為替レートに関しては次のような感じになります：</p>
+<pre><code class="language-nil" data-lang="nil">P 2019/07/08 12:25:00 USD JPY 108.04
+</code></pre><p>このDBファイルがあれば、ledgerファイル内のアカウントで <code>@108.04 USD</code> を記述する必要はありません。</p>
+<p><code>$ led bal -X JPY</code> に <code>-H</code> オプションをつけると、Ledgerはトランザクションの日の為替レートを <code>.prices.db</code> ファイルから読みだして日本円に変換してくれます。いま仮に、07/20の <code>.prices.db</code> の中身が次のとおりだとします：</p>
+<pre><code class="language-nil" data-lang="nil">P 2019/07/20 10:01:10 USD JPY 108.2695
+P 2019/07/21 15:41:02 USD JPY 107.7151
+</code></pre><p>07/21に、次のように =-H=オプションをつけてbalレポートさせると次のように円の値が変わってきます：</p>
+<pre><code class="language-nil" data-lang="nil">$ led bal -X JPY -H
+	   3,022 JPY  Expenses:Books
+	  -3,022 JPY  Liabilities:VisaCard
+--------------------
+		   0
+</code></pre><!--list-separator-->
+<ul>
+<li>
+<p>xurrency.comから自動的に為替データをゲットする方法</p>
+<p><code>.prices.db</code> に毎日その都度、為替レートを手入力で追加するのは非合理的です。いろいろな方法がありますが、たとえば、<a href="http://xurrency.com">http://xurrency.com</a> から円ドルレートを取得して、 <code>.prices.db</code> に追記するスクリプトは次のような感じです。とても原始的ですが、とりあえず動きます（わかりやすくするために余分なコードが入っています）：</p>
+<pre><code class="language-nil" data-lang="nil">#!/bin/bash
+#  https://xurrency.com/usd/jpy/ から「円ドルレート」のみ入手し
+#  $HOME/.prices.db に追記する
+
+# 「円ドル」レートが表示されたページをゲット
+curl -Ss https://xurrency.com/usd/jpy/ &gt; ~/tmp/xurrency-page.txt
+
+# そのページから為替レートの行のみを抽出し、one-line.txtへ
+grep &quot;1 USD&quot; ~/tmp/xurrency-page.txt &gt; ~/tmp/one-line.txt
+
+# その行の２番め目の'='よりも後ろ(eg. '108.9626 JPY&lt;/span&gt; ')を
+# 残して、after-equal.txt へ
+awk -F '=' '{print $3}' ~/tmp/one-line.txt &gt; ~/tmp/after-equal.txt
+
+# そこから数字とピリオドと改行だけを抽出し、RATEに代入
+RATE=`cat ~/tmp/after-equal.txt |tr -cd '0123456789.\n'`
+
+# Ledger の.prices.db用に整形して追記
+prices_db=&quot;$HOME/.prices.db&quot;
+date=$(date &quot;+%Y/%m/%d %H:%M:%S&quot;)
+echo &quot;P $date USD JPY $RATE&quot; &gt;&gt; &quot;$prices_db&quot;
+
+# 無用になったファイルを削除
+rm ~/tmp/xurrency-page.txt
+rm ~/tmp/one-line.txt
+rm ~/tmp/after-equal.txt
+</code></pre><p>これで <code>~/.prices.db</code> ファイルの末尾に、次のようにスクリプト起動時の円ドルの為替レートが追加されます：</p>
+<pre><code class="language-nil" data-lang="nil">P 2019/07/10 10:47:40 USD JPY 108.6957
+P 2019/07/21 15:41:02 USD JPY 107.7151
+</code></pre><p>このスクリプトを適当なタイミングで1日1回自動起動するようにしておけば、 <code>.prices-db</code> は常に最新のものになります。</p>
+</li>
+</ul>
+<h2 id="apply_account">apply account の使い勝手</h2>
+<p><code>apply account</code> はアカウントの全カテゴリの <strong>ルート</strong> を新たに追加する際に使います。マニュアルによれば、 <code>apply account</code> 記述子に続くアカウントはすべて、指定されたルートの配下になります。Ledgerは階層的なカウントの樹状構造に対応しています。ルートアカウントが2つ（以上）あればとても便利です。そうすれば、たとえば個人的な生活費をPrivateとして、またビジネスに関係する費用をBussinessとして、別々に分けて計上することができます：</p>
+<pre><code class="language-nil" data-lang="nil">apply account Personal
+2011/11/15  Supermarket
+    Expenses:Groceries      $ 50.00
+    Assets:checking
+end apply
+</code></pre><p>上のように <code>apply account</code> を宣言して、終わったら <code>end apply</code> すれば、その間に記帳されたトランザクションは <strong>Personal</strong> というルートの配下になり、 ターゲットアカウントは <strong>Personal:Expenses:Groceries</strong> に、ソースアカウントは <strong>Personal:Assets:checking</strong> になります。</p>
+<p>これに続いて、 <strong>Bussiness</strong> にするとトランザクションはビジネス関連となります：</p>
+<pre><code class="language-nil" data-lang="nil">apply account Bussiness
+2011/11/20
+    Expenses:Travels      $ 500.00
+    Assets:checking
+end apply
+</code></pre><p>この <code>apply account</code> は、さまざまなフェーズで経済的活動をしている多くの人にとって、とても便利な機能だと思います。</p>
+<h2 id="acknowledgement">Acknowledgement</h2>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2019年7月21日T18:26:00&#43;0900 class="date">2019年7月21日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/4th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（4）</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/6th-step_ledger/" class="next">プレーンテキストファイルで「複式」家計簿（6）</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

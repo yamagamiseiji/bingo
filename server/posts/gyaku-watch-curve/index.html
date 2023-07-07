@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    逆ウォッチ曲線をgnuplotで描く | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">逆ウォッチ曲線をgnuplotで描く</h2>
+    <div class="post_content">
+      <p>株の <strong>出来高</strong> をX軸、 <strong>終値</strong> をY軸にとってプロットした図を <strong>逆ウォッチ曲線</strong> と言います。名前からは海外で作られた株価チャート分析手法のように見えますが、実は日本で開発されたもののようです（<a href="https://www.google.co.jp/books/edition/%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E5%88%86%E6%9E%90%E3%81%AE%E7%9C%9F%E5%AE%9F%E6%99%AE%E5%8F%8A%E7%89%88/UjuSSEFKPZQC?hl=ja&amp;gbpv=1&amp;dq=%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E5%88%86%E6%9E%90%E3%80%80%E7%9C%9F%E5%AE%9F%E3%80%80%E6%99%AE%E5%8F%8A%E7%89%88+inauthor:%E5%90%89%E8%A6%8B+inauthor:%E4%BF%8A%E5%BD%A6&amp;printsec=frontcover">吉見, 2006</a>）<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>逆ウォッチ曲線については、ネット上に良い紹介記事がたくさんあります（例えば<a href="http://trade.smbcnikko.co.jp/html/ez3d%5Fgyakuwatch.html">日興イージートレード</a>, <a href="https://kabu.com/investment/guide/technical/17.html">auカブコム証券 第17回 逆ウォッチ曲線</a>, <a href="https://www.daiwa.jp/glossary/YST0378.html">大和証券 逆ウォッチ曲線</a> など）。またgnuplotで逆ウォッチ曲線を描くことに関しては
+<a href="https://ameblo.jp/moveofsunday/entry-12323759436.html">こちら</a>などに記事があります。</p>
+<p><br /></p>
+<p>ここでは 細かい説明は省略して
+<strong>gnuplot</strong> で図<a href="#org4adb5f6">1</a> のような逆ウォッチ曲線を描く方法の <strong>骨子</strong> だけを紹介します。</p>
+<p><a id="org4adb5f6"></a></p>
+<figure>
+    <img src="/sample-gyaku-watch-curve.jpg"
+         alt="図1:  逆ウォッチ曲線の例図" width="90%"/> <figcaption>
+            <p>図1:  逆ウォッチ曲線の例図</p>
+        </figcaption>
+</figure>
+
+<p>図<a href="#org4adb5f6">1</a>では <strong>期間</strong> が100日間になっていますが、起動時に任意の日数を指定できます。
+<strong>銘柄名</strong> は起動時に銘柄一覧から選択します。図のタイトル＝「逆ウォッチ」の左側に銘柄名が印字されますが例図では消してあります。</p>
+<p><font color="red">赤丸</font> がスタート点、<font color="blue">青丸</font>が終点です。</p>
+<h2 id="スクリプトの概要">スクリプトの概要</h2>
+<p>以下、順を追って説明します。</p>
+<h3 id="データファイルを作ります">データファイルを作ります</h3>
+<p>逆ウォッチ曲線を描きたい会社の株価と出来高のデータを用意します。次のような感じです（図<a href="#org4adb5f6">1</a> とは関係ありません）。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(日付)　（出来高）（株価）
+　:         :       :
+2022-01-18 2007200 2537.0
+2022-01-19 2514600 2493.0
+2022-01-20 2612300 2525.0
+2022-01-21 2011100 2540.5
+</code></pre></div><p>日付(<strong>d</strong> ate), 出来高(<strong>v</strong> olume), 株価(<strong>p</strong> rice) の３列で構成されているので <strong>dvp</strong> データと呼びます。</p>
+<h3 id="移動平均を計算します">移動平均を計算します</h3>
+<p>上のdvpデータ( <code>./tmp-dvp.dat</code> )から <code>awk</code> を使って窓サイズ <strong>25日</strong> で移動平均を求め、別ファイル（ <code>./tmp-out.dat</code> ）に格納します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 移動平均計算パート</span>
+input_file<span style="color:#f92672">=</span>./tmp-dvp.dat
+window_size<span style="color:#f92672">=</span><span style="color:#ae81ff">25</span>
+i<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>window_size<span style="color:#e6db74">}</span>
+<span style="color:#75715e">#</span>
+cp /dev/null ./tmp-out.dat
+wc_l<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> cat <span style="color:#e6db74">${</span>input_file<span style="color:#e6db74">}</span> | wc -l <span style="color:#66d9ef">)</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">while</span> <span style="color:#f92672">[</span> $i -lt <span style="color:#66d9ef">$((</span> $wc_l <span style="color:#66d9ef">))</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">do</span>
+    head -n $i <span style="color:#e6db74">${</span>input_file<span style="color:#e6db74">}</span> | tail -n <span style="color:#e6db74">${</span>window_size<span style="color:#e6db74">}</span> &gt; ./tmp.dat
+    awk <span style="color:#e6db74">&#39;{a+=$2}{b+=$3} END{print $1, a/NR,b/NR;}&#39;</span> tmp.dat &gt;&gt; ./tmp-out.dat
+    i<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> $i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>
+<span style="color:#66d9ef">done</span>
+</code></pre></div><p>このコードは<a href="https://ccsr.aori.u-tokyo.ac.jp/~obase/awk.html">こちら</a>を参考にさせていただきました。</p>
+<h3 id="gnuplot用の変数をbashスクリプト内で設定します">gnuplot用の変数をbashスクリプト内で設定します</h3>
+<p>gnuplotに引き渡す変数やファイル名などをbashスクリプト内で準備します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp ./tmp-out.dat <span style="color:#e6db74">${</span>wrk_dir<span style="color:#e6db74">}</span>/data-to-plot.dat
+data_to_plot<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>wrk_dir<span style="color:#e6db74">}</span>/data-to-plot.dat
+<span style="color:#75715e">#</span>
+from_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>days<span style="color:#e6db74">}</span><span style="color:#e6db74"> days ago&#34;</span> <span style="color:#e6db74">&#39;+%Y/%m/%d&#39;</span><span style="color:#66d9ef">)</span>
+latest<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>tail -1  <span style="color:#e6db74">${</span>wrk_dir<span style="color:#e6db74">}</span>/revcd-<span style="color:#e6db74">${</span>stock<span style="color:#e6db74">}</span>-dvp.csv | awk <span style="color:#e6db74">&#39;{print $1}&#39;</span><span style="color:#66d9ef">)</span>
+to_date<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d  <span style="color:#e6db74">${</span>latest<span style="color:#e6db74">}</span> <span style="color:#e6db74">&#39;+%Y/%m/%d&#39;</span><span style="color:#66d9ef">)</span>
+<span style="color:#75715e">#</span>
+mytitle<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>stock_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;　逆ウオッチ曲線&#34;</span>
+</code></pre></div><h3 id="gnuplotをコールするパート">gnuplotをコールするパート</h3>
+<p>bashスクリプト内でgnuplotを呼び出すパートです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#  gnuplotのコール</span>
+gnuplot -e <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>　　<span style="color:#e6db74">&#34;fig_title=&#39;</span>$mytitle<span style="color:#e6db74">&#39;;\
+</span><span style="color:#e6db74">	days=&#39;</span>$days<span style="color:#e6db74">&#39;;\
+</span><span style="color:#e6db74">	start_date=&#39;</span>$from_date<span style="color:#e6db74">&#39;;\
+</span><span style="color:#e6db74">	end_date=&#39;</span><span style="color:#e6db74">${</span>to_date<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	~/bin/counter-clock-curve.plt
+</code></pre></div><h3 id="gnuplotスクリプト本体">gnuplotスクリプト本体</h3>
+<p><code>counter-clock-curve.plt</code> の中身です。変数の書き方がgnuplotスクリプト内とbashスクリプト内でちょっと異なっていますので注意してください。</p>
+<p>gnuplotの <strong>配列</strong> を使って描出します。出来高は数百万株になることがありますので、
+1000で割った値にしてY軸のlabelに x1000の注記をいれました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  data_to_plot<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./data-to-plot.dat&#39;</span>
+<span style="color:#75715e">#</span>
+  stats data_to_plot  using 2:3 nooutput
+  xmax <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> STATS_max_x/1000 * 1.05 <span style="color:#f92672">)</span>
+  xmin <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> STATS_min_x/1000 * 0.95 <span style="color:#f92672">)</span>
+  ymax <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> STATS_max_y * 1.05 <span style="color:#f92672">)</span>
+  ymin <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> STATS_min_y * 0.95 <span style="color:#f92672">)</span>
+
+<span style="color:#75715e"># タイトル</span>
+  set title fig_title.<span style="color:#e6db74">&#34;（&#34;</span>.days.<span style="color:#e6db74">&#34;日間)&#34;</span>  font <span style="color:#e6db74">&#34;Arial, 14&#34;</span>
+
+<span style="color:#75715e"># ターミナル設定</span>
+  set terminal pdfcairo transparent enhanced font <span style="color:#e6db74">&#34;Arial, 12&#34;</span>
+<span style="color:#75715e"># スタイル設定</span>
+  set style fill transparent solid border
+  set boxwidth 0.6 relative
+
+<span style="color:#75715e"># 数値表現の設定</span>
+  set decimal locale
+  set format x <span style="color:#e6db74">&#34;%&#39;5.0f&#34;</span>
+  set format y <span style="color:#e6db74">&#34;%&#39;5.0f&#34;</span>
+  set xlabel <span style="color:#e6db74">&#34;出来高（x1,000）&#34;</span> font <span style="color:#e6db74">&#34;Arial, 12&#34;</span>
+  set ylabel <span style="color:#e6db74">&#34;終値（円）&#34;</span> font <span style="color:#e6db74">&#34;Arial, 12&#34;</span>
+<span style="color:#75715e">#</span>
+  N <span style="color:#f92672">=</span> STATS_records
+  array X<span style="color:#f92672">[</span>N<span style="color:#f92672">]</span>
+  array Y<span style="color:#f92672">[</span>N<span style="color:#f92672">]</span>
+
+  stats data_to_plot  using <span style="color:#f92672">(</span>X<span style="color:#f92672">[</span>$0+1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> $2, Y<span style="color:#f92672">[</span>$0+1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> $3, 0<span style="color:#f92672">)</span> nooutput
+
+  set xrange<span style="color:#f92672">[</span>xmin:xmax<span style="color:#f92672">]</span>
+  set yrange<span style="color:#f92672">[</span>ymin:ymax<span style="color:#f92672">]</span>
+  set colorsequence default
+<span style="color:#75715e">#</span>
+  set output <span style="color:#e6db74">&#34;./tmp-out.pdf&#34;</span>
+<span style="color:#75715e">#</span>
+  plot Y using <span style="color:#f92672">(</span>X<span style="color:#f92672">[</span>$1<span style="color:#f92672">]</span>/1000<span style="color:#f92672">)</span>:<span style="color:#f92672">(</span>Y<span style="color:#f92672">[</span>$1<span style="color:#f92672">])</span> w lp pt <span style="color:#ae81ff">7</span> ps 0.25 notitle ,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     <span style="color:#e6db74">&#39;&#39;</span> using <span style="color:#f92672">(</span>X<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>/1000<span style="color:#f92672">)</span>:<span style="color:#f92672">(</span>Y<span style="color:#f92672">[</span>1<span style="color:#f92672">])</span> w lp pt <span style="color:#ae81ff">7</span> ps 0.6 lt rgbcolor <span style="color:#e6db74">&#39;red&#39;</span> title start_date,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     <span style="color:#e6db74">&#39;&#39;</span> using <span style="color:#f92672">(</span>X<span style="color:#f92672">[</span>N<span style="color:#f92672">]</span>/1000<span style="color:#f92672">)</span>:<span style="color:#f92672">(</span>Y<span style="color:#f92672">[</span>N<span style="color:#f92672">])</span> w lp pt <span style="color:#ae81ff">7</span> ps 0.6 lt rgbcolor <span style="color:#e6db74">&#39;blue&#39;</span> title end_date
+
+set output
+pause -1
+</code></pre></div><p>このコードは<a href="https://ss.scphys.kyoto-u.ac.jp/person/yonezawa/contents/program/gnuplot/array%5Ftrue.html">こちら</a>を参考にしました。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>コードの要点となる部分だけを抜き出して紹介しました。これ以外にも、ウエブサイトからデータを取得するパートやUI（ユーザーインターフェイス）のパート、それから他の株価のデータ処理スクリプト類との帳合をとるパートなどがありますが、煩瑣になるので省略しました。あしからず・・・。</p>
+<p>なお逆ウォッチ曲線の考え方や利用方法はよく分かるのですが、これを使って売買判断をした場合のパフォーマンスがどうなるか、シミュレーションでも良いから調べた結果があればそれを知りたいと思っています。</p>
+<p>一般の科学分野、とくに基礎科学の分野ではすべての情報は公開されることが原則です。けれども株や投資などお金に関わる知見や技術は、たいがいの情報は非公開です。まぁ公開すると、投資に関わるいろいろな業種が成り立たないわけですから仕方ないとは思いますが・・・。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>「逆ウォッチ曲線」のただしい英語名を調べようとググってみました。しかし英語の記事では、それらしい単語がほとんど出てきません。日本語の記事では anti watch curve, counter colock curve, contrary watch curve などと書かれていますが、どれが定訳かわかりませんでした。上で引用した吉見氏は counter clock curve を採用されていました。ようするに「反時計回り曲線」ということなんですね。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年1月24日T00:00:00&#43;0900 class="date">2022年1月24日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E6%A0%AA">株</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/bash">bash</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/postal_code/" class="prev">郵便番号・住所の簡易検索スクリプト</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/maandcandlesticks/" class="next">ローソク足と移動平均をgnuplotで描く</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

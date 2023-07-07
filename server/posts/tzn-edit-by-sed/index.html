@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger-cliのトランザクション中のアカウント名をsedで一括変更 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger-cliのトランザクション中のアカウント名をsedで一括変更</h2>
+    <div class="post_content">
+      <h2 id="ledger-cliのアカウント名を変更したい">Ledger-cliのアカウント名を変更したい</h2>
+<p>Ledger-cli はいつでも自由にアカウント名（勘定科目名）やアカウント構造を変更できます。</p>
+<p>今回は従来の <strong><strong>CableTV</strong></strong> というアカウントを変更して <strong><strong>StreamTV:Netflix</strong></strong> というアカウント名にしたい</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">＜変更前＞
+2019/07/15 Netflix
+    Expenses:教養娯楽費:CableTV             1,296 JPY
+    Liabilitie:Visa
+
+＜変更後＞
+2019/07/15 Netflix
+    Expenses:教養娯楽費:StreamTV:Netflix    1,296 JPY
+    Liabilitie:Visa
+</code></pre></div><p><strong><strong>CableTV</strong></strong> には、NetflixだけではなくてHuluとかiTSCOMとかも含まれていますので、単純に <code>sed 's/CableTV/StreamTV:Netflix/g'</code> するわけには行きません。</p>
+<blockquote>
+<p>文字列Netflixの「次の行」にCableTVがあったら</p>
+<p>それをStreamTV:Netflixに変更する</p>
+</blockquote>
+<p>これをやりたいわけです。手動で変更するのは最悪で、件数が多いとかならずタイプミスが起こります。</p>
+<p>どうしたら良いかと思っていたら、sedにはちゃんと方法があるんですね<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<h2 id="やったことは">やったことは・・・</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ sed -e &#39;/Netflix/{n;s/CableTV/StreamTV:Netflix/}&#39; original-ledger.dat &gt; new-ledger.dat
+</code></pre></div><p>つまり
+<strong><strong>{n;}</strong></strong> を使うだけ😅</p>
+<p>これでもともとのLedgerデータファイル中の
+<strong><strong>Netflix</strong></strong> という文字列がある行の<span style="color: red 次の行"></span>にある <strong><strong>CableTV</strong></strong> が <strong><strong>StreamTV:Netflix</strong></strong> に置換されました。めでたしめでたし！</p>
+<p>sedで行をまたいだ文字列を置換できることが分かりましたので、過去のトランザクション中のアカウント名の変更がこれまで以上に簡単にできるようになりました。タイプミス リスクも大幅に減ります。</p>
+<p>Ledger-cliが複式簿記を
+Ledger-cliがデータとしてプレーンテキストであること
+Bash/sed のすばらしさ、に感謝いっぱいです。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>参考にさせていただいたサイトは <a href="https://foxtrot0304.hatenablog.com/entry/2015/12/09/015537">sedのお勉強2 特定文字列に一致した次の行を操作するスクリプト</a>　です🙏 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年12月31日T00:00:00&#43;0900 class="date">2022年12月31日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/sed">sed</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounts">accounts</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/nanaco-txn/" class="prev">nanacoをLedger-cliで複式簿記トラッキング</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/tree_diagram_4_leder/" class="next">Ledger-cliのアカウント構造を樹状図にする</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

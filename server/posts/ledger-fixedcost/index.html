@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger — 固定費のトラッキング | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger — 固定費のトラッキング</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E5%9B%BA%E5%AE%9A%E8%B2%BB%E3%81%A8%E3%81%AF">固定費とは</a></li>
+<li><a href="#%E5%AE%B6%E8%A8%88%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%9B%BA%E5%AE%9A%E8%B2%BB%E3%81%AE%E4%B8%AD%E8%BA%AB">家計における固定費の中身</a></li>
+<li><a href="#%E5%9B%BA%E5%AE%9A%E8%B2%BB%E3%82%92%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E7%AE%97%E5%87%BA%E3%81%99%E3%82%8B%E3%81%8B">固定費をどのように算出するか</a></li>
+<li><a href="#ledger%E3%81%AE%E6%96%B9%E6%B3%95--1">Ledgerの方法(1)</a></li>
+<li><a href="#ledger%E3%81%AE%E6%96%B9%E6%B3%95--2">Ledgerの方法(2)</a></li>
+<li><a href="#%E3%81%8A%E3%81%BE%E3%81%91">おまけ</a></li>
+<li><a href="#acknowledgements">Acknowledgements:</a></li>
+<li><a href="#footnotes">Footnotes:</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<p>Ledger-cliを使ってこれは便利！というような小技を一つずつ紹介する企画の第1弾です。</p>
+<h2 id="固定費とは">固定費とは</h2>
+<p>家計でもビジネスでもNPOなどの団体でも、すべての <strong>経済活動体</strong> には
+<strong>固定費</strong> (fixed cost/expenses)とよばれる費用があります。固定費は金額がカチッと固定しているから固定費と呼ばれるわけではありません。活動体の活動水準との関連性があまり高くなく <strong>定期的</strong> に生じる支出（expenses）のことです(注<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>)。</p>
+<p>いろいろな家計簿サイトの <strong>やりくりヒント集</strong> を見ると、内外問わず重要なのは：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">「固定費をちゃんと把握して抑制すること」
+</code></pre></div><p>と書かれています（ビジネスの領域でも事情は同じです）。</p>
+<p>では家計の中の固定費とはどんな費目（account）でしょうか。</p>
+<h2 id="家計における固定費の中身">家計における固定費の中身</h2>
+<p>家計における固定費はおよそ表<a href="#table--tbl-1">1</a>のようなものです。</p>
+<p><a id="table--tbl-1"></a></p>
+<div class="table-caption">
+  <span class="table-number"><a href="#table--tbl-1">&#34920; 1</a></span>:
+  固定費のおもな費目と具体的な内容例
+</div>
+<table>
+<thead>
+<tr>
+<th>費目(account)</th>
+<th>具体的内容例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>住居費</td>
+<td>ローン、固定資産税、家賃など</td>
+</tr>
+<tr>
+<td>諸会費</td>
+<td>年会費、メンバーシップ費など</td>
+</tr>
+<tr>
+<td>保険</td>
+<td>健康保険、生命保険などの保険料</td>
+</tr>
+<tr>
+<td>通信費</td>
+<td>電話、スマホ、インターネット回線など</td>
+</tr>
+<tr>
+<td>水光熱費</td>
+<td>電気、ガス、水道、灯油など</td>
+</tr>
+<tr>
+<td>教養教育費</td>
+<td>学校、習い事など</td>
+</tr>
+<tr>
+<td>車両費</td>
+<td>駐車場、税金、定期点検費、車検など</td>
+</tr>
+</tbody>
+</table>
+<h2 id="固定費をどのように算出するか">固定費をどのように算出するか</h2>
+<p>表<a href="#table--tbl-1">1</a>のように多岐にわたる費目の支出をどうやって算出したら良いのでしょうか？</p>
+<p>家計簿アプリや経理システムの中には、固定費を抽出して計算したり図に書いたりする機能を持っているものもあるようです。</p>
+<p>もちろんLedgerでも <strong>腕力</strong> をつかって、表<a href="#table--tbl-1">1</a> の支出費目（アカウント）を <code>or</code> でつないでクエリ（検索・抽出）すればできます（・・・は中略）。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger reg ^expenses and <span style="color:#f92672">(</span> 住居費 or 諸会費 or 保険 or 通信費 or ・・・ or 車両費）
+</code></pre></div><p>しかし日常的にこんなことはやってられません。</p>
+<p>またこの固定費の内容は人によって（企業団体によって）異なります。同一人であってもライフスタイルの変化にともなって内容が変わってきます。そうした変化に即応できないと使い物になりません。</p>
+<h2 id="ledgerの方法--1">Ledgerの方法(1)</h2>
+<p>Ledgerで固定費を扱うための一つの方法は、Ledgerの <strong>自動転記</strong> (automated transaction)と <strong>仮想アカウント</strong> (virtual accounts)を使う方法です。</p>
+<p>Ledgerの自動転記に関する説明記事の中に次のような記述がありました（<a href="https://rolfschr.github.io/gswl-book/latest.html#Automated%5FTransactions">出典</a>）。</p>
+<pre><code class="language-nil" data-lang="nil">account FixedCost
+= /Rent$/ or /Electricity$/ or /Insurance$/ or /Telephone$/
+    (FixedCost)                              1
+</code></pre><p>この方法を使えば固定費をきちんと把握するすることが文字通りあっという間に可能になります。</p>
+<p>具体的には、Ledgerファイルの冒頭またはユーザの <code>accounts.dat</code> の冒頭に次のような自動転記の定義文を追記します。それだけです。</p>
+<pre><code class="language-nil" data-lang="nil">account FixedCost
+= /住居費$/ or /諸会費$/ or /保険$/ or /通信費$/ or ・・・ or /車両費$/）
+</code></pre><p>こうしておけば、固定費は次のように簡単にクエリできます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger reg FixedCost
+</code></pre></div><h3 id="しかし制約があります">しかし制約があります</h3>
+<p>この自動転記＋仮想アカウントの組み合わせによる方法には、一つだけ不都合があります。固定費を仮想アカウントにすると、いわゆる <strong>aux-date</strong> が無視されます。</p>
+<p>例を上げます。固定費の中には <strong>水道料金</strong> などのように2ヶ月に1回の支払いになっているものがあります。aux-dateは下のトランザクションの <code>[=2021/01/01]</code> 部分のことです。Ledgerではこの日付を使って水道料金を月ごとに振り分けて計算してくれます。</p>
+<pre><code class="language-nil" data-lang="nil">2021/03/01 * 水道料金
+    Expenses:水道               1,500 JPY ; [=2021/01/01]
+    Expenses:水道               1,500 JPY ; [=2021/02/01]
+    Assets:Bank
+</code></pre><p>ところがこれを仮想アカウント＝ <code>FixedCost</code> でクエリすると、3月に支払った3,000円が1月分と2月分に1,500円ずつに按分されません(注<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>)。これではaux-dateを使用しているユーザは困ります(注<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>）。</p>
+<h2 id="ledgerの方法--2">Ledgerの方法(2)</h2>
+<p>手っ取り早い解決策は固定費をbal/regするだけのシンプルな単機能のスクリプトを作ることです。 <code>kbal</code> の例は次のとおりです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#          kbal (固定費をbalするスクリプト）</span>
+<span style="color:#75715e">#</span>
+acnt_fc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;(水光熱費 or Insurance or Internet or Mobile or 通信費 or 地方税 or 所得税 or 自動車税 or 管理費 or 諸会費 or 駐車場賃料)&#34;</span>
+
+parm<span style="color:#f92672">=</span>$@
+ledger bal ^Expenses and <span style="color:#e6db74">${</span>acnt_fc<span style="color:#e6db74">}</span>  <span style="color:#e6db74">${</span>parm<span style="color:#e6db74">}</span>
+</code></pre></div><p>これだけです。簡単すぎてスミマセン😅</p>
+<p>細かい制約はありますが(注<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>)結構使えます。たとえば：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ kreg  -M -b 2021/01/01 --collapse
+2021/01/01 - 2021/01/31         &lt;Total&gt;                 105,443 JPY  105,443 JPY
+2021/02/01 - 2021/02/28         &lt;Total&gt;                  89,424 JPY  194,867 JPY
+2021/03/01 - 2021/03/31         &lt;Total&gt;                 103,293 JPY  298,160 JPY
+2021/04/01 - 2021/04/30         &lt;Total&gt;                  65,830 JPY  363,990 JPY
+
+$ kbal  -p 2021/02 --depth <span style="color:#ae81ff">2</span>
+	  89,424 JPY  Expenses
+	  10,100 JPY    Cars
+	  21,960 JPY    Insurance
+	  20,520 JPY    水光熱費
+	   7,561 JPY    租税公課
+	  10,700 JPY    管理費
+	  18,583 JPY    通信費
+--------------------
+	  89,424 JPY
+</code></pre></div><p>あまりにも簡単なのでおまけの情報を。</p>
+<h2 id="おまけ">おまけ</h2>
+<p>固定費をコマンドラインからクエリしなければいけないケースは実際にはそれほど多くないと思います。むしろ月末の <strong>締め日</strong> に「今月の固定費の状況はどうだったか？」が把握できれば良いので、それならばそのためのスクリプトを書いてしまえばよいわけです。</p>
+<p>ならばと、従来から使っていた「特別費・経常費の推移チャート」に固定費を重ね書きしたのが図<a href="#org0862c7b">1</a>です(注<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>)。赤い折れ線が固定費の推移、青い棒グラフが経常費、ピンクの棒グラフは特別費です。</p>
+<p><a id="org0862c7b"></a></p>
+<figure>
+    <img src="/50%25-fixedcost.jpg"
+         alt="図1:  特別費、経常費、固定費の推移（サンプル図）" width="60%"/> <figcaption>
+            <p>図1:  特別費、経常費、固定費の推移（サンプル図）</p>
+        </figcaption>
+</figure>
+
+<p>ここでいう <strong>特別費</strong> （non-recurring expenses; NRE)は冠婚葬祭などのように例外的に発生する支出です。 <strong>経常費</strong> （ordinary expenses; OE）は特別費以外のいわゆる一般的な家計費です。</p>
+<p>これで家計における「固定費」のトラッキングは問題なくできるようになりました。めでたしめでたし(注<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>)😄</p>
+<h2 id="acknowledgements">Acknowledgements:</h2>
+<ul>
+<li><a href="https://www.petekeen.net/program-your-finances-automated-transactions">Program Your Finances: Automated Transactions</a> (Keen, P)</li>
+<li><a href="https://rolfschr.github.io/gswl-book/latest.html#Automated%5FTransactions">Getting Started With Ledger 5.3 Automated Transactions</a> (Schröder, R. &amp; Contributors)</li>
+</ul>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>固定費に対して、経済活動体の活動水準に関連して増減する支出のことを「 <strong>変動費</strong> (variable cost)」と呼びます。企業では売上金額、生産量、販売量などが活動水準と関連します。家計では食費、ガソリン代、衣服費、外食費、教養娯楽費、衛生費などの支出が主なものです。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>実アカウントである <code>水道</code> でクエリすれば、当然3月支払い分は2月と1月に按分されて表示されます。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>仮想アカウントがaux-dateをrespectしてくれるようにする方法法があるような気がします。しかし現在のところ検索しても解決策が見当たりません。どなたか教えていただけるとありがたいです。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>たとえば引数にクォーテーションマークは（このままでは）含められません。たとえば <code>-p 'since 2020/01/01'</code> とかはできません。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>意図的に画像の精細度を落としています。またY軸の目盛り数値もマスクしています。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>なお特別費か経常費かというカテゴリ分けと固定費か変動費かというカテゴリ分けの関係は個々のケースではちょっと判断が微妙になります。このあたりになると「きまり」というものは無いので、各自で好みに応じて使い分ければよいようです。 <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年4月24日T00:00:00&#43;0900 class="date">2021年4月24日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/hanamame2021/" class="prev">ムラサキ花豆のひと口メモ</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/kinran/" class="next">キンラン</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

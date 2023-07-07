@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    nanacoをLedger-cliで複式簿記トラッキング | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">nanacoをLedger-cliで複式簿記トラッキング</h2>
+    <div class="post_content">
+      <h2 id="nanacoはトップランナー">nanacoはトップランナー！</h2>
+<p>nanacoを知らないヒトはいませんよね。</p>
+<p>「<a href="https://retailguide.tokubai.co.jp/trend/31578/">リテールガイド</a>」によれば、nanacoの発行枚数は <strong><strong>7,520万枚</strong></strong> (2022/02現在）、nanaco利用な店舗数は956,000件（2022/06末現在）。</p>
+<p>ボクも1枚持っています 😄</p>
+<div align=left>
+<img src="https://dl.dropboxusercontent.com/s/p1czmnknrzzmpm5/senior_nanaco.jpg" alt="" width="50%"><figure caption>図1. nanacoカード（シニア用）</figure>
+</div>
+<p>コンビニなどで小銭入れの代わりに使えて本当に便利です。</p>
+<p>国のマイナポイント事業のキャッシュレス決済サービスにもなりました。そこでnanacoをマイナポイント受取り口座にしてみました。</p>
+<h3 id="nanacoで-はまった-sweat">nanacoで はまった😓</h3>
+<p>nanacoは小銭レベルの少額プリペイドカードなので、仕組みは簡単素朴だと思ったのが間違いの始まり。nanacoのポイントとお金の動きをLedger-cliで <strong><strong>複式簿記的</strong></strong> にトラッキングしようとしてハマりました。</p>
+<ul>
+<li>仕組みが思ったよりも複雑</li>
+<li>ポイントと電子マネーの移動をリアルタイムに追跡できない<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<p>いろいろ試行錯誤した結果、パーフェクトではありませんが、ようやく そこそこのレベルでnanacoのポイントと電子マネーをトラッキングできるようになりました。</p>
+<p>ここではそれを紹介します。細かく解説的に書くと長くなりますので、この記事は複式簿記とLedger-cliについてある程度のリテラシーをお持ちの方をイメージターゲットにしています。</p>
+<h3 id="勘定科目-アカウント-設定">勘定科目（アカウント）設定</h3>
+<h4 id="nanacoポイントと電子マネーの構造">nanacoポイントと電子マネーの構造</h4>
+<p>図2はnanacoアプリのスクリーンショットです。</p>
+<div align=left>
+<img src="https://dl.dropboxusercontent.com/s/gki8ok3b385zzg6/%E4%BC%9A%E5%93%A1%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BCnanaco.jpg]]" alt="" width="60%">
+<figure caption>図2. nanacoアプリのスクリーンショット</figure>
+<p>この図からnanacoは次の4つの要素から構成されていることが分かります。</p>
+<ol>
+<li>カード内　マネー残高</li>
+<li>カード内　ポイント残高</li>
+<li>センター預り内　マネー残高</li>
+<li>センター預か内　ポイント残高</li>
+</ol>
+<p>上の構成要素を次の図3のように複式簿記の <strong><strong>勘定科目</strong></strong> にします。</p>
+<div align=left><img src="https://dl.dropboxusercontent.com/s/pkwva7kup1xp177/nanaco-AC-tree.png" alt="" width="60%"></div>
+<figure caption>図3. nanaco関係の勘定科目樹状図</figure>
+<p>要するに nanacoの最上位の勘定科目（アカウント）は <strong><strong>Assets</strong></strong> (資産)、その下に <strong><strong>e-money</strong></strong> （電子マネー）<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>を置き、さらにその下にnanacoがあるという構造です。</p>
+<p>ここで</p>
+<ul>
+<li><code>card</code> は「カード内」、 <code>center</code> は「センター預り内」です</li>
+<li><code>em</code> はElectoronic Money（電子マネー）、 <code>pts</code> はポイントです</li>
+<li>nanaco内の勘定科目（アカウント）のコモディティ（通貨単位）は <code>card_em</code> （カード内電子マネー）だけが「日本円」 <code>JPY</code> です。あとのアカウントはすべて「ポイント」 <code>pts</code> にします</li>
+<li><code>JPY</code> と <code>pts</code> との交換率は1:1です(<code>C 1 JPY = 1 pts</code>)</li>
+</ul>
+<h4 id="日本語でもokです">日本語でもOKです</h4>
+<p>こうした勘定科目（アカウント）の階層構造をLedger-cliでは半角コロン <code>:</code> で連結して</p>
+<pre><code class="language-nil" data-lang="nil">Assets:e-money:nanaco:card_em
+</code></pre><p>のように記述します。もちろん これを日本語表記して</p>
+<pre><code class="language-nil" data-lang="nil">資産:電子マネー:ナナコ:カード内電子マネー
+</code></pre><p>と書くこともできます。</p>
+<p>記帳の時に毎回日本語変換キーを叩くのが面倒なので、ボクはアカウント名にはできるだけ日本語を使わないようにしています。単なる好みの問題です<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>さて とりあえずこれだけの勘定科目を用意すれば、nanacoのお金とポイントの流れをそれなりにトラッキングすることができます。下に例をあげます。</p>
+<h2 id="nanacoのledger-cliトランザクション例">nanacoのledger-cliトランザクション例</h2>
+<p>この例で記述しているのは、次のようなnanacoのポイントと電子マネーの流れ：</p>
+<ol>
+<li>最初に <code>Opening Balance</code> で nanaco各要素の勘定科目の初期値を宣言</li>
+<li>nanacoでマイナポイントを受け取り、それを電子マネーに交換</li>
+<li>nanaco電子マネーを使って買い物（セブンイレブンとマクドナルド）</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">account Assets:e_money:nanaco
+account Expenses:Grocery
+;
+alias nanaco=Assets:e_money:nanaco
+alias food=Expenses:Grocery
+alias lunch=Expenses:Meals:Lunch
+;;
+2022/12/13 * Opening Balance
+    nanaco:card_em                              1788 JPY
+    Equity:Opening Balance
+2022/12/13 * Opening Balance
+    [nanaco:card_pts]                             38 pts
+    Equity:Opening Balance
+2022/12/13 * Opening Balance
+    nanaco:center_em                               0 JPY
+    Equity:Opening Balance
+2022/12/13 * Opening Balance
+    nanaco:center_pts                              0 pts
+    Equity:Opening Balance
+
+2022/12/13 * nanacoチャージ
+    ; セブンイレブンのレジにてcard points を em へチャージ
+    nanaco:card_em                                38 JPY
+    [nanaco:card_pts]                            -38 pts
+
+2022/12/15 * マイナポイント取得
+    ; 付与されたポイント＝電子マネーをnancoセンター(預り)に収納
+    Income:一時所得                          -15,000 JPY
+    nanaco:center_pts                         15,000 pts
+
+2022/11/02 * nanacoポイント交換
+    ; nanacoセンター(預り)ポイントを nanacoマネーに交換
+    nanaco:center_pts                        -10,000 pts
+    nanaco:card_em                            10,000 JPY
+
+2022/12/21 * セブンイレブン
+    ; 税抜き支払額の 0.5% のポイント付与
+    food                                        1862 JPY
+    nanaco:card_em                             -1862 JPY
+    (nanaco:card_pts)                              8 pts
+
+2022/12/22 * マクドナルド
+    ; 毎月10日 6:00AM に前月末までのポイントが付与される
+	; 税込み!! 200円ごとに1ポイント
+    lunch                                        850 JPY
+    nanaco:card_em                              -850 JPY
+    (nanaco:card_pts)                              4 pts ;[2023/01/10]
+</code></pre></div><h3 id="補足説明">補足説明</h3>
+<ul>
+<li>トランザクションの冒頭2行の <code>account</code> 行で勘定科目を宣言しています。次の3行の <code>alias</code> 行は勘定科目のエリアス（短縮別名）を定義しています</li>
+<li>トランザクション最下行の右端にある <code>;[2023/10/10]</code> はnanacoポイントが反映される日付けを記述しています<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
+<li>ポイント更新のタイミングの詳細については<a href="https://www.nanaco-net.jp/how-to/save_point/shopping.html">nanaco 使い方ページ</a>を参照してください</li>
+</ul>
+<h2 id="クエリの例">クエリの例</h2>
+<p>上のトランザクション（ <code>nanaco.ledger</code> ファイル) のあるディレクトリ内に、次のような内容のファイル（ <code>init.ledger</code> ）を置きます。その中でLedgerのデータファイル名などの基本情報を定義しています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">--file ./nanaco.ledger
+--sort date
+--effective
+--date_format %Y/%m/%d
+</code></pre></div><p>こうしておけば、そのディレクトリ内で、Ledger起動時に <code>--init-file init.ledger</code> のオプションだけを指定すれば済むようになります。</p>
+<h3 id="nanacoのbalanceレポート">nanacoのbalanceレポート</h3>
+<p>balanceレポートでは <code>pts</code>, <code>JPY</code> のコモディティが並立して表記されます</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ led bal nanaco --init-file init.ledger
+	   9,014 JPY
+	   5,012 pts  Assets:e_money:nanaco
+	   9,014 JPY    card_em
+	      12 pts    card_pts
+	   5,000 pts    center_pts
+--------------------
+	   9,014 JPY
+	   5,012 pts
+</code></pre></div><h4 id="exchange-jpy-オプション">&ndash;exchange JPY オプション</h4>
+<p>コモディティ <code>pts</code> は <code>JPY</code> に換算して表記されます</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ led bal nanaco --init-file init.ledger --exchange JPY
+	  14,026 JPY  Assets:e_money:nanaco
+	   9,014 JPY    card_em
+	      12 JPY    card_pts
+	   5,000 JPY    center_pts
+--------------------
+	  14,026 JPY
+</code></pre></div><h4 id="ポイントのトラッキング">ポイントのトラッキング</h4>
+<p>nanacoのポイントだけをトラッキングしてレジスター表示</p>
+<pre><code class="language-nil" data-lang="nil">$ ledger reg nanaco and pts --init-file init.ledger
+</code></pre><div align=left>
+<img src="https://dl.dropboxusercontent.com/s/7ykhhv9hnw24dh1/nanaco_and_pts.png" alt="" width="100%"></div>
+<h4 id="電子マネーのトラッキング">電子マネーのトラッキング</h4>
+<p>nanacoの電子マネーだけをトラッキングしてレジスター表示</p>
+<pre><code class="language-nil" data-lang="nil">$ ledger reg nanaco and _em --init-file init.ledger
+</code></pre><div align=center>
+<img src="https://dl.dropboxusercontent.com/s/0bg4wz96bjk57dh/nanaco_and_em.png" alt="" width="100%"></div>
+<h2 id="まとめ">まとめ</h2>
+<p>nanacoカードに収納可能な金額は最大10万円ほどです。自分では普段は数千円ほどしか入れてません😓 nanacoは小銭入れ代わりに使うのが一番の使い方だと思います。</p>
+<p><span style="color: red">ポイントが溜まる</span>とか<span style="color: red">お得</span>とか言われますが、nanaco最大キャパの10万円を使っても、せいぜい500円ほどの「おまけ」がつくだけです<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。</p>
+<p>ボクのように数千円入っていれば安心というような使い方をしている人間に付与されるポイントはほんとうに微々たるものです。それを厳密にトラッキングする意味は家計・経理の面から言えばほとんど無意味です。</p>
+<p>ここでは、敢えて複式簿記でnanaco内外のポイントとお金の動きをトラックしてみましたが、「やろうと思えばここまでは出来る」というほどの意味しか無いと思います😎</p>
+<h3 id="むしろ">むしろ</h3>
+<p>家計簿的には、nanacoを内部構造まで忠実に勘定科目化するのではなく、nanacoを単一の勘定科目にしておいて</p>
+<ul>
+<li>nanaco内部はブラックボックスにして</li>
+<li>そこから先の細かいリワードポイントなどは追跡・分析せず</li>
+<li>コンビニでチャージした現金とか買い物の結果だけを記帳し（ポイントも記帳しない）</li>
+<li>しばらく使って、溜まったポイントをチャージしたりした結果、nanaco内の電子マネーの誤差が蓄積してきたら</li>
+<li>年に1回くらいの頻度でつぎのようなトランザクションを書いて <strong><strong>調整</strong></strong> する</li>
+</ul>
+<p>という感じ。たとえばある日（2023/10/10)、nanacoの電子マネーが3,510円になっていることを確認したら：</p>
+<pre><code class="language-nil" data-lang="nil">2023/10/10 nanacoポイント調整
+   Assets:e-money:nanaco                  =3,510 JPY
+   Equity Adjustments
+</code></pre><p>これだけでOKです。これがnanacoとの妥当な付き合い方かと思います。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>nanacoアプリだけではなく、スマホアプリならもうちょっとできそうですが、ボクのようにスマホを持たずガラケーとタブレットで暮らしている人間にはその恩恵は届きません。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><strong><strong>e-money</strong></strong> アカウント内にはnanacoの他に、ANA, Costco, Kuroneko, Orico, Suica などがぶら下がっています。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>単なる「好み」だけではなく、Ledger-cliではマルチバイト文字を使ったアカウント名にすると、レポートが <strong><strong>列崩壊</strong></strong> します。列崩壊を全面的に解消するのはとても大変です。どうしても列崩壊を避けたいときには、文字コードを「小手先でいぢくる」uglyな関数を介在させています😓 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>これはLedger-cliの独特の書式で、 <strong><strong>Effective/Aux date</strong></strong> です。詳しくは<a href="https://www.ledger-cli.org/3.0/doc/ledger3.html">マニュアル</a>を見てください。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>nanacoは支払った金額のウチ、基本的には税抜きの金額だけがポイント付与のベースになってますし、ポイントがつかない商品やサービスもありますので、<span style="color: red">10万円で300円台のオマケ</span>と考えた方が良いかも知れません。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年12月29日T00:00:00&#43;0900 class="date">2022年12月29日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">マイナポイント</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/nanaco">nanaco</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98">複式簿記</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E9%9B%BB%E5%AD%90%E3%83%9E%E3%83%8D%E3%83%BC">電子マネー</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88_on_ledger/" class="prev">Ledger-cliでマイナポイントをトラッキングする</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/tzn-edit-by-sed/" class="next">Ledger-cliのトランザクション中のアカウント名をsedで一括変更</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

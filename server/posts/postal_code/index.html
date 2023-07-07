@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    郵便番号・住所の簡易検索スクリプト | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">郵便番号・住所の簡易検索スクリプト</h2>
+    <div class="post_content">
+      <h2 id="つくったわけ">つくったわけ</h2>
+<p>2021年の年末に <strong>年賀状</strong> の宛名データが壊れました<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。その復旧作業をやっているときに、郵便番号と住所の <strong>どちらから</strong> でもお互いにコマンドラインで検索できる道具が欲しくなりました<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>そこで大急ぎで作ったのが <strong><code>postal-coder.sh</code></strong> 。とても単純 素朴ですが、とりあえずこれで過去3年間の年賀状をめくりながら、宛名ファイル（CSV）を作り直し<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>、なんとか宛名印刷を完了することができました<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<p>宛名印刷が終わった後、y
+日本郵便の郵便番号データは月に1回のペースで更新されることを知りました。そこで毎月1回、定期的に郵便番号データをダウンロードし、
+<strong><code>postal-coder.sh</code></strong> に合った形式にデータを整形するスクリプト <strong><code>fabr-postalcode-DB.sh</code></strong> を作りました。</p>
+<p>その2本のスクリプトについて自分用の備忘も兼ねて概要を紹介します。</p>
+<h2 id="スクリプト">スクリプト</h2>
+<dl>
+<dt><code>postal-coder.sh</code></dt>
+<dd>住所から郵便番号、郵便番号から住所あるいは事業所名、事業所名から郵便番号と住所を検索して表示します（コードは <a href="#postal-coder-code">こちら</a>）。</dd>
+<dt><code>fabr-postalcode-DB.sh</code></dt>
+<dd>日本郵便のデータをダウロードし <code>postal-coder.sh</code> 用にデータを整形します（おおざっぱなフローは<a href="#org66d19d5">こちら</a>）。</dd>
+</dl>
+<h2 id="postal-coder-dot-shスクリプト">postal-coder.shスクリプト</h2>
+<h3 id="使用例">使用例</h3>
+<p>ターミナル上では郵便番号出力は<span style="color:red">赤字</span>で表示されます。</p>
+<h4 id="住所-郵便番号">住所 <strong>→</strong> 郵便番号</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ postal-coder.sh 緑区鴨居
+<span style="color:#ae81ff">2260003</span>  神奈川県横浜市緑区鴨居
+<span style="color:#ae81ff">2260004</span>  神奈川県横浜市緑区鴨居町
+</code></pre></div><p>検索語にヒットする住所が複数あれば全部表示します。うっかり「東京都」と入力すると破滅的な数の行が表示されます(やってみたら <strong>4046行</strong> 😲 ）。データ中にヒットする住所が無ければ
+<code>** Not found.</code> を表示して停止します。</p>
+<h4 id="郵便番号-住所">郵便番号 <strong>→</strong> 住所</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ postal-coder.sh <span style="color:#ae81ff">7290111</span>
+<span style="color:#ae81ff">7290111</span> 広島県福山市今津町
+</code></pre></div><p>データに存在しない郵便番号の場合には <code>** Not found.</code> を表示して停止します。</p>
+<h4 id="事業所名-郵便番号-住所">事業所名 <strong>→</strong> 郵便番号・住所</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ postal-coder.sh 培風館
+<span style="color:#ae81ff">1028260</span>  株式会社　培風館 東京都千代田区九段南４丁目３−１２
+</code></pre></div><p>支店・支社が複数あれば、それらも全部表示します。</p>
+<h4 id="郵便番号-事業者名">郵便番号 <strong>→</strong> 事業者名</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ postal-coder.sh <span style="color:#ae81ff">2148580</span>
+<span style="color:#ae81ff">2148580</span>  学校法人　専修大学 神奈川県川崎市多摩区東三田２丁目１−１
+</code></pre></div><h4 id="応用問題-おまけ">応用問題（おまけ）</h4>
+<p>（Ex.1）虎ノ門ヒルズ３５階の郵便番号を知りたい：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ postal-coder.sh 虎ノ門ヒルズ | grep <span style="color:#ae81ff">３５</span>
+<span style="color:#ae81ff">1056435</span>  東京都港区虎ノ門虎ノ門ヒルズビジネスタワー（３５階）
+<span style="color:#ae81ff">1056335</span>  東京都港区虎ノ門虎ノ門ヒルズ森タワー（３５階）
+</code></pre></div><p>虎ノ門ヒルズには「ビジネスタワー」と「森タワー」があったんですね 😅</p>
+<p>日本郵便のDBでは数字はすべて <strong>全角数字</strong> が使われています。 <code>grep</code> する際には、上のようにハナから全角文字で検索するか、次のように <code>nkf -Z</code> のひと手間かけて半角化しましょう。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ postal-coder.sh 虎ノ門ヒルズ | nkf -Z | grep <span style="color:#ae81ff">35</span>
+<span style="color:#ae81ff">1056435</span>  東京都港区虎ノ門虎ノ門ヒルズビジネスタワー<span style="color:#f92672">(</span>35階<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">1056335</span>  東京都港区虎ノ門虎ノ門ヒルズ森タワー<span style="color:#f92672">(</span>35階<span style="color:#f92672">)</span>
+</code></pre></div><p><br /></p>
+<h2 id="fabr-postalcode-db-dot-shスクリプト">fabr-postalcode-DB.shスクリプト</h2>
+<p>毎月1回、cronで事業所名データ（ <code>jigyosyo.zip</code> ）と全国郵便番号データ( <code>ken_all.zip</code> )に更新があったかどうかをチェックします。</p>
+<p>もし更新があったら、
+zipファイルをダウンロードして解凍し、 <strong><code>postal-coder.sh</code></strong> スクリプトで使えるように整形して保存します。全国郵便番号データ( <code>ken_all.zip</code> )は <strong>1.7MB</strong> 、事業所名データ( <code>jigyosyo.zip</code> )は <strong>0.7MB</strong> 程度なので、回線的にもそれほど大きな負担はないと思います。</p>
+<p>2022年1月5日には事業所名データ（ <code>jigyosyo.zip</code> ）にも 全国郵便番号データ( <code>ken_all.zip</code> )にも更新がありませんでした。次のようなログが残っていました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">（log-JIGYOSHO.txt）
+$ cat log-JIGYOSHO.txt
+--2022-01-05 21:02:01--  https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/j
+igyosyo.zip
+www.post.japanpost.jp <span style="color:#f92672">(</span>www.post.japanpost.jp<span style="color:#f92672">)</span> をDNSに問いあわせています... 43.25
+3.212.144
+www.post.japanpost.jp <span style="color:#f92672">(</span>www.post.japanpost.jp<span style="color:#f92672">)</span>|43.253.212.144|:443 に接続していま
+す... 接続しました。
+HTTP による接続要求を送信しました、応答を待っています... <span style="color:#ae81ff">304</span> Not Modified
+ファイル <span style="color:#e6db74">`</span>jigyosyo.zip<span style="color:#960050;background-color:#1e0010">&#39;</span> はサーバ側で変更されていませんでした。
+ダウンロードを省略します。
+</code></pre></div><p>アップデートがなければほとんど何もせずスクリプトは終わります（図<a href="#org66d19d5">1</a>）。</p>
+<p>（完）</p>
+<h2 id="参考資料-postal-coder-dot-sh-コード">参考資料（ <code>postal-coder.sh</code> コード）</h2>
+<p>緊急避難的なコードですがとりあえず <strong>自家用</strong> には動いています。小ぎれいにしたいところや変なところがたくさんありますが、それは後ほど改修ということであしからず・・・。</p>
+<h3 id="postal-coder-code">postal-coder.sh</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#  Postal-coder.sh</span>
+<span style="color:#75715e">#      郵便番号 =&gt; 住所</span>
+<span style="color:#75715e">#      住所     =&gt; 郵便番号・住所</span>
+<span style="color:#75715e">#      事業所名 =&gt;  郵便番号・住所</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    read -rp <span style="color:#e6db74">&#34;住所/郵便番号/事業者名を入力してください： &#34;</span> keyin
+<span style="color:#66d9ef">else</span>
+    keyin<span style="color:#f92672">=</span>$1
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#  keyinに半角ハイフンが含まれていたら削除</span>
+keyin<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>keyin/-/<span style="color:#e6db74">}</span>
+
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  入力判定（郵便番号 or 住所/事業所名)</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>keyin<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^<span style="color:#f92672">[</span>0-9<span style="color:#f92672">]</span>+$ <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>   <span style="color:#75715e"># keyinが数字のみかどうか</span>
+    <span style="color:#75715e">#  keyinの桁数をチェック ７桁限定</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">${#</span>keyin<span style="color:#e6db74">}</span> !<span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+	echo <span style="color:#e6db74">&#34;** 郵便番号の桁数は7です.&#34;</span>
+	exit <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">fi</span>
+    <span style="color:#75715e">##  郵便番号から　住所/事業所名を得る</span>
+    <span style="color:#75715e">#</span>
+    all_japan_file<span style="color:#f92672">=</span>$HOME/郵便番号/ALL-JAPAN.csv
+    <span style="color:#75715e">#</span>
+    zipcode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>keyin<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    adrs<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">${</span>zipcode<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>all_japan_file<span style="color:#e6db74">}</span> <span style="color:#66d9ef">)</span>
+    adrs_only<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>adrs<span style="color:#e6db74">}</span> |cut -c 8-<span style="color:#66d9ef">)</span>
+    <span style="color:#75715e">#</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>adrs<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+	echo -e <span style="color:#e6db74">&#34;\e[31m</span><span style="color:#e6db74">${</span>zipcode<span style="color:#e6db74">}</span><span style="color:#e6db74">\e[m </span><span style="color:#e6db74">${</span>adrs_only<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+	exit <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">else</span>
+	echo <span style="color:#e6db74">&#39;** 郵便番号 not found. Do it again.&#39;</span>
+	exit <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">fi</span>
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">##  住所/事業所名から　郵便番号</span>
+<span style="color:#75715e">#</span>
+ippan_file<span style="color:#f92672">=</span>$HOME/郵便番号/essential-ippan.csv
+jigyosho_file<span style="color:#f92672">=</span>$HOME/郵便番号/essential-jigyosho.csv
+
+<span style="color:#75715e"># 一般住所データから検索</span>
+grep <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>keyin<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>ippan_file<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; ./tmp-ippan-koho.txt
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -s ./tmp-ippan-koho.txt <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    <span style="color:#75715e">#</span>
+    <span style="color:#66d9ef">while</span> read line
+    <span style="color:#66d9ef">do</span>
+	zipcode<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | cut -b 1-7<span style="color:#66d9ef">)</span>
+	adrs_koho<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | cut -b 8-<span style="color:#66d9ef">)</span>
+	echo -e <span style="color:#e6db74">&#34;\e[31m</span><span style="color:#e6db74">${</span>zipcode<span style="color:#e6db74">}</span><span style="color:#e6db74">\e[m  </span><span style="color:#e6db74">${</span>adrs_koho<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    <span style="color:#66d9ef">done</span> &lt; ./tmp-ippan-koho.txt
+    rm ./tmp-ippan-koho.txt
+    exit <span style="color:#ae81ff">0</span>
+
+<span style="color:#66d9ef">else</span>
+    grep <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>keyin<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>jigyosho_file<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; ./tmp-jigyosho-koho.txt
+    <span style="color:#75715e">#     ####### 事業所にデータがある場合</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -s ./tmp-jigyosho-koho.txt <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    <span style="color:#75715e">#</span>
+    <span style="color:#66d9ef">while</span> read line
+    <span style="color:#66d9ef">do</span>
+	zipcode<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | cut -b 1-7<span style="color:#66d9ef">)</span>
+	adrs_koho<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | cut -b 8-<span style="color:#66d9ef">)</span>
+	echo -e <span style="color:#e6db74">&#34;\e[31m</span><span style="color:#e6db74">${</span>zipcode<span style="color:#e6db74">}</span><span style="color:#e6db74">\e[m </span><span style="color:#e6db74">${</span>adrs_koho<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    <span style="color:#66d9ef">done</span> &lt; ./tmp-jigyosho-koho.txt
+    rm ./tmp-*.txt
+    exit <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">fi</span>
+<span style="color:#75715e"># 作業ファイル削除</span>
+    rm ./tmp-*.txt
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># 入力　みつからず</span>
+<span style="color:#75715e">#</span>
+echo <span style="color:#e6db74">&#39;** 入力データ not found. Do it again.&#39;</span>
+exit <span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="fabr-postalcode-db-dot-shのフローチャート">fabr-postalcode-DB.shのフローチャート</h3>
+<p><a id="org66d19d5"></a></p>
+<figure>
+    <img src="/fabr-postalcode-DB.sh.jpg"
+         alt="図1: fabr-postalcode-DB.sh のフローチャート。 fabr はfabricateの短縮です。" width="70%"/> <figcaption>
+            <p>図1:  <code>fabr-postalcode-DB.sh</code> のフローチャート。 <code>fabr</code> はfabricateの短縮です。</p>
+        </figcaption>
+</figure>
+
+<p><br /></p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>バックアップはとってありましたが、CSVフォーマットで2019年のものしか残っていませんでした。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>市販の住所録・宛名印刷ソフトでは備わっているのが当たり前のありきたりな機能です。けど重たいアプリを起動したり、ウエッブページを開いて検索したりするのは（若者言葉では）「だるい」ものですから・・・。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>宛名データがとりあえず復旧した後に、そのデータについて郵便番号と住所が一致しているかどうかをチェックする作業を行いました。スクリプトにするほどでもなく、ワンライナーですが、注意深く入力したつもりでも多くのタイプミスがあることを改めて思い知らされました。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>残っていたCSVファイルをEmacsのCSVモードで読み込み、それに追記・修正を加えるという形で行いました。復旧したデータも当然CSVです。なお宛名の印刷途中で自宅のインクジェット プリンタ＝Canon <strong>iP7230</strong> (2012年製)が <strong><code>B200</code></strong> エラーを吐いて止まるというシリアスなトラブルが発生。これも何とか迂回して、やっとこさで印刷が終わりました。今年の年賀状発送はほんとうに大変でした 😓 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年1月15日T00:00:00&#43;0900 class="date">2022年1月15日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/shell">shell</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/script">script</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E9%83%B5%E4%BE%BF%E7%95%AA%E5%8F%B7">郵便番号</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/happyny2k22/" class="prev">２０２２年 年初のごあいさつ</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/gyaku-watch-curve/" class="next">逆ウォッチ曲線をgnuplotで描く</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

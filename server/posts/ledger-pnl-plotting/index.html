@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    投資信託の評価損益を「見える化」する | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">投資信託の評価損益を「見える化」する</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E6%8A%95%E8%B3%87%E3%81%A8ledger-cli">投資とLedger-cli</a></li>
+<li><a href="#%E6%8A%95%E8%B3%87%E4%BF%A1%E8%A8%97%E3%81%AE-%E8%A9%95%E4%BE%A1%E6%90%8D%E7%9B%8A-%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96">投資信託の「評価損益」の可視化</a></li>
+<li><a href="#%E6%97%A5%E3%80%85%E3%81%AE%E5%9F%BA%E6%BA%96%E4%BE%A1%E9%A1%8D%E3%82%92%E3%81%A9%E3%81%86%E3%82%84%E3%81%A3%E3%81%A6%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%8B">日々の基準価額をどうやって取得するか</a></li>
+<li><a href="#ledger%E3%81%AE%E5%87%BA%E7%95%AA">Ledgerの出番</a></li>
+<li><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%82%B3%E3%83%84">ちょっとしたコツ</a></li>
+<li><a href="#codes">Appendix:  コードの要点</a></li>
+<li><a href="#acknowledgements">Acknowledgements:</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E5%B1%A5%E6%AD%B4">更新履歴</a></li>
+<li><a href="#footnotes">Footnotes:</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<h2 id="投資とledger-cli">投資とLedger-cli</h2>
+<p><strong>Ledger-cli</strong> の広範囲な使われ方の中で、
+<strong>経理・会計</strong> 分野はもちろんメインの領域ですが、その他に <strong>時間マネージメント</strong> や <strong>在庫管理</strong> などにも広く活用されています。</p>
+<p>メインの領域の中でもLedgerを個人や小規模な団体の <strong>投資</strong> モニターに使うのはいわば <strong>王道</strong> の一つです。投資管理のために有効な機能が豊富に備わっています。</p>
+<p>すでに「<a href="https://bred-in-bingo.netlify.app/posts/6th-step%5Fledger/">プレーンテキストファイルで「複式」家計簿（6）</a>」で <strong>株式</strong> についてLedgerの基本的な機能を紹介しました。ここでは投資信託を例にとって投資の可視化例をお話します。</p>
+<h2 id="投資信託の-評価損益-の可視化">投資信託の「評価損益」の可視化</h2>
+<p>日々の「 <strong>基準価額</strong> 」は投資信託を提供している会社のホームページで公開されています。しかし「 <strong>評価損益</strong> 」 とくにその推移の可視化は個々人にまかされているというのが一般的かもしれません(注<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>)。</p>
+<p>株式でも投資信託でも、評価損益の計算そのものはとても簡単。使う計算は <strong>加減乗除</strong> 算だけなので、ユーザレベルで自分で使いやすく「見える化」するのはさほど難しいことではありません</p>
+<p>投資信託を購入したときの基準価額（ <strong>簿価単価</strong> ）と本日の基準価額の差を求めて、保有している「 <strong>口数</strong> 」をかけ算すれば当日の評価損益になります(注<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>)。</p>
+<p>ひとつ例を上げましょう。</p>
+<p>いま <strong>架空の投信</strong> を3種（AAA投信, BBB投信, CCC投信）保有しているとします。評価損益の推移は図<a href="#orge02ea13">1</a>のようにプロットできます。</p>
+<p><a id="orge02ea13"></a></p>
+<figure>
+    <img src="/out-pnl-it-monthly.jpg"
+         alt="図1:  期間を1ヶ月に指定した場合の投資信託評価損益の推移。赤いラインは3投資信託の合計損益（架空の損益プロットです）。" width="95%"/> <figcaption>
+            <p>図1:  期間を1ヶ月に指定した場合の投資信託評価損益の推移。赤いラインは3投資信託の合計損益（架空の損益プロットです）。</p>
+        </figcaption>
+</figure>
+
+<p>図<a href="#orge02ea13">1</a>では期間幅（＝X軸）を1ヶ月にしていますが、起動時のオプションでweekly, monthly, 3months, 6months, yearly の中から一つを選択できるようにしてあります。3ヶ月分のデータをプロットするときのスクリプトの起動方法は次のとおりです<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ time pnl-it-plotter <span style="color:#ae81ff">3</span>
+real    0m0.206s
+user    0m0.156s
+sys     0m0.069s
+</code></pre></div><p>上の例では <code>time</code> コマンドを使って起動から図が表示されるまでの所要時間も表示しています(注<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>)。コードの要点は<a href="#codes">下記</a> に紹介しました。</p>
+<h2 id="日々の基準価額をどうやって取得するか">日々の基準価額をどうやって取得するか</h2>
+<p>株価の終値もそうですが投資信託の基準価額も毎日きちんと取得するにはそれなりの工夫が必要です。</p>
+<p>一番原始的で簡単なのは、夕方に信託会社のホームページを開いて当日の価額を <strong>書きとめる</strong> 方法です。保有する投資信託の本数が少数の場合には、この方法でもなんとかなります。しかし「片手」近い数になると「目で見て手で入力する」方法はミスも起こるし現実的ではありません。</p>
+<p>最も確実な方法は、 <code>cron</code> で定時的に <code>curl</code> を使ってホームページから価額データベースに収納していく方法です。これも技術的な難易度は高くはありません。しかしその方法を公けにするのははばかられます。信託会社の顧客であっても、そのホームページから価額をスクレーピングすることが法律的に許容されるかどうか、ちょっと微妙な点がわが国（＝情報化における <strong>極東のガラパゴス</strong> ）にはあります。</p>
+<h2 id="ledgerの出番">Ledgerの出番</h2>
+<p>さて実はここまでのプロセスにはLedgerの出番はありません。Ledgerが提供する <code>.prices.db</code> というコモディティの <strong>価格データベース</strong> を使っているだけです。</p>
+<p>しかし、いったんこの価格データベースに日々の価額や株価が収納されれば、Ledgerはそれを使って評価損益（ゲイン）やマーケット価格、元本などの情報を計算してくれます。評価損益などの <strong>具体的な金額</strong> をコマンドラインから <strong>瞬時にほしい</strong> 、そんな時にLedgerの本領とパワーが発揮されます。</p>
+<h2 id="ちょっとしたコツ">ちょっとしたコツ</h2>
+<p>トランザクション内で投資信託をどう転記するかによって、コマンドラインから投資信託の現状を把握する際の <strong>クエリ</strong> （検索・抽出コマンド）の方法が決まります。</p>
+<p>Ledger内で投資信託の <strong>名称</strong> をハンドリングする方法は基本的には次の３つです。</p>
+<ol>
+<li>投資信託名を <strong>アカウント</strong> にする</li>
+<li>投資信託名を <strong>コモディティ</strong> にする</li>
+<li>投資信託名を <strong>タグの値(value)</strong> にする</li>
+</ol>
+<p>汎用性があって使いやすく、多くのユーザが採用しているのは上の2)と3)を合わせた次のような方法です。</p>
+<h3 id="購入時の転記のしかた">購入時の転記のしかた</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">ABC信託会社から 「AAA信託」を単価12,500円で40口、
+合計金額＝500,000円で購入した。手数料は0円。
+</code></pre></div><p>これを転記するには次のようにします。</p>
+<pre><code class="language-nil" data-lang="nil">2020/01/10 ABC信託会社
+    ; fund: AAA信託
+    Expenses:Trusts:cmsn         　            0 JPY
+    Assets:Trusts            40 AAA信託 @ 12,500 JPY
+    Assets:abcBank                      -500,000 JPY
+</code></pre><p>2行目で <code>fund</code> というタグに <code>AAA信託</code> という値(value)を与えています。これは必須ではありませんがあとで検索のときに使います。</p>
+<p>4行目で <code>AAA信託</code> が <strong>コモディティ</strong> （まるで <strong>通貨単位commodity</strong> ）のように使われています。
+Ledgerのコモディティはとても広い概念です(注<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>)。この場合には
+<code>40 AAA信託</code> という形で資産を表現します。 <code>@</code> マークは単価を、 <code>@@</code> マークは合計金額を意味します。</p>
+<h3 id="評価損益のクエリ">評価損益のクエリ</h3>
+<p>評価損益（ゲインまたはPNL）を得たいときには次のようにします：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger bal ^assets and trust --gain --account<span style="color:#f92672">=</span>commodity
+	 -72,029 JPY  AAA投信:Assets:Trusts
+	  14,163 JPY  BBB投信:Assets:Trusts
+	  43,862 JPY  CCC投信:Assets:Trusts
+--------------------
+	 -14,005 JPY
+</code></pre></div><p>このコマンドラインクエリは短縮形にすると<br />
+<strong><code>$ led b ^assets and trust -G -a commodity</code></strong> になります。</p>
+<p>投信の中から一つだけ抽出して評価損益を得たいときにはさっきの「タグと値(value)」を使います。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger bal  ^assets and trust and %fund<span style="color:#f92672">=</span>CCC --account<span style="color:#f92672">=</span>commodity --gain
+	 43,862 JPY  CCC投信:Assets:Trusts
+</code></pre></div><p><code>%fund=CCC</code> で <code>fund</code> というタグで、かつ <code>CCC</code> という文字列を持つ値(value)が抽出されます。どうしてもタグを使うのがいやな人は次のように <code>--limit=</code> を使えばタグ無しでのクエリが可能です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger bal trust --limit<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;commodity =~ /CCC/&#34;</span>  --gain
+</code></pre></div><h3 id="売却時の転記のしかた">売却時の転記のしかた</h3>
+<p>「保有していたAAA信託の半分＝20口だけ売却（単価18,000円で）した」ときの転記は次のとおりです。</p>
+<pre><code class="language-nil" data-lang="nil">2021/04/10 ABC信託会社
+    ; fund: AAA信託
+    Expenses:Trusts:cmsn                   1,300 JPY
+    Assets:Trusts           -20 AAA信託 @ 18,000 JPY
+    Assets:abcBank                       358,700 JPY
+</code></pre><h2 id="codes">Appendix:  コードの要点</h2>
+<p>bashスクリプトとgnuplotのリテラシーを持っている方なら図<a href="#orge02ea13">1</a>を見ただけですぐに書けると思いますが、自分への備忘もかねて要点だけ記しておきます。</p>
+<h3 id="bashパート">bashパート</h3>
+<p>bashパートでは、投資信託名および簿記単価、口数を「 <strong>3次元配列</strong> 」っぽく(注<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>)データ化しておきます（数値は乱数です）。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fund_list<span style="color:#f92672">=(</span>
+	<span style="color:#e6db74">&#34;AAA 12090 111.9427&#34;</span>
+	<span style="color:#e6db74">&#34;BBB 11439 104.8205&#34;</span>
+	<span style="color:#e6db74">&#34;CCC 30125 28.5414&#34;</span>
+	<span style="color:#e6db74">&#34;DDD 13392 122.4732&#34;</span>
+	<span style="color:#e6db74">&#34;EEE 15298 130.9514&#34;</span>
+<span style="color:#f92672">)</span>
+</code></pre></div><p>当日の価額は <code>.prices.db</code> から読み込みます。これで評価損益を算出します。投資信託の数が増えても（減っても）配列定義のパートだけを変更するだけで対応できます。</p>
+<p>X軸の期間は入力された期間のキーワード（w,m,3,6）を <code>case文</code> で仕分けます。</p>
+<h3 id="gnuplotパート">gnuplotパート</h3>
+<p>gnuplotのX軸関係のパラメータは全部変数化しておいてbashから引き継いでいます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 時間軸の設定</span>
+  set xdata time
+  set timefmt <span style="color:#e6db74">&#34;%Y%m%d&#34;</span>
+  set format x <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>x_format<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e"># xticsの設定</span>
+  unset mxtic
+  set xtics format <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>x_format<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+  set xtics <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>xtics1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">${</span>xtics2<span style="color:#e6db74">}</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>xtics3<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+  set xtics  font <span style="color:#e6db74">&#34;Arial, 10&#34;</span>
+<span style="color:#75715e"># X軸の設定</span>
+  set xrange <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>xrange1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>:<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>xrange3<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">]</span>
+  set xlabel <span style="color:#e6db74">&#39;${xlabel}&#39;</span> font <span style="color:#e6db74">&#34;Arial,12&#34;</span>
+</code></pre></div><p>これ以外のパートは単純な折れ線グラフを描くgnuplotスクリプトです。</p>
+<p>各折れ線グラフの最終ポイントにだけ価格をラベルとして印字するところは次のように <strong>三項演算子</strong> を使っています：</p>
+<pre><code class="language-nil" data-lang="nil">　　：
+  '' using 1:((column(1)==${latest_date}) ? column(2): 1/0):(sprintf(&quot;%'d&quot;, column(2))) \
+	 w labels font &quot;Arial, 8&quot; offset 0., +0.7 textcolor rgb &quot;dark-green&quot; notitle,\
+　　：
+</code></pre><p>以前にも紹介しましたが、 <code>&quot;%'d&quot;</code> は数値に3桁ごとにカンマを入れるフォーマットです。</p>
+<h2 id="acknowledgements">Acknowledgements:</h2>
+<ul>
+<li><a href="https://groups.google.com/g/ledger-cli">GoogleGroup; Ledger</a></li>
+<li><a href="http://www.gnuplot.info/docs%5F4.6/gnuplot-ja.pdf">gnuplot日本語マニュアル</a></li>
+<li><a href="https://www.ledger-cli.org/docs.html">Ledger Docs</a></li>
+</ul>
+<h2 id="更新履歴">更新履歴</h2>
+<dl>
+<dt>2021/04/16</dt>
+<dd>新規投稿日</dd>
+<dt>2021/10/17</dt>
+<dd><code>pnl-it-plotter</code> のオプションに yearly を追加</dd>
+</dl>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>会社によっては、それも可視化して提供しているところもあるかも。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>厳密には <strong>有効数字</strong> の問題があって、単純に <strong>価額ｘ口数</strong> では正確な評価損益を得ることはできませんが、そのあたりになると話が細かいので今回は省略します。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><code>pnl-it-plotter</code> の起動オプションは [m]onthly, [3]months, [6]months, [yearly]。先頭1文字だけの指定も可です。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>bashでコマンド、スクリプトの実行時間測定をしています。実際には、スクリプトはこの図を書くだけではなくて、基準価額のデータベースを更新したり、USBやクラウドにデータをバックアップしたりするなどの処理もしていますので200msecほどかかっています。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>詳しくは上のLedgerマニュアルを参照してください。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>Bashスクリプトは公式には配列には対応していませんが「 <strong>配列もどき</strong> 」の使い方はできます。😄 <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年10月17日T00:00:00&#43;0900 class="date">2021年10月17日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/felling%E7%99%BD%E6%A8%BA/" class="prev">白樺の伐倒にチャレンジ – 樹高7.2m</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/ledger-salary-pension/" class="next">Ledger — 給与・年金の仕訳</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

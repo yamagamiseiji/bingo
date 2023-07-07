@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    PostgreSQL住所録 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">PostgreSQL住所録</h2>
+    <div class="post_content">
+      <h2 id="概要">概要</h2>
+<p>携帯電話（ガラケー）、Google Contacts、年賀状ソフト（筆王）など、あちこちに散在している氏名・連絡先データを「名寄せ」して一本化し、PostgreSQLのテーブルにしてちゃんと管理・運用してみようという企画。</p>
+<p>データ件数は500件ほどです。小規模で個人的な住所録の整理整頓した作業メモです。</p>
+<h2 id="方針">方針</h2>
+<ol>
+<li>出来上がったPostgreSQLターブルからのデータ抽出をどうするかの方針を立てる</li>
+<li>各種の氏名・連絡先データをCSVデータとしてエクスポート</li>
+<li>それぞれのCSVをクリーニング、整列、整形</li>
+<li>PostgreSQLのインストールと初期設定</li>
+<li>一本化したCSVをPostgreSQLにエキスポート</li>
+<li>検索・結果表示のフロントエンドをBashスクリプト化する</li>
+</ol>
+<h2 id="まずは検索サンプル">まずは検索サンプル</h2>
+<p>ごく簡単な検索・結果表示スクリプト
+<strong><strong>./contacts-search.sh</strong></strong> を起動します。引数としてクエリ語（姓名、姓または名の一部）を入力。第1検索の結果表示は（当面）次の3情報です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">姓名（漢字）、Emailアドレスx1、電話番号x2
+</code></pre></div><p>その下にさらに第2検索をやるかどうかのプロンプトが表示されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">** Wanna more infos? (a)ddress, (e)mails, (p)hones,  (r)e-select or (q)uit :
+</code></pre></div><p><strong><strong>re-select</strong></strong> を選ぶと別の検索に移れます。</p>
+<h3 id="サンプル画面">サンプル画面</h3>
+<div align=center><img src="https://dl.dropboxusercontent.com/s/pk7jglvd538mckm/contacts-search-sample-1.png" alt="" width="100%"></div>
+<h3 id="感想文">感想文</h3>
+<p>取りかかった当初は、たかが住所録、1週間もあれば余裕で終わると思っていました。しかし甘かった。</p>
+<p>第一にハマったのはデータの洗浄・加工・整形。重複があるし、新旧が不明だし、タイポもある。また半角カタカナが混じっていたり、ダブルクオートでくくってあったり・・・。とんでもないカオスでした。</p>
+<p>最大の問題は、日本語表記法の多様性というかブレの大きさ。そもそも、クエリ語を漢字、ひらがな、カタカナ、ローマ字のどれにすべきかで悩み、いろいろ試行錯誤しました。最終的には、ヘボン式ローマ字を使うことにしました。それには表記ブレのない姓名ローマ字表記が前提になります。</p>
+<p>今回は大きな流れとしては次のようにしてローマ字姓名データを作りました。</p>
+<ol>
+<li>姓名漢字から仮名読みデータをつくる(gmigemo)</li>
+<li>かな読みをヘボンローマ字に変換する(uconv)</li>
+<li>さらに細かくローマ字表記法を調整する(sed)</li>
+</ol>
+<p>このローマ字姓名データを検索キーとしたPostgreSQL検索をBashスクリプト内に埋め込むことで、ターミナルから住所情報検索が簡単にできるようになりました。</p>
+<p>姓名、姓または名（の一部でも可）をローマ字入力すると、あいまい検索の結果を得ます。</p>
+<ol>
+<li>まずはメールアドレスと電話番号を2つずつ表示する</li>
+<li>さらに詳細情報が必要ならば、「メールアドレス（最大5件）、電話番号（最大5件）、郵便番号と住所」</li>
+</ol>
+<p>　を選択表示できます。</p>
+<p>原データのCSVテーブル整形・作成はBashでコツコツやりました。明らかに不要だと思われるデータは削除して残ったデータ件数は約500件でした。この程度の件数でも、csvtoolとかが無ければシェルスクリプトでやるのは無理だったと思います。</p>
+<p>データがいったんPostgreSQL内におさまれば、あとの操作（編集、追加、削除など）はPostgreSQL内で楽にできます。やれやれ！です。</p>
+<h2 id="contacts-search-dot-sh">contacts-search.sh</h2>
+<h2 id="段取り">段取り</h2>
+<h3 id="インストール">インストール</h3>
+<ul>
+<li>apt install</li>
+</ul>
+<h3 id="ログインと基本操作">ログインと基本操作</h3>
+<ul>
+<li>セミコロンを忘れずに！</li>
+<li>改行はignoreされる</li>
+<li>コマンドのアルファベットは大文字、小文字は無視される</li>
+<li>\q and exit</li>
+</ul>
+<h3 id="テーブル作成">テーブル作成</h3>
+<ul>
+<li>CSVファイルのデータテーブルを作る
+<ul>
+<li>作る道具は何でもOK（Excel,emacs,Libreoffice&hellip;)</li>
+</ul>
+</li>
+<li>テーブル名を決める (mytable)</li>
+<li>カラムの名前＝ヘッダーをつける (順番はともかくよく考えて！）
+<ul>
+<li>略字にしない（あとでASでエリアスを作れる）</li>
+<li>アルファベット</li>
+<li>スペース、ハイフンは使わない</li>
+<li>大文字も使わない etc</li>
+</ul>
+</li>
+<li>カラムのデータタイプを決める
+<ul>
+<li>電話番号や郵便番号はnumericにせずvarcharにする(アタマに0が来るとX）</li>
+<li>空にできないカラムはNOT NULLにする</li>
+</ul>
+</li>
+<li>\COPYをつかう　
+<ul>
+<li>フルパスにする</li>
+<li>permissionでこけることがある（親DIRは　drwxr-xr-x）</li>
+</ul>
+</li>
+</ul>
+<h3 id="確認作業">確認作業</h3>
+<ul>
+<li>`SELECT *`してみる</li>
+</ul>
+<p>``` sql
+contacts=#SELECT * FROM mytable;
+contacts=# select * from contacts;
+```
+これで全カラムが入っていればOK。</p>
+<h3 id="おわり">おわり</h3>
+<h3 id="補足">補足</h3>
+<ul>
+<li>電話番号は固定電話か携帯電話かは、sedで区別可能なので分ける必要はない</li>
+<li>Emailアドレスもカラムで指定しなくても、全部のデータ行の中から、sedで抽出できる</li>
+<li>郵便番号から住所１は抽出できるので、別にその変換機能をプログラム化してあれば、住所１は不要</li>
+<li>住所３（アパート部屋番号）などは必要なら追加すればよい</li>
+<li>クエリの利便を考えると、ローマ字のフルネームカラムがよい。曖昧検索で</li>
+</ul>
+<p>`WHERE latin_fullname ~ &lsquo;suzuki ho&rsquo;`のようになクエリが可能になる。</p>
+<ul>
+<li>件数の多い住所録だと姓と名とで別々に検索する方がよい。其の際には`WHERE family_name = &lsquo;suzuki&rsquo; || given_name = &lsquo;taro&rsquo;`のようにすることになる。</li>
+<li>カラムはあとで随時 追加可能。たとえば旧姓(maiden_name　＋maiden_name_yomi) なら</li>
+</ul>
+<p>``` sql
+ALTER TABLE mytable ADD COLUMN maiden_name varchar;
+```</p>
+<ul>
+<li>其のカラムにデータ(田中花子さんの旧姓＝佐藤)を追加するには次のようにする：</li>
+</ul>
+<p>``` sql
+UPDATE mytable SET maiden_name=&lsquo;佐藤&rsquo;,maiden_name_yomi=&lsquo;sato&rsquo; WHERE latin_fullname=&lsquo;tanaka hanako&rsquo;;
+```</p>
+<h2 id="snsメモ">SNSメモ</h2>
+<p>2023/03/18 16:42:02</p>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2023年5月10日T00:00:00&#43;0900 class="date">2023年5月10日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/postgresql">PostgreSQL</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E4%BD%8F%E6%89%80%E9%8C%B2">住所録</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/two-cubed-coding/" class="prev">Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/%E3%83%8B%E3%83%B3%E3%83%8B%E3%82%AF%E6%A0%B9%E5%88%87%E3%82%8A/" class="next">外科用ハサミでニンニクの根切り</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

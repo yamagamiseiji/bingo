@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger-cliのレジスターレポートのカラム崩壊を防止する | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger-cliのレジスターレポートのカラム崩壊を防止する</h2>
+    <div class="post_content">
+      <p><strong><strong>Ledger-cli</strong></strong> では 勘定科目（account）名や支払い先（payees）名に
+<strong><strong>日本語</strong></strong> が含まれていると、レジスターレポートのカラムが乱れます<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>たとえば</p>
+<pre><code class="language-nil" data-lang="nil">$ ledger reg ^Expenses --begin 2023/02/03 --current
+</code></pre><p>のように、 <code>regコマンド</code> でフォーマットを指定せずに支出（ <code>Expenses</code> ）に関するレポートを表示させると、結果は図1のようになります。勘定科目名と支払い金額、それから合計金額の列が <strong><strong>崩壊</strong></strong> します<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<figure>
+    <img src="/no-format-reg-report.png"
+         alt="図1: レジスターレポートのカラム崩壊" width="90%"/> <figcaption>
+            <p><span class="figure-number">図1:  </span>レジスターレポートのカラム崩壊</p>
+        </figcaption>
+</figure>
+
+<p>Ledgerのフォーマット機能を使ってカラム指定しても、やっぱりマルチバイト文字では <strong><strong>カラム崩壊</strong></strong> を回避することはできません。</p>
+<p>図2は、Ledgerのフォーマットで勘定科目名と支払い金額列の位置を逆にし、各項目の表示位置を指定しています。それでも事態は改善しません（図2）。</p>
+<figure>
+    <img src="/without-fixer.png"
+         alt="図2: Ledgerフォーマット文で指定してもやっぱりカラム崩壊" width="90%"/> <figcaption>
+            <p><span class="figure-number">図2:  </span>Ledgerフォーマット文で指定してもやっぱりカラム崩壊</p>
+        </figcaption>
+</figure>
+
+<p>経理・会計の世界だけでなくどんな部門・領域でも、このようなカラム崩壊は許容されませんよね。しかしマルチバイトにきちんと対応するのは結構たいへんなようです。</p>
+<h2 id="シェルスクリプト関数でカラム整列させる">シェルスクリプト関数でカラム整列させる</h2>
+<p>ここでは <strong><strong>シェルスクリプト関数</strong></strong> で
+Ledge-cliのレジスターレポートのカラム崩壊を防止する一つの試みを紹介します。</p>
+<p>これを使えば、 <strong><strong>乱れた出力</strong></strong> を整列させることができます（図3）。</p>
+<figure>
+    <img src="/fixer-applied.png"
+         alt="図3: シェルスクリプト関数（カラム整列関数）を使って整列させた出力例" width="90%"/> <figcaption>
+            <p><span class="figure-number">図3:  </span>シェルスクリプト関数（カラム整列関数）を使って整列させた出力例</p>
+        </figcaption>
+</figure>
+
+<h2 id="カラム整列関数の説明">カラム整列関数の説明</h2>
+<p>関数を動かすためには、PC<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>に <code>SHIFT_JIS</code> ロケールを追加することが必要です<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。</p>
+<p>シェルスクリプトの要点はつぎのとおりです。</p>
+<ul>
+<li>文字列操作は <code>export LC_ALL=ja_JP.sjis</code> と <code>export LC_ALL=ja_JP.utf8</code> とではさまれたパートで行います</li>
+<li>ターミナルの横幅は80カラム（自由に変更可能です）</li>
+<li>整列表示するのは、日付、支払い先、金額、最後に勘定科目の <strong><strong>4項目</strong></strong> です。合計金額は、80カラム内に収めるのは大変なので表示から外しています</li>
+<li>Ledgerのレジスタークエリは関数の外から変数 <code>$QUERY</code> で与えます</li>
+<li><code>./out-dpamac.txt</code> に整列したテキストファイルが出力されます</li>
+<li>勘定科目で長たらしいもの（主に英語のアカウント名）は、関数内で <code>sed</code> を使って短縮形に置換して表示します（ <em>e.g</em> Expenses → Expns ）</li>
+</ul>
+<h2 id="コード">コード</h2>
+<h3 id="func-dpaac-column-fixer-dot-sh-関数">func-dpaAC-column-fixer.sh 関数</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#    date,payees,amount,A/C をカラム整列する関数</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">function</span> dpaAC-column-fixer.sh<span style="color:#f92672">(){</span>
+    <span style="color:#75715e"># ターミナルの横幅=80用の設定</span>
+    DP_width<span style="color:#f92672">=</span><span style="color:#ae81ff">34</span> <span style="color:#75715e">#date,payeeの幅</span>
+    AM_width<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span> <span style="color:#75715e">#amountの幅</span>
+    AC_width<span style="color:#f92672">=</span><span style="color:#ae81ff">26</span> <span style="color:#75715e">#accountの幅</span>
+    <span style="color:#75715e">#</span>
+    ledger reg --current <span style="color:#e6db74">${</span>QUERY<span style="color:#e6db74">}</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	   --no-revalued --real<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	   --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%(format_date(date, &#34;%Y/%m/%d&#34;))&amp;%(payee)&amp;%(display_amount)&amp;%(account)\n&#39;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	   &gt; ./tmp-dpaAC.txt
+    <span style="color:#75715e">#</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -s ./tmp-dpaAC.txt <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+	   echo <span style="color:#e6db74">&#34;** No Expenses.&#34;</span>
+	   <span style="color:#66d9ef">return</span>
+    <span style="color:#66d9ef">fi</span>
+    <span style="color:#75715e">## payees,accountsを短縮するsedルールリスト</span>
+    sed -e <span style="color:#e6db74">&#34;s/Assets/Ass/g;\
+</span><span style="color:#e6db74">	     s/Balance/Bal/g;\
+</span><span style="color:#e6db74">	     s/Expenses/Expns/g;\
+</span><span style="color:#e6db74">	     s/Gardening/Gardn/g;\
+</span><span style="color:#e6db74">	     s/Grocery/Groc/g;\
+</span><span style="color:#e6db74">	     s/Household/HH/g;\
+</span><span style="color:#e6db74">	     s/Income/Inc/g;\
+</span><span style="color:#e6db74">	     s/Insurance/Ins/g;\
+</span><span style="color:#e6db74">	     s/Liabilities/Liab/g;\
+</span><span style="color:#e6db74">	     s/Reimbursement/Reimb/g;\
+</span><span style="color:#e6db74">	     s/学習センター/学習CNTR/g&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	   &lt; ./tmp-dpaAC.txt &gt; ./short-AC.txt
+
+  <span style="color:#75715e"># short-AC.txtを一旦SJISに変換し sjis.txt に</span>
+  iconv -c -f UTF-8 -t SHIFT_JISX0213 ./short-AC.txt<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>		&gt; ./sjis.txt
+  <span style="color:#75715e"># localeを一時的にSHIFT_JISに</span>
+  export LC_ALL<span style="color:#f92672">=</span>ja_JP.sjis
+  <span style="color:#75715e">#</span>
+  <span style="color:#66d9ef">while</span> read -r line; <span style="color:#66d9ef">do</span>
+      DP<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	       | cut -d<span style="color:#e6db74">&#39;&amp;&#39;</span> -f 1-2<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	       | sed -e <span style="color:#e6db74">&#39;s/&amp;/ /g&#39;</span><span style="color:#66d9ef">)</span>
+      AMOUNT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>		   | cut -d<span style="color:#e6db74">&#39;&amp;&#39;</span> -f 3<span style="color:#66d9ef">)</span>
+      AC<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	       | cut -d<span style="color:#e6db74">&#39;&amp;&#39;</span> -f 4<span style="color:#66d9ef">)</span>
+      printf <span style="color:#e6db74">&#34;%-</span><span style="color:#e6db74">${</span>DP_width<span style="color:#e6db74">}</span><span style="color:#e6db74">b%</span><span style="color:#e6db74">${</span>AM_width<span style="color:#e6db74">}</span><span style="color:#e6db74">b  \e[34m%-</span><span style="color:#e6db74">${</span>AC_width<span style="color:#e6db74">}</span><span style="color:#e6db74">b\e[m\n&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>			 <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>DP:0:<span style="color:#e6db74">${</span>DP_width<span style="color:#e6db74">}}</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>			 <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>AMOUNT:0:<span style="color:#e6db74">${</span>AM_width<span style="color:#e6db74">}}</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>			 <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>AC:0:<span style="color:#e6db74">${</span>AC_width<span style="color:#e6db74">}}</span><span style="color:#e6db74">&#34;</span>
+  <span style="color:#66d9ef">done</span> &lt; ./sjis.txt &gt; ./out-sjis.txt
+
+  <span style="color:#75715e"># localeをUTFに戻す</span>
+  export LC_ALL<span style="color:#f92672">=</span>ja_JP.utf8
+  <span style="color:#75715e"># out-sjis.txt を UTF-8 変換してout-dpamac.txt に</span>
+  iconv -f SHIFT_JISX0213  -t UTF-8 ./out-sjis.txt<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	&gt; ./out-dpamac.txt
+  cat ./out-dpamac.txt
+  <span style="color:#75715e"># 一時ファイル削除</span>
+  rm tmp-*.txt ./sjis.txt ./out-sjis.txt ./short-AC.txt
+<span style="color:#f92672">}</span>
+</code></pre></div><h4 id="補足説明">補足説明</h4>
+<p>Ledgerのフォーマットでは、出力項目（日付や支払先など）の区切記号として <code>&amp;</code> を使っています。通常はスペースまたはタブですが、支払先の中にスペースが含まれている場合がありますので、スペースを項目の区切に使うことはできません<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。</p>
+<h3 id="上の関数を呼び出すシェルスクリプト例">上の関数を呼び出すシェルスクリプト例</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+<span style="color:#75715e">#   dpaAC-column-fixer.sh  コールテスト</span>
+<span style="color:#75715e">#</span>
+source <span style="color:#e6db74">&#34;./func-dpaAC-column-fixer.sh&#34;</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$*<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    QUERY<span style="color:#f92672">=</span>$*
+<span style="color:#66d9ef">else</span>
+    <span style="color:#75715e"># default to</span>
+    QUERY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;^Expenses -p today&#34;</span>
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#</span>
+dpaAC-column-fixer.sh
+exit <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="今後の展望など">今後の展望など</h2>
+<p>かつて（2020/01/30）当ブログの「<a href="https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/">ぼちぼちですが可視化してます</a> 」の「おまけ」節で紹介した <code>today</code> というシェルスクリプトがありますが、 <code>today</code> の中で、このカラム崩壊防止関数を使おうと思っています。</p>
+<p>じつは <code>today</code> では、かれこれ3年間もカラム崩壊したレジスターレポートをそのまま使っていました。もっぱら自分の転記作業をチェックするだけの用途なので、多少列が壊れていても良しとしていました。</p>
+<p>ところで現在、この <code>today</code> の出力をウェブに流し込んで「いつでも、どこでも」（タブレットなどから）当日の支出をひと目で確認できるように改訂することを計画しています。すでに <code>today</code> では</p>
+<ol>
+<li>
+<p>当月の月始めから当日までの <strong><strong>支出予算と累積支出額</strong></strong> とをプロット <code>budget-watch</code> チャート<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+</li>
+<li>
+<p>当月の月始めから当日までの <strong><strong>クレジットカード負債残高</strong></strong> をプロットした <code>credit-cards-balance-tracking</code> チャート</p>
+</li>
+</ol>
+<p>の2枚も表示するようにしています。</p>
+<p>カラム崩壊した支出レポートを、そのままウエッブ化すると、上の（プリティな 😉 ）チャートとの釣り合いが悪いので、この際 本気でカラム崩壊をなんとかしたいと思って作ったのがこのシェルスクリプト関数、という次第です。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>このカラム崩壊はマルチバイト文字特有の症状です。英文字だけの場合にはとても美しくカラムが整列します。なお、LedgerのバージョンはLedger 3.1.3-20190331です。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>シングルバイト文字だけのトランザクションだと、Ledgerはかなり頭が良くて、ターミナルの幅を斟酌して支払い先の名称や勘定科目名を自動的に短縮形にして列が崩壊するのを防止してくれます。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>PCはThinkPad X230, Ubuntu20.04です。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>「<a href="https://zenn.dev/tmtms/articles/202205-locale">LinuxでシフトJISが使えた</a>」などのサイトをご覧ください。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>区切を <code>@</code> や <code>|</code> にすると、SJISのコードがぶつかって混乱を起こしかねません。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>「支出予算と累積支出額」のサンプルチャート。架空の金額でプロットしました。うすピンクの直線が <strong><strong>予算線</strong></strong> 、緑の折れ線が <strong><strong>累積支出</strong></strong> 、差額領域は予算以下なら<span style="color: blue">青</span>、予算オーバなら<span style="color: red">赤</span>にペイントされます。</p>
+<p><figure>
+    <img src="/budget-daily-watch.svg"
+         alt="図4: 「支出予算と累積支出額」のサンプルチャート" width="80%"/> <figcaption>
+            <p><span class="figure-number">図4:  </span>「支出予算と累積支出額」のサンプルチャート</p>
+        </figcaption>
+</figure>
+ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2023年2月8日T00:00:00&#43;0900 class="date">2023年2月8日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98">複式簿記</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%83%AC%E3%82%B8%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88">レジスターレポート</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E5%88%97%E5%B4%A9%E5%A3%8A">列崩壊</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/bash">bash</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E9%96%A2%E6%95%B0">シェルスクリプト関数</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/tree_diagram_4_leder/" class="prev">Ledger-cliのアカウント構造を樹状図にする</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/two-cubed-coding/" class="next">Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

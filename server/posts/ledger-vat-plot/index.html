@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger – 消費税のあつかい | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger – 消費税のあつかい</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E7%B7%8F%E9%A1%8D%E8%A1%A8%E7%A4%BA%E3%81%AE%E7%BE%A9%E5%8B%99%E5%8C%96">総額表示の義務化</a></li>
+<li><a href="#%E8%87%AA%E5%8B%95%E8%BB%A2%E8%A8%98-plus-%E4%BB%AE%E6%83%B3%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88">自動転記+仮想アカウント</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E3%81%99%E3%82%8B%E3%81%A8%E3%81%93%E3%82%8D">注意するところ</a></li>
+<li><a href="#%E6%9C%80%E5%BE%8C%E3%81%AB">最後に</a></li>
+<li><a href="#footnotes">Footnotes:</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<h2 id="総額表示の義務化">総額表示の義務化</h2>
+<p>消費税が導入されたのは1989年です。
+32年後の今月(2021年4月)から商品・サービス類の「 <strong>総額表示</strong> 」が義務化されました。しかしかなり以前から実態としては小売レベルの値段札やレシートは「 <strong>内税</strong> 」表示が主流です。内税にすれば税負担を意識させずに庶民のお財布から税金を抜くことができますものね。</p>
+<p>ところで家計レベルでは消費税額をきちんと計算・捕捉する必要はありません。内税のまま記帳して消費金額に埋め込んでしまうのが普通でしょう。</p>
+<p>しかし <strong>消費税以外</strong> の税金は家計でも把握されていることが多いと思います。たとえば所得税や住民税、固定資産税、それから自動車関係の税金、酒税などは通年で合算するとかなりの金額になります。</p>
+<p>じつは消費税もこれらの税金とくらべて遜色のない金額が取られています。日々少しずつだからピンとこないだけです。家計でも、できれば簡単かつ正確に消費税として徴収されている金額を把握したいものです。</p>
+<p>家計簿アプリや簡易経理システムでは、消費税を取り出してその金額を算出・表示する機能が組み込まれているものがいろいろあるようです。また電卓風な製品にも工夫をこらしたものがあります。</p>
+<p>Ledgerをつかえば、それらの製品やアプリにくらべてはるかに簡単に消費税をトラッキングできます。</p>
+<h2 id="自動転記-plus-仮想アカウント">自動転記+仮想アカウント</h2>
+<p>ここでは消費税を（<a href="https://bred-in-bingo.netlify.app/posts/ledger-fixedcost/">固定費</a>と同じように） <strong>自動転記</strong> (automated transaction)＋ <strong>仮想アカウント</strong> (virtual account)で算出する方法を説明します。</p>
+<p>やることはLedgerファイルの冒頭部に次の <strong>4行</strong> を書き足すだけです。</p>
+<pre><code class="language-nil" data-lang="nil">= /^Expenses:Food/
+    (Expenses:VAT)                   .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                   .09090909090909090909
+</code></pre><p>これはLedgerの <strong>自動転記</strong> （automated transaction）記法で書かれています。<br />
+第１番目のトランザクションは次のような意味になります。</p>
+<blockquote>
+<p>「これ以降のトランザクションにおいて、すべてのExpenses:Foodアカウントは、その支出額に .07407407407407407407 を乗じた金額を（Expenses:VAT)という仮想アカウントの支出として転記しなさい」</p>
+</blockquote>
+<p><strong>.07407407407407407407</strong> という数字にはコモディティ（＝通貨記号）がありません。これは0.08/1.08 の値、つまり内税で表示された金額を1.08で割って0.08を掛けた <strong>定数</strong> です。「この定数を元の金額に掛けなさい」という意味になります。</p>
+<p>第2番めのトランザクションは、food(税率8%)と租税公課(無税) <strong>以外</strong> の支出には消費税が10%になることをLedgerに教えています(注<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>)。</p>
+<h3 id="サンプルledgerファイル">サンプルLedgerファイル</h3>
+<p>日々のトランザクションは普通に「内税」ベースで記帳します。つぎの例（ <code>sample.ledger</code> ）では「ハックドラッグ」だけが「外税」です。</p>
+<pre><code class="language-nil" data-lang="nil">= /^Expenses:Food/
+    (Expenses:VAT)                    .07407407407407407407
+= /^Expenses/ and not ( /food/ or /租税公課/ )
+    (Expenses:VAT)                   .09090909090909090909
+;;
+2021/03/08 * カフェ
+    ; 店内で食べたのでVAT=10%
+    Expenses:外食                                500 JPY
+    Liabilities:Visa
+
+2021/03/08 * McDonald's
+    ; テイクアウトだったのでVAT=8%
+    Expenses:Food                               635 JPY
+    Liabilities:Visa
+
+2021/03/08 * ハックドラッグ
+    ; 外税レシート
+    Expenses:医薬品      (floor ( 2,380 JPY * 1.10 ))
+    Expenses:Food       (floor ( 644 JPY * 1.08 ))
+    Assets:Cash
+
+2021/03/08 * イトーヨーカドー
+    Expenses:Food                        3,199 JPY
+    Assets:Cash
+</code></pre><p><code>(floor ( 2,380 JPY * 1.10 ))</code> の <code>floor</code> は小数点以下の切り捨て関数です。</p>
+<h3 id="クエリの例">クエリの例</h3>
+<p>この <code>sample.ledger</code> に対するクエリ例は次の通りです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">＜1. 税込みの支出総額を知りたい＞
+$ ledger bal ^expenses -f sample.ledger
+	     8,214 JPY  Expenses
+	     2,618 JPY    医薬品
+	     4,529 JPY    Food
+	       <span style="color:#ae81ff">500</span> JPY    外食
+	       <span style="color:#ae81ff">567</span> JPY    VAT
+  --------------------
+	     8,214 JPY
+＜2. 消費税額を知りたい＞
+$ ledger reg vat -f sample.ledger
+2021/03/08 カフェ　         <span style="color:#f92672">(</span>Expenses:VAT<span style="color:#f92672">)</span>         <span style="color:#ae81ff">45</span> JPY       <span style="color:#ae81ff">45</span> JPY
+2021/03/08 McDonald<span style="color:#960050;background-color:#1e0010">&#39;</span>s      <span style="color:#f92672">(</span>Expenses:VAT<span style="color:#f92672">)</span>         <span style="color:#ae81ff">47</span> JPY       <span style="color:#ae81ff">92</span> JPY
+2021/03/08 ハックドラッグ    <span style="color:#f92672">(</span>Expenses:VAT<span style="color:#f92672">)</span>        <span style="color:#ae81ff">238</span> JPY      <span style="color:#ae81ff">330</span> JPY
+2021/03/08 イトーヨーカドー   <span style="color:#f92672">(</span>Expenses:VAT<span style="color:#f92672">)</span>        <span style="color:#ae81ff">237</span> JPY      <span style="color:#ae81ff">567</span> JPY
+
+＜3. 税抜きの支出総額を知りたい＞
+$ ledger bal ^expenses and not vat -f sample.ledger
+	     7,647 JPY  Expenses
+	     2,618 JPY    医薬品
+	     4,529 JPY    Food
+	       <span style="color:#ae81ff">500</span> JPY    外食
+  --------------------
+	     7,647 JPY
+</code></pre></div><p>上の <code>例3.</code> では、VATが <strong>仮想アカウント</strong> なので、 <code>and not vat</code> の代わりに
+<code>--real</code> とか <code>--actual</code> とかしても結果は同じです。</p>
+<p>このようにLedgerファイルのトップに消費税の定義を書いておくだけで、トランザクションごとにいちいち消費税のエントリを書かなくても、全トランザクションについて仮想アカウントで税の金額を計算してくれる、これはほんとうに強力な機能です。</p>
+<h2 id="注意するところ">注意するところ</h2>
+<p>「<a href="https://bred-in-bingo.netlify.app/posts/ledger-fixedcost/">Ledger — 固定費のトラッキング</a>」でも紹介したように、自動転記+仮想アカウントによる方法には <strong>aux-date</strong> をrespectしてくれないという不都合があります(注<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>)。そこまで細かいことを気にせずに使う限りでは、この方法はとても簡単です。</p>
+<p>消費税アカウントは仮想アカウントなので、他の経理計算には影響を与えません。とりあえずLedgerファイルの冒頭に <strong>4行</strong> を追加して使ってみると良いと思います。</p>
+<h2 id="最後に">最後に</h2>
+<p>Ledgerによる消費税の取り扱いについては、書き溜めた下書きがこの数倍以上あります。話が細かくなりすぎるので、ここでは思いっきり短く要点だけに絞って書きました。もしかしたら絞りすぎたかもしれません。それについては後日のフォローということでご容赦ください。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>みなさんご存知の通り、ガソリン税や酒税やタバコ税は「税に税をかける」悪名高き <strong>二重課税</strong> になっています。しかし今のところ、所得税や住民税には消費税はかかっていません。まだ独立した司法が日本で活きていた時代＝2010年には最高裁で「年金型生保に二重課税 所得税は違法 国が逆転敗訴」と二重課税が違法の判決がでましたが、そのうち、この国ではどんなものにも <strong>裁量行政</strong> で課税される日が来てもおかしくないような気がします。😎 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>どなたか「自動転記＋仮想アカウント」でaux-dateを扱う方法をご存知であればぜひ教えて頂きたいと思います。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年4月30日T00:00:00&#43;0900 class="date">2021年4月30日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/kinran/" class="prev">キンラン</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/plantnet/" class="next">ヤマエンゴサク</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Leder-cliでガソリン給油量を管理する | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Leder-cliでガソリン給油量を管理する</h2>
+    <div class="post_content">
+      <p>Ledger-cliを使えばガソリンへの <strong><strong>支出金額</strong></strong> を管理するのはとても簡単です。ガソリン支出を特定のアカウント、たとえば <strong><strong><code>Expenses:Cars:Gasoline</code></strong></strong> に割り付けておくだけです。</p>
+<p>5月1日から31日までのガソリン支出を知りたいときには：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger reg gasoline -b 05/01 -e 06/01
+2022/05/10 ENEOS SS             Expenses:Cars:Gasoline    6,414 JPY    6,414 JPY
+2022/05/17 ENEOS SS             Expenses:Cars:Gasoline    2,496 JPY    8,910 JPY
+2022/05/31 ENEOS SS             Expenses:Cars:Gasoline    7,173 JPY   16,083 JPY
+</code></pre></div><h2 id="ところが">ところが・・・</h2>
+<p>ふとしたことから</p>
+<blockquote>
+<p>月々のガソリンへの支出金額ではなくて <strong><strong>給油量</strong></strong> （リッター）を把握し レポートする必要が生じました</p>
+</blockquote>
+<p><br /></p>
+<p>2019年以降、Ledgerのトランザクションでは次のように <strong><strong>給油量</strong></strong> と <strong><strong>単価</strong></strong> をコメントで記録していました。</p>
+<pre><code class="language-nil" data-lang="nil">2022/05/10 ENEOS SS
+    ; 39.59L @162円
+    Expenses:Cars:Gasoline                 6,414 JPY
+    Liabilities:EneosCard
+</code></pre><p>このコメントにある <strong><strong><code>39.59L</code></strong></strong> という給油量を、Ledgerで計算対象とすることは（たぶん）できません。</p>
+<p>そこで次のように、ガソリンの給油量単位（L；リッター）をLedgerの <strong><strong>コモディティ</strong></strong> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> にし、その後ろに <code>@</code> をつけて単価を書きます<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>：</p>
+<pre><code class="language-nil" data-lang="nil">2022/05/10 * ENEOS SS
+    Expenses:Cars:Gasoline             39.59 L @ 162 JPY
+    Liabilities:EneosCard                     -6,414 JPY
+</code></pre><p>トランザクションをこんな風に書き換えたら、ガソリンの給油量（L）をレポートしたいときにはつぎのようにします：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">&lt;例１&gt;
+$ ledger reg  gas -f my_ledger.dat -b 05/01 -e 06/01 -X L
+2022/05/10 ENEOS SS       Expenses:Cars:Gasoline        39.59 L        39.59 L
+2022/05/17 ENEOS SS       Expenses:Cars:Gasoline        15.22 L        54.81 L
+2022/05/31 ENEOS SS       Expenses:Cars:Gasoline        44.83 L        99.64 L
+</code></pre></div><p>ここで
+<code>-X L</code> オプションは <code>--exchange L</code> の短縮形で、 <code>L</code> （リッター）というコモディティ単位でレポートしなさいという意味になります。</p>
+<p>このオプションを書かないとデフォルトのコモディティ(JPY)で表示されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">&lt;例２&gt;
+$ ledger r gas -f my_ledger.dat
+2022/05/10 ENEOS SS             Expenses:Cars:Gasoline    6,414 JPY    6,414 JPY
+2022/05/17 Commodities revalued &lt;Revalued&gt;                   <span style="color:#ae81ff">79</span> JPY    6,493 JPY
+2022/05/17 ENEOS SS             Expenses:Cars:Gasoline    2,496 JPY    8,989 JPY
+2022/05/20 Commodities revalued &lt;Revalued&gt;               -3,617 JPY    5,371 JPY
+2022/05/23 Commodities revalued &lt;Revalued&gt;                3,508 JPY    8,879 JPY
+2022/05/31 Commodities revalued &lt;Revalued&gt;                 -110 JPY    8,770 JPY
+2022/05/31 ENEOS SS             &lt;Adjustment&gt;                 -1 JPY    8,769 JPY
+　　　　　　　　　　　　　           Expenses:Cars:Gasoline    7,173 JPY   15,942 JPY
+</code></pre></div><p>それだけでなく、上のように <code>&lt;Revalued&gt;</code> や
+<code>&lt;Adjustment&gt;</code> が表示されます。それを抑止するには <code>--no-revalued</code> オプションをつけます:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">&lt;例３&gt;
+$ led r gas -f my_ledger.dat --no-revalued
+2022/05/10 ENEOS SS             Expenses:Cars:Gasoline    6,414 JPY    6,414 JPY
+2022/05/17 ENEOS SS             Expenses:Cars:Gasoline    2,496 JPY    8,989 JPY
+2022/05/31 ENEOS SS             Expenses:Cars:Gasoline    7,173 JPY   15,942 JPY
+</code></pre></div><h2 id="まとめ">まとめ</h2>
+<p>以上です。簡単すぎてスミマセン 😓</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Ledgerのコモディティの一般的な使い方はドルやユーロなどの <strong><strong>通貨単位</strong></strong> ですが、この例のように <code>L</code> にしたりできる柔軟性があります。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>この修正を手作業で行うと必ずミスが起こります。簡単なbashスクリプトを書いて書き換えましょう。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年7月7日T00:00:00&#43;0900 class="date">2022年7月7日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/commodity">commodity</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">Ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gasoline">gasoline</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/creditcard-csv-conv/" class="prev">Ledger帳簿とクレジットカード利用明細との照合確認</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/get-dropbox-direct_link-by-cui/" class="next">Dropbox内ファイルの直リンクをCUIで取得する</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

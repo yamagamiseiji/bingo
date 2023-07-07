@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger – Emacs内でレシート参照 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger – Emacs内でレシート参照</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%81%AA%E5%AE%B6%E8%A8%88%E3%81%A7%E3%81%AF">プライベートな家計では</a></li>
+<li><a href="#%E7%B4%A0%E6%9C%B4%E3%81%AA%E6%96%B9%E6%B3%95">素朴な方法</a></li>
+<li><a href="#%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%81%AE%E6%96%B9%E6%B3%95">おすすめの方法</a></li>
+<li><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%84%87%E9%81%93">ちょっと脇道</a></li>
+<li><a href="#%E3%83%AC%E3%82%B7%E3%83%BC%E3%83%88%E3%81%AE%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%8B%E3%83%B3%E3%82%B0">レシートのスキャニング</a></li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+<li><a href="#footnotes">Footnotes:</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<p>いま <strong>頭の体操</strong> として
+<strong>NPO法人</strong> の経理をLedger-cliでどこまでやれるかの検証に取り組んでいます。</p>
+<p>今日の話題はそれと直接の関係はありませんが、
+NPO法人のみならず多くの正式な会計報告では <strong>領収書</strong> はもっとも重要な証憑書類。かりに監督官庁からの保存・開示命令がなくても、担当事務部門としては、日常の仕事のクオリティとスピードを高めるために、デジタル化した <strong>すべての領収書</strong> をLedger内で閲覧できるようにしておくべきだと思います(注<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>)。</p>
+<h2 id="プライベートな家計では">プライベートな家計では</h2>
+<p>すべてのレシートをデジタルデータとして保存しておく意味はほとんどありません。しかし重要なレシートをデジタル保存しておいて、内容を随時チェックできるようにしておくことは <strong>人生の質</strong> （QOL）を高めます😉</p>
+<p>ここではEmacsでLedger-cliを動かしている場合のやり方を説明します。</p>
+<p>たとえば</p>
+<blockquote>
+<p>春先にホームセンターで夏野菜などの苗を各種購入した</p>
+</blockquote>
+<p>こんな場合、Ledgerからレシート画像が見えるようにしておくと、翌年 購入計画をたてるときに助かります。</p>
+<h2 id="素朴な方法">素朴な方法</h2>
+<p>ソースコード<a href="#code-snippet--soboku">1</a>がいちばん素朴で原始的な方法です。</p>
+<p><a id="code-snippet--soboku"></a></p>
+<pre><code class="language-nil" data-lang="nil">2021/05/11 ジョイフルホンダ
+    ; 税抜価格　キュウリ(@250x6), ナス(@250x3), ピーマン(@250x3), トマト(@250x7), バジル(@140x2)　
+    Expenses:Farming:種・苗                     5,030 JPY
+    Liabilities:Visa
+</code></pre><div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--soboku">ソースコード 1</a></span>:
+  購入品目と単価x員数をコメントとして記帳
+</div>
+<p>つまりレシートの内容をコメント <code>;</code> マークの後ろにテキストとして手入力しておく方法。これはこれでじゅうぶん役に立ちます。</p>
+<h2 id="おすすめの方法">おすすめの方法</h2>
+<p>レシートの画像ファイルをEmacsのLedgerモード内で直接見えるようにする方法です。トランザクションはソースコード<a href="#code-snippet--osusume">2</a> のように書きます。</p>
+<p><a id="code-snippet--osusume"></a></p>
+<pre><code class="language-nil" data-lang="nil">2021/05/11 ジョイフルホンダ
+    ; Receipt: receipts/20210511_ジョイフルホンダ.jpg
+    Expenses:Farming:種・苗                     5,030 JPY
+    Liabilities:Visa
+</code></pre><div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--osusume">ソースコード 2</a></span>:
+  メタタグとその値をつかったレシート指定
+</div>
+<p>2行目にあるのが、
+<code>Receipt</code> というメタ <strong>タグ名</strong> の宣言、そしてそのタグの <strong>値</strong> としての画像ファイル「パス名」と「ファイル名( <code>receipts/20210511_ジョイフルホンダ.jpg</code> )」です。</p>
+<p><code>receipts</code> ディレクトリはメインのLedgerファイルと同じディレクトリにありますので、パスの表記は <strong>相対パス</strong> にしています。</p>
+<h3 id="emacs内でレシート画像を見る方法">Emacs内でレシート画像を見る方法</h3>
+<p>上のソースコード<a href="#code-snippet--osusume">2</a> のようなトランザクションを書いておけば、
+<strong>Emacsの中で</strong> このレシート画像を表示できます。使うのはEmacsにビルトインされている <code>ffap-bindings</code> です。</p>
+<h4 id="init-dot-elの設定">init.elの設定</h4>
+<p>次の1行を <code>.emacs.d/init.el</code> の適当な場所に追加します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(ffap-bindings)
+</code></pre></div><p>設定はこれだけ。</p>
+<h4 id="使い方">使い方</h4>
+<p>カーソルをレシートファイル名の上に置いて <strong><code>C-x C-f</code></strong> します。ファイルが、書かれている通りに存在していればミニバッファにファイル名が表示されます(注<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>)。
+<code>RET</code> でレシート画像がEmacsの新しいバッファ内に表示されます。</p>
+<p><a id="org94ac58a"></a></p>
+<figure>
+    <img src="/ffap-sample.png"
+         alt="図1:  Emacsでトランザクション内のレシート画像を表示。標準ではレシート画像はバッファ全体を使って表示されます。" width="90%"/> <figcaption>
+            <p>図1:  Emacsでトランザクション内のレシート画像を表示。標準ではレシート画像はバッファ全体を使って表示されます。</p>
+        </figcaption>
+</figure>
+
+<p>もとのバッファに戻るには <strong><code>C-x b</code></strong> (change buffer）です。なお、
+<code>init.el</code> への追加が面倒なら <code>M-x ffap-bindings</code> するだけでもOK。</p>
+<h3 id="応用">応用</h3>
+<p>このようにLedgerのメタタグの値としてファイルを指定する方法は、多様な経理環境でいろいろな応用可能性があります。</p>
+<ul>
+<li>請求書ファイル(注<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>)</li>
+<li>銀行口座の取引状況ファイル</li>
+<li>アルバイトから提出された作業報告書</li>
+<li>etc &hellip;</li>
+</ul>
+<p>これらについては <a href="https://github.com/conservancy/npo-ledger-cli/blob/master/npo-ledger-cli-tutorial.md#documentation-tags">Non-profit Accounting With Ledger CLI, A Tutorial</a>
+が参考になります(注<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>)。</p>
+<h2 id="ちょっと脇道">ちょっと脇道</h2>
+<p>図<a href="#org94ac58a">1</a> のトランザクションはアカウントの <strong>エリアス</strong> （別名）が使われています。エリアスは
+<code>~/.ledgerrc</code> 内で次のように設定されています(一部のみ抽出）。</p>
+<pre><code class="language-nil" data-lang="nil">alias toll=Expenses:Cars:Toll
+alias orico=Liabilities:OricoCard
+alias farming=Expenses:Farming
+alias gas=Expenses:Cars:Gasoline
+alias eneos=Liabilities:EneosCard
+</code></pre><p>このように、よく使うアカウントは自分なりにわかりやすい別名を定義しておけば、記帳の時間が大幅に短縮できます。</p>
+<p>NPO法人のアカウント名（= <strong>勘定科目名</strong> ）として内閣府が推奨しているものはとてつもなく文字数が多いです。一部だけをお見せしますと：</p>
+<pre><code class="language-nil" data-lang="nil">;; NPO法人「活動計算書」の勘定科目一覧
+;; filename = npo-accounts.dat
+経常利益
+経常利益:受取会費
+経常利益:受取会費:正会員受取会費
+経常利益:受取会費:正会員受取会費:個人正会員受取会費
+経常利益:受取会費:正会員受取会費:法人正会員受取会費
+  :
+</code></pre><p>これを手打ちで入力するのは <strong>時間の無駄</strong> です。タイプミスも誘発します。英数文字で数文字程度の覚えやすいエリアスを定義しておきましょう。</p>
+<h2 id="レシートのスキャニング">レシートのスキャニング</h2>
+<p>一昔前なら、ちゃんとしたスキャナを使うのが正統派なのでしょうが、最近はスマホやタブレットの内蔵カメラを使うアプリがいろいろあります。どれも十分に実用域に到達しているので、どのアプリを選ぶかは個々人の <strong>好み</strong> でよいと思います。</p>
+<p>むしろスマホやタブレットでスキャンするときの「 <strong>脇役</strong> 」をどう使うかがポイント。それについては「<a href="https://k-tai.watch.impress.co.jp/docs/column/stapa/1319297.html">紙書類のスキャンはもっぱらスマートフォンで行う俺</a>」というサイトがとても参考になりました。</p>
+<p>その他のちょっとした <strong>小技</strong> ですが、レシートはどうしても財布の中で変な <strong>シワ</strong> や <strong>折り癖</strong> ができます。シワを押さえつけるために、レシートをはさむクリアーホルダーを <strong>高透明度</strong> な製品(注<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>)にしたら、作業がとても快適になります。レシートを平らにするためにガラス板を持ち歩くのは大変だけどクリアーホルダーなら気になりません😄</p>
+<h2 id="acknowledgement">Acknowledgement</h2>
+<ul>
+<li><a href="https://github.com/conservancy/npo-ledger-cli/blob/master/npo-ledger-cli-tutorial.md#documentation-tags">Non-Profit Accounting With Ledger CLI, A Tutorial</a></li>
+<li><a href="https://kanjo.biz/%E5%8B%98%E5%AE%9A%E7%A7%91%E7%9B%AE/npo%E6%B3%95%E4%BA%BA/%E6%B4%BB%E5%8B%95%E8%A8%88%E7%AE%97%E6%9B%B8">NPO法人【活動計算書】の勘定科目一覧表</a> 経理Web</li>
+</ul>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>先進国では <strong>政治資金</strong> は全領収書の保存・公開が原則です。けど日本では「政党・政治資金団体・その他の政治団体」では <strong>5万円以上</strong> の経費のみに領収書が必添です<a href="https://www.soumu.go.jp/senkyo/seiji%5Fs/teishutsugimu.html">（出典）</a>。本来ならば政治資金規正法を改正して、1円から領収書添付を義務付けるべきでしょうね。法改正されないなら、NPO法人も <strong>政治団体</strong> にした方が会計処理・経理が簡単かも 😎 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>もしディレクトリは存在するのに、指定されたファイルが存在しない場合には、ミニバッファにはディレクト名だけが表示されます。 <code>RET</code> すれば <code>dired</code> バッファが開きます。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>(2021/05/14；追記) 書き忘れていました。😓 クレジットカード会社からの月々の請求明細書を「口座振替のトランザクション」内に <strong><code>; Invoice: invoices/visa/YYmmdd-visa.pdf</code></strong> のような形にしてリンクさせています。こうすると銀行から引き落とされる金額の根拠が一目で確認できます。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>NPO法人を規制している法律は国によって異なっています。このサイトはとても参考になりますが、わが国の法律には合わない点が多々あります。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>いま愛用しているのは「PLUS高透明クリアーホルダー」で型番はFL-188HOクリアー 89-178（A4版）です。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年5月13日T00:00:00&#43;0900 class="date">2021年5月13日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/npo">NPO</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/plantnet/" class="prev">ヤマエンゴサク</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/fuderindo/" class="next">フデリンドウ</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

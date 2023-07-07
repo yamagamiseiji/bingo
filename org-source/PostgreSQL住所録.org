@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-04-20 13:50:45 yamagami>
+# Time-stamp: <2023-07-07 22:20:21 yamagami>
 #+title: PostgreSQL住所録
 #+date: [2023-05-10]
 #+language: ja
@@ -64,73 +64,6 @@
 原データのCSVテーブル整形・作成はBashでコツコツやりました。明らかに不要だと思われるデータは削除して残ったデータ件数は約500件でした。この程度の件数でも、csvtoolとかが無ければシェルスクリプトでやるのは無理だったと思います。
 
 データがいったんPostgreSQL内におさまれば、あとの操作（編集、追加、削除など）はPostgreSQL内で楽にできます。やれやれ！です。
-
-
-
-
-* contacts-search.sh
-
-
-* 段取り
-** インストール
-- apt install
-
-** ログインと基本操作
-- セミコロンを忘れずに！
-- 改行はignoreされる
-- コマンドのアルファベットは大文字、小文字は無視される
-- \q and exit
-
-** テーブル作成
-- CSVファイルのデータテーブルを作る
-  - 作る道具は何でもOK（Excel,emacs,Libreoffice...)
-- テーブル名を決める (mytable)
-- カラムの名前＝ヘッダーをつける (順番はともかくよく考えて！）
-   - 略字にしない（あとでASでエリアスを作れる）
-   - アルファベット
-   - スペース、ハイフンは使わない
-   - 大文字も使わない etc
-- カラムのデータタイプを決める
-  - 電話番号や郵便番号はnumericにせずvarcharにする(アタマに0が来るとX）
-  - 空にできないカラムはNOT NULLにする
-- \COPYをつかう　
-  - フルパスにする
-  - permissionでこけることがある（親DIRは　drwxr-xr-x）
-** 確認作業
-- `SELECT *`してみる
-``` sql
-contacts=#SELECT * FROM mytable; 
-contacts=# select * from contacts;
-```
-これで全カラムが入っていればOK。
-
-** おわり
-
-** 補足
-
-- 電話番号は固定電話か携帯電話かは、sedで区別可能なので分ける必要はない
-- Emailアドレスもカラムで指定しなくても、全部のデータ行の中から、sedで抽出できる
-- 郵便番号から住所１は抽出できるので、別にその変換機能をプログラム化してあれば、住所１は不要
-- 住所３（アパート部屋番号）などは必要なら追加すればよい
-- クエリの利便を考えると、ローマ字のフルネームカラムがよい。曖昧検索で
-`WHERE latin_fullname ~ 'suzuki ho'`のようになクエリが可能になる。
-- 件数の多い住所録だと姓と名とで別々に検索する方がよい。其の際には`WHERE family_name = 'suzuki' || given_name = 'taro'`のようにすることになる。
-- カラムはあとで随時 追加可能。たとえば旧姓(maiden_name　＋maiden_name_yomi) なら
-``` sql
-ALTER TABLE mytable ADD COLUMN maiden_name varchar; 
-```
-- 其のカラムにデータ(田中花子さんの旧姓＝佐藤)を追加するには次のようにする：
-``` sql
-UPDATE mytable SET maiden_name='佐藤',maiden_name_yomi='sato' WHERE latin_fullname='tanaka hanako'; 
-```
-
-
-
-
-*  SNSメモ
-2023/03/18 16:42:02
-
-
 
 
 # Local Variables:

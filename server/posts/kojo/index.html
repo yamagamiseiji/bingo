@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    さようならWordPress | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">さようならWordPress</h2>
+    <div class="post_content">
+      <p>これまで2年ほどブログ書きは下のようなフローでやってきました<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Emacs &gt; org2blog &gt; WordPress &gt; freenom &gt; AWS
+</code></pre></div><p>しかし</p>
+<ol>
+<li>org2blogがなかなか曲者でときどき言うことを聞かなくなったりします</li>
+<li>WordPressのバージョンアップが激しくてついていけない（涙）</li>
+<li>SSL対応をしなくてはと思いつつおっくうで着手せず気がかりでした</li>
+<li>AWSの無料サービス期間が終わって年間使用料金が <strong>重荷</strong> になってきました</li>
+</ol>
+<p>などなどから一念発起。この際、ブログ書きの流れをつぎのように変えようと思いました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Emacs &gt; org-mode &gt; ox-hugo &gt; Hugo &gt; Netlify &gt; GitHub
+</code></pre></div><p>この流れだとコストとしてはNetlifyだけを心配すればよいわけですが、とうぜん
+<strong><span style="color: red"> 無料枠</span></strong> (starter)で行きます。ちなみにNetlifyの無料枠は次のようになっています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">転送量(bandwith)                     100G/月
+ビルド時間(build minutes)             300分/月
+フォール投稿(form submission)          100回/月
+リクエスト回数(serverless functions)   125,000回/月
+</code></pre></div><p>ふつうの善良な市民の個人ブログでこれを超えるようなことはちょっと考えられないです。とくにリクエスト回数が月に <strong>125,000回</strong> を超えるなんてことはまず心配無用、もしそんなことが起こればそれはまことにめでたいことです（笑）</p>
+<h2 id="四苦八苦ログ">四苦八苦ログ</h2>
+<p>ところが意気揚々と引っ越し作業を始めてみるとあちこちに <strong>地雷</strong> や <strong>落とし穴</strong> が！ちゃんとした「新装開店」まで　まだ一山も二山もあるかと思います。</p>
+<h3 id="最大の難関">最大の難関</h3>
+<p>NetlifyがGitHubレポジトリをデプロイするところでかなりはまりました。ウエッブで調べてみると、とても簡単だったという記事がある一方で、ひどくハマったという記事が英語でも日本語でも多数あります。それらを見ながらほんとうにいろいろやりました。</p>
+<p>文字通り四苦八苦しましたが、ついに <strong>2021/03/25</strong> に初デプロイ成功！。うまくいった理由は</p>
+<ol>
+<li>
+<p>hugoを <code>hugo_extended_0.81.0_Linux-64bit.deb</code> にアップしたこと</p>
+</li>
+<li>
+<p>Netlifyウエブサイトの&rsquo;Deploy settings&rsquo;中の&rsquo;Build settings&rsquo;の内容をGitHubのサイトルートにしたこと</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Base = bingo/
+　：
+Publish = public
+　：
+</code></pre></div></li>
+</ol>
+<p>などが奏功したのではないかと思いますが、じつは理由はよく分かっていません。</p>
+<p>何回もやりなおして苦労したので、後日 <strong>org-mode＋~ox-hugo＋Hugo+Netlify＋GitHub</strong> でホームページを公開する手順を整理して備忘録としてまとめようと思います。</p>
+<h3 id="hugoテーマの変更">Hugoテーマの変更</h3>
+<p>ここでもハマりました。つまらないことですがテーマによって必要なディレクトリの名称が
+postsだったりpostだったり！それ以外にもテーマを変更したときに変更の必要な設定ファイル類があちこちに在ります。分かるまでエラーの嵐でした。</p>
+<p>まったく新規にレポジトリを作ってテーマの設定をまっさらな状態で行えばスムーズなのでしょうが、そうるすとNetlifyのデプロイをやり直さなければなりません。そこでまたハマる。</p>
+<p>それから、いったんローカルのある特定のディレクトリでhugo初期化した投稿記事原稿には、環境が変わると変更が必要になるところがあります<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。40から50本程度の記事数ですが、手作業ではできないのでその都度スクリプトを書いたりして、結構つかれました<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>あとヘッダー内の <strong>ARCHIVES</strong> という語を <strong>POSTS</strong> に変更したくて、コード内を <code>grep -ir</code> したのですが見つからず困ってました。そしたら灯台下暗し、 <code>config.toml</code> 内で簡単に書き換えできました。</p>
+<h3 id="netlifyのドメイン名変更">Netlifyのドメイン名変更</h3>
+<p>ここはまだハマった状態です（笑）。</p>
+<h2 id="環境">環境</h2>
+<p>ソフトウエアの環境は次のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th style="text-align:right">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td style="text-align:right">Ubuntu20.04</td>
+</tr>
+<tr>
+<td>Emacs</td>
+<td style="text-align:right">26.3</td>
+</tr>
+<tr>
+<td>org-mode</td>
+<td style="text-align:right">9.4.4</td>
+</tr>
+<tr>
+<td>ox-hugo</td>
+<td style="text-align:right">0.7</td>
+</tr>
+<tr>
+<td>hugo</td>
+<td style="text-align:right">extended 0.81.0</td>
+</tr>
+<tr>
+<td>git</td>
+<td style="text-align:right">2.25.1</td>
+</tr>
+</tbody>
+</table>
+<p>（これはテストページです）</p>
+<h2 id="footnote">Footnote</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>今は昔、HTML＝ホームページの黎明期、国内の大学で学科単位のHPを持っているところがほとんどなかった頃、HTMLの直書きで所属学科のHPを一人で書きました。その時の記憶が少しだけ残っていて今回の作業にもいくらか役に立ちました。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><code>#+HUGO_BASE_DIR:</code> の変更は必須です。もしこれが記事中に散在する「一般語」と重複すると置換作業が面倒だったのですが、幸い今回は重複ゼロでしたので簡単なスクリプトで一発置換できました。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>これを回避する方法があるようです。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年4月1日T00:00:00&#43;0900 class="date">2021年4月1日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">Emacs</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/hugo">hugo</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ox-hugo">ox-hugo</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/netlify">Netlify</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/github">GitHub</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/origin-of-domain-name/" class="prev">bingo の由来</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/sanmarzarno-sprouting/" class="next">サンマルツァーノの育苗</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

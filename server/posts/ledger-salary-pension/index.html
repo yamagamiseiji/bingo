@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Ledger — 給与・年金の仕訳 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Ledger — 給与・年金の仕訳</h2>
+    <div class="post_content">
+      <p>今日は<a href="https://www.ledger-cli.org/"> <strong>Ledge-cli</strong> </a>を使って給与・年金を仕訳してみます<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>お題は：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">サラリーマン、年金受給者は 家計簿で
+給与、年金をどのように仕訳できるか
+</code></pre></div><p><a href="https://www.ledger-cli.org/">Ledger-cli</a>の主な特長を箇条書きにすると次のとおりです。</p>
+<ul>
+<li>複式簿記</li>
+<li>会計データはプレーンテキストファイル</li>
+<li>コマンドライン</li>
+<li>フリーソフト</li>
+</ul>
+<p>対応しているプラットフォームは GNU/linux, Windows, Mac OS X, BSDなどです。テキストファイルが編集できるエディター<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>なら基本的には何でもOKです。</p>
+<h2 id="まずは給与明細">まずは給与明細</h2>
+<p>伝統的な複式簿記の <strong>借方・貸方</strong> 方式でも もちろん仕訳できます。けれども一般人にはとてもハードルが高いです（注<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>）。</p>
+<p>では
+<strong>Ledger</strong> でサラリーマンの給与を仕訳してみましょう。</p>
+<p>次の例は
+<a href="https://www.microsoft.com/ja-jp/microsoft-365?rtc=1">Micorosoft 365</a> サイトの<a href="https://www.microsoft.com/ja-jp/office/pipc/template/result.aspx?id=13293">給与管理表 (明細書付き)</a> にあげられている数値を使って
+Ledger向けのトランザクションを書いたものです。</p>
+<p><a id="code-snippet--kyuyo-meisai"></a></p>
+<pre><code class="language-nil" data-lang="nil">2021/10/24 * (株) XYZ
+    Income:基本給                         -250,000 JPY
+    Income:諸手当                          -20,000 JPY
+    ;
+    Expenses:社会保険:健康保険                15,000 JPY
+    Expenses:社会保険:厚生年金                28,000 JPY
+    Expenses:社会保険:雇用保険                 3,000 JPY
+    Expenses:社会保険:生命保険                 1,000 JPY
+    ;
+    Expenses:その他:組合費                      700 JPY
+    Expenses:その他:その他                        0 JPY
+    ;
+    Expenses:租税公課:所得税                   6,500 JPY
+    Expenses:租税公課:住民税                  15,000 JPY
+    ;
+    Assets:積立                             　8,000 JPY
+    ;
+    Assets:ABC銀行
+</code></pre><div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--kyuyo-meisai">ソースコード 1</a></span>:
+  Ledgerによる給与の仕訳例
+</div>
+<p>同じ数字が2回書かれることもなく、見た目からしてシンプルですよね 😄</p>
+<p>テキストエディタでこれを書いて保存するだけ、です。</p>
+<p><strong>補足説明：</strong></p>
+<ul>
+<li>Ledgerでは、借方・貸方の概念を前提とせず<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>、 <strong>アカウント</strong> （account; 勘定科目）ベースで複式簿記の <strong>原理</strong> を具現化しています。</li>
+<li>アカウントの第1レベルである Income, Expenses, Assets&hellip; などは収入、経費、資産などのように <strong>日本語</strong> にしても全然 問題ありません。</li>
+<li>最終行の <code>Assets:ABC銀行</code> の行に <strong>金額</strong> が入っていませんが、Ledgerでは一つのトランザクション中の1アカウントだけは金額を <strong>ブランク</strong> にすることが許容されます。そこはLedgerが自動的に補完してくれます。</li>
+<li>Ledgerでは１トランザクション内に複数の通貨（JPY, $, € など)を混在させることができます。当日の通貨の交換レートを為替レートデータベース（ディフォルトでは <code>.prices.db</code> ファイル）から読み込んで換算してくれます。そのためトランザクション内では <strong>通貨単位</strong> （上の例では <code>JPY</code> ）は <strong>必須</strong> です<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。</li>
+</ul>
+<p>上の内容を <code>myledger.dat</code> ファイルに保存して、
+<code>ledger reg</code> を実行すると次のようになります<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ ledger reg  -f myledger.dat
+2021/10/24 (株) XYZ   Income:基本給             -250,000 JPY   -250,000 JPY
+                      Income:諸手当              -20,000 JPY   -270,000 JPY
+                      Expenses:社会保険:健康保険    15,000 JPY   -255,000 JPY
+                      Expenses:社会保険:厚生年金    28,000 JPY   -227,000 JPY
+                      Expenses:社会保険:雇用保険    3,000 JPY   -224,000 JPY
+                      Expenses:社会保険:生命保険    1,000 JPY   -223,000 JPY
+                      Expenses:その他:組合費         700 JPY   -222,300 JPY
+                      Expenses:その他:その他               0   -222,300 JPY
+                      Expenses:租税公課:所得税      6,500 JPY   -215,800 JPY
+                      Expenses:租税公課:住民税     15,000 JPY   -200,800 JPY
+                      Assets:積立                 8,000 JPY   -192,800 JPY
+                      Assets:ABC銀行             192,800 JPY            0
+</code></pre></div><p>ABC銀行への振込額(192,800円)が補完されています。</p>
+<h2 id="つぎは年金">つぎは年金</h2>
+<p>つぎにLedgerで年金を仕訳した例をあげます。金額はあてずっぽうです。</p>
+<p><a id="code-snippet--pension"></a></p>
+<pre><code class="language-nil" data-lang="nil">2021/10/15 * 国民年金
+   Income:国民年金             (-100,000 JPY /2) ; [2021/08/15]
+   Income:国民年金             (-100,000 JPY /2) ; [2021/09/15]
+   ;
+   Expenses:社会保険:介護保険     (15,000 JPY /2) ; [2021/08/15]
+   Expenses:社会保険:介護保険     (15,000 JPY /2) ; [2021/09/15]
+   ;
+   Expenses:租税公課:地方税       (20,000 JPY /2) ; [2021/08/15]
+   Expenses:租税公課:地方税       (20,000 JPY /2) ; [2021/09/15]
+   ;
+   Assets:ABC銀行
+</code></pre><div class="src-block-caption">
+  <span class="src-block-number"><a href="#code-snippet--pension">ソースコード 2</a></span>:
+  複式簿記による国民年金の仕訳
+</div>
+<p>こちらは金額欄と行末の日付欄などが一見「何？」という感じですね。</p>
+<p><strong>補足説明：</strong></p>
+<ul>
+<li>年金は2ヶ月に1回、偶数月の15日に、その前の <strong>2ヶ月分</strong> が支給されます。各行の右端の <code>[ ]</code> カッコ内の日付がそれを表現しています。支給日は10月15日ですが、実際には8月分と9月分の収入となることをLedger風に表現しています。</li>
+<li><code>( )</code> で囲まれた金額欄内には2で割る <strong>式</strong> が書かれています。</li>
+<li>2ヶ月分の支給額が2で割り切れない時には、たとえば <code>(floor (100,451 JPY / 2))</code> とすれば、小数点以下が <strong>切り捨て</strong> られます。ちなみに 切り上げは <code>ceiling()</code>, 四捨五入は <code>round()</code> です。</li>
+</ul>
+<p>このLedgerファイルの <code>reg</code> コマンド出力は次のようになります。ちゃんと年金額と控除金額が8月分と9月分に振り分けられています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger reg -f myledger.dat
+2021/08/15 国民年金  Income:国民年金            -50,000 JPY    -50,000 JPY
+				    Expenses:社会保険:介護保険    7,500 JPY    -42,500 JPY
+				    Expenses:租税公課:地方税      10,000 JPY   -32,500 JPY
+2021/09/15 国民年金   Income:国民年金            -50,000 JPY    -82,500 JPY
+				     Expenses:社会保険:介護保険    7,500 JPY    -75,000 JPY
+				     Expenses:租税公課:地方税     10,000 JPY    -65,000 JPY
+2021/10/15 国民年金   Assets:ABC銀行              65,000 JPY
+</code></pre></div><p>最終行の <code>Assets:ABC銀行</code> の日付は、銀行振込みの日付＝10月15日になっています。</p>
+<h2 id="メリット-デメリット">メリット・デメリット</h2>
+<p>このように家計簿で給料や年金の <strong>振込金額</strong> だけではなく、その <strong>明細</strong> も仕訳することのメリット・デメリットは何でしょうか。</p>
+<p>最大のメリットは、
+<strong>税金</strong> や <strong>保険料</strong> あるいは <strong>積立預金</strong> などを分析して正確に理解できるようになることです。</p>
+<p>税金について言えば、 <strong>特別徴収</strong> される以外の税金も合わせて計算できます。消費税も含めたいならそれもできますし、 <strong>悪名高い</strong> ガソリン税や酒税、入湯税、入場税なども1円単位でおさえることができます。それらの <strong>納税金額</strong> をワンラインのコマンドで、任意の期間、任意の組み合わせで簡単・正確に得ることができます。</p>
+<p>国だけでなく多くの <strong>税金専門家</strong> も、これらの税金は「仕訳する必要が無い」と言ってますが、きちんと仕訳してデータ化し可視化して悪いわけではありません。都合が悪いのは <strong>徴税する主体</strong> の方だけです 😄</p>
+<p><br />
+デメリットとして考えられるのは、仕訳に余計な <strong>手間</strong> がかかるのでは、ということです。しかしLedgerの <strong>自動転記機能</strong> （automated transactions）や <strong>定期的トランザクション</strong> （scheduled transactions）の機能（<a href="#teiki-trx">付録参照</a>）を使えば、日常的な仕訳・転記に手間が増えることはほとんどありません。</p>
+<p>一番 深刻なデメリットは、分析して税額がはっきりすると、その金額の大きさに <strong>絶望</strong> して <strong>心理的</strong> に落ち込む可能性があることでしょうか 😉</p>
+<p><br /></p>
+<h2 id="teiki-trx">付録：トランザクションのスケジューリング</h2>
+<p>毎回、長たらしいトランザクションを手入力するのはヤボです。もし、Emacsのユーザならば、 <code>~/ledger-schedule.ledger</code> ファイルに次のようなエントリを書いておきましょう<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>。</p>
+<p>第1行目の <code>[*/E/15]</code> は毎偶数月（even）の15日を意味します。</p>
+<pre><code class="language-nil" data-lang="nil">[*/E/15] 国民年金
+    Income:国民年金      (-100,000 JPY /2) ; [2021/xx/15]
+    Income:国民年金      (-100,866 JPY /2) ; [2021/yy/15]
+    ;
+    Expenses:社会保険:介護保険 (15,000 JPY /2) ; [2021/xx/15]
+    Expenses:社会保険:介護保険 (12,700 JPY /2) ; [2021/yy/15]
+    ;
+    Expenses:租税公課:地方税   (20,000 JPY /2) ; [2021/xx/15]
+    Expenses:租税公課:地方税   (20,000 JPY /2) ; [2021/yy/15]
+    ;
+    Assets:ABC銀行
+</code></pre><p>こうしておいて、Emacs でLedgerファイルを開いている時に <code>C-c, u</code> を叩きます。年金支払い日が近いと <code>[*/E/15]</code> のところに具体的な日付が入ったトランザクション例が表示されます。それをそのままコピペして修正が必要な箇所だけを直せばよいわけです。</p>
+<p>ちなみに毎月25日は <code>[*/*/25]</code>, 奇数月の1日は <code>[*/O/01]</code>, 毎年4月1日なら <code>[*/04/01]</code> のように指定します。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>わが国では給与（や年金）から、ありとあらゆる（考えられないような）天引き控除（中には <strong>特別徴収</strong> というジョークのような名目の控除もあります）がなされています。LedgerのドキュメントやGoogle Groupでの議論を見ても、天引きされる税金や社会保険費の扱い例を見ることはほとんどありません。給与は原則として雇用主が雇い人にまるまる支払うものとなっているからです（公務員などは例外ですが）。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>EmacsやVIMを使うヒトが多いようです。個人的にはEmacsが最適だと思いますが・・・。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>給与を <strong>借方・貸方</strong> 方式で家計簿にまとめる方法については、「<a href="https://webshufu.com/take-home-pay/#i-2">給与収入の仕訳は手取り金額と法定外控除分の二本立て</a>」（中川勉社会保険労務士事務所）でわかりやすく説明されています（図<a href="#org7ad6b01">1</a>）。 <a id="org7ad6b01"></a> <figure>
+    <img src="/debit-credit-salary-trx.jpg"
+         alt="図1: 「給与収入の仕訳は手取り金額と法定外控除分の二本立て」より" width="90%"/> <figcaption>
+            <p>図1: 「給与収入の仕訳は手取り金額と法定外控除分の二本立て」より</p>
+        </figcaption>
+</figure>
+ このサイトは、天引きされる <strong>保険料</strong> や <strong>税金</strong> は自分でコントロールできないので、家計簿には<a href="https://webshufu.com/take-home-pay/#i-2">「記入する必要はありません」</a>という立場です。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>概念を前提としないだけでなく、Ledgerでは借方・貸方の <strong>用語</strong> すら必要としません。しかし <code>--dc</code> オプションを使うとLedgerの出力を借方・貸方のフォーマットに変換して表示することができます。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>Ledgerの出力の通貨単位を <code>JPY</code> ではなくて <strong>円</strong> にしたいときは、 <code>Income:基本給 -250,000 円</code> と書けます。 $ マークは金額の前に書けますが ¥ マークはどうやって書けばよいか良く分かりません。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>日本語を含むLedgerの出力は、残念ながら列がきれいに揃わないことがあります。出力の <strong>列崩壊</strong> が許容されない場合には、ちょっとした小技を必要とします。それについては後日、別の記事にして紹介します。 <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>これはEmacsの <strong>Ledger-mode</strong> 内のみの機能です。他にもたくさんの機能があります。詳しくは<a href="https://www.ledger-cli.org/3.0/doc/ledger-mode.html">Ledger-mode manual</a> を見てください。 <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2021年10月27日T00:00:00&#43;0900 class="date">2021年10月27日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/pension">pension</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E5%B9%B4%E9%87%91">年金</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E7%B5%A6%E4%B8%8E">給与</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E4%BB%95%E8%A8%B3">仕訳</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98">複式簿記</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/ledger-pnl-plotting/" class="prev">投資信託の評価損益を「見える化」する</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/ledger-odometer/" class="next">Ledger — クルマの走行距離トラッキング</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

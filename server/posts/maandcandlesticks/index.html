@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    ローソク足と移動平均をgnuplotで描く | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">ローソク足と移動平均をgnuplotで描く</h2>
+    <div class="post_content">
+      <p><strong>ローソク足</strong> と <strong>移動平均</strong> は 株の分析チャートでは「定番中の定番」です。それをgnuplotで1枚の図に重ね描きしてみました。</p>
+<p>ローソク足と移動平均を重ねて描くアプリやソフトは <strong>無数</strong> にあります。あえてgnuplotを使う意義はさほど大きくはありません。けれども</p>
+<ul>
+<li>フリーソフトなのでコストはゼロです</li>
+<li>ローカルに保存している株価データを使ってコマンド一発でチャートを表示できます</li>
+<li>ローソク足や移動平均の計算方法、表現方法などを自由自在に変更できます</li>
+<li>gnuplotでローソク足と移動平均を重ね描いた事例をネット上で探しました。探し方が悪かったのでしょうか、なかなか見当たりませんでした<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+</ul>
+<p>しかし gnuplot にはローソク足を描くスタイルである <code>candlesticks</code> が標準的に備わっていますし、移動平均はシンプルな折れ線グラフ。何とかなるだろうと軽い気持ちで着手しました。</p>
+<p>始めたら あちこちに落とし穴（「<a href="#kabe">今後の課題など</a>」節）があって、けっこうハマりました 😓</p>
+<p>しかし、なんとか図<a href="#org376825e">1</a>のような図が描けるようになりました。ある会社のおよそ１年間の株価データをプロットして見ました。</p>
+<p><a id="org376825e"></a></p>
+<figure>
+    <img src="/yatta-1.png"
+         alt="図1:  Gnuplotで描いたローソク足と25日,75日移動平均" width="100%"/> <figcaption>
+            <p>図1:  Gnuplotで描いたローソク足と25日,75日移動平均</p>
+        </figcaption>
+</figure>
+
+<p>図<a href="#orgc35f676">2</a>は 図<a href="#org376825e">1</a>の一部を拡大表示したものです。</p>
+<p><a id="orgc35f676"></a></p>
+<figure>
+    <img src="/kakudai.png"
+         alt="図2:  上の図の一部を拡大" width="100%"/> <figcaption>
+            <p>図2:  上の図の一部を拡大</p>
+        </figcaption>
+</figure>
+
+<p>拡大すると いわゆるゴールデングロス、デッドクロス前後の値動きがよく読み取れます。</p>
+<h3 id="補足説明">補足説明</h3>
+<ul>
+<li>
+<p>ローソク足の色は、わが国では値上がり時は<font color="red">赤</font>、値下がり時は<font color="blue">青</font>にするのが一般的のようです</p>
+</li>
+<li>
+<p>英語圏では日本と逆に、値上がりが<font color="blue">青</font>、値下がりが<font color="red">赤</font>が一般的</p>
+</li>
+<li>
+<p>けれども、たとえば<a href="https://investdiva.com/investing-guide/what-do-colored-candlesticks-mean/">こちら</a>などを見ると</p>
+<ul>
+<li>色分けに特に決まりはなく好きな色を使ってよい</li>
+<li>多くのアプリでは値上がり・値下がりに気に入った色を選択可能</li>
+<li>日本では<font color="red">赤</font>はrising sunの象徴なので値上がりになる</li>
+</ul>
+</li>
+<li>
+<p>ということで、結局どっちでも良いようです。</p>
+</li>
+</ul>
+<p>そもそもローソク足チャート分析はわが国が <strong>発祥の地</strong><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>です。日本風の色使いに敬意を表したいのはやまやまですが、個人的な趣味で</p>
+<blockquote>
+<p><font color="red">赤</font>は<font color="red">赤字</font>を連想させるので値下がり、
+<font color="blue">青</font>は<font color="blue">青い空</font>を連想させるので値上がり</p>
+</blockquote>
+<p>としました。</p>
+<p>あと、移動平均の日数(窓サイズ)は、国によってさまざま<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>ですが、ここではわが国で一般的に採用されている短期＝25日、長期＝75日としました。</p>
+<h3 id="gnuplotスクリプト">gnuplotスクリプト</h3>
+<p>銘柄ごとのデータファイルは次のような構造になっています。</p>
+<pre><code class="language-nil" data-lang="nil"># 　日付    始値　 高値   安値　  終値　  出来高 　25MA   75MA
+　　：　　　　：　　　：　　：　　　：　　　：　　　：　　　：
+2022-01-21 2511.0 2548.5 2493.0 2540.5 2011100 2566.52 2459.59
+2022-01-24 2500.5 2533.0 2491.0 2530.0 1808600 2566.26 2462.31
+2022-01-25 2516.0 2516.5 2401.0 2418.0 2793000 2558.52 2464.47
+</code></pre><p>右端の2列（25日移動平均と75日移動平均）の算出は、
+2021/01/24の記事＝「<a href="https://bred-in-bingo.netlify.app/posts/gyaku-watch-curve/">逆ウォッチ曲線をgnuplotで描く」</a>で紹介したコードをbashの関数にして使いました。コードはこの記事の末尾参考資料にある「<a href="#func-mov">移動平均算出関数</a>」にあげておきました。</p>
+<p>銘柄ごとのデータファイルの命名ルールは次のとおりです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">銘柄短縮名（アルファベット大文字）-dohlcvMA.dat
+</code></pre></div><p>たとえば <code>HOGEHOGE-dohlcvMA.dat</code> のようになります。</p>
+<p>ここで
+<code>-dohlcvMA</code> はデータ列名の英語綴の <strong>頭文字</strong> からとっています。つまり
+<b>d</b>ate, <b>o</b>pening price, <b>h</b>igh price, <b>l</b>ow price, <b>c</b>losing price, <b>v</b>olume, <b>M</b>oving <b>A</b>verge　を連ねて <code>-dohcvMA</code> です。</p>
+<h3 id="gnuplotスクリプト">gnuplotスクリプト</h3>
+<p>図<a href="#org376825e">1</a>, <a href="#orgc35f676">2</a>を描出する　gnuplotスクリプト（ <code>double-curve.plt</code> ）は次のとおりです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">reset
+<span style="color:#75715e">#</span>
+data_to_plot<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;~/data保管庫/HOGEHOGE-dohlcvMA.dat&#39;</span>
+out_file<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./out.pdf&#39;</span>
+<span style="color:#75715e"># 土日を詰める</span>
+everyNth<span style="color:#f92672">(</span>countCol,labelCol, N<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   <span style="color:#f92672">((</span>int<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>countCol<span style="color:#f92672">))</span> % N <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> ? stringcolumn<span style="color:#f92672">(</span>labelCol<span style="color:#f92672">)</span> : <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">)</span>
+<span style="color:#75715e"># Y軸の数値に3桁ごとにカンマ（最大8桁）</span>
+set decimal locale
+set format y <span style="color:#e6db74">&#34;%&#39;8.0f&#34;</span>
+set ylabel <span style="color:#e6db74">&#34;株価(円)&#34;</span>
+<span style="color:#75715e"># 軸の設定</span>
+set xtics nomirror
+set mytics <span style="color:#ae81ff">2</span>
+set xtics rotate by <span style="color:#ae81ff">270</span> font <span style="color:#e6db74">&#39;Arial, 8&#39;</span>
+<span style="color:#75715e"># グリッドの設定</span>
+set grid ytics mytics
+<span style="color:#75715e">#  箱に色をつける</span>
+set linetype <span style="color:#ae81ff">1</span> lc rgb <span style="color:#e6db74">&#39;red&#39;</span>
+set linetype <span style="color:#ae81ff">2</span> lc rgb <span style="color:#e6db74">&#39;blue&#39;</span>
+<span style="color:#75715e">#  箱の幅を指定</span>
+set boxwidth 0.4 absolute
+<span style="color:#75715e">#  描出</span>
+set output out_file
+
+plot data_to_plot<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       using 0:2:3:4:5:<span style="color:#f92672">(</span>$5 &lt; $2?1:2<span style="color:#f92672">)</span>:xticlabels<span style="color:#f92672">(</span>everyNth<span style="color:#f92672">(</span>0,1,10<span style="color:#f92672">))</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	      linecolor variable notitle  w candlesticks,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     <span style="color:#e6db74">&#39;&#39;</span>  using 0:7:xticlabels<span style="color:#f92672">(</span>everyNth<span style="color:#f92672">(</span>0,1,10<span style="color:#f92672">))</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       w line lc rgb <span style="color:#e6db74">&#39;web-green&#39;</span> title <span style="color:#e6db74">&#39;25-day&#39;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     <span style="color:#e6db74">&#39;&#39;</span>   using 0:8:xticlabels<span style="color:#f92672">(</span>everyNth<span style="color:#f92672">(</span>0,1,10<span style="color:#f92672">))</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       w line lc rgb <span style="color:#e6db74">&#39;sienna1&#39;</span> title <span style="color:#e6db74">&#39;75-day&#39;</span>
+set output
+pause -1
+</code></pre></div><p><a href="#weekday-only">あとで</a> もう一度触れますが、横軸は一見「時間」ですけれども、スクリプト中におなじみの</p>
+<pre><code class="language-nil" data-lang="nil">set xdata time
+</code></pre><p>がありません。株価データがない土日祝日の非営業日を空白にせずに詰めてプロットするために、
+X軸は文字列扱いになっています。</p>
+<p>なおplot文の最初の <code>using</code> 中にある</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>$5 &lt; $2?1:2<span style="color:#f92672">)</span>
+</code></pre></div><p>は <strong>三項演算子</strong> <code>?</code> を使った条件分岐です。第5列(<strong>終値</strong>)の値が第2列の値(<strong>始値</strong>)よりも小さければ、 <code>linestyle 1</code> （赤字の<font color="red">赤</font>）を使い、そうでないなら <code>linestyle 2</code> （青空の<font color="blue">青</font>）を使うことを記述しています。</p>
+<h2 id="kabe">今後の課題など</h2>
+<h3 id="手こずった点">手こずった点</h3>
+<!--list-separator-->
+<ul>
+<li>
+<p>ローソク足の箱に色をつける方法</p>
+<p>白黒ならばgnuplotの <code>candlesticks</code> スタイルをそのまま使えます。でも色をつけると見やすくなるので前述のように赤と青に塗り分けました。色々な方法がありますが今回は <code>set linetype</code> を使いました。</p>
+</li>
+</ul>
+<!--list-separator-->
+<ul>
+<li>
+<p>箱の幅を拡げる方法</p>
+<p><code>set boxwidth</code> を使いました。次は幅を使って <strong>出来高</strong> の多い少ないを表現する <strong>EquiVolume</strong> チャートを描いててみようと思っています。</p>
+<p><strong>(2020/02/04 追記)</strong> EquiVolumeはわりに簡単にできました。「<a href="https://bred-in-bingo.netlify.app/posts/boxwidth-candlesticks/">gnuplotでローソク足の箱幅を出来高に応じて変える</a> 」をご覧ください。</p>
+</li>
+</ul>
+<!--list-separator-->
+<ul>
+<li>
+<p>土日など非営業日を <strong>詰めて</strong> プロットする方法</p>
+<p>この<a href="https://stackoverflow.com/questions/36030346/remove-weekend-gaps-in-gnuplot-for-candlestick-chart">stackoverflowの記事</a>を参考にしました。gnuplot内で関数を定義できる機能を使っています。</p>
+<pre><code class="language-nil" data-lang="nil">everyNth(countCol,labelCol, N) = \
+   ((int(column(countCol)) % N == 0) ? stringcolumn(labelCol) : &quot;&quot; )
+</code></pre><p>要するにX軸の値を「時間」にせずに「文字列」にするということ。ちょっと不自由な面もありますが、これ以外には簡単な方法が見当たりませんでした。</p>
+<p>その他、移動平均の計算方法として <strong>EMA</strong> (Exponential Moving Average； 指数平滑化移動平均) を試してみたいと思います。</p>
+<p>(完)</p>
+<p><br /></p>
+</li>
+</ul>
+<h2 id="参考資料">参考資料</h2>
+<h3 id="func-mov">移動平均算出関数</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#  移動平均を求める関数</span>
+<span style="color:#75715e">#     引数1 $1 = 入力ファイル名</span>
+<span style="color:#75715e">#     引数2 $2 = 列番号(区切りはスペース前提)</span>
+<span style="color:#75715e">#     引数3 $3 = 窓サイズ</span>
+<span style="color:#75715e">#     出力ファイルは ./tmp-MA-out.dat</span>
+
+<span style="color:#66d9ef">function</span> moving-average <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<span style="color:#75715e">#</span>
+local f_name<span style="color:#f92672">=</span>$1
+local col_num<span style="color:#f92672">=</span>$2
+local window_size<span style="color:#f92672">=</span>$3
+
+<span style="color:#75715e"># ファイルから列を抽出 .csv ならカンマにする</span>
+ext<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>f_name##*.<span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">${</span>ext<span style="color:#e6db74">}</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;csv&#39;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;,&#34;</span>
+<span style="color:#66d9ef">else</span>
+    delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span>
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#</span>
+col<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1,</span><span style="color:#e6db74">${</span>col_num<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e">#</span>
+cut -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>delimiter<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -f <span style="color:#e6db74">${</span>col<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>f_name<span style="color:#e6db74">}</span> &gt; ./tmp-target.dat
+input_file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./tmp-target.dat&#34;</span>
+wc_l<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> cat <span style="color:#e6db74">${</span>input_file<span style="color:#e6db74">}</span> | wc -l <span style="color:#66d9ef">)</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># ここから本体</span>
+<span style="color:#75715e">#</span>
+cp /dev/null ./tmp-MA-out.dat
+i<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>window_size<span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">while</span> <span style="color:#f92672">[</span> $i -lt <span style="color:#66d9ef">$((</span> $wc_l <span style="color:#66d9ef">))</span> <span style="color:#f92672">]</span> <span style="color:#75715e"># attn</span>
+<span style="color:#66d9ef">do</span>
+    head -n $i <span style="color:#e6db74">${</span>input_file<span style="color:#e6db74">}</span> | tail -n <span style="color:#e6db74">${</span>window_size<span style="color:#e6db74">}</span> &gt; ./tmp.dat
+    awk <span style="color:#e6db74">&#39;{a+=$2} END{print $1, a/NR;}&#39;</span> ./tmp.dat &gt;&gt; ./tmp-MA-out.dat
+    i<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> $i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>
+<span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>gnuplotでの重ね書きの記事がぜんぜん無いわけではありません。 <a href="https://spare-time-trading.com/en/know-how-en/106-generating-charts-with-gnuplot">Generating charts with Gnuplot</a>ではgnuplotですばらしい <code>ichimoku</code> 出力を描く方法が公開されています。下図の通り、ほとんど完璧な分析チャートです。 <figure>
+    <img src="/DAX_light2.png" width="80%"/> 
+</figure>
+ しかし、ここまでの情報は自分には多すぎます。簡単にローソク足と移動平均だけの描出例を探していました。そうした例は、Pythonなどを使ったものはありましたが、gnuplotでは見つかりませんでした。gnuplotのユーザには株の分析チャートのニーズが高くないのか、あるいはgnuplotユーザは自力でなんでも描ける人が多いので、解説記事の需要がないのかもしれません 😄 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>ローソク分析は、山形県酒田市出身の米商人である本間宗久(図<a href="#org4ba421a">3</a>)が創案したそうですが、その真偽を巡っては議論もあります。しかしいずれにしてもローソク足分析が日本で発生し広まったのは間違いないようです。 <a id="org4ba421a"></a> <figure>
+    <img src="/%e6%9c%ac%e9%96%93%e5%ae%97%e4%b9%85.jpg"
+         alt="図3: 本間宗久（1724年(享保9年)〜1805年（享和3年））の肖像画(早坂豊蔵；作画年1900年)。出典は酒田市立図書館/光丘文庫デジタルアーカイブ。" width="30%"/> <figcaption>
+            <p>図3: 本間宗久（1724年(享保9年)〜1805年（享和3年））の肖像画(早坂豊蔵；作画年1900年)。出典は<a href="https://trc-adeac.trc.co.jp/WJ11F0/WJJS07U/0620415100/0620415100200020/mp200750/?Word=%e6%9c%ac%e9%96%93%e5%ae%97%e4%b9%85">酒田市立図書館/光丘文庫デジタルアーカイブ</a>。</p>
+        </figcaption>
+</figure>
+ <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>移動平均の日数は、各国の株式市場の営業日などの事情で変わってくるようです。<a href="https://www.investopedia.com/ask/answers/122414/what-are-most-common-periods-used-creating-moving-average-ma-lines.asp">Investopedia</a>によれば、もっとも一般的なのは <strong>5, 10, 20, 50日</strong> だそうです。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年1月31日T00:00:00&#43;0900 class="date">2022年1月31日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E6%A0%AA">株</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%83%AD%E3%83%BC%E3%82%BD%E3%82%AF%E8%B6%B3">ローソク足</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E7%A7%BB%E5%8B%95%E5%B9%B3%E5%9D%87">移動平均</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/candlesticks">candlesticks</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/gyaku-watch-curve/" class="prev">逆ウォッチ曲線をgnuplotで描く</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/boxwidth-candlesticks/" class="next">gnuplotでローソク足の箱幅を出来高に応じて変える</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

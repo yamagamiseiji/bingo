@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    プレーンテキストファイルで「複式」家計簿（4） | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">プレーンテキストファイルで「複式」家計簿（4）</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">トランザクションのスケジューリング</a>
+<ul>
+<li><a href="#%E8%A3%9C%E8%B6%B3">（補足）</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E4%B8%AD%E3%81%AE%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E8%A8%88%E7%AE%97%E5%BC%8F%E3%82%92%E4%BD%BF%E3%81%86">トランザクション中のアカウントで計算式を使う</a></li>
+<li><a href="#%E6%9C%88%E5%88%A5%E3%81%AE%E6%94%AF%E5%87%BA%E3%82%92%E3%81%96%E3%81%8F%E3%81%A3%E3%81%A8%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84">月別の支出をざくっと知りたい</a></li>
+<li><a href="#%E5%B8%B3%E7%B0%BF%E3%81%AE%E4%B8%96%E7%95%8C%E5%8F%B2-%E6%96%87%E6%98%A5%E6%96%87%E5%BA%AB">「帳簿の世界史（文春文庫）」</a>
+<ul>
+<li><a href="#%E8%B3%87%E6%A0%BC%E3%81%A8%E5%AD%A6%E4%BC%9A%E3%81%A8%E4%B8%80%E8%88%AC%E4%BA%BA%E3%81%AE%E3%83%AA%E3%83%86%E3%83%A9%E3%82%B7%E3%83%BC">資格と学会と一般人のリテラシー</a></li>
+<li><a href="#%E3%82%82%E3%81%97%E3%81%8B%E3%81%97%E3%81%9F%E3%82%89">もしかしたら</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<!--endtoc-->
+<h2 id="トランザクションのスケジューリング">トランザクションのスケジューリング</h2>
+<p>繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。</p>
+<p>そのため結構四苦八苦しましたが、<a href="https://groups.google.com/forum/m/#!topic/ledger-cli/MZwjYEp2rjU">ここ</a>の記事を見て「目からウロコ！」。やり方は簡単で、まずホームディレクトリに <strong>ledger-schedule.ledger</strong> という名前（ディフォールトです）で、次のようなコンテンツのファイルを作ります：</p>
+<pre><code class="language-nil" data-lang="nil">;;; 毎月
+[*/*/01]   NTTコミュニケーション
+    Expenses:通信費   　    4590 JPY
+    Assets:三菱UFJ
+[*/*/05]   東京ガス
+    Expenses:公共料金:ガス  4000 JPY
+    Assets:三菱UFJ
+　　　：
+;;; 隔月
+[*/E/01]  団地管理費
+    Expenses:管理費:横浜    40400 JPY
+    Assets:三菱UFJ
+　　　：
+;;; 年に1回
+[*/03/31]   日本基礎心理学会
+    Expenses:諸会費          9000 JPY
+    Assets:Cash
+　　　：
+</code></pre><p>そして、Emacsでメインのledgerファイルを開き、メニューから、「Ledger」 &ndash;&gt;  「Show upcoming transaction（C-c C-u）」をクリックすると、本日から7日 <strong>前</strong> および15日 <strong>後</strong> の間の定期的トランザクションの候補が上記ファイルから読み出されて、2ndバッファに表示されます。ユーザはそれを <strong>コピペ</strong> して使う、というしかけです。</p>
+<p>ここで「隔月」の <code>E</code> は偶数月(even)の意味です。奇数月の場合には <code>O</code> (odd)にします。その他、たとえば毎月1日と15日のトランザクションの場合には、 <code>[*/*/1,15]</code> などとします。詳しくはマニュアルを見て下さい。</p>
+<p>なお細かいことですが、ノートPCなど画面の小さいPCで作業する際には、 <strong>C-c C-u</strong> する前に、 <strong>C-x 3</strong> でEmacsの窓を <strong>縦に</strong> 2分割しておくと、 <strong>C-c C-u</strong> したときに両ファイルの視認性がよくなり作業が楽です。</p>
+<p>定期的なトランザクションと言っても、月ごとに金額も変動しますし、曜日の巡り合わせで日付も変動します。したがって、この機能は完全に全自動で仕訳帳に転記してくれるというものではありません。しかし、転記の手間はかなり省けますし、なによりも転記忘れミスの防止には大いに役立ちます。なおこの機能はEmacs内に限定されています。</p>
+<h3 id="補足">（補足）</h3>
+<p>このシリーズの(3)で、「定期的なトランザクション」について記述しましたが、そこで紹介したのはbudget（予算建て）と関連して使うことを想定してしたものでした。そこで記帳された内容はバランスなどの計算の対象となるものではありませんでした。中途半端な紹介をして申し訳ありませんでした。なお予算建てと収支予測などについては後日あらためて紹介したいと思います。</p>
+<h2 id="トランザクション中のアカウントで計算式を使う">トランザクション中のアカウントで計算式を使う</h2>
+<p>次の例は、セブンイイレブンで買い物をしましたが、買ったものは当日のランチの他、夕食や朝食などの一般食品も含まれていて、総額=1,194円。それをナナコカードで支払ったという例です。</p>
+<p>レシートには品名が書いてあるので、ランチ用品がどれで一般食品がどれかはわかります。それを見ながら電卓を叩けば、ランチの合計、一般食品の合計は計算できますが、面倒です。そこでランチの2品だけの価格を足し算の「式」でアカウントに転記し、あとはレシートの合計欄の金額を転記すれば、一般食品の金額はLedgerが計算して補完してくれます：</p>
+<pre><code class="language-nil" data-lang="nil">2019/06/20 * セブンイレブン
+    Expenses:Lunch                                (289 JPY + 138 JPY)
+    Expenses:Grocery:Food
+    Assets:nanaco                                 - 1194 JPY
+</code></pre><p>これは、日々の生活でとても便利です。なお、許容される式の書き方の感じは以下のとおりです：</p>
+<pre><code class="language-nil" data-lang="nil">(289 JPY + 138 JPY)   ---&gt; ok
+(JPY 289 + JPY 138)   ---&gt; ok
+(289 JPY + JPY 138)   ---&gt; ok
+(289 + 138 ) JPY      ---&gt; no!
+(289 JPY * 2)         ---&gt; ok
+</code></pre><p>式の書き方の詳細はマニュアルを参照して下さい。</p>
+<h2 id="月別の支出をざくっと知りたい">月別の支出をざくっと知りたい</h2>
+<p><code>reg</code> では、</p>
+<pre><code class="language-nil" data-lang="nil">ledger reg cars -M
+</code></pre><p>なとどすれば、簡単にクルマCars関係の月ごとのレポートが表示されます。 <code>reg report</code> ほど細かくなくても良いので、 <code>bal -M</code> で月ごとのサマリが表示できると便利なのですができません。これに関してはマニュアルにも記述がありませんでした。</p>
+<p>しばらく不便をかこっていたら、Wiegleyさんがフォーラムに次のような記事を書いているのを見つけました(　<a href="https://www.mail-archive.com/ledger-cli@googlegroups.com/msg09020.html">https://www.mail-archive.com/ledger-cli@googlegroups.com/msg09020.html</a> )：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RE:Monthly balance position
+
+John Wiegley |  Thu, 12 Apr 2018 12:08:20 -0700
+
+&gt;&gt;&gt;&gt;&gt; &#34;RL&#34; == Richard Lawrence &lt;wyl...@gmail.com&gt; writes:
+
+RL&gt; I don&#39;t think so, at least not with regular ledger. I&#39;d be happy to be
+RL&gt; proven wrong, though! I have also wanted this feature.
+
+You can use:
+
+    ledger --group-by &#39;format_date(date, &#34;%Y/%m&#34;)&#39; bal
+
+John
+</code></pre></div><p>なるほど！これは素晴らしい！ということで、もう少し具体的な例にして紹介しておきます：</p>
+<pre><code class="language-nil" data-lang="nil">$ ledger bal --group-by 'format_date(date, &quot;%Y-%m&quot;)' --depth 2 expenses and not 租税公課
+</code></pre><p>この例だと、支出Expensesから「租税公課」を除いて、支出の第２階層のカテゴリまでのアカウントの金額が、月ごとにbalレポート表示されます。もちろん、期間を限定したければ、このコマンドの後ろに、 <code>--period</code> 指定します。</p>
+<p>これはとても便利で頻繁に使えます。しかし、あまりにコマンドの文字列が長くなるので、簡単な <strong>シェルスクリプト</strong> にしておくとよいでしょう。その際、次のように&quot;expenses and not 租税公課&quot;のところだけを標準入力から受け入れるようにしておけば、汎用性が少し高まります（スクリプト名＝ <strong>mbal.sh</strong> ）：</p>
+<pre><code class="language-shell-script" data-lang="shell-script">#!/bin/bash
+#
+#  引数入力されたアカウント等（Payee,Tagなどを含む）を
+#  月ごとにbal reportするスクリプト
+#     Usage: mbal &quot;EXPR&quot; RET
+#     Examples: mbal &quot;expenses and not 租税公課&quot; RET
+#               mbal &quot;expenses and %hinako&quot; RET
+#               mbal &quot;expenses and not Cars -e apr&quot; RET
+# 　　 **attn** 引数にはクオートをつけること
+
+if [ $# = 0 ]
+then
+    echo 'Usage: mbal 'EXPR'
+    exit 1
+fi
+
+options=$1
+
+/usr/bin/ledger bal\
+      -f Your_Ledger_File.ledger\
+      --group-by 'format_date(date, &quot;%Y-%m&quot;)'\
+      --depth 2\
+      $options
+</code></pre><p>これだけです。 <strong>mbal</strong> はmonthly balanceのつもりですw</p>
+<h2 id="帳簿の世界史-文春文庫">「帳簿の世界史（文春文庫）」</h2>
+<figure>
+    <img src="/s-reckoning.jpg" width="70%"/> 
+</figure>
+
+<p>この本は <strong>複式簿記</strong> の歴史、というよりも歴史上のいくつかの王国や政府などが滅亡したのは、会計帳簿をきちんとつけなかったために財政破綻したからだ、というストーリになっています。この主張が歴史科学的にどれほど妥当なのかは門外漢のボクには評価できませんが、とても強い印象を受けました。</p>
+<p>また、専門家には当たり前の常識だったのでしょうが、わが国に複式簿記を紹介したのが <strong>福沢諭吉</strong> であることを、この本で初めて知りました。</p>
+<p>さてそれはともかく、これまで学会の理事会、大学の理事会・評議委員会などの末席を汚した経験がありますが、その時点では会計の「いろはのい」すら知りませんでした。まことに申し訳なかったと反省しています。しかし、ボクの経験から推測すると、それらの会議体に提出される会計書類の具体的な内容を理解すること、およびそれらの書類の基礎または背後にある実体的な意味合いを理解すること、つまり会計帳簿、とりわけ複式簿記に関するリテラシーを持っていたのは、会議出席者のごく一部であったように思います。</p>
+<p>もし本書の主張するように、どれほどの人々が帳簿読み取りの知識をもっているか、そのことがその組織、集団さらには国の盛衰に影響を及ぼすとすれば、残念ながらボクの参与していたそれらの組織体の将来的な見通しはかなり厳しいと言えるかもしれません。</p>
+<h3 id="資格と学会と一般人のリテラシー">資格と学会と一般人のリテラシー</h3>
+<p>わが国では、ちゃんとした簿記の資格があって、人口比率でいえば複式簿記のリテラシーを持つ者の率は高いような気もしますが、実態はどうなのでしょうか？米国では高等学校で行う「会計」教育のきちんとしたプログラム案があるようです。わが国では商業高校など以外では会計教育は行われていませんですよね。それから、ちょっと気がかりになったので、わが国で「会計」の語を含む <strong>学会</strong> の構成員の数を調べてみました。心理学のようにマイナー（？）な学問でも10,000人規模の学会がいくつかあったりしますが、商学部や経営学部などに在籍している学生数に比して、思いの外、学会構成員数が少ないのに驚きました。</p>
+<p>簿記には何級といった資格もあるし、専門職として公認会計士、税理士などの確立したキャリアパスがあるのですが、いわゆる一般の人々（一般職サラリーマン、公務員、家計を預かる主婦・主夫の方など）などへの普及は、もしかしたら進んでいないのかもしれません。実態を把握できる調査結果を見てみたいと思っています。</p>
+<h3 id="もしかしたら">もしかしたら</h3>
+<p>複式簿記は、勉強を始めた第一歩のところで、いきなり <strong>貸方</strong> 、 <strong>借方</strong> というとても日本語として理解しづらい言葉が出てきます。ボクもこれで激しい「目まい」を覚えました。いろいろな専門家集団がギルドの利益と構成員の食い扶持を守るするために、時として意図的に <strong>ジャーゴン</strong> を使うことがままありますが、まさか会計関係ではそんなことは無いと思います。会計・経理はその基礎に厳格な「倫理」がないと成り立たず、社会からの信頼もそれによって保たれているからです。しかし、少なくとも一般人からとても敷居が高くなっている（ように見える）状況は、福沢諭吉の意図していたこととは異なるのかも知れません。</p>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2019年7月7日T16:15:00&#43;0900 class="date">2019年7月7日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/tdm1874/" class="prev">だんだん日本ワインが・・・</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/5th-step_ledger/" class="next">プレーンテキストファイルで「複式」家計簿（5）</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

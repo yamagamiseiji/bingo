@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    ノートPC (X230) のDC電源ジャック交換 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">ノートPC (X230) のDC電源ジャック交換</h2>
+    <div class="post_content">
+      <p>lenovoのThnkPad X230を複数台使いまわしています。そのうちの1台がバッテリーが充電されなくなりました。いまメインで使っているノートPCでホスト名は <strong><strong>ikuta</strong></strong> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>と言います。</p>
+<h2 id="dc電源ジャックは">DC電源ジャックは</h2>
+<p>ACアダプタのDCプラグを挿すための穴で、ThinkPad X230でもたいがいのノートPCと同じように背後にあります。</p>
+<figure>
+    <img src="/X230%e9%9b%bb%e6%ba%90%e3%82%b8%e3%83%a3%e3%83%83%e3%82%af.jpg"
+         alt="図1:  X230のDC電源ジャック" width="60%"/> <figcaption>
+            <p>図1:  X230のDC電源ジャック</p>
+        </figcaption>
+</figure>
+
+<h2 id="故障の症状-原因">故障の症状・原因</h2>
+<h3 id="症状">症状</h3>
+<p>ACアダプタを接続して使用していたが、充電中のマークが表示されなくなり、充電不能になった。しかし、バッテリーだけで起動すれば問題なく使えるので、バッテリー関係の障害ではない。またACアダプターの問題ではないことも、他のアダプターに変えて確認した。</p>
+<h3 id="原因">原因</h3>
+<p>本体背後のDC電源ジャックにACアダプタを挿すと、まえからゆるゆるグラグラしていて気にはなっていたが、要するにこいつが接触不良を起こしたという結論。当初、安直にも有償修理をトライしたが瞬殺で挫折。その後、部品が比較的入手しやすいことが分かったので、自力でX230を分解し故障部品を交換することにした。</p>
+<h3 id="故障部品">故障部品</h3>
+<p>下の写真が本体から取り出した故障部品のDC電源ジャック＆ケーブル（新品はAmazonで1,020円)。</p>
+<p><a id="org9b220b6"></a></p>
+<figure>
+    <img src="/DC%e9%9b%bb%e6%ba%90%e3%82%b8%e3%83%a3%e3%83%83%e3%82%af.jpg"
+         alt="図2:  X230のDC電源ジャック（取り外したもの）" width="60%"/> <figcaption>
+            <p>図2:  X230のDC電源ジャック（取り外したもの）</p>
+        </figcaption>
+</figure>
+
+<h3 id="mb-取り出しまでの解体手順">MB 取り出しまでの解体手順</h3>
+<p>参考にしたのは、
+<a href="https://www.ifixit.com/Guide/Lenovo+Thinkpad+x230+Motherboard+Replacement/72850">Lenovo Thinkpad x230 Motherboard Replacement</a>
+まぁまぁよく出来た手順説明だが、分かりづらかったのは：</p>
+<dl>
+<dt>Step 20</dt>
+<dd>Unlock white seal and disconnect blue cable from upper corner.</dd>
+</dl>
+<p>この「白いシールのロックを外す」が理解できなかった。結局、ここは取り外さなくともDC電源ジャックの交換はできそうだったのでスルーした。</p>
+<dl>
+<dt>Step 25</dt>
+<dd>写真の右端に、本来ある小さな基盤（5mm x 15mm程度）が映っていない。白い小さなソケットに上からハマるようなICの乗った基盤があって、それを白い頭のネジで固定するようになっている。その基盤がMBを取り外した時に、カランと落ちたが、どこから落ちたのか分からなかった。別のX230をMBが見えるようにして、探してようやく理解できた次第。</dd>
+</dl>
+<h2 id="自力修理に至るまでの四苦八苦">自力修理に至るまでの四苦八苦</h2>
+<h3 id="sofmap-に電話">Sofmap に電話</h3>
+<p>20220411 13:15</p>
+<blockquote>
+<p>製品の修理のお問い合わせはこちら
+○サポート専用ダイヤル製品の修理のお問い合わせはカスタマーセンターサポート専用ダイヤル ： 0077-78-9666
+営業時間 10:00～19:00
+携帯電話、PHS、IP電話からは東日本地区：<font color=red>050-3032-9666</font>　西日本地区：050-3163-9666
+担当 たてかわさん</p>
+</blockquote>
+<p>ソフマップでは対応不能の回答</p>
+<h3 id="パソコン修理のイーハンズ">パソコン修理のイーハンズ</h3>
+<p>修理見積もりを依頼したら、19,960円（税別）の回答！ふざけた値段だ。メーカ依頼すると3万〜5万と抜かしておる。</p>
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>ノートパソコンのホスト名は地名をつけて、その土地の風景写真を画面の背景にしています。ikutaは川崎市多摩区生田で背景画面は桝形山城址公園。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年4月14日T00:00:00&#43;0900 class="date">2022年4月14日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/computer">computer</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/diy">DIY</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    gnuplotでローソク足の箱幅を出来高に応じて変える | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">gnuplotでローソク足の箱幅を出来高に応じて変える</h2>
+    <div class="post_content">
+      <p>ローソク足の箱幅を当日の <strong>出来高</strong> に応じて可変にしてみました<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>ある会社のゴールデンクロス前後あたりを抽出して描いた図は次の通りです。</p>
+<p><a id="org80a23ae"></a></p>
+<figure>
+    <img src="/50days-candle.png"
+         alt="図1:  ローソク足の幅を出来高の指標とした例図" width="100%"/> <figcaption>
+            <p>図1:  ローソク足の幅を出来高の指標とした例図</p>
+        </figcaption>
+</figure>
+
+<p>このように描くと、たしかに <strong>市場エネルギー</strong> <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>の大小と変動が直感的に分かりやすいような気がします。</p>
+<ul>
+<li><font color='red'>赤</font>い箱は<font color='red'>赤字</font>で値下がり、<font color='blue'>青</font>い箱は<font color='blue'>青空</font>で値上がりを示しています</li>
+<li>ローソク足の箱幅(boxwidth)のためのデータ列は、期間中の最大出来高を <strong>0.99</strong>, 最小出来高を <strong>0.09</strong> になるように変換したものとなっています</li>
+<li>出来高の最大値、最小値はこの図の期間中ではなくて過去1年間のデータに基づいています</li>
+</ul>
+<p>なお英語ではこのようなチャートを <strong>Equivolume Chart</strong> と言います。日本語では「等量チャート」になるのでしょうか？しかし、この訳語はあまり一般的には使用されていないようです<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<h2 id="描き方">描き方</h2>
+<p>gnuplotマニュアルの「2-35 candlesticks」の項には次のような記述があります。</p>
+<blockquote>
+<p>長方形の幅はコマンド set boxwidth で制御できますが、以前の gnuplotへの後方互換性として、boxwidth パラメータが設定されていない場合はset bars &lt; width&gt; で制御されるようになっています。</p>
+<p>これの代わりに、箱ひげ (box-and-whisker) のグループ化に関する明示的な <strong><strong>幅の指定を、追加の 6 番目のデータで指定できます</strong></strong> 。その幅は、x座標と同じ単位で与えなければいけません。</p>
+</blockquote>
+<p>つまり
+x軸が時間軸の場合には、幅指定の単位は秒換算された <strong>UNIX時間</strong> にする必要があります。</p>
+<p>しかし今回のローソク足プロットでは、土日祝日の休業日を詰めて表示するために
+<code>everyNth</code> 関数を導入していました。この関数の「副作用」で、x軸は時間ではなくて文字列になっています。そのため 幅指定を0〜1.0の間で変動する数値でおこなうことができました 😃</p>
+<h3 id="データファイルの構成">データファイルの構成</h3>
+<p>株価データファイル（ <code>HOGE-dohlcv.dat</code> ）の当該期間中の出来高( <em>volume</em> )を
+0.09〜0.99 の間で変動する <strong>相対箱幅</strong> ( <em>boxwidth</em> ）に変換しました（式1）。
+\[
+boxwidth = \Bigl\{\frac{(volume - min)}{(max - min)} + 0.1 \Bigr\} \times 0.9　　　　(1)
+\]</p>
+<p><br /></p>
+<p>計算のためのコードは「<a href="#%E5%B9%85%E8%A8%88%E7%AE%97">相対箱幅を求める</a>」節を参照してください。</p>
+<p>得られた <strong>相対箱幅</strong> をデータファイルの第9列に <code>paste</code> で貼り付けました。</p>
+<pre><code class="language-nil" data-lang="nil">#日付      始値   高値    安値   終値　　　出来高　　MA25    MA75    相対箱幅
+2021-11-18 2332.0 2354.0 2320.0 2339.5 1798600 2395.48 2350.03 0.181684
+2021-11-19 2381.0 2488.5 2372.0 2484.5 4652700 2401.82 2351.91 0.501463
+2021-11-22 2440.0 2476.5 2435.5 2454.0 2628600 2404.36 2353.37 0.274679
+2021-11-24 2438.0 2500.0 2419.0 2431.5 2990400 2405.82 2356.15 0.315216
+    :
+</code></pre><h2 id="gnuplot-code">gnuplot Code</h2>
+<p>gnuplotスクリプト内でやることは、次の行の <code>using</code> 相対箱幅のデータ列である <code>:9</code> を追加する変更だけです。</p>
+<pre><code class="language-nil" data-lang="nil">plot using 0:2:3:4:5:9:($5 &lt; $2?1:2):xticlabels(everyNth(0,1,10)) \
+	      linecolor variable notitle  w candlesticks,\
+</code></pre><p>参考にしたURLはこちら。</p>
+<h3 id="最低限のgnuplotスクリプト">最低限のgnuplotスクリプト</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">reset
+  set terminal  pngcairo size 1280, <span style="color:#ae81ff">960</span> font <span style="color:#e6db74">&#34;Arial, 16&#34;</span>
+  set output <span style="color:#e6db74">&#34;out.png&#34;</span>
+<span style="color:#75715e">#</span>
+  data_to_plot<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./50day-hoge.dat&#39;</span>
+<span style="color:#75715e">#</span>
+  set style fill solid
+<span style="color:#75715e">#  土日を除外するための関数</span>
+  everyNth<span style="color:#f92672">(</span>countCol,labelCol, N<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">((</span>int<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>countCol<span style="color:#f92672">))</span> % N <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> ? stringcolumn<span style="color:#f92672">(</span>labelCol<span style="color:#f92672">)</span> : <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">)</span>
+<span style="color:#75715e">#  Y軸の数値に3桁ごとにカンマ（最大8桁）</span>
+  set decimal locale
+  set format y <span style="color:#e6db74">&#34;%&#39;8.0f&#34;</span>
+  set ylabel <span style="color:#e6db74">&#34;株価(円)&#34;</span> font <span style="color:#e6db74">&#34;Arial, 16&#34;</span>
+  set ytics font <span style="color:#e6db74">&#39;Arial, 16&#39;</span>
+<span style="color:#75715e">#  軸の設定</span>
+  set mytics <span style="color:#ae81ff">2</span>
+  set xtics rotate by <span style="color:#ae81ff">270</span> font <span style="color:#e6db74">&#39;Arial, 16&#39;</span>
+  set grid ytics mytics
+<span style="color:#75715e">#  箱に色をつけるための下準備</span>
+  set linetype <span style="color:#ae81ff">1</span> lc rgb <span style="color:#e6db74">&#39;red&#39;</span>
+  set linetype <span style="color:#ae81ff">2</span> lc rgb <span style="color:#e6db74">&#39;blue&#39;</span>
+<span style="color:#75715e">#</span>
+  plot data_to_plot<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       using 0:2:3:4:5:9:<span style="color:#f92672">(</span>$5 &lt; $2?1:2<span style="color:#f92672">)</span>:xticlabels<span style="color:#f92672">(</span>everyNth<span style="color:#f92672">(</span>0,1,10<span style="color:#f92672">))</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	      linecolor variable notitle  w candlesticks,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     <span style="color:#e6db74">&#39;&#39;</span>  using 0:7:xticlabels<span style="color:#f92672">(</span>everyNth<span style="color:#f92672">(</span>0,1,10<span style="color:#f92672">))</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       w line lc rgb <span style="color:#e6db74">&#39;web-green&#39;</span> title <span style="color:#e6db74">&#39;25-day&#39;</span>,<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>     <span style="color:#e6db74">&#39;&#39;</span>   using 0:8:xticlabels<span style="color:#f92672">(</span>everyNth<span style="color:#f92672">(</span>0,1,10<span style="color:#f92672">))</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>       w line lc rgb <span style="color:#e6db74">&#39;sienna1&#39;</span> title <span style="color:#e6db74">&#39;75-day&#39;</span>
+pause -1
+</code></pre></div><p>（完）</p>
+<h2 id="siryo">参考資料</h2>
+<h3 id="幅計算">相対箱幅を求める</h3>
+<p>bashスクリプト内で計算しますので、awkを使っています。</p>
+<h4 id="出来高の最大値-最小値">出来高の最大値、最小値</h4>
+<pre><code class="language-nil" data-lang="nil"># 最大値を求める
+v_max=$(awk 'NR==1 {max=$1} {if($1&gt;max) max=$1} END{print max}'\
+	${data_dir}/tmp-vol.dat )
+#最小値を求める
+v_min=$(awk 'BEGIN{min=100000000} {if($1 !=&quot;&quot; &amp;&amp; min&gt;$1) min=$1} END{print min}' ${data_dir}/tmp-vol.dat)
+</code></pre><h4 id="相対箱幅計算">相対箱幅計算</h4>
+<p>上の式１にしたがって、日毎の相対箱幅 <code>${box_width}</code> を計算します。</p>
+<pre><code class="language-nil" data-lang="nil">box_width=$(awk &quot;BEGIN {print (((${vol}-${v_min})/(${v_max}-${v_min})+0.1)*0.9)}&quot;)
+</code></pre><h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>この件、2022/01/31のブログ記事<a href="https://bred-in-bingo.netlify.app/posts/maandcandlesticks/">「ローソク足と移動平均をgnuplotで描く」</a>で、今後の課題の一つに上げていました。手こずる予感がありましたが、この改変はとてもすんなり行きました。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>出来高と値動きが株式市場のエネルギーを反映するという意味です。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>チャート分析において、ローソク足の箱幅を出来高にする表現方法が使われていないわけではありません。「等量チャート」という語がネット上で少ししかヒットしないという意味です。日本では、ローソク足は特に断らなくてもEquivolumeなチャートだったりすることが多いのかも知れません。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年2月4日T00:00:00&#43;0900 class="date">2022年2月4日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/candlesticks">candlesticks</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%83%AD%E3%83%BC%E3%82%BD%E3%82%AF%E8%B6%B3">ローソク足</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E5%87%BA%E6%9D%A5%E9%AB%98">出来高</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E7%AE%B1%E5%B9%85">箱幅</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/maandcandlesticks/" class="prev">ローソク足と移動平均をgnuplotで描く</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/creditcard-csv-conv/" class="next">Ledger帳簿とクレジットカード利用明細との照合確認</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

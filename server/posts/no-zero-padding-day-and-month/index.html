@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Gnuplotで月の数字をゼロ埋めしない方法 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Gnuplotで月の数字をゼロ埋めしない方法</h2>
+    <div class="post_content">
+      <h2 id=""></h2>
+<p>描きたかったのは図<a href="#org48bc229">1</a>のように
+X軸の「月」をゼロ埋めしない数字にしたチャート<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p><a id="org48bc229"></a></p>
+<figure>
+    <img src="https://dl.dropboxusercontent.com/s/fdjzi6fnxlc17e5/single-digit-month-sample.svg%22"
+         alt="図1:  X軸の目盛り=月の数値がゼロ埋めされていない" width="90%"/> <figcaption>
+            <p>図1:  X軸の目盛り=月の数値がゼロ埋めされていない</p>
+        </figcaption>
+</figure>
+
+<p>Bashでは <code>%-m</code> と書けばゼロ埋めされない月になります。なのでGnuplotでも簡単にできると思ったのですが、ちょっと甘かったです。</p>
+<p>Gnuplotのマニュアルを見ると、「月」には次のようなフォーマットがあります。</p>
+<table>
+<thead>
+<tr>
+<th>フォーマット</th>
+<th>説明</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%b or %h</td>
+<td>月の省略名</td>
+<td>Jan, Feb&hellip;</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>月のフルネーム</td>
+<td>January, February..</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月のゼロ埋めされた数字</td>
+<td>01,02&hellip;</td>
+</tr>
+</tbody>
+</table>
+<p>けれどもゼロ埋めしないためのフォーマットを見つけることはできませんでした。当然のことながら <code>%-m</code> にしてもBashのようにはなりません 😓</p>
+<p>多くのユーザには「当たり前」で「常識」の話なので記事にするまでもないことなのか、それともGnuplotユーザにはゼロ埋めしない月を軸の目盛りに書くニーズがないのか、あるいは自分のネット検索の方法が悪いのか、いずれにしても当時は日本語での関係記事を見つけることができず、数年間ほど放置していました。</p>
+<p>ところが最近になって、あらためて英語ページも含めて探してみたら、ちゃんとありました<span style="color: red">!!!</span> 　参考にした記事は<a href="https://stackoverflow.com/questions/62410451/single-digit-month-and-day-format-specifier-in-gnuplot-5-2">こちら</a>（など）です。</p>
+<p>　ということで自分用の備忘としてここにメモしておきます。</p>
+<h2 id="サンプルデータとコード">サンプルデータとコード</h2>
+<p>データはLedger-cliで算出した月ごとの水光熱費のサンプルデータです<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<pre><code class="language-nil" data-lang="nil">2021-10-01 18257
+2021-11-01 21196
+2021-12-01 20420
+2022-01-01 23295
+2022-02-01 23741
+2022-03-01 21057
+2022-04-01 21540
+2022-05-01 24144
+2022-06-01 17953
+2022-07-01 18296
+2022-08-01 16668
+2022-09-01 1055
+</code></pre><p>図<a href="#org48bc229">1</a>は次のようにして簡単に描けました（参考ページのおかげです） 😄</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/gnuplot
+</span><span style="color:#75715e"></span>set xdata time
+set timefmt <span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span>
+set format x <span style="color:#e6db74">&#34;%01m&#34;</span> time
+<span style="color:#75715e"># date -d &#34;2021/10/01&#34; &#34;+%s&#34; ==&gt; 1633014000最近になって、あらためて英語ページも含めて探してみた</span>
+set xrange <span style="color:#f92672">[</span>1633014000:<span style="color:#f92672">]</span>
+
+plot <span style="color:#e6db74">&#39;./tmp-all-UC.csv&#39;</span> u 1:2 w linespoints
+pause -1
+</code></pre></div><p>ようするにミソは、Bashなら <code>%-m</code> とするところを<span style="color: red"> %01m</span>にするだけ<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<p>なお上の例では、
+xrangeをセットしないと、なぜか一ヶ月前の <code>2021/09/01</code> からプロットされましたので、描出開始日をunixtime化しておいて <code>set xrange</code> してます。</p>
+<h2 id="おまけ">おまけ</h2>
+<h4 id="日にちをゼロ埋めなしにする">日にちをゼロ埋めなしにする</h4>
+<p>フォーマットを <span style="color: red">%01d</span> にします。</p>
+<h4 id="y軸への適用">Y軸への適用</h4>
+<p><strong><strong>Y軸</strong></strong> が月の場合にゼロ埋めなしで描く方法について、おもしろい記事がありました。
+<a href="https://stackoverflow.com/questions/65086109/how-to-plot-month-numbers-in-gnuplot-5-4">https://stackoverflow.com/questions/65086109/how-to-plot-month-numbers-in-gnuplot-5-4</a></p>
+<h4 id="ちなみに">ちなみに</h4>
+<p>図<a href="#orgb7e4b70">2</a>は過去25ヶ月分のわが家の水光熱費のサンプルチャートです。
+X軸の月の数字をゼロ埋め無しにしたおかげで、これまでよりもはるかに見やすくなりました。</p>
+<p><a id="orgb7e4b70"></a></p>
+<figure>
+    <img src="/out-tmp_20220903.svg" width="90%"/> 
+</figure>
+
+<h2 id="footnotes">Footnotes:</h2>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>正しくは「左ゼロ埋め」とか「前ゼロ埋め」でしょうか。英語の <strong>zero padding</strong> をそのままカタカナにして「ゼロパディング」の言い方が多いようです。またゼロ埋めしないことは <strong>zero suppress</strong> （ゼロサプレス）ということもあるようですが、ここでは「ゼロ埋め」で統一しました。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>クエリは <code>$ledger reg ^Expenses and 水光熱費 --amount-data --monthly --collapse --begin 2021/10/01 --current &gt; ./tmp-all-UC.csv</code> 。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>どうして <code>%01m</code> で「ゼロ埋め無し」になるのか、理屈はぜんぜんわかっていません😓。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2022年9月3日T00:00:00&#43;0900 class="date">2022年9月3日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/get-dropbox-direct_link-by-cui/" class="prev">Dropbox内ファイルの直リンクをCUIで取得する</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88_on_ledger/" class="next">Ledger-cliでマイナポイントをトラッキングする</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>

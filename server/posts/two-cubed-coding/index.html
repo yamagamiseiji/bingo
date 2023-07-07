@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用 | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-194281784-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+  
+</head>
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">Bashで2x2x2の条件分岐 — Ledger-cliのフロントエンド用</h2>
+    <div class="post_content">
+      <p><strong><strong>自家用</strong></strong> の
+<strong><strong>Ledger-cli</strong></strong> 向けフロントエンド スクリプト(Bash)が数十本あります。それらのスクリプトでは日付けに関する３つの引数、すなわち <strong><strong>始期、終期、間隔</strong></strong> (<strong><strong>-b, -e, -p</strong></strong>)を入力します。たとえば次の例では、収入と支出、それからその差額（損益）を1枚にまとめたチャートを 2023/02/28までの12ヶ月間だけプロットします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ I-and-E_plotter -e 2023/02/28 -p 12m
+</code></pre></div><p>これらのスクリプトでは、引数の有無によって処理が2の3乗（=8条件）に分岐します。</p>
+<p>3つの引数が相互に独立していれば条件分岐のコーディングも簡単ですが、この場合には、引数間に
+\[
+終期 -  始期  = 間隔
+\]
+の関係があります。また入力が省略された場合のデフォルトの扱いもバラバラです。こうした条件分岐をIF〜THEN〜ELIF〜FI で書こうとするとアタマがぐじゃぐじゃになります。</p>
+<p>ここでは錯乱状態に陥らずに 誰でも分岐コードが書ける一つの方法を紹介します。</p>
+<h3 id="概要の説明">概要の説明</h3>
+<ul>
+<li>
+<p>起動時に <strong><strong>-b, -e, -p</strong></strong> の引数が指定されたかどうかを&quot; <strong><strong>1 / 0</strong></strong> &ldquo;化し、3つの引数の有無を&rdquo; <strong><strong>1 0 1</strong></strong> &ldquo;のような形の文字列にして変数 <strong><strong>$RESP</strong></strong> に収納</p>
+</li>
+<li>
+<p>case文で8通りの条件分岐を記述・管理</p>
+</li>
+<li>
+<p><strong><strong>-b</strong></strong> と <strong><strong>-e</strong></strong> はLedger-cliのそれらと同じ意味 で <strong><strong>begin</strong></strong> と <strong><strong>end</strong></strong> 。 <strong><strong>-p</strong></strong> はperiod ですが、Ledgerとはちょっと意味合いが異なっていて文字どおりの「期間」つまりbegin からendまでの間隔(日にち、月数、または年数)を意味します。たとえば</p>
+<ul>
+<li>20日間なら <strong><strong>-p 20d</strong></strong></li>
+<li>3ヶ月間なら <strong><strong>-p 3m</strong></strong></li>
+<li>4年間なら <strong><strong>-p 4y</strong></strong> 　のように書きます<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</li>
+</ul>
+</li>
+<li>
+<p>この始期、終期、間隔はスクリプトによって、引数ゼロでもよいし、どれか一つだけ指定すれば良い場合あるし、少なくとも２つを必要とすることもあります。引数が省略されたときには、多くの場合デフォルト値が使われます。</p>
+<ul>
+<li>例えば <strong><strong>-p 6m</strong></strong> だけが指定されていて <strong><strong>-b</strong></strong> も <strong><strong>-e</strong></strong> も指定されてない時には、 <strong><strong>-e</strong></strong> は <strong><strong>today</strong></strong> をデフォルトとします</li>
+<li><strong><strong>-e</strong></strong> だけが指定されているときには <strong><strong>-p</strong></strong> は <strong><strong>25m</strong></strong> をデフォルトとします<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+</li>
+</ul>
+<h2 id="各条件ごとの処理例">各条件ごとの処理例</h2>
+<p>スクリプトによって少しずつ処理内容が異なります。これは一つの例です。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">RESP変数</th>
+<th>引数状態</th>
+<th>処理</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0 0 0</td>
+<td>NO args</td>
+<td>e=today, p=25m</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">0 0 1</td>
+<td>p only</td>
+<td>b=null, e=today</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">0 1 0</td>
+<td>e only</td>
+<td>b=null, p=25m</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">0 1 1</td>
+<td>e &amp; p</td>
+<td>b=null</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">1 0 0</td>
+<td>b only</td>
+<td>e=today</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">1 0 1</td>
+<td>b &amp; p</td>
+<td>if (b+p)&gt;today, e=today</td>
+<td>b yields to p</td>
+</tr>
+<tr>
+<td style="text-align:center">1 1 0</td>
+<td>b &amp; e</td>
+<td>if e&gt;today, e=today</td>
+<td>b yields to e</td>
+</tr>
+<tr>
+<td style="text-align:center">1 1 1</td>
+<td>ALL args</td>
+<td>if (e-b)≠p, null p</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="組み込み方">組み込み方</h2>
+<ul>
+<li>2の3乗の分岐の処理を行う部分は関数（ <strong><strong>func-two-cubes-arg-analyser.sh</strong></strong> ）にします</li>
+<li>関数の引数はデフォルトの年月日数（ <strong><strong>$DFLT_MONTH</strong></strong> )</li>
+<li>関数の呼び出し元に返すのは <strong><strong>$b_date, $e_date, $period</strong></strong></li>
+</ul>
+<h3 id="関数のサンプルコード">関数のサンプルコード</h3>
+<p>こんな風に書けばまぁまぁ読めるしデバッグも簡単 😄</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+<span style="color:#75715e"># function two-cubes-arg-analysier.sh</span>
+<span style="color:#75715e">#      2x2x2の条件分岐分析器</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">function</span> two-cubes-arg-analyser.sh<span style="color:#f92672">(){</span>
+    source func-period-converter.sh
+
+    DFLT_MONTH<span style="color:#f92672">=</span>$1
+    local RESP
+    local TODAY<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#39;+%Y/%m/%d&#39;</span><span style="color:#66d9ef">)</span>
+
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$b<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> b<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>; <span style="color:#66d9ef">fi</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$e<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> e<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>; <span style="color:#66d9ef">fi</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$p<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> p<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>; <span style="color:#66d9ef">fi</span>
+
+    RESP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$b<span style="color:#e6db74"> </span>$e<span style="color:#e6db74"> </span>$p<span style="color:#e6db74">&#34;</span>
+
+    <span style="color:#66d9ef">case</span> $RESP in
+	<span style="color:#e6db74">&#34;0 0 0&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;No args&#34;</span>
+	    e_date<span style="color:#f92672">=</span>$TODAY
+	    period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DFLT_MONTH<span style="color:#e6db74">&#34;</span> ;;
+	<span style="color:#e6db74">&#34;0 0 1&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;p arg only&#34;</span>
+	    b_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+	    e_date<span style="color:#f92672">=</span>$TODAY ;;
+	<span style="color:#e6db74">&#34;0 1 0&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;e arg only&#34;</span>
+	    b_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+	    period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DFLT_MONTH<span style="color:#e6db74">&#34;</span> ;;
+	<span style="color:#e6db74">&#34;0 1 1&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;e and p args&#34;</span>
+	    b_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> ;;
+	<span style="color:#e6db74">&#34;1 0 0&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;b arg only&#34;</span>
+	    e_date<span style="color:#f92672">=</span>$TODAY ;;
+	<span style="color:#e6db74">&#34;1 0 1&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;b and p args&#34;</span>
+	    period-converter.sh $period $e_date
+	    <span style="color:#75715e"># b+p をTODAYと比較</span>
+	    left_part<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>b_date<span style="color:#e6db74">}</span><span style="color:#e6db74"> +</span><span style="color:#e6db74">${</span>nume<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span>dmy<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;+%Y%m%d&#39;</span><span style="color:#66d9ef">)</span>
+	    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>left_part<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TODAY//<span style="color:#e6db74">&#39;/&#39;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+		e_date<span style="color:#f92672">=</span>$TODAY
+		b_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+	    <span style="color:#66d9ef">fi</span>;;
+	<span style="color:#e6db74">&#34;1 1 0&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;b and e args&#34;</span>
+	    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>e_date//<span style="color:#e6db74">&#39;/&#39;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TODAY//<span style="color:#e6db74">&#39;/&#39;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+		e_date<span style="color:#f92672">=</span>$TODAY
+	    <span style="color:#66d9ef">fi</span>;;
+	<span style="color:#e6db74">&#34;1 1 1&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># echo &#34;ALL args&#34;</span>
+	    period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+	    ;;
+	*<span style="color:#f92672">)</span> exit <span style="color:#ae81ff">0</span> ;;
+    <span style="color:#66d9ef">esac</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="関数呼び出しのサンプルコード">関数呼び出しのサンプルコード</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>set -eu
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  call test for fonction two-cubes-arg-analysier.sh</span>
+<span style="color:#75715e">#</span>
+source ./func-two-cubes-arg-analyser.sh
+
+b<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>; b_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+e<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>; e_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+p<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>; period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#66d9ef">while</span> getopts e🅱️p: args; <span style="color:#66d9ef">do</span>
+    <span style="color:#66d9ef">case</span> $args in
+	b<span style="color:#f92672">)</span> b_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$OPTARG<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$b_date<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> b<span style="color:#f92672">=</span>0; <span style="color:#66d9ef">else</span> b<span style="color:#f92672">=</span>1; <span style="color:#66d9ef">fi</span> ;;
+	e<span style="color:#f92672">)</span> e_date<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$OPTARG<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$e_date<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> e<span style="color:#f92672">=</span>0; <span style="color:#66d9ef">else</span> e<span style="color:#f92672">=</span>1; <span style="color:#66d9ef">fi</span> ;;
+	p<span style="color:#f92672">)</span> period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$OPTARG<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$period<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> p<span style="color:#f92672">=</span>0; <span style="color:#66d9ef">else</span> p<span style="color:#f92672">=</span>1; <span style="color:#66d9ef">fi</span> ;;
+	*<span style="color:#f92672">)</span> exit <span style="color:#ae81ff">0</span> ;;
+    <span style="color:#66d9ef">esac</span>
+<span style="color:#66d9ef">done</span>
+
+dflt_month<span style="color:#f92672">=</span>25m  <span style="color:#75715e"># 関数の引数＝デフォルト年月数（y,m,d）</span>
+two-cubes-arg-analyser.sh $dflt_month
+
+echo <span style="color:#e6db74">&#34;b_date =&#34;</span> $b_date
+echo <span style="color:#e6db74">&#34;e_date =&#34;</span> $e_date
+echo <span style="color:#e6db74">&#34;period =&#34;</span> $period
+
+exit <span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="補足説明など">補足説明など</h3>
+<ul>
+<li><strong><strong>getopts</strong></strong> はBashの組込みコマンド、 <strong><strong>$OPTARG</strong></strong> も組込みのシェル変数です。</li>
+<li>この方法は分岐数がもっと多くなっても対応できます。</li>
+<li>これがLedger-cliユーザにとってversability（汎用性）があるかどうか分かりませんが、アイデアだけは他の場所で使えるかもしれません。</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><code>20d</code> などは数字とアルファベットに仕分ける関数を使って、dateコマンドで使えるように変換します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">function</span> period-converter.sh<span style="color:#f92672">(){</span>
+    <span style="color:#75715e"># 連想配列宣言</span>
+    declare -A keymap<span style="color:#f92672">=(</span>
+	<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;d&#34;</span><span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;days&#34;</span>
+	<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;m&#34;</span><span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;months&#34;</span>
+	<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;y&#34;</span><span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;years&#34;</span>
+    <span style="color:#f92672">)</span>
+    numer<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo $period | sed -e <span style="color:#e6db74">&#39;s/[^0-9]//g&#39;</span><span style="color:#66d9ef">)</span>
+    alpha<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo $period | sed -e <span style="color:#e6db74">&#39;s/[^dmyDMY]//g&#39;</span><span style="color:#66d9ef">)</span>
+    dmy<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>keymap[$alpha]<span style="color:#e6db74">}</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<li id="fn:2" role="doc-endnote">
+<p>多くのチャートでX 軸は <strong><strong>25ヶ月</strong></strong> をデフォルト値として使用しています。25ヶ月だと <strong><strong>2年前</strong></strong> の同月からデータが表示されるからです。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2023年4月26日T00:00:00&#43;0900 class="date">2023年4月26日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger-cli">ledger-cli</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98">複式簿記</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/bash">bash</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/case">case</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/getopts">getopts</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89">フロントエンド</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/dpamac-column-fixer/" class="prev">Ledger-cliのレジスターレポートのカラム崩壊を防止する</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/postgresql%E4%BD%8F%E6%89%80%E9%8C%B2/" class="next">PostgreSQL住所録</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+</footer>
+
+    </body>
+</html>
