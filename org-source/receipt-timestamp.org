@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-10-30 12:58:18 yamagami>
+# Time-stamp: <2023-10-30 13:02:48 yamagami>
 #+title: Ledger-cliでレシートにタイムスタンプをつけてみる
 #+date: [2023-10-30]
 #+language: ja
@@ -155,7 +155,7 @@ tmp.csvの中身はこんな感じ：
 2023/09/28,13:33,角上魚類,"-5,193 JPY"
 #+end_example
 
-- 金額がマイナス表示されてますが、これを直すには上のクエリの ="%(amount)"= を =%(-amount)"= にします。
+- 金額がマイナス表示されてますが、これを直すには上のクエリの ="%(amount)"= を ="%(-amount)"= にします。
 - =ENEOS_SS= が気になるのなら、ここでsedを使って元の =ENEOS SS= に戻します[^csv]。
 
 * 他の使い方？
