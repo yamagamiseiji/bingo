@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-10-30 12:16:14 yamagami>
+# Time-stamp: <2023-10-30 12:58:18 yamagami>
 #+title: Ledger-cliでレシートにタイムスタンプをつけてみる
 #+date: [2023-10-30]
 #+language: ja
@@ -94,7 +94,7 @@ $ ledger reg %recpt and \( ^liab or ^assets \)\
 
 - 支払先名（payee）の =ENEOS SS= 内に半角スペースが含まれています。このままでは =sort= 時にトラブルを起こしますので、あらかじめ半角スペースをアンダーバーにでも書き換えておきます[^spc_issue]。
    #+begin_example
-   sed 's/ENEOS SS/ENEOS_SS/g
+   sed 's/ENEOS SS/ENEOS_SS/g'
    #+end_example
 
 [^spc_issue]: Ledgerでは支払先にスペースを入れてもOKですが、後々のことを考えると、できるなら避けた方が良いのかもしれません。
@@ -155,7 +155,8 @@ tmp.csvの中身はこんな感じ：
 2023/09/28,13:33,角上魚類,"-5,193 JPY"
 #+end_example
 
-=ENEOS_SS= が気になるのなら、ここでsedを使って元の =ENEOS SS= に戻します[^csv]。
+- 金額がマイナス表示されてますが、これを直すには上のクエリの ="%(amount)"= を =%(-amount)"= にします。
+- =ENEOS_SS= が気になるのなら、ここでsedを使って元の =ENEOS SS= に戻します[^csv]。
 
 * 他の使い方？
 個人レベルでは、旅行や出張などの移動経路の確認のために補助記録として使う他に使い方を思いつきません。何かよいアイデアがあれば教えて欲しいです。

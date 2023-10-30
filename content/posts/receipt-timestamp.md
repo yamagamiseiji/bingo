@@ -96,7 +96,7 @@ $ ledger reg %recpt and \( ^liab or ^assets \)\
 
 -   支払先名（payee）の `ENEOS SS` 内に半角スペースが含まれています。このままでは `sort` 時にトラブルを起こしますので、あらかじめ半角スペースをアンダーバーにでも書き換えておきます[^spc_issue]。
     ```text
-    sed 's/ENEOS SS/ENEOS_SS/g
+    sed 's/ENEOS SS/ENEOS_SS/g'
     ```
 
 [^spc_issue]: Ledgerでは支払先にスペースを入れてもOKですが、後々のことを考えると、できるなら避けた方が良いのかもしれません。
@@ -166,7 +166,8 @@ tmp.csvの中身はこんな感じ：
 2023/09/28,13:33,角上魚類,"-5,193 JPY"
 ```
 
-`ENEOS_SS` が気になるのなら、ここでsedを使って元の `ENEOS SS` に戻します[^csv]。
+-   金額がマイナス表示されてますが、これを直すには上のクエリの `"%(amount)"` を `%(-amount)"` にします。
+-   `ENEOS_SS` が気になるのなら、ここでsedを使って元の `ENEOS SS` に戻します[^csv]。
 
 
 ## 他の使い方？ {#他の使い方}
