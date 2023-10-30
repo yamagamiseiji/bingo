@@ -1,0 +1,127 @@
+#+setupfile: /home/yamagami/org/macros-org/org-macros.setup
+# Time-stamp: <2023-10-30 09:25:02 yamagami>
+#+title: Ledger-cliでレシートにタイムスタンプをつけてみる
+#+date: [2023-10-30]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger-cli レシート タイムスタンプ
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+
+*
+家計簿でもスモールビジネスでもレシートの時刻を記録する必要はありません。
+Ledger-cliではTXNに時刻を打つことは標準では用意されていません。
+普段の生活では不必要。
+
+旅行先の色々な場所移動のメモをつくる際には、レシートの時刻を参照すると、どのような順番で移動したかが分かります。
+
+ここではLedger-cliでレシート時刻を記録し表示する一つの方法を紹介します。
+
+* TXNの書き方
+Ledger-cliで用意されているタグを使います。
+
+タグの名前は=Recpt-TS= (Receipt Time Stamp)、
+その値として時刻を`%H:%M`で記録します。たとえば
+#+begin_example
+2023/10/04 角上魚類
+    ; Recpt-TS: 13:37
+    Expenses:Grocery:Food:KAT             -3,565 JPY
+    Liabilities:OricoCard:hinako
+#+end_example
+
+* COMMENT 付録
+
+
+# クエリのサンプル
+## もっとも簡単な例
+指定した日のTXNの中でレシート時刻のあるレコードを表示する[^gas_note]。
+``` ledger-cli
+$ ledger print %recpt -p 09/03
+2023/09/03 ENEOS SS
+    ; Recpt-TS: 12:04
+	; 15.17L @183 JPY
+    Expenses:Cars:Gasoline                 2,776 JPY
+    Liabilities:EneosCard
+
+2023/09/03 ベイシア
+    ; Recpt-TS: 13:57
+    Expenses:Grocery:Food:KAT
+    Liabilities:OricoCard:hinako          -4,687 JPY
+```
+
+[^gas_note]: ENEOSのTXNにはガソリン給油量と単価がnote（コメント）で入っている。これを`Recpt-TS`と同じ行に書くと面倒なことが起こる。
+
+## やや実用的な例
+2023/09月中のTXNからレシート時刻のあるレコードを抽出して、「日付、時刻、支払先」を表示する。クエリは：
+``` sh
+$ ledger reg %recpt and \( liab or assets \)\
+     --format '%(date) %(payee) %(tag(/recpt/))\n'\
+	 -b 09/01 -e 10/01
+```
+表示される出力は：
+```sh
+2023/09/03 11:11 角上魚類
+2023/09/03 12:04 ENEOS SS
+2023/09/03 13:57 ベイシア
+2023/09/21 11:48 ENEOS SS
+2023/09/21 13:05 ジャパンミート
+2023/09/21 12:21 バーガーキング
+2023/09/21 13:12 ジョイホンパーク吉岡
+2023/09/21 13:23 ABC-mart
+2023/09/21 13:54 角上魚類
+2023/09/21 14:33 ツルヤ
+2023/09/28 10:41 ベイシア
+2023/09/28 10:41 クロネコ
+2023/09/28 12:20 ENEOS SS
+2023/09/28 12:53 マクドナルド
+2023/09/28 13:33 角上魚類
+```
+- このままでは、09/21の「ジャパンミート」と「バーガーキング」の時刻順が逆になっている。それを直すには
+`sort -k1,1 -k3,3n`
+すればよいのだが、`ENEOS SS`内にある半角SPCがsort時にトラブルをおこすので、あらかじめSPCをアンダーバーに書き換えておく。
+`sed 's/ENEOS SS/ENEOS_SS/g'`
+
+### まとめると
+```sh
+$ ledger reg %recpt and \( liab or assets \)\
+     --format '%(date) %(payee) %(tag(/recpt/))\n'\
+	 -b 09/01 -e 10/01\
+	 | sed 's/ENEOS SS/ENEOS_SS/g'\
+	 | sort -k1,1 -k3,3n
+```
+結果は次の通り：
+```sh
+2023/09/03 11:11 角上魚類
+2023/09/03 12:04 ENEOS_SS
+2023/09/03 13:57 ベイシア
+2023/09/21 11:48 ENEOS_SS
+2023/09/21 12:21 バーガーキング
+2023/09/21 13:05 ジャパンミート
+2023/09/21 13:12 ジョイホンパーク吉岡
+2023/09/21 13:23 ABC-mart
+2023/09/21 13:54 角上魚類
+2023/09/21 14:33 ツルヤ
+2023/09/28 10:41 クロネコ
+2023/09/28 10:41 ベイシア
+2023/09/28 12:20 ENEOS_SS
+2023/09/28 12:53 マクドナルド
+2023/09/28 13:33 角上魚類
+```
+
+- `ENEOS_SS`が気になるのなら、ここで元の`ENEOS SS`に戻せばよい。
+
+# 応用？？
+- レシート時刻を取得したいことが普通の生活であるかしら？
+- いま話題の消費税インボイスでもレシート時刻は必須ではない
+- 
+
+
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
