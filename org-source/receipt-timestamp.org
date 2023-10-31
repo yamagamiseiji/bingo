@@ -1,6 +1,6 @@
 #+setupfile: /home/yamagami/org/macros-org/org-macros.setup
-# Time-stamp: <2023-10-30 13:02:48 yamagami>
-#+title: Ledger-cliでレシートにタイムスタンプをつけてみる
+# Time-stamp: <2023-10-31 10:27:26 yamagami>
+#+title: Ledger-cliでレシートのタイムスタンプを記録・処理してみる
 #+date: [2023-10-30]
 #+language: ja
 #+link: file file+sys:../static/

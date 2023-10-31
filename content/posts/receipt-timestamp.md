@@ -1,5 +1,5 @@
 +++
-title = "Ledger-cliでレシートにタイムスタンプをつけてみる"
+title = "Ledger-cliでレシートのタイムスタンプを記録・処理してみる"
 author = ["YAMAGAMI"]
 date = 2023-10-30T00:00:00+09:00
 tags = ["ledger-cli", "レシート", "タイムスタンプ"]
