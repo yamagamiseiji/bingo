@@ -7,4 +7,4 @@ categories = ["social"]
 draft = false
 +++
 
-## 新年のご挨拶 {#新年のご挨拶}
+{{< figure src="/Under_Construction_clip_art.svg" width="30%" >}}

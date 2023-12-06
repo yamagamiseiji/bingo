@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2023-12-06 19:05:59 yamagami>
+#           Time-stamp: <2023-12-06 20:50:33 yamagami>
 #+title: 2024年 新年のご挨拶
 #+date: [ 2023-12-06 ]
 #+language: ja
@@ -12,7 +12,11 @@
 #+options: toc:nil
 #+draft: true
 
-* 新年のご挨拶
+
+
+#+attr_html: :width 30%
+[[file:Under_Construction_clip_art.svg]]
+
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
