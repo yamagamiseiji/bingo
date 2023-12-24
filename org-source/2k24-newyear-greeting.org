@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2023-12-24 14:51:59 yamagami>
+#           Time-stamp: <2023-12-24 15:04:56 yamagami>
 #+title: 2024年 新年のご挨拶
-#+date: [ 2023-12-24 ]
+#+date: [ 2024-01-01 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
