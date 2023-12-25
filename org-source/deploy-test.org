@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2023-12-25 11:41:37 yamagami>
+#           Time-stamp: <2023-12-25 20:55:36 yamagami>
 #+title: Deploy Test for GA4
-#+date: [2023-12-24]
+#+date: [2023-12-25]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -12,19 +12,43 @@
 #+options: toc:nil
 #+draft: false
 
+* Adding Google Analytics to this blog
+この **Yam's Peace Blog** は
+#+begin_example
+Emacs/Hugo/GitHub/Netlify
+#+end_example
+経路で公開しています。
 
-* Deplay Test for GA4.
-1. config.toml に次の行を追記
+2023年前半まではGoogle Universal Analytics（ **UA** ）でアクセス状況をモニターしていました。
+
+**UA** は2023/07/01で終了したのですが、きちんと新しいバージョンのアナリティクス＝Google Analytics4( **GA4** )へ移行する作業をダラダラと後延べしていました。
+
+ようやく年末も押し迫った2023年12月下旬から **GA4** への移行に着手し始めました。
+
+当初、ネット上で移行のための日本語サイトをいろいろ探索しましたが、いずれも「帯に短したすきに長し」。というかほとんどがHugoベースのブログにとっては無用な情報が多くて「たすきに長し」でした。
+
+しかし、Rodney Maiatoさんによる
+[[https://rodneymaiato.dev/posts/how-to-add-google-analytics-to-a-hugo-site/][How to Add Google Analytics to a Hugo Site
+]]に出会ってからは、記事にも書かれている通り5分程度の作業で移行が終わりました。
+ほんとうに助かりました。ありがとうございました。
+
+* 手順
+上のサイトに紹介されている通りに作業（というほどでもありません:sweat:）
+1. =./config.toml= に次の行を追記
      #+begin_src
       google_Analytics = "G-XXXXXXXX"
      #+end_src
-2. ./layout/partial/head.html に次の行を確認
+2. =./layout/partial/head.html= の次行を確認
    #+begin_src
    {{ template "_internal/google_analytics.html" }}}
    #+end_src
 
-3. Save the changes
-4. Deploy to Netlify
+3. 上の修正を保存
+4. Netlifyにデプロイ
+5. 1日から2日ほど待つとGoogle Analytisでアクセス情報を見ることができる
+
+これだけです。
+
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
