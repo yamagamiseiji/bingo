@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2023-12-24 14:56:17 yamagami>
+#           Time-stamp: <2023-12-25 11:41:37 yamagami>
 #+title: Deploy Test for GA4
 #+date: [2023-12-24]
 #+language: ja
@@ -13,8 +13,18 @@
 #+draft: false
 
 
-Deplay Test for GA4.
+* Deplay Test for GA4.
+1. config.toml に次の行を追記
+     #+begin_src
+      google_Analytics = "G-XXXXXXXX"
+     #+end_src
+2. ./layout/partial/head.html に次の行を確認
+   #+begin_src
+   {{ template "_internal/google_analytics.html" }}}
+   #+end_src
 
+3. Save the changes
+4. Deploy to Netlify
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
