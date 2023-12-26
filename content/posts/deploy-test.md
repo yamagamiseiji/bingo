@@ -1,33 +1,28 @@
 +++
-title = "Deploy Test for GA4"
+title = "Adding Google Analyitcs4 to My Site"
 author = ["YAMAGAMI"]
-date = 2023-12-25T00:00:00+09:00
+date = 2023-12-26T00:00:00+09:00
 tags = ["test"]
 categories = ["comp"]
 draft = false
 +++
 
-## Adding Google Analytics to this blog {#adding-google-analytics-to-this-blog}
-
-この ****Yam's Peace Blog**** は
+このサイト（ ****Yam's Peace Blog**** ）は
 
 ```text
 Emacs/Hugo/GitHub/Netlify
 ```
 
-経路で公開しています。
+という流れで公開しています。
 
 2023年前半まではGoogle Universal Analytics（ ****UA**** ）でアクセス状況をモニターしていました。
 
-****UA**** は2023/07/01で終了したのですが、きちんと新しいバージョンのアナリティクス＝Google Analytics4( ****GA4**** )へ移行する作業をダラダラと後延べしていました。
+****UA**** は2023/07/01で終了したのですが、新しいバージョンのアナリティクス＝Google Analytics4( ****GA4**** )へ移行するのをダラダラと先延ばししていました。
 
-ようやく年末も押し迫った2023年12月下旬から ****GA4**** への移行に着手し始めました。
+年末も押し迫った2023年12月下旬になってようやく ****GA4**** への移行に着手しました。移行のための情報をネット上の日本語サイトでいろいろ探索しましたが、いずれも「帯に短したすきに長し」、というかHugoベースのサイトの ****GA4化**** にとっては無用な情報が多くてほとんど「たすきに長し」でした。
 
-当初、ネット上で移行のための日本語サイトをいろいろ探索しましたが、いずれも「帯に短したすきに長し」。というかほとんどがHugoベースのブログにとっては無用な情報が多くて「たすきに長し」でした。
-
-しかし、Rodney Maiatoさんによる
-[How to Add Google Analytics to a Hugo Site
-](https://rodneymaiato.dev/posts/how-to-add-google-analytics-to-a-hugo-site/)に出会ってからは、記事にも書かれている通り5分程度の作業で移行が終わりました。ほんとうに助かりました。ありがとうございました。
+しかし Rodney Maiatoさんの分かりやすいサイト（
+[How to Add Google Analytics to a Hugo Site）](https://rodneymaiato.dev/posts/how-to-add-google-analytics-to-a-hugo-site/)に出会ったおかげで、記事に書かれている通り 5分程度の作業で移行が終わりました。ほんとうに助かりました。ありがとうございました。
 
 
 ## 手順 {#手順}
@@ -47,4 +42,4 @@ Emacs/Hugo/GitHub/Netlify
 4.  Netlifyにデプロイ
 5.  1日から2日ほど待つとGoogle Analytisでアクセス情報を見ることができる
 
-これだけです。
+これだけです。Hugoはほんとうにすばらしい！
