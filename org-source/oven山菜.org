@@ -1,14 +1,13 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2023-01-16 18:12:40 yamagami>
+#           Time-stamp: <2023-12-31 23:55:57 yamagami>
 #+title: 山菜をオーブンで
-#+date: [2023-12-31 ]
+#+date: [2024-12-31 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
 #+hugo_tags: oven 
 #+hugo_categories: food
-
 #+options: toc:nil
 #+draft: true
 

@@ -1,7 +1,7 @@
 +++
 title = "人名を仮名書きするときの表記ゆれ — こまった問題です"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
+date = 2023-12-31T00:00:00+09:00
 tags = ["表記ゆれ", "ひらがな", "姓名", "名義"]
 categories = ["comp"]
 draft = false
@@ -114,7 +114,7 @@ sedで一発でできる  see `Bash sed:清音を濁音に変換`
 これもsedで一発.  see `Bash sed:拗音・促音を大書きに`
 
 
-### じ・ぢ & ず・づ混同 {#じ-ぢ-and-ず-づ混同}
+### じ・ぢ &amp; ず・づ混同 {#じ-ぢ-and-ず-づ混同}
 
 すべて「じ」「ず」に変換
 sed 一発　=Bash sed: 「ぢづ」を「じず」に変換=
@@ -345,34 +345,34 @@ exit 0
 
 ### 人名｜表記 | ゆれ {#人名-表記-ゆれ}
 
-宮部博, 大山実, & 本郷郁夫. (1983).<br />
+宮部博, 大山実, &amp; 本郷郁夫. (1983).<br />
 　名義検索システム-電話番号案内業務への適用.<br />
 　情報処理学会論文誌, 24(4), 421-428.
 
 <img src="https://dl.dropboxusercontent.com/s/yltg12frpx7mzpp/tbl2-%E5%AE%AE%E9%83%A8%E4%BB%961983.png?dl=0" alt="tbl2 読みの曖昧さによる問題" width="50%" class="jop-noMdConv">
 
-戸部美春, 武藤信夫, & 山本康二. (1990). <br />
-　高付加価値型番号案内システム (CUPID) の電話帳検索方式 (高付加価値型番号案内システム&lt; 特集&gt;). <br />
-　NTT R & D, 39(6), p841-850.　（インタ＝ネット公開なし）
+戸部美春, 武藤信夫, &amp; 山本康二. (1990). <br />
+　高付加価値型番号案内システム (CUPID) の電話帳検索方式 (高付加価値型番号案内システム&amp;lt; 特集&amp;gt;). <br />
+　NTT R &amp; D, 39(6), p841-850.　（インタ＝ネット公開なし）
 
-高橋克巳, & 岩瀬成人. (1992).
+高橋克巳, &amp; 岩瀬成人. (1992).
 　人名の読みからの検索法.
 　情報処理学会研究報告自然言語処理 (NL), 1992(74 (1992-NL-091)), 25-32.
-　([<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C%5Faction=repository%5C%5Fview%5C%5Fmain%5C%5Fitem%5C%5Fdetail&page%5C%5Fid=13&block%5C%5Fid=8&item%5C%5Fid=13848&item%5Fno=1>](<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5Faction=repository%5Fview%5Fmain%5Fitem%5Fdetail&page%5Fid=13&block%5Fid=8&item%5Fid=13848&item%5Fno=1>))
+　([<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&page%5C_id=13&block%5C_id=8&item%5C_id=13848&item_no=1>](<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&page_id=13&block_id=8&item_id=13848&item_no=1>))
 
 高橋克巳, 梅村恭司. (1995).
 　人名のかな表記のゆれに基づく近似文字列照合法.
 　情報処理学会論文誌 8, 1906 - 1915.
-　[<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C%5Faction=repository%5C%5Fview%5C%5Fmain%5C%5Fitem%5C%5Fdetail&page%5C%5Fid=13&block%5C%5Fid=8&item%5C%5Fid=13848&item%5Fno=1>](<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5Faction=repository%5Fview%5Fmain%5Fitem%5Fdetail&page%5Fid=13&block%5Fid=8&item%5Fid=13848&item%5Fno=1>)
+　[<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&page%5C_id=13&block%5C_id=8&item%5C_id=13848&item_no=1>](<https://ipsj.ixsq.nii.ac.jp/ej/index.php?active_action=repository_view_main_item_detail&page_id=13&block_id=8&item_id=13848&item_no=1>)
 
 <img src="https://dl.dropboxusercontent.com/s/9m1mz6iwle3kqvt/tbl2-高橋・梅村1995.jpg?dl=0" alt="tbl2 番号案内におけるかな表記の揺れ対策例" width="90%">
 
-横尾昭男, 宮崎正弘, 池原悟, 白井論, & 阿部さつき. (1997).
+横尾昭男, 宮崎正弘, 池原悟, 白井論, &amp; 阿部さつき. (1997).
 　日英機械翻訳のための単語辞書.
 　情報処理学会研究報告自然言語処理 (NL), 1997(69dl.dropboxusercontent.com (1997-NL-120)), 37-44.
-　[<https://ipsj.ixsq.nii.ac.jp/ej/?action=pages%5C%5Fview%5C%5Fmain&active%5C%5Faction=repository%5C%5Fview%5C%5Fmain%5C%5Fitem%5C%5Fdetail&item%5C%5Fid=48957&item%5C%5Fno=1&page%5C%5Fid=13&block%5Fid=8>](<https://ipsj.ixsq.nii.ac.jp/ej/?action=pages%5Fview%5Fmain&active%5Faction=repository%5Fview%5Fmain%5Fitem%5Fdetail&item%5Fid=48957&item%5Fno=1&page%5Fid=13&block%5Fid=8>)
+　[<https://ipsj.ixsq.nii.ac.jp/ej/?action=pages%5C_view%5C_main&active%5C_action=repository%5C_view%5C_main%5C_item%5C_detail&item%5C_id=48957&item%5C_no=1&page%5C_id=13&block_id=8>](<https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=48957&item_no=1&page_id=13&block_id=8>)
 
-[</ox-hugo/IPSJ-JNL2404005.pdf>](</ox-hugo/IPSJ-JNL2404005.pdf>)
+[</home/yamagami/ダウンロード/IPSJ-JNL2404005.pdf>](</home/yamagami/%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89/IPSJ-JNL2404005.pdf>)
 
 
 ## Footnotes: {#footnotes}

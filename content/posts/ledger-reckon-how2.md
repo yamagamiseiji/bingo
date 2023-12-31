@@ -1,7 +1,7 @@
 +++
 title = "Ledger – 銀行csvをledgerファイルにする"
 author = ["YAMAGAMI"]
-date = 2023-12-31T00:00:00+09:00
+date = 2024-12-31T00:00:00+09:00
 tags = ["accounting", "ledger"]
 categories = ["comp"]
 draft = false

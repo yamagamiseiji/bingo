@@ -1,20 +1,20 @@
 +++
 title = "Ledger — 支払先のタイプミスをチェックする"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
+date = 2023-12-31T00:00:00+09:00
 tags = ["farming", "food"]
 categories = ["comp"]
 draft = false
 +++
 
-##  {#}
+##  {#d41d8c}
 
 家計簿でも会社の帳簿でも、支払先の名前をタイプミスするとちょっと面倒なことが起こる。会計ソフトにはそれへの対応策が含まれている？
 
 Ledgerでも簡単で便利なツールが用意されています。
 
 以前（2019/10/04）、
-[プレーンテキストファイルで「複式」家計簿(9)](https://bred-in-bingo.netlify.app/posts/9th-step%5Fledger/#payees%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+[プレーンテキストファイルで「複式」家計簿(9)](https://bred-in-bingo.netlify.app/posts/9th-step_ledger/#payees%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
 で `payees` コマンドと `-by-payee (-P)` オプションについて簡単に紹介。
 
 
@@ -71,4 +71,11 @@ $ led b --check-payees -f myledger.data
 
 ## Footnotes: {#footnotes}
 
-[^fn:1]: この場合の頻度とはトランザクションの数ではなくて、トランザクション内に含まれるアカウントの数になっています。なので、たとえば<br /> 2020/10/10 レストランHOGE<br /> Expenses:Dinner 3,000 JPY<br /> Expenses:Grocery:Liquor 1,200 JPY<br /> visacard<br /> レストランHOGEで一度しか食事してない場合でも ~ledger payees --count= すると、<br /> 3 レストランHOGE<br /> になります。
+[^fn:1]: この場合の頻度とはトランザクションの数ではなくて、トランザクション内に含まれるアカウントの数になっています。なので、たとえば<br />
+    2020/10/10 レストランHOGE<br />
+    　Expenses:Dinner         3,000 JPY<br />
+    　Expenses:Grocery:Liquor 1,200 JPY<br />
+    　visacard<br />
+    レストランHOGEで一度しか食事してない場合でも ~ledger payees --count= すると、<br />
+    　3 レストランHOGE<br />
+    になります。

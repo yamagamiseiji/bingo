@@ -1,27 +1,25 @@
 +++
 title = "パラソル ホワイト トップ？"
 author = ["YAMAGAMI"]
-date = 2022-12-31T00:00:00+09:00
+date = 2023-12-31T00:00:00+09:00
 tags = ["自然誌", "横浜"]
 categories = ["comp"]
 draft = false
 +++
 
-\*
-
 横浜市旭区の公園内の散策路
 
 午後の木漏れ日がスポットのようにあたっている
 
-{{< figure src="/群生umbellata.jpg" caption="&#22259;1:  遠景" width="90%" >}}
+{{< figure src="/群生umbellata.jpg" caption="<span class=\"figure-number\">&#22259;1:  </span>遠景" width="90%" >}}
 
 場所は桧山公園 所在地：神奈川県横浜市旭区若葉台2-1-14　
 
-ズームアップすると図[2](#org3271dad)のような花が咲いている場所があった。
+ズームアップすると図[2](#figure--zoom-up)のような花が咲いている場所があった。
 
-<a id="org3271dad"></a>
+<a id="figure--zoom-up"></a>
 
-{{< figure src="/Doellingeria_umbellata.jpg" caption="&#22259;2:  名前不詳の花" width="70%" >}}
+{{< figure src="/Doellingeria_umbellata.jpg" caption="<span class=\"figure-number\">&#22259;2:  </span>名前不詳の花" width="70%" >}}
 
 この花がわりに広い範囲に渡ってカバリングのように咲き誇っている。地面をおおっている
 
