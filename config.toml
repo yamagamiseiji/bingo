@@ -16,6 +16,9 @@ pygmentsCodeFences = true
 hasCJKLanguage = true # 日本語文字数を正しくカウントさせるため必要
 
 disableKinds = ["RSS", "sitemap"] # index.xml(RSS), sitemap.xmlを作らない
+# Add your Google Analytics4 identifier: "UA-194281783-1"
+#googleAnalytics = "G-Z5K4GXE0V9"
+
 enableEmoji = true
 
 
@@ -33,7 +36,7 @@ showReadMore = true
 mainSections = [
 	"posts",
 ]
-# Add your Google Analytics4 identifier: UA-XXXXXXXX-X
+# Add your Google Analytics4 identifier: "UA-194281783-1"
 # 行の場所を変更 01/02,2024
 googleAnalytics = "G-Z5K4GXE0V9"
 
