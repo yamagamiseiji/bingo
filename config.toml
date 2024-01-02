@@ -14,9 +14,7 @@ pygmentsCodeFences = true
 # pygmentsUseClasses = true
 # pygmentsStyle = "manni"
 hasCJKLanguage = true # 日本語文字数を正しくカウントさせるため必要
-# Add your Google Analytics identifier: UA-XXXXXXXX-X
-# change to "G-EGYJTGY91" 2023/12/25 11:26:25 changed 01/02
-googleAnalytics = "G-Z5K4GXE0V9"
+
 disableKinds = ["RSS", "sitemap"] # index.xml(RSS), sitemap.xmlを作らない
 enableEmoji = true
 
@@ -35,6 +33,10 @@ showReadMore = true
 mainSections = [
 	"posts",
 ]
+# Add your Google Analytics4 identifier: UA-XXXXXXXX-X
+# 行の場所を変更 01/02,2024
+googleAnalytics = "G-Z5K4GXE0V9"
+
 # paginate of archives, tags and categories
 listPaginate = 20
 postLicense = ""

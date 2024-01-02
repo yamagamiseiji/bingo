@@ -8,8 +8,6 @@ summaryLength = 100 # Configure how long the post summary should be on the homep
 pygmentsUseClasses = true # enable theme-defined highlight style
 hasCJKLanguage = false
 
-# Add your Google Analytics identifier: UA-XXXXXXXX-X
-googleAnalytics = ""
 
 [taxonomies]
 tag = "tags"
@@ -24,6 +22,9 @@ showReadMore = false
 mainSections = [
 	"post",
 ]
+# Add your Google Analytics identifier: UA-XXXXXXXX-X
+googleAnalytics = "G-Z5K4GXE0V9"
+
 # paginate of archives, tags and categories
 listPaginate = 20
 postLicense = ""
