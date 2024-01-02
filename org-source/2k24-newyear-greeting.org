@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#                    Time-stamp: <2024-01-02 08:46:16 yamagami>
+# Time-stamp: <2024-01-02 10:50:08 yamagami>
 #+title: 2024年 新年のご挨拶
 #+date: [ 2024-01-01 ]
 #+language: ja
