@@ -17,7 +17,7 @@ hasCJKLanguage = true # 日本語文字数を正しくカウントさせるた�
 
 disableKinds = ["RSS", "sitemap"] # index.xml(RSS), sitemap.xmlを作らない
 # Add your Google Analytics4 identifier: "UA-194281783-1"
-#googleAnalytics = "G-Z5K4GXE0V9"
+googleAnalytics = "G-Z5K4GXE0V9"
 
 enableEmoji = true
 

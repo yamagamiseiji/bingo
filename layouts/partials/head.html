@@ -30,7 +30,7 @@
   {{ with .OutputFormats.Get "RSS" }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end }}
-  {{ if not .Site.IsServer }} <!-- original 下の行に変えてみた2024/01/02 -->
+  {{ if not .Site.IsServer }} 
     {{ template "_internal/google_analytics.html" . }}
   {{ end }}
 </head>
