@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-13 19:06:29 yamagami>
+#           Time-stamp: <2024-01-13 19:16:09 yamagami>
 #+title: Ledger-cliでNPO会計 -- 小規模学会の経理例
-#+date: [2024-01-13]
+#+date: [2024-01-14]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
