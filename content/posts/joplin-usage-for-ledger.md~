@@ -1,0 +1,92 @@
++++
+title = "アンドロイドタブレットのJoplinをLedgerレポートのビューアにする"
+author = ["YAMAGAMI"]
+date = 2024-01-13T00:00:00+09:00
+tags = ["ledger-cli", "joplin"]
+categories = ["comp"]
+draft = false
++++
+
+## Intro {#intro}
+
+LedgerのトランザクションはノートPC（ubuntu 20.04) のEmacsで書いています。これ以上に使い勝手がよく高機能の会計・経理データ記帳システムはないと思います。
+
+特別なバランスレポートやレジスターレポートが必要なときにはPCを開いてクエリ式を叩きます。しかし、
+
+1.  ****毎日チェック**** する定常的なお金の出入りに関するレポート
+2.  クルマの整備記録のように数ヶ月に1度程度の ****低頻度イベント**** のレポート
+
+これらはPCを開いてコマンドを入力して確認するよりも、タブレットの ****Jopling画面**** を2,3回タップして表示・確認する方が便利です。
+
+
+## 仕組みのイメージ {#仕組みのイメージ}
+
+大ざっぱな流れはとても単純です（図[1](#figure--fig-3)）。
+
+<a id="figure--fig-3"></a>
+
+{{< figure src="/joplin-viewer-for-linux.png" caption="<span class=\"figure-number\">&#22259;1:  </span>JoplinでLedgerのregレポートを見る" width="80%" >}}
+
+PCで日々 トランザクションを入力した後、ほぼ毎回起動する `today` という名前の自家製スクリプトがあります[^footnote_today]。 `today` が生成する出力の中で、ここで紹介するJoplinノートに引き渡されるのは次のとおりです。
+
+-   当日までの「予算消化率(%)」（水平プログレッシブバーチャート）
+-   当日の支出のレジスターレポート（テキスト）
+-   「支出予算額と当月の支出額」（折れ線グラフ）
+-   クルマの整備記録レポート（テキスト）
+
+[^footnote_today]: `today` についての過去記事。<br />
+****2020/01/31**** 「[ぼちぼち可視化してます](https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/)」<br />
+****2023/02/08**** 「[Ledger-cliのレジスターレポートのカラム崩壊を防止する](https://bred-in-bingo.netlify.app/posts/dpamac-column-fixer/)」
+
+
+### 毎日チェックするイベント＝今日の支出状況 {#毎日チェックするイベント-今日の支出状況}
+
+図[2](#figure--fig-2)はタブレット上のJoplinのスクリーンショット（金額などの数値はダミー）です。
+
+<a id="figure--fig-2"></a>
+
+{{< figure src="/today-sample-out20240113.jpg" caption="<span class=\"figure-number\">&#22259;2:  </span>TODAY on Joplinのタブレットスクリーンショット" width="70%" >}}
+
+このJoplinノートのMarkdownソースはこれだけ（ `src` のDropboxダイレクトリンクは隠蔽しています）。
+
+```markdown
+# TODAY
+<div align=center>
+<img src="https://dl.dropboxusercontent.com/xxxxxxxxxxxxxxxxxxxxxuge.png" alt="" width=50%>
+<img src="https://dl.dropboxusercontent.com/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" alt="" width=90%>
+<img src="https://dl.dropboxusercontent.com/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" alt="" width=90%>
+</div>
+```
+
+
+#### 補足説明 {#補足説明}
+
+1.  Ledgerのregレポートを作る際に、テキストファイルが「 ****列崩壊**** 」するのを防ぐためのフィルター（＝関数 `func-dpaAC-column-fixer.sh` ）を通しています[^footnote_fixer]。
+2.  整列したLedgerのregレポートは一旦テキストファイルにストアし、それを `pango-view` で ****SVG**** に変換しています。その際、背景に色(papaya)をつけています。他にもスマートなやり方はあると思いますが、下のような感じ。
+    ```sh
+    $ pango-view --font=mono -qo\
+      image_made_by_pango.svg original_textfile.txt\
+      --background=papayawhip
+    ```
+
+[^footnote_fixer]: 列崩壊防止のための関数：![](/img_by_pango.svg) もたもたしてお恥ずかしいですがとりあえず動いています&#128517;
+
+
+### 低頻度イベント＝クルマの整備記録 {#低頻度イベント-クルマの整備記録}
+
+直近2年間のオイル交換やタイヤ交換、エアコンフィルターのDIY交換などの日付とオドメータ（走行距離）に関するレポートのタブレット画面です（図[3](#figure--fig-4)）。
+
+<a id="figure--fig-4"></a>
+
+{{< figure src="/forester整備記録_on_Joplin.jpg" caption="<span class=\"figure-number\">&#22259;3:  </span>Ledgerで記録したクルマの整備記録をJoplinノートにしたページのスクリーンショット" width="70%" >}}
+
+最近はクルマ自体に整備イベントを記録する仕掛けが用意されていることが多いです[^footnote_foresterも]。残念ながら自分のクルマでは入力がとてもわずらわしいです。
+
+Ledgerでは、トランザクションを書いているときに、クルマの整備情報も一緒に書き込めます。あとは記録を見たい時にタブレットを開けばこれが見えます。
+
+トランザクションの書き方を忘れがちなので記録表示の下にサンプルトランザクションを表示しました:smile:
+
+[^footnote_foresterも]: 愛車のSJGフォレスターにもついていますけど使ったことはありません&#128517;
+
+
+## Footnotes: {#footnotes}
