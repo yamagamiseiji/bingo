@@ -1,7 +1,7 @@
 +++
 title = "小規模学会の経理をLedger-cliでやってみる – NPO法人会計基準に沿いながら"
 author = ["YAMAGAMI"]
-date = 2024-01-16T00:00:00+09:00
+date = 2024-01-31T00:00:00+09:00
 tags = ["Ledger-cli", "NPO", "会計"]
 categories = ["comp"]
 draft = false

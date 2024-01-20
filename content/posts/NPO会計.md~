@@ -350,9 +350,9 @@ Ledger-cliをインストールするとユーザのホームホーム ディレ
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Aliases
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-yucho=Assets:現金預金:ゆうちょ
-ufj=Assets:現金預金:UFJ
-smbc=Assets:現金預金:SMBC
+aliase yucho=Assets:現金預金:ゆうちょ
+aliase ufj=Assets:現金預金:UFJ
+aliase smbc=Assets:現金預金:SMBC
 　　：
 ＜これにならって好きなだけエリアスを追加できます＞
 ```
