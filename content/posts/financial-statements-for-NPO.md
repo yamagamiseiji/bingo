@@ -8,3 +8,5 @@ draft = false
 +++
 
 この記事で使用しているLedgerのサンプルデータは[こちら](https://bred-in-bingo.netlify.app/sample-npo-data.ledger).
+
+おっけ。
