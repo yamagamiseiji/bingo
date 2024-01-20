@@ -1,67 +1,138 @@
 +++
-title = "Ledger-cliでNPO会計 – 小規模学会の経理例"
+title = "小規模学会の経理をLedger-cliでやってみる – NPO法人会計基準に沿いながら"
 author = ["YAMAGAMI"]
-date = 2024-01-14T00:00:00+09:00
+date = 2024-01-16T00:00:00+09:00
 tags = ["Ledger-cli", "NPO", "会計"]
 categories = ["comp"]
 draft = false
 +++
 
+<div class="ox-hugo-toc toc">
+
+<div class="heading">&#30446;&#27425;</div>
+
+- [イントロダクション](#イントロダクション)
+- [この記事について](#この記事について)
+    - [事例は少しずつ増やしていきます](#事例は少しずつ増やしていきます)
+    - [トップレベルの４勘定科目](#トップレベルの４勘定科目)
+    - [Expenses（経常経費）勘定科目構造（例題用の短縮版）](#expenses-経常経費-勘定科目構造-例題用の短縮版)
+    - [Income（経常収益）勘定科目構造（例題用の短縮版）](#income-経常収益-勘定科目構造-例題用の短縮版)
+    - [Assets（資産）勘定科目構造（例題用の短縮版)](#assets-資産-勘定科目構造-例題用の短縮版)
+    - [Liabilities（負債）勘定科目構造（例題用の短縮版)](#liabilities-負債-勘定科目構造-例題用の短縮版)
+- [ポスティング サンプル](#ポスティング-サンプル)
+    - [入会金と年会費の例](#入会金と年会費の例)
+    - [受取補助金の例](#受取補助金の例)
+    - [事業収入の例](#事業収入の例)
+    - [Expenses(経常経費）の例](#expenses経常経費-の例)
+    - [源泉税の例](#源泉税の例)
+    - [立替金の例](#立替金の例)
+    - [未払金の例](#未払金の例)
+    - [仮受金の例](#仮受金の例)
+- [Pros and Cons](#pros-and-cons)
+    - [Pros](#pros)
+    - [Cons](#cons)
+- [（参考資料1） Ledger-cliの設定ファイル](#参考資料1-ledger-cliの設定ファイル)
+    - [~/.ledgerrc](#ledgerrc)
+    - [内容例](#内容例)
+- [（参考資料2） 活動報告書、貸借対照表](#参考資料2-活動報告書-貸借対照表)
+- [Footnotes:](#footnotes)
+
+</div>
+<!--endtoc-->
+
+
+
 ## イントロダクション {#イントロダクション}
 
 ここでは
 
--   Ledger-cliを使って1,000名未満の小規模な学会の会計・経理の一例
--   （ほぼ）NPO会計(出典)に準拠
+```text
+会員数1,000名未満の小規模な学会をイメージしながら
+NPO法人会計基準にそった形でLedger-cliを使って会計処理する方法を
+具体的なledger-cliポスティングを例示しながら説明します。
+```
 
-Ledgerとは
+NPO法人会計の体系的な説明や勘定科目構造などについてはネット上に良い資料がたくさんありますので、そちらを参照してください（「[NPO 法人会計基準ハンドブック](https://www.npokaikeikijun.jp/wp-content/uploads/handbook201202.pdf)」、「[「ＮＰＯ法人会計」の仕訳](https://www.ssdesign.co.jp/kaiN/kaiN_shiwake.pdf) 」など）。
 
--   Ledger-cliは複式簿記、フリー（無料）、プレインテキスト
--   Ledger-cliでは、複式簿記の ****貸方/借方**** （debit/credit）の概念はスルーしてかまいません[^fn:1]。下の図 [1](#figure--four-basic-accounts) に書かれている4つの基本勘定科目（Income, Assets, Liabilities, Expenses）とそのらの間の相互関係を抑えておくだけでOK[^fn:2]。
+****Ledger-cli**** はオープンソースの ****複式簿記**** 会計処理システムです。UNIXのコマンドラインベースで動き、元帳などすべてのデータはプレインテキストです。
 
-<a id="figure--four-basic-accounts"></a>
+Ledgerにはユニークで優れた特徴がたくさんありますが、その最たるものは、複式簿記のいわゆる ****貸方/借方**** （debit/credit）の概念をスルーできるということ[^footnote_see_manual]。
+
+[^footnote_see_manual]: 詳細は[公式マニュアル](https://ledger-cli.org/docs.html)などをみてください。
+<https://ledger-cli.org/docs.html>
+
+これから Ledgerで経理処理を始めてみようという方は、下の図[1](#figure--from-gnucash) に書かれている4つの基本勘定科目（ `Income`, `Assets`, `Liabilities`, `Expenses` ）とそれらの間の相互関係を抑えておくだけでOKです。
+
+<a id="figure--from-gnucash"></a>
 
 {{< figure src="/basics_AccountRelationships.png" caption="<span class=\"figure-number\">&#22259;1:  </span>4つの基本勘定科目（accounts)    (出典： [GnuCash Tutorial and Concepts Guide](<https://gnucash-docs-rst.readthedocs.io/en/latest/guide/C/ch_basics.html>))" width="90%" >}}
 
-この記事の前提など
-
--   Ledger-cliの基本的なリテラシのある方がtarget readerです。
--   OSはlinux/windows/MacOS、なんでもOK。トランザクションを記述するためのテキストエディターも何でもOKだがEmacsがベスト。
+あとは具体的なトランザクションの書き方、ポスティングの書き方の具体例を見ながら実際に使って見れば、複式簿記概念に基づく基本的な会計処理が可能になります。
 
 
-## 勘定科目構造 {#勘定科目構造}
+## この記事について {#この記事について}
+
+この記事は形式的には小規模学会の経理を例として使っていますが、一般的なNPO法人会計への適用または応用にもいくらか役立つと思います。
+
+
+### 事例は少しずつ増やしていきます {#事例は少しずつ増やしていきます}
+
+本日（2024/01/16）ここにデプロイした事例は ****最小限**** のものです。目に付いたトランザクションをどうポスティングするかのメモを寄せ集めたもので体系的な説明にはなっていません。
+
+今後、少しずつポスティング例を増やして行く中で、徐々に体系化をはかっていこうと思います。
 
 
 ### トップレベルの４勘定科目 {#トップレベルの４勘定科目}
 
-NPO会計でよく使われる日本語の勘定科目名ですが、
+NPO法人会計で使われる日本語の勘定科目名の内、「資産（Assets）」と「負債（Liabilities）」は日本語訳のゆらぎはほとんどありませんが、
+`Expenses` と `Income` の訳語が個人的にちょっとしっくりこないのでここでは、トップレベルの4勘定科目はとりあえず ****すべて英語のまま**** 使うことにします。
 
--   「資産」と「負債」は日本語訳のゆらぎはほとんど無いのでだいじょうぶですが
--   ExpensesとIncomeの訳語が個人的にちょっとしっくりこないので
+<a id="figure--top-level-accounts"></a>
 
-とりあえずトップの4科目は英語のまま使うことこします。
-
-{{< figure src="/top_level-AC.svg" caption="<span class=\"figure-number\">&#22259;2:  </span>勘定科目ツリーのトップレベル４科目" width="50%" >}}
-
-この4勘定科目の関係図
+{{< figure src="/top_level-AC.svg" caption="<span class=\"figure-number\">&#22259;2:  </span>勘定科目ツリーのトップレベル４科目。この記事内では英語を使います。" width="50%" >}}
 
 
-## 経常収益(Income)勘定科目表（簡易版） {#経常収益--income--勘定科目表-簡易版}
+### Expenses（経常経費）勘定科目構造（例題用の短縮版） {#expenses-経常経費-勘定科目構造-例題用の短縮版}
 
-{{< figure src="/cutdown-経常収益-tree.svg" caption="<span class=\"figure-number\">&#22259;3:  </span>経常収益（簡易版）" width="50%" >}}
+NPO法人の場合には `Expenses` は「事業費」direct cost(expenditure)と「管理費」overheads に大別されます。
 
-
-## 資産（Assets）勘定科目表（簡易版) {#資産-assets-勘定科目表-簡易版}
-
-{{< figure src="/cutdown-資産-tree.svg" caption="<span class=\"figure-number\">&#22259;4:  </span>資産（簡易版）" width="35%" >}}
+{{< figure src="/cutdown-expenses-tree.svg" caption="<span class=\"figure-number\">&#22259;3:  </span>`Expenses` 科目内のサブ勘定科目(例題用の短縮版)" width="45%" >}}
 
 
-### TXNサンプル {#txnサンプル}
+### Income（経常収益）勘定科目構造（例題用の短縮版） {#income-経常収益-勘定科目構造-例題用の短縮版}
+
+図[4](#figure--income-tree) はこの記事内のポスティング例で使用する `Income` 内のサブ勘定科目です。
+
+<a id="figure--income-tree"></a>
+
+{{< figure src="/cutdown-income-tree.svg" caption="<span class=\"figure-number\">&#22259;4:  </span>`Income` 科目内のサブ勘定科目（例題用の短縮版）" width="50%" >}}
 
 
-#### 入会金と年会費のTXN例 {#入会金と年会費のtxn例}
+### Assets（資産）勘定科目構造（例題用の短縮版) {#assets-資産-勘定科目構造-例題用の短縮版}
 
-(1) 2021/04/10に東京太郎氏が正会員の入会金と年会費を「ゆうちょ」に振り込んだ。東京太郎氏の会員番号（ID）は20220410。
+図[5](#figure--assets-tree) はこの記事内のポスティング例で使用する `Assets` 内のサブ勘定科目です。
+
+<a id="figure--assets-tree"></a>
+
+{{< figure src="/cutdown-assets-tree.svg" caption="<span class=\"figure-number\">&#22259;5:  </span>`Assets` 科目内のサブ勘定科目（例題用の短縮版）" width="35%" >}}
+
+
+### Liabilities（負債）勘定科目構造（例題用の短縮版) {#liabilities-負債-勘定科目構造-例題用の短縮版}
+
+図[6](#figure--liab-tree) は `Liabilities` 内のサブ勘定科目です。
+
+<a id="figure--liab-tree"></a>
+
+{{< figure src="/cutdown-liab-tree.svg" caption="<span class=\"figure-number\">&#22259;6:  </span>`Liabilities` 科目内のサブ勘定科目(例題用の短縮版)" width="35%" >}}
+
+
+## ポスティング サンプル {#ポスティング-サンプル}
+
+
+### 入会金と年会費の例 {#入会金と年会費の例}
+
+(1) 2021/04/10に東京太郎氏が正会員の入会金と年会費を「ゆうちょ」に振り込んだ。<br />
+東京太郎氏の会員番号（ID）は20220410。
 
 ```text
 2021/04/10 東京太郎
@@ -85,8 +156,10 @@ NPO会計でよく使われる日本語の勘定科目名ですが、
    Assets:現金預金:UFJ                    6,000 JPY
 ```
 
+`Income` アカウント内の `2022` が翌年度になっていますので、あえて `前受け会費` を勘定科目化する必要はありません。
 
-#### 受取補助金のTXN例 {#受取補助金のtxn例}
+
+### 受取補助金の例 {#受取補助金の例}
 
 (3) 文科省から補助金が「ゆうちょ」に振り込まれた。
 
@@ -97,9 +170,10 @@ NPO会計でよく使われる日本語の勘定科目名ですが、
 ```
 
 
-#### 事業収入のTXN例 {#事業収入のtxn例}
+### 事業収入の例 {#事業収入の例}
 
-(4) 会誌の定期購読料が○○大学図書館から「UFJ」に振り込まれた。
+(4) 会誌の定期購読料が○○大学図書館から「UFJ」に振り込まれた。<br />
+この例では `UFJ` は[~/.ledgerrc](#ledgerrc)で「Assets:現金預金:UFJ」とエリアス定義されています。
 
 ```text
 2023/01/31 ○○大学図書館
@@ -107,7 +181,11 @@ NPO会計でよく使われる日本語の勘定科目名ですが、
     UFJ
 ```
 
-(5) 「(一社)学術著作権協会」から著作物使用料金が「ゆうちょ」に振り込まれた。
+また第2行目のトランザクションの金額 `5,000 JPY` が省略されています。Ledgerではポスティング内のトランザクションは ****1つだけ**** 省略可能です[^footnote_zerosum]。
+
+[^footnote_zerosum]: ポスティング内の全トランザクションの合計は必ずゼロになりますので、省略された金額はLedgerが補完してくれます。
+
+(5) 「(一社)学術著作権協会」から著作物使用料金が「ゆうちょ」に振り込まれた。 `yucho` は同じくエリアスで内部的に「Assetes:現金預金:ゆうちょ」に展開されます。
 
 ```text
 2023/03/27 (一社)学術著作権協会
@@ -133,33 +211,7 @@ NPO会計でよく使われる日本語の勘定科目名ですが、
           SMBC
 ```
 
-
-## 経常経費 Expenses {#経常経費-expenses}
-
-事業費 direct cost(expenditure)と管理費 overheads に大別される。
-
-{{< figure src="/cutdown-経常経費-tree.svg" caption="<span class=\"figure-number\">&#22259;5:  </span>経常経費の勘定科目構造" width="45%" >}}
-
-団体の設立目的・本来業務である研究・学術に直接関係した事業に要する経費を事業費とする。(NPO法人の場合）
-
-```text
-eg. 事業を遂行するために支出した人件費、売上原価（仕入れや制作費）、チラシやポスターの印刷、講師への謝金、会場の賃貸料、特定事業の寄付金の募集のためのファンドレイジング（資金調達）費等、明らかに事業に関する経費として特定できる金額
-```
-
-法人を維持しその事業を管理することに要する経費を管理費 overheads
-とする。
-
-```text
-eg. 総会および理事会の開催運営費、管理部門に係る役職員の人件費、管理部門に係る事務所の賃貸料および水道光熱費等
-```
-
-
-### 経常経費:事業費 {#事業費}
-
-
-## TXN例 {#txn例}
-
-(8) 新宿花子氏に学術大会の講師謝金を「ゆうちょ」に振り込んだ。この例では簡単のために源泉税は転記していない（後述する）
+(8) 学術大会の講師謝金を新宿花子氏の「ゆうちょ」口座に振り込んだ。この例では簡単のために源泉税は転記していません（後述します）。
 
 ```text
 2022/12/15 新宿花子
@@ -169,7 +221,7 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
 ```
 
 
-### 経常経費:管理費 {#経常経費-管理費}
+### Expenses(経常経費）の例 {#expenses経常経費-の例}
 
 (9) ㈱業務委託社に理事会の会議費費用を振り込んだ。
 
@@ -180,14 +232,9 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
 ```
 
 
-## 負債 Liabilities {#負債-liabilities}
+### 源泉税の例 {#源泉税の例}
 
-{{< figure src="/cutdown-負債-tree.svg" caption="<span class=\"figure-number\">&#22259;6:  </span>負債の勘定科目構造" width="30%" >}}
-
-
-#### 源泉税の書き方例 {#源泉税の書き方例}
-
-(10) 大会シンポジストの静岡三郎氏に源泉税を天引した交通費を振り込んだ。
+(10) 大会シンポジストの静岡三郎氏に源泉税を天引した交通費を振り込んだ。 `exp, liab` ともエリアスで、それぞれ `Expenses, Liabilites` に展開されます。 `ゆうちょ` もエリアス。
 
 ```text
 2022/12/15 静岡三郎
@@ -208,12 +255,14 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
     Assets:現金預金:UFJ                           -3,361 JPY
 ```
 
-ここで、 `（Liabilities:未払源泉税)` は仮想アカウント(virtual account)
+ここで `（Liabilities:未払源泉税)` は ****仮想アカウント**** (virtual account)[^footnote_va]です。
+
+[^footnote_va]: 仮想アカウントについては公式マニュアルなどをみてください。
 
 
-#### 立替金 {#立替金}
+### 立替金の例 {#立替金の例}
 
-立替金は `資産:立替金` に収納する。
+立替金は `資産:立替金` に収納します。
 
 (12) 相模原花子氏が支払った立替金を後日、氏の「ゆうちょ」に振り込んだ。
 
@@ -229,9 +278,9 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
 ```
 
 
-#### 未払金 {#未払金}
+### 未払金の例 {#未払金の例}
 
-(13) 年度末日において、業務委託先に通信郵便費の未払い金がある場合のトランザクション
+(13) 年度末日において、業務委託先に通信郵便費の未払い金がある場合のポスティング
 
 ```text
 2022/03/31 ㈱事務代行社
@@ -240,9 +289,9 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
 ```
 
 
-#### 仮受金 {#仮受金}
+### 仮受金の例 {#仮受金の例}
 
-(14) 2019/07/01にナゾの振込が「ナゾフリコミ」さんから7,000円あった。調査不能のために当面、毎年度、期首振替する
+(14) 2019/07/01にナゾの振込が「ナゾフリコミ」さんから7,000円あった。調査不能のために当面、毎年度、期首振替する。
 
 ```text
 2019/07/01=2022/04/01 ナゾノフリコミ
@@ -251,7 +300,7 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
     Assets:現金預金:ゆうちょ                       7,000 JPY
 ```
 
-(15) 振込元が判明し返金する時のトランザクション。負債:仮受金に収納する。
+(15) 振込元が判明し返金する時のポスティング。負債:仮受金に収納する。
 
 ```text
 2023/10/10 ナゾノフリコミ
@@ -260,103 +309,56 @@ eg. 総会および理事会の開催運営費、管理部門に係る役職員�
 ```
 
 
-## ちょっとした小技 {#ちょっとした小技}
+## Pros and Cons {#pros-and-cons}
 
 
-### 領収書等の帳票の扱い {#領収書等の帳票の扱い}
+### Pros {#pros}
 
-Emacs内で、請求書や領収書などをin-line表示することができる。
-
-```text
-2022/07/15=2022/08/10 ㈱事務代行社
-    ; 請求書: invoice/㈱事務代行社/20220715_事務代行社.pdf
-    ; 領収書: receipt/㈱事務代行社/20220810_事務代行社.pdf
-    Expenses:管理費:業務委託費           450,000 JPY
-    ゆうちょ                            -450,000 JPY
-```
-
-請求書の日付が07/15、振込の日付が08/10などのように使い分けることができる。
-
-書類をin-line表示するには、Emacs内で領収書の行にカーソルを乗せC-x
-C-y。ミニバッファに
-receiptディレクトリ配下にあるPDFファイルが表示されるので、Enterを叩くとEmacsバッファに領収書が表示される。元の画面に戻るにはC-x
-b。ミニバッファに元のバッファが表示されるので、Enter。
+-   プレインテキストベースなので、勘定科目名や構造、金額、支払先名などを自由に変更できる。
+-   会計事務を外部委託すると毎年の経理はやってくれるが、新しい観点での分析とか長期的なトレンド、将来の予測などを依頼することはむずかしい（もちろんお金に糸目をつけなければ何でもやってくれますが（笑））
 
 
-### Ledgerの初期設定ファイル {#ledgerの初期設定ファイル}
+### Cons {#cons}
+
+-   日本語の入門書が見当たらない（英文のよい入門記事はたくさんありますが）
 
 
-#### ~/.ledgerrc {#ledgerrc}
+## （参考資料1） Ledger-cliの設定ファイル {#参考資料1-ledger-cliの設定ファイル}
+
+
+### ~/.ledgerrc {#ledgerrc}
+
+`.ledgerrc` は、
+Ledger-cliのもっとも基本的な環境を設定するためのファイル。
+Ledger-cliをインストールするとユーザのホームホーム ディレクトリに作成されます。このデフォルトの場所を変更するには、
+\`$ ledger --init-file 'PATH/init-file.dat'\`します。くわしくはマニュアルを参照してください。
 
 -   <https://github.com/yradunchev/ledger/blob/master/.ledgerrc>
--   デフォルトの場所は
-    ~/.\`　ledgerをインストールするとホームDIRに作成される。
--   場所を変えるときには、\`ledger --init-file 'PATH/init-file.dat'\`
-    か、もしくは...
--   内容例:
-    ```text
-    --file ~/npo-ledger-dir/
-    --color
-    --check-payees
-    --date-format %Y/%m/%d
-    --pager /usr/bin/less
-    --price-db ~/.prices.db
-    --sort date
-    ;--strict
-    ;--explicit
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;  Aliases
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    yucho=Assets:現金預金:ゆうちょ
-    ufj=Assets:現金預金:UFJ
-    smbc=Assets:現金預金:SMBC
-    　　：
-    ```
 
 
-#### ~/ledger-schedule.ledger {#ledger-schedule-dot-ledger}
-
--   see manual
-
-
-#### payees.dat, accounts.dat tags.dat {#payees-dot-dat-accounts-dot-dat-tags-dot-dat}
+### 内容例 {#内容例}
 
 ```text
-include ~/local-ledger-directory/configs/accounts.dat
-include ~/local-ledger-directory/configs/payees.dat
-include ~/local-ledger-directory/configs/tags.dat
+--file ~/npo-ledger-dir/
+--color
+--check-payees
+--date-format %Y/%m/%d
+--pager /usr/bin/less
+--sort date
+--pedantic
+--explicit
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Aliases
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+aliase yucho=Assets:現金預金:ゆうちょ
+aliase ufj=Assets:現金預金:UFJ
+aliase smbc=Assets:現金預金:SMBC
+　　：
+＜これにならって好きなだけエリアスを追加できます＞
 ```
 
 
-## Pros and Cons（後ほど文末に移動する） {#pros-and-cons-後ほど文末に移動する}
-
--   事務を委託すると毎年の経理はやってくれるが、新しい観点での分析とか長期的なトレンド、将来の予測などは無理（金を積めばなんでもやる）
+## （参考資料2） 活動報告書、貸借対照表 {#参考資料2-活動報告書-貸借対照表}
 
 
-## Appendix （資料） {#appendix-資料}
-
-
-### 勘定科目の詳細例 {#勘定科目の詳細例}
-
-
-#### 経常費用(Expenses) {#経常費用--expenses}
-
-{{< figure src="/expenses_tree.svg" caption="<span class=\"figure-number\">&#22259;7:  </span>Expenses" width="60%" >}}
-
-
-#### 負債(Liabilities) {#負債--liabilities}
-
-{{< figure src="/liabilities_tree.svg" caption="<span class=\"figure-number\">&#22259;8:  </span>Liabilities" width="60%" >}}
-
-
-#### 経常収益(Income) {#経常収益--income}
-
-{{< figure src="/income_tree.svg" caption="<span class=\"figure-number\">&#22259;9:  </span>Income" width="60%" >}}
-
-
-#### 資産(Assets) {#資産--assets}
-
-{{< figure src="/assets_tree.svg" caption="<span class=\"figure-number\">&#22259;10:  </span>Assets" width="60%" >}}
-
-[^fn:1]: Ledger-cliでは、貸方/借方という考え方はまったく使わずに済ませることができます。
-[^fn:2]: 会計・経理分野の英単語を日本語に直そうとすると、一つの英単語にいくつもの日本語訳候補があって、どれが正解かよく分からないことがあります。会計・経理の世界の中の細分化あれた分野によって、慣習として使われる日本語が違うらしいです。仕方ないので図[1](#figure--four-basic-accounts)の中では英語のままにしておきました。
+## Footnotes: {#footnotes}

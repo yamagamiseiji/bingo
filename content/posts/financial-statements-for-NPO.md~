@@ -1,0 +1,12 @@
++++
+title = "NPO法人会計に準拠した財務諸表をLedger-cliで書く"
+author = ["YAMAGAMI"]
+date = 2024-01-20T00:00:00+09:00
+tags = ["NPO", "Ledger-cli", "finance"]
+categories = ["comp"]
+draft = false
++++
+
+これおっけ？
+
+この記事で使用しているLedgerのサンプルデータは[こちら](https://bred-in-bingo.netlify.app/sample-npo-data.ledger).

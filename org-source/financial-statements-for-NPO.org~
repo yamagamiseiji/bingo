@@ -1,0 +1,25 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2024-01-20 14:42:05 yamagami>
+#+title: NPO法人会計に準拠した財務諸表をLedger-cliで書く
+#+date: [2024-01-20]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: NPO Ledger-cli finance
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+
+
+# data file download test
+[[https://bred-in-bingo.netlify.app/sample-npo-data.ledger]]
+
+これおっけ？
+ど？
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
