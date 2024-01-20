@@ -1,7 +1,7 @@
 +++
 title = "NPO法人会計に準拠した財務諸表をLedger-cliで書く"
 author = ["YAMAGAMI"]
-date = 2024-01-20T00:00:00+09:00
+date = 2024-01-21T00:00:00+09:00
 tags = ["NPO", "Ledger-cli", "finance"]
 categories = ["comp"]
 draft = false
