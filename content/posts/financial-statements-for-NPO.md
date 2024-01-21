@@ -1,7 +1,7 @@
 +++
 title = "NPO法人会計に準拠した財務諸表をLedger-cliで書く"
 author = ["YAMAGAMI"]
-date = 2024-01-21T00:00:00+09:00
+date = 2024-01-22T00:00:00+09:00
 tags = ["NPO", "Ledger-cli", "finance"]
 categories = ["comp"]
 draft = false
@@ -96,8 +96,6 @@ Ledgerにはユニークで優れた特徴がたくさんありますが、そ�
 これはこの記事のために作った架空のLedgerファイルです。
 [こちら](https://bred-in-bingo.netlify.app/sample-npo-data.ledger) からダウンロードできます。
 
-[[<https://bred-in-bingo.netlify.app/sample-npo-data.ledger>][こちら]
-
 
 ### configsディレクトリ配下の設定ファイル {#configsディレクトリ配下の設定ファイル}
 
@@ -169,7 +167,7 @@ alias ufj=資産:流動資産:現金預金:UFJ
 
 #### `payees-npo.dat` {#payees-npo-dot-dat}
 
-TXNの日付の後ろに記述されている `payees` (支払先名)のリストです。
+TXNの日付の後ろに記述されている `payees` (支払先名)のリストです。ダウンロードは[こちら](https://https//bred-in-bingo.netlify.app/payees-npo.dat)から。
 
 ```nil
 payee 相模原花子
