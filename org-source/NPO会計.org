@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-20 16:06:04 yamagami>
+#           Time-stamp: <2024-01-21 09:14:43 yamagami>
 #+title: 小規模学会の経理をLedger-cliでやってみる -- NPO法人会計基準に沿いながら
 #+date: [2024-01-31]
 #+language: ja
@@ -20,24 +20,6 @@ NPO法人会計基準にそった形でLedger-cliを使って会計処理する�
 #+end_example
 NPO法人会計の体系的な説明や勘定科目構造などについてはネット上に良い資料がたくさんありますので、そちらを参照してください（「[[https://www.npokaikeikijun.jp/wp-content/uploads/handbook201202.pdf][NPO 法人会計基準ハンドブック]]」、「[[https://www.ssdesign.co.jp/kaiN/kaiN_shiwake.pdf][「ＮＰＯ法人会計」の仕訳]] 」など）。
 
-**Ledger-cli** はオープンソースの **複式簿記** 会計処理システムです。UNIXのコマンドラインベースで動き、元帳などすべてのデータはプレインテキストです。
-
-Ledgerにはユニークで優れた特徴がたくさんありますが、
-その最たるものは、複式簿記のいわゆる **貸方/借方** （debit/credit）の概念をスルーできるということ[^footnote_see_manual]。
-
-[^footnote_see_manual]: 詳細は[[https://ledger-cli.org/docs.html][公式マニュアル]]などをみてください。
-https://ledger-cli.org/docs.html
-
-これから Ledgerで経理処理を始めてみようという方は、
-下の図[[from_gnucash]] に書かれている4つの基本勘定科目（ =Income=, =Assets=, =Liabilities=, =Expenses= ）とそれらの間の相互関係を抑えておくだけでOKです。
-
-#+name: from_gnucash
-#+attr_html: :width 90%
-#+caption: 4つの基本勘定科目（accounts)    (出典： [GnuCash Tutorial and Concepts Guide](https://gnucash-docs-rst.readthedocs.io/en/latest/guide/C/ch_basics.html))
-[[file:basics_AccountRelationships.png]]
-
-
-あとは具体的なトランザクションの書き方、ポスティングの書き方の具体例を見ながら実際に使って見れば、複式簿記概念に基づく基本的な会計処理が可能になります。
 
 # この記事の前提など
 #   - Ledger-cliの基本的なリテラシのある方がtarget readerです。

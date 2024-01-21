@@ -1,0 +1,20 @@
+--file ~/NPO-project/Ledger-for-NPO/sample-npo-data.ledger
+--color
+--check-payees
+--date-format %Y/%m/%d
+--pager /usr/bin/less
+--sort date
+;;--empty
+--pedantic
+--explicit
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Aliases
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+alias income=経常収益
+alias expns=経常費用
+alias assets=資産
+alias liab=負債
+alias cash=資産:流動資産:現金預金:現金
+alias yucho=資産:流動資産:現金預金:ゆうちょ
+alias ufj=資産:流動資産:現金預金:UFJ
+

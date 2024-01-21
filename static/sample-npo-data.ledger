@@ -1,8 +1,8 @@
 ; ledger -*-
-include ./configs/payees.dat
-include ./configs/accounts.dat
-include ./configs/commodities.dat
-include ./configs/tags.dat
+include ./configs/payees-npo.dat
+include ./configs/accounts-npo.dat
+include ./configs/commodities-npo.dat
+include ./configs/tags-npo.dat
 
 ;; 下のOpening Balanceにおいてとりあえず全勘定科目をについて0を設定しておくと
 ;; ledger bal などで`--empty` を指定すれば全勘定科目が表示される。
@@ -185,7 +185,8 @@ include ./configs/tags.dat
     経常費用:管理費:その他経費:業務委託費    350,000 JPY
 
 2021/09/15 いとうや
-    経常費用:事業費:その他経費:消耗品費       35,000 JPY 
+    経常費用:事業費:その他経費:消耗品費       35,000 JPY
+    ;; 経常費用:事業費:その他経費:消耗品費       135,000 JPY 
     cash
 
 2021/10/10 東京太郎
@@ -197,10 +198,10 @@ include ./configs/tags.dat
     負債:流動負債:未払金
     経常費用:管理費:その他経費:業務委託費    200,000 JPY
 
-2021/11/28 相模原花子
-    ; 会議用Zoom使用料金（立替）
-    経常費用:管理費:その他経費:通信運搬費      2,200 JPY
-    資産:流動資産:立替金                      -2,200 JPY
+; 2021/11/28 相模原花子
+;     ; 会議用Zoom使用料金（立替）
+;     経常費用:管理費:その他経費:通信運搬費      2,200 JPY
+;     資産:流動資産:立替金                      -2,200 JPY
 ; 年度内に返金するときは下のように記帳する
 ; 2021/12/30 相模原花子
 ;     資産:流動資産:立替金                       2,200 JPY

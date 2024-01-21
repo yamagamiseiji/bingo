@@ -54,21 +54,6 @@ NPO法人会計基準にそった形でLedger-cliを使って会計処理する�
 
 NPO法人会計の体系的な説明や勘定科目構造などについてはネット上に良い資料がたくさんありますので、そちらを参照してください（「[NPO 法人会計基準ハンドブック](https://www.npokaikeikijun.jp/wp-content/uploads/handbook201202.pdf)」、「[「ＮＰＯ法人会計」の仕訳](https://www.ssdesign.co.jp/kaiN/kaiN_shiwake.pdf) 」など）。
 
-****Ledger-cli**** はオープンソースの ****複式簿記**** 会計処理システムです。UNIXのコマンドラインベースで動き、元帳などすべてのデータはプレインテキストです。
-
-Ledgerにはユニークで優れた特徴がたくさんありますが、その最たるものは、複式簿記のいわゆる ****貸方/借方**** （debit/credit）の概念をスルーできるということ[^footnote_see_manual]。
-
-[^footnote_see_manual]: 詳細は[公式マニュアル](https://ledger-cli.org/docs.html)などをみてください。
-<https://ledger-cli.org/docs.html>
-
-これから Ledgerで経理処理を始めてみようという方は、下の図[1](#figure--from-gnucash) に書かれている4つの基本勘定科目（ `Income`, `Assets`, `Liabilities`, `Expenses` ）とそれらの間の相互関係を抑えておくだけでOKです。
-
-<a id="figure--from-gnucash"></a>
-
-{{< figure src="/basics_AccountRelationships.png" caption="<span class=\"figure-number\">&#22259;1:  </span>4つの基本勘定科目（accounts)    (出典： [GnuCash Tutorial and Concepts Guide](<https://gnucash-docs-rst.readthedocs.io/en/latest/guide/C/ch_basics.html>))" width="90%" >}}
-
-あとは具体的なトランザクションの書き方、ポスティングの書き方の具体例を見ながら実際に使って見れば、複式簿記概念に基づく基本的な会計処理が可能になります。
-
 
 ## この記事について {#この記事について}
 
@@ -89,41 +74,41 @@ NPO法人会計で使われる日本語の勘定科目名の内、「資産（As
 
 <a id="figure--top-level-accounts"></a>
 
-{{< figure src="/top_level-AC.svg" caption="<span class=\"figure-number\">&#22259;2:  </span>勘定科目ツリーのトップレベル４科目。この記事内では英語を使います。" width="50%" >}}
+{{< figure src="/top_level-AC.svg" caption="<span class=\"figure-number\">&#22259;1:  </span>勘定科目ツリーのトップレベル４科目。この記事内では英語を使います。" width="50%" >}}
 
 
 ### Expenses（経常経費）勘定科目構造（例題用の短縮版） {#expenses-経常経費-勘定科目構造-例題用の短縮版}
 
 NPO法人の場合には `Expenses` は「事業費」direct cost(expenditure)と「管理費」overheads に大別されます。
 
-{{< figure src="/cutdown-expenses-tree.svg" caption="<span class=\"figure-number\">&#22259;3:  </span>`Expenses` 科目内のサブ勘定科目(例題用の短縮版)" width="45%" >}}
+{{< figure src="/cutdown-expenses-tree.svg" caption="<span class=\"figure-number\">&#22259;2:  </span>`Expenses` 科目内のサブ勘定科目(例題用の短縮版)" width="45%" >}}
 
 
 ### Income（経常収益）勘定科目構造（例題用の短縮版） {#income-経常収益-勘定科目構造-例題用の短縮版}
 
-図[4](#figure--income-tree) はこの記事内のポスティング例で使用する `Income` 内のサブ勘定科目です。
+図[3](#figure--income-tree) はこの記事内のポスティング例で使用する `Income` 内のサブ勘定科目です。
 
 <a id="figure--income-tree"></a>
 
-{{< figure src="/cutdown-income-tree.svg" caption="<span class=\"figure-number\">&#22259;4:  </span>`Income` 科目内のサブ勘定科目（例題用の短縮版）" width="50%" >}}
+{{< figure src="/cutdown-income-tree.svg" caption="<span class=\"figure-number\">&#22259;3:  </span>`Income` 科目内のサブ勘定科目（例題用の短縮版）" width="50%" >}}
 
 
 ### Assets（資産）勘定科目構造（例題用の短縮版) {#assets-資産-勘定科目構造-例題用の短縮版}
 
-図[5](#figure--assets-tree) はこの記事内のポスティング例で使用する `Assets` 内のサブ勘定科目です。
+図[4](#figure--assets-tree) はこの記事内のポスティング例で使用する `Assets` 内のサブ勘定科目です。
 
 <a id="figure--assets-tree"></a>
 
-{{< figure src="/cutdown-assets-tree.svg" caption="<span class=\"figure-number\">&#22259;5:  </span>`Assets` 科目内のサブ勘定科目（例題用の短縮版）" width="35%" >}}
+{{< figure src="/cutdown-assets-tree.svg" caption="<span class=\"figure-number\">&#22259;4:  </span>`Assets` 科目内のサブ勘定科目（例題用の短縮版）" width="35%" >}}
 
 
 ### Liabilities（負債）勘定科目構造（例題用の短縮版) {#liabilities-負債-勘定科目構造-例題用の短縮版}
 
-図[6](#figure--liab-tree) は `Liabilities` 内のサブ勘定科目です。
+図[5](#figure--liab-tree) は `Liabilities` 内のサブ勘定科目です。
 
 <a id="figure--liab-tree"></a>
 
-{{< figure src="/cutdown-liab-tree.svg" caption="<span class=\"figure-number\">&#22259;6:  </span>`Liabilities` 科目内のサブ勘定科目(例題用の短縮版)" width="35%" >}}
+{{< figure src="/cutdown-liab-tree.svg" caption="<span class=\"figure-number\">&#22259;5:  </span>`Liabilities` 科目内のサブ勘定科目(例題用の短縮版)" width="35%" >}}
 
 
 ## ポスティング サンプル {#ポスティング-サンプル}
