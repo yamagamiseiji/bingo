@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-21 20:04:23 yamagami>
+#           Time-stamp: <2024-01-22 10:47:43 yamagami>
 #+title: NPO法人会計に準拠した財務諸表をLedger-cliで書く
 #+date: [2024-01-21]
 #+language: ja
@@ -52,6 +52,9 @@ Ledgerにはユニークで優れた特徴がたくさんありますが、
 - ちなみにサンプルデータのポスティング数は120ほどですが、この「活動計算書」と「貸借対照表」出力を得るために要する時間は 330msecです[^footnote_env]。
 
 [^footnote_env]: 環境はThinkPad X230, Ubuntu 20.04 です。Ledgerのバージョンは 3.1.3-20190331。現在、スクリプトはまだ未整理なのでもう少し高速化できると思いますし、最新の高性能PCならほとんど瞬時に終わると思います。
+
+** 修正履歴
+- **2024/01/21 :**  Ledgerオプションの =--sort account= を =--sort -account= に変更（accountの前にマイナス記号を付加）して勘定科目名の表示順を逆にして、「その他XXXXX」が先頭に来ないようにした。
 
 * Ledger関係ファイルの配置
 この記事では、Ledger関係のファイルが図[[tree]]のように配置されていることを前提としています。
