@@ -1,5 +1,5 @@
 #!/bin/bash
-#                         Time-stamp: <2024-01-21 13:16:13 yamagami>
+#                         Time-stamp: <2024-01-22 10:05:46 yamagami>
 #  NPO 活動計算書 貸借対照表 表示・印刷  financial-statements.sh
 #
 config_dir="./configs"
@@ -38,7 +38,7 @@ for ACNT in "${ACNT_arr[@]}"; do
 
     # カラムの乱れ（列崩壊）を直し整列させる
     ledger bal ${account} --init-file ${config_dir}/init-npo.dat\
-	   --depth ${depth} --sort account\
+	   --depth ${depth} --sort -account\
 	   --balance-format "%(! options.flat ? depth_spacer : \"\")%(ansify_if(partial_account(options.flat), blue if color))|%(justify(scrub(${fugo}display_total), 20, -1, true, color))\n%/%\$1\n" \
 	   -o ./column-broken-${f_name}.dat
     # 
