@@ -1,7 +1,7 @@
 +++
 title = "小規模学会のためのLedgeｒポスティング例 — NPO法人会計基準に準拠しながら"
 author = ["YAMAGAMI"]
-date = 2024-01-23T00:00:00+09:00
+date = 2024-01-24T00:00:00+09:00
 tags = ["Ledger-cli", "NPO", "会計"]
 categories = ["comp"]
 draft = false
