@@ -381,5 +381,3 @@ alias ufj=資産:流動資産:現金預金:UFJ
 
 
 ## Footnotes: {#footnotes}
-
-I'd like to change source code block background color in org-mode exported HTML. Searched for a while in vain.

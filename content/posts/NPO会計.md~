@@ -30,7 +30,7 @@ draft = false
     - [仮受金の例](#仮受金の例)
 - [クエリの例](#クエリの例)
 - [Appendix: Ledger-cliの設定ファイル](#appendix-ledger-cliの設定ファイル)
-        - [~/.ledgerrcについて](#ledgerrc)
+    - [~/.ledgerrcについて](#ledgerrc)
     - [init-npo-datファイルの中身](#init-file-sample)
 - [Footnotes:](#footnotes)
 
@@ -343,10 +343,8 @@ init-file指定が不要なら `$ ledger reg 正会員 and 会費` だけの入�
 
 ## Appendix: Ledger-cliの設定ファイル {#appendix-ledger-cliの設定ファイル}
 
-　
 
-
-#### ~/.ledgerrcについて {#ledgerrc}
+### ~/.ledgerrcについて {#ledgerrc}
 
 `.ledgerrc` は、
 Ledger-cliのもっとも基本的な環境を設定するためのファイルです。デフォルトでは、次の順に探索されて使われます。
