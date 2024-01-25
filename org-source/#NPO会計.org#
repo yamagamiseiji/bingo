@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-25 09:30:35 yamagami>
+#           Time-stamp: <2024-01-24 17:50:52 yamagami>
 #+title: 小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら
-#+date: [2024-01-25]
+#+date: [2024-01-24]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -136,17 +136,17 @@ NPO法人会計で使われる日本語の勘定科目名の内、最上位の4�
 **(7)** 2022/07/28に京都次郎氏から会誌の「著者負担金」がUFJ銀行に振り込まれた。
 #+begin_example
 2022/07/28 京都次郎
-    ; ID: 19920601
-    経常収益:事業収入:著者負担金          -50,000 JPY
-    UFJ
+          ; ID: 19920601
+          経常収益:事業収入:著者負担金          -50,000 JPY
+          UFJ
 #+end_example
 
 **(8)** 名古屋良子氏から論文の別刷り代金がUFJ銀行に振り込まれた
 #+begin_example
 2022/07/29 名古屋良子
-    ; ID:  20150810
-    経常収益:事業収入:別刷代               -3,000 JPY
-    UFJ
+          ; ID:  20150810
+          経常収益:事業収入:別刷代               -3,000 JPY
+          UFJ
   #+END_EXAMPLE
 
 
@@ -276,12 +276,10 @@ init-file指定が不要なら =$ ledger reg 正会員 and 会費= だけの入�
 
 
 * Appendix: Ledger-cliの設定ファイル
-
-** ~/.ledgerrcについて
    :PROPERTIES:
    :CUSTOM_ID: ledgerrc
    :END:
-
+*** ~/.ledgerrcについて
 =.ledgerrc= は、
 Ledger-cliのもっとも基本的な環境を設定するためのファイルです。
 デフォルトでは、次の順に探索されて使われます。
@@ -315,8 +313,21 @@ alias ufj=資産:流動資産:現金預金:UFJ
 ＜これにならって好きなだけエリアスを追加できます＞
 #+END_EXAMPLE
 
+* Test 背景色変更
+#+att_html: :textarea t 
+#+HTML_HEAD: <style type="text/css"> pre.src { background-color: #ffffcc; } </style>
+#+begin_src ledger :exports code
+2024/01/24 test
+    food:yok                       4,500 JPY
+    日本語hoge
+#+end_src
 
-
+#+attr_html: :textarea t 
+#+HTML_HEAD: <style type="text/css"> pre.src { background-color: #ffffcc; } </style>
+#+begin_src ledger
+this is a test.
+#+end_src
+  
 * Footnotes:
 
 # Local Variables:
