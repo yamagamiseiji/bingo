@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-26 20:52:48 yamagami>
+#           Time-stamp: <2024-01-26 20:55:24 yamagami>
 #+title: Ledger-cliでNPO法人会計の可視化 --- チュートリアル
 #+date: [2024-01-26]
 #+language: ja
@@ -10,7 +10,7 @@
 #+hugo_categories: comp
 
 #+options: toc:nil
-#+draft: false
+#+draft: true
 
 
 * この記事はただいま工事中です2024/01/26
@@ -26,12 +26,12 @@
 チャート内の細かい修飾は抜きで、上のプリンシパル方針でやるときの実例を紹介する
 
 * 条件
-- Ledger-cliがインストールされていることが前提（あたりまえ）  
+- Ledger-cliがインストールされていること
 - LedgerのTXNファイルはこちら
 - configsはこちら
 - 前回記事は学会という特殊な団体、人件費が非常にちいさい、「その他事業費」というが変だったので、「人権費」「その他事業費」という二分法を敢えて取らなかった
 - ここでは、できるだけ基準に準ずるという意味で（納得してないが）まそのままの勘定科目構造にしてみた
-- サンプルのLedgerデータは[[https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger][こちら]]。
+- サンプルのLedgerデータは[[https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger][こちら]]
 
 
   

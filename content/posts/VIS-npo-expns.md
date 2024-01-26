@@ -27,12 +27,12 @@ draft = false
 
 ## 条件 {#条件}
 
--   Ledger-cliがインストールされていることが前提（あたりまえ）
+-   Ledger-cliがインストールされていること
 -   LedgerのTXNファイルはこちら
 -   configsはこちら
 -   前回記事は学会という特殊な団体、人件費が非常にちいさい、「その他事業費」というが変だったので、「人権費」「その他事業費」という二分法を敢えて取らなかった
 -   ここでは、できるだけ基準に準ずるという意味で（納得してないが）まそのままの勘定科目構造にしてみた
--   サンプルのLedgerデータは[こちら](https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger)。
+-   サンプルのLedgerデータは[こちら](https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger)
 
 
 ## 出力サンプル {#出力サンプル}
