@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-26 20:56:38 yamagami>
+#           Time-stamp: <2024-01-26 21:05:22 yamagami>
 #+title: Ledger-cliでNPO法人会計の可視化 --- チュートリアル
-#+date: [2024-01-27]
+#+date: [2024-01-26]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -12,18 +12,19 @@
 #+options: toc:nil
 #+draft: false
 
-
-* この記事はただいま工事中です2024/01/26
 * イントロ
 ここでは
 #+begin_example
 経常費用を月ごとに集計して折れ線グラフにする
 #+end_example
-というとてもシンプルな作業を例に説明します。
+これのあらまし、骨格だけを紹介します。
 
-いろいろな方法がある、ここではbashのシェルスクリプトからgnuplotをヒアドキュメントとして呼び出してグラフを書くという方法
+Ledgerと組み合わせてグラフやチャートを書く方法は多様だと思います。
+ここではbashのシェルスクリプト内でLedgerとgnuplotを使っています。
+gnuplotはヒアドキュメントとしてシェルスクリプト内に組み込んでいます。
 
-チャート内の細かい修飾は抜きで、上のプリンシパル方針でやるときの実例を紹介する
+とにかく骨格だけの紹介ですから、グラフ内の細かい修飾はいっさい入れていません。
+でも、この事例をご覧いただければ、各自の用途にマッチしたきれいな図がすぐにかけるようになるでしょう。
 
 * 条件
 - Ledger-cliがインストールされていること
@@ -32,16 +33,14 @@
 - 前回記事は学会という特殊な団体、人件費が非常にちいさい、「その他事業費」というが変だったので、「人権費」「その他事業費」という二分法を敢えて取らなかった
 - ここでは、できるだけ基準に準ずるという意味で（納得してないが）まそのままの勘定科目構造にしてみた
 - サンプルのLedgerデータは[[https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger][こちら]]
-
-
   
 * 出力サンプル
+  
 #+attr_html: :width 60%
 #+caption:
 #+name: sample-chart
 [[file:npo/monthly-expnese-rolling.svg]]
 
-  
 * Codeサンプル
 #+begin_src sh
 #!/bin/bash
