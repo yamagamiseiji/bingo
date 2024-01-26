@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliでNPO法人会計の可視化 — チュートリアル"
 author = ["YAMAGAMI"]
-date = 2024-01-26T00:00:00+09:00
+date = 2024-01-27T00:00:00+09:00
 tags = ["ledger-cli", "NPO", "visualization", "可視化"]
 categories = ["comp"]
 draft = false
