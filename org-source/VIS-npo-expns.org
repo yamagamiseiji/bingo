@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-01-27 16:32:33 yamagami>
+#           Time-stamp: <2024-01-29 10:07:28 yamagami>
 #+title: Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ
-#+date: [2024-01-28]
+#+date: [2024-01-29]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -12,36 +12,56 @@
 #+options: toc:nil
 #+draft: false
 
-* イントロ
-NPO法人会計で求められているのは財務諸表とその注記までです。
-それらは数値とその表、若干の補足文言です。
+* イントロ[^fn_logs]
 
-しかし日々、月々さらには年ごとの経費、収益や資産、負債などの動きを数値と文字の表だけでなくグラフで可視化して確認できれば・・・
+[^fn_logs]: この記事は Ledger-cliによるNPO法人会計シリーズの{{{color(red,第3弾)}}}になります。
+第1弾、第2弾はつぎのとおりです：\\
+**第1弾 (2024/01/21)** [[https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]\\
+**第2弾 (2024/01/25)** [[https://bred-in-bingo.netlify.app/posts/NPO会計][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]]
+
+
+NPO法人会計で所管庁[^fn:shokancho]に提出が求められいる会計書類は **財務諸表** とその **注記** です[^fn:chuki]。それらは数値とその表、若干の補足文言です。
+
+[^fn:shokancho]: [[https://www.npo-homepage.go.jp/shokatsucho][内閣府NPOホームページ 所管庁一覧]]
+
+[^fn:chuki]: NPO会計で求められている **注記** も大半はLedgerクエリ出力でカバーできます。後日紹介しますが、ポイントは「役員及びその近親者との取引」を転記する時に、忘れずにそのトランザクションに、それと分かるタグ（例えば **:近親者取引:** など）を付けておくことです。そうすれば簡単にそのタグの付いた取引だけを抽出して集計できます。
+同様に「使途が制約された寄付等」についてもタグづけしておきましょう。
+
+しかし日々、月々さらには年ごとの **費用、収益** や **資産、負債** などの動きを、グラフやチャートなどで **可視化** できたら、より効率的でかつ合目的的にNPO法人の運営を進めることができると思われます。
 
 ここでは
 #+begin_example
-経常費用を月ごとに集計して折れ線グラフにする
-もっともシンプルな例を紹介します
+経常費用を月ごとに集計して折れ線グラフを描く
+もっとも初歩的で簡単な例を紹介します
 #+end_example
 
-**Ledger-cli** と他のソフトウエアを組み合わせてグラフやチャートを描く方法はたくさんあります。
+**Ledger-cli** と他のソフトウエアを組み合わせてグラフやチャートを描く方法はたくさんあります[^fn_vis_examples]。
+
+[^fn_vis_examples]: 例えば\\
+(1) [[https://www.sundialdreams.com/report-scripts-for-ledger-cli-with-gnuplot/][Report Scripts for Ledger CLI with Gnuplot]]\\
+(2) [[https://github.com/kendricktan/ledger-analytics][Easy to use analytics/visualization tool for ledger-cli]]\\
+(3) [[https://wilw.dev/blog/2022/04/24/ledger-python-visualisation/][Simple Ledger visualisations using Python]] など\\
+中でもとくに(1)は私自身も参考にさせていただきました。ありがとうございます。
+
 
 この記事では、それらの中で bashのシェルスクリプト内でLedger-cliと **gnuplot** を組み合わせて使う例を紹介しています。gnuplotはヒアドキュメントとしてシェルスクリプト内に組み込んでいます。
 
 この記事中のサンプルを見ながら各自の用途にマッチするように改変すれば、すぐにきれいな図が描けると思います。
   
 * 出力サンプル
-
 #+attr_html: :width 65%
-#+caption:
-#+name: sample-chart
+#+caption: 月ごとの経常経費の推移（Y軸は金額（千円単位）、X軸は月）
+#+name: sample_chart
 [[file:npo/monthly-expnese-rolling.svg]]
 
-- 図の元になったLedgerデータ( =sample-NPO.ledger= )のサンプルは[[https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger][こちら]]からダウンロードできます。
+- 図の元になったLedgerのサンプルデータ( =sample-NPO.ledger= )は[[https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger][こちら]]からダウンロードできます。
 - Ledger起動時のinit-fileのサンプル( =init-npo.dat= )は [[https://bred-in-bingo.netlify.app/npo/configs/init-npo.dat][こちら]] からダウンロードできます。
-- Ledger-cliをインストールして、適当な場所に上のサンプルデータとinit-fileを置き、下のスクリプトを起動すれば上の図が表示されます。
+- Ledger-cliをインストールして、適当なディレクトリ内に上のサンプルデータとinit-fileを置き、下のソースコード[[code_sample]]を起動すれば図[[sample_chart]]が表示されます。
+- 図[[sample_chart]]では細かい修飾は抜きにして最小限の情報のみ描出しています。
 
 * Codeサンプル
+#+name: code_sample
+#+caption: スクリプト expns-linecurve.sh
 #+begin_src sh
 #!/bin/bash
 #
@@ -57,7 +77,7 @@ ledger reg 経常費用\
        > data-to-plot.dat
 
 # csv化
-sed 's/ /,/g' data-to-plot.dat > csv.dat
+sed 's/ \+/,/g' data-to-plot.dat > csv.dat
 csv_file="csv.dat"
 
 out_file="monthly-expnese-rolling.pdf"
@@ -84,15 +104,22 @@ gnuplot <<EOF
   set output '$out_file'
 # 描出
   plot '$csv_file' \
-     using 1:2 w linespoints pt 7 ps 0.5 lw 2 notitle,\
-     '' using 1:2:(sprintf("%'d", column(2))) with labels\
-        font "Arial,8" offset 0,0.7 textcolor linestyle 0 notitle
+     using 1:(column(2)/1000) w linespoints pt 7 ps 0.5 lw 2 notitle,\
+  '' using 1:(column(2)/1000):(sprintf("%'d", column(2))) with labels\
+         font "Arial,8" offset 0,0.7 textcolor linestyle 0 notitle
   set output
 EOF
 
 evince ${out_file}
 exit 0
 #+end_src
+** 補足説明
+1. 金額を表示する時に3桁ごとにカンマを入れる
+2. Y軸の横幅を小さくしてグラフ面をできるだけ広く取るために、ラベルを千円単位にする
+3. X軸の「月」表示ではリーディングゼロを書かないようにする
+4. 折れ線グラフのポイントごとに金額を記入する
+
+など、普段gnuplotでは余りやらないことだけ追加しておきました。
 
 
 * Appendix:
@@ -103,6 +130,7 @@ exit 0
 - **2020-01-31:** [[https://bred-in-bingo.netlify.app/posts/可視化][ぼちぼちですが可視化してます]]
 - **2019-07-27:** [[https://bred-in-bingo.netlify.app/posts/6th-step_ledger][プレーンテキストファイルで「複式」家計簿（6）]]
 
+* Footnotes:
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
