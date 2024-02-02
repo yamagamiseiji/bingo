@@ -1,0 +1,9 @@
+--file ./TXN-関連当事者.ledger
+--color
+--check-payees
+--date-format %Y/%m/%d
+--pager /usr/bin/less
+--sort date
+--empty
+;;--pedantic
+;;--explicit
