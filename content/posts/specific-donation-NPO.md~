@@ -7,7 +7,7 @@ categories = ["comp"]
 draft = false
 +++
 
-ここでは、その内、次の注記をLedger-cliで扱う例を紹介します。
+ここでは、次の注記をLedger-cliで扱う例を紹介します。
 
 ```text
 使途等が制約された寄付等の内訳
