@@ -9,9 +9,11 @@ draft = false
 
 ## イントロ[^fn_logs] {#イントロ-fn-logs}
 
-[^fn_logs]: この記事は Ledger-cliによるNPO法人会計シリーズの<span style="color: red">第3弾</span>になります。第1弾、第2弾はつぎのとおりです：<br />
-****第1弾 (2021/01/21)**** [NPO法人会計に準拠した財務諸表をLedger-cliで書く](https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/)<br />
-****第2弾 (2021/01/25)**** [小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら](https://bred-in-bingo.netlify.app/posts/NPO%E4%BC%9A%E8%A8%88)
+[^fn_logs]: この記事は Ledger-cliによるNPO法人会計シリーズの<span style="color: red">第3弾</span>です。記事リストは次のとおりです（2024/02/03現在）<br />
+2024/01/21&nbsp;&nbsp;  [NPO法人会計に準拠した財務諸表をLedger-cliで書く](https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/)<br />
+2024/01/25&nbsp;&nbsp;  [小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら](https://bred-in-bingo.netlify.app/posts/NPO%E4%BC%9A%E8%A8%88)<br />
+2024/01/29&nbsp;&nbsp; Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ<br />
+2024/02/02&nbsp;&nbsp;  [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO.org)<br />
 
 NPO法人会計で所管庁[^fn:shokancho]に提出が求められいる会計書類は ****財務諸表**** とその ****注記**** です[^fn:chuki]。それらは数値とその表、若干の補足文言です。
 
@@ -45,7 +47,7 @@ NPO法人会計で所管庁[^fn:shokancho]に提出が求められいる会計�
 
 <a id="figure--sample-chart"></a>
 
-{{< figure src="/npo/monthly-expnese-rolling.svg" caption="<span class=\"figure-number\">&#22259;1:  </span>月ごとの経常経費の推移（Y軸は金額（千円単位）、X軸は月）" width="65%" >}}
+{{< figure src="/npo/monthly-expnese-rolling.svg" caption="<span class=\"figure-number\">Figure 1: </span>月ごとの経常経費の推移（Y軸は金額（千円単位）、X軸は月）" width="65%" >}}
 
 -   図の元になったLedgerのサンプルデータ( `sample-NPO.ledger` )は[こちら](https://bred-in-bingo.netlify.app/npo/sample-NPO.ledger)からダウンロードできます。
 -   Ledger起動時のinit-fileのサンプル( `init-npo.dat` )は [こちら](https://bred-in-bingo.netlify.app/npo/configs/init-npo.dat) からダウンロードできます。
@@ -108,7 +110,7 @@ evince ${out_file}
 exit 0
 ```
 <div class="src-block-caption">
-  <span class="src-block-number"><a href="#code-snippet--code-sample">ソースコード 1</a>:</span>
+  <span class="src-block-number"><a href="#code-snippet--code-sample">Code Snippet 1</a>:</span>
   スクリプト expns-linecurve.sh
 </div>
 

@@ -33,6 +33,7 @@ draft = false
 - [Appendix: Ledger-cliの設定ファイル](#appendix-ledger-cliの設定ファイル)
     - [~/.ledgerrcについて](#ledgerrc)
     - [init-npo-datファイルの中身](#init-file-sample)
+- [Appendix:  NPO法人会計関係記事一覧](#appendix-npo法人会計関係記事一覧)
 - [Footnotes:](#footnotes)
 
 </div>
@@ -394,6 +395,15 @@ alias ufj=資産:流動資産:現金預金:UFJ
 　　：
 ＜これにならって好きなだけエリアスを追加できます＞
 ```
+
+
+## Appendix:  NPO法人会計関係記事一覧 {#appendix-npo法人会計関係記事一覧}
+
+(updated 2024/02/03)<br />
+2024/02/02&nbsp;&nbsp;  [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO.org)<br />
+2024/01/29&nbsp;&nbsp;  [Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ](https://bred-in-bingo.netlify.app/posts/VIS-npo-expns.org)<br />
+2024/01/25&nbsp;&nbsp; 小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら<br />
+2024/01/21&nbsp;&nbsp;  [NPO法人会計に準拠した財務諸表をLedger-cliで書く](https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/)
 
 
 ## Footnotes: {#footnotes}

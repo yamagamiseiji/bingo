@@ -17,6 +17,7 @@ draft = false
 - [注記作成に必要な情報の収集手順](#注記作成に必要な情報の収集手順)
 - [今後の課題など](#今後の課題など)
 - [Appendix: 通貨記号に「円」を使う](#yen_as_commodity)
+- [Appendix: NPO法人会計関係記事一覧](#appendix-npo法人会計関係記事一覧)
 - [Footnotes:](#footnotes)
 
 </div>
@@ -273,6 +274,15 @@ Commoditiesについて何も指定しないでLedgerコマンドを打つと、
 インターナショナルに活動をしているヒトにはこの為替換算の機能は福音ですよね。
 
 なお、commodityをヌルにする（使わない）ことはLedgerではできません。というか推奨されていません。commodityは単に通貨記号としてだけでなく、株価とか労働時間とかクルマの走行距離とか、いろいろなcommodityに対して文字通り ****汎用的**** に使われるからです。
+
+
+## Appendix: NPO法人会計関係記事一覧 {#appendix-npo法人会計関係記事一覧}
+
+(updated 2024/02/03)<br />
+2024/02/02&nbsp;&nbsp; Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引<br />
+2024/01/29&nbsp;&nbsp;  [Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ](https://bred-in-bingo.netlify.app/posts/VIS-npo-expns.org)<br />
+2024/01/25&nbsp;&nbsp; [小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら](https://bred-in-bingo.netlify.app/posts/npo%E4%BC%9A%E8%A8%88/)<br />
+2024/01/21&nbsp;&nbsp;  [NPO法人会計に準拠した財務諸表をLedger-cliで書く](https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/)
 
 
 ## Footnotes: {#footnotes}
