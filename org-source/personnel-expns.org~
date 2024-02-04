@@ -1,0 +1,33 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2024-02-04 13:41:34 yamagami>
+#+title: Ledger-cliでNPO法人会計 -- 人件費の事業費・管理費按配
+#+date: [2024-02-04 ]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger-cli NPO 人件費 按配
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: true
+
+
+- 従事時間記録をつくる
+- NPOでは、管理部門の業務リストを作りそれらへの従事時間を記録する
+- その他が事業部門という風にあつかうと容易らしいが、問題は両方に関わる仕事をしている時間
+- 両方に共通する仕事をしている時間は、明確に業務・管理に従事していた時間比を使って按分する、ということらしい
+- 記録の方法としては、だから
+  - 管理部門リストに明確に属するものは管理
+  - 事業部門に明確に属するものは事業
+  - グレーゾーン、区別が難しい仕事はboth
+
+#+attr_html: :width 90%
+#+caption: 表1
+#+name: tbl-01
+[[file:npo/tbl-仕事按分.jpg]]
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
