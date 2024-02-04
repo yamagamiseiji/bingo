@@ -233,7 +233,8 @@ $ ledger print %関連当事者=D and 経常収益
 
 この記事内では、通貨記号として `JPY` ではなくて `円` を使っています。「円」を使う時には init-fileの中、またはLedgerファイルの冒頭部のどちらかに、次のように「円」と（ついでに）USD（米ドル）を宣言しておきます[^fn_other_places]。
 
-[^fn_other_places]: 他には、 `configs/` ディレクトリの中に `commodities.dat` のようなデータファイルを作っておいて、init-fileまたはLedgerのデータファイルの中に `include configs/commodities.dat` などと書き込んでおく方法もあります。
+[^fn_other_places]: 他には、 `configs/` ディレクトリの中に `commodities.dat` のようなデータファイルを作っておいて、init-fileまたはLedgerのデータファイルの中に `include configs/commodities.dat` などと書き込んでおく方法もあります。<br />
+なおLedgerは実際にはLedgerデータ{{{color{red,ファイル中の最初の金額表示)}}}を見て、通貨表示を決めてくれます。なので実際には最初の金額表示を「円」にすれば良いのですが（一定以上の年齢になると &#128517;）できるだけ明示的に宣言しておく方が安全です。
 
 ```nil
 commodities 円

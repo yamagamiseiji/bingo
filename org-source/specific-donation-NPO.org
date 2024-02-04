@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-02-04 10:21:16 yamagami>
+#           Time-stamp: <2024-02-04 11:05:20 yamagami>
 #+title: Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等
-#+date: [2024-02-28]
+#+date: [2024-02-04]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -9,7 +9,7 @@
 #+hugo_tags: ledger-cli NPO 注記 使途制約 寄付
 #+hugo_categories: comp
 #+options: toc:nil
-#+draft: true
+#+draft: false
 
 ここでは、次の注記をLedger-cliで扱う例を紹介します。
 #+begin_example
@@ -18,14 +18,14 @@
 
 * 使途等が制約された寄付等の内訳
 
-- 例題は「これ」を参考にしました。
+- 例題の出典＝「これ」,
+- サンプルデータ  init-file=これ、 Ledgerファイル= これ
 - 寄付、助成金の入金記帳はかんたんでタグづけすればよい
-- 経費でも、TXN内でその支出が助成金から出ていることを記録しておくことが必要だろうから、これにもタグづけ
-- 問題は ==資産:流動資産:現金預金:使途指定== のようなアカウントを用意しないと注記のときに困るってこと。
+- しかし、経費では、TXN内でその支出が助成金から出ていることを記録しておくことが必要。しかも ==資産:流動資産:現金預金:使途指定== のようにアカウントを用意しないと注記のときに困る。
 - =使途制約:= というタグに、その値として =災害支援= と =教育支援= を与えている。
 
 #+begin_src
-(1)  ㈱グッドウイル社から、使途を災害支援に限定した寄付金 5,000,000円がUHF銀行に入金された。
+(1)  ㈱グッドウイル社から、使途を災害支援に限定した寄付金 5,000,000円がUFG銀行に入金された。
 #+end_src
 #+begin_example ledger
 2024/01/01 ㈱グッドウイル
@@ -36,7 +36,7 @@
 - 第2行目の =;= セミコロン以下がタグの設定。
    - =:= コロンの前の =使途制約= がタグ名、その次の =災害支援= がそのタグの値
 - 第3行目の =受取寄付金= 科目の下に =使途指定= を設定
-- 第4行目の =資産= の =現金預金= 科目の下に =使途指定= 科目、さらにその下に =UHF= と銀行名を設定
+- 第4行目の =資産= の =現金預金= 科目の下に =使途指定= 科目、さらにその下に =UFG= と銀行名を設定
 
 #+begin_src
 (2)  寄付された金額の内 3,000,000円で被災者の援助物資を購入しストック
@@ -81,13 +81,14 @@
 #+begin_src
 (1)  Ledger元帳データから使途制約タグのあるTXNのbalanceレポートを表示
 #+end_src
-#+begin_example ledger
+
+#+begin_example
 $ ledger bal %使途制約 --init-file -f sample-data.leder --empty
       -5,000,000 JPY  経常収益:受取寄付金:使途指定
        2,000,000 JPY  経常費用:業務費:その他経費:援助用消耗品費
        3,000,000 JPY  資産:流動資産
        3,000,000 JPY    現金預金:使途指定
-       2,000,000 JPY      UHF
+       2,000,000 JPY      UFG
        3,000,000 JPY      ゆうちょ
                    0    被災者援助物資
 --------------------
@@ -105,7 +106,7 @@ $ ledger bal %使途=災害
        2,000,000 JPY  経常費用:業務費:その他経費:援助用消耗品費
                                0  資産:流動資産
       -3,000,000 JPY    現金預金:使途指定
-       2,000,000 JPY      UHF
+       2,000,000 JPY      UFG
        3,000,000 JPY    被災者援助物資
 --------------------
       -3,000,000 JPY
@@ -122,13 +123,13 @@ NPOの注記では、期首残高 当期増加額 当期減少額 期末残高�
 
 
 
-* Appendix:
-
-
-**2024-02-02** [https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]
-**2024-01-29** [https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]
-**2024-01-25** [https://bred-in-bingo.netlify.app/posts/NPO会計/][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]]
-**2024-01-21**  [https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]  
+* Appendix: NPO法人会計関係記事一覧
+(updated: 2024/02/04)
+**2024/02/XX** Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等\\
+**2024/02/02** [[https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]\\
+**2024/01/29** [[https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]\\
+**2024/01/25** [[https://bred-in-bingo.netlify.app/posts/NPO会計/][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]]\\
+**2024/01/21** [[https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
