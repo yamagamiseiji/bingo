@@ -1,7 +1,7 @@
 +++
 title = "Ledger-cliによるNPO法人会計注記 – 使途制約のある寄付等"
 author = ["YAMAGAMI"]
-date = 2024-01-30T00:00:00+09:00
+date = 2024-02-28T00:00:00+09:00
 tags = ["ledger-cli", "NPO", "注記", "使途制約", "寄付"]
 categories = ["comp"]
 draft = false

@@ -132,3 +132,11 @@ $ ledger bal %使途=災害
 NPOの注記では、期首残高 当期増加額 当期減少額 期末残高を求めている。寄付、補助金が年度をまたぐものでなければ、期首残高はゼロ、期末残高もゼロ、当期増加額が寄付・補助金の入金額、当期減少額もそれと同額てのが普通
 
 仮に年度をまたいだとしても、画面のような出力があれば、手入力で表を書くことがかんたん。これをNPOの求めるような表にまとめるのをLedgerにやらせるのは、労多くて益少ない。そもそも、寄付・補助金が何十本もあるようなNPOとか考えられないし（笑）
+
+
+## Appendix: {#appendix}
+
+****2024-02-02**** [<https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/>][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]
+****2024-01-29**** [<https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/>][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]
+****2024-01-25**** [<https://bred-in-bingo.netlify.app/posts/NPO%E4%BC%9A%E8%A8%88/>][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]]
+****2024-01-21****  [<https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO>][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]

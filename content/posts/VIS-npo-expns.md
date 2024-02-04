@@ -10,10 +10,10 @@ draft = false
 ## イントロ[^fn_logs] {#イントロ-fn-logs}
 
 [^fn_logs]: この記事は Ledger-cliによるNPO法人会計シリーズの<span style="color: red">第3弾</span>です。記事リストは次のとおりです（2024/02/03現在）<br />
-2024/01/21&nbsp;&nbsp;  [NPO法人会計に準拠した財務諸表をLedger-cliで書く](https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/)<br />
+2024/01/21&nbsp;&nbsp; [NPO法人会計に準拠した財務諸表をLedger-cliで書く](https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO/)<br />
 2024/01/25&nbsp;&nbsp; [小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら](https://bred-in-bingo.netlify.app/posts/npo%E4%BC%9A%E8%A8%88)<br />
 2024/01/29&nbsp;&nbsp; Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ<br />
-2024/02/02&nbsp;&nbsp;  [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO.org)<br />
+2024/02/02&nbsp;&nbsp; [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/)<br />
 
 NPO法人会計で所管庁[^fn:shokancho]に提出が求められいる会計書類は ****財務諸表**** とその ****注記**** です[^fn:chuki]。それらは数値とその表、若干の補足文言です。
 
