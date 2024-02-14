@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-02-04 10:27:06 yamagami>
+#           Time-stamp: <2024-02-14 09:21:28 yamagami>
 #+title: NPO法人会計に準拠した財務諸表をLedger-cliで書く
 #+date: [2024-01-21]
 #+language: ja
@@ -182,11 +182,14 @@ Ledgerのtagについては、過去に何回か触れていますのでここ�
 [^footnote_minus]: マイナス記号は他の勘定科目でもつくことがあります。たとえば誰かが立替払いした「立替金」も締め日までに精算していない場合には =立替金  -2,200 JPY= と表示されます。
 
 * Appendix: NPO法人会計関係記事一覧
-(updated 2024/02/03)\\
-2024/02/02\nbsp{}\nbsp{} [[https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]\\
-2024/01/29\nbsp{}\nbsp{} [[https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]\\
-2024/01/25\nbsp{}\nbsp{} [[https://bred-in-bingo.netlify.app/posts/npo%E4%BC%9A%E8%A8%88/][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]]\\
-2024/01/21\nbsp{}\nbsp{}  NPO法人会計に準拠した財務諸表をLedger-cliで書く
+
+| タイトル                                                                 | 日付       |
+|--------------------------------------------------------------------------+------------|
+| [[https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]            | 2024/02/02 |
+| [[https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]                 | 2024/01/29 |
+| [[https://bred-in-bingo.netlify.app/posts/NPO会計/][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]] | 2024/01/25 |
+| [[https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]                          | 2024/01/21 |
+
 
 # \nbsp{}\nbsp{} は半角SPCx2 
 * Footnotes:

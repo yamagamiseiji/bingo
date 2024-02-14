@@ -1,7 +1,7 @@
 ;;
 2022/04/01 Opening Balance
     資産:流動資産:現金預金:ゆうちょ        2,000,000 円
-    Equity Adjustments
+    Equity:Opening Balances
 ;; ↑のポスティングは 期首残高 opening balanceを設定するものです。
 ;; 記事の説明をわかりやすくするために
 ;; ゆうちょ銀行に200万円の期首残高があったことにしました。
