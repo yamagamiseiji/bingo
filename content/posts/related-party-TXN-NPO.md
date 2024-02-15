@@ -281,6 +281,7 @@ Commoditiesについて何も指定しないでLedgerコマンドを打つと、
 
 | タイトル                                                                                                      | 日付       |
 |-----------------------------------------------------------------------------------------------------------|----------|
+| [Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等](https://bred-in-bingo.netlify.app/posts/specific-donation-NPO) | 2024/02/15 |
 | [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/) | 2024/02/02 |
 | [Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ](https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/) | 2024/01/29 |
 | [小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら](https://bred-in-bingo.netlify.app/posts/NPO%E4%BC%9A%E8%A8%88/) | 2024/01/25 |
