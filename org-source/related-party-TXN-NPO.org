@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-02-15 13:09:05 yamagami>
+#           Time-stamp: <2024-02-21 21:01:14 yamagami>
 #+title: Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引
 #+date: [2024-02-02]
 #+language: ja
@@ -243,6 +243,7 @@ Commoditiesについて何も指定しないでLedgerコマンドを打つと、
 * Appendix: NPO法人会計関係記事一覧
 | タイトル                                                                 | 日付       |
 |--------------------------------------------------------------------------+------------|
+| [[https://bred-in-bingo.netlify.app/posts/recursive-aliases-NPO][Ledger-cliでNPO法人会計 -- 勘定科目にエリアスを使う]]                      | 2024/02/22 |
 | [[https://bred-in-bingo.netlify.app/posts/specific-donation-NPO][Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等]]                  | 2024/02/15 |
 | [[https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]            | 2024/02/02 |
 | [[https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]                 | 2024/01/29 |

@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-02-15 13:08:24 yamagami>
+#           Time-stamp: <2024-02-21 20:58:25 yamagami>
 #+title: 小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら
 #+date: [2024-01-25]
 #+language: ja
@@ -332,6 +332,7 @@ alias ufj=資産:流動資産:現金預金:UFJ
 
 | タイトル                                                                 | 日付       |
 |--------------------------------------------------------------------------+------------|
+| [[https://bred-in-bingo.netlify.app/posts/recursive-aliases-NPO][Ledger-cliでNPO法人会計 -- 勘定科目にエリアスを使う]]                      | 2024/02/22 |
 | [[https://bred-in-bingo.netlify.app/posts/specific-donation-NPO][Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等]]                  | 2024/02/15 |
 | [[https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]            | 2024/02/02 |
 | [[https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]                 | 2024/01/29 |

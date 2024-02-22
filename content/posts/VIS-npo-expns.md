@@ -15,6 +15,7 @@ draft = false
 2024/01/29&nbsp;&nbsp; Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ<br />
 2024/02/02&nbsp;&nbsp; [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/)<br />
 2024/02/15&nbsp;&nbsp; [Ledger-cliによるNPO法人会計注記 – 使途制約のある寄付等](https://bred-in-bingo.netlify.app/posts/specific-donation-NPO)<br />
+2024/02/22&nbsp;&nbsp; [Ledger-cliでNPO法人会計 -- 勘定科目にエリアスを使う](https://bred-in-bingo.netlify.app/posts/recursive-aliases-NPO)
 
 NPO法人会計で所管庁[^fn:shokancho]に提出が求められいる会計書類は ****財務諸表**** とその ****注記**** です[^fn:chuki]。それらは数値とその表、若干の補足文言です。
 

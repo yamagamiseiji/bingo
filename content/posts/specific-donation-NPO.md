@@ -264,6 +264,7 @@ $ ledger bal 経常費用 and %使途=災害 --begin 2022/04/01 --end 2023/04/01
 
 | タイトル                                                                                                      | 日付       |
 |-----------------------------------------------------------------------------------------------------------|----------|
+| [Ledger-cliでNPO法人会計 -- 勘定科目にエリアスを使う](https://bred-in-bingo.netlify.app/posts/recursive-aliases-NPO) | 2024/02/22 |
 | Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等                                                       | 2024/02/15 |
 | [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/) | 2024/02/02 |
 | [Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ](https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/) | 2024/01/29 |

@@ -401,6 +401,7 @@ alias ufj=資産:流動資産:現金預金:UFJ
 
 | タイトル                                                                                                      | 日付       |
 |-----------------------------------------------------------------------------------------------------------|----------|
+| [Ledger-cliでNPO法人会計 -- 勘定科目にエリアスを使う](https://bred-in-bingo.netlify.app/posts/recursive-aliases-NPO) | 2024/02/22 |
 | [Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等](https://bred-in-bingo.netlify.app/posts/specific-donation-NPO) | 2024/02/15 |
 | [Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引](https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/) | 2024/02/02 |
 | [Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ](https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/) | 2024/01/29 |
