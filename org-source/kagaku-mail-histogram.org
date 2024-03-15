@@ -1,0 +1,181 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2024-03-15 14:14:28 yamagami>
+#+title: 投資信託の基準価額メール配信時刻分布
+#+date: [2024-03-15]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: 投資信託 価額 可視化
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+
+* はじめに
+去年（2023年）の8月から、契約している投資信託の運用会社が
+顧客の保有している投資信託の **基準価額** を
+ユーザ宛にメール配信するサービスを始めました。
+
+若干の実務的要請と **興味半分** で
+#+begin_example
+基準価額メールの配信時刻の分布
+#+end_example
+がどうなるかを調べてみました。
+
+図[[sample-out]] は2023/08/15から2024/03/12 までの **141営業日** のメール配信時刻をヒストグラムにしたものです。グラフは営業日の20時10分に自動的[fn:automatic]に描かれます。
+
+[fn:automatic] 価額メールの配信が20時10分よりも遅くなった場合には、メールが届いたことを確認して手動でスクリプト類を起動していますので、完全全自動というわけではありません :sweat:
+
+
+#+attr_html: :width 100%
+#+caption: 投資信託の基準価額メール配信時刻の分布。毎営業日の20時30分にグラフは更新される。
+#+name: sample-out
+[[file:mufg_mail_histo.svg]]
+
+X軸は時刻、ヒストグラムの幅(bin)は3分、Y軸はその3分間に配信されたメールの頻度(frequencey)です。チャート右上はデータ数と配信時刻のメディアンです。
+
+およそメディアンにあたる18時23分付近に頻度の *深い谷* があって、その直後に **最頻値** となり、19時以降から21時30分前までの時間帯にパラパラとメールが配信されるという不思議な頻度分布になっています。極端な *外れ値* は2024/03/06のもので21時23分です。
+
+価額メールが機械的に計算され発信されているのではなく、何らかの形で人手が入っている様子が伺えます。
+
+ここでは、このヒストグラムをどうやって描いたかを自分への備忘もかねてメモしました。
+
+* 環境
+PCはThinkPad X230、Ubuntu22.04でホスト名は =kiri= です。
+このPCは株価や投信の価額を自動取得する専用機になっています。
+普段は電源はスリープ状態になっていて、crontabで指定された時刻になったら電源が入って、株価や投資信託の価額を取得し、データの一次処理を済ませたら再びスリープに戻るという運用をしています（[[https://bred-in-bingo.netlify.app/posts/rtcwake/][「rtcwake+cronでノートPCを定時にオンオフする」]]をご覧ください）。
+
+コードはシェルスクリプト＋gnuplotで書いています。
+
+* フローチャート
+図[[flowchart]] は大ざっぱな処理の流れ図です[fn:flow]。
+
+[fn:flow] 実際には別々の３つのシェルスクリプトの中に部品としてヒストグラム描出機能がばらばらに入っています。単一のスクリプトにはなっていません。
+
+
+#+name: flowchart
+#+caption: 価額メール配信時刻分析のフローチャート
+#+attr_html: :width 100%
+[[file:mufg-histo-flowchart.svg]]
+
+これに沿って順番に概要を説明します。
+
+* getmail
+- 価額メールは個人用のGmailアドレスに届きます。
+- 自動的にGmailを受信するには =getmail= を使いました。
+- getmail のインストールと設定の説明はここでは省略しました。「[[https://wiki.archlinux.jp/index.php/Getmail][archlinux getmail]]」など分かりやすい記事がありますのでそれらをご覧ください。
+- getmailはcrontabで営業日の20:10に起動するようにしてあります[fn:crontab]。
+- 着信したメールは =kiri:$HOME/Maildir/new= 配下に格納します。
+
+
+[fn:crontab] 図[[sample-out]]を見ると、20時10分までに価額メールが配信されなかったケースが2件あることが分かります。
+
+* 価額メールを抽出
+- 上記の受信メール内に価額メールがあるかどうかを、メール発信元のメールアドレスをgrepして調べます。
+- あればメールの日付行からタイムスタンプ（ **UTC** ）を抽出し、それを **JST** に変換します。
+- JST変換後の日時を =Dropbox= 内の関係ディレクトリ内に =mail受信時刻.log= として格納します。
+- フォーマットは次のとおりです：
+   #+begin_src
+    :
+   2024/03/05 18:27:40
+   2024/03/06 21:22:45
+   2024/03/07 18:26:40
+   2024/03/08 18:27:46
+   #+end_src
+
+* 配信時刻をunixtimeに変換する
+- 上記データファイルの **時分秒（JST）** のみをunixtimeに変換して、 =~/tmp/unixtime.dat= ファイルに格納。中身はこんな感じです。
+   #+begin_src
+   　：
+   34060
+   44565
+   34000
+   34066
+   #+end_src
+
+* 配信時刻の統計量
+- 上記 時分秒のunixtimeについて、 =gbstat= を使って最大値(max), 最小値(min), メディアン(med)を取得します[fn:mean]。
+
+- 配信時刻はunixtimeのままgnuplotに渡します[fn:jisa]。
+
+[fn:mean] こんな分布のデータでは平均値(mean)は意味がありあませんので使っていません。
+
+[fn:jisa] JSTとUTの間に9時間の時差があるのでgnuplot内で補正しています。
+
+* gnuplotでヒストグラムを描く
+
+- gnuplotスクリプトはヒアドキュメントにしてshellスクリプトに埋め込んでいます
+- max, min, med, n_data, until, などの変数はshell scriptから受け取ります
+- コードは次のような感じ：  
+#+begin_example
+gnuplot <<EOF
+# ターミナル設定
+  set terminal pdfcairo transparent enhanced font 'Arial, 12'
+# スタイル設定
+  set style data histogram
+  set style fill transparent solid border
+# 
+  set title "価額メール配信時間分布（ 2023/08/15〜 $until）" font "Arial,14"
+  set label 1 at screen 0.75,0.8 "N of data = $n_dat"
+  set label 2 at screen 0.75,0.75 "Median = $med"
+  set ylabel "FREQ" font "Arial,12"
+  set grid ytics xtics
+# 時間データ宣言
+  set xdata time
+  set timefmt "%s"
+  set format x '%H:%M' # 出力フォーマット
+#
+# Histogram Trick 2023/10/01
+#    UTCとJSTの時差=9時間を補正
+  Min = $min + 3600*9
+  Max = $max + 3600*9 + 60*3
+#    +60*3 無しだと最大データが表示されない
+  binwidth = 60*3
+  set boxwidth binwidth
+#    freq=0 の binがある時のバグ防止用
+  set xrange[Min:Max]
+  set yrange[0:${freq_max}+1]
+  bin(x,width)=width*floor(x/width) + binwidth/2.0
+# 
+  set output '$out_file'
+  plot "$HOME/tmp/unix-time.dat"\
+       using (bin((column(1)+3600*9),binwidth)):(1.0)\
+       smooth freq with boxes notitle
+  set output
+EOF
+#+end_example
+
+** おまけ
+Dropbox内のヒストグラム(PDF)出力はSVGに変換して、Joplinノートで配信時刻分布の様子を見えるようにしています。方法は[[https://bred-in-bingo.netlify.app/posts/joplin-usage-for-ledger/][「アンドロイドタブレットのJoplinをLedgerレポートのビューアにする」]] をご覧ください。
+
+#+caption: Android タブレットのJoplinノート内でのヒストグラム表示
+#+name: on_Joplin  
+#+attr_html: :width 80%
+[[file:2ver-mufg-histo-tablet.svg]]
+
+
+* 今後の課題
+基準価額のメール配信サービスが始まったのは2023年8月からです。
+それ以前は、価額は誰でも閲覧できる投信会社のウエッブサイトで公開されていましたので、
+営業日の夕方から深夜（時には翌日！）の時間帯にサイトを巡回して情報を収集していました。
+
+以前から価額がウエッブ公開される時刻が不安定で困っていましたので、メールになったら（明らかに顧客向けなので）価額の連絡が早くなり時刻も安定するかと期待していました。
+
+しかし、図[[sample-out]]から見る限り、配信時刻の安定性が大きく改善されたようには思えません。価額、損益などの自家製分析システムは、時刻を定めてcrontabでいくつかのスクリプトを起動させるようになっています。現行の方式だとデータ取得の時刻をどこまで遅くしても、それを超えてメール配信が遅くなる可能性がありますので、確率は小さいですがどうしても手作業の介入が必要となっています。
+
+手作業の介入を避けるためには、いろいろな手段があると思います。たとえば
+- 5分とか10分に一度の割合で価額メール配信の有無をチェックするとか
+- 価額メール配信があったらそれをトリガーにして各種の分析を開始するとか
+などが考えられますが、ちょっと修正に手間がかかりそうなので、時間ができたらおいおい取り組んでみようと思っています[fn:oioi]。
+
+
+
+[fn:oioi] けど、手作業が必要になる確率は営業日70日（物理日数≒100日）あたり１回程度なので、それくらいなら大掛かりなスクリプト類の修正よりは手作業を続けるほうがマシという考えもありますよね:sweat:
+
+
+* Footnotes:
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
