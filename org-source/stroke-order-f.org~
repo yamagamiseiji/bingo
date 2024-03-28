@@ -1,0 +1,95 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2024-03-28 21:36:07 yamagami>
+#+title:  アルファベット小文字 f の書き順矯正トレーニング中です
+#+date: [ 2024-03-28 ]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: alphabets handwriting training stroke order 
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+アルファベットの *小文字ｆ* の
+正しい筆順は図[[fig1]]のように、上から *曲がりフック* を書いて縦棒を床まで下ろし、その後ペンを持ち上げて中程の高さに短い *横棒* を書くという順番なんですね。
+
+#+attr_html: :width 40%
+#+name: fig1
+#+caption: 英小文字ｆの正しい書き順
+[[file:stroke-order-f.jpg]]
+
+つい最近まったく偶然に、自分の **f** の書き順が正しくなかったことを知りました。とても恥ずかしいことですが、60年以上にわたって横棒から書きはじめていました[fn:hikkitai]。
+
+書き順が違っていても、何か実害があるわけではありませんけど
+#+begin_example
+治るものなら矯正したい！
+#+end_example
+と思いました。
+
+[fn:hikkitai] 中学1年生の頃には筆記体の書き方をずいぶん練習した記憶があります。しかし今風のブロック体の小文字の書き方を勉強した記憶はほとんどゼロです。
+
+
+* 筆順矯正トレーナー
+*ｆ* を１文字単独で繰り返し書くよりは、
+*活きた英単語* の中で正しい筆順で数多く書く方が良いトレーニングになると思い、
+英単語10,000語ほどを対象にして、１単語の中の *ｆ* の個数をカウントしました[fn:from]。
+
+結果は次のとおりでした。
+| f の個数 | 1  | 2  | 3  | 4  | 5  |
+|---------+-----+-----+-----+-----+-----|
+| *単語数* | 866 | 153 |   6 |   2 |   0 |
+
+[fn:from] 10,000語の出典は *山形方人氏（2018）* による
+[わがまま科学者の英語講座  究極の英単語リストUVL10000（β版）を無料公開（その１）](https://bioenglish.hatenablog.com/entry/2018/07/22/071416)の10,000単語の他、ChatGPTに質問して回答してもらった語が10語程度含まれています。
+
+
+上の表から *f* が2個以上含まれる単語（合計 *161語* ）を抜き出してファイルにし、それをパソコンでランダムに読み上げる *筆順矯正トレーナー* を作成しました[fn:trainer]。
+
+[fn:trainer] パソコンはThinkPad X230, Ubuntu20.04。トレーナーのスクリプトはほんとうに行数の少ない簡単なBashスクリプトです。これについては別の記事で紹介します。
+
+
+読み上げのサンプル音声（6単語のみ）は下のオーディオプレイヤーで聞くことができます[fn:sample-audio]。
+#+begin_export html
+<figure>
+  <figcaption>単語読み上げのサンプル音声</figcaption>
+  <audio controls src="/audio/sample-fs.mp3"></audio>
+  <br><a href="/audoi/sample-fs.mp3"> Download audio </a>
+</figure>
+#+end_export
+
+矯正トレーナでは161語がランダム順に読み上げられます。
+それを聞きながら、 *裏紙* に正しい書き順で綴りを書いていきます。
+もし聞き取れなかったら、パソコンのスクリーンを見るとスペルが表示されていますから、
+それを見ながら書きます。リスニングやスペリングのトレーニングではありませんから:smile:
+
+図[[fig2]]はトレーニングで書いた裏紙のサンプルです。悪筆でお恥ずかしいですが雰囲気をご覧ください。
+#+name: fig2
+#+caption: 筆順矯正トレーニングで書いたf入り英単語
+#+attr_html: :width 40%
+[[file:stroke-trainer-sample-out.svg]]
+
+
+* あとがき
+これまでにA4用紙に10枚ほど練習したと思います。すこしずつですが悪い習慣が矯正されているような気がします。なにしろ年齢が年齢ですから、進歩がはかばかしくないのは仕方ありませんね。
+
+なお筆順矯正トレーナーの作り方などは別の記事にしました。そこでは
+*ｆ文字* だけではなくて、aからｚまでの全26文字の頻度もついでに算出しています。たいした内容ではありませんが興味おありのかたは下のリンクからご覧ください。
+
+- [[https://bred-in-bingo.netlify.app/posts/setup-training-materials][アルファベット文字書き順矯正トレーナーの概要]] 
+
+
+[fn:sample-audio] 読み上げられている単語は payoff, affect, fluffy, effectful, fiftyfifth, riffraffの6語です。
+サンプルでは単語間に1秒のポーズを置いていますが、実際のトレーナーでは、綴りを書き終わった時に、何かキーボードを叩いたら次の単語に進むようになっています。
+
+
+
+
+* Footnotes:
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

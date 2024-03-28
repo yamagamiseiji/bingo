@@ -1,0 +1,334 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2024-02-22 14:28:40 yamagami>
+#+title: Ledger-cliでNPO法人会計 -- 勘定科目にエリアスを使う
+#+date: [2024-02-22]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: ledger-cli NPO aliases 
+#+hugo_categories: comp
+#+options: toc:t
+#+draft: false
+
+* はじめに
+この記事はNPO法人会計をLedger-cliでやってみるシリーズの第6弾になります（→[[#npo-blog-list][関連記事一覧]])。
+
+
+日本語の勘定科目名は、トップレベルから最下位のレベルまで省略せずに全て記述すると かなり長大なものになります。NPO法人会計基準で例示されている中で、特に長い科目名をピックアップしてみると、こんな感じです。
+#+begin_src
+経常費用:事業費:人件費:ボランティア評価費用
+資産:固定資産:投資その他の資産:投資有価証券
+経常費用:事業費:その他経費:施設等評価費用
+資産:固定資産:有形固定資産:車両運搬具
+   etc..
+#+end_src
+
+これらの勘定科目名をポスティングするたびに全文字タイプしていると、時間がかかりますしタイプミスが起こりやすくなります。できるだけ短い単語で **alias** を設定して科目名を入力すれば、科目名に気を使うことなく **金額の入力** に全神経を集中することができます。
+
+** alias使用/不使用によるキーストローク数の差
+
+aliasを使って書いたポスティングとaliasを使わずに書いたポスティングの間で、どれくらいキーストローク数が異なるか、この記事で使っているポスティング例（ **31** トランザクション）を対象にしてストローク数を簡便法で算出して比較してみました。
+#+attr_html: :width 100%
+#+name:
+#+caption: alias使用によるキーストローク数減少効果（→ [[#strokes][ストローク算出方法]] )
+|  ファイル名  | 半角英数記号 | 全角(Roman化) |   合計   |
+|     <c>      |     <c>      |      <c>      |   <c>    |
+|--------------+--------------+---------------+----------|
+| aliased.ledger |     590      |      550      | **1140** |
+| expanded.ledger |     570      |     1468      | **2038** |
+1ポスティングあたりのストローク数は aliasあり= **36.8** 、aliasなし= **65.7** となります。この程度の別名化でも **44%** ほどのストローク節約になっています[^fn_節約率]。
+
+
+[^fn_節約率]: キーストローク節約率は簡単に 50% 超のレベルまで高めることができると思います。
+
+
+* aliasの設定方法
+aliasは次のような書式で設定します。
+  #+begin_example
+  alias 別名=勘定科目名
+  #+end_example
+- デフォルトではLedgerのaliasは **再帰的** には展開されません。しかし起動時にオプション =--recursive-aliases= をつけると、「可能な限り」aliasが再帰的に展開されます[^fn_init-fileに]。
+
+[^fn_init-fileに]: 起動のたびに =--recursive-aliases= を打つのではなくて、 =init-file= 内にこれを追加しておきましょう。
+
+- Ledger-cliの [[https://ledger-cli.org/doc/ledger3.html][公式マニュアル]] に掲載されている再帰的aliasの使用例は次のとおりです。
+  #+begin_src
+alias Entertainment=Expenses:Entertainment
+alias Dining=Entertainment:Dining
+alias Checking=Assets:Credit Union:Joint Checking Account
+
+2011/11/30 ChopChop
+  Dining          $10.00
+  Checking
+  #+end_src
+   こうしておいて =ledger balance= すると aliasが展開されて表示されます。
+  #+begin_src
+  $ ledger balance --no-total --recursive-aliases ^Exp
+               $10.00  Expenses:Entertainment:Dining
+  #+end_src
+この「再帰的なalias」機能のおかげで、複雑な構造を持つ勘定科目ツリーも別名化しやすくなっています。
+
+* NPO法人会計の科目にaliasをつけてみる
+使用頻度が高い科目に限定してaliasをつけてみました。
+
+** alias命名ルール
+- 最上位の4勘定科目（ =経常収益, 経常費用, 負債, 資産= ）については、それぞれ英語由来のアルファベット綴り（またはその短縮形）をaliasとする[^fn_optional]。
+- 最上位の勘定科目から深度の深い（より下位の）科目までをまとめて別名化するときには、（できるだけ）最下位にある科目名が推定できるような語を用いてaliasにする( /eg./ =alias 正会員会費=経常収益:受取会費:正会員受取会費= )。
+- 「その他○○」は =other○○= 形のaliasにする( /eg./ other業務, other管理)。
+- 経常費用科目の下位科目(=「事業費」と「管理費」)の双方に出現する同名の下位科目を識別するために「事業」と「管理」の語を入れて別名化する（ /eg./ 事業消耗品, 管理消耗品)。
+- 勘定科目資産の配下に銀行名を科目として新設するが、それぞれの銀行名（UFJ, boy,[^fn_boy] yucho）をaliasとする。
+
+などです。詳しくは下のaliasサンプルリストを見てください。
+
+この別名化ルールは単なる一例です。ポスティングを担当する人が、自分に分かりやすいaliasをつければ良いと思います。
+
+[^fn_optional]: これはキーストローク数の減少を狙ったものではありません。漢字が30文字も連続するような文字列よりも、中にアルファベットが混在している方が見やすくなると思います（個人感想です:smile:）。
+
+[^fn_boy]: はまぎんは bank of yokohama なので =boy= です。
+
+** NOP法人会計用のalias設定例
+以下は具体的なalias設定例です。
+この内容を =aliases.dat= ファイルなどに保存して、ledgerのポスティングファイルの冒頭、または =init-file= の適当な場所に =include aliases.dat= を書き込みます。
+#+attr_html: :width 100%
+#+name: sample-aliases
+#+caption: 再帰的なaliasのサンプルリスト
+#+begin_example
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; **Rules** 
+;;  - toplevel 4 accountsは英語由来のアルファベットベース（オプショナル)
+;;  - 末端の科目は日本語化するができるだけ短く
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; 経常収益
+alias income=経常収益
+;;   受取会費
+alias 会費=income:受取会費
+alias 正会員会費=会費:正会員受取会費
+;;  受取寄付金
+alias 寄付金=income:受取寄付金
+alias 資産受贈=寄付金:資産等受贈益
+;;   受取助成金等
+alias 助成金=income:受取助成金等:受取助成金
+alias 補助金=income:受取助成金等:受取補助金
+;;  事業収益
+alias A事業収益=income:事業収益:A事業収益
+alias B事業収益=income:事業収益:B事業収益
+
+;; 経常費用
+alias expns=経常費用
+;;   事業費
+alias opex=expns:事業費
+alias other事業=opex:(2)その他経費
+alias 事業消耗品=other事業:消耗品費
+alias 事業人件費=opex:(1)人件費
+alias 事業給与=事業人件費:給料手当
+alias 事業通勤費=事業人件費:通勤費
+
+;;   管理費
+alias adm=expns:管理費
+alias other管理=adm:(2)その他経費
+alias 管理消耗品=other管理:消耗品費
+alias 管理人件費=adm:(1)人件費
+alias 管理通勤費=管理人件費:通勤費
+
+;; 資産
+alias assests=資産
+alias boy=資産:流動資産:現金預金:はまぎん
+alias yucho=資産:流動資産:現金預金:ゆうちょ
+alias 有形固定資産=資産:固定資産:有形固定資産
+alias 車両=有形固定資産:車両運搬具
+alias 無形固定資産=資産:固定資産:無形固定資産
+alias ソフトウエア=無形固定資産:ソフトウエア
+
+;; 負債
+alias liab=負債
+alias current-liab=liab:流動負債
+alias visa=負債:流動負債:VISA
+alias 前受金=current-liab:前受金
+#+end_example
+- このaliasリストは、NPO法人会計の推奨[[https://www.npokaikeikijun.jp/wp-content/uploads/2012/05/appendix1.pdf][勘定科目一覧例]]にある内容の **一部** をLedger向けフォーマットに変換したものです。参考までにNPO会計の **全勘定科目リスト** も[[file:npo/npo-all-accounts-list.txt][こちら]] にアップロードしておきました。
+
+* サンプルLedgerポスティング
+** aliasありポスティング
+これはaliasを使って書いたポスティングの例です（ダウンロードは[[file:npo/aliased.ledger][こちら]]から）。
+#+begin_example ledger
+;;
+;;  Ledgerポスティング サンプルデータ
+;;     - aliasのテスト用
+;;     - aliasファイルは同一ディレクトリに aliases.dat として保管
+
+include aliases.dat
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   期首残高
+
+2024/01/01 Opening Balance
+    boy                                    5,000,000 円
+    yucho                                  1,000,000 円
+    Equity Balances
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  経常収益
+
+2024/02/16 会費
+    正会員会費:2024021601                    -35,000 円
+    正会員会費:2024021602                    -35,000 円
+    yucho
+
+2024/02/16 ㈱グッドウイル
+    寄付金                                  -550,000 円
+    yucho
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   経常費用:事業費:その他経費
+
+2024/02/16 印刷
+    other事業:印刷製本費                     57,800 円
+    yucho
+
+2024/02/16 通信運搬
+    other事業:通信運搬費                     56,000 円
+    yucho
+
+2024/02/16 事業消耗品
+    事業消耗品                                 7,819 円
+    boy
+
+2024/02/16 給与
+    経常費用:事業費:(1)人件費:給料手当:A      50,000 円
+    事業人件費:給料手当:B                     60,000 円
+    事業給与:C                                70,000 円
+    boy
+
+2024/02/16 アルバイト賃金
+    ; 5人分
+    事業人件費:臨時雇賃金                  ( 3,500 円 * 5 )
+    boy
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   経常費用:管理費:その他経費
+
+2024/02/16 旅費交通費
+    other管理:旅費交通費                      3,400 円
+    boy
+
+2024/02/16 管理費の例（会議費）
+    other管理:会議費                         350,000 円
+    boy
+
+2024/02/16 ヨーカドー
+    管理消耗品                                24,500 円
+    visa
+
+2024/02/16 役員報酬
+    管理人件費:役員報酬:理事A                 80,000 円
+    管理人件費:役員報酬:理事B                 76,000 円
+    boy
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   負債
+
+2024/02/16 会費前受け金
+    前受金                                   -35,000 円
+    yucho
+#+end_example
+- 「給与」をpayeeとするトランザクションは、A, B, Cさんの3人分の給与ポスティングですが、
+  Aさんの給与はaliasなしでフルスペルの勘定科目、Bさんは「経常費用:事業費(1)人件費」を別名化した =事業人件費= aliasを使っています。Cさんの給与は、「経常費用:事業費(1)人件費:給料手当」までを別名化した =事業給与= aliasを使っています。
+- Bさん、Cさんの給与ポスティングも内部的にはaliasが展開されて、Aさんと同じように扱われます。
+
+** aliasを展開したポスティング例
+これは上の alias付きポスティングを展開してフルスペルにしたトランザクションの **冒頭4件** だけを抽出したものです（展開されたポスティング **全行** のダウンロードは[[file:npo/expanded.ledger][こちら]]から）。
+#+begin_example ledger
+2024/01/01 Opening Balance
+    資産:流動資産:現金預金:はまぎん                   5,000,000 円
+    資産:流動資産:現金預金:ゆうちょ                   1,000,000 円
+    Equity Balances
+
+2024/02/16 会費
+    経常収益:受取会費:正会員受取会費:2024021601          -35,000 円
+    経常収益:受取会費:正会員受取会費:2024021602          -35,000 円
+    資産:流動資産:現金預金:ゆうちょ
+
+2024/02/16 ㈱グッドウイル
+    経常収益:受取寄付金                           -550,000 円
+    資産:流動資産:現金預金:ゆうちょ
+
+2024/02/16 印刷
+    経常費用:事業費:(2)その他経費:印刷製本費                57,800 円
+    資産:流動資産:現金預金:ゆうちょ
+  :
+#+end_example
+
+
+* aliasつきポスティングのbalanceレポート例
+一つだけbalanceレポートの例をあげます。
+#+begin_example
+$ ledger bal --init-file init.data -f aliased.ledger --recursive-aliases
+#+end_example
+上のコマンドの出力は次のようになります[^fn_kozaiku]。
+#+attr_html: :width 80%
+#+name: fig1
+#+caption: 出力例
+[[file:npo/out-sample-bal-aliases.png]]  
+
+
+[^fn_kozaiku]: 勘定科目 人件費を =(1)人件費= その他経費を =(2)その他経費= にして、アルファベティカルに並んだ勘定科目順に「その他」の前に「人件費」が来るように小細工をしました。
+
+* 今後の課題など
+- もし実際に自分が会計データを入力する担当になったとしたら、できるだけ多くのaliasを半角英数文字（と許容される半角記号）だけを使ってで作ると思います。ローマ字入力した後の変換キーのストロークは無視できない数になると思われます。とくに誤変換の修正のためのストロークは全くの **無駄手** です。
+- 会計帳簿のタイプミスは、後になって発見することはなかなか難しいです。別の記事（[[https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]）でも触れましたが、 =init-file= 内では =-pedantic= and/or =--explicit= を使うようにしましょう。
+- aliasとは直接関係ありませんが、日本語の財務諸表類は一般に、左端に科目名、その右に金額を（何列か使って）書きます。ところがLedger-cliの出力は左右が逆で左端に金額を書きます。最初は違和感がありましたが、慣れるとこちらの方が合理的で見易い気がします[^fn_docs_to_go]。金額列の幅（金額の桁数＋アルファ）は大きく変動しませんが、勘定科目名は（英語でも）長いものはとてつもなく長くなりますので。
+
+以上です。
+
+[^fn_docs_to_go]: 所轄庁へ提出する書類は推奨された形式に合うようにフォーマットを変えましょう。Ledger-cli内でもフォーマット変えはできなくは無いですが、とても面倒くさいです。LedgerのbalanceレポートをCSVファイルにし、それを少しの手作業でNPOのエクセルフォーマットに食わせるのが心身の健康にはよろしいかと思います:smile:
+
+
+* Appendix:
+** ストローク数の算出・取得方法
+:PROPERTIES:
+:CUSTOM_ID: strokes
+:END:
+参考までにストローク数の算出・取得と比較の方法を紹介しておきます。
+
+ここでは
+- 日本語入力はローマ字入力を前提としています
+- 半角英数記号の1文字は1ストロークとみなすという仮定に立っています
+
+つまりポスティング内の文字列をすべてローマ字に変換して、そこに含まれる半角英数記号の数をカウントして近似的なストローク数としています。
+
+具体的な方法はつぎのとおりです。
+
+1. aliasありのデータ( =aliased.ledger= )からaliasを全展開したファイル( =expanded.ledger= )を作ります（ =$ ledger print --init-file init.dat -f aliased.ledger > expanded.ledger= ）。
+2. 上の2つのファイルから、半角英数記号を削除して全角文字だけのファイル(=aliased-zenkaku.txt, expanded-zenkaku.txt=) と、全角文字を削除して半角英数記号だけのファイル(=aliased-hankaku.txt, expanded-hankaku.txt=)を作ります。
+   
+  この =aliased.txt, expanded.txt= の2ファイルについて
+3. 全角文字だけになったファイルを対象にして、[[https://manpages.ubuntu.com/manpages/xenial/ja/man1/kakasi.1.html][=kakasi=]] を使ってローマ字に変換しアルファベット文字数を得ます(/eg./  =$ cat aliased-zenkaku.txt | kakasi -Ja -Ha -Ka -i utf-8 -o utf-8 -S| wc -c= ）
+4. 半角文字だけになったファイルから =wc -c= で文字数＝ストローク数の近似値を得ます。
+5. 半角スペースなどは途中でsedなどで取り除いてはいますが、厳密にはやっていません。また変換キーなどのストロークは勘定に入れていません。
+
+以上です。
+# なおコードは[[file:npo/counting-keystrokes.sh][こちら]]からダウンロードできます。
+
+
+** NPO法人会計関係記事一覧
+:properties:
+:custom_id: npo-blog-list
+:end:
+
+| タイトル                                                                 | 日付       |
+|--------------------------------------------------------------------------+------------|
+| [[https://bred-in-bingo.netlify.app/posts/recursive-aliases-NPO][Ledger-cliでNPO法人会計 – 勘定科目にエリアスを使う]]                       | 2024/02/22  |
+| [[https://bred-in-bingo.netlify.app/posts/specific-donation-npo/][Ledger-cliによるNPO法人会計注記 -- 使途制約のある寄付等]]                  | 2024/02/15 |
+| [[https://bred-in-bingo.netlify.app/posts/related-party-TXN-NPO/][Ledger-cliによるNPO法人会計注記 -- 役員及びその近親者との取引]]            | 2024/02/02 |
+| [[https://bred-in-bingo.netlify.app/posts/VIS-npo-expns/][Ledger-cliでNPO法人会計の可視化 --- かんたん折れ線グラフ]]                 | 2024/01/29 |
+| [[https://bred-in-bingo.netlify.app/posts/NPO会計/][小規模学会のためのLedgerポスティング例 --- NPO法人会計基準に準拠しながら]] | 2024/01/25 |
+| [[https://bred-in-bingo.netlify.app/posts/financial-statements-for-NPO][NPO法人会計に準拠した財務諸表をLedger-cliで書く]]                          | 2024/01/21 |
+
+
+* Footnote:
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
