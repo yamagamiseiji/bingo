@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-04-22 10:49:51 yamagami>
+#           Time-stamp: <2024-04-22 11:20:41 yamagami>
 #+title: Ledger-cli のコメント行の内容を連想配列化 -- 種や苗の購入履歴リストを作る
 #+date: [2024-04-22]
 #+language: ja
@@ -132,7 +132,7 @@ LedgerとBashシェルスクリプトを併用して試作することしまし�
 #+end_src
 
 * 補足説明
-野菜名をキーとし日付を要素にして連想配列 seedsに格納するパート（ (4）-3 について
+野菜名をキーとし日付を要素にして連想配列 seedsに格納するパート（(4）-3）について
 自分への備忘の意味でメモしておきます。
 
 最初は次のようにコーディングしていました。

@@ -107,8 +107,8 @@ declare -a veggie_list
 for i in $(seq 1 ${n_blocks}) ; do
     # (3) 空行区切のTXNブロックを１つずつ読出しtmp-txt.datに書出す
     awk -v RS=  'NR=='${i}'{ print }'\
-	  < txn-seeds.txt\
-	  > tmp-txn.dat
+	    < txn-seeds.txt\
+	    > tmp-txn.dat
 
     # (4) コメント行(;)を抽出し、日付と野菜名を取得して配列に格納
     #   (4)-1 変数dateに日付格納
