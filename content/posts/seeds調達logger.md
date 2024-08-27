@@ -146,7 +146,6 @@ cat seeds-buy-date.dat
 # (6) 一時ファイル削除
 rm tmp-txn.dat txn-seeds.txt
 exit 0
-
 ```
 
 

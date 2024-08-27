@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-04-22 11:20:41 yamagami>
+#           Time-stamp: <2024-04-22 13:04:39 yamagami>
 #+title: Ledger-cli のコメント行の内容を連想配列化 -- 種や苗の購入履歴リストを作る
 #+date: [2024-04-22]
 #+language: ja
@@ -128,7 +128,6 @@ LedgerとBashシェルスクリプトを併用して試作することしまし�
   # (6) 一時ファイル削除
   rm tmp-txn.dat txn-seeds.txt
   exit 0
-
 #+end_src
 
 * 補足説明

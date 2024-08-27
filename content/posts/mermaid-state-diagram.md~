@@ -1,0 +1,112 @@
++++
+title = "状態遷移図をMermaidで描いてみました"
+author = ["YAMAGAMI"]
+date = 2024-08-27T00:00:00+09:00
+tags = ["mermaid", "joplin", "ledger-cli", "state_diagram"]
+categories = ["comp"]
+draft = false
++++
+
+## はじめに {#はじめに}
+
+世の中に
+****Mermaid**** という便利なものがあるのを知って感激し、
+2024/06/25に
+****X**** （旧twitter）に[投稿しました](https://x.com/seijiyamagami/status/1805566822248280503)。
+
+<a id="figure--ss-twitter"></a>
+
+{{< figure src="/twitter-screenshot.png" caption="<span class=\"figure-number\">&#22259;1:  </span>X（旧twitter）への投稿記事" width="80%" >}}
+
+プログラムのフローチャートは、chatGPTにコードを渡してMermaid Codeにしてもらい、その後、必要があれば微修正という流れで描いています。MermaidとchatGPTのおかげでフローチャート作成時間はほんとうに極小化しました。
+
+
+### 状態遷移図（State Diagram） {#状態遷移図-state-diagram}
+
+一方、複数のプログラムやスクリプトから構成されている処理系の状態遷移図は、フローチャートのようなAI利用のやり方が思いつかず、しばらく手をつけずにいました。
+
+この度、自分自身の頭を整理するために（というか必要に迫られて &#128517; ) Mermeid code 直書きで状態遷移図を書いてみました。その第１試作品が図[2](#figure--sample-out)です。
+
+保有する ****投資信託と株式の当日の価額**** を取得して、 ****Ledger-cli**** の `.prices.db` 形式DBファイルとして保存する処理系の遷移図です。図中の取扱い会社名、銘柄名、銘柄の数などは架空のものです。
+
+<a id="figure--sample-out"></a>
+
+{{< figure src="/mermaid-1724726378291.svg" caption="<span class=\"figure-number\">&#22259;2:  </span>投資信託・株式の時価データベース生成処理系についてのサンプルダイアグラム" width="100%" >}}
+
+ダイヤグラムにするととても簡単な構造ですが、DBファイル名などを正確に記憶することが難しくなってました（汗）ので、このような図が ****Joplin**** 内で簡単に見えるようになったのは ほんとうにありがたいです。
+
+
+### 補足説明 {#補足説明}
+
+1.  最終的な `ALL-PRICES.db` のフォーマットは次のようになっています（出典：Ledger-cli公式マニュアル）。
+    ```nil
+    P 2004/06/21 02:18:01 FEQTX $22.49
+    P 2004/06/21 02:18:01 BORL $6.20
+    P 2004/06/21 02:18:02 AAPL $32.91
+    P 2004/06/21 02:18:02 AU $400.00
+    ```
+    第3列の ****時刻**** は、自分のデータでは `00:00:00` 、第4列の ****銘柄名**** は、できるだけ東証などの短縮名を使います。最後の ****時価**** の列は日本円です（ `JPY 2,350` など）。
+
+2.  図中のノート部（ `mufg-pricedb_getter.sh` など）は投資信託の価額や株式の時価を ****自動取得**** するスクリプト名です。
+
+    この `.prices.db` 形式のDBがあれば、保有する投信・株式の時価評価額を次のようなクエリで表示できます。
+    ```sh
+    $ ledger bal trust --price-db ALL-PRICES.db --market -X JPY
+    ```
+
+3.  Mermaidについては、まだ腑に落ちないところが少なからずありますが、それでも、これまで使いこなせなかったいろいろなDrawingソフトよりもずっと楽にダイアグラムが描けます。ありがたいことです 🙏
+
+
+### Mermaid Code {#mermaid-code}
+
+参考までに・・・
+
+```nil
+stateDiagram
+    %%direction LR
+	A: TRUST
+	S: STOCK
+    [*] --> A
+	[*] --> S
+    A --> MUFG
+    A --> SMBC
+	S --> 野村証券
+
+	C1: MUFG-prices.db
+    MUFG --> C1: mufg-pricedb_getter.sh
+    state MUFG {
+      direction LR
+      eNauto: 投信M1
+	  eNbond: 投信M2
+    }
+
+    C2: SMBC-prices.db
+    SMBC --> C2: SMBC-pricedb_getter.sh
+	state SMBC{
+	   direction LR
+	   Ds: 投信S1
+	   Dt: 投信S2
+	 }
+
+    C3: Nomura-stk-prices.db
+	野村証券 --> C3: nomura-pricedb_getter.sh
+	state 野村証券{
+	   direction LR
+	   K: 株銘柄N1
+	   M: 株銘柄N2
+	 }
+
+    T1: TRUST-prices.db
+	S1: STOCK-prices.db
+	C1 --> T1
+	C2 --> T1
+    C3 --> S1
+
+	D: ALL-PRICES.db
+	T1 --> D
+	S1 --> D
+
+	D --> [*]
+```
+
+（以上です）
