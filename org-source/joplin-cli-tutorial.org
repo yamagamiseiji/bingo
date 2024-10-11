@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2024-10-09 16:27:25 yamagami>
+#           Time-stamp: <2024-10-11 19:35:53 yamagami>
 #+title: Joplin CLIをUbuntuで使う --- インストールから同期先設定と基本的な使い方の解説
 #+date: [ 2024-10-09 ]
 #+language: ja
@@ -172,7 +172,7 @@ $ joplin ls -l
 4f4f9 09/10/2024 15:59 new note
 $ joplin sync upgrade
 #+end_example
-=loplin sync upgrade= で、同期先を最新バージョンにアップグレードしています。
+=joplin sync upgrade= で、同期先を最新バージョンにアップグレードしています。
 
 ---
 

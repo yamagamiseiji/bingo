@@ -2,7 +2,7 @@
 title = "Joplin CLIをUbuntuで使う — インストールから同期先設定と基本的な使い方の解説"
 author = ["YAMAGAMI"]
 date = 2024-10-09T00:00:00+09:00
-tags = ["joplin", "CLI", "ubuntu", "Dropbox", "tutorial"]
+tags = ["joplin", "CLI", "ubuntu", "Dropbox", "install", "usage", "tutorial"]
 categories = ["comp"]
 draft = false
 +++

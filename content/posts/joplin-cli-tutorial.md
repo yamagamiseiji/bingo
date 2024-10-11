@@ -233,7 +233,7 @@ $ joplin ls -l
 $ joplin sync upgrade
 ```
 
-`loplin sync upgrade` で、同期先を最新バージョンにアップグレードしています。
+`joplin sync upgrade` で、同期先を最新バージョンにアップグレードしています。
 
 ---
 
