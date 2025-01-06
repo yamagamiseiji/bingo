@@ -115,7 +115,7 @@ draft = false
 
 日々の体重の折れ線（青）に7日間の ****移動平均**** （ピンク）を重ね書きしたチャートです。チャートをクリックすると、書き方を説明した記事に飛びます。
 
-<a href="url"><img src="/out-taiju.svg" alt="体重曲線" width=70%></a>
+<a href="https://bred-in-bingo.netlify.app/posts/taiju-project/"><img src="/out-taiju.svg" alt="体重曲線" width=70%></a>
 
 
 ## まとめ {#まとめ}

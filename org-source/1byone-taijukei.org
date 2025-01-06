@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-01-06 10:24:17 yamagami>
+#           Time-stamp: <2025-01-06 10:28:08 yamagami>
 #+title: CSVデータをエクスポートできる家庭用体組成計 -- １byone smart scale
-#+date: [ 2025-01-05 ]
+#+date: [ 2025-01-06 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
