@@ -1,7 +1,7 @@
 +++
 title = "Ledger — 支払先のタイプミスをチェックする"
 author = ["YAMAGAMI"]
-date = 2024-12-31T00:00:00+09:00
+date = 2029-12-31T00:00:00+09:00
 tags = ["farming", "food"]
 categories = ["comp"]
 draft = false

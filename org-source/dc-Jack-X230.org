@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2023-12-31 23:53:46 yamagami>
+#           Time-stamp: <2025-02-10 20:14:13 yamagami>
 #+title: ノートPC のDC電源ジャック交換 -- ThinkPad X230
-#+date: [2024-12-31]
+#+date: [2029-12-31]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/

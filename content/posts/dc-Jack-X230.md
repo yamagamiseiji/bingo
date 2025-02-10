@@ -1,7 +1,7 @@
 +++
 title = "ノートPC のDC電源ジャック交換 – ThinkPad X230"
 author = ["YAMAGAMI"]
-date = 2024-12-31T00:00:00+09:00
+date = 2029-12-31T00:00:00+09:00
 tags = ["computer", "DIY"]
 categories = ["comp"]
 draft = false

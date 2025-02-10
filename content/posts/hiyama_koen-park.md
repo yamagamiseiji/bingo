@@ -1,7 +1,7 @@
 +++
 title = "パラソル ホワイト トップ？"
 author = ["YAMAGAMI"]
-date = 2024-12-31T00:00:00+09:00
+date = 2029-12-31T00:00:00+09:00
 tags = ["自然誌", "横浜"]
 categories = ["comp"]
 draft = false
