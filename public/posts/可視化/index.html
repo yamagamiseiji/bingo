@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -106,9 +104,8 @@ if (!doNotTrack) {
 <h2 id="二次元プロットの例">二次元プロットの例</h2>
 <p>図<a href="#org0d5d11e">1</a>は経理情報を可視化するための自作スクリプトによる出力例です。</p>
 <p><a id="org0d5d11e"></a></p>
-<figure>
-    <img src="/small-work.png"
-         alt="図1:  経理情報可視化スクリプトの出力例。金額が見えないように意図的に解像度を下げています。" width="450px"/> <figcaption>
+<figure><img src="/small-work.png"
+         alt="図1:  経理情報可視化スクリプトの出力例。金額が見えないように意図的に解像度を下げています。" width="450px"/><figcaption>
             <p>図1:  経理情報可視化スクリプトの出力例。金額が見えないように意図的に解像度を下げています。</p>
         </figcaption>
 </figure>
@@ -119,9 +116,8 @@ if (!doNotTrack) {
 <h2 id="3dプロットの例">3Dプロットの例</h2>
 <p>次の図<a href="#orgfee6b96">2</a>は、Ledger＋gnuplotによる3Dプロットの例図（試作品）です。縦軸の金額にはボカシを入れています。</p>
 <p><a id="orgfee6b96"></a></p>
-<figure>
-    <img src="/fence-plot-sample.png"
-         alt="図2:  上位5位までのアカウント（勘定）の支出推移" width="450px"/> <figcaption>
+<figure><img src="/fence-plot-sample.png"
+         alt="図2:  上位5位までのアカウント（勘定）の支出推移" width="450px"/><figcaption>
             <p>図2:  上位5位までのアカウント（勘定）の支出推移</p>
         </figcaption>
 </figure>
@@ -130,9 +126,8 @@ if (!doNotTrack) {
 <h2 id="おまけ-日々の支出状況をみるtodayスクリプト">（おまけ）日々の支出状況をみるtodayスクリプト</h2>
 <p>日々の記帳作業のあと、(1) その日の入力を確認するため、(2) 月々の支出予定金額に対して現在の支出がどれくらいの割合になっているかを一目で見るために、 <strong><code>today</code></strong> という <strong>ターミナル</strong> 上で動く小さなスクリプトを作って愛用しています。図<a href="#org14e5b6f">3</a>の下の方には、 <code>$ ledger bal ^expenses -p today</code> と <code>reg</code> の出力を表示していますが、省略しています。</p>
 <p><a id="org14e5b6f"></a></p>
-<figure>
-    <img src="/snapshot-today.png"
-         alt="図3: today スクリプトのスクリーンショット。金額はダミーです。"/> <figcaption>
+<figure><img src="/snapshot-today.png"
+         alt="図3: today スクリプトのスクリーンショット。金額はダミーです。"/><figcaption>
             <p>図3:  <code>today</code> スクリプトのスクリーンショット。金額はダミーです。</p>
         </figcaption>
 </figure>
@@ -197,13 +192,23 @@ if (!doNotTrack) {
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>

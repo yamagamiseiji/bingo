@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -122,7 +120,7 @@ if (!doNotTrack) {
 <p>物品やサービスごとに税率が8%だったり10%だったりするだけならば、帳簿書きは簡単。ですが、今回は増税に同期して <strong><strong>キャッシュレス還元</strong></strong> という不思議な仕掛けが始まりました。ここでは、とりあえずそれへの対応を紹介します。</p>
 <h2 id="キャッシュレス還元が始まった">キャッシュレス還元が始まった</h2>
 <p>これが <strong><strong>増税</strong></strong> とペアになって始まったこと、それから８ヶ月後には終わりになることなど、とても <strong><strong>イミフ</strong></strong> な状況ですが、今日（10月3日）、増税後はじめてセブンイレブンで買い物をしてレシートをもらいました。次のような内容でした：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">　　領　収　書
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">　　領　収　書
 こしあんぱん	108
 サンドイッチ	268
 赤ワイン 	880
@@ -143,13 +141,13 @@ if (!doNotTrack) {
 nanaco支払い	1,374
 </code></pre></div><p>ははは、本当に変な領収書・明細書ですね。それはさておき問題はこれをどう仕訳するかです。</p>
 <p>この<a href="http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/">シリーズ(7)</a> で、ETCの還元ポイントを捉えるために <strong><strong>仮想アカウント</strong></strong> <code>[Income:還元Point:ETC]</code> を使いました。今回もそれにならって、キャッシュレス還元を <code>Income:還元Point:キャッシュレス</code> に収納してみました。ただし仮想アカウントではなくて <strong><strong>real</strong></strong> なアカウントとしてです。次のような感じです：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/10/03   セブンイレブン
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/10/03   セブンイレブン
     Expenses:Grocery:Liquor                      <span style="color:#ae81ff">968</span> JPY
     Expenses:Meals:Lunch                         <span style="color:#ae81ff">406</span> JPY
     Income:還元Point:キャッシュレス              -27 JPY
     Assets:nanaco
 </code></pre></div><p>これでbal/regレポートを見ると：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal 還元
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal 還元
 	  -3,027 JPY  Income:還元Point
 	  -3,000 JPY    ETC
 	     -27 JPY    キャッシュレス
@@ -160,7 +158,7 @@ $ led reg 還元
 2019/08/20 ETCマイレージサービス <span style="color:#f92672">[</span>Income:還元Point:ETC<span style="color:#f92672">]</span>   -3,000 JPY   -3,000 JP
 2019/10/03 セブンイレブン       Income:還元Point:キャッシュレス  -27 JPY  -3,027 JPY
 </code></pre></div><p>また当然ですが、支出金額、nanacoからの振り出しとか全ての点でつじつまが合っています：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -p today
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -p today
 	  -1,347 JPY  Assets:nanaco
 	   1,374 JPY  Expenses
 	     <span style="color:#ae81ff">968</span> JPY    Grocery:Liquor
@@ -177,16 +175,16 @@ $ led reg 還元
 <p>帳簿に紛れ込むミスやエラーをできるだけ少なくするために便利な機能をまとめてみました。元帳管理のための必須の機能と言っても良いでしょう。</p>
 <h3 id="accountsコマンド">accountsコマンド</h3>
 <p>長期間 Ledgerを使っていると、アカウントの構造に混乱が生じます。タイプミスも混入します。そんな場合に便利なのが <code>accounts</code> コマンドです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led accounts
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led accounts
 </code></pre></div><p>これで自分のLedgerファイルで使われているすべてのアカウント名がリストされます。結果を上から順番にながめるだけでも、タイプミスとか「表記のゆらぎ」とか色々とみつかります。</p>
 <p><code>accounts</code> の後ろに正規表現を入力すれば、それにマッチするアカウントがリストされます：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led accounts liab
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led accounts liab
 </code></pre></div><p>これで <code>Liabilities</code> に属するアカウントのリストが得られます。</p>
 <p><code>accounts</code> コマンドでは <code>--count</code> オプションがおすすめです。これをつけると、すべてのアカウントについてそれが使われた <strong>回数</strong> も併せて表示されます。回数が少ないアカウントは別のアカウントと合併させるとか、いろいろな対策を考えることができます。</p>
 <p>Ledgerファイルのメンテナンスには必須の機能だと思います。</p>
 <h3 id="payeesコマンド">payeesコマンド</h3>
 <p><code>payees</code> コマンドは指定した正規表現に一致するトランザクションの支払先 <code>payee</code> をリストにして表示します。これも支払先の名称のタイプミスや表記ゆらぎを修正するのに便利です。 <code>payees</code> コマンドに <code>-count</code> オプションをつけると、 <code>accounts</code> コマンドと同じように、出現した頻度が行頭に表示されます:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led payees eatout --count
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led payees eatout --count
 <span style="color:#ae81ff">2</span> Gratia
 <span style="color:#ae81ff">1</span> えびす鯛 新潟駅前店
 <span style="color:#ae81ff">1</span> 幡多バル
@@ -197,7 +195,7 @@ $ led reg 還元
 <h3 id="by-payee-p-オプション"><code>--by-payee</code> （ <code>-P</code> ）オプション</h3>
 <p><strong>支払先</strong> <code>Payee</code> でグルーピングして支出等を確認することは家計のみならずさまざまな組織・団体でもしばしば必要とされます。</p>
 <p>この <code>-P</code> オプションは、regレポートする際に、正規表現にマッチするトランザクションを支払先 <code>payee</code> の名前でグルーピングして表示するオプションです。次の例は、 <code>eatout</code> というアカウント（外食）について、外食先を金額の大きい順にソートした結果の抜粋です（日付、金額は当てずっぽうです）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led reg eatout -P -S -amount
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led reg eatout -P -S -amount
 2019/05/05 寿司おとわ           Expenses:教養娯楽費:Eatout   41,600 JPY   41,600 JPY
 2019/09/25 おばんざい木村       Expenses:教養娯楽費:Eatout   18,040 JPY   59,000 JPY
 2019/06/29 鼎泰豊               Expenses:教養娯楽費:Eatout   17,954 JPY   68,754 JPY
@@ -205,30 +203,30 @@ $ led reg 還元
 <h3 id="xactコマンド">xactコマンド</h3>
 <p>転記作業の大半は以前のトランザクションの繰り返しです。繰り返し率は80%を超えるとも言われています。これをその都度、毎回入力をするのは時間とエネルギーの無駄です。</p>
 <p>それを回避するために用意されているのがこの <code>xact</code> コマンドです。たとえば次のようなトランザクションが既に（直前のショッピングとして）存在しているとしましょう：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">05/20  Costco
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">05/20  Costco
     Expenses:Food                      <span style="color:#ae81ff">8930</span> JPY
     Liabilites:OricoCard
 </code></pre></div><p>その後、05/29にCostcoで食料品を4,500円購入したときには、 <code>xact</code> コマンドを使って次のようにします：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact Costco food <span style="color:#ae81ff">4500</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact Costco food <span style="color:#ae81ff">4500</span>
 2019/07/20 Costco
     Expenses:Food                          7,654 JPY
     Liabilites:OricoCard
 </code></pre></div><p><code>$ led xact</code> は単に標準出力に結果を表示するだけなので、リダイレクションを使用して次のようにすれば、自動的にファイル末尾に追記されます：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact Costco food <span style="color:#ae81ff">4500</span> &gt;&gt; your-ledgerfile.ledger
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact Costco food <span style="color:#ae81ff">4500</span> &gt;&gt; your-ledgerfile.ledger
 </code></pre></div><p>Ledger3の公式マニュアルには、 <code>xact</code> の指定の仕方のバリエーションがいくつか挙げてあります。マニュアルの <code>Payee</code> をRestaurantに変更したものを下に示します：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger xact 4/9 Restaurant 11.50
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger xact 4/9 Restaurant 11.50
 $ ledger xact 4/9 Restaurant 11.50 checking <span style="color:#75715e"># (from `checking&#39;)</span>
 $ ledger xact 4/9 Restaurant food 11.50 tips <span style="color:#ae81ff">8</span>
 $ ledger xact 4/9 Restaurant food 11.50 tips <span style="color:#ae81ff">8</span> cash
 $ ledger xact 4/9 Restaurant food $11.50 tips $8 cash
 $ ledger xact 4/9 Restaurant dining <span style="color:#e6db74">&#34;DM 11.50&#34;</span>
 </code></pre></div><p>上の例で、 <strong><strong>日付</strong></strong> は新規トランザクションの日付が使われ、省略すると今日の日付が使われます。 <code>Expenses</code> の下の階層に <code>Toys</code> という新しいアカウントを付け加えたい場合には次のようにします：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact costco Expenses:Toys <span style="color:#e6db74">&#34;500 JPY&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact costco Expenses:Toys <span style="color:#e6db74">&#34;500 JPY&#34;</span>
 2019/07/20 Costco
     expenses:toys                            <span style="color:#ae81ff">500</span> JPY
     Liabilites:Visa
 </code></pre></div><p>さらに、クレジットカードをVisaからMasterに変えた場合には：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact costco food <span style="color:#ae81ff">450</span>  <span style="color:#e6db74">&#34;Liabilities:Master&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led xact costco food <span style="color:#ae81ff">450</span>  <span style="color:#e6db74">&#34;Liabilities:Master&#34;</span>
 2019/07/20 Costco
     Expenses:Food                            <span style="color:#ae81ff">450</span> JPY
     Liabilities:Master
@@ -242,9 +240,8 @@ $ ledger xact 4/9 Restaurant dining <span style="color:#e6db74">&#34;DM 11.50&#3
 <p>suicaは、残高を印刷されたレシートから得るチャンスが少ないというか、ほとんど無いし、最近は改札口のディスプレイにも残高が表示されないことが多くなりました。そのため何回も使った後、 <strong>記憶</strong> にもとづいて仕訳・転記の作業をやる他なくなります。</p>
 <p>しかし <strong>記憶</strong> ほどもろいものはありません、特にボクら <strong>准高齢者</strong> にはきびしい。困り果てて <strong>増税記念</strong> にPaSoRi RC-S380/P（SONY）を購入しました。2,500円ほどの出費でした。</p>
 <h3 id="pasoriを使って残高確認">PaSoRiを使って残高確認</h3>
-<figure>
-    <img src="/pasori.jpg"
-         alt="図1:  PaSoRiを使ってsuica残高確認" width="80%"/> <figcaption>
+<figure><img src="/pasori.jpg"
+         alt="図1:  PaSoRiを使ってsuica残高確認" width="80%"/><figcaption>
             <p>図1:  PaSoRiを使ってsuica残高確認</p>
         </figcaption>
 </figure>
@@ -268,7 +265,7 @@ $ ledger xact 4/9 Restaurant dining <span style="color:#e6db74">&#34;DM 11.50&#3
 </li>
 </ul>
 <p>これだけですが、JRとか小田急とかはちゃんと乗車・降車駅が表示されていますけど、路線バスだと、なぜか「車載端末」と区分され次のように表示されます：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">出線区: ＪＲ西日本-山陰本線
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">出線区: ＪＲ西日本-山陰本線
 出駅順: 鳥取
 </code></pre></div><p>山陰本線 <strong>鳥取</strong> で出たことになっているのが不思議？ボクだけかしら？</p>
 <p>Windows10で公式アプリとドライバをインストールして見ましたが、バスなどの入駅・出駅場所は表示してくれません。要するに交通系とはいえ、電車などに限定している気味？あと、お店や自販機で購入した支出は、「物販」とか使用後の残高だけ表示されます。しかし日付と残高はちゃんと表示されるので重宝しています。</p>
@@ -322,13 +319,23 @@ $ ledger xact 4/9 Restaurant dining <span style="color:#e6db74">&#34;DM 11.50&#3
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>

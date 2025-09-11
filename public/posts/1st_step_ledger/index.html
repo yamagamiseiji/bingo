@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -118,11 +116,11 @@ if (!doNotTrack) {
 <h2 id="ledgerのインストール">Ledgerのインストール</h2>
 <p>インストール先のハードウエアは、ThinkPad X230（HDDはSSDに換装済）です。ソフトウエア環境は、Ubuntu16.04/Emacs25.3.2/Ledger3.1.1です。</p>
 <p>さてLedger本体のインストールはapt installで一発です：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo apt install ledger
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo apt install ledger
 </code></pre></div><h3 id="init-dot-elの設定">init.elの設定</h3>
 <p>次に、EmacsでLedger-modeを使えるようにinit.elを設定します。
 <code>use-package</code> の設定が済んでいる場合には、次の数行をinit.elに追加するだけでとりあえず動きます：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="color:#75715e">;;	ledger-mode</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="color:#75715e">;;	ledger-mode</span>
 <span style="color:#75715e">;;</span>
 (use-package ledger-mode
   :ensure <span style="color:#66d9ef">t</span>
@@ -147,7 +145,7 @@ Ledgerは柔軟性が高く、枠組み変更がとても簡単です。実際�
 (3) コマンドラインからledgerを起動することになります。ここでは基本的にLinux/Emacsを使いますので、それ以外やり方については触れません。</p>
 <h4 id="仕訳帳はopening-balanceから始まる">仕訳帳はOpening Balanceから始まる</h4>
 <p>仕訳帳ファイルは期首残高（Opening balance）の記帳（posting）から始めます。たとえばを次のように書きましょう（仮想データです）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        <span style="color:#ae81ff">50000</span> JPY
     Liabilities:VisaCard                           <span style="color:#ae81ff">0</span> JPY
@@ -174,21 +172,21 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <ul>
 <li>
 <p>ATMを使って、ゆうちょ銀行から現金30,000円を引き出しました：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/10  ATMでキャッシング
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/10  ATMでキャッシング
     Assets:Cash
     Assets:ゆうちょ銀行                       -30000  JPY
 </code></pre></div><p>上の例では、「Assets:ゆうちょ銀行」がソース勘定<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>（account）で、その上の「Assets:Cash」がターゲット勘定です。</p>
 </li>
 <li>
 <p>その現金を使って、スタバでコーヒを飲みました：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/10  スタバ
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/10  スタバ
     Expenses:交際費:Coffee                       <span style="color:#ae81ff">780</span>  JPY
     Assets:Cash
 </code></pre></div><p>つまり「Assets:Cash」というソースをつかって、「Coffee」という「交際費」に属する「経費」を「スタバ」（ターゲット）に支払いました。Cashアカウント欄には金額が書かれていませんが、Ledgerが複式簿記のルールに従って -780円とマイナスの金額を補完してくれます。</p>
 </li>
 <li>
 <p>クレジットカードを使ってAmazonで本を買いました：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/10  Amazon
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/10  Amazon
     Expenses:教養費:Books                       <span style="color:#ae81ff">2780</span>  JPY
     Liabilities:VisaCard
 </code></pre></div><p>仕訳帳の中で、どんな本を購入したかをどうしても記録しておきたい場合には、セミコロンを使ってコメントとして追記してください。</p>
@@ -196,27 +194,27 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </li>
 <li>
 <p>いよいよ給料日！ 振込先は三井住友銀行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/25   株式会社ほげほげ
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/25   株式会社ほげほげ
     Assets:三井住友銀行
     Income:給与                 -250000  JPY
 </code></pre></div><p>自分の三井住友銀行口座（ターゲット口座）に、「Income:給与」（ソース口座）＝「株式会社ほげほげ」から25万円のサラリーが振り込まれました。ここで、25万円がマイナスになっているのは、またまた目まいがしますねｗ。要するに給料は自分にとってはプラスなのですが、雇用主である会社の視点から見れば、資産はマイナスになっているから、と考えましょう。複式簿記は、心理学的に言えば「自己視点」と「他者視点」を切り替えることが求められる感じがします。</p>
 </li>
 <li>
 <p>さて給料が出たので居酒屋でビールを飲みました。支払いはVisaCard：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/26  居酒屋
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/26  居酒屋
     Expenses:交際費:Beer                        <span style="color:#ae81ff">1900</span>  JPY
     Liabilities:VisaCard
 </code></pre></div><p>VISAを使って、交際費としてビールを飲みました。VISAのアカウントには負債（Liabilites）として記録されて行きます。</p>
 </li>
 <li>
 <p>三井住友からゆうちょへ資金移動：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/26   三井住友からゆうちょへ資金移動
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/26   三井住友からゆうちょへ資金移動
     Assets:ゆうちょ銀行
     Assets:三井住友銀行                      -150000 JPY
 </code></pre></div></li>
 <li>
 <p>以上をまとめると次のような内容です：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">;
 ;    サンプルledger journalファイル <span style="color:#f92672">(=</span>sample.ledger<span style="color:#f92672">)</span>
 ;
 2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
@@ -270,7 +268,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </ul>
 <p>次のようにします：</p>
 <p><a id="code-snippet--list:1"></a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger -f sample.ledger bal
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger -f sample.ledger bal
 
 	 999,220 JPY  Assets
 	  29,220 JPY    Cash
@@ -294,7 +292,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <ul>
 <li>
 <p>資産（Assets）と負債（Liabilites）だけのバランスをチェックしたい時：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal Assets Liabilites
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger bal Assets Liabilites
 
      999,220 JPY  Assets
       29,220 JPY    Cash
@@ -309,11 +307,11 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <li>~/.legerrcファイルを作成し、その中に次の例のような行を書いておく：</li>
 </ol>
 <!--listend-->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">--file ~/Dropbox/sample.Ledger
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">--file ~/Dropbox/sample.Ledger
 </code></pre></div></li>
 <li>
 <p>特定のアカウントのバランスをチェックしたい場合、たとえば「交際費」のバランスを見たい時には次のようにします：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger reg 交際費
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -f sample.ledger reg 交際費
 
 19-Apr-10 スタバ                Expenses:交際費:Coffee      <span style="color:#ae81ff">780</span> JPY      <span style="color:#ae81ff">780</span> JPY
 19-Apr-26 居酒屋                Expenses:交際費:Beer      1,900 JPY    2,680 JPY
@@ -321,14 +319,14 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </li>
 <li>
 <p>VISAの請求額を決済銀行（ゆうちょ銀行）から引き落とすトランザクションの書き方は次のとおりです：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/15<span style="color:#f92672">=</span>05/10   請求書への支払い<span style="color:#f92672">(</span>VISA<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/15<span style="color:#f92672">=</span>05/10   請求書への支払い<span style="color:#f92672">(</span>VISA<span style="color:#f92672">)</span>
     Liabilities:VisaCard               <span style="color:#ae81ff">4680</span>  JPY
     Assets:ゆうちょ銀行
 </code></pre></div><p>VISAが、毎月15日締めで翌月10日引き落としだとすれば、こんな感じです。日程に <code>05/10</code> と書いてあるのは、それが「発効日」であることを示します。</p>
 </li>
 <li>
 <p>VISAからの請求書に対して、自分の資産（ゆうちょ銀行）から資金が移動すると、その結果として、つぎのようなバランスになります：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger -f sample.ledger bal
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger -f sample.ledger bal
 
      994,540 JPY  Assets
       29,220 JPY    Cash
@@ -389,7 +387,7 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </li>
 </ul>
 <!--listend-->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/04/01  Opening Balance    ;コメント文はセミコロンの後に
     Assets:三井住友銀行                      700,000 JPY
     Assets:ゆうちょ銀行                        <span style="color:#ae81ff">50000</span> JPY
     Liabilities:VisaCard                           <span style="color:#ae81ff">0</span> JPY
@@ -421,19 +419,19 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>Ledgerという英語は一般名詞では「元帳」と訳されますが、ソフトウエアとしてのLedgerを指すときには英語つづりのまま使います。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Ledgerという英語は一般名詞では「元帳」と訳されますが、ソフトウエアとしてのLedgerを指すときには英語つづりのまま使います。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>journalは「仕訳帳」と訳されますが、ここでは家計簿を想定しているので、ちょっと大げさ。けれども他に適切な言い回しを思いつかないので、暫定的に「仕訳帳」を使います。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>journalは「仕訳帳」と訳されますが、ここでは家計簿を想定しているので、ちょっと大げさ。けれども他に適切な言い回しを思いつかないので、暫定的に「仕訳帳」を使います。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>Transactionは「取引」の訳語が一般的でしょうが、家計簿ですので「取引」は大げさ？ということでカタカナ表記にしました。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Transactionは「取引」の訳語が一般的でしょうが、家計簿ですので「取引」は大げさ？ということでカタカナ表記にしました。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
-<p>accountは「勘定」と訳すべきでしょうが、家庭内で一般市民が使う日本語では「どんぶり勘定」とか、「損得勘定」とか、物の数を数えるとかがメインの意味です。専門家の定義内容とはかけ離れているかも知れません。なので、「勘定」と言ったり、アカウントと言ったりしていて、支離滅裂です。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>accountは「勘定」と訳すべきでしょうが、家庭内で一般市民が使う日本語では「どんぶり勘定」とか、「損得勘定」とか、物の数を数えるとかがメインの意味です。専門家の定義内容とはかけ離れているかも知れません。なので、「勘定」と言ったり、アカウントと言ったりしていて、支離滅裂です。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:5" role="doc-endnote">
-<p>Balanceは「残高」と訳されることが多いそうです。これも、専門家だと「残高」という日本語を聞いて、その会計学的意味をちゃんと理解できますが、家計簿の世界では、残高はとても狭い意味（＝銀行口座の残高）しかありません。ということで、このドキュメントではあえてカタカナのまま「バランス」としています。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Balanceは「残高」と訳されることが多いそうです。これも、専門家だと「残高」という日本語を聞いて、その会計学的意味をちゃんと理解できますが、家計簿の世界では、残高はとても狭い意味（＝銀行口座の残高）しかありません。ということで、このドキュメントではあえてカタカナのまま「バランス」としています。&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -486,13 +484,23 @@ Ledgerでは、通貨を指定しないとUSD’＄’と認識しますので�
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>

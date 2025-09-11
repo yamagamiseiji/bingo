@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -125,7 +123,7 @@ if (!doNotTrack) {
 <h3 id="日付けの手抜き入力">日付けの手抜き入力</h3>
 <h4 id="毎回-2019-と西暦まで入力するのがうざい">毎回、2019/と西暦まで入力するのがうざい</h4>
 <p>次のように、第1行目に <strong><code>Y 2019</code></strong> とか書くと、西暦年の入力は不要になります：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Y <span style="color:#ae81ff">2019</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Y <span style="color:#ae81ff">2019</span>
 05/01  * Petty Cash
 	Expenses:Cash
 	Assets:BKみずほ
@@ -135,11 +133,11 @@ if (!doNotTrack) {
 <strong><code>RET</code></strong> すると、今日の日付けが自動的にjournalに書き込まれます。記帳したいトランザクションの日付けが今日でなければ、その日付けを手入力します。いずれの場合にも、日付け順にみてしかるべき場所に、新規トランザクションの種（日付けのみ）が記入されます。</p>
 <h3 id="トランザクション名-アカウント名などの手抜き記帳">トランザクション名、アカウント名などの手抜き記帳</h3>
 <p><strong><code>TAB</code></strong> などによる補完や入力修正機能を使うと、キーを叩く回数を節約できます。たとえば次のようなトランザクションを記帳したいとしましょう：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/05/16 Amazon
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2019/05/16 Amazon
     Expenses:Grocery:Food
     Liabilities:VisaCard
 </code></pre></div><p>必要なキー入力は：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">C-c C-a RET am RET
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">C-c C-a RET am RET
 TAB e TAB g TAB ESC RET
 l TAB v TAB
 </code></pre></div><p><strong><code>RET,TAB,ESC</code></strong> 以外の一般文字キーで、入力したのは
@@ -150,9 +148,8 @@ l TAB v TAB
 <p>Journalには同じお店や支払先などからのトランザクションが繰り返しでてきます。その時には、コピー元となるトランザクションの上にカーソルを置いて、
 <strong><code>C-c C-k</code></strong> するとEmacsの下半分に次のようなカレンダーが表示されます。</p>
 <p><a id="org1888619"></a></p>
-<figure>
-    <img src="/emacs_calendar.png"
-         alt="図1:  Emacs内に表示されるカレンダー" width="95%"/> <figcaption>
+<figure><img src="/emacs_calendar.png"
+         alt="図1:  Emacs内に表示されるカレンダー" width="95%"/><figcaption>
             <p>図1:  Emacs内に表示されるカレンダー</p>
         </figcaption>
 </figure>
@@ -163,22 +160,22 @@ journal中の正しい日付け位置に複写されたトランザクション�
 <h3 id="よく使う絞り込み">よく使う絞り込み</h3>
 <p>簡単に絞り込みreportを表示する方法をメモしておきます。元帳ledgerファイルのデフォルト指定は終わっているという前提です。指定が終わっていない場合には、ledgerコマンドの後ろに「-f hogehoge.ledger」を追加してください。</p>
 <h4 id="クルマ関係経費だけ表示">クルマ関係経費だけ表示</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars
 </code></pre></div><p><strong><code>b</code></strong> は <strong><code>balance</code></strong> の略です。上のように、carsと小文字にしても、大文字になっているCarsも拾ってくれます。</p>
 <h4 id="クルマ-食費-教養娯楽の経費の表示">クルマ、食費、教養娯楽の経費の表示</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars food 娯楽
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars food 娯楽
 </code></pre></div><p>並べて書いた経費カテゴリの「すべて」についてのバランスが表示されます。</p>
 <h4 id="上の経費からケーブルtv-など-を除外した表示">上の経費からケーブルTV（など）を除外した表示</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars food 娯楽 and not TV
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars food 娯楽 and not TV
 </code></pre></div><p>カテゴリ名にTVを含む経費は除外して表示します。</p>
 <h4 id="昨日の食費の表示">昨日の食費の表示</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b -p yesterday
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b -p yesterday
 </code></pre></div><p><strong><code>-p</code></strong> は <strong><code>--period</code></strong> の略です。「yesterday」と指定しただけでOKなのがクールですｗ</p>
 <h4 id="この１か月のクルマ関係経費の表示">この１か月のクルマ関係経費の表示</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars -p this momth
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars -p this momth
 </code></pre></div><p>これで、この1ヶ月間のクルマ関係経費になります。
 yesterday, this monthの他、次のような期間指定が可能です（詳しくはマニュアルを参照してください）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">october
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">october
 oct
 this week<span style="color:#f92672">(</span>day, month, quarter, year<span style="color:#f92672">)</span>
 next week
@@ -196,12 +193,12 @@ from apr
 last oct
 weekly last august
 </code></pre></div><h4 id="もっとこまかく期間を限定して経費を表示">もっとこまかく期間を限定して経費を表示</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars -b 04/01 -e 04/20
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b cars -b 04/01 -e 04/20
 </code></pre></div><p>この例では、04/01から06/30までの期間におけるクルマ関係経費を表示します。
 <strong><code>-b</code></strong> は <strong><code>-begin=*、 *</code>-e=</strong> は <strong><code>-end</code></strong> の略です。</p>
 <h3 id="register-report">Register report</h3>
 <p>ここまでのreportではすべて、バランス（残高）の金額だけが表示されます。例えば、上の最後の例（＝期間限定のクルマ関係経費バランス）では次のような結果になります：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger b cars -b 04/01 -e 04/20
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ledger b cars -b 04/01 -e 04/20
 	  30,890 JPY  Expenses:Cars
 	  15,530 JPY    ガソリン
 	   2,700 JPY    整備
@@ -209,7 +206,7 @@ weekly last august
 --------------------
 	  30,890 JPY
 </code></pre></div><p>この「b」を「r」にするだけで、バランス金額だけでなく、各トランザクションの日付や支出先などの詳細レポートが表示されます：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led r cars -b 04/01 -e 04/20
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led r cars -b 04/01 -e 04/20
 
 19-Apr-04 ENEOS SS       Expenses:Cars:ガソリン    7,374 JPY   7,374 JPY
 19-Apr-11 沼田往復        Expenses:Cars:通行料金   10,640 JP   18,014 JPY
@@ -218,16 +215,16 @@ weekly last august
 19-Apr-18 ENEOS SS       Expense:Cars:整備         2,700 JPY  30,890 JPY
 </code></pre></div><h3 id="その他いろいろ">その他いろいろ</h3>
 <h4 id="トランザクション名での絞り込み">トランザクション名での絞り込み</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -r @starbacks
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger -r @starbacks
 </code></pre></div><p>アカウント名ではなくて、特定のトランザクション（取引）先の名前で整理したいことがあります。上の例のように <strong><code>@</code></strong> （atのつもりですねｗ）をつけるとスタバでの支出のレポートを得ることができます。</p>
 <h4 id="クレカ名での絞り込み">クレカ名での絞り込み</h4>
 <p>あるクレジットカードでどれ位の支出をしたか、これは頻繁にチェックしますね。たとえばVisaCardでの支出をみたければ：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger r visa
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger r visa
 </code></pre></div><p>期間指定をしなければ、びっくりするほどの行数（と金額）が表示されます。それだけ支出したってことですので、反省材料になります。もちろん、合計金額だけでよければ：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b visa
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b visa
 </code></pre></div><p>これでVisaCardについての「Liabilities」（負債）の金額が表示されます。</p>
 <h4 id="手元にいくら残っているかしら">手元にいくら残っているかしら？</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b -e 05/20 ^Assets ^Liabilities --invert
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ledger b -e 05/20 ^Assets ^Liabilities --invert
 </code></pre></div><p>過去のある年月日における純資産（的な）ものをチェックできます。はたして家計簿で何の意味があるかよく分かりませんがｗ</p>
 <h2 id="使い勝手について">使い勝手について</h2>
 <h3 id="セキュリティとの関連で">セキュリティとの関連で</h3>
@@ -290,13 +287,23 @@ CSVを経由して他の会計ソフトや描画機能と連携することで�
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>

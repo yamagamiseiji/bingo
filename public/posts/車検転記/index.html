@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -110,8 +108,7 @@ if (!doNotTrack) {
 <!--endtoc-->
 <h2 id="車検哀歌">車検哀歌</h2>
 <p>12月2日（月）、車検が終わりました。毎度のことながら車検は金がかかりますね（涙）。</p>
-<figure>
-    <img src="/tiny-tenta.jpg"/> 
+<figure><img src="/tiny-tenta.jpg"/>
 </figure>
 
 <p>まずは２年分の税金（ <strong>重量税</strong> ）と <strong>自賠責保険料</strong> そして <strong>手数料</strong> （印紙代）、これはキャッシュでディーラに預けます。その他にクルマの状況によっては <strong>点検整備費</strong> がどっさり請求されます。よく見るとワイパー交換とか、わざわざディラー様でやらなくても通販などで安く買え、交換も簡単というものまで入ってきますよね（笑）。車種によりますが、わが愛車フォレスターではトータルでざくっと15万円前後というイメージです。</p>
@@ -134,7 +131,7 @@ if (!doNotTrack) {
 </ul>
 <p>割りきって、これらをすべて「車両費」にする手もあるでしょうし、「特別費」にまとめる手もあり得ると思います。</p>
 <p>けれども自分としては、各支出のもつ多重な側面をできるだけ漏らさずすくい上げる形でトラッキングしたいと思い、 <strong>タグ</strong> を使って（<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>）つぎのようにしました：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apply tag 車検
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apply tag 車検
 apply tag NRE
 
 2019/12/02 * ディーラー
@@ -165,7 +162,7 @@ end apply
 </code></pre></div><p>Ledger-cli使用の日常場面では、「車両費」で検索する頻度が高いので、基本的には車検費用は「車両費」アカウントに収納しました。ただ、それだけでは「税金」という側面がみえにくいし、また「車検」というカテゴリでの抽出もできません。そこで車検関係トランザクションに「車検( <code>車検</code> )」と「税金( <code>tax</code> )」という <strong>タグ</strong> をつけました。</p>
 <h3 id="使い勝手">使い勝手</h3>
 <p>たとえば単純に12月分の「車両費」を抽出したい時には <code>$ led b cars -p dec</code> と入力します：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	 101,159 JPY  Expenses:車両費
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	 101,159 JPY  Expenses:車両費
 	     <span style="color:#ae81ff">717</span> JPY    Gasoline
 	  25,830 JPY    保険:自賠責
 	   1,000 JPY    手数料
@@ -175,7 +172,7 @@ end apply
 --------------------
 	 101,159 JPY
 </code></pre></div><p>これだと車検とは関係ない「ガソリン代」や「駐車場賃料」も入ってきます。純粋に車検費用だけを抽出したいときには車検タグを使います（ <code>$ led bal expense and %車検</code> ）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	  90,342 JPY  Expenses:車両費
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	  90,342 JPY  Expenses:車両費
 	  25,830 JPY    保険:自賠責
 	   1,000 JPY    手数料
 	  30,712 JPY    整備修繕
@@ -196,7 +193,7 @@ end apply
 </li>
 </ul>
 <!--listend-->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ led bal %車検<span style="color:#f92672">=</span><span style="color:#ae81ff">2019</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ led bal %車検<span style="color:#f92672">=</span><span style="color:#ae81ff">2019</span>
 </code></pre></div><p>検索語には正規表現が使えるので、 <code>%車検=19</code> でも、 <code>%車検=9</code> でも、 <code>%車=9</code> でもOKです。</p>
 <p>ではでは、ハッピーPTA<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>！</p>
 <h2 id="footnote">Footnote</h2>
@@ -204,10 +201,10 @@ end apply
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>タグの使い方はこのシリーズ<a href="http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/">(４)</a>と<a href="http://org2-wp.kgt-yamy.tk/2019/07/21/post-750/">(５)</a>で導入的な紹介をしています。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>タグの使い方はこのシリーズ<a href="http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/">(４)</a>と<a href="http://org2-wp.kgt-yamy.tk/2019/07/21/post-750/">(５)</a>で導入的な紹介をしています。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>PTAは Plain Text Accountingの略です。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>PTAは Plain Text Accountingの略です。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -260,13 +257,23 @@ end apply
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>

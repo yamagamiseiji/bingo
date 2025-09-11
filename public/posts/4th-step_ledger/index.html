@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -113,7 +111,7 @@ if (!doNotTrack) {
 <h2 id="トランザクションのスケジューリング">トランザクションのスケジューリング</h2>
 <p>繰り返し発生するトランザクションをその都度、手入力するのはとても非合理的です。たしかにLedger-ver3のマニュアルには、Ledgerはそれを回避する機能をもっているとの記述はありますが、実際にどうやるのか具体的な説明は書かれていません。</p>
 <p>そのため結構四苦八苦しましたが、<a href="https://groups.google.com/forum/m/#!topic/ledger-cli/MZwjYEp2rjU">ここ</a>の記事を見て「目からウロコ！」。やり方は簡単で、まずホームディレクトリに <strong>ledger-schedule.ledger</strong> という名前（ディフォールトです）で、次のようなコンテンツのファイルを作ります：</p>
-<pre><code class="language-nil" data-lang="nil">;;; 毎月
+<pre tabindex="0"><code class="language-nil" data-lang="nil">;;; 毎月
 [*/*/01]   NTTコミュニケーション
     Expenses:通信費   　    4590 JPY
     Assets:三菱UFJ
@@ -140,12 +138,12 @@ if (!doNotTrack) {
 <h2 id="トランザクション中のアカウントで計算式を使う">トランザクション中のアカウントで計算式を使う</h2>
 <p>次の例は、セブンイイレブンで買い物をしましたが、買ったものは当日のランチの他、夕食や朝食などの一般食品も含まれていて、総額=1,194円。それをナナコカードで支払ったという例です。</p>
 <p>レシートには品名が書いてあるので、ランチ用品がどれで一般食品がどれかはわかります。それを見ながら電卓を叩けば、ランチの合計、一般食品の合計は計算できますが、面倒です。そこでランチの2品だけの価格を足し算の「式」でアカウントに転記し、あとはレシートの合計欄の金額を転記すれば、一般食品の金額はLedgerが計算して補完してくれます：</p>
-<pre><code class="language-nil" data-lang="nil">2019/06/20 * セブンイレブン
+<pre tabindex="0"><code class="language-nil" data-lang="nil">2019/06/20 * セブンイレブン
     Expenses:Lunch                                (289 JPY + 138 JPY)
     Expenses:Grocery:Food
     Assets:nanaco                                 - 1194 JPY
 </code></pre><p>これは、日々の生活でとても便利です。なお、許容される式の書き方の感じは以下のとおりです：</p>
-<pre><code class="language-nil" data-lang="nil">(289 JPY + 138 JPY)   ---&gt; ok
+<pre tabindex="0"><code class="language-nil" data-lang="nil">(289 JPY + 138 JPY)   ---&gt; ok
 (JPY 289 + JPY 138)   ---&gt; ok
 (289 JPY + JPY 138)   ---&gt; ok
 (289 + 138 ) JPY      ---&gt; no!
@@ -153,10 +151,10 @@ if (!doNotTrack) {
 </code></pre><p>式の書き方の詳細はマニュアルを参照して下さい。</p>
 <h2 id="月別の支出をざくっと知りたい">月別の支出をざくっと知りたい</h2>
 <p><code>reg</code> では、</p>
-<pre><code class="language-nil" data-lang="nil">ledger reg cars -M
+<pre tabindex="0"><code class="language-nil" data-lang="nil">ledger reg cars -M
 </code></pre><p>なとどすれば、簡単にクルマCars関係の月ごとのレポートが表示されます。 <code>reg report</code> ほど細かくなくても良いので、 <code>bal -M</code> で月ごとのサマリが表示できると便利なのですができません。これに関してはマニュアルにも記述がありませんでした。</p>
 <p>しばらく不便をかこっていたら、Wiegleyさんがフォーラムに次のような記事を書いているのを見つけました(　<a href="https://www.mail-archive.com/ledger-cli@googlegroups.com/msg09020.html">https://www.mail-archive.com/ledger-cli@googlegroups.com/msg09020.html</a> )：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RE:Monthly balance position
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RE:Monthly balance position
 
 John Wiegley |  Thu, 12 Apr 2018 12:08:20 -0700
 
@@ -171,10 +169,10 @@ You can use:
 
 John
 </code></pre></div><p>なるほど！これは素晴らしい！ということで、もう少し具体的な例にして紹介しておきます：</p>
-<pre><code class="language-nil" data-lang="nil">$ ledger bal --group-by 'format_date(date, &quot;%Y-%m&quot;)' --depth 2 expenses and not 租税公課
+<pre tabindex="0"><code class="language-nil" data-lang="nil">$ ledger bal --group-by 'format_date(date, &quot;%Y-%m&quot;)' --depth 2 expenses and not 租税公課
 </code></pre><p>この例だと、支出Expensesから「租税公課」を除いて、支出の第２階層のカテゴリまでのアカウントの金額が、月ごとにbalレポート表示されます。もちろん、期間を限定したければ、このコマンドの後ろに、 <code>--period</code> 指定します。</p>
 <p>これはとても便利で頻繁に使えます。しかし、あまりにコマンドの文字列が長くなるので、簡単な <strong>シェルスクリプト</strong> にしておくとよいでしょう。その際、次のように&quot;expenses and not 租税公課&quot;のところだけを標準入力から受け入れるようにしておけば、汎用性が少し高まります（スクリプト名＝ <strong>mbal.sh</strong> ）：</p>
-<pre><code class="language-shell-script" data-lang="shell-script">#!/bin/bash
+<pre tabindex="0"><code class="language-shell-script" data-lang="shell-script">#!/bin/bash
 #
 #  引数入力されたアカウント等（Payee,Tagなどを含む）を
 #  月ごとにbal reportするスクリプト
@@ -199,8 +197,7 @@ options=$1
       $options
 </code></pre><p>これだけです。 <strong>mbal</strong> はmonthly balanceのつもりですw</p>
 <h2 id="帳簿の世界史-文春文庫">「帳簿の世界史（文春文庫）」</h2>
-<figure>
-    <img src="/s-reckoning.jpg" width="70%"/> 
+<figure><img src="/s-reckoning.jpg" width="70%"/>
 </figure>
 
 <p>この本は <strong>複式簿記</strong> の歴史、というよりも歴史上のいくつかの王国や政府などが滅亡したのは、会計帳簿をきちんとつけなかったために財政破綻したからだ、というストーリになっています。この主張が歴史科学的にどれほど妥当なのかは門外漢のボクには評価できませんが、とても強い印象を受けました。</p>
@@ -261,13 +258,23 @@ options=$1
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>

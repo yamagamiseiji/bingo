@@ -27,21 +27,19 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.3d5a68f36a35a6222bc2e1fcea7b57c01e44e85b3d979d2129b6180a821d6e79.css" integrity="sha256-PVpo82o1piIrwuH86ntXwB5E6Fs9l50hKbYYCoIdbnk=" />
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-  
+   
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-194281784-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
 }
 </script>
 
@@ -118,18 +116,16 @@ if (!doNotTrack) {
 <p>多くの複式簿記入門書に図として紹介されていますし、ネット上にも掲載されています（たとえば <a href="https://boki.popnavi.net/005/post%5F8.html">複式簿記入門講座</a> など）。要するに「借方」の「 <strong>り</strong> 」が「 <strong>左はね</strong> 」になるから「左に書く」、「貸方」の「 <strong>し</strong> 」が「 <strong>右はね</strong> 」になるから「右に書く」というおぼえ方（笑）。このそもそもの発案者が誰でどの本に書かれたものか、ちょっと興味がありますが、ま、それはそれとして、これで誰でも仕訳帳の左右どちらに書くかは、しっかりと記憶できます。</p>
 <p>ところで、この「借方」「貸方」という日本語の生い立ちはなかなか由緒正しいもののようです。福澤諭吉が「 <strong>帳合之法</strong> 」（1873）で使い始めたのが最初とのこと。</p>
 <p><a id="orgb74ddfc"></a></p>
-<figure>
-    <img src="/s-choainoho-hyoshi.jpg"
-         alt="図1:  「帳合之法」福澤諭吉（1873）表紙" width="90%"/> <figcaption>
+<figure><img src="/s-choainoho-hyoshi.jpg"
+         alt="図1:  「帳合之法」福澤諭吉（1873）表紙" width="90%"/><figcaption>
             <p>図1:  「帳合之法」福澤諭吉（1873）表紙</p>
         </figcaption>
 </figure>
 
 <p>「帳合之法」は国会図書館でデジタル化した原本をキンドルストアで購入できました！良い時代になったもんです。話は逸れますが、有名な（？）「古来から日本においては、学者は必ず貧乏である。金持ちは必ず無学である。」の文言がこの本の冒頭にあったんですね。</p>
 <p><a id="org246a830"></a></p>
-<figure>
-    <img src="/s-choainoho-page02.jpg"
-         alt="図2:  「帳合之法」2ページ" width="90%"/> <figcaption>
+<figure><img src="/s-choainoho-page02.jpg"
+         alt="図2:  「帳合之法」2ページ" width="90%"/><figcaption>
             <p>図2:  「帳合之法」2ページ</p>
         </figcaption>
 </figure>
@@ -154,11 +150,11 @@ if (!doNotTrack) {
 <p>しかし、それでも次から次へと構造を変えるのはできれば避けるほうが望ましいでしょう。</p>
 <p>たとえばある支出アカウントが新規に発生したとしましょう。もし今後とも、そのアカウントを含むトランザクションが高頻度で発生するならば、新規カテゴリを作成すれば良いでしょう。たまにしか発生しない場合には、その支出に新しい科目カテゴリを割り当てるのは転記の際に混乱をもたらす原因になりますし、元帳がゴチャゴチャう小るさいものになってしまいます。（次のシリーズで紹介しますが、アカウントの整理には <code>accounts</code> コマンドが有効です）</p>
 <p>そんな場合に便利なのが <strong>tag</strong> です。使いかたは簡単です。トランザクションまたはそれの構成要素であるアカウントに適宜タグをつければよいだけ。それで、 <code>bal/reg</code> でレポートを作成する際に、そのタグを使って計算することができます。いま次のようなトランザクションがあるとします：</p>
-<pre><code class="language-nil" data-lang="nil">05/15   Book 1st.
+<pre tabindex="0"><code class="language-nil" data-lang="nil">05/15   Book 1st.
     Expenses:教養娯楽:Books     1950 JPY
     Liabilities:Visa
 </code></pre><p>このトランザクションで購入した本は、実際には <strong>教養娯楽</strong> 目的ではなくて、知人への <strong>プレゼント</strong> 用だったとします。しかも数年に1回程度しか、そうしたことが発生しないとすれば、次のように、この支出に <strong>presents</strong> というタグをつけます：</p>
-<pre><code class="language-nil" data-lang="nil">05/15   Book 1st.
+<pre tabindex="0"><code class="language-nil" data-lang="nil">05/15   Book 1st.
     Expenses:教養娯楽:Books     1950 JPY
     ; :presents:
     Liabilities:Visa
@@ -169,7 +165,7 @@ if (!doNotTrack) {
 <li>アカウントへのタグ付けは、（上の例のように）当該アカウントの次の行にタグコードを書く</li>
 </ul>
 <p>これだけです。階層的で多層構造のタグも使えますが、とりあえずは単層の例を示しました。 <strong>tag</strong> を参照してレポートするには、次のように <code>%</code> の後ろにタグ語を書きます：</p>
-<pre><code class="language-nil" data-lang="nil">$ led bal %presents
+<pre tabindex="0"><code class="language-nil" data-lang="nil">$ led bal %presents
       1,950 JPY  Expenses:教養娯楽:Books
 
 $ led reg %presents
@@ -184,20 +180,20 @@ $ led reg %presents
 <p>などで、かつ、それらを独立にカテゴリ化して別計算するほどでもないケースなどでしょうか。本格的にビジネスと私生活を分けなければならない場合などには、後述する<a href="#apply_account">apply account</a> を使うことになります。</p>
 <h2 id="外国通貨の扱い">外国通貨の扱い</h2>
 <p>たとえばAmazon USAで洋書を購入すると、代金は米ドル建てで支払うことになります。しかし一般的には、日本円ベースのクレジットカードから支払うケースが多いかと思います。そのような場合の転記の仕方は次の通りです：</p>
-<pre><code class="language-nil" data-lang="nil">2019/07/08   Amazon US
+<pre tabindex="0"><code class="language-nil" data-lang="nil">2019/07/08   Amazon US
     Expenses:Books                  27.97 USD @ 108.04 JPY
     Liabilities:Visa
 </code></pre><p>これで、27.97ドルの洋書を買いました、支払いはVisaです、当日の円ドルレートは180.04円でしたということになります。この書き方がもっとも基本的なやりかたですが、
 <a href="https://www.convalesco.org/articles/2016/11/01/fetching-ledger-exchange-rates.html">https://www.convalesco.org/articles/2016/11/01/fetching-ledger-exchange-rates.html</a>　によい説明があります。それに基づいて、例を上げながら補足的に説明をします。</p>
 <h3 id="まずは上の例のようにアカウントの金額の後ろにレートを書いた場合">まずは上の例のようにアカウントの金額の後ろにレートを書いた場合</h3>
 <p>balレポートさせると次のようになります：</p>
-<pre><code class="language-nil" data-lang="nil">$ led bal
+<pre tabindex="0"><code class="language-nil" data-lang="nil">$ led bal
 	   27.97 USD  Expenses:Books
 	  -27.97 USD  Liabilities:VisaCard
 --------------------
 		   0
 </code></pre><p>ドルベースでのバランスが表示されます。もし、すべてを円換算した結果のレポートを出したい場合には、 <code>-X JPY</code> オプションを追加します：</p>
-<pre><code class="language-nil" data-lang="nil">$ led bal -X JPY
+<pre tabindex="0"><code class="language-nil" data-lang="nil">$ led bal -X JPY
 	   3,013 JPY  Expenses:Books
 	  -3,013 JPY  Liabilities:VisaCard
 --------------------
@@ -212,19 +208,19 @@ $ led reg %presents
 <p>しかし、中にはひんぱんに色々な国の通貨を使って経済生活をしている方もいます。その場合にはこの方法ではなくて、次の方法、つまり日々の為替換算データをデータベースファイルにして、それに基づいて計算するような形でLedgerを使う方が良いと思います。</p>
 <h3 id="dot-prices-dot-db-ファイルを使う">~/.prices.db ファイルを使う</h3>
 <p><code>.prices.db</code> はディフォールトのファイル名ですが、 <code>--price-db</code> オプションでの指定は必須です。次のように <code>~/.ledgerrc</code> ファイルに追記しておきましょう：</p>
-<pre><code class="language-nil" data-lang="nil">　　：
+<pre tabindex="0"><code class="language-nil" data-lang="nil">　　：
 --color
 --date-format %Y/%m/%d
 --price-db ~/.prices.db
 　　：
 </code></pre><p>実際の <code>~/.prices.db</code> ファイルの中身は、円ドルの為替レートに関しては次のような感じになります：</p>
-<pre><code class="language-nil" data-lang="nil">P 2019/07/08 12:25:00 USD JPY 108.04
+<pre tabindex="0"><code class="language-nil" data-lang="nil">P 2019/07/08 12:25:00 USD JPY 108.04
 </code></pre><p>このDBファイルがあれば、ledgerファイル内のアカウントで <code>@108.04 USD</code> を記述する必要はありません。</p>
 <p><code>$ led bal -X JPY</code> に <code>-H</code> オプションをつけると、Ledgerはトランザクションの日の為替レートを <code>.prices.db</code> ファイルから読みだして日本円に変換してくれます。いま仮に、07/20の <code>.prices.db</code> の中身が次のとおりだとします：</p>
-<pre><code class="language-nil" data-lang="nil">P 2019/07/20 10:01:10 USD JPY 108.2695
+<pre tabindex="0"><code class="language-nil" data-lang="nil">P 2019/07/20 10:01:10 USD JPY 108.2695
 P 2019/07/21 15:41:02 USD JPY 107.7151
 </code></pre><p>07/21に、次のように =-H=オプションをつけてbalレポートさせると次のように円の値が変わってきます：</p>
-<pre><code class="language-nil" data-lang="nil">$ led bal -X JPY -H
+<pre tabindex="0"><code class="language-nil" data-lang="nil">$ led bal -X JPY -H
 	   3,022 JPY  Expenses:Books
 	  -3,022 JPY  Liabilities:VisaCard
 --------------------
@@ -234,7 +230,7 @@ P 2019/07/21 15:41:02 USD JPY 107.7151
 <li>
 <p>xurrency.comから自動的に為替データをゲットする方法</p>
 <p><code>.prices.db</code> に毎日その都度、為替レートを手入力で追加するのは非合理的です。いろいろな方法がありますが、たとえば、<a href="http://xurrency.com">http://xurrency.com</a> から円ドルレートを取得して、 <code>.prices.db</code> に追記するスクリプトは次のような感じです。とても原始的ですが、とりあえず動きます（わかりやすくするために余分なコードが入っています）：</p>
-<pre><code class="language-nil" data-lang="nil">#!/bin/bash
+<pre tabindex="0"><code class="language-nil" data-lang="nil">#!/bin/bash
 #  https://xurrency.com/usd/jpy/ から「円ドルレート」のみ入手し
 #  $HOME/.prices.db に追記する
 
@@ -261,21 +257,21 @@ rm ~/tmp/xurrency-page.txt
 rm ~/tmp/one-line.txt
 rm ~/tmp/after-equal.txt
 </code></pre><p>これで <code>~/.prices.db</code> ファイルの末尾に、次のようにスクリプト起動時の円ドルの為替レートが追加されます：</p>
-<pre><code class="language-nil" data-lang="nil">P 2019/07/10 10:47:40 USD JPY 108.6957
+<pre tabindex="0"><code class="language-nil" data-lang="nil">P 2019/07/10 10:47:40 USD JPY 108.6957
 P 2019/07/21 15:41:02 USD JPY 107.7151
 </code></pre><p>このスクリプトを適当なタイミングで1日1回自動起動するようにしておけば、 <code>.prices-db</code> は常に最新のものになります。</p>
 </li>
 </ul>
 <h2 id="apply_account">apply account の使い勝手</h2>
 <p><code>apply account</code> はアカウントの全カテゴリの <strong>ルート</strong> を新たに追加する際に使います。マニュアルによれば、 <code>apply account</code> 記述子に続くアカウントはすべて、指定されたルートの配下になります。Ledgerは階層的なカウントの樹状構造に対応しています。ルートアカウントが2つ（以上）あればとても便利です。そうすれば、たとえば個人的な生活費をPrivateとして、またビジネスに関係する費用をBussinessとして、別々に分けて計上することができます：</p>
-<pre><code class="language-nil" data-lang="nil">apply account Personal
+<pre tabindex="0"><code class="language-nil" data-lang="nil">apply account Personal
 2011/11/15  Supermarket
     Expenses:Groceries      $ 50.00
     Assets:checking
 end apply
 </code></pre><p>上のように <code>apply account</code> を宣言して、終わったら <code>end apply</code> すれば、その間に記帳されたトランザクションは <strong>Personal</strong> というルートの配下になり、 ターゲットアカウントは <strong>Personal:Expenses:Groceries</strong> に、ソースアカウントは <strong>Personal:Assets:checking</strong> になります。</p>
 <p>これに続いて、 <strong>Bussiness</strong> にするとトランザクションはビジネス関連となります：</p>
-<pre><code class="language-nil" data-lang="nil">apply account Bussiness
+<pre tabindex="0"><code class="language-nil" data-lang="nil">apply account Bussiness
 2011/11/20
     Expenses:Travels      $ 500.00
     Assets:checking
@@ -333,13 +329,23 @@ end apply
 </script>
 
 
-    <span>&copy; 2023 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
   <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
 </footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
 
     </body>
 </html>
