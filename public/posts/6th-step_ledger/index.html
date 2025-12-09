@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,22 +27,9 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-   
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
-}
-</script>
-
   
 </head>
 
@@ -50,11 +37,11 @@ if (!doNotTrack) {
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        <li><a href="http://localhost:1313/">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -76,7 +63,6 @@ if (!doNotTrack) {
               <span>Posts</span>
             </a>
           </li>
-
 
 </ul>
 </nav>
@@ -116,24 +102,24 @@ if (!doNotTrack) {
 <li>2005年8月に、1株50ドルで50株全株を売却した</li>
 </ul>
 <p>という場合のトランザクションの書き方を例示しています：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2004/05/01 Stock purchase
-    Assets:Broker                     <span style="color:#ae81ff">50</span> AAPL @ $30.00ファイル
-    Expenses:Broker:Commissions        $19.95
-    Assets:Broker                  $-1,519.95
-
-2005/08/01 Stock sale
-    Assets:Broker                    -50 AAPL <span style="color:#f92672">{</span>$30.00<span style="color:#f92672">}</span> <span style="color:#f92672">[</span>2004/05/01<span style="color:#f92672">]</span> @ $50.00
-    Expenses:Broker:Commissions        $19.95
-    Income:Capital Gains           $-1,000.00
-    Assets:Broker                   $2,480.05
-</code></pre></div><p>こうしておいて、balレポートを見ると次のとおりです：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal
-	     $960.10  Assets:Broker
-	      $39.90  Expenses:Broker:Commissions
-	  $-1,000.00  Income:Capital Gains
---------------------
-		   <span style="color:#ae81ff">0</span>
-</code></pre></div><p>このような全量の一括売買は転記も簡単で、計算結果もほとんど問題はありません。しかし次のような、やや複雑な事例になると結構面倒なことが起こります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2004/05/01 Stock purchase
+</span></span><span style="display:flex;"><span>    Assets:Broker                     <span style="color:#ae81ff">50</span> AAPL @ $30.00ファイル
+</span></span><span style="display:flex;"><span>    Expenses:Broker:Commissions        $19.95
+</span></span><span style="display:flex;"><span>    Assets:Broker                  $-1,519.95
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2005/08/01 Stock sale
+</span></span><span style="display:flex;"><span>    Assets:Broker                    -50 AAPL <span style="color:#f92672">{</span>$30.00<span style="color:#f92672">}</span> <span style="color:#f92672">[</span>2004/05/01<span style="color:#f92672">]</span> @ $50.00
+</span></span><span style="display:flex;"><span>    Expenses:Broker:Commissions        $19.95
+</span></span><span style="display:flex;"><span>    Income:Capital Gains           $-1,000.00
+</span></span><span style="display:flex;"><span>    Assets:Broker                   $2,480.05
+</span></span></code></pre></div><p>こうしておいて、balレポートを見ると次のとおりです：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal
+</span></span><span style="display:flex;"><span>	     $960.10  Assets:Broker
+</span></span><span style="display:flex;"><span>	      $39.90  Expenses:Broker:Commissions
+</span></span><span style="display:flex;"><span>	  $-1,000.00  Income:Capital Gains
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>このような全量の一括売買は転記も簡単で、計算結果もほとんど問題はありません。しかし次のような、やや複雑な事例になると結構面倒なことが起こります。</p>
 <h2 id="同一銘柄株の一部を売買する場合">同一銘柄株の一部を売買する場合</h2>
 <p>Google groupへの<a href="https://groups.google.com/forum/#!msg/ledger-cli/t8spw-5sXt8/OkuufiJ5AQAJ">Pranesh Prakash</a>さんの投稿記事（2019/07/03）の一部を紹介します。次のようなケースを事例としています。</p>
 <ul>
@@ -145,60 +131,60 @@ if (!doNotTrack) {
 <li>03/01に、525ドルに値上がりした</li>
 </ul>
 <p>それぞれのトランザクションの書き方は次のようになります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">2018/12/31 Opening Balances
-    Assets:Stocks                             <span style="color:#ae81ff">2</span> AAPL @ $500.00
-    Equity:Opening Balances
-
-P 2019/02/01 AAPL $540.00
-
-;2019/02/02 Broker
-2019/02/02 Sell share
-    Assets:Stocks                            -1 AAPL @ $500.00
-    Income:Capital Gains                     $-40.00; 540-500
-    Assets:Checking                          $540.00
-
-P 2019/02/10 AAPL $490.00
-
-;2019/02/10 Broker
-2019/02/10 Buy share
-    Assets:Stocks                             <span style="color:#ae81ff">1</span> AAPL @ $490.00
-    Assets:Checking                         $-490.00
-
-P 2019/03/01 AAPL $525.00
-</code></pre></div><p>こうしておいてbalレポートを見ると：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -X <span style="color:#e6db74">&#39;$&#39;</span>
-	    $1100.00  Assets
-	      $50.00    Checking
-	    $1050.00    Stocks
-	   $-1000.00  Equity:Opening Balances
-	     $-40.00  Income:Capital Gains
---------------------
-	      $60.00
-</code></pre></div><p>ちゃんと <strong>含み損益</strong> も正しくレポートされています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2018/12/31 Opening Balances
+</span></span><span style="display:flex;"><span>    Assets:Stocks                             <span style="color:#ae81ff">2</span> AAPL @ $500.00
+</span></span><span style="display:flex;"><span>    Equity:Opening Balances
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>P 2019/02/01 AAPL $540.00
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;2019/02/02 Broker
+</span></span><span style="display:flex;"><span>2019/02/02 Sell share
+</span></span><span style="display:flex;"><span>    Assets:Stocks                            -1 AAPL @ $500.00
+</span></span><span style="display:flex;"><span>    Income:Capital Gains                     $-40.00; 540-500
+</span></span><span style="display:flex;"><span>    Assets:Checking                          $540.00
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>P 2019/02/10 AAPL $490.00
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;2019/02/10 Broker
+</span></span><span style="display:flex;"><span>2019/02/10 Buy share
+</span></span><span style="display:flex;"><span>    Assets:Stocks                             <span style="color:#ae81ff">1</span> AAPL @ $490.00
+</span></span><span style="display:flex;"><span>    Assets:Checking                         $-490.00
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>P 2019/03/01 AAPL $525.00
+</span></span></code></pre></div><p>こうしておいてbalレポートを見ると：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal -X <span style="color:#e6db74">&#39;$&#39;</span>
+</span></span><span style="display:flex;"><span>	    $1100.00  Assets
+</span></span><span style="display:flex;"><span>	      $50.00    Checking
+</span></span><span style="display:flex;"><span>	    $1050.00    Stocks
+</span></span><span style="display:flex;"><span>	   $-1000.00  Equity:Opening Balances
+</span></span><span style="display:flex;"><span>	     $-40.00  Income:Capital Gains
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>	      $60.00
+</span></span></code></pre></div><p>ちゃんと <strong>含み損益</strong> も正しくレポートされています。</p>
 <p>この場合には490ドルで購入した株が03/01には525ドルに値上がりしています。しかし売買は完了していませんので、いわゆる含み損益を抱えている事例となります。
 Ledgerでは、 <code>--unrealized</code> オプションを使えば、 <strong>未実現</strong> の含み益（＝評価益）、含み損（＝評価損）が計算できるということになります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal  -X <span style="color:#e6db74">&#39;$&#39;</span> --unrealized
-	    $1100.00  Assets
-	      $50.00    Checking
-	    $1050.00    Stocks
-	   $-1060.00  Equity
-	   $-1000.00    Opening Balances
-	     $-70.00    Unrealized Gains
-	      $10.00    Unrealized Losses
-	     $-40.00  Income:Capital Gains
---------------------
-		   <span style="color:#ae81ff">0</span>
-</code></pre></div><p>評価益と評価損がbalレポートに表示されています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal  -X <span style="color:#e6db74">&#39;$&#39;</span> --unrealized
+</span></span><span style="display:flex;"><span>	    $1100.00  Assets
+</span></span><span style="display:flex;"><span>	      $50.00    Checking
+</span></span><span style="display:flex;"><span>	    $1050.00    Stocks
+</span></span><span style="display:flex;"><span>	   $-1060.00  Equity
+</span></span><span style="display:flex;"><span>	   $-1000.00    Opening Balances
+</span></span><span style="display:flex;"><span>	     $-70.00    Unrealized Gains
+</span></span><span style="display:flex;"><span>	      $10.00    Unrealized Losses
+</span></span><span style="display:flex;"><span>	     $-40.00  Income:Capital Gains
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>評価益と評価損がbalレポートに表示されています。</p>
 <p>これを公式マニュアルの方式、つまり <code>{},@</code> を使ってでやろうとすると、場合によっては？うまく計算があわなくなることがあるようです。ここで例示されたPrakashさんの方法ならばだいじょうぶのようです。</p>
 <h2 id="株価現在値の取得">株価現在値の取得</h2>
 <h3 id="dot-prices-dot-dbファイル">~/.prices.dbファイル</h3>
 <p><code>~/.prices.db</code> ファイルはシリーズ（5）でも紹介しました。そこでは円ドルなどの為替レートを保存しておくときに使いましたが、株価のデータ保存にも使います。中身はたとえば次のようになります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">　　　：
-P 2019/07/19 09:23:06 USD JPY 107.4005
-P 2019/07/19 14:03:43 JT JPY 2,4510
-P 2019/07/19 14:03:43 キャノン JPY 3,092
-　　　：
-</code></pre></div><p>上の例ではJI（日本たばこ）とキャノンの現在株価がリストされています。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>　　　：
+</span></span><span style="display:flex;"><span>P 2019/07/19 09:23:06 USD JPY 107.4005
+</span></span><span style="display:flex;"><span>P 2019/07/19 14:03:43 JT JPY 2,4510
+</span></span><span style="display:flex;"><span>P 2019/07/19 14:03:43 キャノン JPY 3,092
+</span></span><span style="display:flex;"><span>　　　：
+</span></span></code></pre></div><p>上の例ではJI（日本たばこ）とキャノンの現在株価がリストされています。
 Ledgerに対して、このDBを使って評価益とか評価損を計算するように指示できます。</p>
 <h3 id="株価の取得方法">株価の取得方法</h3>
 <p>日本株に対してLedgerの持つこの機能を使うには、どこからか銘柄の <strong>現在株価</strong> を取得しなければなりません。少数の銘柄ならば、Webページを閲覧して手入力することもできます。しかしそれはいかにも原始的。</p>
@@ -214,40 +200,40 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
 <p>いろいろ調査した結果、自分自身では何とか特定の企業株の現在値を取得することができています。自分で使用する限りにおいては、スクレーピングに関する法律には触れませんが、しかしその方法を不特定多数の方に向けて公開するのは、（たいした技術ではないのですが）いささかリスキーだと思いますので、ここでは公開しません。あしからず・・・　興味のある方はプライベートにコンタクトしてください。</p>
 <h2 id="各種レポート">各種レポート</h2>
 <p>さて <code>~/.prices.db</code> は、株売買でどのように使われるのでしょうか。いま仮に次のようなトランザクションがあったとしましょう：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">05/01  purchase stocks
-    Assets:Brokerage            <span style="color:#ae81ff">100</span> 丸全運 @ 3000.00 JPY
-    Expenses:Brokerage:手数料       <span style="color:#ae81ff">450</span> JPY
-    Assets:Brokerage
-</code></pre></div><p>これに対して、次のようにいろいろなレポート表示を指示することができます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>05/01  purchase stocks
+</span></span><span style="display:flex;"><span>    Assets:Brokerage            <span style="color:#ae81ff">100</span> 丸全運 @ 3000.00 JPY
+</span></span><span style="display:flex;"><span>    Expenses:Brokerage:手数料       <span style="color:#ae81ff">450</span> JPY
+</span></span><span style="display:flex;"><span>    Assets:Brokerage
+</span></span></code></pre></div><p>これに対して、次のようにいろいろなレポート表示を指示することができます。</p>
 <h3 id="コモディティ総額のレポート">コモディティ総額のレポート</h3>
 <p><code>--quantity</code>, <code>-O</code> オプション（ディフォールト）を使うと次のようになります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -O
-	 -300450 JPY
-	  <span style="color:#ae81ff">100</span> 丸全運  Assets:Brokerage
-	     <span style="color:#ae81ff">450</span> JPY  Expenses:Brokerage:手数料
---------------------
-	 -300000 JPY
-	  <span style="color:#ae81ff">100</span> 丸全運
-</code></pre></div><p>つまりコモディティのトータルがバランス表示されます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal -O
+</span></span><span style="display:flex;"><span>	 -300450 JPY
+</span></span><span style="display:flex;"><span>	  <span style="color:#ae81ff">100</span> 丸全運  Assets:Brokerage
+</span></span><span style="display:flex;"><span>	     <span style="color:#ae81ff">450</span> JPY  Expenses:Brokerage:手数料
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>	 -300000 JPY
+</span></span><span style="display:flex;"><span>	  <span style="color:#ae81ff">100</span> 丸全運
+</span></span></code></pre></div><p>つまりコモディティのトータルがバランス表示されます。</p>
 <h3 id="コストのレポート">コストのレポート</h3>
 <p><code>--basis</code>, <code>-B</code> オプションは、全ポスティングのコストcost basisをレポートします：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -B
-	    -450 JPY  Assets:Brokerage
-	     <span style="color:#ae81ff">450</span> JPY  Expenses:Brokerage:手数料
---------------------
-		   <span style="color:#ae81ff">0</span>
-</code></pre></div><h3 id="株価の最新情報-データベース的に-に基づく計算結果をレポートする">株価の最新情報（データベース的に）に基づく計算結果をレポートする</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal -B
+</span></span><span style="display:flex;"><span>	    -450 JPY  Assets:Brokerage
+</span></span><span style="display:flex;"><span>	     <span style="color:#ae81ff">450</span> JPY  Expenses:Brokerage:手数料
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><h3 id="株価の最新情報-データベース的に-に基づく計算結果をレポートする">株価の最新情報（データベース的に）に基づく計算結果をレポートする</h3>
 <p><code>--market</code>, <code>-V</code> オプションで以下の表示になります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -V
-	   <span style="color:#ae81ff">42050</span> JPY  Assets:Brokerage
-	     <span style="color:#ae81ff">450</span> JPY  Expenses:Brokerage:手数料
---------------------
-	   <span style="color:#ae81ff">42500</span> JP
-</code></pre></div><h3 id="キャピタル-ゲインのレポート">キャピタル・ゲインのレポート</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal -V
+</span></span><span style="display:flex;"><span>	   <span style="color:#ae81ff">42050</span> JPY  Assets:Brokerage
+</span></span><span style="display:flex;"><span>	     <span style="color:#ae81ff">450</span> JPY  Expenses:Brokerage:手数料
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>	   <span style="color:#ae81ff">42500</span> JP
+</span></span></code></pre></div><h3 id="キャピタル-ゲインのレポート">キャピタル・ゲインのレポート</h3>
 <p><code>--gain</code> <code>-G</code> オプションを使うと、3,000円で購入した丸全運の100株が、本日の株価でいくとどれほどのゲインになっているか（だけ）をみることができます：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ led bal -G
-	  42,500 JPY  Assets:Brokerage
-</code></pre></div><p><code>-V</code> とちがって手数料などは計算されません。純粋に株によるP&amp;Lのみが表示されることになります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal -G
+</span></span><span style="display:flex;"><span>	  42,500 JPY  Assets:Brokerage
+</span></span></code></pre></div><p><code>-V</code> とちがって手数料などは計算されません。純粋に株によるP&amp;Lのみが表示されることになります。</p>
 <h2 id="acknowledgement">Acknowledgement</h2>
 
     </div>
@@ -256,11 +242,11 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
       
         <ul class="tags">
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">emacs</a> </li>
+          <li> <a href="http://localhost:1313/tags/emacs">emacs</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
         
         </ul>
       
@@ -271,10 +257,10 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
   
     <div class="other_posts">
       
-      <a href="https://bred-in-bingo.netlify.app/posts/5th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（5）</a>
+      <a href="http://localhost:1313/posts/5th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（5）</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/masked-musang/" class="next">ハクビシンめ！</a>
+      <a href="http://localhost:1313/posts/masked-musang/" class="next">ハクビシンめ！</a>
       
     </div>
     <aside id="comments">
@@ -298,12 +284,12 @@ Ledgerに対して、このDBを使って評価益とか評価損を計算する
 </script>
 
 
-    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
 </footer>
 
 	

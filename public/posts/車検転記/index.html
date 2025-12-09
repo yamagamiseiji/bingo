@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,22 +27,9 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-   
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
-}
-</script>
-
   
 </head>
 
@@ -50,11 +37,11 @@ if (!doNotTrack) {
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        <li><a href="http://localhost:1313/">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -76,7 +63,6 @@ if (!doNotTrack) {
               <span>Posts</span>
             </a>
           </li>
-
 
 </ul>
 </nav>
@@ -131,55 +117,55 @@ if (!doNotTrack) {
 </ul>
 <p>割りきって、これらをすべて「車両費」にする手もあるでしょうし、「特別費」にまとめる手もあり得ると思います。</p>
 <p>けれども自分としては、各支出のもつ多重な側面をできるだけ漏らさずすくい上げる形でトラッキングしたいと思い、 <strong>タグ</strong> を使って（<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>）つぎのようにしました：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apply tag 車検
-apply tag NRE
-
-2019/12/02 * ディーラー
-    ; :tax:
-    Expenses:車両費:重量税                     32,800 JPY
-    Assets:Cash
-
-2019/12/02 * ディーラー
-    ; :tax:
-    Expenses:車両費:手数料                      1,000 JPY
-    Assets:Cash
-
-2019/12/02 * ディーラー
-    Expenses:車両費:保険:自賠責                  25,830 JPY
-    Assets:Cash
-
-2019/12/02 * ディーラー
-    Expenses:車両費:整備修繕                    14,212 JPY
-    Liabilities:Visa
-
-2019/12/02 * ディーラー
-    ; 6か月点検x2回、12か月点検x1回分の先払い
-    Expenses:車両費:整備修繕                    16,500 JPY
-    Liabilities:Visa
-
-end apply
-end apply
-</code></pre></div><p>Ledger-cli使用の日常場面では、「車両費」で検索する頻度が高いので、基本的には車検費用は「車両費」アカウントに収納しました。ただ、それだけでは「税金」という側面がみえにくいし、また「車検」というカテゴリでの抽出もできません。そこで車検関係トランザクションに「車検( <code>車検</code> )」と「税金( <code>tax</code> )」という <strong>タグ</strong> をつけました。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>apply tag 車検
+</span></span><span style="display:flex;"><span>apply tag NRE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2019/12/02 * ディーラー
+</span></span><span style="display:flex;"><span>    ; :tax:
+</span></span><span style="display:flex;"><span>    Expenses:車両費:重量税                     32,800 JPY
+</span></span><span style="display:flex;"><span>    Assets:Cash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2019/12/02 * ディーラー
+</span></span><span style="display:flex;"><span>    ; :tax:
+</span></span><span style="display:flex;"><span>    Expenses:車両費:手数料                      1,000 JPY
+</span></span><span style="display:flex;"><span>    Assets:Cash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2019/12/02 * ディーラー
+</span></span><span style="display:flex;"><span>    Expenses:車両費:保険:自賠責                  25,830 JPY
+</span></span><span style="display:flex;"><span>    Assets:Cash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2019/12/02 * ディーラー
+</span></span><span style="display:flex;"><span>    Expenses:車両費:整備修繕                    14,212 JPY
+</span></span><span style="display:flex;"><span>    Liabilities:Visa
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2019/12/02 * ディーラー
+</span></span><span style="display:flex;"><span>    ; 6か月点検x2回、12か月点検x1回分の先払い
+</span></span><span style="display:flex;"><span>    Expenses:車両費:整備修繕                    16,500 JPY
+</span></span><span style="display:flex;"><span>    Liabilities:Visa
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>end apply
+</span></span><span style="display:flex;"><span>end apply
+</span></span></code></pre></div><p>Ledger-cli使用の日常場面では、「車両費」で検索する頻度が高いので、基本的には車検費用は「車両費」アカウントに収納しました。ただ、それだけでは「税金」という側面がみえにくいし、また「車検」というカテゴリでの抽出もできません。そこで車検関係トランザクションに「車検( <code>車検</code> )」と「税金( <code>tax</code> )」という <strong>タグ</strong> をつけました。</p>
 <h3 id="使い勝手">使い勝手</h3>
 <p>たとえば単純に12月分の「車両費」を抽出したい時には <code>$ led b cars -p dec</code> と入力します：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	 101,159 JPY  Expenses:車両費
-	     <span style="color:#ae81ff">717</span> JPY    Gasoline
-	  25,830 JPY    保険:自賠責
-	   1,000 JPY    手数料
-	  30,712 JPY    整備修繕
-	  32,800 JPY    重量税
-	  10,100 JPY    駐車場賃料
---------------------
-	 101,159 JPY
-</code></pre></div><p>これだと車検とは関係ない「ガソリン代」や「駐車場賃料」も入ってきます。純粋に車検費用だけを抽出したいときには車検タグを使います（ <code>$ led bal expense and %車検</code> ）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">	  90,342 JPY  Expenses:車両費
-	  25,830 JPY    保険:自賠責
-	   1,000 JPY    手数料
-	  30,712 JPY    整備修繕
-	  32,800 JPY    重量税
---------------------
-	  90,342 JPY
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>	 101,159 JPY  Expenses:車両費
+</span></span><span style="display:flex;"><span>	     <span style="color:#ae81ff">717</span> JPY    Gasoline
+</span></span><span style="display:flex;"><span>	  25,830 JPY    保険:自賠責
+</span></span><span style="display:flex;"><span>	   1,000 JPY    手数料
+</span></span><span style="display:flex;"><span>	  30,712 JPY    整備修繕
+</span></span><span style="display:flex;"><span>	  32,800 JPY    重量税
+</span></span><span style="display:flex;"><span>	  10,100 JPY    駐車場賃料
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>	 101,159 JPY
+</span></span></code></pre></div><p>これだと車検とは関係ない「ガソリン代」や「駐車場賃料」も入ってきます。純粋に車検費用だけを抽出したいときには車検タグを使います（ <code>$ led bal expense and %車検</code> ）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>	  90,342 JPY  Expenses:車両費
+</span></span><span style="display:flex;"><span>	  25,830 JPY    保険:自賠責
+</span></span><span style="display:flex;"><span>	   1,000 JPY    手数料
+</span></span><span style="display:flex;"><span>	  30,712 JPY    整備修繕
+</span></span><span style="display:flex;"><span>	  32,800 JPY    重量税
+</span></span><span style="display:flex;"><span>--------------------
+</span></span><span style="display:flex;"><span>	  90,342 JPY
+</span></span></code></pre></div><ul>
 <li>
 <p>今回の車検費仕訳では、車検タグの他に <strong>NRE</strong> というタグもつけました。これは「 <strong>特別費</strong> 」または「 <strong>一時的支出</strong> 」（Non Recurring Expenses; <strong>NRE</strong> ）用のタグです。こうすることで月々または年間を通して「経常的な経費」と「特別費」とを別々にトラッキングすることができます。たとえば：</p>
 <ul>
@@ -193,21 +179,21 @@ end apply
 </li>
 </ul>
 <!--listend-->
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ led bal %車検<span style="color:#f92672">=</span><span style="color:#ae81ff">2019</span>
-</code></pre></div><p>検索語には正規表現が使えるので、 <code>%車検=19</code> でも、 <code>%車検=9</code> でも、 <code>%車=9</code> でもOKです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ led bal %車検<span style="color:#f92672">=</span><span style="color:#ae81ff">2019</span>
+</span></span></code></pre></div><p>検索語には正規表現が使えるので、 <code>%車検=19</code> でも、 <code>%車検=9</code> でも、 <code>%車=9</code> でもOKです。</p>
 <p>ではでは、ハッピーPTA<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>！</p>
 <h2 id="footnote">Footnote</h2>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>タグの使い方はこのシリーズ<a href="http://org2-wp.kgt-yamy.tk/2019/07/07/post-741/">(４)</a>と<a href="http://org2-wp.kgt-yamy.tk/2019/07/21/post-750/">(５)</a>で導入的な紹介をしています。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>PTAは Plain Text Accountingの略です。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
     </div>
     <div class="info post_meta">
@@ -215,11 +201,11 @@ end apply
       
         <ul class="tags">
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/cars">cars</a> </li>
+          <li> <a href="http://localhost:1313/tags/cars">cars</a> </li>
         
         </ul>
       
@@ -230,10 +216,10 @@ end apply
   
     <div class="other_posts">
       
-      <a href="https://bred-in-bingo.netlify.app/posts/10th-step/" class="prev">プレーンテキストファイルで「複式」家計簿（10）</a>
+      <a href="http://localhost:1313/posts/10th-step/" class="prev">プレーンテキストファイルで「複式」家計簿（10）</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/" class="next">榎下城と観護寺</a>
+      <a href="http://localhost:1313/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/" class="next">榎下城と観護寺</a>
       
     </div>
     <aside id="comments">
@@ -257,12 +243,12 @@ end apply
 </script>
 
 
-    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
 </footer>
 
 	

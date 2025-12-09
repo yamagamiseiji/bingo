@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,22 +27,9 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-   
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
-}
-</script>
-
   
 </head>
 
@@ -50,11 +37,11 @@ if (!doNotTrack) {
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        <li><a href="http://localhost:1313/">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -76,7 +63,6 @@ if (!doNotTrack) {
               <span>Posts</span>
             </a>
           </li>
-
 
 </ul>
 </nav>
@@ -155,60 +141,60 @@ if (!doNotTrack) {
 <h3 id="ソフトの設定">ソフトの設定</h3>
 <h4 id="fswebcam-を使う">fswebcam を使う</h4>
 <p>もしインストールされていなければインストールします。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt install fswebcam
-</code></pre></div><h4 id="カメラの解像度を調べる">カメラの解像度を調べる</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ sudo apt install fswebcam
+</span></span></code></pre></div><h4 id="カメラの解像度を調べる">カメラの解像度を調べる</h4>
 <ul>
 <li>
 <p>USBデバイスの確認から始めます。たとえば・・・</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lsusb | grep C270
-Bus <span style="color:#ae81ff">003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C270
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ lsusb | grep C270
+</span></span><span style="display:flex;"><span>Bus <span style="color:#ae81ff">003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C270
+</span></span></code></pre></div></li>
 <li>
 <p>ところで機種によっては（たとえばC922では）なぜか、次のようにメーカ名は表示されるのに、デバイス名は表示されませんでした。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Bus <span style="color:#ae81ff">001</span> Device 007: ID 046d:085c Logitech, Inc.
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Bus <span style="color:#ae81ff">001</span> Device 007: ID 046d:085c Logitech, Inc.
+</span></span></code></pre></div></li>
 </ul>
 <p>けど、Bus:Deviceコードは表示されてるし、次の段階で lsusb -v すると解像度は見えるので問題はありませんｗ。</p>
 <ul>
 <li>解像度を調べる</li>
 </ul>
 <p>lsusbを「-v」オプションで起動すると表示されます。同時に「-s」オプションで「Bus:Device」の値を指定します。解像度情報を得るためにこの２つの値が必要です。単純にコマンドを起動すると、表示される情報が多すぎるので、grepを wWidth で絞って実行し、その前後1行だけ表示します。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lsusb -s 003:006 -v | grep -1 wWidth
-</code></pre></div><p>それでもたくさんの組み合わせが表示されます。ちなみに、最後の3行あたりを抜粋すると次のような感じです。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">	  Still image supported
-	wWidth                           <span style="color:#ae81ff">1184</span>
-	wHeight                           <span style="color:#ae81ff">656</span>
---
-	  Still image supported
-	wWidth                           <span style="color:#ae81ff">1280</span>
-	wHeight                           <span style="color:#ae81ff">720</span>
---
-	  Still image supported
-	wWidth                           <span style="color:#ae81ff">1280</span>
-	wHeight                           <span style="color:#ae81ff">960</span>
-</code></pre></div><p>その他、細かい情報は<a href="https://www.sssg.org/blogs/hiro345/archives/18787.html">こちら</a>をどうぞ。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ lsusb -s 003:006 -v | grep -1 wWidth
+</span></span></code></pre></div><p>それでもたくさんの組み合わせが表示されます。ちなみに、最後の3行あたりを抜粋すると次のような感じです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>	  Still image supported
+</span></span><span style="display:flex;"><span>	wWidth                           <span style="color:#ae81ff">1184</span>
+</span></span><span style="display:flex;"><span>	wHeight                           <span style="color:#ae81ff">656</span>
+</span></span><span style="display:flex;"><span>--
+</span></span><span style="display:flex;"><span>	  Still image supported
+</span></span><span style="display:flex;"><span>	wWidth                           <span style="color:#ae81ff">1280</span>
+</span></span><span style="display:flex;"><span>	wHeight                           <span style="color:#ae81ff">720</span>
+</span></span><span style="display:flex;"><span>--
+</span></span><span style="display:flex;"><span>	  Still image supported
+</span></span><span style="display:flex;"><span>	wWidth                           <span style="color:#ae81ff">1280</span>
+</span></span><span style="display:flex;"><span>	wHeight                           <span style="color:#ae81ff">960</span>
+</span></span></code></pre></div><p>その他、細かい情報は<a href="https://www.sssg.org/blogs/hiro345/archives/18787.html">こちら</a>をどうぞ。</p>
 <h2 id="実際に使う">実際に使う</h2>
 <h3 id="カメラから静止画像を得る">カメラから静止画像を得る</h3>
 <p>次のようなスクリプトでカメラで静止画像を撮影し保存します。-r オプションで先ほど得た解像度を指定します。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
-<span style="color:#75715e">#   Get image from c270 (Logicool) cam.</span>
-<span style="color:#75715e">#</span>
-/usr/bin/fswebcam <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> -p YUYV <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> -d /dev/video1<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --font <span style="color:#e6db74">&#39;/usr/share/fonts/alias/TrueType/MaruGo-Medium.ttf:32&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --title <span style="color:#e6db74">&#34;2came@Katashina&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --bottom-banner <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --line-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --banner-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> -D 2<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> -S 5<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> -r 1280x960 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --save ~/webcam/2came_img.jpg <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span> --timestamp <span style="color:#e6db74">&#39;%Y-%m-%d %H:%M (%Z)&#39;</span>
-<span style="color:#75715e">#</span>
-</code></pre></div><h4 id="d-オプションの指定の仕方">-d オプションの指定の仕方</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   Get image from c270 (Logicool) cam.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>/usr/bin/fswebcam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -p YUYV <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -d /dev/video1<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --font <span style="color:#e6db74">&#39;/usr/share/fonts/alias/TrueType/MaruGo-Medium.ttf:32&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --title <span style="color:#e6db74">&#34;2came@Katashina&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --bottom-banner <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --line-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --banner-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -D 2<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -S 5<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -r 1280x960 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --save ~/webcam/2came_img.jpg <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --timestamp <span style="color:#e6db74">&#39;%Y-%m-%d %H:%M (%Z)&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span></code></pre></div><h4 id="d-オプションの指定の仕方">-d オプションの指定の仕方</h4>
 <dl>
 <dt>-d /dev/video0</dt>
 <dd>第1番目に接続したcamera</dd>
@@ -226,18 +212,18 @@ ubuntuでのやり方はたとえば次の例などを参考にしてくださ�
 </ul>
 <h3 id="ローカルに保存された画像をサーバに転送する">ローカルに保存された画像をサーバに転送する</h3>
 <p>レンタルサーバ（ここでは plala）にftpで画像を転送します。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#</span>
-<span style="color:#75715e"># ftp_img_to_plala  server</span>
-<span style="color:#75715e">#</span>
-/usr/bin/ftp -n www999.plala.or.jp <span style="color:#e6db74">&lt;&lt;EOF
-</span><span style="color:#e6db74">user user_name password
-</span><span style="color:#e6db74">bin
-</span><span style="color:#e6db74">cd jpgs
-</span><span style="color:#e6db74">lcd /home/yamagami/webcam_katashina
-</span><span style="color:#e6db74">put 2came_katashina.jpg
-</span><span style="color:#e6db74">bye
-</span><span style="color:#e6db74">EOF</span>
-</code></pre></div><h3 id="cronの設定">Cronの設定</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ftp_img_to_plala  server</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>/usr/bin/ftp -n www999.plala.or.jp <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">user user_name password
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">bin
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cd jpgs
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">lcd /home/yamagami/webcam_katashina
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">put 2came_katashina.jpg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">bye
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><h3 id="cronの設定">Cronの設定</h3>
 <p>あとやることは、cronの設定のみ。これについてはほとんど問題ないので、省略。</p>
 <h2 id="検討課題と今後の展開">検討課題と今後の展開</h2>
 <ul>
@@ -252,11 +238,11 @@ ubuntuでのやり方はたとえば次の例などを参考にしてくださ�
       
         <ul class="tags">
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/diy">DIY</a> </li>
+          <li> <a href="http://localhost:1313/tags/diy">DIY</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/ubuntu">ubuntu</a> </li>
+          <li> <a href="http://localhost:1313/tags/ubuntu">ubuntu</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/farming">farming</a> </li>
+          <li> <a href="http://localhost:1313/tags/farming">farming</a> </li>
         
         </ul>
       
@@ -267,10 +253,10 @@ ubuntuでのやり方はたとえば次の例などを参考にしてくださ�
   
     <div class="other_posts">
       
-      <a href="https://bred-in-bingo.netlify.app/posts/2k19happynewyear/" class="prev">新年のご挨拶</a>
+      <a href="http://localhost:1313/posts/2k19happynewyear/" class="prev">新年のご挨拶</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/" class="next">名刺を自作しました</a>
+      <a href="http://localhost:1313/posts/makingmy%E5%90%8D%E5%88%BA/" class="next">名刺を自作しました</a>
       
     </div>
     <aside id="comments">
@@ -294,12 +280,12 @@ ubuntuでのやり方はたとえば次の例などを参考にしてくださ�
 </script>
 
 
-    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
 </footer>
 
 	

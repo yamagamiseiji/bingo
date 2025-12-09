@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,22 +27,9 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-   
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
-}
-</script>
-
   
 </head>
 
@@ -50,11 +37,11 @@ if (!doNotTrack) {
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        <li><a href="http://localhost:1313/">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -76,7 +63,6 @@ if (!doNotTrack) {
               <span>Posts</span>
             </a>
           </li>
-
 
 </ul>
 </nav>
@@ -162,92 +148,92 @@ if (!doNotTrack) {
 <p>気温データはアメダスの現在気温のデータを使わせてもらいました。 <strong>横浜</strong> は<a href="https://tenki.jp/amedas/3/17/46106.html">こちら</a>のデータを使えますが、 <strong>片品村</strong> にはアメダスの測定ポイント（気温）が存在しないので、もっとも近隣にある<a href="https://tenki.jp/amedas/3/13/42046.html">「みなかみ藤原」</a>のデータを使いました（注 <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>）。</p>
 <p>畑の場所と「みなかみ藤原」には標高差が250m以上ありますので、平均温度は畑の方が1.5℃程度低いと思いますが、今回はその辺は目をつむっています。</p>
 <p>なお、アメダスデータはスクリプトをcronで毎時1回ずつ起動して取得します。仕掛けは簡単で、上記の横浜と片品村のURLを <code>curl -s</code> したサイトのデータ <code>${site}.html</code> から次のような方法で気温を抽出しています：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">current<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>grep <span style="color:#e6db74">&#34;&gt;現在&lt;&#34;</span> <span style="color:#e6db74">${</span>site<span style="color:#e6db74">}</span>.html | grep <span style="color:#e6db74">&#34;℃&#34;</span> | grep -Eo <span style="color:#e6db74">&#39;[+-]?([0-9]*[.])?[0-9]+&#39;</span><span style="color:#e6db74">`</span>
-</code></pre></div><p>もっとエレガントな方法があるかと思いますが、現在のところ取りこぼしなどのエラーは起こっていません。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>current<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>grep <span style="color:#e6db74">&#34;&gt;現在&lt;&#34;</span> <span style="color:#e6db74">${</span>site<span style="color:#e6db74">}</span>.html | grep <span style="color:#e6db74">&#34;℃&#34;</span> | grep -Eo <span style="color:#e6db74">&#39;[+-]?([0-9]*[.])?[0-9]+&#39;</span><span style="color:#e6db74">`</span>
+</span></span></code></pre></div><p>もっとエレガントな方法があるかと思いますが、現在のところ取りこぼしなどのエラーは起こっていません。</p>
 <p>抽出したデータは次のような形のファイルにして保存します：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">　　：
-2020-06-11 00:03 19.1
-2020-06-11 01:03 18.1
-2020-06-11 02:03 18.1
-2020-06-11 03:03 18.1
-2020-06-11 04:03 17.8
-2020-06-11 05:03 17.7
-2020-06-11 06:03 18.2
-2020-06-11 07:03 19.1
-2020-06-11 08:03 19.8
-2020-06-11 09:03 21.3
-2020-06-11 10:03 23.0
-　　：
-</code></pre></div><p>毎時03分にデータを取得しています。毎時00分にアメダスデータを取得するのは意図的に避けています（注 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>　　：
+</span></span><span style="display:flex;"><span>2020-06-11 00:03 19.1
+</span></span><span style="display:flex;"><span>2020-06-11 01:03 18.1
+</span></span><span style="display:flex;"><span>2020-06-11 02:03 18.1
+</span></span><span style="display:flex;"><span>2020-06-11 03:03 18.1
+</span></span><span style="display:flex;"><span>2020-06-11 04:03 17.8
+</span></span><span style="display:flex;"><span>2020-06-11 05:03 17.7
+</span></span><span style="display:flex;"><span>2020-06-11 06:03 18.2
+</span></span><span style="display:flex;"><span>2020-06-11 07:03 19.1
+</span></span><span style="display:flex;"><span>2020-06-11 08:03 19.8
+</span></span><span style="display:flex;"><span>2020-06-11 09:03 21.3
+</span></span><span style="display:flex;"><span>2020-06-11 10:03 23.0
+</span></span><span style="display:flex;"><span>　　：
+</span></span></code></pre></div><p>毎時03分にデータを取得しています。毎時00分にアメダスデータを取得するのは意図的に避けています（注 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>）。</p>
 <h3 id="日平均気温の計算">日平均気温の計算</h3>
 <p>上で収集した毎時の気温データファイルを24個読み込んで、毎日23時30分に当日の日平均気温を算出します。awkを使うと1行で平均値が計算できるのですね、ありがたいです：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat <span style="color:#e6db74">${</span>kion<span style="color:#e6db74">}</span>.dat | awk <span style="color:#e6db74">&#39;{m+=$3} END{print m/NR;}&#39;</span> &gt; ./wrk-avr.dat
-</code></pre></div><h3 id="グラフのプロット">グラフのプロット</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat <span style="color:#e6db74">${</span>kion<span style="color:#e6db74">}</span>.dat | awk <span style="color:#e6db74">&#39;{m+=$3} END{print m/NR;}&#39;</span> &gt; ./wrk-avr.dat
+</span></span></code></pre></div><h3 id="グラフのプロット">グラフのプロット</h3>
 <p>データは次のような形になっています。右側の6カラムはポット苗のステータスで、
 1=種, 2=発芽, 3=子葉 です。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># Date   平均気温 積算温度 1   2   3   4   5   6
-2020-05-11  0      0      40   0   0   0   0   0
-2020-05-12  14.6  14.6    40   0   0   0   0   0
-2020-05-13  22.7  37.3    40   0   0   0   0   0
-2020-05-14  20.7  58.0    40   0   0   0   0   0
-2020-05-15  21.3  79.3    40   0   0   0   0   0
-2020-05-16  18.1  97.4    40   0   0   0   0   0
-2020-05-17  21.3  118.7   40   0   0   0   0   0
-2020-05-18  18.7  137.4   40   0   0   0   0   0
-2020-05-19  14.8  152.2   20  20   0   0   0   0
-2020-05-20  11.2  163.4   15  25   0   0   0   0
-2020-05-21  9.7   173.1   13  27   0   0   0   0
-2020-05-22  12.8  185.9   11  29   7   0   0   0
-2020-05-23  15.3  201.2   10  30   8   0   0   0
-2020-05-24  16.4  217.6    7  33  10   0   0   0
-2020-05-25  16.9  234.4    6  34  20   0   0   0
-2020-05-26  15.9  250.3    6  34  30   0   0   0
-2020-05-27  15.0  265.3    3  37  34   0   0   0
-2020-05-28  13.9  279.2    3  37  35   2   0   0
-2020-05-29  13.3  292.5    3  37  35   4   0   0
-2020-05-30  15.0  307.5    2  38  37   6
-</code></pre></div><p>これを読み込んで図<a href="#orgc112b7a">1</a>をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図<a href="#orgc112b7a">1</a>のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">set terminal pdfcairo transparent enhanced font <span style="color:#e6db74">&#34;Arial, 8&#34;</span>
-
-set grid x y
-set key left top
-set output <span style="color:#e6db74">&#39;$out_file&#39;</span>
-
-set xdata time
-set timefmt <span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span>
-set format x <span style="color:#e6db74">&#34;%m/%d&#34;</span>
-
-set yrange <span style="color:#f92672">[</span>0:100<span style="color:#f92672">]</span>
-set xrange <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;2020-05-10&#34;</span>:<span style="color:#e6db74">&#34;2020-05-31&#34;</span><span style="color:#f92672">]</span>
-
-set xtics nomirror
-set x2tics
-
-set title <span style="color:#e6db74">&#39;ベニバナインゲン（花豆）播種育苗記録（2020）&#39;</span> font <span style="color:#e6db74">&#34;Arial,13&#34;</span>
-set xlabel <span style="color:#e6db74">&#39;Date（2020）&#39;</span> font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
-set x2label <span style="color:#e6db74">&#39;積算温度( ℃日)&#39;</span> font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
-set ylabel <span style="color:#e6db74">&#39;累積ステータス(%)&#39;</span>  font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
-
-<span style="color:#75715e">## ラベルの書き方 = timefmtで指定した通りに指定する</span>
-set label <span style="color:#ae81ff">1</span> <span style="color:#e6db74">&#34;播種(05/11)&#34;</span> at <span style="color:#e6db74">&#34;2020-05-11&#34;</span>,17 center
-set label <span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#34;定植(05/30)&#34;</span> at <span style="color:#e6db74">&#34;2020-05-30&#34;</span>,17 center
-
-<span style="color:#75715e">## 矢印の入れ方 = timefmtで指定した通りに指定する</span>
-set arrow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   from <span style="color:#e6db74">&#39;2020-05-11&#39;</span>,14 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   to   <span style="color:#e6db74">&#39;2020-05-11&#39;</span>, 2<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   linewidth <span style="color:#ae81ff">2</span> lc <span style="color:#e6db74">&#34;blue&#34;</span>
-
-set arrow <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   from <span style="color:#e6db74">&#39;2020-05-30&#39;</span>,14 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   to   <span style="color:#e6db74">&#39;2020-05-30&#39;</span>, 2<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   linewidth <span style="color:#ae81ff">2</span> lc <span style="color:#e6db74">&#34;blue&#34;</span>
-
-plot <span style="color:#e6db74">&#39;$data_to_plot&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>	 u 1:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>/40*100<span style="color:#f92672">)</span>:x2tic<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> w lp ps 0.5 pt <span style="color:#ae81ff">7</span> title <span style="color:#e6db74">&#39;発芽&#39;</span>,<span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>      <span style="color:#e6db74">&#39;&#39;</span> u 1:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>/40*100<span style="color:#f92672">)</span>:x2tic<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> w lp ps 0.5 title <span style="color:#e6db74">&#39;子葉&#39;</span>
-set output
-</code></pre></div><h2 id="今後の課題">今後の課題</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># Date   平均気温 積算温度 1   2   3   4   5   6
+</span></span><span style="display:flex;"><span>2020-05-11  0      0      40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-12  14.6  14.6    40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-13  22.7  37.3    40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-14  20.7  58.0    40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-15  21.3  79.3    40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-16  18.1  97.4    40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-17  21.3  118.7   40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-18  18.7  137.4   40   0   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-19  14.8  152.2   20  20   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-20  11.2  163.4   15  25   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-21  9.7   173.1   13  27   0   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-22  12.8  185.9   11  29   7   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-23  15.3  201.2   10  30   8   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-24  16.4  217.6    7  33  10   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-25  16.9  234.4    6  34  20   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-26  15.9  250.3    6  34  30   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-27  15.0  265.3    3  37  34   0   0   0
+</span></span><span style="display:flex;"><span>2020-05-28  13.9  279.2    3  37  35   2   0   0
+</span></span><span style="display:flex;"><span>2020-05-29  13.3  292.5    3  37  35   4   0   0
+</span></span><span style="display:flex;"><span>2020-05-30  15.0  307.5    2  38  37   6
+</span></span></code></pre></div><p>これを読み込んで図<a href="#orgc112b7a">1</a>をプロットするためのスクリプト（gnuplotパート）は次のような感じです。Y軸を2本描くのはちょくちょくやりますが、X軸を2本というのは初めてでしたw　あと、図<a href="#orgc112b7a">1</a>のようにX軸が日付の場合に、図中に矢印を入れるのもそれなりにもたつきました。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>set terminal pdfcairo transparent enhanced font <span style="color:#e6db74">&#34;Arial, 8&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set grid x y
+</span></span><span style="display:flex;"><span>set key left top
+</span></span><span style="display:flex;"><span>set output <span style="color:#e6db74">&#39;$out_file&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set xdata time
+</span></span><span style="display:flex;"><span>set timefmt <span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span>
+</span></span><span style="display:flex;"><span>set format x <span style="color:#e6db74">&#34;%m/%d&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set yrange <span style="color:#f92672">[</span>0:100<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>set xrange <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;2020-05-10&#34;</span>:<span style="color:#e6db74">&#34;2020-05-31&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set xtics nomirror
+</span></span><span style="display:flex;"><span>set x2tics
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set title <span style="color:#e6db74">&#39;ベニバナインゲン（花豆）播種育苗記録（2020）&#39;</span> font <span style="color:#e6db74">&#34;Arial,13&#34;</span>
+</span></span><span style="display:flex;"><span>set xlabel <span style="color:#e6db74">&#39;Date（2020）&#39;</span> font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
+</span></span><span style="display:flex;"><span>set x2label <span style="color:#e6db74">&#39;積算温度( ℃日)&#39;</span> font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
+</span></span><span style="display:flex;"><span>set ylabel <span style="color:#e6db74">&#39;累積ステータス(%)&#39;</span>  font <span style="color:#e6db74">&#34;Arial,10&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ラベルの書き方 = timefmtで指定した通りに指定する</span>
+</span></span><span style="display:flex;"><span>set label <span style="color:#ae81ff">1</span> <span style="color:#e6db74">&#34;播種(05/11)&#34;</span> at <span style="color:#e6db74">&#34;2020-05-11&#34;</span>,17 center
+</span></span><span style="display:flex;"><span>set label <span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#34;定植(05/30)&#34;</span> at <span style="color:#e6db74">&#34;2020-05-30&#34;</span>,17 center
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 矢印の入れ方 = timefmtで指定した通りに指定する</span>
+</span></span><span style="display:flex;"><span>set arrow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   from <span style="color:#e6db74">&#39;2020-05-11&#39;</span>,14 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   to   <span style="color:#e6db74">&#39;2020-05-11&#39;</span>, 2<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   linewidth <span style="color:#ae81ff">2</span> lc <span style="color:#e6db74">&#34;blue&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set arrow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   from <span style="color:#e6db74">&#39;2020-05-30&#39;</span>,14 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   to   <span style="color:#e6db74">&#39;2020-05-30&#39;</span>, 2<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   linewidth <span style="color:#ae81ff">2</span> lc <span style="color:#e6db74">&#34;blue&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot <span style="color:#e6db74">&#39;$data_to_plot&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>	 u 1:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>/40*100<span style="color:#f92672">)</span>:x2tic<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> w lp ps 0.5 pt <span style="color:#ae81ff">7</span> title <span style="color:#e6db74">&#39;発芽&#39;</span>,<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      <span style="color:#e6db74">&#39;&#39;</span> u 1:<span style="color:#f92672">(</span>column<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>/40*100<span style="color:#f92672">)</span>:x2tic<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> w lp ps 0.5 title <span style="color:#e6db74">&#39;子葉&#39;</span>
+</span></span><span style="display:flex;"><span>set output
+</span></span></code></pre></div><h2 id="今後の課題">今後の課題</h2>
 <ul>
 <li>できれば畑の温度を近似値ではなくて、温度ロガーで正確にリアルタイムに収集したいと思っています。安価な方法を探索中です。</li>
 <li>植物の状態を観察しカウントした数を「観察ノート（online）」に記入したら、その時点でのグラフが自動的に描出されるようにしたいと思います。</li>
@@ -271,26 +257,26 @@ set output
 </figure>
 
 <h2 id="acknowledgement">Acknowledgement</h2>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>有馬博 (1986). ベニバナインゲンの栽培方法. 信州大学農学部農場報告, <strong>4</strong> , <em>1-11</em>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>気温と地温は厳密には別物ですがここでは気温を指標として使いました。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>発芽率が50%になるための積算温度とか日照、水分とかの条件が、おもな作物の種について一覧表になっていると、誰が育ててもうまくいくのですが・・・。きっとありますよね。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>去年までは、花豆の種まきから苗の育成はすべて横浜で行いました。今年は種々の特殊事情によって、ポットへの播種は片品村で行いましたが、数日後にはポットごと横浜に持ち帰り、また1週間後に片品村に持ってくるというイレギュラーな形になりました。そのために、横浜と片品村の2箇所の気温データが必要となりました。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
+<li id="fn:5">
 <p>tenki.jpだけではありませんが、毎時00分にcronでスクレーピングすると、ちょうどサイトデータの書換タイミングにぶつかったりします。またサイト運営者にとっても毎時00分に <code>curl</code> などでアクセスが入るのは好ましくない可能性もあります。それやこれやであえて03分にしました。&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
     </div>
     <div class="info post_meta">
@@ -298,9 +284,9 @@ set output
       
         <ul class="tags">
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/farming">farming</a> </li>
+          <li> <a href="http://localhost:1313/tags/farming">farming</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+          <li> <a href="http://localhost:1313/tags/gnuplot">gnuplot</a> </li>
         
         </ul>
       
@@ -311,10 +297,10 @@ set output
   
     <div class="other_posts">
       
-      <a href="https://bred-in-bingo.netlify.app/posts/broken-histogram/" class="prev">Give me a break!</a>
+      <a href="http://localhost:1313/posts/broken-histogram/" class="prev">Give me a break!</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/old-jigsaw/" class="next">古い道具たち – B＆Dのジグソー</a>
+      <a href="http://localhost:1313/posts/old-jigsaw/" class="next">古い道具たち – B＆Dのジグソー</a>
       
     </div>
     <aside id="comments">
@@ -338,12 +324,12 @@ set output
 </script>
 
 
-    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
 </footer>
 
 	

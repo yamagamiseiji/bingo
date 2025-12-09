@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,22 +27,9 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-   
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
-}
-</script>
-
   
 </head>
 
@@ -50,11 +37,11 @@ if (!doNotTrack) {
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        <li><a href="http://localhost:1313/">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -76,7 +63,6 @@ if (!doNotTrack) {
               <span>Posts</span>
             </a>
           </li>
-
 
 </ul>
 </nav>
@@ -238,19 +224,19 @@ P 2019/07/21 15:41:02 USD JPY 107.7151
 curl -Ss https://xurrency.com/usd/jpy/ &gt; ~/tmp/xurrency-page.txt
 
 # そのページから為替レートの行のみを抽出し、one-line.txtへ
-grep &quot;1 USD&quot; ~/tmp/xurrency-page.txt &gt; ~/tmp/one-line.txt
+grep &#34;1 USD&#34; ~/tmp/xurrency-page.txt &gt; ~/tmp/one-line.txt
 
-# その行の２番め目の'='よりも後ろ(eg. '108.9626 JPY&lt;/span&gt; ')を
+# その行の２番め目の&#39;=&#39;よりも後ろ(eg. &#39;108.9626 JPY&lt;/span&gt; &#39;)を
 # 残して、after-equal.txt へ
-awk -F '=' '{print $3}' ~/tmp/one-line.txt &gt; ~/tmp/after-equal.txt
+awk -F &#39;=&#39; &#39;{print $3}&#39; ~/tmp/one-line.txt &gt; ~/tmp/after-equal.txt
 
 # そこから数字とピリオドと改行だけを抽出し、RATEに代入
-RATE=`cat ~/tmp/after-equal.txt |tr -cd '0123456789.\n'`
+RATE=`cat ~/tmp/after-equal.txt |tr -cd &#39;0123456789.\n&#39;`
 
 # Ledger の.prices.db用に整形して追記
-prices_db=&quot;$HOME/.prices.db&quot;
-date=$(date &quot;+%Y/%m/%d %H:%M:%S&quot;)
-echo &quot;P $date USD JPY $RATE&quot; &gt;&gt; &quot;$prices_db&quot;
+prices_db=&#34;$HOME/.prices.db&#34;
+date=$(date &#34;+%Y/%m/%d %H:%M:%S&#34;)
+echo &#34;P $date USD JPY $RATE&#34; &gt;&gt; &#34;$prices_db&#34;
 
 # 無用になったファイルを削除
 rm ~/tmp/xurrency-page.txt
@@ -285,13 +271,13 @@ end apply
       
         <ul class="tags">
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">emacs</a> </li>
+          <li> <a href="http://localhost:1313/tags/emacs">emacs</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
         
         </ul>
       
@@ -302,10 +288,10 @@ end apply
   
     <div class="other_posts">
       
-      <a href="https://bred-in-bingo.netlify.app/posts/4th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（4）</a>
+      <a href="http://localhost:1313/posts/4th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（4）</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/6th-step_ledger/" class="next">プレーンテキストファイルで「複式」家計簿（6）</a>
+      <a href="http://localhost:1313/posts/6th-step_ledger/" class="next">プレーンテキストファイルで「複式」家計簿（6）</a>
       
     </div>
     <aside id="comments">
@@ -329,12 +315,12 @@ end apply
 </script>
 
 
-    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
 </footer>
 
 	

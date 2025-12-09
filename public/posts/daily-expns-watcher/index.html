@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,22 +27,9 @@
   
   
   
-  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
 
   
-   
-    
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
-}
-</script>
-
   
 </head>
 
@@ -50,11 +37,11 @@ if (!doNotTrack) {
         <header id="header">
   <div class="header_container">
     <h1 class="sitetitle">
-      <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
     </h1>
     <nav class="navbar">
       <ul>
-        <li><a href="https://bred-in-bingo.netlify.app">Home</a></li>
+        <li><a href="http://localhost:1313/">Home</a></li>
         
           <li>
             <a href="/about/">
@@ -76,7 +63,6 @@ if (!doNotTrack) {
               <span>Posts</span>
             </a>
           </li>
-
 
 </ul>
 </nav>
@@ -113,9 +99,9 @@ if (!doNotTrack) {
 <p><strong>新型コロナウイルス</strong> という外来の危機（ <strong>外患</strong> ）加えて、3月に入ってから、破れかぶれの政府が支離滅裂な迷走状態に入るという <strong>内憂</strong> が重なって、ますます気分が鬱々としています。現在の政府・内閣の挙動はおよそ組織としての体をなしていませんよね。政府と内閣だけでなく、霞が関全体とマスコミが <strong>挙国一致</strong> してこの暴走を見てみぬふりをしている。これまで歴史上、無数の国や組織体が壊れて消滅しましたが、 <strong>「帝国」</strong> はこんな風にして <strong>内側</strong> から崩壊するんですね。</p>
 <h2 id="日々の累積支出額と予算の関係">日々の累積支出額と予算の関係</h2>
 <p>それはともかく、<a href="http://org2-wp.kgt-yamy.tk/2020/02/21/post-904/">前回</a>、グラッフィクな水平ゲージで予算消化率（パーセンテージだけ）をプロットする方法を紹介しました。今回は、新型コロナウィルスで <strong>外遊び</strong> もままならぬので（笑）、さらに一歩を進めて次のようなチャートを作ってみました。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">月々の支出目標（予算）に向けて日々の累積支出額がどのように推移しているか
-その動きをモニターする
-</code></pre></div><p>まずは例図をみてください（金額はでたらめです）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>月々の支出目標（予算）に向けて日々の累積支出額がどのように推移しているか
+</span></span><span style="display:flex;"><span>その動きをモニターする
+</span></span></code></pre></div><p>まずは例図をみてください（金額はでたらめです）。</p>
 <p><a id="orgfe9e69e"></a></p>
 <figure><img src="/budget-watcher-sample.png"
          alt="図1:  予算ライン（バイオレット）と現在の支出レベル（緑）。青っぽいところは予算以下、オレンジっぽいところは予算超過。" width="90%"/><figcaption>
@@ -126,9 +112,9 @@ if (!doNotTrack) {
 <h3 id="仕掛け">仕掛け</h3>
 <p>月始めから当日までに支出した金額の累計（緑のライン）はledger-cliで算出します。これはとても簡単。次の１行です：</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">#  当月の累積支出金額（１日毎） --&gt; tmp-togetsu.dat
-ledger reg ^expenses -p 'this month' -J -D --collapse\
-       --plot-total-format=&quot;%(format_date(date, \&quot;%d\&quot;))\
-	%(abs(quantity(scrub(display_total))))\n&quot;  &gt; ./tmp-togetsu.dat
+ledger reg ^expenses -p &#39;this month&#39; -J -D --collapse\
+       --plot-total-format=&#34;%(format_date(date, \&#34;%d\&#34;))\
+	%(abs(quantity(scrub(display_total))))\n&#34;  &gt; ./tmp-togetsu.dat
 </code></pre><p>上で得られる <code>tmp-togetsu.dat</code> は次のような形になります（金額はでたらめです）：</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">01   8404
 02   49728
@@ -166,46 +152,46 @@ ledger reg ^expenses -p 'this month' -J -D --collapse\
 #   gnuplotに引き渡す
 
 #  当月の累積支出金額のファイルを作成する --&gt; tmp-togetsu.dat
-ledger reg ^expenses -p 'this month' -J -D --collapse\
-       --plot-total-format=&quot;%(format_date(date, \&quot;%d\&quot;))\
-	%(abs(quantity(scrub(display_total))))\n&quot;  &gt; tmp-togetsu.dat
+ledger reg ^expenses -p &#39;this month&#39; -J -D --collapse\
+       --plot-total-format=&#34;%(format_date(date, \&#34;%d\&#34;))\
+	%(abs(quantity(scrub(display_total))))\n&#34;  &gt; tmp-togetsu.dat
 ##
 #  当月の年月を得る
-ym=`date +&quot;%Y/%m&quot;`
+ym=`date +&#34;%Y/%m&#34;`
 
 # ymの年月文字列を含む行をbudgets.tableから抽出しtmp-hitline.txtに格納
 grep $ym ~/hogehoge/configs/budget.table &gt; tmp-hitline.txt
 
 #  係数a,bを獲得し、gnuplotに引き渡す
-a=`awk '{printf $3}' tmp-hitline.txt`
-b=`awk '{printf $4}' tmp-hitline.txt`
+a=`awk &#39;{printf $3}&#39; tmp-hitline.txt`
+b=`awk &#39;{printf $4}&#39; tmp-hitline.txt`
 
 ###############################
 #  gnuplot の励起
-gnuplot -e &quot;a='$a';b='$b';out_file='doya-out.pdf'&quot; gp-budget-daily.plt
+gnuplot -e &#34;a=&#39;$a&#39;;b=&#39;$b&#39;;out_file=&#39;doya-out.pdf&#39;&#34; gp-budget-daily.plt
 ###############################
 # 端末に表示
 mupdf $out_file &amp;
 </code></pre><h3 id="script-gnu">gnuplotスクリプト</h3>
 <p>スクリプト名は <code>gp-budget-daily.plt</code> 。</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">reset
-set terminal pdfcairo  transparent enhanced font &quot;arial,10&quot;
+set terminal pdfcairo  transparent enhanced font &#34;arial,10&#34;
 
 set style fill transparent solid 0.8 noborder
 set style increment default
 set style data lines
 #
 set grid ytics xtics
-set ylabel '金額（円）'
-set xlabel 'Days in Month'
+set ylabel &#39;金額（円）&#39;
+set xlabel &#39;Days in Month&#39;
 #
-set title &quot;支出予算額と当月の支出額 （`date &quot;+%Y/%m&quot;`）&quot; \
-   font &quot;arial,14&quot;
+set title &#34;支出予算額と当月の支出額 （`date &#34;+%Y/%m&#34;`）&#34; \
+   font &#34;arial,14&#34;
 set key inside left top
 set xrange [ 01 : 31 ] noreverse writeback
 set yrange [0:450000] noreverse writeback
 set decimal locale
-set format y &quot;%'8.0f&quot;
+set format y &#34;%&#39;8.0f&#34;
 #
 set samples 31
 #  予算式の係数a,bはbashから受け取る
@@ -214,18 +200,18 @@ f(x) = a * x + b
 #  出力ファイル名はbashから受け取る
 set output out_file
 
-plot '/home/hogehoge/tmp-togetsu.dat'\
-   using 1:2:(f($1)) w filledcurves below title '予算以下' lc rgb &quot;skyblue&quot;,\
-'' using 1:2:(f($1)) w filledcurves above title '予算以上' lc rgb &quot;orange-red&quot;,\
-'' using 1:2 w lines lt 2 lw 3  title '当月の支出',\
-   f(x) lt 2 lw 1 lc rgb &quot;violet&quot; title '支出予算額'
+plot &#39;/home/hogehoge/tmp-togetsu.dat&#39;\
+   using 1:2:(f($1)) w filledcurves below title &#39;予算以下&#39; lc rgb &#34;skyblue&#34;,\
+&#39;&#39; using 1:2:(f($1)) w filledcurves above title &#39;予算以上&#39; lc rgb &#34;orange-red&#34;,\
+&#39;&#39; using 1:2 w lines lt 2 lw 3  title &#39;当月の支出&#39;,\
+   f(x) lt 2 lw 1 lc rgb &#34;violet&#34; title &#39;支出予算額&#39;
 
 set output
 </code></pre><p>ここのミソは次の1行です：</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">plot '/home/hogehoge/tmp-togetsu.dat'\
-   using 1:2:(f($1)) w filledcurves below title '予算以下' lc rgb &quot;skyblue&quot;,\
+<pre tabindex="0"><code class="language-nil" data-lang="nil">plot &#39;/home/hogehoge/tmp-togetsu.dat&#39;\
+   using 1:2:(f($1)) w filledcurves below title &#39;予算以下&#39; lc rgb &#34;skyblue&#34;,\
 　　：
-</code></pre><p>引っかかったのは、 <code>f($1)</code> の <code>$1</code> がbashとgnuplotの間で <strong>もめ事</strong> を起こすこと。そのために <code>gnuplot &lt;&lt; EOF</code> スタイルでgnuplotスクリプトを素直にbashに埋め込むことができませんでした。それを迂回するためにこんな形でしのいでいます。回避できるので大きな問題ではありませんが、簡単にエスケープ？する方法が他にもあるんだとは思いますが・・・😄</p>
+</code></pre><p>引っかかったのは、 <code>f($1)</code> の <code>$1</code> がbashとgnuplotの間で <strong>もめ事</strong> を起こすこと。そのために <code>gnuplot &lt;&lt; EOF</code> スタイルでgnuplotスクリプトを素直にbashに埋め込むことができませんでした。それを迂回するためにこんな形でしのいでいます。回避できるので大きな問題ではありませんが、簡単にエスケープ？する方法が他にもあるんだとは思いますが・・・&#x1f604;</p>
 <h3 id="追記-上記-もめ事-解決しました">（追記）上記「もめ事」解決しました！</h3>
 <p><a href="https://groups.google.com/forum/m/#!topic/comp.graphics.apps.gnuplot/JCNS96hGaIg">こちらのサイト</a> にすばらしい情報がありました。gnuplotの <code>column()</code> 関数を使う方法です。たとえば次のようにします：</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">（旧）   using ($2*0.5):0:($2*0.5):(0.35):yticlabels(1)\
@@ -246,15 +232,15 @@ set output
       
         <ul class="tags">
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/ledger">ledger</a> </li>
+          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">emacs</a> </li>
+          <li> <a href="http://localhost:1313/tags/emacs">emacs</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/accounting">accounting</a> </li>
+          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/viz">viz</a> </li>
+          <li> <a href="http://localhost:1313/tags/viz">viz</a> </li>
         
-          <li> <a href="https://bred-in-bingo.netlify.app/tags/gnuplot">gnuplot</a> </li>
+          <li> <a href="http://localhost:1313/tags/gnuplot">gnuplot</a> </li>
         
         </ul>
       
@@ -265,10 +251,10 @@ set output
   
     <div class="other_posts">
       
-      <a href="https://bred-in-bingo.netlify.app/posts/horizontal-gauge-by-gnuplot/" class="prev">予算消化率の水平ゲージをledger-cliとgnuplotで描く</a>
+      <a href="http://localhost:1313/posts/horizontal-gauge-by-gnuplot/" class="prev">予算消化率の水平ゲージをledger-cliとgnuplotで描く</a>
       
       
-      <a href="https://bred-in-bingo.netlify.app/posts/broken-histogram/" class="next">Give me a break!</a>
+      <a href="http://localhost:1313/posts/broken-histogram/" class="next">Give me a break!</a>
       
     </div>
     <aside id="comments">
@@ -292,12 +278,12 @@ set output
 </script>
 
 
-    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
     <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
     <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
   </p>
 
-  <script src="https://bred-in-bingo.netlify.app/js/main.min.d36ef68c78feb357a5c05e0c28a47045a10fabf33345f1cb02f91d521272e329.js" integrity="sha256-0272jHj+s1elwF4MKKRwRaEPq/MzRfHLAvkdUhJy4yk=" crossorigin="anonymous" async></script>
+  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
 </footer>
 
 	
