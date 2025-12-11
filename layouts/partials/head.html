@@ -47,9 +47,10 @@
     <meta name="twitter:image" content="{{ .Permalink }}{{ $image }}">
   {{ end }}
 
-    <!-- ox-hugo OGP 設定 2025/12/11 16:06:41 -->
-
-    {{ template "_internal/opengraph.html" . }}
-    {{ template "_internal/twitter_cards.html" . }}
+    <!-- ox-hugo OGP 設定 2025/12/11 2025/12/11 20:12:16 by copilot -->
+    {{ with .Params.og_image }}
+    <meta property="og:image" content="{{ . | absURL }}">
+    <meta name="twitter:image" content="{{ . | absURL }}">
+    {{ end }}
     
 </head>
