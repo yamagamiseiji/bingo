@@ -1,0 +1,26 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/yamagami/peace-blog/bingo/org-source/imazu-test.org
+
+
+* Test for Imazu ほげほげ
+:PROPERTIES:
+:ARCHIVE_TIME: 2025-12-11 木 17:18
+:ARCHIVE_FILE: ~/peace-blog/bingo/org-source/imazu-test.org
+:ARCHIVE_CATEGORY: imazu-test
+:END:
+
+
+
+これは Ubuntu24.04 上での hugo v0.123.7+extended によるデプロイテストです。
+SNS 向けのサムネイル画像をなんとかしたい。。。
+
+- これもだめ<<#+HTML_HEAD: <meta property="og:image" content="https://bred-in-bingo.netlify.app/なんちゃら.png"> >>
+- #+EXPORT_HUGO_CUSTOM_FRONT_MATTER:og_image="踏板隠しネジ_20251206.png" もだめ
+- 
+  
+
+  
+
+
