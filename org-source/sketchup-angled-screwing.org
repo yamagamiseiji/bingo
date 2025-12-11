@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-10 17:18:15 yamagami>
+#           Time-stamp: <2025-12-11 09:35:55 yamagami>
 #+title: Sketchup Free で隠しビスの斜め打ちを書く
 #+date: [2025-12-09]
 #+language: ja
@@ -10,6 +10,8 @@
 #+hugo_categories: comp
 #+options: toc:nil
 #+draft: false
+#+HUGO_PARAMS: og_image="踏板隠しネジ_20251206.png"
+
 
 ** はじめに
 DIYで自作したデッキ階段[^fn_decksteps]の図面を書くために2025年10月から [[https://app.sketchup.com/app?hl=en][Sketchup Free]] を使い始めました。この記事は Sketchupで *階段の踏板* の隠しビスの **斜め打ち** （図[[tread_o_stair]]の手前のビス4本）を書く方法を自分のための備忘として書いたものです。

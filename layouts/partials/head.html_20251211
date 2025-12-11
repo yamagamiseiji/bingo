@@ -33,18 +33,4 @@
   {{ if not .Site.IsServer }} 
     {{ template "_internal/google_analytics.html" . }}
   {{ end }}
-
-  <!-- SNS サムネイルのための og:image 設定 2025/12/11 -->
-  {{ $image := "" }}
-  {{ if .Params.og_image }}
-    {{ $image = .Params.og_image }}
-  {{ else if .Site.Params.og_image }}
-    {{ $image = .Site.Params.og_image }}
-  {{ end }}
-
-  {{ if $image }}
-    <meta property="og:image" content="{{ .Permalink }}{{ $image }}">
-    <meta name="twitter:image" content="{{ .Permalink }}{{ $image }}">
-    {{ end }}
-
 </head>
