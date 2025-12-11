@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-09 14:09:58 yamagami>
+#           Time-stamp: <2025-12-11 15:50:30 yamagami>
 #+title: Test Posting from host Imazu
-#+date: [2040-12-09 ]
+#+date: [2025-12-11 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -9,11 +9,17 @@
 #+hugo_tags: test 
 #+hugo_categories: comp
 #+options: toc:nil
-#+draft: true
+#+HTML_HEAD: <meta property="og:image" content="https://bred-in-bingo.netlify.app/踏板隠しネジ_20251206.png">
+#+EXPORT_HUGO_PARAMS:og_image="踏板隠しネジ_20251206.png"
 
 * Test for Imazu
-2025/12/09 10:24:45
+
 これは Ubuntu24.04 上での hugo v0.123.7+extended によるデプロイテストです。
+SNS 向けのサムネイル画像をなんとかしたい。。。
+
+
+#+attr_html: :width 50%
+[[file:20251204_19-53-39.png]]
 
 
 # Local Variables:

@@ -1,19 +1,24 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-11 09:35:55 yamagami>
 #+title: Sketchup Free で隠しビスの斜め打ちを書く
 #+date: [2025-12-09]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
 #+hugo_section: posts
-#+hugo_tags: woodworking sketchup DIY CAD 
+#+hugo_tags: woodworking sketchup DIY CAD
 #+hugo_categories: comp
 #+options: toc:nil
-#+draft: false
-#+HUGO_PARAMS: og_image="踏板隠しネジ_20251206.png"
+#+OPTIONS: tags:nil todo:nil timestamp:nil author:nil ^:nil H:5 \n:t ARCHIVE:t custom_params:t
+#+EXPORT_FILE_NAME: sketchup-angled-screwing.md 
+#+HUGO_FRONT_MATTER_FORMAT: toml
+
+* はじめに
+:EXPORT_HUGO_PARAMS:
+:draft: true
+:og_image: 踏板隠しネジ_20251206.png
+:END:
 
 
-** はじめに
 DIYで自作したデッキ階段[^fn_decksteps]の図面を書くために2025年10月から [[https://app.sketchup.com/app?hl=en][Sketchup Free]] を使い始めました。この記事は Sketchupで *階段の踏板* の隠しビスの **斜め打ち** （図[[tread_o_stair]]の手前のビス4本）を書く方法を自分のための備忘として書いたものです。
 
 
@@ -202,6 +207,23 @@ Sketchup *PRO* ならエレガントな方法がある？かもしれないし�
 #+attr_html: :width 70%
 #+caption:デッキ階段全体の寸法図
 [[file:20251122_デッキ階段寸法図.jpg]]
+
+* COMMENT 旧ヘッダー
+# #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+# #           Time-stamp: <2025-12-11 11:28:44 yamagami>
+# #+title: Sketchup Free で隠しビスの斜め打ちを書く
+# #+date: [2025-12-11]
+# #+language: ja
+# #+link: file file+sys:../static/
+# #+hugo_base_dir: ~/peace-blog/bingo/
+# #+hugo_section: posts
+# #+hugo_tags: woodworking sketchup DIY CAD 
+# #+hugo_categories: comp
+# #+draft: true
+# #+options: toc:nil
+# #+OPTIONS: tags:nil todo:nil timestamp:nil author:nil ^:nil H:5 \n:t ARCHIVE:t custom_params:t
+# #+EXPORT_HUGO_PARAMS: og_image="踏板隠しネジ_20251206.png"
+
 
 
 
