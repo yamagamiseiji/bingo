@@ -1,7 +1,9 @@
 +++
 title = "Test Posting from host Imazu"
 author = ["yamagami"]
-date = 2025-12-08T00:00:00+09:00
+description = "踏板の隠しネジ"
+date = 2025-12-11T00:00:00+09:00
+images = ["20240703_redcurrant.jpg"]
 tags = ["test"]
 categories = ["comp"]
 draft = false
