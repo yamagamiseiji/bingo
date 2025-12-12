@@ -1,3 +1,4 @@
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -47,10 +48,13 @@
     <meta name="twitter:image" content="{{ .Permalink }}{{ $image }}">
   {{ end }}
 
-    <!-- ox-hugo OGP 設定 2025/12/11 2025/12/11 20:12:16 by copilot -->
-    {{ with .Params.og_image }}
+    <!--- 2025/12/12 10:14:27 -->
+  {{ with .Params.og_image }}
     <meta property="og:image" content="{{ . | absURL }}">
     <meta name="twitter:image" content="{{ . | absURL }}">
-    {{ end }}
-    
+  {{ end }}
+  
 </head>
+
+
+

@@ -1,7 +1,7 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-11 20:13:35 yamagami>
+#           Time-stamp: <2025-12-12 10:16:14 yamagami>
 #+title: Test Posting from host Imazu
-#+date: [2025-12-11 ]
+#+date: [2025-12-12 ]
 #+language: ja
 #+link: file file+sys:../static/
 #+hugo_base_dir: ~/peace-blog/bingo/
@@ -10,17 +10,16 @@
 #+hugo_categories: comp
 #+export_file_name: imazu-test
 #+options: toc:nil
-#+DESCRIPTION: 踏板の隠しネジ
-#+HUGO_IMAGES: 20240703_redcurrant.jpg
-#+HUGO_CUSTOM_FRONT_MATTER: :og_image "20240703_redcurrant.jpg"
+#+HUGO_CUSTOM_FRONT_MATTER: :og_image "/20240703_redcurrant.jpg"
+
+これは Ubuntu24.04 上での hugo v0.123.7+extended によるデプロイテストです。 
+
+- 2025/12/12 10:15:41 /layouts/partials/head.html の末尾変更
+- 2025/12/12 09:37:47 baseURL --> 末尾に/追加
+- 2025/12/12 09:12:50 revised
 
 
-
-これは Ubuntu24.04 上での hugo v0.123.7+extended によるデプロイテストです。 SNS 向けのサムネイル画像をなんとかしたい。。。
-
-copilot のアドバイスはすごい！　あと一歩だ！
-
-
+;;; #+HUGO_IMAGES: 20240703_redcurrant.jpg
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
