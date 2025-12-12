@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-12 16:28:56 yamagami>
+#           Time-stamp: <2025-12-12 19:00:00 yamagami>
 #+title: Test Posting from host Imazu
 #+date: [2025-12-09 ]
 #+language: ja
@@ -10,12 +10,15 @@
 #+hugo_categories: comp
 #+export_file_name: imazu-test
 #+options: toc:nil
-#+HUGO_CUSTOM_FRONT_MATTER: :og_image "/20240703_redcurrant.jpg"
+#+HUGO_CUSTOM_FRONT_MATTER: :og_image "/resized_redcurrant.jpg"
 
 Ubuntu24.04 上での ox-hugo v0.123.7+extended によるデプロイテストです。 
 OGP の設定試験中
 
+画像サイズ＝1236x1964, 1.5MB
 
+#+attr_html: :width 50%
+[[file:resized_redcurrant.jpg]]
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
 # End:
