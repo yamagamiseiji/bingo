@@ -8,5 +8,4 @@ draft = false
 og_image = "/ogp-fig.jpg"
 +++
 
-Ubuntu24.04 上での ox-hugo v0.123.7+extended によるデプロイテストです。
 OGP の設定試験中

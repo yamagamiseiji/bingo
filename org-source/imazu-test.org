@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-12 19:55:11 yamagami>
+#           Time-stamp: <2025-12-12 20:06:15 yamagami>
 #+title: Test Posting from host Imazu
 #+date: [2025-12-09 ]
 #+language: ja
@@ -12,7 +12,6 @@
 #+options: toc:nil
 #+HUGO_CUSTOM_FRONT_MATTER: :og_image "/ogp-fig.jpg"
 
-Ubuntu24.04 上での ox-hugo v0.123.7+extended によるデプロイテストです。 
 OGP の設定試験中
 
 
