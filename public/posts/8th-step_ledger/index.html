@@ -1,329 +1,82 @@
-<!DOCTYPE html>
-<html lang="ja">
-    
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="format-detection" content="telephone=no" />
-
-  <title>
-    プレーンテキストファイルで「複式」家計簿（8） | Yam’s Peace Blog
-  </title>
-
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
-
-  
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
-  />
-
-  
-  
-  
-  
-  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
-
-  
-  
-
-  
-  
-  
-
-  
-
-    
-  
-  
-</head>
-
-
-
-
-    <body>
-        <header id="header">
-  <div class="header_container">
-    <h1 class="sitetitle">
-      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
-    </h1>
-    <nav class="navbar">
-      <ul>
-        <li><a href="http://localhost:1313/">Home</a></li>
-        
-          <li>
-            <a href="/about/">
-              
-              <span>About</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/tags/">
-              
-              <span>Tags</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/archives/">
-              
-              <span>Posts</span>
-            </a>
-          </li>
-
-</ul>
-</nav>
-</div>
-</header>
-
-        
-<section id="main">
-  <article class="post content">
-    <h2 class="title">プレーンテキストファイルで「複式」家計簿（8）</h2>
-    <div class="post_content">
-      <div class="ox-hugo-toc toc">
-<div></div>
-<div class="heading">&#30446;&#27425;</div>
-<ul>
-<li><a href="#%E9%AB%98%E9%80%9F%E9%81%93%E8%B7%AF%E6%96%99%E9%87%91-%E9%AB%98%E3%81%84">高速道路料金、高い！</a></li>
-<li><a href="#etc%E3%83%9E%E3%82%A4%E3%83%AC%E3%83%BC%E3%82%B8%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%82%92%E3%81%AA%E3%82%93%E3%81%A8%E3%81%8B%E3%81%97%E3%82%88%E3%81%86">ETCマイレージポイントをなんとかしよう！</a>
-<ul>
-<li><a href="#etc%E3%83%9E%E3%82%A4%E3%83%AC%E3%83%BC%E3%82%B8%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AE%E6%AE%8B%E9%AB%98%E3%81%AA%E3%81%A9%E3%82%92%E8%A8%98%E9%8C%B2-%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E8%A9%A6%E3%81%BF">ETCマイレージポイントの残高などを記録・管理する試み</a></li>
-<li><a href="#pta%E3%81%AB%E3%82%88%E3%82%8B%E5%87%A6%E7%90%86%E3%81%AE%E4%B8%80%E4%BE%8B">PTAによる処理の一例</a></li>
-<li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95">トランザクションコードを使う方法</a></li>
-<li><a href="#%E3%81%A8%E3%81%84%E3%81%86%E3%81%93%E3%81%A8%E3%81%A7">ということで</a></li>
-<li><a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB">おわりに・・・</a></li>
-</ul>
-</li>
-<li><a href="#acknowledgement">Acknowledgement</a></li>
-</ul>
-</div>
-<!--endtoc-->
-<h2 id="高速道路料金-高い">高速道路料金、高い！</h2>
-<p>日本の高速道路料金は <strong>不当に高い</strong> ですよね。誰もがそう感じていると思います。</p>
-<p>一体どうなっているのか、 <strong>国際比較</strong> のデータを見たいと思って報告書や資料、ネットを探しても、なかなかこれというものが見つかりませんでした。つい最近、偶然、<a href="https://livejapan.com/en/article-a0002292/">こちら</a>にとてもコンパクトにまとまったデータを見つけました。元は英語だったので日本語にさせてもらいました。なお、「円」換算はその日のレートによって異なります。およその目安としてごらんください。</p>
-<figure><img src="/tables.png"
-         alt="図1: 高速道路料金国際比較（https://livejapan.com/en/article-a0002292/ より）" width="95%"/><figcaption>
-            <p>図1:  高速道路料金国際比較（<a href="https://livejapan.com/en/article-a0002292/">https://livejapan.com/en/article-a0002292/</a> より）</p>
-        </figcaption>
-</figure>
-
-<p>これを見ると各国の高速道路課金システムの主なものは <strong>無料</strong> の他、</p>
-<ul>
-<li><strong>走行距離</strong> に応じて課金</li>
-<li>それプラス基本料金というか <strong>１回利用</strong> あたりの料金を課金</li>
-<li><strong>年間使用料金</strong> を払うという形</li>
-</ul>
-<p>などがあるようです。上の表で <code>/use</code> とあるのは、１回利用あたりの基本料金です。 <code>/年</code> は文字通りの年間利用料金です。</p>
-<p>その他、時間帯や時期によって料金を変えたり無料にしたりとか、特定の車種（トラックのみ）に限定して課金するとか、特定の地域だけ有料だったりとかの小さなバリエーションがあります。日本のETCマイレージサービスが提供する平日朝夕割引とかもその一例でしょう。</p>
-<p>しかしどう見ても、わが国の高速料金は <strong>地球上</strong> でダントツの <strong>トップ</strong> 。言い換えれば <strong>太陽系</strong> で最も料金が高い（笑）。お願いだからもう少し安くしてくれないかしら・・・。けれども大きな流れとしては、安くするどころかむしろ機会があれば値上げしたいという雰囲気のようですね。さすが <strong>東洋のガラパゴス</strong> の面目躍如というところです。</p>
-<p>いろいろ言いたいことはありますが、それは別の機会、別の場所でということにして、ここでは一市民のささやかなる節約のための工夫を紹介します。</p>
-<p>つまり：</p>
-<blockquote>
-<p>たいていの人は高速道路料金を <strong>ETC</strong> で支払います。そうすると何となく <strong>ポイント</strong> が溜まっていきます。そのポイントをうまく管理し活用するための
-<strong>プレインテキスト</strong> によるアカウンティングのやり方</p>
-</blockquote>
-<p>を紹介します。なお、プレインテキスト・アカウンティングは「業界」では <strong>PTA</strong> （Plain Text Accounting）と略すならわしのようです（笑）。</p>
-<p>なので、ここのテーマは短く言えば「 <strong>PTAでETCポイント管理</strong> 」になります。</p>
-<h2 id="etcマイレージポイントをなんとかしよう">ETCマイレージポイントをなんとかしよう！</h2>
-<p>マイレージなどの「ポイント」をどう仕訳・記帳するのかについておさらいをすると、日本でも欧米でも「ポイント」取得時には何も記帳する必要はない、実際に使った時のみにそれを記録すれば良いようです。</p>
-<p>転記の際には、「 <strong>雑収入</strong> 」にするとか「 <strong>値引き</strong> 」にするのが一般的のようです。会社の経理でも特に決まったやり方があるわけではないとのこと。</p>
-<p>個人的な家計簿レベルで一番 <strong>簡便</strong> な方法は、ポイントを使った時には、アカウントとしてはポイントをぜんぜん表に出さずに <strong>値引き</strong> として扱うことです。たとえば5,600円の電気製品を買いました、1,200円をポイントから支出しました、その時には：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/09/01 ヨドバシカメラ
-</span></span><span style="display:flex;"><span>   Expenses:家電:ガジェット     <span style="color:#f92672">(</span> 5,600 JPY - 1,200 JPY<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>   Liabilites:Visa
-</span></span></code></pre></div><p>こうすると、実際に支出した <strong>金額</strong> が帳簿上で追跡できるので、多くの場合にはこれで用が足ります。</p>
-<p>高速道路を使ったときの <strong>ETCマイレージポイント</strong> についても事情はほぼ同じです。いま仮にマイレージポイントを1,000円分だけ使った場合には、次のような転記になります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/09/01  練馬〜高崎
-</span></span><span style="display:flex;"><span>   Expenses:車両費:高速代    <span style="color:#f92672">(</span> 2,170 JPY - 1,000 JPY<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>   Liabilites:Visa
-</span></span></code></pre></div><p>これはこれで、OKなのですが、しかし・・・</p>
-<p>もうすこしきちんとETCポイントの残高などを把握・管理したい場合には、ETCマイレージ特有の特殊性もあって、結構めんどうです。</p>
-<p>ネット上（<a href="https://www.soumunomori.com/forum/thread/trd-98199/">総務の森）</a>にもこんなやり取りがありました：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>＜Q1＞　ETCの利用が多いので、月末に一か月分を未払金であげて、
-</span></span><span style="display:flex;"><span>クレジット引落し日に現金支払いで計上しています。
-</span></span><span style="display:flex;"><span>マイレージ還元があった場合の仕訳を教えて下さい。
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>＜A1＞　こんばんわ。
-</span></span><span style="display:flex;"><span>特に仕訳の必要はないと思います。
-</span></span><span style="display:flex;"><span>利用料の値引のようなものですから料金自体発生しませので
-</span></span><span style="display:flex;"><span>仕訳のしようがないと思います。
-</span></span><span style="display:flex;"><span>ポイント還元値引も今のところ同様に特に経理処理は不要のようです。
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>＜Q2＞　ご回答ありがとうございます。
-</span></span><span style="display:flex;"><span>経理処理は不要とのことですが、
-</span></span><span style="display:flex;"><span>実際に走ったETC料金を未払金で計上しているので還元分が
-</span></span><span style="display:flex;"><span>未払金として残ってしまうのですが・・・
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>＜A2＞　こんばんわ。
-</span></span><span style="display:flex;"><span>逆仕訳で還元分戻しは無理でしょうか。
-</span></span><span style="display:flex;"><span>であれば雑収入で収入処理するよりないと思います。
-</span></span></code></pre></div><p>要するに「値引き」か「雑収入」かのどちらからで処理、という話になっていますが、プロフェッショナルな経理担当の方は何となくすっきりしない心持ちになると思います。</p>
-<h3 id="etcマイレージポイントの残高などを記録-管理する試み">ETCマイレージポイントの残高などを記録・管理する試み</h3>
-<p>ETCマイレージポイントは一般のポイントと次のような点で異なります：</p>
-<ol>
-<li>
-<p>ETCでは、特定の使用日や使用経路に対して、ユーザが自由にポイントを使うことができません。たまったポイントを「ETCサービス」（会社なの？公益法人なの？行政組織なの？）があるルール（FCFS）に従って振り分けて消化してくれます。</p>
-</li>
-<li>
-<p>またマイレージポイントの蓄積と消化はリアルタイムに把握することができません。毎月20日に「ETCサービス」のホームページなどを見て <strong>自分</strong> で確認することが必要です。</p>
-</li>
-<li>
-<p>何よりもポイントのたまり方や消化の仕方などが <strong>超複雑</strong> 。しかも高速道路各社でも微妙にちがう。自前でこのプロセスをプログラム化するのは大変でしょう。情報系の学部生の課題としては面白いかもしれませんが（笑）</p>
-</li>
-</ol>
-<p>しかしきちんと管理するとそれなりに <strong>大きな金額</strong> の戻りが期待できます。がんばってトライする価値はあります。</p>
-<p>まず準備段階として次の２つのサービスにユーザ登録します：</p>
-<ul>
-<li>「ETC利用照会サービス」</li>
-<li>「ETCマイレージサービス」</li>
-</ul>
-<p>これについては良い情報がたくさんネット上にあります。そちらを見てください。上のサービスに登録しても、実際の経理的な処理には <strong>手作業</strong> が必要です。次に例をあげます。</p>
-<h3 id="ptaによる処理の一例">PTAによる処理の一例</h3>
-<p>ここに至るまで、さまざまなやり方を試しました。いずれも「あちらを立てればこちらが立たず」で欲しい情報をきんと管理できている気分がしませんでしたが、現在は次の例のようにLedgerの <strong>仮想アカウント</strong> （virtual accounts）で処理しています。これで、とりあえずほぼ満足の行く形になったと思います。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/08/10  青葉〜町田
-</span></span><span style="display:flex;"><span>    Expenses:車両費:高速代                  <span style="color:#ae81ff">370</span> JPY
-</span></span><span style="display:flex;"><span>    Liabilities:Visa
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/08/11   新保土ヶ谷〜大師
-</span></span><span style="display:flex;"><span>    Expenses:車両費:高速代          <span style="color:#f92672">(</span><span style="color:#ae81ff">320</span> JPY + <span style="color:#ae81ff">690</span> JPY<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    ; 首都高 690円
-</span></span><span style="display:flex;"><span>    Liabilities:Visa
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/08/12  練馬〜anywhere
-</span></span><span style="display:flex;"><span>    Expenses:車両費:高速代                   2,000 JPY
-</span></span><span style="display:flex;"><span>    Liabilities:Visa
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/08/20 * ETCマイレージサービス
-</span></span><span style="display:flex;"><span>    ; ポイント還元
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[</span>Assets:Mileage:ETC<span style="color:#f92672">]</span>                    2,000 JPY
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[</span>Income:還元Point<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/08/21 <span style="color:#f92672">(</span>08/10<span style="color:#f92672">)</span>  青葉〜町田　マイレージ使用
-</span></span><span style="display:flex;"><span>   ; 全額マイレージでカバー
-</span></span><span style="display:flex;"><span>    Liabilities:Visa                    <span style="color:#ae81ff">370</span> JPY
-</span></span><span style="display:flex;"><span>    Expenses:車両費:高速代              -370 JPY
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">(</span>Assets:Mileage:ETC<span style="color:#f92672">)</span>               -370 JPY
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/08/21 <span style="color:#f92672">(</span>08/11<span style="color:#f92672">)</span>  新保土ヶ谷〜大師 マイレージ使用
-</span></span><span style="display:flex;"><span>    ; 首都高以外をマイレージでカバー
-</span></span><span style="display:flex;"><span>    Liabilities:Visa              <span style="color:#ae81ff">320</span> JPY
-</span></span><span style="display:flex;"><span>    Expenses:車両費:高速代         -320 JPY
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">(</span>Assets:Mileage:ETC<span style="color:#f92672">)</span>          -320 JPY
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/08/21 <span style="color:#f92672">(</span>08/12<span style="color:#f92672">)</span>  練馬〜anywhere マイレージ使用
-</span></span><span style="display:flex;"><span>    Liabilities:Visa              <span style="color:#ae81ff">630</span> JPY
-</span></span><span style="display:flex;"><span>    Expenses:車両費:高速代         -630 JPY
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">(</span>Assets:Mileage:ETC<span style="color:#f92672">)</span>    -630 JPY
-</span></span></code></pre></div><p>このような元帳に対して、まず仮想アカウントを <strong>除外</strong> して計算するために、 <code>--real</code> オプションをつけてbalレポートすると：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal --real
-</span></span><span style="display:flex;"><span>	    2,060 JPY  Expenses:車両費:高速代
-</span></span><span style="display:flex;"><span>	   -2,060 JPY  Liabilities:Visa
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><p>当月の高速代として2,060円が計上されています。当然バランスはゼロになっています。</p>
-<p>次に、仮想アカウント（ <code>Income:還元Point</code> 、 <code>Expenses:Mileage:ETC</code> ）を含めて計算したレポートを見ましょう。 <code>--real</code> オプションを外すだけです：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal
-</span></span><span style="display:flex;"><span>	      <span style="color:#ae81ff">680</span> JPY  Assets:Mileage:ETC
-</span></span><span style="display:flex;"><span>	    2,060 JPY  Expenses:車両費:高速代
-</span></span><span style="display:flex;"><span>	   -2,000 JPY  Income:還元Point
-</span></span><span style="display:flex;"><span>	   -2,060 JPY  Liabilities:Visa
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>	   -1,320 JPY
-</span></span></code></pre></div><p><strong>1行目</strong> に注目して下さい。仮想アカウント <code>Assests:Mileage:ETC</code> の残高が680円であることが示されています。次に <strong>3行目</strong> では、仮想アカウト <code>Income:還元Point</code> が-2,000円であることが示されています。</p>
-<p>このように仮想アカウントを使うことで、マイレージポイントのたまり具合や還元・充当の記録をきちんと残すことができます。</p>
-<p>ただ、このままだとポイント還元がどの高速利用に適用されたのか、わかりづらいという難点があります。</p>
-<p>それを迂回する一つの方法として、Ledgerの <strong>トランザクションコード</strong> を使ってみました。</p>
-<h3 id="トランザクションコードを使う方法">トランザクションコードを使う方法</h3>
-<p>上の記帳例では、マイレージポイントが適用されたトランザクション（下から３つ）では、日付の後ろに <code>(08/10)</code> などのオプショナルな <strong>コード</strong> が追加されています。これはマイレージを適用して割引き対象となった元の道路利用日を記録しています。このコードをつけることで、どの高速利用がどのような金額で割り引かれたかをすぐに知ることができます。 <code>--format</code> オプションを使って、次のようにコマンド入力します：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led --format <span style="color:#e6db74">&#34;%(date) %(account) %(code)\n&#34;</span> reg expenses
-</span></span></code></pre></div><p>その結果は次のようになります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/08/10 Expenses:車両費:高速代  <span style="color:#ae81ff">370</span> JPY
-</span></span><span style="display:flex;"><span>2019/08/11 Expenses:車両費:高速代  1,010 JPY
-</span></span><span style="display:flex;"><span>2019/08/12 Expenses:車両費:高速代  2,000 JPY
-</span></span><span style="display:flex;"><span>2019/08/21 Expenses:車両費:高速代 08/10 -370 JPY
-</span></span><span style="display:flex;"><span>2019/08/21 Expenses:車両費:高速代 08/11 -320 JPY
-</span></span><span style="display:flex;"><span>2019/08/21 Expenses:車両費:高速代 08/12 -630 JPY
-</span></span></code></pre></div><p>これで、もともとの（値引き前の）トランザクションと、マイレージポイントで値引きされたトランザクションとの対応がひと目で分かります。もちろんコードのつけ方は自由です。１日に何回も同じ経路で高速道路利用する場合には、それがわかるような形でコードづけします。</p>
-<h3 id="ということで">ということで</h3>
-<p>この方法によれば、高速代の月ごとの支出など現実に支出された金額と同時に、マイレージポイントの残高をきちんと把握できます。これだけの記録と情報があれば、個人の経理（会社も？）としては不満はありません。またLedgerによるPTAでは、帳面をめくったり大きな会計ソフトを立ち上げたりしなくても、随時、知りたい情報をほぼ <strong>瞬時</strong> に入手できます。</p>
-<p>なお仮想アカウントの名称を <code>Mileage:ETC</code> にしたのは、将来、 <code>Mileage:ANA</code> とかも管理対象にしたいという理由からです。</p>
-<h3 id="おわりに">おわりに・・・</h3>
-<p>思いの外、長くなってしまったので本日はここまでにします。</p>
-<h2 id="acknowledgement">Acknowledgement</h2>
-
-    </div>
-    <div class="info post_meta">
-      <time datetime=2019年9月16日T10:10:00&#43;0900 class="date">2019年9月16日</time>
-      
-        <ul class="tags">
-        
-          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
-        
-          <li> <a href="http://localhost:1313/tags/emacs">emacs</a> </li>
-        
-          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
-        
-        </ul>
-      
-      
-    </div>
-    <div class="clearfix"></div>
-  </article>
-  
-    <div class="other_posts">
-      
-      <a href="http://localhost:1313/posts/7th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（7）</a>
-      
-      
-      <a href="http://localhost:1313/posts/9th-step_ledger/" class="next">プレーンテキストファイルで「複式」家計簿（9）</a>
-      
-    </div>
-    <aside id="comments">
-</aside>
-
-  
-</section>
-
-        <a id="back_to_top" title="Go To Top" href="#">
-  <span>
-    <svg viewBox="0 0 24 24">
-      <path fill="none" d="M0 0h24v24H0z"></path>
-      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
-    </svg>
-  </span>
-</a>
-
-        <footer id="footer">
-  <p>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
-    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
-    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
-  </p>
-
-  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
-</footer>
-
-	
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-J843BPL02S');
-</script>
-
-    </body>
-</html>
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><title>プレーンテキストファイルで「複式」家計簿（8） | Yam’s Peace Blog
+</title><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css><link rel=stylesheet href=https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/++gZIktTledhjw="><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z5K4GXE0V9",{anonymize_ip:!0})}</script></head><body><header id=header><div class=header_container><h1 class=sitetitle><a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a></h1><nav class=navbar><ul><li><a href=https://bred-in-bingo.netlify.app/>Home</a></li><li><a href=/about/><span>About</span></a></li><li><a href=/tags/><span>Tags</span></a></li><li><a href=/archives/><span>Posts</span></a></li></ul></nav></div></header><section id=main><article class="post content"><h2 class=title>プレーンテキストファイルで「複式」家計簿（8）</h2><div class=post_content><div class="ox-hugo-toc toc"><div></div><div class=heading>&#30446;&#27425;</div><ul><li><a href=#%E9%AB%98%E9%80%9F%E9%81%93%E8%B7%AF%E6%96%99%E9%87%91-%E9%AB%98%E3%81%84>高速道路料金、高い！</a></li><li><a href=#etc%E3%83%9E%E3%82%A4%E3%83%AC%E3%83%BC%E3%82%B8%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%82%92%E3%81%AA%E3%82%93%E3%81%A8%E3%81%8B%E3%81%97%E3%82%88%E3%81%86>ETCマイレージポイントをなんとかしよう！</a><ul><li><a href=#etc%E3%83%9E%E3%82%A4%E3%83%AC%E3%83%BC%E3%82%B8%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AE%E6%AE%8B%E9%AB%98%E3%81%AA%E3%81%A9%E3%82%92%E8%A8%98%E9%8C%B2-%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E8%A9%A6%E3%81%BF>ETCマイレージポイントの残高などを記録・管理する試み</a></li><li><a href=#pta%E3%81%AB%E3%82%88%E3%82%8B%E5%87%A6%E7%90%86%E3%81%AE%E4%B8%80%E4%BE%8B>PTAによる処理の一例</a></li><li><a href=#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95>トランザクションコードを使う方法</a></li><li><a href=#%E3%81%A8%E3%81%84%E3%81%86%E3%81%93%E3%81%A8%E3%81%A7>ということで</a></li><li><a href=#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB>おわりに・・・</a></li></ul></li><li><a href=#acknowledgement>Acknowledgement</a></li></ul></div><h2 id=高速道路料金-高い>高速道路料金、高い！</h2><p>日本の高速道路料金は <strong>不当に高い</strong> ですよね。誰もがそう感じていると思います。</p><p>一体どうなっているのか、 <strong>国際比較</strong> のデータを見たいと思って報告書や資料、ネットを探しても、なかなかこれというものが見つかりませんでした。つい最近、偶然、<a href=https://livejapan.com/en/article-a0002292/>こちら</a>にとてもコンパクトにまとまったデータを見つけました。元は英語だったので日本語にさせてもらいました。なお、「円」換算はその日のレートによって異なります。およその目安としてごらんください。</p><figure><img src=/tables.png alt="図1: 高速道路料金国際比較（https://livejapan.com/en/article-a0002292/ より）" width=95%><figcaption><p>図1: 高速道路料金国際比較（<a href=https://livejapan.com/en/article-a0002292/>https://livejapan.com/en/article-a0002292/</a> より）</p></figcaption></figure><p>これを見ると各国の高速道路課金システムの主なものは <strong>無料</strong> の他、</p><ul><li><strong>走行距離</strong> に応じて課金</li><li>それプラス基本料金というか <strong>１回利用</strong> あたりの料金を課金</li><li><strong>年間使用料金</strong> を払うという形</li></ul><p>などがあるようです。上の表で <code>/use</code> とあるのは、１回利用あたりの基本料金です。 <code>/年</code> は文字通りの年間利用料金です。</p><p>その他、時間帯や時期によって料金を変えたり無料にしたりとか、特定の車種（トラックのみ）に限定して課金するとか、特定の地域だけ有料だったりとかの小さなバリエーションがあります。日本のETCマイレージサービスが提供する平日朝夕割引とかもその一例でしょう。</p><p>しかしどう見ても、わが国の高速料金は <strong>地球上</strong> でダントツの <strong>トップ</strong> 。言い換えれば <strong>太陽系</strong> で最も料金が高い（笑）。お願いだからもう少し安くしてくれないかしら・・・。けれども大きな流れとしては、安くするどころかむしろ機会があれば値上げしたいという雰囲気のようですね。さすが <strong>東洋のガラパゴス</strong> の面目躍如というところです。</p><p>いろいろ言いたいことはありますが、それは別の機会、別の場所でということにして、ここでは一市民のささやかなる節約のための工夫を紹介します。</p><p>つまり：</p><blockquote><p>たいていの人は高速道路料金を <strong>ETC</strong> で支払います。そうすると何となく <strong>ポイント</strong> が溜まっていきます。そのポイントをうまく管理し活用するための
+<strong>プレインテキスト</strong> によるアカウンティングのやり方</p></blockquote><p>を紹介します。なお、プレインテキスト・アカウンティングは「業界」では <strong>PTA</strong> （Plain Text Accounting）と略すならわしのようです（笑）。</p><p>なので、ここのテーマは短く言えば「 <strong>PTAでETCポイント管理</strong> 」になります。</p><h2 id=etcマイレージポイントをなんとかしよう>ETCマイレージポイントをなんとかしよう！</h2><p>マイレージなどの「ポイント」をどう仕訳・記帳するのかについておさらいをすると、日本でも欧米でも「ポイント」取得時には何も記帳する必要はない、実際に使った時のみにそれを記録すれば良いようです。</p><p>転記の際には、「 <strong>雑収入</strong> 」にするとか「 <strong>値引き</strong> 」にするのが一般的のようです。会社の経理でも特に決まったやり方があるわけではないとのこと。</p><p>個人的な家計簿レベルで一番 <strong>簡便</strong> な方法は、ポイントを使った時には、アカウントとしてはポイントをぜんぜん表に出さずに <strong>値引き</strong> として扱うことです。たとえば5,600円の電気製品を買いました、1,200円をポイントから支出しました、その時には：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/09/01 ヨドバシカメラ
+</span></span><span style=display:flex><span>   Expenses:家電:ガジェット     <span style=color:#f92672>(</span> 5,600 JPY - 1,200 JPY<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   Liabilites:Visa
+</span></span></code></pre></div><p>こうすると、実際に支出した <strong>金額</strong> が帳簿上で追跡できるので、多くの場合にはこれで用が足ります。</p><p>高速道路を使ったときの <strong>ETCマイレージポイント</strong> についても事情はほぼ同じです。いま仮にマイレージポイントを1,000円分だけ使った場合には、次のような転記になります：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/09/01  練馬〜高崎
+</span></span><span style=display:flex><span>   Expenses:車両費:高速代    <span style=color:#f92672>(</span> 2,170 JPY - 1,000 JPY<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   Liabilites:Visa
+</span></span></code></pre></div><p>これはこれで、OKなのですが、しかし・・・</p><p>もうすこしきちんとETCポイントの残高などを把握・管理したい場合には、ETCマイレージ特有の特殊性もあって、結構めんどうです。</p><p>ネット上（<a href=https://www.soumunomori.com/forum/thread/trd-98199/>総務の森）</a>にもこんなやり取りがありました：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>＜Q1＞　ETCの利用が多いので、月末に一か月分を未払金であげて、
+</span></span><span style=display:flex><span>クレジット引落し日に現金支払いで計上しています。
+</span></span><span style=display:flex><span>マイレージ還元があった場合の仕訳を教えて下さい。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>＜A1＞　こんばんわ。
+</span></span><span style=display:flex><span>特に仕訳の必要はないと思います。
+</span></span><span style=display:flex><span>利用料の値引のようなものですから料金自体発生しませので
+</span></span><span style=display:flex><span>仕訳のしようがないと思います。
+</span></span><span style=display:flex><span>ポイント還元値引も今のところ同様に特に経理処理は不要のようです。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>＜Q2＞　ご回答ありがとうございます。
+</span></span><span style=display:flex><span>経理処理は不要とのことですが、
+</span></span><span style=display:flex><span>実際に走ったETC料金を未払金で計上しているので還元分が
+</span></span><span style=display:flex><span>未払金として残ってしまうのですが・・・
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>＜A2＞　こんばんわ。
+</span></span><span style=display:flex><span>逆仕訳で還元分戻しは無理でしょうか。
+</span></span><span style=display:flex><span>であれば雑収入で収入処理するよりないと思います。
+</span></span></code></pre></div><p>要するに「値引き」か「雑収入」かのどちらからで処理、という話になっていますが、プロフェッショナルな経理担当の方は何となくすっきりしない心持ちになると思います。</p><h3 id=etcマイレージポイントの残高などを記録-管理する試み>ETCマイレージポイントの残高などを記録・管理する試み</h3><p>ETCマイレージポイントは一般のポイントと次のような点で異なります：</p><ol><li><p>ETCでは、特定の使用日や使用経路に対して、ユーザが自由にポイントを使うことができません。たまったポイントを「ETCサービス」（会社なの？公益法人なの？行政組織なの？）があるルール（FCFS）に従って振り分けて消化してくれます。</p></li><li><p>またマイレージポイントの蓄積と消化はリアルタイムに把握することができません。毎月20日に「ETCサービス」のホームページなどを見て <strong>自分</strong> で確認することが必要です。</p></li><li><p>何よりもポイントのたまり方や消化の仕方などが <strong>超複雑</strong> 。しかも高速道路各社でも微妙にちがう。自前でこのプロセスをプログラム化するのは大変でしょう。情報系の学部生の課題としては面白いかもしれませんが（笑）</p></li></ol><p>しかしきちんと管理するとそれなりに <strong>大きな金額</strong> の戻りが期待できます。がんばってトライする価値はあります。</p><p>まず準備段階として次の２つのサービスにユーザ登録します：</p><ul><li>「ETC利用照会サービス」</li><li>「ETCマイレージサービス」</li></ul><p>これについては良い情報がたくさんネット上にあります。そちらを見てください。上のサービスに登録しても、実際の経理的な処理には <strong>手作業</strong> が必要です。次に例をあげます。</p><h3 id=ptaによる処理の一例>PTAによる処理の一例</h3><p>ここに至るまで、さまざまなやり方を試しました。いずれも「あちらを立てればこちらが立たず」で欲しい情報をきんと管理できている気分がしませんでしたが、現在は次の例のようにLedgerの <strong>仮想アカウント</strong> （virtual accounts）で処理しています。これで、とりあえずほぼ満足の行く形になったと思います。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/08/10  青葉〜町田
+</span></span><span style=display:flex><span>    Expenses:車両費:高速代                  <span style=color:#ae81ff>370</span> JPY
+</span></span><span style=display:flex><span>    Liabilities:Visa
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/08/11   新保土ヶ谷〜大師
+</span></span><span style=display:flex><span>    Expenses:車両費:高速代          <span style=color:#f92672>(</span><span style=color:#ae81ff>320</span> JPY + <span style=color:#ae81ff>690</span> JPY<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    ; 首都高 690円
+</span></span><span style=display:flex><span>    Liabilities:Visa
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/08/12  練馬〜anywhere
+</span></span><span style=display:flex><span>    Expenses:車両費:高速代                   2,000 JPY
+</span></span><span style=display:flex><span>    Liabilities:Visa
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/08/20 * ETCマイレージサービス
+</span></span><span style=display:flex><span>    ; ポイント還元
+</span></span><span style=display:flex><span>    <span style=color:#f92672>[</span>Assets:Mileage:ETC<span style=color:#f92672>]</span>                    2,000 JPY
+</span></span><span style=display:flex><span>    <span style=color:#f92672>[</span>Income:還元Point<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/08/21 <span style=color:#f92672>(</span>08/10<span style=color:#f92672>)</span>  青葉〜町田　マイレージ使用
+</span></span><span style=display:flex><span>   ; 全額マイレージでカバー
+</span></span><span style=display:flex><span>    Liabilities:Visa                    <span style=color:#ae81ff>370</span> JPY
+</span></span><span style=display:flex><span>    Expenses:車両費:高速代              -370 JPY
+</span></span><span style=display:flex><span>    <span style=color:#f92672>(</span>Assets:Mileage:ETC<span style=color:#f92672>)</span>               -370 JPY
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/08/21 <span style=color:#f92672>(</span>08/11<span style=color:#f92672>)</span>  新保土ヶ谷〜大師 マイレージ使用
+</span></span><span style=display:flex><span>    ; 首都高以外をマイレージでカバー
+</span></span><span style=display:flex><span>    Liabilities:Visa              <span style=color:#ae81ff>320</span> JPY
+</span></span><span style=display:flex><span>    Expenses:車両費:高速代         -320 JPY
+</span></span><span style=display:flex><span>    <span style=color:#f92672>(</span>Assets:Mileage:ETC<span style=color:#f92672>)</span>          -320 JPY
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/08/21 <span style=color:#f92672>(</span>08/12<span style=color:#f92672>)</span>  練馬〜anywhere マイレージ使用
+</span></span><span style=display:flex><span>    Liabilities:Visa              <span style=color:#ae81ff>630</span> JPY
+</span></span><span style=display:flex><span>    Expenses:車両費:高速代         -630 JPY
+</span></span><span style=display:flex><span>    <span style=color:#f92672>(</span>Assets:Mileage:ETC<span style=color:#f92672>)</span>    -630 JPY
+</span></span></code></pre></div><p>このような元帳に対して、まず仮想アカウントを <strong>除外</strong> して計算するために、 <code>--real</code> オプションをつけてbalレポートすると：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led bal --real
+</span></span><span style=display:flex><span>	    2,060 JPY  Expenses:車両費:高速代
+</span></span><span style=display:flex><span>	   -2,060 JPY  Liabilities:Visa
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><p>当月の高速代として2,060円が計上されています。当然バランスはゼロになっています。</p><p>次に、仮想アカウント（ <code>Income:還元Point</code> 、 <code>Expenses:Mileage:ETC</code> ）を含めて計算したレポートを見ましょう。 <code>--real</code> オプションを外すだけです：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led bal
+</span></span><span style=display:flex><span>	      <span style=color:#ae81ff>680</span> JPY  Assets:Mileage:ETC
+</span></span><span style=display:flex><span>	    2,060 JPY  Expenses:車両費:高速代
+</span></span><span style=display:flex><span>	   -2,000 JPY  Income:還元Point
+</span></span><span style=display:flex><span>	   -2,060 JPY  Liabilities:Visa
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>	   -1,320 JPY
+</span></span></code></pre></div><p><strong>1行目</strong> に注目して下さい。仮想アカウント <code>Assests:Mileage:ETC</code> の残高が680円であることが示されています。次に <strong>3行目</strong> では、仮想アカウト <code>Income:還元Point</code> が-2,000円であることが示されています。</p><p>このように仮想アカウントを使うことで、マイレージポイントのたまり具合や還元・充当の記録をきちんと残すことができます。</p><p>ただ、このままだとポイント還元がどの高速利用に適用されたのか、わかりづらいという難点があります。</p><p>それを迂回する一つの方法として、Ledgerの <strong>トランザクションコード</strong> を使ってみました。</p><h3 id=トランザクションコードを使う方法>トランザクションコードを使う方法</h3><p>上の記帳例では、マイレージポイントが適用されたトランザクション（下から３つ）では、日付の後ろに <code>(08/10)</code> などのオプショナルな <strong>コード</strong> が追加されています。これはマイレージを適用して割引き対象となった元の道路利用日を記録しています。このコードをつけることで、どの高速利用がどのような金額で割り引かれたかをすぐに知ることができます。 <code>--format</code> オプションを使って、次のようにコマンド入力します：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led --format <span style=color:#e6db74>&#34;%(date) %(account) %(code)\n&#34;</span> reg expenses
+</span></span></code></pre></div><p>その結果は次のようになります：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/08/10 Expenses:車両費:高速代  <span style=color:#ae81ff>370</span> JPY
+</span></span><span style=display:flex><span>2019/08/11 Expenses:車両費:高速代  1,010 JPY
+</span></span><span style=display:flex><span>2019/08/12 Expenses:車両費:高速代  2,000 JPY
+</span></span><span style=display:flex><span>2019/08/21 Expenses:車両費:高速代 08/10 -370 JPY
+</span></span><span style=display:flex><span>2019/08/21 Expenses:車両費:高速代 08/11 -320 JPY
+</span></span><span style=display:flex><span>2019/08/21 Expenses:車両費:高速代 08/12 -630 JPY
+</span></span></code></pre></div><p>これで、もともとの（値引き前の）トランザクションと、マイレージポイントで値引きされたトランザクションとの対応がひと目で分かります。もちろんコードのつけ方は自由です。１日に何回も同じ経路で高速道路利用する場合には、それがわかるような形でコードづけします。</p><h3 id=ということで>ということで</h3><p>この方法によれば、高速代の月ごとの支出など現実に支出された金額と同時に、マイレージポイントの残高をきちんと把握できます。これだけの記録と情報があれば、個人の経理（会社も？）としては不満はありません。またLedgerによるPTAでは、帳面をめくったり大きな会計ソフトを立ち上げたりしなくても、随時、知りたい情報をほぼ <strong>瞬時</strong> に入手できます。</p><p>なお仮想アカウントの名称を <code>Mileage:ETC</code> にしたのは、将来、 <code>Mileage:ANA</code> とかも管理対象にしたいという理由からです。</p><h3 id=おわりに>おわりに・・・</h3><p>思いの外、長くなってしまったので本日はここまでにします。</p><h2 id=acknowledgement>Acknowledgement</h2></div><div class="info post_meta"><time datetime=2019年9月16日T10:10:00+0900 class=date>2019年9月16日</time><ul class=tags><li><a href=https://bred-in-bingo.netlify.app/tags/ledger>ledger</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/emacs>emacs</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/accounting>accounting</a></li></ul></div><div class=clearfix></div></article><div class=other_posts><a href=https://bred-in-bingo.netlify.app/posts/7th-step_ledger/ class=prev>プレーンテキストファイルで「複式」家計簿（7）</a>
+<a href=https://bred-in-bingo.netlify.app/posts/9th-step_ledger/ class=next>プレーンテキストファイルで「複式」家計簿（9）</a></div><aside id=comments></aside></section><a id=back_to_top title="Go To Top" href=#><span><svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></span></a><footer id=footer><p><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><span>&copy; 2025 <a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span><span>Built with <a rel=nofollow target=_blank href=https://gohugo.io>Hugo</a></span>
+<span>Theme by <a rel=nofollow target=_blank href=https://github.com/wayjam/hugo-theme-mixedpaper>WayJam</a></span></p><script src=https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin=anonymous async></script></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J843BPL02S")</script></body></html>

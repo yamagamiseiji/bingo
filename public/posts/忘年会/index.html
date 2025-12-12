@@ -1,301 +1,77 @@
-<!DOCTYPE html>
-<html lang="ja">
-    
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="format-detection" content="telephone=no" />
-
-  <title>
-    忘年会会計をledger-cliで | Yam’s Peace Blog
-  </title>
-
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
-
-  
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
-  />
-
-  
-  
-  
-  
-  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
-
-  
-  
-
-  
-  
-  
-
-  
-
-    
-  
-  
-</head>
-
-
-
-
-    <body>
-        <header id="header">
-  <div class="header_container">
-    <h1 class="sitetitle">
-      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
-    </h1>
-    <nav class="navbar">
-      <ul>
-        <li><a href="http://localhost:1313/">Home</a></li>
-        
-          <li>
-            <a href="/about/">
-              
-              <span>About</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/tags/">
-              
-              <span>Tags</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/archives/">
-              
-              <span>Posts</span>
-            </a>
-          </li>
-
-</ul>
-</nav>
-</div>
-</header>
-
-        
-<section id="main">
-  <article class="post content">
-    <h2 class="title">忘年会会計をledger-cliで</h2>
-    <div class="post_content">
-      <div class="ox-hugo-toc toc">
-<div></div>
-<div class="heading">&#30446;&#27425;</div>
-<ul>
-<li><a href="#%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3">忘年会シーズン</a>
-<ul>
-<li><a href="#%E5%AE%B4%E5%B8%AD%E3%81%A7%E3%82%88%E3%81%8F%E8%A6%8B%E3%82%8B%E5%85%89%E6%99%AF">宴席でよく見る光景</a></li>
-<li><a href="#%E7%84%A1%E7%A4%BC%E8%AC%9B">無礼講</a></li>
-<li><a href="#%E3%81%AA%E3%81%AE%E3%81%A7">なので・・・</a></li>
-</ul>
-</li>
-<li><a href="#%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%81%AE%E4%BC%9A%E8%A8%88">忘年会の会計</a>
-<ul>
-<li><a href="#%E7%8F%BE%E9%87%91%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E5%89%B2%E3%82%8A%E5%8B%98%E3%81%AE%E3%81%A8%E3%81%8D">現金ベースの割り勘のとき</a></li>
-<li><a href="#%E5%A4%AA%E9%83%8E%E3%81%8C%E3%82%AF%E3%83%AC%E3%82%B8%E3%83%83%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A7%E7%AB%8B%E6%9B%BF%E6%89%95%E3%81%84%E3%82%92%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%9F">太郎がクレジットカードで立替払いをしてくれた</a></li>
-<li><a href="#%E8%87%AA%E5%88%86%E3%81%AE%E3%82%AF%E3%83%AC%E3%82%B8%E3%83%83%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A7%E5%85%A8%E5%93%A1%E5%88%86%E3%82%92%E7%AB%8B%E6%9B%BF%E6%89%95%E3%81%84%E3%81%97%E3%81%9F">自分のクレジットカードで全員分を立替払いした</a></li>
-</ul>
-</li>
-<li><a href="#acknowledgement">Acknowledgement</a></li>
-</ul>
-</div>
-<!--endtoc-->
-<h2 id="忘年会シーズン">忘年会シーズン</h2>
-<p>忘年会シーズンですね。</p>
-<p>最近は <strong>会社の忘年会</strong> への風当たりが強くなってきています。とくに若い世代に不賛同の声が多いようです。その一方で、年長者には伝統的な行事のひとつとして継続して欲しいという気持ちがあるのも分かります。</p>
-<p><a id="orgaca5b93"></a></p>
-<figure><img src="/ochoko-tokkuri.jpg" width="60%"/>
-</figure>
-
-<p>若い世代と年長者の両方を立てるために、忘年会のお約束として「出席を無理強いしない」「宴席で仕事の話はしない」「セクハラ・パワハラ・アルハラはしない」などを申し合わせるのはどうでしょうか。</p>
-<p>と言ってはみたものの、こんな申し合わせ程度では事態は変わらないような気がします。わが国では宴席に限らず仕事場でも、多くの人が日々、序列や階層性を強く意識しながら生活しています。とくに男性にその傾向が強いように思います。哺乳類のオスは、ニホンザルでもイヌでも群れにおける自分の序列にとても敏感です。各個体はその序列にふさわしい態度をとろうとします。そうやって群れが無用な混乱に陥るのを予防しているのだと思います。</p>
-<h3 id="宴席でよく見る光景">宴席でよく見る光景</h3>
-<p>宴会で男性3名（ <strong>A</strong>, <strong>B</strong>, <strong>C</strong> さん）の席順が年齢や階級のとおり <strong>A&gt;B&gt;C</strong> になっていたとすると、真ん中の <strong>B</strong> さんがお隣の <strong>A</strong> さんとおしゃべりをする時は、名前は「さん」付けし、丁寧語や敬語を使います。振り向いて <strong>C</strong> さんとおしゃべりをする時は、名前の呼び捨てから始まり「おぅ」とか「だぜ」「じゃん（横浜弁ですw）」など横柄なしゃべりになります。もちろん男性でもこの切り替えが好きな人と嫌いな人がいます。女性はここまで激しくないけれど、中には態度・物腰で地位の上下を意識させることが得意な人がいます。</p>
-<p>いずれにしても、やってる本人の心地よさとは別に、傍から見ていて気持ちの良いものではありません。人間以外の動物もやっているから人間もやってよい、というふうにはボクは思いません。</p>
-<h3 id="無礼講">無礼講</h3>
-<p>ところで「無礼講」ということばがあります。これは「無礼」にして良いのではなくて、地位の上下を気にせずに宴を楽しもうという意味です。どうせ人間なんぞは <strong>神様</strong> の前では身分の上下などあってもたかがしれているという発想だと思います。だから宴席に限らず、常に上下左右・東西南北の誰に対しても平等に柔らかく優しい物言いをすれば良いと思っています。</p>
-<p>ところが、わが国ではどうしても「下の者」はへりくだり緊張し、言いたいことを我慢する傾向にあります。「上の者」の話し方や物腰がとても柔らかく優しくても、その傾向はあまり変わりません。</p>
-<h3 id="なので">なので・・・</h3>
-<p>ボクらのように年長に属する者は、自分がいるだけで若い方々はストレスを感じていることを常に意識することが大事だと思っています。「一緒に飲んでもらってありがとう」という <strong>感謝</strong> の気持ち、あるいは「気を使ってもらって申し訳ない」という <strong>お詫び</strong> の気持ちとして、多少なりとも経済的な負担を重くさせてもらう、つまり「若い方々が気を使っている分、年長者はお金を使う」ということを心がけてきたのですが伝わっているかどうか・・・w</p>
-<p>そこで今回は、忘年会の会計についてのおはなしです。</p>
-<h2 id="忘年会の会計">忘年会の会計</h2>
-<p>次のような忘年会をやった場合のポスティングを考えてみます。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>自分と太郎、次郎、花子の4人でファンシーなレストランで忘年会をしました。
-</span></span><span style="display:flex;"><span>費用は4人で21,345円でした。
-</span></span></code></pre></div><p>会費の支払い方法ごとに転記例をあげます。</p>
-<h3 id="現金ベースの割り勘のとき">現金ベースの割り勘のとき</h3>
-<p>現金ベースなら「おごり」「割り勘」のいずれにしても転記は簡単。単に自分が支払った金額を転記するだけです。たとえば今回の忘年会は均等割りでは <strong>5,336円</strong> になるけど、自分としてはキリの良い金額＝ <strong>5,400円</strong> を払ったというケースでは：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/12/20 * ファンシーレストラン
-</span></span><span style="display:flex;"><span>   ; 4人で忘年会、21,345円を割り勘　
-</span></span><span style="display:flex;"><span>   Expenses:宴会費    5,400 JPY
-</span></span><span style="display:flex;"><span>   Assets:Cash
-</span></span></code></pre></div><p>個人的に「おごられた」場合には転記不要ですが、政治家とか後援会、政治団体に「おごられた」ら明細のコピーをもらって保管しておきましょうｗ</p>
-<h3 id="太郎がクレジットカードで立替払いをしてくれた">太郎がクレジットカードで立替払いをしてくれた</h3>
-<p>この場合にも上と同じように支払った <strong>5,400円</strong> を転記するだけ。もし太郎への返金が遅れる、または遅れたようだったら <strong>未払金</strong> にしておいてもよいでしょう：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/12/20 * ファンシーレストラン
-</span></span><span style="display:flex;"><span>   Expeses:忘年会       5,400 JPY
-</span></span><span style="display:flex;"><span>   Assets:未払金:太郎  -5,400 JPY
-</span></span><span style="display:flex;"><span>;
-</span></span><span style="display:flex;"><span>; 年が明けて・・・
-</span></span><span style="display:flex;"><span>;
-</span></span><span style="display:flex;"><span>2020/01/10 * 太郎に返金
-</span></span><span style="display:flex;"><span>    Assets:未払金:太郎   5,400 JPY
-</span></span><span style="display:flex;"><span>    Assets:Cash         -5,400 JPY
-</span></span></code></pre></div><p>こうしておけば、年末の締めの時に太郎への未払金が <strong>5,400円</strong> 残っていることがわかります：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ led bal
-</span></span><span style="display:flex;"><span>	  -5,400 JPY  Assets:未払金:太郎
-</span></span><span style="display:flex;"><span>	   5,400 JPY  Expeses:忘年会
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><h3 id="自分のクレジットカードで全員分を立替払いした">自分のクレジットカードで全員分を立替払いした</h3>
-<p>とりあえず自分のカードを切って全額を支払いました。その際、
-<strong>21,345円</strong> を均等割りせずに、花子は飲まなかったので <strong>3,000円</strong> 、自分と太郎、次郎は割り勘で <strong>6,115円</strong> という風に <strong>ウエイトをつけた割り勘</strong> の場合：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/12/20 * ファンシーレストラン
-</span></span><span style="display:flex;"><span>   ; 4人分 21,345円をクレカで立替払いした
-</span></span><span style="display:flex;"><span>   Expenses:宴会費          6,115 JPY
-</span></span><span style="display:flex;"><span>   Assets:未収金:太郎       6,115 JPY
-</span></span><span style="display:flex;"><span>   Assets:未収金:次郎       6,115 JPY
-</span></span><span style="display:flex;"><span>   Assets:未収金:花子       3,000 JPY
-</span></span><span style="display:flex;"><span>   Liabilities:Visa       -21,345 JPY
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/12/21 * 花子から返金
-</span></span><span style="display:flex;"><span>    Assets:Cash             3,000 JPY
-</span></span><span style="display:flex;"><span>    Assets:未収金:花子     -3,000 JPY
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2019/12/22 * 太郎から返金
-</span></span><span style="display:flex;"><span>    ; 切りの良い金額＝6,200で返金された
-</span></span><span style="display:flex;"><span>    Assets:Cash              6,200 JPY
-</span></span><span style="display:flex;"><span>    Assets:未収金:太郎      -6,115 JPY
-</span></span><span style="display:flex;"><span>    Equity:Adjustments
-</span></span><span style="display:flex;"><span>;
-</span></span><span style="display:flex;"><span>; 次郎は年内に返金せず・・・
-</span></span><span style="display:flex;"><span>;
-</span></span><span style="display:flex;"><span>2020/01/10 * 次郎から返金
-</span></span><span style="display:flex;"><span>    ; 支払い遅れのお詫びも入れて 6,500円が返金された
-</span></span><span style="display:flex;"><span>    Assets:Cash              6,500 JPY
-</span></span><span style="display:flex;"><span>    Assets:未収金:次郎      -6,115 JPY
-</span></span><span style="display:flex;"><span>    Equity:Adjustments
-</span></span></code></pre></div><h4 id="balレポート">balレポート</h4>
-<p>上の転記についてタイミング別にbalレポートを見てみます。</p>
-<ul>
-<li><strong>忘年会当日</strong> のbalレポート：</li>
-</ul>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ led bal
-</span></span><span style="display:flex;"><span>	  15,230 JPY  Assets:未収金
-</span></span><span style="display:flex;"><span>	   6,115 JPY    太郎
-</span></span><span style="display:flex;"><span>	   6,115 JPY    次郎
-</span></span><span style="display:flex;"><span>	   3,000 JPY    花子
-</span></span><span style="display:flex;"><span>	   6,115 JPY  Expenses:宴会費
-</span></span><span style="display:flex;"><span>	 -21,345 JPY  Liabilities:Visa
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><ul>
-<li><strong>年末</strong> 12月31日のbalレポート。 <strong>未収金</strong> をクエリーすると：</li>
-</ul>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ led bal 未収金
-</span></span><span style="display:flex;"><span>	   6,115 JPY  Assets:未収金
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>    太郎
-</span></span><span style="display:flex;"><span>	   6,115 JPY    次郎
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>    花子
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>	   6,115 JPY
-</span></span></code></pre></div><p>花子と太郎からは返金を受けているので未収金ゼロ、次郎だけが返済を忘れているw</p>
-<ul>
-<li>年開けの <strong>1月10日</strong> 、次郎がようやく返済。その時点でのbalレポート：</li>
-</ul>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>	  15,700 JPY  Assets
-</span></span><span style="display:flex;"><span>	  15,700 JPY    Cash
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>    未収金
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>      太郎
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>      次郎
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>      花子
-</span></span><span style="display:flex;"><span>	    -470 JPY  Equity:Adjustments
-</span></span><span style="display:flex;"><span>	   6,115 JPY  Expenses:宴会費
-</span></span><span style="display:flex;"><span>	 -21,345 JPY  Liabilities:Visa
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><p>めでたく未収金がゼロになりました。なお、全体のバランスをゼロにするために、 <code>Equity:Adjustments</code> というアカウントを設けて差額を収納しています。</p>
-<p>ではLedger-cliで良い忘年会を！&#x1f376;</p>
-<h2 id="acknowledgement">Acknowledgement</h2>
-
-    </div>
-    <div class="info post_meta">
-      <time datetime=2019年12月17日T00:00:00&#43;0900 class="date">2019年12月17日</time>
-      
-        <ul class="tags">
-        
-          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
-        
-          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
-        
-          <li> <a href="http://localhost:1313/tags/psychology">psychology</a> </li>
-        
-        </ul>
-      
-      
-    </div>
-    <div class="clearfix"></div>
-  </article>
-  
-    <div class="other_posts">
-      
-      <a href="http://localhost:1313/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/" class="prev">榎下城と観護寺</a>
-      
-      
-      <a href="http://localhost:1313/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/" class="next">ぼちぼちですが可視化してます</a>
-      
-    </div>
-    <aside id="comments">
-</aside>
-
-  
-</section>
-
-        <a id="back_to_top" title="Go To Top" href="#">
-  <span>
-    <svg viewBox="0 0 24 24">
-      <path fill="none" d="M0 0h24v24H0z"></path>
-      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
-    </svg>
-  </span>
-</a>
-
-        <footer id="footer">
-  <p>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
-    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
-    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
-  </p>
-
-  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
-</footer>
-
-	
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-J843BPL02S');
-</script>
-
-    </body>
-</html>
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><title>忘年会会計をledger-cliで | Yam’s Peace Blog
+</title><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css><link rel=stylesheet href=https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/++gZIktTledhjw="><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z5K4GXE0V9",{anonymize_ip:!0})}</script></head><body><header id=header><div class=header_container><h1 class=sitetitle><a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a></h1><nav class=navbar><ul><li><a href=https://bred-in-bingo.netlify.app/>Home</a></li><li><a href=/about/><span>About</span></a></li><li><a href=/tags/><span>Tags</span></a></li><li><a href=/archives/><span>Posts</span></a></li></ul></nav></div></header><section id=main><article class="post content"><h2 class=title>忘年会会計をledger-cliで</h2><div class=post_content><div class="ox-hugo-toc toc"><div></div><div class=heading>&#30446;&#27425;</div><ul><li><a href=#%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3>忘年会シーズン</a><ul><li><a href=#%E5%AE%B4%E5%B8%AD%E3%81%A7%E3%82%88%E3%81%8F%E8%A6%8B%E3%82%8B%E5%85%89%E6%99%AF>宴席でよく見る光景</a></li><li><a href=#%E7%84%A1%E7%A4%BC%E8%AC%9B>無礼講</a></li><li><a href=#%E3%81%AA%E3%81%AE%E3%81%A7>なので・・・</a></li></ul></li><li><a href=#%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%81%AE%E4%BC%9A%E8%A8%88>忘年会の会計</a><ul><li><a href=#%E7%8F%BE%E9%87%91%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E5%89%B2%E3%82%8A%E5%8B%98%E3%81%AE%E3%81%A8%E3%81%8D>現金ベースの割り勘のとき</a></li><li><a href=#%E5%A4%AA%E9%83%8E%E3%81%8C%E3%82%AF%E3%83%AC%E3%82%B8%E3%83%83%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A7%E7%AB%8B%E6%9B%BF%E6%89%95%E3%81%84%E3%82%92%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%9F>太郎がクレジットカードで立替払いをしてくれた</a></li><li><a href=#%E8%87%AA%E5%88%86%E3%81%AE%E3%82%AF%E3%83%AC%E3%82%B8%E3%83%83%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A7%E5%85%A8%E5%93%A1%E5%88%86%E3%82%92%E7%AB%8B%E6%9B%BF%E6%89%95%E3%81%84%E3%81%97%E3%81%9F>自分のクレジットカードで全員分を立替払いした</a></li></ul></li><li><a href=#acknowledgement>Acknowledgement</a></li></ul></div><h2 id=忘年会シーズン>忘年会シーズン</h2><p>忘年会シーズンですね。</p><p>最近は <strong>会社の忘年会</strong> への風当たりが強くなってきています。とくに若い世代に不賛同の声が多いようです。その一方で、年長者には伝統的な行事のひとつとして継続して欲しいという気持ちがあるのも分かります。</p><p><a id=orgaca5b93></a></p><figure><img src=/ochoko-tokkuri.jpg width=60%></figure><p>若い世代と年長者の両方を立てるために、忘年会のお約束として「出席を無理強いしない」「宴席で仕事の話はしない」「セクハラ・パワハラ・アルハラはしない」などを申し合わせるのはどうでしょうか。</p><p>と言ってはみたものの、こんな申し合わせ程度では事態は変わらないような気がします。わが国では宴席に限らず仕事場でも、多くの人が日々、序列や階層性を強く意識しながら生活しています。とくに男性にその傾向が強いように思います。哺乳類のオスは、ニホンザルでもイヌでも群れにおける自分の序列にとても敏感です。各個体はその序列にふさわしい態度をとろうとします。そうやって群れが無用な混乱に陥るのを予防しているのだと思います。</p><h3 id=宴席でよく見る光景>宴席でよく見る光景</h3><p>宴会で男性3名（ <strong>A</strong>, <strong>B</strong>, <strong>C</strong> さん）の席順が年齢や階級のとおり <strong>A>B>C</strong> になっていたとすると、真ん中の <strong>B</strong> さんがお隣の <strong>A</strong> さんとおしゃべりをする時は、名前は「さん」付けし、丁寧語や敬語を使います。振り向いて <strong>C</strong> さんとおしゃべりをする時は、名前の呼び捨てから始まり「おぅ」とか「だぜ」「じゃん（横浜弁ですw）」など横柄なしゃべりになります。もちろん男性でもこの切り替えが好きな人と嫌いな人がいます。女性はここまで激しくないけれど、中には態度・物腰で地位の上下を意識させることが得意な人がいます。</p><p>いずれにしても、やってる本人の心地よさとは別に、傍から見ていて気持ちの良いものではありません。人間以外の動物もやっているから人間もやってよい、というふうにはボクは思いません。</p><h3 id=無礼講>無礼講</h3><p>ところで「無礼講」ということばがあります。これは「無礼」にして良いのではなくて、地位の上下を気にせずに宴を楽しもうという意味です。どうせ人間なんぞは <strong>神様</strong> の前では身分の上下などあってもたかがしれているという発想だと思います。だから宴席に限らず、常に上下左右・東西南北の誰に対しても平等に柔らかく優しい物言いをすれば良いと思っています。</p><p>ところが、わが国ではどうしても「下の者」はへりくだり緊張し、言いたいことを我慢する傾向にあります。「上の者」の話し方や物腰がとても柔らかく優しくても、その傾向はあまり変わりません。</p><h3 id=なので>なので・・・</h3><p>ボクらのように年長に属する者は、自分がいるだけで若い方々はストレスを感じていることを常に意識することが大事だと思っています。「一緒に飲んでもらってありがとう」という <strong>感謝</strong> の気持ち、あるいは「気を使ってもらって申し訳ない」という <strong>お詫び</strong> の気持ちとして、多少なりとも経済的な負担を重くさせてもらう、つまり「若い方々が気を使っている分、年長者はお金を使う」ということを心がけてきたのですが伝わっているかどうか・・・w</p><p>そこで今回は、忘年会の会計についてのおはなしです。</p><h2 id=忘年会の会計>忘年会の会計</h2><p>次のような忘年会をやった場合のポスティングを考えてみます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>自分と太郎、次郎、花子の4人でファンシーなレストランで忘年会をしました。
+</span></span><span style=display:flex><span>費用は4人で21,345円でした。
+</span></span></code></pre></div><p>会費の支払い方法ごとに転記例をあげます。</p><h3 id=現金ベースの割り勘のとき>現金ベースの割り勘のとき</h3><p>現金ベースなら「おごり」「割り勘」のいずれにしても転記は簡単。単に自分が支払った金額を転記するだけです。たとえば今回の忘年会は均等割りでは <strong>5,336円</strong> になるけど、自分としてはキリの良い金額＝ <strong>5,400円</strong> を払ったというケースでは：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/12/20 * ファンシーレストラン
+</span></span><span style=display:flex><span>   ; 4人で忘年会、21,345円を割り勘　
+</span></span><span style=display:flex><span>   Expenses:宴会費    5,400 JPY
+</span></span><span style=display:flex><span>   Assets:Cash
+</span></span></code></pre></div><p>個人的に「おごられた」場合には転記不要ですが、政治家とか後援会、政治団体に「おごられた」ら明細のコピーをもらって保管しておきましょうｗ</p><h3 id=太郎がクレジットカードで立替払いをしてくれた>太郎がクレジットカードで立替払いをしてくれた</h3><p>この場合にも上と同じように支払った <strong>5,400円</strong> を転記するだけ。もし太郎への返金が遅れる、または遅れたようだったら <strong>未払金</strong> にしておいてもよいでしょう：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/12/20 * ファンシーレストラン
+</span></span><span style=display:flex><span>   Expeses:忘年会       5,400 JPY
+</span></span><span style=display:flex><span>   Assets:未払金:太郎  -5,400 JPY
+</span></span><span style=display:flex><span>;
+</span></span><span style=display:flex><span>; 年が明けて・・・
+</span></span><span style=display:flex><span>;
+</span></span><span style=display:flex><span>2020/01/10 * 太郎に返金
+</span></span><span style=display:flex><span>    Assets:未払金:太郎   5,400 JPY
+</span></span><span style=display:flex><span>    Assets:Cash         -5,400 JPY
+</span></span></code></pre></div><p>こうしておけば、年末の締めの時に太郎への未払金が <strong>5,400円</strong> 残っていることがわかります：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ led bal
+</span></span><span style=display:flex><span>	  -5,400 JPY  Assets:未払金:太郎
+</span></span><span style=display:flex><span>	   5,400 JPY  Expeses:忘年会
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><h3 id=自分のクレジットカードで全員分を立替払いした>自分のクレジットカードで全員分を立替払いした</h3><p>とりあえず自分のカードを切って全額を支払いました。その際、
+<strong>21,345円</strong> を均等割りせずに、花子は飲まなかったので <strong>3,000円</strong> 、自分と太郎、次郎は割り勘で <strong>6,115円</strong> という風に <strong>ウエイトをつけた割り勘</strong> の場合：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/12/20 * ファンシーレストラン
+</span></span><span style=display:flex><span>   ; 4人分 21,345円をクレカで立替払いした
+</span></span><span style=display:flex><span>   Expenses:宴会費          6,115 JPY
+</span></span><span style=display:flex><span>   Assets:未収金:太郎       6,115 JPY
+</span></span><span style=display:flex><span>   Assets:未収金:次郎       6,115 JPY
+</span></span><span style=display:flex><span>   Assets:未収金:花子       3,000 JPY
+</span></span><span style=display:flex><span>   Liabilities:Visa       -21,345 JPY
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/12/21 * 花子から返金
+</span></span><span style=display:flex><span>    Assets:Cash             3,000 JPY
+</span></span><span style=display:flex><span>    Assets:未収金:花子     -3,000 JPY
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2019/12/22 * 太郎から返金
+</span></span><span style=display:flex><span>    ; 切りの良い金額＝6,200で返金された
+</span></span><span style=display:flex><span>    Assets:Cash              6,200 JPY
+</span></span><span style=display:flex><span>    Assets:未収金:太郎      -6,115 JPY
+</span></span><span style=display:flex><span>    Equity:Adjustments
+</span></span><span style=display:flex><span>;
+</span></span><span style=display:flex><span>; 次郎は年内に返金せず・・・
+</span></span><span style=display:flex><span>;
+</span></span><span style=display:flex><span>2020/01/10 * 次郎から返金
+</span></span><span style=display:flex><span>    ; 支払い遅れのお詫びも入れて 6,500円が返金された
+</span></span><span style=display:flex><span>    Assets:Cash              6,500 JPY
+</span></span><span style=display:flex><span>    Assets:未収金:次郎      -6,115 JPY
+</span></span><span style=display:flex><span>    Equity:Adjustments
+</span></span></code></pre></div><h4 id=balレポート>balレポート</h4><p>上の転記についてタイミング別にbalレポートを見てみます。</p><ul><li><strong>忘年会当日</strong> のbalレポート：</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ led bal
+</span></span><span style=display:flex><span>	  15,230 JPY  Assets:未収金
+</span></span><span style=display:flex><span>	   6,115 JPY    太郎
+</span></span><span style=display:flex><span>	   6,115 JPY    次郎
+</span></span><span style=display:flex><span>	   3,000 JPY    花子
+</span></span><span style=display:flex><span>	   6,115 JPY  Expenses:宴会費
+</span></span><span style=display:flex><span>	 -21,345 JPY  Liabilities:Visa
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><ul><li><strong>年末</strong> 12月31日のbalレポート。 <strong>未収金</strong> をクエリーすると：</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ led bal 未収金
+</span></span><span style=display:flex><span>	   6,115 JPY  Assets:未収金
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>    太郎
+</span></span><span style=display:flex><span>	   6,115 JPY    次郎
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>    花子
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>	   6,115 JPY
+</span></span></code></pre></div><p>花子と太郎からは返金を受けているので未収金ゼロ、次郎だけが返済を忘れているw</p><ul><li>年開けの <strong>1月10日</strong> 、次郎がようやく返済。その時点でのbalレポート：</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>	  15,700 JPY  Assets
+</span></span><span style=display:flex><span>	  15,700 JPY    Cash
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>    未収金
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>      太郎
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>      次郎
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>      花子
+</span></span><span style=display:flex><span>	    -470 JPY  Equity:Adjustments
+</span></span><span style=display:flex><span>	   6,115 JPY  Expenses:宴会費
+</span></span><span style=display:flex><span>	 -21,345 JPY  Liabilities:Visa
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><p>めでたく未収金がゼロになりました。なお、全体のバランスをゼロにするために、 <code>Equity:Adjustments</code> というアカウントを設けて差額を収納しています。</p><p>ではLedger-cliで良い忘年会を！&#x1f376;</p><h2 id=acknowledgement>Acknowledgement</h2></div><div class="info post_meta"><time datetime=2019年12月17日T00:00:00+0900 class=date>2019年12月17日</time><ul class=tags><li><a href=https://bred-in-bingo.netlify.app/tags/ledger>ledger</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/accounting>accounting</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/psychology>psychology</a></li></ul></div><div class=clearfix></div></article><div class=other_posts><a href=https://bred-in-bingo.netlify.app/posts/%E6%A6%8E%E4%B8%8B%E5%9F%8E/ class=prev>榎下城と観護寺</a>
+<a href=https://bred-in-bingo.netlify.app/posts/%E5%8F%AF%E8%A6%96%E5%8C%96/ class=next>ぼちぼちですが可視化してます</a></div><aside id=comments></aside></section><a id=back_to_top title="Go To Top" href=#><span><svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></span></a><footer id=footer><p><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><span>&copy; 2025 <a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span><span>Built with <a rel=nofollow target=_blank href=https://gohugo.io>Hugo</a></span>
+<span>Theme by <a rel=nofollow target=_blank href=https://github.com/wayjam/hugo-theme-mixedpaper>WayJam</a></span></p><script src=https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin=anonymous async></script></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J843BPL02S")</script></body></html>

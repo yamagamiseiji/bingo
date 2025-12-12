@@ -1,341 +1,82 @@
-<!DOCTYPE html>
-<html lang="ja">
-    
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="format-detection" content="telephone=no" />
-
-  <title>
-    プレーンテキストファイルで「複式」家計簿（9） | Yam’s Peace Blog
-  </title>
-
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
-
-  
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
-  />
-
-  
-  
-  
-  
-  <link rel="stylesheet" href="http://localhost:1313/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
-
-  
-  
-
-  
-  
-  
-
-  
-
-    
-  
-  
-</head>
-
-
-
-
-    <body>
-        <header id="header">
-  <div class="header_container">
-    <h1 class="sitetitle">
-      <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
-    </h1>
-    <nav class="navbar">
-      <ul>
-        <li><a href="http://localhost:1313/">Home</a></li>
-        
-          <li>
-            <a href="/about/">
-              
-              <span>About</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/tags/">
-              
-              <span>Tags</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/archives/">
-              
-              <span>Posts</span>
-            </a>
-          </li>
-
-</ul>
-</nav>
-</div>
-</header>
-
-        
-<section id="main">
-  <article class="post content">
-    <h2 class="title">プレーンテキストファイルで「複式」家計簿（9）</h2>
-    <div class="post_content">
-      <div class="ox-hugo-toc toc">
-<div></div>
-<div class="heading">&#30446;&#27425;</div>
-<ul>
-<li><a href="#%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%83%AC%E3%82%B9%E9%82%84%E5%85%83%E3%81%8C%E5%A7%8B%E3%81%BE%E3%81%A3%E3%81%9F">キャッシュレス還元が始まった</a>
-<ul>
-<li><a href="#real-%E3%81%8B-virtual%E3%81%8B">real か virtualか</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BE%BF%E5%88%A9%E3%81%AA%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%9F%E3%81%A1">便利なコマンド・オプションたち</a>
-<ul>
-<li><a href="#accounts%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">accountsコマンド</a></li>
-<li><a href="#payees%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">payeesコマンド</a></li>
-<li><a href="#by-payee-p-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3"><code>--by-payee</code> （ <code>-P</code> ）オプション</a></li>
-<li><a href="#xact%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">xactコマンド</a></li>
-</ul>
-</li>
-<li><a href="#%E3%81%8A%E3%81%BE%E3%81%91-suica%E3%81%AE%E6%AE%8B%E9%AB%98%E3%82%92pc%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">おまけ &ndash; suicaの残高をPCで確認する</a>
-<ul>
-<li><a href="#suica%E3%81%AE%E6%AE%8B%E9%AB%98">suicaの残高</a></li>
-<li><a href="#pasori%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E6%AE%8B%E9%AB%98%E7%A2%BA%E8%AA%8D">PaSoRiを使って残高確認</a></li>
-</ul>
-</li>
-<li><a href="#acknowledgement">Acknowledgement</a></li>
-</ul>
-</div>
-<!--endtoc-->
-<p>2019年10月1日から消費税が（一部）10%に増税になりました。ボクは経済学が専門ではありませんが、不況下で増税するのはどういう理屈なんでしょうか？不況には <strong><strong>減税</strong></strong> するものと思っていました。経済の専門家のみなさんはオッケーなんですかね？</p>
-<p>ま、それはともかくとして、庶民としてはなんとか対応しなければならないわけです。その一つが家計簿などの帳簿でどうやって仕訳するか、です（小さいなぁ〜ｗ）。</p>
-<p>物品やサービスごとに税率が8%だったり10%だったりするだけならば、帳簿書きは簡単。ですが、今回は増税に同期して <strong><strong>キャッシュレス還元</strong></strong> という不思議な仕掛けが始まりました。ここでは、とりあえずそれへの対応を紹介します。</p>
-<h2 id="キャッシュレス還元が始まった">キャッシュレス還元が始まった</h2>
-<p>これが <strong><strong>増税</strong></strong> とペアになって始まったこと、それから８ヶ月後には終わりになることなど、とても <strong><strong>イミフ</strong></strong> な状況ですが、今日（10月3日）、増税後はじめてセブンイレブンで買い物をしてレシートをもらいました。次のような内容でした：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>　　領　収　書
-</span></span><span style="display:flex;"><span>こしあんぱん	108
-</span></span><span style="display:flex;"><span>サンドイッチ	268
-</span></span><span style="display:flex;"><span>赤ワイン 	880
-</span></span><span style="display:flex;"><span>-----------------------
-</span></span><span style="display:flex;"><span>小計（税抜 8%）	376
-</span></span><span style="display:flex;"><span>　消費税等	 30
-</span></span><span style="display:flex;"><span>小計（税抜10%）	880
-</span></span><span style="display:flex;"><span>　消費税等	 88
-</span></span><span style="display:flex;"><span>-----------------------
-</span></span><span style="display:flex;"><span>合計	      1,374
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>（税率 8%対象	406）
-</span></span><span style="display:flex;"><span>（税率10%対象	968）
-</span></span><span style="display:flex;"><span>（内消費税等 8%	 30）
-</span></span><span style="display:flex;"><span>（内消費税等10%	 88）
-</span></span><span style="display:flex;"><span>キャッシュレス還元額  -27
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>nanaco支払い	1,374
-</span></span></code></pre></div><p>ははは、本当に変な領収書・明細書ですね。それはさておき問題はこれをどう仕訳するかです。</p>
-<p>この<a href="http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/">シリーズ(7)</a> で、ETCの還元ポイントを捉えるために <strong><strong>仮想アカウント</strong></strong> <code>[Income:還元Point:ETC]</code> を使いました。今回もそれにならって、キャッシュレス還元を <code>Income:還元Point:キャッシュレス</code> に収納してみました。ただし仮想アカウントではなくて <strong><strong>real</strong></strong> なアカウントとしてです。次のような感じです：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>2019/10/03   セブンイレブン
-</span></span><span style="display:flex;"><span>    Expenses:Grocery:Liquor                      <span style="color:#ae81ff">968</span> JPY
-</span></span><span style="display:flex;"><span>    Expenses:Meals:Lunch                         <span style="color:#ae81ff">406</span> JPY
-</span></span><span style="display:flex;"><span>    Income:還元Point:キャッシュレス              -27 JPY
-</span></span><span style="display:flex;"><span>    Assets:nanaco
-</span></span></code></pre></div><p>これでbal/regレポートを見ると：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal 還元
-</span></span><span style="display:flex;"><span>	  -3,027 JPY  Income:還元Point
-</span></span><span style="display:flex;"><span>	  -3,000 JPY    ETC
-</span></span><span style="display:flex;"><span>	     -27 JPY    キャッシュレス
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>	  -3,027 JPY
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ led reg 還元
-</span></span><span style="display:flex;"><span>2019/08/20 ETCマイレージサービス <span style="color:#f92672">[</span>Income:還元Point:ETC<span style="color:#f92672">]</span>   -3,000 JPY   -3,000 JP
-</span></span><span style="display:flex;"><span>2019/10/03 セブンイレブン       Income:還元Point:キャッシュレス  -27 JPY  -3,027 JPY
-</span></span></code></pre></div><p>また当然ですが、支出金額、nanacoからの振り出しとか全ての点でつじつまが合っています：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led bal -p today
-</span></span><span style="display:flex;"><span>	  -1,347 JPY  Assets:nanaco
-</span></span><span style="display:flex;"><span>	   1,374 JPY  Expenses
-</span></span><span style="display:flex;"><span>	     <span style="color:#ae81ff">968</span> JPY    Grocery:Liquor
-</span></span><span style="display:flex;"><span>	     <span style="color:#ae81ff">406</span> JPY    Meals:Lunch
-</span></span><span style="display:flex;"><span>	     -27 JPY  Income:還元Point:キャッシュレス
-</span></span><span style="display:flex;"><span>--------------------
-</span></span><span style="display:flex;"><span>		   <span style="color:#ae81ff">0</span>
-</span></span></code></pre></div><p>要するに、キャッシュレス還元を <strong><strong>雑収入</strong></strong> としてに扱ったというわけです。キャッシュレス還元については、このようにrealなアカウントとして扱っても大きな問題は起きません。</p>
-<h3 id="real-か-virtualか">real か virtualか</h3>
-<p><a href="http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/">シリーズ(8)</a> では、ETCの還元ポイントはvirtualなアカウントにしました。なぜ、今回のキャッシュレスはrealなアカウントにしたのでしょうか？</p>
-<p>今回のキャッシュレス還元は（少なくともnanacoでは）、トランザクションの当日にリアルタイムに一定の金額が明示的に還元されます。どの支出に対して、どれだけの還元があったかが一目瞭然です。しかし先のETCの場合には、還元額がわかるのが1ヶ月以上も後になってからです。この <strong>タイムラグ</strong> と、それからユーザ側にはどの支出に対してポイントを適用するかを決める <strong>自由</strong> がありません。</p>
-<p>キャッシュレス還元ポイントは、実際のお金のようにそのポイントをいつ、何を購入するときに使うかをユーザが決めることができます。なので <code>Income</code> として扱うことに何の矛盾も生じません。他にもありますが、主にこれらの点から、ETCはrealなアカウントで把握するのが難しかったわけです。</p>
-<h2 id="便利なコマンド-オプションたち">便利なコマンド・オプションたち</h2>
-<p>帳簿に紛れ込むミスやエラーをできるだけ少なくするために便利な機能をまとめてみました。元帳管理のための必須の機能と言っても良いでしょう。</p>
-<h3 id="accountsコマンド">accountsコマンド</h3>
-<p>長期間 Ledgerを使っていると、アカウントの構造に混乱が生じます。タイプミスも混入します。そんな場合に便利なのが <code>accounts</code> コマンドです。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led accounts
-</span></span></code></pre></div><p>これで自分のLedgerファイルで使われているすべてのアカウント名がリストされます。結果を上から順番にながめるだけでも、タイプミスとか「表記のゆらぎ」とか色々とみつかります。</p>
-<p><code>accounts</code> の後ろに正規表現を入力すれば、それにマッチするアカウントがリストされます：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led accounts liab
-</span></span></code></pre></div><p>これで <code>Liabilities</code> に属するアカウントのリストが得られます。</p>
-<p><code>accounts</code> コマンドでは <code>--count</code> オプションがおすすめです。これをつけると、すべてのアカウントについてそれが使われた <strong>回数</strong> も併せて表示されます。回数が少ないアカウントは別のアカウントと合併させるとか、いろいろな対策を考えることができます。</p>
-<p>Ledgerファイルのメンテナンスには必須の機能だと思います。</p>
-<h3 id="payeesコマンド">payeesコマンド</h3>
-<p><code>payees</code> コマンドは指定した正規表現に一致するトランザクションの支払先 <code>payee</code> をリストにして表示します。これも支払先の名称のタイプミスや表記ゆらぎを修正するのに便利です。 <code>payees</code> コマンドに <code>-count</code> オプションをつけると、 <code>accounts</code> コマンドと同じように、出現した頻度が行頭に表示されます:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led payees eatout --count
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> Gratia
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> えびす鯛 新潟駅前店
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> 幡多バル
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> 楽々
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> 鼎泰豊
-</span></span></code></pre></div><p>アルファベット表記された支払先では、大文字小文字の混乱がよく見られます。日本語表記された支払先名の前後に <strong>全角スペース</strong> が混入して、それらが別の支払先として扱われているケースもありました。</p>
-<p><code>accounts</code> や <code>payees</code> を使わないでLedgerファイルをクリーニングしろと言われたら、死んだほうがましです（誇張ですw）。</p>
-<h3 id="by-payee-p-オプション"><code>--by-payee</code> （ <code>-P</code> ）オプション</h3>
-<p><strong>支払先</strong> <code>Payee</code> でグルーピングして支出等を確認することは家計のみならずさまざまな組織・団体でもしばしば必要とされます。</p>
-<p>この <code>-P</code> オプションは、regレポートする際に、正規表現にマッチするトランザクションを支払先 <code>payee</code> の名前でグルーピングして表示するオプションです。次の例は、 <code>eatout</code> というアカウント（外食）について、外食先を金額の大きい順にソートした結果の抜粋です（日付、金額は当てずっぽうです）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led reg eatout -P -S -amount
-</span></span><span style="display:flex;"><span>2019/05/05 寿司おとわ           Expenses:教養娯楽費:Eatout   41,600 JPY   41,600 JPY
-</span></span><span style="display:flex;"><span>2019/09/25 おばんざい木村       Expenses:教養娯楽費:Eatout   18,040 JPY   59,000 JPY
-</span></span><span style="display:flex;"><span>2019/06/29 鼎泰豊               Expenses:教養娯楽費:Eatout   17,954 JPY   68,754 JPY
-</span></span></code></pre></div><p><code>-S</code> オプションは <code>--sort</code> の略です。その後ろの <code>-amount</code> は、金額の大きい順（降順）にソートすることを意味します。昇順のソートだとマイナス記号なしに <code>-S amount</code> とします。</p>
-<h3 id="xactコマンド">xactコマンド</h3>
-<p>転記作業の大半は以前のトランザクションの繰り返しです。繰り返し率は80%を超えるとも言われています。これをその都度、毎回入力をするのは時間とエネルギーの無駄です。</p>
-<p>それを回避するために用意されているのがこの <code>xact</code> コマンドです。たとえば次のようなトランザクションが既に（直前のショッピングとして）存在しているとしましょう：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>05/20  Costco
-</span></span><span style="display:flex;"><span>    Expenses:Food                      <span style="color:#ae81ff">8930</span> JPY
-</span></span><span style="display:flex;"><span>    Liabilites:OricoCard
-</span></span></code></pre></div><p>その後、05/29にCostcoで食料品を4,500円購入したときには、 <code>xact</code> コマンドを使って次のようにします：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led xact Costco food <span style="color:#ae81ff">4500</span>
-</span></span><span style="display:flex;"><span>2019/07/20 Costco
-</span></span><span style="display:flex;"><span>    Expenses:Food                          7,654 JPY
-</span></span><span style="display:flex;"><span>    Liabilites:OricoCard
-</span></span></code></pre></div><p><code>$ led xact</code> は単に標準出力に結果を表示するだけなので、リダイレクションを使用して次のようにすれば、自動的にファイル末尾に追記されます：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led xact Costco food <span style="color:#ae81ff">4500</span> &gt;&gt; your-ledgerfile.ledger
-</span></span></code></pre></div><p>Ledger3の公式マニュアルには、 <code>xact</code> の指定の仕方のバリエーションがいくつか挙げてあります。マニュアルの <code>Payee</code> をRestaurantに変更したものを下に示します：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ledger xact 4/9 Restaurant 11.50
-</span></span><span style="display:flex;"><span>$ ledger xact 4/9 Restaurant 11.50 checking <span style="color:#75715e"># (from `checking&#39;)</span>
-</span></span><span style="display:flex;"><span>$ ledger xact 4/9 Restaurant food 11.50 tips <span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>$ ledger xact 4/9 Restaurant food 11.50 tips <span style="color:#ae81ff">8</span> cash
-</span></span><span style="display:flex;"><span>$ ledger xact 4/9 Restaurant food $11.50 tips $8 cash
-</span></span><span style="display:flex;"><span>$ ledger xact 4/9 Restaurant dining <span style="color:#e6db74">&#34;DM 11.50&#34;</span>
-</span></span></code></pre></div><p>上の例で、 <strong><strong>日付</strong></strong> は新規トランザクションの日付が使われ、省略すると今日の日付が使われます。 <code>Expenses</code> の下の階層に <code>Toys</code> という新しいアカウントを付け加えたい場合には次のようにします：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led xact costco Expenses:Toys <span style="color:#e6db74">&#34;500 JPY&#34;</span>
-</span></span><span style="display:flex;"><span>2019/07/20 Costco
-</span></span><span style="display:flex;"><span>    expenses:toys                            <span style="color:#ae81ff">500</span> JPY
-</span></span><span style="display:flex;"><span>    Liabilites:Visa
-</span></span></code></pre></div><p>さらに、クレジットカードをVisaからMasterに変えた場合には：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ led xact costco food <span style="color:#ae81ff">450</span>  <span style="color:#e6db74">&#34;Liabilities:Master&#34;</span>
-</span></span><span style="display:flex;"><span>2019/07/20 Costco
-</span></span><span style="display:flex;"><span>    Expenses:Food                            <span style="color:#ae81ff">450</span> JPY
-</span></span><span style="display:flex;"><span>    Liabilities:Master
-</span></span></code></pre></div><p>などなど、ほんとうによくできています。一度使うとクセになりますねｗ</p>
-<p>ただ一つだけ気をつけなければいけないのは、リダイレクションでLedgerファイルに追記するときに、まちがって <code>&gt;&gt;</code> を <code>&gt;</code> にすると、大事なファイルがひどいことになります。実際にこれをやって冷や汗をかいた経験があります。</p>
-<h2 id="おまけ-suicaの残高をpcで確認する">おまけ &ndash; suicaの残高をPCで確認する</h2>
-<p>令和の <strong>増税（キャッシュレス還元）記念</strong> で、おまけを一つ（笑）</p>
-<h3 id="suicaの残高">suicaの残高</h3>
-<p>帳簿への仕訳作業をしていると、suicaなどのプリペイドカード系の残高が合わなくなることがよく起こります。個人の家計のレベルでは誤差範囲で無視できますが、大量に使っている企業や団体では、チリも積もれば無視し得ない金額になります。</p>
-<p>プリペイドカードの中でも、たとえばnanacoなどは使用後のレシートに毎回残高が記録されていますし、<a href="https://www.nanaco-net.jp/">nanaco-net</a>にログインすれば、それほど困ることはありませんが、問題はsuica（特に無記名のsuica）。</p>
-<p>suicaは、残高を印刷されたレシートから得るチャンスが少ないというか、ほとんど無いし、最近は改札口のディスプレイにも残高が表示されないことが多くなりました。そのため何回も使った後、 <strong>記憶</strong> にもとづいて仕訳・転記の作業をやる他なくなります。</p>
-<p>しかし <strong>記憶</strong> ほどもろいものはありません、特にボクら <strong>准高齢者</strong> にはきびしい。困り果てて <strong>増税記念</strong> にPaSoRi RC-S380/P（SONY）を購入しました。2,500円ほどの出費でした。</p>
-<h3 id="pasoriを使って残高確認">PaSoRiを使って残高確認</h3>
-<figure><img src="/pasori.jpg"
-         alt="図1:  PaSoRiを使ってsuica残高確認" width="80%"/><figcaption>
-            <p>図1:  PaSoRiを使ってsuica残高確認</p>
-        </figcaption>
-</figure>
-
-<p>Windows10では、<a href="https://www.sony.co.jp/Products/felica/consumer/index.html">SONYのHP</a> を見ながらやれば簡単にできますが、ubuntuではちょっとだけ余分な手数が必要です。</p>
-<ul>
-<li>ubuntu 16.04に必要なソフトをインストール
-<ul>
-<li>参考にしたのは次のサイト
-<ul>
-<li><a href="https://nfcpy.readthedocs.io/en/latest/topics/get-started.html">https://nfcpy.readthedocs.io/en/latest/topics/get-started.html</a></li>
-<li><a href="https://qiita.com/75u2u/items/010b602605d087edd1ee">https://qiita.com/75u2u/items/010b602605d087edd1ee</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Pasori をUSB決め打ちに設定し、次のようにして使用する
-<ul>
-<li>起動は <code>~/nfcpy-suica-sample/</code> で <code>$ sudo python suica_read.py</code></li>
-</ul>
-</li>
-</ul>
-<p>これだけですが、JRとか小田急とかはちゃんと乗車・降車駅が表示されていますけど、路線バスだと、なぜか「車載端末」と区分され次のように表示されます：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>出線区: ＪＲ西日本-山陰本線
-</span></span><span style="display:flex;"><span>出駅順: 鳥取
-</span></span></code></pre></div><p>山陰本線 <strong>鳥取</strong> で出たことになっているのが不思議？ボクだけかしら？</p>
-<p>Windows10で公式アプリとドライバをインストールして見ましたが、バスなどの入駅・出駅場所は表示してくれません。要するに交通系とはいえ、電車などに限定している気味？あと、お店や自販機で購入した支出は、「物販」とか使用後の残高だけ表示されます。しかし日付と残高はちゃんと表示されるので重宝しています。</p>
-<h2 id="acknowledgement">Acknowledgement</h2>
-
-    </div>
-    <div class="info post_meta">
-      <time datetime=2019年10月4日T00:00:00&#43;0900 class="date">2019年10月4日</time>
-      
-        <ul class="tags">
-        
-          <li> <a href="http://localhost:1313/tags/ledger">ledger</a> </li>
-        
-          <li> <a href="http://localhost:1313/tags/emacs">emacs</a> </li>
-        
-          <li> <a href="http://localhost:1313/tags/accounting">accounting</a> </li>
-        
-        </ul>
-      
-      
-    </div>
-    <div class="clearfix"></div>
-  </article>
-  
-    <div class="other_posts">
-      
-      <a href="http://localhost:1313/posts/8th-step_ledger/" class="prev">プレーンテキストファイルで「複式」家計簿（8）</a>
-      
-      
-      <a href="http://localhost:1313/posts/10th-step/" class="next">プレーンテキストファイルで「複式」家計簿（10）</a>
-      
-    </div>
-    <aside id="comments">
-</aside>
-
-  
-</section>
-
-        <a id="back_to_top" title="Go To Top" href="#">
-  <span>
-    <svg viewBox="0 0 24 24">
-      <path fill="none" d="M0 0h24v24H0z"></path>
-      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
-    </svg>
-  </span>
-</a>
-
-        <footer id="footer">
-  <p>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-    <span>&copy; 2025 <a href="http://localhost:1313/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
-    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
-    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
-  </p>
-
-  <script src="http://localhost:1313/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
-</footer>
-
-	
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-J843BPL02S');
-</script>
-
-    </body>
-</html>
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><title>プレーンテキストファイルで「複式」家計簿（9） | Yam’s Peace Blog
+</title><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css><link rel=stylesheet href=https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/++gZIktTledhjw="><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z5K4GXE0V9",{anonymize_ip:!0})}</script></head><body><header id=header><div class=header_container><h1 class=sitetitle><a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a></h1><nav class=navbar><ul><li><a href=https://bred-in-bingo.netlify.app/>Home</a></li><li><a href=/about/><span>About</span></a></li><li><a href=/tags/><span>Tags</span></a></li><li><a href=/archives/><span>Posts</span></a></li></ul></nav></div></header><section id=main><article class="post content"><h2 class=title>プレーンテキストファイルで「複式」家計簿（9）</h2><div class=post_content><div class="ox-hugo-toc toc"><div></div><div class=heading>&#30446;&#27425;</div><ul><li><a href=#%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%83%AC%E3%82%B9%E9%82%84%E5%85%83%E3%81%8C%E5%A7%8B%E3%81%BE%E3%81%A3%E3%81%9F>キャッシュレス還元が始まった</a><ul><li><a href=#real-%E3%81%8B-virtual%E3%81%8B>real か virtualか</a></li></ul></li><li><a href=#%E4%BE%BF%E5%88%A9%E3%81%AA%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%9F%E3%81%A1>便利なコマンド・オプションたち</a><ul><li><a href=#accounts%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89>accountsコマンド</a></li><li><a href=#payees%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89>payeesコマンド</a></li><li><a href=#by-payee-p-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3><code>--by-payee</code> （ <code>-P</code> ）オプション</a></li><li><a href=#xact%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89>xactコマンド</a></li></ul></li><li><a href=#%E3%81%8A%E3%81%BE%E3%81%91-suica%E3%81%AE%E6%AE%8B%E9%AB%98%E3%82%92pc%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B>おまけ &ndash; suicaの残高をPCで確認する</a><ul><li><a href=#suica%E3%81%AE%E6%AE%8B%E9%AB%98>suicaの残高</a></li><li><a href=#pasori%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E6%AE%8B%E9%AB%98%E7%A2%BA%E8%AA%8D>PaSoRiを使って残高確認</a></li></ul></li><li><a href=#acknowledgement>Acknowledgement</a></li></ul></div><p>2019年10月1日から消費税が（一部）10%に増税になりました。ボクは経済学が専門ではありませんが、不況下で増税するのはどういう理屈なんでしょうか？不況には <strong><strong>減税</strong></strong> するものと思っていました。経済の専門家のみなさんはオッケーなんですかね？</p><p>ま、それはともかくとして、庶民としてはなんとか対応しなければならないわけです。その一つが家計簿などの帳簿でどうやって仕訳するか、です（小さいなぁ〜ｗ）。</p><p>物品やサービスごとに税率が8%だったり10%だったりするだけならば、帳簿書きは簡単。ですが、今回は増税に同期して <strong><strong>キャッシュレス還元</strong></strong> という不思議な仕掛けが始まりました。ここでは、とりあえずそれへの対応を紹介します。</p><h2 id=キャッシュレス還元が始まった>キャッシュレス還元が始まった</h2><p>これが <strong><strong>増税</strong></strong> とペアになって始まったこと、それから８ヶ月後には終わりになることなど、とても <strong><strong>イミフ</strong></strong> な状況ですが、今日（10月3日）、増税後はじめてセブンイレブンで買い物をしてレシートをもらいました。次のような内容でした：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>　　領　収　書
+</span></span><span style=display:flex><span>こしあんぱん	108
+</span></span><span style=display:flex><span>サンドイッチ	268
+</span></span><span style=display:flex><span>赤ワイン 	880
+</span></span><span style=display:flex><span>-----------------------
+</span></span><span style=display:flex><span>小計（税抜 8%）	376
+</span></span><span style=display:flex><span>　消費税等	 30
+</span></span><span style=display:flex><span>小計（税抜10%）	880
+</span></span><span style=display:flex><span>　消費税等	 88
+</span></span><span style=display:flex><span>-----------------------
+</span></span><span style=display:flex><span>合計	      1,374
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>（税率 8%対象	406）
+</span></span><span style=display:flex><span>（税率10%対象	968）
+</span></span><span style=display:flex><span>（内消費税等 8%	 30）
+</span></span><span style=display:flex><span>（内消費税等10%	 88）
+</span></span><span style=display:flex><span>キャッシュレス還元額  -27
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nanaco支払い	1,374
+</span></span></code></pre></div><p>ははは、本当に変な領収書・明細書ですね。それはさておき問題はこれをどう仕訳するかです。</p><p>この<a href=http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/>シリーズ(7)</a> で、ETCの還元ポイントを捉えるために <strong><strong>仮想アカウント</strong></strong> <code>[Income:還元Point:ETC]</code> を使いました。今回もそれにならって、キャッシュレス還元を <code>Income:還元Point:キャッシュレス</code> に収納してみました。ただし仮想アカウントではなくて <strong><strong>real</strong></strong> なアカウントとしてです。次のような感じです：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>2019/10/03   セブンイレブン
+</span></span><span style=display:flex><span>    Expenses:Grocery:Liquor                      <span style=color:#ae81ff>968</span> JPY
+</span></span><span style=display:flex><span>    Expenses:Meals:Lunch                         <span style=color:#ae81ff>406</span> JPY
+</span></span><span style=display:flex><span>    Income:還元Point:キャッシュレス              -27 JPY
+</span></span><span style=display:flex><span>    Assets:nanaco
+</span></span></code></pre></div><p>これでbal/regレポートを見ると：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led bal 還元
+</span></span><span style=display:flex><span>	  -3,027 JPY  Income:還元Point
+</span></span><span style=display:flex><span>	  -3,000 JPY    ETC
+</span></span><span style=display:flex><span>	     -27 JPY    キャッシュレス
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>	  -3,027 JPY
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>$ led reg 還元
+</span></span><span style=display:flex><span>2019/08/20 ETCマイレージサービス <span style=color:#f92672>[</span>Income:還元Point:ETC<span style=color:#f92672>]</span>   -3,000 JPY   -3,000 JP
+</span></span><span style=display:flex><span>2019/10/03 セブンイレブン       Income:還元Point:キャッシュレス  -27 JPY  -3,027 JPY
+</span></span></code></pre></div><p>また当然ですが、支出金額、nanacoからの振り出しとか全ての点でつじつまが合っています：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led bal -p today
+</span></span><span style=display:flex><span>	  -1,347 JPY  Assets:nanaco
+</span></span><span style=display:flex><span>	   1,374 JPY  Expenses
+</span></span><span style=display:flex><span>	     <span style=color:#ae81ff>968</span> JPY    Grocery:Liquor
+</span></span><span style=display:flex><span>	     <span style=color:#ae81ff>406</span> JPY    Meals:Lunch
+</span></span><span style=display:flex><span>	     -27 JPY  Income:還元Point:キャッシュレス
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>		   <span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><p>要するに、キャッシュレス還元を <strong><strong>雑収入</strong></strong> としてに扱ったというわけです。キャッシュレス還元については、このようにrealなアカウントとして扱っても大きな問題は起きません。</p><h3 id=real-か-virtualか>real か virtualか</h3><p><a href=http://org2-wp.kgt-yamy.tk/2019/09/16/post-811/>シリーズ(8)</a> では、ETCの還元ポイントはvirtualなアカウントにしました。なぜ、今回のキャッシュレスはrealなアカウントにしたのでしょうか？</p><p>今回のキャッシュレス還元は（少なくともnanacoでは）、トランザクションの当日にリアルタイムに一定の金額が明示的に還元されます。どの支出に対して、どれだけの還元があったかが一目瞭然です。しかし先のETCの場合には、還元額がわかるのが1ヶ月以上も後になってからです。この <strong>タイムラグ</strong> と、それからユーザ側にはどの支出に対してポイントを適用するかを決める <strong>自由</strong> がありません。</p><p>キャッシュレス還元ポイントは、実際のお金のようにそのポイントをいつ、何を購入するときに使うかをユーザが決めることができます。なので <code>Income</code> として扱うことに何の矛盾も生じません。他にもありますが、主にこれらの点から、ETCはrealなアカウントで把握するのが難しかったわけです。</p><h2 id=便利なコマンド-オプションたち>便利なコマンド・オプションたち</h2><p>帳簿に紛れ込むミスやエラーをできるだけ少なくするために便利な機能をまとめてみました。元帳管理のための必須の機能と言っても良いでしょう。</p><h3 id=accountsコマンド>accountsコマンド</h3><p>長期間 Ledgerを使っていると、アカウントの構造に混乱が生じます。タイプミスも混入します。そんな場合に便利なのが <code>accounts</code> コマンドです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led accounts
+</span></span></code></pre></div><p>これで自分のLedgerファイルで使われているすべてのアカウント名がリストされます。結果を上から順番にながめるだけでも、タイプミスとか「表記のゆらぎ」とか色々とみつかります。</p><p><code>accounts</code> の後ろに正規表現を入力すれば、それにマッチするアカウントがリストされます：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led accounts liab
+</span></span></code></pre></div><p>これで <code>Liabilities</code> に属するアカウントのリストが得られます。</p><p><code>accounts</code> コマンドでは <code>--count</code> オプションがおすすめです。これをつけると、すべてのアカウントについてそれが使われた <strong>回数</strong> も併せて表示されます。回数が少ないアカウントは別のアカウントと合併させるとか、いろいろな対策を考えることができます。</p><p>Ledgerファイルのメンテナンスには必須の機能だと思います。</p><h3 id=payeesコマンド>payeesコマンド</h3><p><code>payees</code> コマンドは指定した正規表現に一致するトランザクションの支払先 <code>payee</code> をリストにして表示します。これも支払先の名称のタイプミスや表記ゆらぎを修正するのに便利です。 <code>payees</code> コマンドに <code>-count</code> オプションをつけると、 <code>accounts</code> コマンドと同じように、出現した頻度が行頭に表示されます:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led payees eatout --count
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> Gratia
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> えびす鯛 新潟駅前店
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> 幡多バル
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> 楽々
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> 鼎泰豊
+</span></span></code></pre></div><p>アルファベット表記された支払先では、大文字小文字の混乱がよく見られます。日本語表記された支払先名の前後に <strong>全角スペース</strong> が混入して、それらが別の支払先として扱われているケースもありました。</p><p><code>accounts</code> や <code>payees</code> を使わないでLedgerファイルをクリーニングしろと言われたら、死んだほうがましです（誇張ですw）。</p><h3 id=by-payee-p-オプション><code>--by-payee</code> （ <code>-P</code> ）オプション</h3><p><strong>支払先</strong> <code>Payee</code> でグルーピングして支出等を確認することは家計のみならずさまざまな組織・団体でもしばしば必要とされます。</p><p>この <code>-P</code> オプションは、regレポートする際に、正規表現にマッチするトランザクションを支払先 <code>payee</code> の名前でグルーピングして表示するオプションです。次の例は、 <code>eatout</code> というアカウント（外食）について、外食先を金額の大きい順にソートした結果の抜粋です（日付、金額は当てずっぽうです）：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led reg eatout -P -S -amount
+</span></span><span style=display:flex><span>2019/05/05 寿司おとわ           Expenses:教養娯楽費:Eatout   41,600 JPY   41,600 JPY
+</span></span><span style=display:flex><span>2019/09/25 おばんざい木村       Expenses:教養娯楽費:Eatout   18,040 JPY   59,000 JPY
+</span></span><span style=display:flex><span>2019/06/29 鼎泰豊               Expenses:教養娯楽費:Eatout   17,954 JPY   68,754 JPY
+</span></span></code></pre></div><p><code>-S</code> オプションは <code>--sort</code> の略です。その後ろの <code>-amount</code> は、金額の大きい順（降順）にソートすることを意味します。昇順のソートだとマイナス記号なしに <code>-S amount</code> とします。</p><h3 id=xactコマンド>xactコマンド</h3><p>転記作業の大半は以前のトランザクションの繰り返しです。繰り返し率は80%を超えるとも言われています。これをその都度、毎回入力をするのは時間とエネルギーの無駄です。</p><p>それを回避するために用意されているのがこの <code>xact</code> コマンドです。たとえば次のようなトランザクションが既に（直前のショッピングとして）存在しているとしましょう：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>05/20  Costco
+</span></span><span style=display:flex><span>    Expenses:Food                      <span style=color:#ae81ff>8930</span> JPY
+</span></span><span style=display:flex><span>    Liabilites:OricoCard
+</span></span></code></pre></div><p>その後、05/29にCostcoで食料品を4,500円購入したときには、 <code>xact</code> コマンドを使って次のようにします：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led xact Costco food <span style=color:#ae81ff>4500</span>
+</span></span><span style=display:flex><span>2019/07/20 Costco
+</span></span><span style=display:flex><span>    Expenses:Food                          7,654 JPY
+</span></span><span style=display:flex><span>    Liabilites:OricoCard
+</span></span></code></pre></div><p><code>$ led xact</code> は単に標準出力に結果を表示するだけなので、リダイレクションを使用して次のようにすれば、自動的にファイル末尾に追記されます：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led xact Costco food <span style=color:#ae81ff>4500</span> &gt;&gt; your-ledgerfile.ledger
+</span></span></code></pre></div><p>Ledger3の公式マニュアルには、 <code>xact</code> の指定の仕方のバリエーションがいくつか挙げてあります。マニュアルの <code>Payee</code> をRestaurantに変更したものを下に示します：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ ledger xact 4/9 Restaurant 11.50
+</span></span><span style=display:flex><span>$ ledger xact 4/9 Restaurant 11.50 checking <span style=color:#75715e># (from `checking&#39;)</span>
+</span></span><span style=display:flex><span>$ ledger xact 4/9 Restaurant food 11.50 tips <span style=color:#ae81ff>8</span>
+</span></span><span style=display:flex><span>$ ledger xact 4/9 Restaurant food 11.50 tips <span style=color:#ae81ff>8</span> cash
+</span></span><span style=display:flex><span>$ ledger xact 4/9 Restaurant food $11.50 tips $8 cash
+</span></span><span style=display:flex><span>$ ledger xact 4/9 Restaurant dining <span style=color:#e6db74>&#34;DM 11.50&#34;</span>
+</span></span></code></pre></div><p>上の例で、 <strong><strong>日付</strong></strong> は新規トランザクションの日付が使われ、省略すると今日の日付が使われます。 <code>Expenses</code> の下の階層に <code>Toys</code> という新しいアカウントを付け加えたい場合には次のようにします：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led xact costco Expenses:Toys <span style=color:#e6db74>&#34;500 JPY&#34;</span>
+</span></span><span style=display:flex><span>2019/07/20 Costco
+</span></span><span style=display:flex><span>    expenses:toys                            <span style=color:#ae81ff>500</span> JPY
+</span></span><span style=display:flex><span>    Liabilites:Visa
+</span></span></code></pre></div><p>さらに、クレジットカードをVisaからMasterに変えた場合には：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ led xact costco food <span style=color:#ae81ff>450</span>  <span style=color:#e6db74>&#34;Liabilities:Master&#34;</span>
+</span></span><span style=display:flex><span>2019/07/20 Costco
+</span></span><span style=display:flex><span>    Expenses:Food                            <span style=color:#ae81ff>450</span> JPY
+</span></span><span style=display:flex><span>    Liabilities:Master
+</span></span></code></pre></div><p>などなど、ほんとうによくできています。一度使うとクセになりますねｗ</p><p>ただ一つだけ気をつけなければいけないのは、リダイレクションでLedgerファイルに追記するときに、まちがって <code>>></code> を <code>></code> にすると、大事なファイルがひどいことになります。実際にこれをやって冷や汗をかいた経験があります。</p><h2 id=おまけ-suicaの残高をpcで確認する>おまけ &ndash; suicaの残高をPCで確認する</h2><p>令和の <strong>増税（キャッシュレス還元）記念</strong> で、おまけを一つ（笑）</p><h3 id=suicaの残高>suicaの残高</h3><p>帳簿への仕訳作業をしていると、suicaなどのプリペイドカード系の残高が合わなくなることがよく起こります。個人の家計のレベルでは誤差範囲で無視できますが、大量に使っている企業や団体では、チリも積もれば無視し得ない金額になります。</p><p>プリペイドカードの中でも、たとえばnanacoなどは使用後のレシートに毎回残高が記録されていますし、<a href=https://www.nanaco-net.jp/>nanaco-net</a>にログインすれば、それほど困ることはありませんが、問題はsuica（特に無記名のsuica）。</p><p>suicaは、残高を印刷されたレシートから得るチャンスが少ないというか、ほとんど無いし、最近は改札口のディスプレイにも残高が表示されないことが多くなりました。そのため何回も使った後、 <strong>記憶</strong> にもとづいて仕訳・転記の作業をやる他なくなります。</p><p>しかし <strong>記憶</strong> ほどもろいものはありません、特にボクら <strong>准高齢者</strong> にはきびしい。困り果てて <strong>増税記念</strong> にPaSoRi RC-S380/P（SONY）を購入しました。2,500円ほどの出費でした。</p><h3 id=pasoriを使って残高確認>PaSoRiを使って残高確認</h3><figure><img src=/pasori.jpg alt="図1:  PaSoRiを使ってsuica残高確認" width=80%><figcaption><p>図1: PaSoRiを使ってsuica残高確認</p></figcaption></figure><p>Windows10では、<a href=https://www.sony.co.jp/Products/felica/consumer/index.html>SONYのHP</a> を見ながらやれば簡単にできますが、ubuntuではちょっとだけ余分な手数が必要です。</p><ul><li>ubuntu 16.04に必要なソフトをインストール<ul><li>参考にしたのは次のサイト<ul><li><a href=https://nfcpy.readthedocs.io/en/latest/topics/get-started.html>https://nfcpy.readthedocs.io/en/latest/topics/get-started.html</a></li><li><a href=https://qiita.com/75u2u/items/010b602605d087edd1ee>https://qiita.com/75u2u/items/010b602605d087edd1ee</a></li></ul></li></ul></li><li>Pasori をUSB決め打ちに設定し、次のようにして使用する<ul><li>起動は <code>~/nfcpy-suica-sample/</code> で <code>$ sudo python suica_read.py</code></li></ul></li></ul><p>これだけですが、JRとか小田急とかはちゃんと乗車・降車駅が表示されていますけど、路線バスだと、なぜか「車載端末」と区分され次のように表示されます：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>出線区: ＪＲ西日本-山陰本線
+</span></span><span style=display:flex><span>出駅順: 鳥取
+</span></span></code></pre></div><p>山陰本線 <strong>鳥取</strong> で出たことになっているのが不思議？ボクだけかしら？</p><p>Windows10で公式アプリとドライバをインストールして見ましたが、バスなどの入駅・出駅場所は表示してくれません。要するに交通系とはいえ、電車などに限定している気味？あと、お店や自販機で購入した支出は、「物販」とか使用後の残高だけ表示されます。しかし日付と残高はちゃんと表示されるので重宝しています。</p><h2 id=acknowledgement>Acknowledgement</h2></div><div class="info post_meta"><time datetime=2019年10月4日T00:00:00+0900 class=date>2019年10月4日</time><ul class=tags><li><a href=https://bred-in-bingo.netlify.app/tags/ledger>ledger</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/emacs>emacs</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/accounting>accounting</a></li></ul></div><div class=clearfix></div></article><div class=other_posts><a href=https://bred-in-bingo.netlify.app/posts/8th-step_ledger/ class=prev>プレーンテキストファイルで「複式」家計簿（8）</a>
+<a href=https://bred-in-bingo.netlify.app/posts/10th-step/ class=next>プレーンテキストファイルで「複式」家計簿（10）</a></div><aside id=comments></aside></section><a id=back_to_top title="Go To Top" href=#><span><svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></span></a><footer id=footer><p><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><span>&copy; 2025 <a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span><span>Built with <a rel=nofollow target=_blank href=https://gohugo.io>Hugo</a></span>
+<span>Theme by <a rel=nofollow target=_blank href=https://github.com/wayjam/hugo-theme-mixedpaper>WayJam</a></span></p><script src=https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin=anonymous async></script></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J843BPL02S")</script></body></html>
