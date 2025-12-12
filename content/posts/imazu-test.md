@@ -8,10 +8,8 @@ draft = false
 og_image = "/20240703_redcurrant.jpg"
 +++
 
-これは Ubuntu24.04 上での hugo v0.123.7+extended によるデプロイテストです。
+Ubuntu24.04 上での ox-hugo v0.123.7+extended によるデプロイテストです。
+
+/layouts/partials/head.html から古い og:image 関係コード削除
+
 $ hugo --gc --minify を使うんだ！！！恥
-
--   2025/12/12 10:15:41 /layouts/partials/head.html の末尾変更
--   2025/12/12 09:37:47 baseURL --&gt; 末尾に/追加
-
-;;; #+HUGO_IMAGES: 20240703_redcurrant.jpg

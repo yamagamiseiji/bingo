@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-12 10:47:31 yamagami>
+#           Time-stamp: <2025-12-12 15:41:29 yamagami>
 #+title: Test Posting from host Imazu
 #+date: [2025-12-12 ]
 #+language: ja
@@ -12,12 +12,12 @@
 #+options: toc:nil
 #+HUGO_CUSTOM_FRONT_MATTER: :og_image "/20240703_redcurrant.jpg"
 
-これは Ubuntu24.04 上での hugo v0.123.7+extended によるデプロイテストです。 
-$ hugo --gc --minify を使うんだ！！！恥
-- 2025/12/12 10:15:41 /layouts/partials/head.html の末尾変更
-- 2025/12/12 09:37:47 baseURL --> 末尾に/追加
+Ubuntu24.04 上での ox-hugo v0.123.7+extended によるデプロイテストです。 
 
-;;; #+HUGO_IMAGES: 20240703_redcurrant.jpg
+/layouts/partials/head.html から古い og:image 関係コード削除
+
+$ hugo --gc --minify を使うんだ！！！恥
+
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)
