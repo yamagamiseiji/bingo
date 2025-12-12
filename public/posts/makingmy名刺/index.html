@@ -1,5 +1,283 @@
-<!doctype html><html lang=ja><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><title>名刺を自作しました | Yam’s Peace Blog
-</title><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css><link rel=stylesheet href=https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/++gZIktTledhjw="><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z5K4GXE0V9",{anonymize_ip:!0})}</script></head><body><header id=header><div class=header_container><h1 class=sitetitle><a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a></h1><nav class=navbar><ul><li><a href=https://bred-in-bingo.netlify.app/>Home</a></li><li><a href=/about/><span>About</span></a></li><li><a href=/tags/><span>Tags</span></a></li><li><a href=/archives/><span>Posts</span></a></li></ul></nav></div></header><section id=main><article class="post content"><h2 class=title>名刺を自作しました</h2><div class=post_content><div class="ox-hugo-toc toc"><div></div><div class=heading>&#30446;&#27425;</div><ul><li><a href=#%E8%87%AA%E4%BD%9C%E3%81%99%E3%82%8B%E3%82%8F%E3%81%91>自作するわけ</a><ul><li><a href=#%E8%87%AA%E4%BD%9C%E3%81%AE%E6%96%B9%E6%B3%95%E3%81%AF%E5%A4%A7%E5%88%A5%E3%81%97%E3%81%A6%E6%AC%A1%E3%81%AE%EF%BC%92%E3%81%A4>自作の方法は大別して次の２つ</a></li><li><a href=#%E7%94%A8%E7%B4%99%E3%81%AE%E9%81%B8%E5%AE%9A>用紙の選定</a></li></ul></li><li><a href=#tex%E3%81%A7%E3%81%8C%E3%82%93%E3%81%B0%E3%82%8B>TeXでがんばる</a><ul><li><a href=#%E7%B4%99%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E8%A8%AD%E5%AE%9A>紙サイズのパラメータ設定</a></li><li><a href=#j-namecard-dot-tex-%E3%81%A7%E3%81%AE%E4%BD%9C%E6%88%90%E4%BE%8B>j-namecard.tex での作成例</a></li><li><a href=#bottom-line-is>Bottom line is ・・・・</a></li></ul></li><li><a href=#%E3%83%A9%E3%83%99%E3%83%AB%E5%B1%8B%E3%81%95%E3%82%93%EF%BC%99-%E3%81%A7%E3%82%84%E3%82%8B>「ラベル屋さん９」でやる</a><ul><li><a href=#%E3%82%84%E3%82%8A%E6%96%B9>やり方</a></li><li><a href=#bottom-line-is>Bottom line is ・・・・</a></li></ul></li><li><a href=#acknowledgement>Acknowledgement</a></li></ul></div><h2 id=自作するわけ>自作するわけ</h2><p>まもなく（2019年3月末）大学を退職するので、４月以降は、</p><ul><li>名刺が大量に必要な場面への出番はなくなる</li><li>大学の費用で印刷してもらえない（これが最大の理由ｗ）</li></ul><p>少ない枚数の名刺印刷を私費で印刷屋さんに依頼するのはどう考えてもコスト的に見合わない。だとしたら、この際、 <strong><strong>人生初</strong></strong> の名刺自作にトライしようと思い立ったわけ。備忘も兼ねてここに紹介する。</p><h3 id=自作の方法は大別して次の２つ>自作の方法は大別して次の２つ</h3><ol><li>TeX/Linuxでやる</li><li>「ラベル屋さん９」/Win10でやる</li></ol><p>いずれにしても、まずは用紙の選択から・・・</p><h3 id=用紙の選定>用紙の選定</h3><p>用紙はエーワン・マルチカード・名刺厚口100枚分、型番＝51275の一択。レーザ、インクジェット共用で、名刺100枚分で415円（@Amazon）。
-51275の紙サイズの詳細は図<a href=#orgb52e483>1</a> を参照のこと。</p><p><a id=orgb52e483></a></p><figure><img src=/F51275_O.jpg alt="図1:  エーワン 51275 サイズ詳細" width=50%><figcaption><p>図1: エーワン 51275 サイズ詳細</p></figcaption></figure><p>なおこのシリーズでは、用紙パッケージに封入されている「テスト印刷」に使えるペーパーがナイス！それから、「マイクロミシンカット」というミシン目加工が素晴らしい。手でもぎっても、エッジがキレイ。</p><h2 id=texでがんばる>TeXでがんばる</h2><p><a href=http://www.w3-4f5f.ee.uec.ac.jp/nameCard/>電通大の名刺作成キット</a> の <strong><strong>j-namecard.tex</strong></strong> を使わせて頂く。実際に作る前は、TeXでは自由度小さいかも？と思っていたが、意外にも「ラベル屋さん９」よりもTeXの方が自由度が大きく、しかもキレイかも？</p><h3 id=紙サイズのパラメータ設定>紙サイズのパラメータ設定</h3><p><strong><strong>j-namecard.tex</strong></strong> の標準設定を、とりあえず１箇所だけエーワン 51275に合わせて修正した。</p><p>上で指定されているパラメータの意味は、図<a href=#orgae3c7e5>2</a>を参照のこと[ <a href=http://cns-guide.sfc.keio.ac.jp/2001/11/5/1.html>出典</a> ]。</p><p><a id=orgae3c7e5></a></p><figure><img src=/img251.png alt="図2:  TeXの紙サイズパラメータ" width=90%><figcaption><p>図2: TeXの紙サイズパラメータ</p></figcaption></figure><p>以下の説明文も図と同一の[ <a href=http://cns-guide.sfc.keio.ac.jp/2001/11/5/1.html>出典</a> ]から。とてもわかりやすい。</p><blockquote><p>図からも分かるように，ページ上端と左端はあらかじめ1インチ(25.4mm)ずつ余計に余白がとられています．つまりページ上端から本文領域の上端までの具体的な長さは， \topmargin + \headheight + \headsep にさらに1インチ加えた値となります．個人でそれぞれのパラメータを設定し直す場合はこの点に注意してください．ページ上端や左端を1インチ以下にしたい場合はそれぞれ\topmargin，\oddsidemargin，\evensidemarginに負の値を設定します．</p></blockquote><h3 id=j-namecard-dot-tex-での作成例>j-namecard.tex での作成例</h3><p>今回のMy名刺のデザイン・ポリシイは次のとおり。</p><ol><li>名前と所属、職階を日本語・英語併記にする</li><li>SNS（Facebook, Blogs, Twitter）アカウントのQRコードを貼り付ける</li><li>住所、電話番号は掲載しない</li><li>公的メールアドレスのみを掲載する</li></ol><p>組版したA4シートの印刷イメージは図<a href=#org1391677>3</a> のとおり。</p><p><a id=org1391677></a></p><figure><img src=/x400sample_out.png alt="図3:  TeXで作成した名刺の印刷イメージ" width=80%><figcaption><p>図3: TeXで作成した名刺の印刷イメージ</p></figcaption></figure><h3 id=bottom-line-is>Bottom line is ・・・・</h3><h4 id=すばらしいのは>すばらしいのは</h4><ol><li>Emacs/Linuxで作業できるからストレスがないｗ</li><li>用紙に合わせて2x5=10枚分の名刺をA4用紙にしてくれる</li><li>フォントサイズをきちんと決められる</li><li>文字の印刷場所を容易かつ精密にコントロールできる</li></ol><h4 id=ラベル屋さん９-に比べてやや劣るのは>「ラベル屋さん９」に比べてやや劣るのは</h4><ol><li>裏表両面のある名刺を作る際の工数</li><li>最後の微調整に試行錯誤が必要となる</li></ol><h2 id=ラベル屋さん９-でやる>「ラベル屋さん９」でやる</h2><h3 id=やり方>やり方</h3><ol><li>Win10 でアプリをダウンロードしてインストール・起動する（not ウエッブ版）。</li><li>WinなGUIで、ボクには最初はちょっと分かりにくかったが、全体としては無料ソフトとは思えない完成度。特にステップごとの説明書の書き方はとても秀逸。完全な初経験者でもほぼ半日作業かと。</li><li>用紙のディメンションは図<a href=#orgb52e483>1</a>参照</li></ol><h3 id=bottom-line-is>Bottom line is ・・・・</h3><ul><li>メニューやタブを探しながら機能を推定するのが認知的に辛かった（加齢のせいです）。</li><li>文字サイズや位置を目でにらみながらマウスで微調整するのは視運動的に苦痛だった（加齢のせいです）。</li><li>表面と裏面を並行して作成・編集できるのはすばらしい（図<a href=#org6ae0ff7>4</a> ）。けど、この表裏切替えボタンは、すべての作業が終わるまで目につかなかった（涙）（これも加齢のせい？）</li></ul><p><a id=org6ae0ff7></a></p><figure><img src=/x250ura_omote.png alt="図4:  「ラベル屋さん９」で表面と裏面を切り替えるボタン" width=70%><figcaption><p>図4: 「ラベル屋さん９」で表面と裏面を切り替えるボタン</p></figcaption></figure><h2 id=acknowledgement>Acknowledgement</h2></div><div class="info post_meta"><time datetime=2019年2月27日T08:39:00+0900 class=date>2019年2月27日</time><ul class=tags><li><a href=https://bred-in-bingo.netlify.app/tags/emacs>emacs</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/diy>DIY</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/latex>LaTeX</a></li></ul></div><div class=clearfix></div></article><div class=other_posts><a href=https://bred-in-bingo.netlify.app/posts/temp_katashina_prj/ class=prev>リモート温度計プロジェクト</a>
-<a href=https://bred-in-bingo.netlify.app/posts/yamaken/ class=next>山研年報に関する速報です</a></div><aside id=comments></aside></section><a id=back_to_top title="Go To Top" href=#><span><svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></span></a><footer id=footer><p><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><span>&copy; 2025 <a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span><span>Built with <a rel=nofollow target=_blank href=https://gohugo.io>Hugo</a></span>
-<span>Theme by <a rel=nofollow target=_blank href=https://github.com/wayjam/hugo-theme-mixedpaper>WayJam</a></span></p><script src=https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin=anonymous async></script></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J843BPL02S")</script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+    
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    名刺を自作しました | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+
+  
+   
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
+}
+</script>
+
+  
+
+    
+  
+  
+</head>
+
+
+
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app/">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">名刺を自作しました</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E8%87%AA%E4%BD%9C%E3%81%99%E3%82%8B%E3%82%8F%E3%81%91">自作するわけ</a>
+<ul>
+<li><a href="#%E8%87%AA%E4%BD%9C%E3%81%AE%E6%96%B9%E6%B3%95%E3%81%AF%E5%A4%A7%E5%88%A5%E3%81%97%E3%81%A6%E6%AC%A1%E3%81%AE%EF%BC%92%E3%81%A4">自作の方法は大別して次の２つ</a></li>
+<li><a href="#%E7%94%A8%E7%B4%99%E3%81%AE%E9%81%B8%E5%AE%9A">用紙の選定</a></li>
+</ul>
+</li>
+<li><a href="#tex%E3%81%A7%E3%81%8C%E3%82%93%E3%81%B0%E3%82%8B">TeXでがんばる</a>
+<ul>
+<li><a href="#%E7%B4%99%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E8%A8%AD%E5%AE%9A">紙サイズのパラメータ設定</a></li>
+<li><a href="#j-namecard-dot-tex-%E3%81%A7%E3%81%AE%E4%BD%9C%E6%88%90%E4%BE%8B">j-namecard.tex での作成例</a></li>
+<li><a href="#bottom-line-is">Bottom line is ・・・・</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%A9%E3%83%99%E3%83%AB%E5%B1%8B%E3%81%95%E3%82%93%EF%BC%99-%E3%81%A7%E3%82%84%E3%82%8B">「ラベル屋さん９」でやる</a>
+<ul>
+<li><a href="#%E3%82%84%E3%82%8A%E6%96%B9">やり方</a></li>
+<li><a href="#bottom-line-is">Bottom line is ・・・・</a></li>
+</ul>
+</li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<h2 id="自作するわけ">自作するわけ</h2>
+<p>まもなく（2019年3月末）大学を退職するので、４月以降は、</p>
+<ul>
+<li>名刺が大量に必要な場面への出番はなくなる</li>
+<li>大学の費用で印刷してもらえない（これが最大の理由ｗ）</li>
+</ul>
+<p>少ない枚数の名刺印刷を私費で印刷屋さんに依頼するのはどう考えてもコスト的に見合わない。だとしたら、この際、 <strong><strong>人生初</strong></strong> の名刺自作にトライしようと思い立ったわけ。備忘も兼ねてここに紹介する。</p>
+<h3 id="自作の方法は大別して次の２つ">自作の方法は大別して次の２つ</h3>
+<ol>
+<li>TeX/Linuxでやる</li>
+<li>「ラベル屋さん９」/Win10でやる</li>
+</ol>
+<p>いずれにしても、まずは用紙の選択から・・・</p>
+<h3 id="用紙の選定">用紙の選定</h3>
+<p>用紙はエーワン・マルチカード・名刺厚口100枚分、型番＝51275の一択。レーザ、インクジェット共用で、名刺100枚分で415円（@Amazon）。
+51275の紙サイズの詳細は図<a href="#orgb52e483">1</a> を参照のこと。</p>
+<p><a id="orgb52e483"></a></p>
+<figure><img src="/F51275_O.jpg"
+         alt="図1:  エーワン 51275 サイズ詳細" width="50%"/><figcaption>
+            <p>図1:  エーワン 51275 サイズ詳細</p>
+        </figcaption>
+</figure>
+
+<p>なおこのシリーズでは、用紙パッケージに封入されている「テスト印刷」に使えるペーパーがナイス！それから、「マイクロミシンカット」というミシン目加工が素晴らしい。手でもぎっても、エッジがキレイ。</p>
+<h2 id="texでがんばる">TeXでがんばる</h2>
+<p><a href="http://www.w3-4f5f.ee.uec.ac.jp/nameCard/">電通大の名刺作成キット</a> の <strong><strong>j-namecard.tex</strong></strong> を使わせて頂く。実際に作る前は、TeXでは自由度小さいかも？と思っていたが、意外にも「ラベル屋さん９」よりもTeXの方が自由度が大きく、しかもキレイかも？</p>
+<h3 id="紙サイズのパラメータ設定">紙サイズのパラメータ設定</h3>
+<p><strong><strong>j-namecard.tex</strong></strong> の標準設定を、とりあえず１箇所だけエーワン 51275に合わせて修正した。</p>
+<p>上で指定されているパラメータの意味は、図<a href="#orgae3c7e5">2</a>を参照のこと[ <a href="http://cns-guide.sfc.keio.ac.jp/2001/11/5/1.html">出典</a> ]。</p>
+<p><a id="orgae3c7e5"></a></p>
+<figure><img src="/img251.png"
+         alt="図2:  TeXの紙サイズパラメータ" width="90%"/><figcaption>
+            <p>図2:  TeXの紙サイズパラメータ</p>
+        </figcaption>
+</figure>
+
+<p>以下の説明文も図と同一の[ <a href="http://cns-guide.sfc.keio.ac.jp/2001/11/5/1.html">出典</a> ]から。とてもわかりやすい。</p>
+<blockquote>
+<p>図からも分かるように，ページ上端と左端はあらかじめ1インチ(25.4mm)ずつ余計に余白がとられています．つまりページ上端から本文領域の上端までの具体的な長さは， \topmargin + \headheight + \headsep にさらに1インチ加えた値となります．個人でそれぞれのパラメータを設定し直す場合はこの点に注意してください．ページ上端や左端を1インチ以下にしたい場合はそれぞれ\topmargin，\oddsidemargin，\evensidemarginに負の値を設定します．</p>
+</blockquote>
+<h3 id="j-namecard-dot-tex-での作成例">j-namecard.tex での作成例</h3>
+<p>今回のMy名刺のデザイン・ポリシイは次のとおり。</p>
+<ol>
+<li>名前と所属、職階を日本語・英語併記にする</li>
+<li>SNS（Facebook, Blogs, Twitter）アカウントのQRコードを貼り付ける</li>
+<li>住所、電話番号は掲載しない</li>
+<li>公的メールアドレスのみを掲載する</li>
+</ol>
+<p>組版したA4シートの印刷イメージは図<a href="#org1391677">3</a> のとおり。</p>
+<p><a id="org1391677"></a></p>
+<figure><img src="/x400sample_out.png"
+         alt="図3:  TeXで作成した名刺の印刷イメージ" width="80%"/><figcaption>
+            <p>図3:  TeXで作成した名刺の印刷イメージ</p>
+        </figcaption>
+</figure>
+
+<h3 id="bottom-line-is">Bottom line is ・・・・</h3>
+<h4 id="すばらしいのは">すばらしいのは</h4>
+<ol>
+<li>Emacs/Linuxで作業できるからストレスがないｗ</li>
+<li>用紙に合わせて2x5=10枚分の名刺をA4用紙にしてくれる</li>
+<li>フォントサイズをきちんと決められる</li>
+<li>文字の印刷場所を容易かつ精密にコントロールできる</li>
+</ol>
+<h4 id="ラベル屋さん９-に比べてやや劣るのは">「ラベル屋さん９」に比べてやや劣るのは</h4>
+<ol>
+<li>裏表両面のある名刺を作る際の工数</li>
+<li>最後の微調整に試行錯誤が必要となる</li>
+</ol>
+<h2 id="ラベル屋さん９-でやる">「ラベル屋さん９」でやる</h2>
+<h3 id="やり方">やり方</h3>
+<ol>
+<li>Win10 でアプリをダウンロードしてインストール・起動する（not ウエッブ版）。</li>
+<li>WinなGUIで、ボクには最初はちょっと分かりにくかったが、全体としては無料ソフトとは思えない完成度。特にステップごとの説明書の書き方はとても秀逸。完全な初経験者でもほぼ半日作業かと。</li>
+<li>用紙のディメンションは図<a href="#orgb52e483">1</a>参照</li>
+</ol>
+<h3 id="bottom-line-is">Bottom line is ・・・・</h3>
+<ul>
+<li>メニューやタブを探しながら機能を推定するのが認知的に辛かった（加齢のせいです）。</li>
+<li>文字サイズや位置を目でにらみながらマウスで微調整するのは視運動的に苦痛だった（加齢のせいです）。</li>
+<li>表面と裏面を並行して作成・編集できるのはすばらしい（図<a href="#org6ae0ff7">4</a> ）。けど、この表裏切替えボタンは、すべての作業が終わるまで目につかなかった（涙）（これも加齢のせい？）</li>
+</ul>
+<p><a id="org6ae0ff7"></a></p>
+<figure><img src="/x250ura_omote.png"
+         alt="図4:  「ラベル屋さん９」で表面と裏面を切り替えるボタン" width="70%"/><figcaption>
+            <p>図4:  「ラベル屋さん９」で表面と裏面を切り替えるボタン</p>
+        </figcaption>
+</figure>
+
+<h2 id="acknowledgement">Acknowledgement</h2>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2019年2月27日T08:39:00&#43;0900 class="date">2019年2月27日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">emacs</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/diy">DIY</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/latex">LaTeX</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/temp_katashina_prj/" class="prev">リモート温度計プロジェクト</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/yamaken/" class="next">山研年報に関する速報です</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
+</footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
+
+    </body>
+</html>

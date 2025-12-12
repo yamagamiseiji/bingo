@@ -1,50 +1,323 @@
-<!doctype html><html lang=ja><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><title>リモート温度計プロジェクト | Yam’s Peace Blog
-</title><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css><link rel=stylesheet href=https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/++gZIktTledhjw="><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z5K4GXE0V9",{anonymize_ip:!0})}</script></head><body><header id=header><div class=header_container><h1 class=sitetitle><a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a></h1><nav class=navbar><ul><li><a href=https://bred-in-bingo.netlify.app/>Home</a></li><li><a href=/about/><span>About</span></a></li><li><a href=/tags/><span>Tags</span></a></li><li><a href=/archives/><span>Posts</span></a></li></ul></nav></div></header><section id=main><article class="post content"><h2 class=title>リモート温度計プロジェクト</h2><div class=post_content><div class="ox-hugo-toc toc"><div></div><div class=heading>&#30446;&#27425;</div><ul><li><a href=#%E3%81%AD%E3%82%89%E3%81%84>ねらい</a></li><li><a href=#%E5%9F%BA%E6%9C%AC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC>基本ポリシー</a></li><li><a href=#%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AA%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6>具体的な方法について</a><ul><li><a href=#%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B%E7%89%A9%E5%93%81>用意する物品</a></li><li><a href=#%E6%B8%A9%E6%B9%BF%E5%BA%A6%E8%A8%88%E3%81%AE%E8%A8%AD%E7%BD%AE%E6%96%B9%E6%B3%95>温湿度計の設置方法</a></li><li><a href=#%E3%82%BD%E3%83%95%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A>ソフトの設定</a></li></ul></li><li><a href=#%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%BF%E3%81%86>実際に使う</a><ul><li><a href=#%E3%82%AB%E3%83%A1%E3%83%A9%E3%81%8B%E3%82%89%E9%9D%99%E6%AD%A2%E7%94%BB%E5%83%8F%E3%82%92%E5%BE%97%E3%82%8B>カメラから静止画像を得る</a></li><li><a href=#%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%95%E3%82%8C%E3%81%9F%E7%94%BB%E5%83%8F%E3%82%92%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E8%BB%A2%E9%80%81%E3%81%99%E3%82%8B>ローカルに保存された画像をサーバに転送する</a></li><li><a href=#cron%E3%81%AE%E8%A8%AD%E5%AE%9A>Cronの設定</a></li></ul></li><li><a href=#%E6%A4%9C%E8%A8%8E%E8%AA%B2%E9%A1%8C%E3%81%A8%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%B1%95%E9%96%8B>検討課題と今後の展開</a></li><li><a href=#acknowledgement>Acknowledgement</a></li></ul></div><h2 id=ねらい>ねらい</h2><p>寒冷地に別荘とか別宅とかをお持ちの方は、天気予報アプリなどでこまめに現地のお天気や温度をチェックされているようです。しかし困ったことに、人里離れた地方になればなるほど、また山岳地になればなるほど、メジャーな天気予報の観測点が、自分の調べたい場所と離れてきます。またさらに悪いことに、山間（やまあい）の土地だと、わずか数百メートル離れただけで、微妙な地形の違いによって日当たりや風の流れが変わります。温度も湿度もそれに伴って大きく変化します。</p><p>2016年（平成28年）秋、武尊山の山麓にある畑小屋の室内温度と隣接する畑の気温を、本拠地であるヨコハマから、スポット的かつできるだけリアルタイムにモニターしたいと思い立ち、いろいろ試行錯誤の結果、とても原始的な方法ではありますが、何とか実用的な形ができあがりました。実際に運用を開始してから既に2年半、とくに大きな問題なく動いていますので、備忘もかねてここに紹介します。</p><h2 id=基本ポリシー>基本ポリシー</h2><p>内外温度計を使って、室内温度は親機、屋外（畑）の気温は子機で測定します。PCにつないだカメラでその画面を、一定時間ごとにスチル撮影し保存します。保存した画像ファイルはレンタルサーバに転送します。</p><h2 id=具体的な方法について>具体的な方法について</h2><h3 id=用意する物品>用意する物品</h3><p>必要なものは次のとおりです。</p><h4 id=パソコン１台>パソコン１台</h4><p>24時間電源をいれて動かし続けられるパソコンが1台必要です。ボクは、Linux （ubuntu16.04）が動く、型落ちのノートPC（バッテリーが発火しないものw）を使っています。別の用途には、停電に備えてUPS（無停電源装置）も使っていますが、カメラサーバのノートPCには、つないでいません。瞬電や数時間程度の停電があっても、まぁ内蔵バッテリーが頑張ってくれます。なお、ノートPCでなくてもラズベリーパイでも良いでしょう。ウエブカメラをつないで静止画像を撮れて、ネットでサーバに送信できる機能さえあればよいわけです。</p><h4 id=内外温度計>内外温度計</h4><p>温度計は、シチズンの<a href=http://www.citizen-systems.co.jp/electronic/health/thd501.html>コードレス温湿度計（THD501）</a>にしました。温度の測定範囲が -30度から+60度と広いこと、外気温を測定する子機センサーが防滴構造なこと、親機、子機とも電池寿命がほぼ１年あること、それから親機と子機の通信可能距離が３０メートルあることなどが選択した理由です。まさに小屋の室内と畑の温度を同時にモニターするのにぴったりですｗ</p><h4 id=webカメラ>Webカメラ</h4><p>使いまわしの古い<a href=https://www.logicool.co.jp/ja-jp/product/hd-webcam-c270>Logicool C270</a>を使っています。新品（？）でも2,000円程度、中古なら1,000円未満で入手可能です。</p><h4 id=ledブックライト>LEDブックライト</h4><p>真夜中に温度計にスポット的に照明をあてて画面を撮影するために使います。クリップが付いていること、スイッチで明るさを２段階に切り替えできることなどから、LEDブックライト XR-novelty R-919Fを使用しています。1,000円程度かと・・・。</p><h4 id=24時間繰り返しタイマー>24時間繰り返しタイマー</h4><p>上の照明用LEDブックライトを２４時間つけっぱなしにしても、電気代は大したことがありませんが、昼間に点灯していると、何となく間抜けな昼行灯に見えるので、時間を決めて夕方になったらLEDを点灯し、朝方には消すようにします。使用したのは、PANASONIC WH3311Bですが、まだ売っているのかしら？ 2,000円台だと思います。</p><h3 id=温湿度計の設置方法>温湿度計の設置方法</h3><h4 id=子機の設置場所>子機の設置場所</h4><p>これがなかなか大変でした。外気温を測定する条件は、直射日光が当たらず、雨に濡れず、風通しがよくなおかつ地上から1.5m ほどの高さに設置という感じです。小学校で百葉箱について勉強しましたよねｗ一番良いのは、適当な場所に百葉箱を設置することなのでしょうが、冬期には相当の積雪があるため、簡単ではありません。それにネットで調べると、百葉箱って信じられないほど高価！　なんでかしら？</p><p>それはともかく、さんざん悩んだあげく、写真のような場所に結わえつけることにしました。プロパンガスのボンベを雪害から守るために作ったボンベハウスの屋根ウラという感じです。日光、雨、風、地上高の条件はほぼ満たしています。</p><p><a id=orgcf990db></a></p><figure><img src=/koki.jpg alt="図1:  子機設置の様子" width=60%><figcaption><p>図1: 子機設置の様子</p></figcaption></figure><h4 id=親機とカメラなどの設置方法>親機とカメラなどの設置方法</h4><p>100均のワイヤー製の皿ホルダーを流用。温度計の表示面を上にしてフラットに置いて、それをまたぐような形で皿ホルダーを図のようにかぶせます。皿ホルダーの外枠の幅と、温度計の横幅がぴったり同じというのが味噌ｗ</p><p><a id=orgde3b53a></a></p><figure><img src=/oyaki_citizen.jpg alt="図2:  親機とC270そしてLEDブックライトのマウント方法" width=60%><figcaption><p>図2: 親機とC270そしてLEDブックライトのマウント方法</p></figcaption></figure><p>ウエッブカメラをマウントするために、太めの針金でアーチを作り皿ホルダーの脚に固定します。また、LEDのクリップは皿ホルダーの(本来は床にあたる）ワイヤメッシュをくわえさせています。</p><h3 id=ソフトの設定>ソフトの設定</h3><h4 id=fswebcam-を使う>fswebcam を使う</h4><p>もしインストールされていなければインストールします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ sudo apt install fswebcam
-</span></span></code></pre></div><h4 id=カメラの解像度を調べる>カメラの解像度を調べる</h4><ul><li><p>USBデバイスの確認から始めます。たとえば・・・</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ lsusb | grep C270
-</span></span><span style=display:flex><span>Bus <span style=color:#ae81ff>003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C270
-</span></span></code></pre></div></li><li><p>ところで機種によっては（たとえばC922では）なぜか、次のようにメーカ名は表示されるのに、デバイス名は表示されませんでした。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>Bus <span style=color:#ae81ff>001</span> Device 007: ID 046d:085c Logitech, Inc.
-</span></span></code></pre></div></li></ul><p>けど、Bus:Deviceコードは表示されてるし、次の段階で lsusb -v すると解像度は見えるので問題はありませんｗ。</p><ul><li>解像度を調べる</li></ul><p>lsusbを「-v」オプションで起動すると表示されます。同時に「-s」オプションで「Bus:Device」の値を指定します。解像度情報を得るためにこの２つの値が必要です。単純にコマンドを起動すると、表示される情報が多すぎるので、grepを wWidth で絞って実行し、その前後1行だけ表示します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ lsusb -s 003:006 -v | grep -1 wWidth
-</span></span></code></pre></div><p>それでもたくさんの組み合わせが表示されます。ちなみに、最後の3行あたりを抜粋すると次のような感じです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>	  Still image supported
-</span></span><span style=display:flex><span>	wWidth                           <span style=color:#ae81ff>1184</span>
-</span></span><span style=display:flex><span>	wHeight                           <span style=color:#ae81ff>656</span>
-</span></span><span style=display:flex><span>--
-</span></span><span style=display:flex><span>	  Still image supported
-</span></span><span style=display:flex><span>	wWidth                           <span style=color:#ae81ff>1280</span>
-</span></span><span style=display:flex><span>	wHeight                           <span style=color:#ae81ff>720</span>
-</span></span><span style=display:flex><span>--
-</span></span><span style=display:flex><span>	  Still image supported
-</span></span><span style=display:flex><span>	wWidth                           <span style=color:#ae81ff>1280</span>
-</span></span><span style=display:flex><span>	wHeight                           <span style=color:#ae81ff>960</span>
-</span></span></code></pre></div><p>その他、細かい情報は<a href=https://www.sssg.org/blogs/hiro345/archives/18787.html>こちら</a>をどうぞ。</p><h2 id=実際に使う>実際に使う</h2><h3 id=カメラから静止画像を得る>カメラから静止画像を得る</h3><p>次のようなスクリプトでカメラで静止画像を撮影し保存します。-r オプションで先ほど得た解像度を指定します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#! /bin/bash
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   Get image from c270 (Logicool) cam.</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
-</span></span><span style=display:flex><span>/usr/bin/fswebcam <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> -p YUYV <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> -d /dev/video1<span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --font <span style=color:#e6db74>&#39;/usr/share/fonts/alias/TrueType/MaruGo-Medium.ttf:32&#39;</span> <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --title <span style=color:#e6db74>&#34;2came@Katashina&#34;</span> <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --bottom-banner <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --line-colour <span style=color:#e6db74>&#39;#FF000000&#39;</span> <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --banner-colour <span style=color:#e6db74>&#39;#FF000000&#39;</span> <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> -D 2<span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> -S 5<span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> -r 1280x960 <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --save ~/webcam/2came_img.jpg <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --timestamp <span style=color:#e6db74>&#39;%Y-%m-%d %H:%M (%Z)&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
-</span></span></code></pre></div><h4 id=d-オプションの指定の仕方>-d オプションの指定の仕方</h4><dl><dt>-d /dev/video0</dt><dd>第1番目に接続したcamera</dd><dt>-d /dev/video1</dt><dd>第2番目に接続したcamera</dd><dt>-d /dev/video2</dt><dd>第3番目に接続したcamera</dd></dl><h4 id=内蔵カメラを無効にする>内蔵カメラを無効にする</h4><p>ノートPCでは内蔵カメラを無効にしたいものです。
-ubuntuでのやり方はたとえば次の例などを参考にしてください。</p><ul><li><a href=http://1204lts.blogspot.com/2014/05/ubuntu.html>http://1204lts.blogspot.com/2014/05/ubuntu.html</a></li><li><a href=https://www.oteage.com/entry/2015/05/19/021318>https://www.oteage.com/entry/2015/05/19/021318</a></li></ul><h3 id=ローカルに保存された画像をサーバに転送する>ローカルに保存された画像をサーバに転送する</h3><p>レンタルサーバ（ここでは plala）にftpで画像を転送します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># ftp_img_to_plala  server</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
-</span></span><span style=display:flex><span>/usr/bin/ftp -n www999.plala.or.jp <span style=color:#e6db74>&lt;&lt;EOF
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>user user_name password
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>bin
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>cd jpgs
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>lcd /home/yamagami/webcam_katashina
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>put 2came_katashina.jpg
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>bye
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
-</span></span></code></pre></div><h3 id=cronの設定>Cronの設定</h3><p>あとやることは、cronの設定のみ。これについてはほとんど問題ないので、省略。</p><h2 id=検討課題と今後の展開>検討課題と今後の展開</h2><ul><li>一番の問題は、今のところ現地のPCへリモートでログインできないこと。トラブル対応には欠くことのできない機能です。コストのかからない方法で実現できるか、検討したいと思っています。すみません、ちゃんと調べたわけではありせんが、そもそも人里離れたエリアは、多くのプロバイダーが固定IPのサービスエリア外にしている模様？</li><li>山岳地方では思いの外、しばしば停電します。雷や着雪による送電経路障害など、理由となる事象が発生する確率が高いためです。それに対しては、大容量のUPSを用意するこしか思いつきません。</li></ul><h2 id=acknowledgement>Acknowledgement</h2></div><div class="info post_meta"><time datetime=2019年2月13日T00:00:00+0900 class=date>2019年2月13日</time><ul class=tags><li><a href=https://bred-in-bingo.netlify.app/tags/diy>DIY</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/ubuntu>ubuntu</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/farming>farming</a></li></ul></div><div class=clearfix></div></article><div class=other_posts><a href=https://bred-in-bingo.netlify.app/posts/2k19happynewyear/ class=prev>新年のご挨拶</a>
-<a href=https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/ class=next>名刺を自作しました</a></div><aside id=comments></aside></section><a id=back_to_top title="Go To Top" href=#><span><svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></span></a><footer id=footer><p><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><span>&copy; 2025 <a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span><span>Built with <a rel=nofollow target=_blank href=https://gohugo.io>Hugo</a></span>
-<span>Theme by <a rel=nofollow target=_blank href=https://github.com/wayjam/hugo-theme-mixedpaper>WayJam</a></span></p><script src=https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin=anonymous async></script></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J843BPL02S")</script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+    
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    リモート温度計プロジェクト | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+
+  
+   
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
+}
+</script>
+
+  
+
+    
+  
+  
+</head>
+
+
+
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app/">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">リモート温度計プロジェクト</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E3%81%AD%E3%82%89%E3%81%84">ねらい</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC">基本ポリシー</a></li>
+<li><a href="#%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AA%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">具体的な方法について</a>
+<ul>
+<li><a href="#%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B%E7%89%A9%E5%93%81">用意する物品</a></li>
+<li><a href="#%E6%B8%A9%E6%B9%BF%E5%BA%A6%E8%A8%88%E3%81%AE%E8%A8%AD%E7%BD%AE%E6%96%B9%E6%B3%95">温湿度計の設置方法</a></li>
+<li><a href="#%E3%82%BD%E3%83%95%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A">ソフトの設定</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%BF%E3%81%86">実際に使う</a>
+<ul>
+<li><a href="#%E3%82%AB%E3%83%A1%E3%83%A9%E3%81%8B%E3%82%89%E9%9D%99%E6%AD%A2%E7%94%BB%E5%83%8F%E3%82%92%E5%BE%97%E3%82%8B">カメラから静止画像を得る</a></li>
+<li><a href="#%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%95%E3%82%8C%E3%81%9F%E7%94%BB%E5%83%8F%E3%82%92%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E8%BB%A2%E9%80%81%E3%81%99%E3%82%8B">ローカルに保存された画像をサーバに転送する</a></li>
+<li><a href="#cron%E3%81%AE%E8%A8%AD%E5%AE%9A">Cronの設定</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A4%9C%E8%A8%8E%E8%AA%B2%E9%A1%8C%E3%81%A8%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%B1%95%E9%96%8B">検討課題と今後の展開</a></li>
+<li><a href="#acknowledgement">Acknowledgement</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<h2 id="ねらい">ねらい</h2>
+<p>寒冷地に別荘とか別宅とかをお持ちの方は、天気予報アプリなどでこまめに現地のお天気や温度をチェックされているようです。しかし困ったことに、人里離れた地方になればなるほど、また山岳地になればなるほど、メジャーな天気予報の観測点が、自分の調べたい場所と離れてきます。またさらに悪いことに、山間（やまあい）の土地だと、わずか数百メートル離れただけで、微妙な地形の違いによって日当たりや風の流れが変わります。温度も湿度もそれに伴って大きく変化します。</p>
+<p>2016年（平成28年）秋、武尊山の山麓にある畑小屋の室内温度と隣接する畑の気温を、本拠地であるヨコハマから、スポット的かつできるだけリアルタイムにモニターしたいと思い立ち、いろいろ試行錯誤の結果、とても原始的な方法ではありますが、何とか実用的な形ができあがりました。実際に運用を開始してから既に2年半、とくに大きな問題なく動いていますので、備忘もかねてここに紹介します。</p>
+<h2 id="基本ポリシー">基本ポリシー</h2>
+<p>内外温度計を使って、室内温度は親機、屋外（畑）の気温は子機で測定します。PCにつないだカメラでその画面を、一定時間ごとにスチル撮影し保存します。保存した画像ファイルはレンタルサーバに転送します。</p>
+<h2 id="具体的な方法について">具体的な方法について</h2>
+<h3 id="用意する物品">用意する物品</h3>
+<p>必要なものは次のとおりです。</p>
+<h4 id="パソコン１台">パソコン１台</h4>
+<p>24時間電源をいれて動かし続けられるパソコンが1台必要です。ボクは、Linux （ubuntu16.04）が動く、型落ちのノートPC（バッテリーが発火しないものw）を使っています。別の用途には、停電に備えてUPS（無停電源装置）も使っていますが、カメラサーバのノートPCには、つないでいません。瞬電や数時間程度の停電があっても、まぁ内蔵バッテリーが頑張ってくれます。なお、ノートPCでなくてもラズベリーパイでも良いでしょう。ウエブカメラをつないで静止画像を撮れて、ネットでサーバに送信できる機能さえあればよいわけです。</p>
+<h4 id="内外温度計">内外温度計</h4>
+<p>温度計は、シチズンの<a href="http://www.citizen-systems.co.jp/electronic/health/thd501.html">コードレス温湿度計（THD501）</a>にしました。温度の測定範囲が -30度から+60度と広いこと、外気温を測定する子機センサーが防滴構造なこと、親機、子機とも電池寿命がほぼ１年あること、それから親機と子機の通信可能距離が３０メートルあることなどが選択した理由です。まさに小屋の室内と畑の温度を同時にモニターするのにぴったりですｗ</p>
+<h4 id="webカメラ">Webカメラ</h4>
+<p>使いまわしの古い<a href="https://www.logicool.co.jp/ja-jp/product/hd-webcam-c270">Logicool C270</a>を使っています。新品（？）でも2,000円程度、中古なら1,000円未満で入手可能です。</p>
+<h4 id="ledブックライト">LEDブックライト</h4>
+<p>真夜中に温度計にスポット的に照明をあてて画面を撮影するために使います。クリップが付いていること、スイッチで明るさを２段階に切り替えできることなどから、LEDブックライト XR-novelty R-919Fを使用しています。1,000円程度かと・・・。</p>
+<h4 id="24時間繰り返しタイマー">24時間繰り返しタイマー</h4>
+<p>上の照明用LEDブックライトを２４時間つけっぱなしにしても、電気代は大したことがありませんが、昼間に点灯していると、何となく間抜けな昼行灯に見えるので、時間を決めて夕方になったらLEDを点灯し、朝方には消すようにします。使用したのは、PANASONIC WH3311Bですが、まだ売っているのかしら？ 2,000円台だと思います。</p>
+<h3 id="温湿度計の設置方法">温湿度計の設置方法</h3>
+<h4 id="子機の設置場所">子機の設置場所</h4>
+<p>これがなかなか大変でした。外気温を測定する条件は、直射日光が当たらず、雨に濡れず、風通しがよくなおかつ地上から1.5m ほどの高さに設置という感じです。小学校で百葉箱について勉強しましたよねｗ一番良いのは、適当な場所に百葉箱を設置することなのでしょうが、冬期には相当の積雪があるため、簡単ではありません。それにネットで調べると、百葉箱って信じられないほど高価！　なんでかしら？</p>
+<p>それはともかく、さんざん悩んだあげく、写真のような場所に結わえつけることにしました。プロパンガスのボンベを雪害から守るために作ったボンベハウスの屋根ウラという感じです。日光、雨、風、地上高の条件はほぼ満たしています。</p>
+<p><a id="orgcf990db"></a></p>
+<figure><img src="/koki.jpg"
+         alt="図1:  子機設置の様子" width="60%"/><figcaption>
+            <p>図1:  子機設置の様子</p>
+        </figcaption>
+</figure>
+
+<h4 id="親機とカメラなどの設置方法">親機とカメラなどの設置方法</h4>
+<p>100均のワイヤー製の皿ホルダーを流用。温度計の表示面を上にしてフラットに置いて、それをまたぐような形で皿ホルダーを図のようにかぶせます。皿ホルダーの外枠の幅と、温度計の横幅がぴったり同じというのが味噌ｗ</p>
+<p><a id="orgde3b53a"></a></p>
+<figure><img src="/oyaki_citizen.jpg"
+         alt="図2:  親機とC270そしてLEDブックライトのマウント方法" width="60%"/><figcaption>
+            <p>図2:  親機とC270そしてLEDブックライトのマウント方法</p>
+        </figcaption>
+</figure>
+
+<p>ウエッブカメラをマウントするために、太めの針金でアーチを作り皿ホルダーの脚に固定します。また、LEDのクリップは皿ホルダーの(本来は床にあたる）ワイヤメッシュをくわえさせています。</p>
+<h3 id="ソフトの設定">ソフトの設定</h3>
+<h4 id="fswebcam-を使う">fswebcam を使う</h4>
+<p>もしインストールされていなければインストールします。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ sudo apt install fswebcam
+</span></span></code></pre></div><h4 id="カメラの解像度を調べる">カメラの解像度を調べる</h4>
+<ul>
+<li>
+<p>USBデバイスの確認から始めます。たとえば・・・</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ lsusb | grep C270
+</span></span><span style="display:flex;"><span>Bus <span style="color:#ae81ff">003</span> Device 006: ID 046d:0825 Logitech, Inc. Webcam C270
+</span></span></code></pre></div></li>
+<li>
+<p>ところで機種によっては（たとえばC922では）なぜか、次のようにメーカ名は表示されるのに、デバイス名は表示されませんでした。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Bus <span style="color:#ae81ff">001</span> Device 007: ID 046d:085c Logitech, Inc.
+</span></span></code></pre></div></li>
+</ul>
+<p>けど、Bus:Deviceコードは表示されてるし、次の段階で lsusb -v すると解像度は見えるので問題はありませんｗ。</p>
+<ul>
+<li>解像度を調べる</li>
+</ul>
+<p>lsusbを「-v」オプションで起動すると表示されます。同時に「-s」オプションで「Bus:Device」の値を指定します。解像度情報を得るためにこの２つの値が必要です。単純にコマンドを起動すると、表示される情報が多すぎるので、grepを wWidth で絞って実行し、その前後1行だけ表示します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ lsusb -s 003:006 -v | grep -1 wWidth
+</span></span></code></pre></div><p>それでもたくさんの組み合わせが表示されます。ちなみに、最後の3行あたりを抜粋すると次のような感じです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>	  Still image supported
+</span></span><span style="display:flex;"><span>	wWidth                           <span style="color:#ae81ff">1184</span>
+</span></span><span style="display:flex;"><span>	wHeight                           <span style="color:#ae81ff">656</span>
+</span></span><span style="display:flex;"><span>--
+</span></span><span style="display:flex;"><span>	  Still image supported
+</span></span><span style="display:flex;"><span>	wWidth                           <span style="color:#ae81ff">1280</span>
+</span></span><span style="display:flex;"><span>	wHeight                           <span style="color:#ae81ff">720</span>
+</span></span><span style="display:flex;"><span>--
+</span></span><span style="display:flex;"><span>	  Still image supported
+</span></span><span style="display:flex;"><span>	wWidth                           <span style="color:#ae81ff">1280</span>
+</span></span><span style="display:flex;"><span>	wHeight                           <span style="color:#ae81ff">960</span>
+</span></span></code></pre></div><p>その他、細かい情報は<a href="https://www.sssg.org/blogs/hiro345/archives/18787.html">こちら</a>をどうぞ。</p>
+<h2 id="実際に使う">実際に使う</h2>
+<h3 id="カメラから静止画像を得る">カメラから静止画像を得る</h3>
+<p>次のようなスクリプトでカメラで静止画像を撮影し保存します。-r オプションで先ほど得た解像度を指定します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   Get image from c270 (Logicool) cam.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>/usr/bin/fswebcam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -p YUYV <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -d /dev/video1<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --font <span style="color:#e6db74">&#39;/usr/share/fonts/alias/TrueType/MaruGo-Medium.ttf:32&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --title <span style="color:#e6db74">&#34;2came@Katashina&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --bottom-banner <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --line-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --banner-colour <span style="color:#e6db74">&#39;#FF000000&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -D 2<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -S 5<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> -r 1280x960 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --save ~/webcam/2came_img.jpg <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> --timestamp <span style="color:#e6db74">&#39;%Y-%m-%d %H:%M (%Z)&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span></code></pre></div><h4 id="d-オプションの指定の仕方">-d オプションの指定の仕方</h4>
+<dl>
+<dt>-d /dev/video0</dt>
+<dd>第1番目に接続したcamera</dd>
+<dt>-d /dev/video1</dt>
+<dd>第2番目に接続したcamera</dd>
+<dt>-d /dev/video2</dt>
+<dd>第3番目に接続したcamera</dd>
+</dl>
+<h4 id="内蔵カメラを無効にする">内蔵カメラを無効にする</h4>
+<p>ノートPCでは内蔵カメラを無効にしたいものです。
+ubuntuでのやり方はたとえば次の例などを参考にしてください。</p>
+<ul>
+<li><a href="http://1204lts.blogspot.com/2014/05/ubuntu.html">http://1204lts.blogspot.com/2014/05/ubuntu.html</a></li>
+<li><a href="https://www.oteage.com/entry/2015/05/19/021318">https://www.oteage.com/entry/2015/05/19/021318</a></li>
+</ul>
+<h3 id="ローカルに保存された画像をサーバに転送する">ローカルに保存された画像をサーバに転送する</h3>
+<p>レンタルサーバ（ここでは plala）にftpで画像を転送します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ftp_img_to_plala  server</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>/usr/bin/ftp -n www999.plala.or.jp <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">user user_name password
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">bin
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cd jpgs
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">lcd /home/yamagami/webcam_katashina
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">put 2came_katashina.jpg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">bye
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><h3 id="cronの設定">Cronの設定</h3>
+<p>あとやることは、cronの設定のみ。これについてはほとんど問題ないので、省略。</p>
+<h2 id="検討課題と今後の展開">検討課題と今後の展開</h2>
+<ul>
+<li>一番の問題は、今のところ現地のPCへリモートでログインできないこと。トラブル対応には欠くことのできない機能です。コストのかからない方法で実現できるか、検討したいと思っています。すみません、ちゃんと調べたわけではありせんが、そもそも人里離れたエリアは、多くのプロバイダーが固定IPのサービスエリア外にしている模様？</li>
+<li>山岳地方では思いの外、しばしば停電します。雷や着雪による送電経路障害など、理由となる事象が発生する確率が高いためです。それに対しては、大容量のUPSを用意するこしか思いつきません。</li>
+</ul>
+<h2 id="acknowledgement">Acknowledgement</h2>
+
+    </div>
+    <div class="info post_meta">
+      <time datetime=2019年2月13日T00:00:00&#43;0900 class="date">2019年2月13日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/diy">DIY</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/ubuntu">ubuntu</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/farming">farming</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/2k19happynewyear/" class="prev">新年のご挨拶</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/makingmy%E5%90%8D%E5%88%BA/" class="next">名刺を自作しました</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
+</footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
+
+    </body>
+</html>

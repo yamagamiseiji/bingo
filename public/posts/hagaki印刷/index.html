@@ -1,232 +1,421 @@
-<!doctype html><html lang=ja><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><title>わざわざ Emacs/LaTeXでハガキ印刷するわけ | Yam’s Peace Blog
-</title><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css><link rel=stylesheet href=https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/++gZIktTledhjw="><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z5K4GXE0V9",{anonymize_ip:!0})}</script></head><body><header id=header><div class=header_container><h1 class=sitetitle><a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a></h1><nav class=navbar><ul><li><a href=https://bred-in-bingo.netlify.app/>Home</a></li><li><a href=/about/><span>About</span></a></li><li><a href=/tags/><span>Tags</span></a></li><li><a href=/archives/><span>Posts</span></a></li></ul></nav></div></header><section id=main><article class="post content"><h2 class=title>わざわざ Emacs/LaTeXでハガキ印刷するわけ</h2><div class=post_content><div class="ox-hugo-toc toc"><div></div><div class=heading>&#30446;&#27425;</div><ul><li><a href=#%E8%A1%A8%E9%9D%A2-%E5%AE%9B%E5%90%8D-%E5%8D%B0%E5%88%B7>表面（宛名）印刷</a><ul><li><a href=#%E5%B9%B4%E8%B3%80%E7%8A%B6%E3%81%AE%E5%AE%9B%E5%90%8D%E9%9D%A2%E5%8D%B0%E5%88%B7%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>年賀状の宛名面印刷のためのクラスファイル</a></li><li><a href=#%E6%99%AE%E9%80%9A%E8%91%89%E6%9B%B8%E3%81%AE%E5%AE%9B%E5%90%8D%E5%8D%B0%E5%88%B7%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>普通葉書の宛名印刷のためのクラスファイル</a></li></ul></li><li><a href=#%E6%96%87%E9%9D%A2-%E3%82%A6%E3%83%A9%E9%9D%A2-%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>文面（ウラ面）のためのサンプルファイル</a></li></ul></div><p>最近でも、年に数回はどうしてもハガキでの通信が必要になります。目上の方へのお中元やお歳暮のお礼とか、住所とお名前だけは分かっているけれど、電話番号やメールやラインなどの情報がない方への連絡というのが主なケースです。</p><p>そんな場合に、手書きでハガキをスラスラ書ける筆達者な人はしあわせです。もちろん、きれいな手書き文字のハガキは受け取った人もしあわせになります。残念ながら、わたしにはその才能がありません。</p><p>ハガキ印刷のためのパソコンアプリがたくさんあるじゃないか、MS Wordだって書けるし・・・そうなんですが、WinPC/MacOSとも立ち上げに時間がかかるし、操作も難しい（皮肉でも冗談でもありません、本音です）。文字だけの単純な文面なのに、思ったように印刷するまでとてもストレスフルです。「お礼状を書かなければ・・」と思いつつも、気が重くて先送りする、その結果、相手先に対して礼を失することになる、これまでもそんなことが少なからずありました。</p><p>このような状況で社会的にまずい人物になるのを避けるためには、使い慣れたEmacs on Linux で文面を作り推敲して、そのままハガキに印刷できる環境があれば良いわけです。短く簡単な内容のテキストファイルなので、Emacs上で書けばハガキ1枚は速ければ数分の作業時間です。</p><p>実は先達のみなさんがすでに各種の仕掛けを作って頂いています（eg. <a href=https://github.com/ueokande/jletteraddress/blob/master/LICENSE>Shin&rsquo;ya Ueoka</a>）が、使ってみると、何故かボクの環境では、郵便番号が枠からはみ出たりなどの小さなトラブルがありました。というわけで、自分用に普通ハガキと年賀状の宛名面印刷のために、先達のスタイルを試行錯誤的にバラックで修正させていただきました。</p><p>この先これが必要な事例数がどれほどになるか分かりませんが、平成最後の年の瀬を迎え、これがあるというだけで心が軽くなりましたｗ。</p><h2 id=表面-宛名-印刷>表面（宛名）印刷</h2><p>動作確認環境は、ubuntu16.04 on ThinkPad X230、プリンタは CANON iP7230/Brother HL-L8350CDW です。</p><h3 id=年賀状の宛名面印刷のためのクラスファイル>年賀状の宛名面印刷のためのクラスファイル</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-LaTeX data-lang=LaTeX><span style=display:flex><span><span style=color:#75715e>%%          Time-stamp: &lt;2018-12-28 21:15:14 yamagami&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%% Copyright (c) 2014 Shin&#39;ya Ueoka &lt;ibenza@i-beam.org&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%%          年賀状宛名フォーマット modified by Seiji ....
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\NeedsTeXFormat</span>{pLaTeX2e}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\ProvidesClass</span>{jletteraddress}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\LoadClass</span><span style=color:#a6e22e>[]</span>{article}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\usepackage</span>{plext}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\usepackage</span>{xstring}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\ifx\kanjiskip\undefined\else</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\usepackage</span>{atbegshi}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\ifx\ucs\undefined</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\ifnum</span> 42146=<span style=color:#66d9ef>\euc</span>&#34;A4A2
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>\AtBeginShipoutFirst</span>{<span style=color:#66d9ef>\special</span>{pdf:tounicode EUC-UCS2}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\else</span>
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>\AtBeginShipoutFirst</span>{<span style=color:#66d9ef>\special</span>{pdf:tounicode 90ms-RKSJ-UCS2}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\fi</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\else</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\AtBeginShipoutFirst</span>{<span style=color:#66d9ef>\special</span>{pdf:tounicode UTF8-UCS2}}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\fi</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\usepackage</span><span style=color:#a6e22e>[dvipdfmx]</span>{hyperref}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#75715e>%% Set a paper size for dvipdfmx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>\special</span>{papersize=100truemm,148truemm}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\fi</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>%% Layouts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\hoffset</span>}{-1truein}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\voffset</span>}{-1truein}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\oddsidemargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\evensidemargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\topmargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\topmargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\headheight</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\headsep</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\paperwidth</span>}{100truemm}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\paperheight</span>}{148truemm}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\tabcolsep</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength\tabbingsep</span>{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\unitlength</span>}{1truemm} <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#75715e>%% Sender macros
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\def\sendername</span>#1{<span style=color:#66d9ef>\gdef\@</span>sendername{#1}}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\def\senderpostcode</span>#1{<span style=color:#66d9ef>\gdef\@</span>senderpostcode{#1}}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\def\senderaddressa</span>#1{<span style=color:#66d9ef>\gdef\@</span>senderaddressa{#1}}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\def\senderaddressb</span>#1{<span style=color:#66d9ef>\gdef\@</span>senderaddressb{#1}}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>%% Make a address-side
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\newcommand</span>{<span style=color:#66d9ef>\addaddress</span>}[5] {
-</span></span><span style=display:flex><span>  <span style=color:#75715e>% #1 : Receiver name
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #2 : Receiver name suffix
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #3 : Receiver postcode
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #4 : Receiver address 1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #5 : Receiver address 2
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>\clearpage</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\refstepcounter</span>{section}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\addcontentsline</span>{toc}{section}{#1}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\noindent</span> <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>\begin</span>{picture}(100,148)(0,0)<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>\put</span>(42,138){ <span style=color:#75715e>% 宛先郵便番号
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>\vtop</span> to 8truemm{<span style=color:#66d9ef>\vfil\hbox</span>{<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{1}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{2}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{3}<span style=color:#66d9ef>\hfil</span>}<span style=color:#66d9ef>\hskip</span>1.3truemm
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{4}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{5}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{6}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{7}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }<span style=color:#66d9ef>\vfil</span>}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(83,120){<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 宛先住所１
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{90truemm}{#4}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(75,120){<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 宛先住所２
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{90truemm}{<span style=color:#66d9ef>\hfil</span>#5}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(50,120){<span style=color:#66d9ef>\kanjiskip</span>=.3zw<span style=color:#66d9ef>\fontsize</span>{27pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 宛先氏名
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{90truemm}{<span style=color:#66d9ef>\hfil</span>#1<span style=color:#66d9ef>\hskip</span>1zw#2}<span style=color:#66d9ef>\hfil</span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>\put</span>(19,79){<span style=color:#66d9ef>\fontsize</span>{12pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 発信者住所１
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{55truemm}{<span style=color:#66d9ef>\@</span>senderaddressa}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(13,79){<span style=color:#66d9ef>\fontsize</span>{12pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 発信者住所２
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{55truemm}{<span style=color:#66d9ef>\@</span>senderaddressb}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(5,79){<span style=color:#66d9ef>\kanjiskip</span>=0.3zw<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 発信者氏名
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{55truemm}{<span style=color:#66d9ef>\hfil\@</span>sendername}<span style=color:#66d9ef>\hfil</span>}
-</span></span><span style=display:flex><span>     <span style=color:#66d9ef>\put</span>(0.5,21){ <span style=color:#75715e>%発信者郵便番号
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>\vtop</span> to 6.5truemm{<span style=color:#66d9ef>\vfil\hbox</span>{<span style=color:#66d9ef>\fontsize</span>{12pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{1}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{2}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{3}<span style=color:#66d9ef>\hfil</span>}<span style=color:#66d9ef>\hskip</span>1.4truemm <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{4}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{5}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{6}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{7}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }<span style=color:#66d9ef>\vfil</span>}}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\end</span>{picture} <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
-</span></span></code></pre></div><h3 id=普通葉書の宛名印刷のためのクラスファイル>普通葉書の宛名印刷のためのクラスファイル</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-LaTeX data-lang=LaTeX><span style=display:flex><span><span style=color:#75715e>%%          Time-stamp: &lt;2018-12-28 21:53:18 yamagami&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%% Copyright (c) 2014 Shin&#39;ya Ueoka &lt;ibenza@i-beam.org&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%%          普通はがき宛名印刷　modified by seiji
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\NeedsTeXFormat</span>{pLaTeX2e}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\ProvidesClass</span>{jletteraddress}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\LoadClass</span><span style=color:#a6e22e>[]</span>{article}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\usepackage</span>{plext}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\usepackage</span>{xstring}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\ifx\kanjiskip\undefined\else</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\usepackage</span>{atbegshi}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\ifx\ucs\undefined</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\ifnum</span> 42146=<span style=color:#66d9ef>\euc</span>&#34;A4A2
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>\AtBeginShipoutFirst</span>{<span style=color:#66d9ef>\special</span>{pdf:tounicode EUC-UCS2}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\else</span>
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>\AtBeginShipoutFirst</span>{<span style=color:#66d9ef>\special</span>{pdf:tounicode 90ms-RKSJ-UCS2}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\fi</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\else</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\AtBeginShipoutFirst</span>{<span style=color:#66d9ef>\special</span>{pdf:tounicode UTF8-UCS2}}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\fi</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\usepackage</span><span style=color:#a6e22e>[dvipdfmx]</span>{hyperref}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#75715e>%% Set a paper size for dvipdfmx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>\special</span>{papersize=100truemm,148truemm}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\fi</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>%% Layouts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\hoffset</span>}{-1truein}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\voffset</span>}{-1truein}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\oddsidemargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\evensidemargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\topmargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\topmargin</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\headheight</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\headsep</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\paperwidth</span>}{100truemm}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\paperheight</span>}{148truemm}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\tabcolsep</span>}{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength\tabbingsep</span>{0pt}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\setlength</span>{<span style=color:#66d9ef>\unitlength</span>}{1truemm} <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#75715e>%% Sender macros
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\def\sendername</span>#1{<span style=color:#66d9ef>\gdef\@</span>sendername{#1}}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\def\senderpostcode</span>#1{<span style=color:#66d9ef>\gdef\@</span>senderpostcode{#1}}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\def\senderaddressa</span>#1{<span style=color:#66d9ef>\gdef\@</span>senderaddressa{#1}}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\def\senderaddressb</span>#1{<span style=color:#66d9ef>\gdef\@</span>senderaddressb{#1}}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>%% Make a address-side
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\newcommand</span>{<span style=color:#66d9ef>\addaddress</span>}[5] {
-</span></span><span style=display:flex><span>  <span style=color:#75715e>% #1 : Receiver name
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #2 : Receiver name suffix
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #3 : Receiver postcode
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #4 : Receiver address 1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>% #5 : Receiver address 2
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>\clearpage</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\refstepcounter</span>{section}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\addcontentsline</span>{toc}{section}{#1}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\noindent</span> <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>%  \begin{picture}(100,148)(0,0)%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>\begin</span>{picture}(100,147)(0,0)<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>\put</span>(42,136){ <span style=color:#75715e>% 宛先郵便番号
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>\vtop</span> to 8truemm{<span style=color:#66d9ef>\vfil\hbox</span>{<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{1}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{2}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{3}<span style=color:#66d9ef>\hfil</span>}<span style=color:#66d9ef>\hskip</span>1.6truemm
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{4}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{5}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{6}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 7truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{#3}{7}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }<span style=color:#66d9ef>\vfil</span>}}
-</span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>\put</span>(83,115){<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 宛先住所１
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{90truemm}{#4}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(75,115){<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 宛先住所２
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{90truemm}{<span style=color:#66d9ef>\hfil</span>#5}}
-</span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>\put</span>(50,110){<span style=color:#66d9ef>\kanjiskip</span>=.3zw<span style=color:#66d9ef>\fontsize</span>{27pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 宛先氏名
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{90truemm}{<span style=color:#66d9ef>\hfil</span>#1<span style=color:#66d9ef>\hskip</span>1zw#2}<span style=color:#66d9ef>\hfil</span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>\put</span>(19,66){<span style=color:#66d9ef>\fontsize</span>{12pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 発信者住所１
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{55truemm}{<span style=color:#66d9ef>\@</span>senderaddressa}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(13,66){<span style=color:#66d9ef>\fontsize</span>{12pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 発信者住所２
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{55truemm}{<span style=color:#66d9ef>\@</span>senderaddressb}}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(5,66){<span style=color:#66d9ef>\kanjiskip</span>=0.3zw<span style=color:#66d9ef>\fontsize</span>{15pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>% 発信者氏名
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\parbox</span>&lt;t&gt;[t]{55truemm}{<span style=color:#66d9ef>\hfil\@</span>sendername}<span style=color:#66d9ef>\hfil</span>}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>\put</span>(1,2){ <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>\vtop</span> to 0.1truemm{<span style=color:#66d9ef>\vfil\hbox</span>{<span style=color:#66d9ef>\fontsize</span>{12pt}{0pt}<span style=color:#66d9ef>\selectfont</span><span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{1}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{2}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{3}<span style=color:#66d9ef>\hfil</span>}<span style=color:#66d9ef>\hskip</span>1.8truemm <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{4}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{5}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{6}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>\hbox</span> to 4truemm{<span style=color:#66d9ef>\hfil\StrChar</span>{<span style=color:#66d9ef>\@</span>senderpostcode}{7}<span style=color:#66d9ef>\hfil</span>}<span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }<span style=color:#66d9ef>\vfil</span>}}
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>\end</span>{picture} <span style=color:#75715e>%
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
-</span></span></code></pre></div><h2 id=文面-ウラ面-のためのサンプルファイル>文面（ウラ面）のためのサンプルファイル</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-LaTeX data-lang=LaTeX><span style=display:flex><span><span style=color:#75715e>%  　　　　　　　　　　　　　Time-stamp: &lt;2018-12-28 22:02:01 yamagami&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\documentclass</span><span style=color:#a6e22e>[12pt]</span>{tarticle}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\thispagestyle</span>{empty}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\usepackage</span>{bxpapersize}
-</span></span><span style=display:flex><span><span style=color:#75715e>% ＜余白設定＞　文字数の多寡によって要調整
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>\papersizesetup</span>{size={100mm,148mm}}
-</span></span><span style=display:flex><span>     <span style=color:#66d9ef>\setlength\topmargin</span>{-23mm}
-</span></span><span style=display:flex><span>     <span style=color:#66d9ef>\setlength\oddsidemargin</span>{-15mm}
-</span></span><span style=display:flex><span>     <span style=color:#66d9ef>\setlength\evensidemargin</span>{5mm}
-</span></span><span style=display:flex><span>     <span style=color:#66d9ef>\setlength\textwidth</span>{126mm} <span style=color:#75715e>% 本文縦サイズ
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>     <span style=color:#66d9ef>\setlength\textheight</span>{80mm} <span style=color:#75715e>% 本文横サイズ
-</span></span></span><span style=display:flex><span><span style=color:#75715e>%  ＜印刷の方法＞印刷指定で紙の設定を「はがき」にして印刷すること
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\begin</span>{document}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\bigskip</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\noindent</span>
-</span></span><span style=display:flex><span>前略
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\medskip</span>
-</span></span><span style=display:flex><span>このたびは結構なお品をご恵贈くださりまことにありがとうございました。
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>平素から公私にわたり何かとご配慮を賜っておりますうえに、ご厚志を頂戴致し
-</span></span><span style=display:flex><span>まして恐縮いたしております。
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>　　：中略：
-</span></span><span style=display:flex><span>{<span style=color:#66d9ef>\hfill</span> 草々}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\bigskip</span>
-</span></span><span style=display:flex><span>　平成三十年十二月三十日
-</span></span><span style=display:flex><span><span style=color:#66d9ef>\end</span>{document}
-</span></span></code></pre></div></div><div class="info post_meta"><time datetime=2018年12月30日T11:52:00+0900 class=date>2018年12月30日</time><ul class=tags><li><a href=https://bred-in-bingo.netlify.app/tags/latex>LaTeX</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/emacs>Emacs</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/diy>DIY</a></li><li><a href=https://bred-in-bingo.netlify.app/tags/social>social</a></li></ul></div><div class=clearfix></div></article><div class=other_posts><a href=https://bred-in-bingo.netlify.app/posts/nanaco%E3%81%AE%E8%AC%8E/ class=prev>nanacoをLedger-cliで複式簿記トラッキング</a>
-<a href=https://bred-in-bingo.netlify.app/posts/2k19happynewyear/ class=next>新年のご挨拶</a></div><aside id=comments></aside></section><a id=back_to_top title="Go To Top" href=#><span><svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></span></a><footer id=footer><p><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><span>&copy; 2025 <a href=https://bred-in-bingo.netlify.app/ title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span><span>Built with <a rel=nofollow target=_blank href=https://gohugo.io>Hugo</a></span>
-<span>Theme by <a rel=nofollow target=_blank href=https://github.com/wayjam/hugo-theme-mixedpaper>WayJam</a></span></p><script src=https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin=anonymous async></script></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J843BPL02S")</script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+    
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>
+    わざわざ Emacs/LaTeXでハガキ印刷するわけ | Yam’s Peace Blog
+  </title>
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/modern-normalize@0.6.0/modern-normalize.css"
+  />
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://bred-in-bingo.netlify.app/style.min.70d7ef7632fa66f36b7e2d6b55ef6b8f542de37e40ffefa064892d4e579d863c.css" integrity="sha256-cNfvdjL6ZvNrfi1rVe9rj1Qt435A/&#43;&#43;gZIktTledhjw=" />
+
+  
+   
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5K4GXE0V9"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z5K4GXE0V9', { 'anonymize_ip': true });
+}
+</script>
+
+  
+
+    
+  
+  
+</head>
+
+
+
+
+    <body>
+        <header id="header">
+  <div class="header_container">
+    <h1 class="sitetitle">
+      <a href="https://bred-in-bingo.netlify.app/" title="Yam’s Peace Blog">Yam’s Peace Blog</a>
+    </h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://bred-in-bingo.netlify.app/">Home</a></li>
+        
+          <li>
+            <a href="/about/">
+              
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/tags/">
+              
+              <span>Tags</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/archives/">
+              
+              <span>Posts</span>
+            </a>
+          </li>
+
+</ul>
+</nav>
+</div>
+</header>
+
+        
+<section id="main">
+  <article class="post content">
+    <h2 class="title">わざわざ Emacs/LaTeXでハガキ印刷するわけ</h2>
+    <div class="post_content">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">&#30446;&#27425;</div>
+<ul>
+<li><a href="#%E8%A1%A8%E9%9D%A2-%E5%AE%9B%E5%90%8D-%E5%8D%B0%E5%88%B7">表面（宛名）印刷</a>
+<ul>
+<li><a href="#%E5%B9%B4%E8%B3%80%E7%8A%B6%E3%81%AE%E5%AE%9B%E5%90%8D%E9%9D%A2%E5%8D%B0%E5%88%B7%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">年賀状の宛名面印刷のためのクラスファイル</a></li>
+<li><a href="#%E6%99%AE%E9%80%9A%E8%91%89%E6%9B%B8%E3%81%AE%E5%AE%9B%E5%90%8D%E5%8D%B0%E5%88%B7%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">普通葉書の宛名印刷のためのクラスファイル</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%87%E9%9D%A2-%E3%82%A6%E3%83%A9%E9%9D%A2-%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">文面（ウラ面）のためのサンプルファイル</a></li>
+</ul>
+</div>
+<!--endtoc-->
+<p>最近でも、年に数回はどうしてもハガキでの通信が必要になります。目上の方へのお中元やお歳暮のお礼とか、住所とお名前だけは分かっているけれど、電話番号やメールやラインなどの情報がない方への連絡というのが主なケースです。</p>
+<p>そんな場合に、手書きでハガキをスラスラ書ける筆達者な人はしあわせです。もちろん、きれいな手書き文字のハガキは受け取った人もしあわせになります。残念ながら、わたしにはその才能がありません。</p>
+<p>ハガキ印刷のためのパソコンアプリがたくさんあるじゃないか、MS Wordだって書けるし・・・そうなんですが、WinPC/MacOSとも立ち上げに時間がかかるし、操作も難しい（皮肉でも冗談でもありません、本音です）。文字だけの単純な文面なのに、思ったように印刷するまでとてもストレスフルです。「お礼状を書かなければ・・」と思いつつも、気が重くて先送りする、その結果、相手先に対して礼を失することになる、これまでもそんなことが少なからずありました。</p>
+<p>このような状況で社会的にまずい人物になるのを避けるためには、使い慣れたEmacs on Linux で文面を作り推敲して、そのままハガキに印刷できる環境があれば良いわけです。短く簡単な内容のテキストファイルなので、Emacs上で書けばハガキ1枚は速ければ数分の作業時間です。</p>
+<p>実は先達のみなさんがすでに各種の仕掛けを作って頂いています（eg. <a href="https://github.com/ueokande/jletteraddress/blob/master/LICENSE">Shin&rsquo;ya Ueoka</a>）が、使ってみると、何故かボクの環境では、郵便番号が枠からはみ出たりなどの小さなトラブルがありました。というわけで、自分用に普通ハガキと年賀状の宛名面印刷のために、先達のスタイルを試行錯誤的にバラックで修正させていただきました。</p>
+<p>この先これが必要な事例数がどれほどになるか分かりませんが、平成最後の年の瀬を迎え、これがあるというだけで心が軽くなりましたｗ。</p>
+<h2 id="表面-宛名-印刷">表面（宛名）印刷</h2>
+<p>動作確認環境は、ubuntu16.04 on ThinkPad X230、プリンタは CANON iP7230/Brother HL-L8350CDW です。</p>
+<h3 id="年賀状の宛名面印刷のためのクラスファイル">年賀状の宛名面印刷のためのクラスファイル</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-LaTeX" data-lang="LaTeX"><span style="display:flex;"><span><span style="color:#75715e">%%          Time-stamp: &lt;2018-12-28 21:15:14 yamagami&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%% Copyright (c) 2014 Shin&#39;ya Ueoka &lt;ibenza@i-beam.org&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%%          年賀状宛名フォーマット modified by Seiji ....
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\NeedsTeXFormat</span>{pLaTeX2e}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\ProvidesClass</span>{jletteraddress}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\LoadClass</span><span style="color:#a6e22e">[]</span>{article}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{plext}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{xstring}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\ifx\kanjiskip\undefined\else</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\usepackage</span>{atbegshi}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\ifx\ucs\undefined</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\ifnum</span> 42146=<span style="color:#66d9ef">\euc</span>&#34;A4A2
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">\AtBeginShipoutFirst</span>{<span style="color:#66d9ef">\special</span>{pdf:tounicode EUC-UCS2}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\else</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">\AtBeginShipoutFirst</span>{<span style="color:#66d9ef">\special</span>{pdf:tounicode 90ms-RKSJ-UCS2}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\AtBeginShipoutFirst</span>{<span style="color:#66d9ef">\special</span>{pdf:tounicode UTF8-UCS2}}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\usepackage</span><span style="color:#a6e22e">[dvipdfmx]</span>{hyperref}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">%% Set a paper size for dvipdfmx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\special</span>{papersize=100truemm,148truemm}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%% Layouts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\hoffset</span>}{-1truein}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\voffset</span>}{-1truein}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\oddsidemargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\evensidemargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\topmargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\topmargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\headheight</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\headsep</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\paperwidth</span>}{100truemm}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\paperheight</span>}{148truemm}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\tabcolsep</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength\tabbingsep</span>{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\unitlength</span>}{1truemm} <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%% Sender macros
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\def\sendername</span>#1{<span style="color:#66d9ef">\gdef\@</span>sendername{#1}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\def\senderpostcode</span>#1{<span style="color:#66d9ef">\gdef\@</span>senderpostcode{#1}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\def\senderaddressa</span>#1{<span style="color:#66d9ef">\gdef\@</span>senderaddressa{#1}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\def\senderaddressb</span>#1{<span style="color:#66d9ef">\gdef\@</span>senderaddressb{#1}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%% Make a address-side
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\newcommand</span>{<span style="color:#66d9ef">\addaddress</span>}[5] {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">% #1 : Receiver name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #2 : Receiver name suffix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #3 : Receiver postcode
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #4 : Receiver address 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #5 : Receiver address 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\clearpage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\refstepcounter</span>{section}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\addcontentsline</span>{toc}{section}{#1}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\noindent</span> <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\begin</span>{picture}(100,148)(0,0)<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">\put</span>(42,138){ <span style="color:#75715e">% 宛先郵便番号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">\vtop</span> to 8truemm{<span style="color:#66d9ef">\vfil\hbox</span>{<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{1}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{2}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{3}<span style="color:#66d9ef">\hfil</span>}<span style="color:#66d9ef">\hskip</span>1.3truemm
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{4}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{5}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{6}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{7}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }<span style="color:#66d9ef">\vfil</span>}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(83,120){<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 宛先住所１
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{90truemm}{#4}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(75,120){<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 宛先住所２
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{90truemm}{<span style="color:#66d9ef">\hfil</span>#5}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(50,120){<span style="color:#66d9ef">\kanjiskip</span>=.3zw<span style="color:#66d9ef">\fontsize</span>{27pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 宛先氏名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{90truemm}{<span style="color:#66d9ef">\hfil</span>#1<span style="color:#66d9ef">\hskip</span>1zw#2}<span style="color:#66d9ef">\hfil</span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">\put</span>(19,79){<span style="color:#66d9ef">\fontsize</span>{12pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 発信者住所１
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{55truemm}{<span style="color:#66d9ef">\@</span>senderaddressa}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(13,79){<span style="color:#66d9ef">\fontsize</span>{12pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 発信者住所２
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{55truemm}{<span style="color:#66d9ef">\@</span>senderaddressb}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(5,79){<span style="color:#66d9ef">\kanjiskip</span>=0.3zw<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 発信者氏名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{55truemm}{<span style="color:#66d9ef">\hfil\@</span>sendername}<span style="color:#66d9ef">\hfil</span>}
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">\put</span>(0.5,21){ <span style="color:#75715e">%発信者郵便番号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">\vtop</span> to 6.5truemm{<span style="color:#66d9ef">\vfil\hbox</span>{<span style="color:#66d9ef">\fontsize</span>{12pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{1}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{2}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{3}<span style="color:#66d9ef">\hfil</span>}<span style="color:#66d9ef">\hskip</span>1.4truemm <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{4}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{5}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{6}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{7}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }<span style="color:#66d9ef">\vfil</span>}}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\end</span>{picture} <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h3 id="普通葉書の宛名印刷のためのクラスファイル">普通葉書の宛名印刷のためのクラスファイル</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-LaTeX" data-lang="LaTeX"><span style="display:flex;"><span><span style="color:#75715e">%%          Time-stamp: &lt;2018-12-28 21:53:18 yamagami&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%% Copyright (c) 2014 Shin&#39;ya Ueoka &lt;ibenza@i-beam.org&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%%          普通はがき宛名印刷　modified by seiji
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\NeedsTeXFormat</span>{pLaTeX2e}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\ProvidesClass</span>{jletteraddress}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\LoadClass</span><span style="color:#a6e22e">[]</span>{article}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{plext}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{xstring}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\ifx\kanjiskip\undefined\else</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\usepackage</span>{atbegshi}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\ifx\ucs\undefined</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\ifnum</span> 42146=<span style="color:#66d9ef">\euc</span>&#34;A4A2
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">\AtBeginShipoutFirst</span>{<span style="color:#66d9ef">\special</span>{pdf:tounicode EUC-UCS2}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\else</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">\AtBeginShipoutFirst</span>{<span style="color:#66d9ef">\special</span>{pdf:tounicode 90ms-RKSJ-UCS2}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\AtBeginShipoutFirst</span>{<span style="color:#66d9ef">\special</span>{pdf:tounicode UTF8-UCS2}}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\usepackage</span><span style="color:#a6e22e">[dvipdfmx]</span>{hyperref}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">%% Set a paper size for dvipdfmx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\special</span>{papersize=100truemm,148truemm}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%% Layouts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\hoffset</span>}{-1truein}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\voffset</span>}{-1truein}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\oddsidemargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\evensidemargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\topmargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\topmargin</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\headheight</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\headsep</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\paperwidth</span>}{100truemm}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\paperheight</span>}{148truemm}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\tabcolsep</span>}{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength\tabbingsep</span>{0pt}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\setlength</span>{<span style="color:#66d9ef">\unitlength</span>}{1truemm} <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%% Sender macros
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\def\sendername</span>#1{<span style="color:#66d9ef">\gdef\@</span>sendername{#1}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\def\senderpostcode</span>#1{<span style="color:#66d9ef">\gdef\@</span>senderpostcode{#1}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\def\senderaddressa</span>#1{<span style="color:#66d9ef">\gdef\@</span>senderaddressa{#1}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\def\senderaddressb</span>#1{<span style="color:#66d9ef">\gdef\@</span>senderaddressb{#1}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%% Make a address-side
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\newcommand</span>{<span style="color:#66d9ef">\addaddress</span>}[5] {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">% #1 : Receiver name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #2 : Receiver name suffix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #3 : Receiver postcode
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #4 : Receiver address 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">% #5 : Receiver address 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\clearpage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\refstepcounter</span>{section}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\addcontentsline</span>{toc}{section}{#1}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\noindent</span> <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">%  \begin{picture}(100,148)(0,0)%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\begin</span>{picture}(100,147)(0,0)<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">\put</span>(42,136){ <span style="color:#75715e">% 宛先郵便番号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">\vtop</span> to 8truemm{<span style="color:#66d9ef">\vfil\hbox</span>{<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{1}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{2}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{3}<span style="color:#66d9ef">\hfil</span>}<span style="color:#66d9ef">\hskip</span>1.6truemm
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{4}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{5}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{6}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 7truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{#3}{7}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }<span style="color:#66d9ef">\vfil</span>}}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">\put</span>(83,115){<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 宛先住所１
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{90truemm}{#4}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(75,115){<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 宛先住所２
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{90truemm}{<span style="color:#66d9ef">\hfil</span>#5}}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">\put</span>(50,110){<span style="color:#66d9ef">\kanjiskip</span>=.3zw<span style="color:#66d9ef">\fontsize</span>{27pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 宛先氏名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{90truemm}{<span style="color:#66d9ef">\hfil</span>#1<span style="color:#66d9ef">\hskip</span>1zw#2}<span style="color:#66d9ef">\hfil</span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">\put</span>(19,66){<span style="color:#66d9ef">\fontsize</span>{12pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 発信者住所１
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{55truemm}{<span style="color:#66d9ef">\@</span>senderaddressa}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(13,66){<span style="color:#66d9ef">\fontsize</span>{12pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 発信者住所２
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{55truemm}{<span style="color:#66d9ef">\@</span>senderaddressb}}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(5,66){<span style="color:#66d9ef">\kanjiskip</span>=0.3zw<span style="color:#66d9ef">\fontsize</span>{15pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">% 発信者氏名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\parbox</span>&lt;t&gt;[t]{55truemm}{<span style="color:#66d9ef">\hfil\@</span>sendername}<span style="color:#66d9ef">\hfil</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\put</span>(1,2){ <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">\vtop</span> to 0.1truemm{<span style="color:#66d9ef">\vfil\hbox</span>{<span style="color:#66d9ef">\fontsize</span>{12pt}{0pt}<span style="color:#66d9ef">\selectfont</span><span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{1}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{2}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{3}<span style="color:#66d9ef">\hfil</span>}<span style="color:#66d9ef">\hskip</span>1.8truemm <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{4}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{5}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{6}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">\hbox</span> to 4truemm{<span style="color:#66d9ef">\hfil\StrChar</span>{<span style="color:#66d9ef">\@</span>senderpostcode}{7}<span style="color:#66d9ef">\hfil</span>}<span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }<span style="color:#66d9ef">\vfil</span>}}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\end</span>{picture} <span style="color:#75715e">%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h2 id="文面-ウラ面-のためのサンプルファイル">文面（ウラ面）のためのサンプルファイル</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-LaTeX" data-lang="LaTeX"><span style="display:flex;"><span><span style="color:#75715e">%  　　　　　　　　　　　　　Time-stamp: &lt;2018-12-28 22:02:01 yamagami&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\documentclass</span><span style="color:#a6e22e">[12pt]</span>{tarticle}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\thispagestyle</span>{empty}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{bxpapersize}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">% ＜余白設定＞　文字数の多寡によって要調整
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\papersizesetup</span>{size={100mm,148mm}}
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">\setlength\topmargin</span>{-23mm}
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">\setlength\oddsidemargin</span>{-15mm}
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">\setlength\evensidemargin</span>{5mm}
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">\setlength\textwidth</span>{126mm} <span style="color:#75715e">% 本文縦サイズ
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#66d9ef">\setlength\textheight</span>{80mm} <span style="color:#75715e">% 本文横サイズ
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">%  ＜印刷の方法＞印刷指定で紙の設定を「はがき」にして印刷すること
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{document}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\bigskip</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\noindent</span>
+</span></span><span style="display:flex;"><span>前略
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\medskip</span>
+</span></span><span style="display:flex;"><span>このたびは結構なお品をご恵贈くださりまことにありがとうございました。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>平素から公私にわたり何かとご配慮を賜っておりますうえに、ご厚志を頂戴致し
+</span></span><span style="display:flex;"><span>まして恐縮いたしております。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>　　：中略：
+</span></span><span style="display:flex;"><span>{<span style="color:#66d9ef">\hfill</span> 草々}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\bigskip</span>
+</span></span><span style="display:flex;"><span>　平成三十年十二月三十日
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{document}
+</span></span></code></pre></div>
+    </div>
+    <div class="info post_meta">
+      <time datetime=2018年12月30日T11:52:00&#43;0900 class="date">2018年12月30日</time>
+      
+        <ul class="tags">
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/latex">LaTeX</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/emacs">Emacs</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/diy">DIY</a> </li>
+        
+          <li> <a href="https://bred-in-bingo.netlify.app/tags/social">social</a> </li>
+        
+        </ul>
+      
+      
+    </div>
+    <div class="clearfix"></div>
+  </article>
+  
+    <div class="other_posts">
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/nanaco%E3%81%AE%E8%AC%8E/" class="prev">nanacoをLedger-cliで複式簿記トラッキング</a>
+      
+      
+      <a href="https://bred-in-bingo.netlify.app/posts/2k19happynewyear/" class="next">新年のご挨拶</a>
+      
+    </div>
+    <aside id="comments">
+</aside>
+
+  
+</section>
+
+        <a id="back_to_top" title="Go To Top" href="#">
+  <span>
+    <svg viewBox="0 0 24 24">
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path>
+    </svg>
+  </span>
+</a>
+
+        <footer id="footer">
+  <p>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    <span>&copy; 2025 <a href="https://bred-in-bingo.netlify.app/" title="Yam’s Peace Blog">Yam’s Peace Blog</a> </span>
+    <span>Built with <a rel="nofollow" target="_blank" href="https://gohugo.io">Hugo</a></span>
+    <span>Theme by <a rel="nofollow" target="_blank" href="https://github.com/wayjam/hugo-theme-mixedpaper">WayJam</a></span>
+  </p>
+
+  <script src="https://bred-in-bingo.netlify.app/js/main.min.8d5e5c2aeeb637f3dddaa2680f8169c057c6dca5717ee4188a442ad000362f09.js" integrity="sha256-jV5cKu62N/Pd2qJoD4FpwFfG3KVxfuQYikQq0AA2Lwk=" crossorigin="anonymous" async></script>
+</footer>
+
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J843BPL02S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J843BPL02S');
+</script>
+
+    </body>
+</html>
