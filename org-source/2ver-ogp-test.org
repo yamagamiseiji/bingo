@@ -1,0 +1,23 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2025-12-13 10:30:31 yamagami>
+#+title: ver.2 OGP Test
+#+date: [2025-12-13]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: test
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+#+export_file_name: 2ver-ogp-test
+#+options: toc:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :og_image "/images/ogp-fig.jpg"
+#+HUGO_IMAGES: /images/ogp-fig.jpg
+
+OGP試験 ver.2
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:

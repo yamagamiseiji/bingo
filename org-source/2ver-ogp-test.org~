@@ -1,0 +1,21 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2021-04-16 11:55:17 yamagami>
+#+title: 
+#+date: [ ]
+#+language: ja
+
+#+link: file file+sys:../static/
+
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: xxxxx yyyyy zzzzz
+#+hugo_categories: comp
+
+#+options: toc:nil
+#+draft: false
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
