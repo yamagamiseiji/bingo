@@ -1,7 +1,7 @@
 +++
 title = "Test Posting from host Imazu"
 author = ["yamagami"]
-date = 2025-12-13T00:00:00+09:00
+date = 2050-12-13T00:00:00+09:00
 images = ["/ogp-fig.jpg"]
 tags = ["test"]
 categories = ["comp"]

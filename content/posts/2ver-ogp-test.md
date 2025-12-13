@@ -1,7 +1,7 @@
 +++
 title = "ver.2 OGP Test"
 author = ["yamagami"]
-date = 2025-12-13T00:00:00+09:00
+date = 2050-12-13T00:00:00+09:00
 images = ["/images/ogp-fig.jpg"]
 tags = ["test"]
 categories = ["comp"]
