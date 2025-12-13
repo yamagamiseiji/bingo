@@ -11,4 +11,5 @@ og_image = "/images/ogp-fig.jpg"
 
 OGP試験 ver.2-2
 
--   /layouts/partials/head.html内追記コードを &lt;meta   /&gt; にした
+-   twitter 用コードを追加
+-   /layouts/partials/head.html内追記コードを &lt;meta   /&gt; にした --&gt; facebook done!

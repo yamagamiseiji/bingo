@@ -37,13 +37,21 @@
 
 <!--- 2025/12/13 11:00:41 by copilot -->
 <!-- OGP基本設定 -->
-<<meta property="og:url" content="{{ .Permalink }}"/>
+<meta property="og:url" content="{{ .Permalink }}"/>
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}"/>
 <meta property="og:title" content="{{ .Title }}"/>
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}"/>
 
 {{ with .Params.og_image }}
   <meta property="og:image" content="{{ . | absURL }}"/>
+  <meta name="twitter:image" content="{{ . | absURL }}"/>
 {{ end }}
-    
+
+<!-- Twitterカード -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{{ .Title }}"/>
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}"/>
+
 </head>
+
+
