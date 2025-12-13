@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2025-12-13 11:03:42 yamagami>
+#           Time-stamp: <2025-12-13 12:26:06 yamagami>
 #+title: ver.2 OGP Test
 #+date: [2025-12-13]
 #+language: ja
@@ -16,9 +16,7 @@
 #+HUGO_IMAGES: /images/ogp-fig.jpg
 
 OGP試験 ver.2-2
-- /layouts/partials/head.html にOGPプロパティを追記
-  
-
+- /layouts/partials/head.html内追記コードを <meta   /> にした
 
 # Local Variables:
 # eval: (org-hugo-auto-export-mode)

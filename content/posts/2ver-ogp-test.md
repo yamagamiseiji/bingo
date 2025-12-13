@@ -11,4 +11,4 @@ og_image = "/images/ogp-fig.jpg"
 
 OGP試験 ver.2-2
 
--   /layouts/partials/head.html にOGPプロパティを追記
+-   /layouts/partials/head.html内追記コードを &lt;meta   /&gt; にした
