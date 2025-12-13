@@ -9,4 +9,6 @@ draft = false
 og_image = "/images/ogp-fig.jpg"
 +++
 
-OGP試験 ver.2
+OGP試験 ver.2-2
+
+-   /layouts/partials/head.html にOGPプロパティを追記
