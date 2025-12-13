@@ -9,7 +9,6 @@ draft = false
 og_image = "/images/ogp-fig.jpg"
 +++
 
-OGP試験 ver.2-2
+OGP試験 ver.2-5
 
--   twitter 用コードを追加
--   /layouts/partials/head.html内追記コードを &lt;meta   /&gt; にした --&gt; facebook done!
+-   twitter 用コードを修正追加
