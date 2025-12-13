@@ -33,4 +33,17 @@
   {{ if not .Site.IsServer }}
     {{ template "_internal/google_analytics.html" . }}
   {{ end }}
+
+<!-- 2025/12/13 09:47:31 copilot's revision  -->
+{{ with .Params.images }}
+  {{ if (reflect.IsSlice .) }}
+    <meta property="og:image" content="{{ index . 0 | absURL }}">
+    <meta name="twitter:image" content="{{ index . 0 | absURL }}">
+  {{ else }}
+    <meta property="og:image" content="{{ . | absURL }}">
+    <meta name="twitter:image" content="{{ . | absURL }}">
+  {{ end }}
+{{ end }}
+
+
 </head>
