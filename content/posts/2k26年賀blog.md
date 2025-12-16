@@ -1,7 +1,7 @@
 +++
 title = "2026年 新年のごあいさつ"
 author = ["yamagami"]
-date = 2025-12-15T00:00:00+09:00
+date = 2026-01-01T00:00:00+09:00
 images = ["/images/ogp午-fig.png"]
 tags = ["年賀状"]
 categories = ["comp"]
