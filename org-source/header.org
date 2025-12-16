@@ -1,0 +1,15 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2025-12-13 15:57:19 yamagami>
+#+title: 
+#+date: [ ]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: xxxxx yyyyy zzzzz
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+#+HUGO_CUSTOM_FRONT_MATTER: :og_image "/images/OPG画像.jpg"
+#+HUGO_IMAGES: /images/OPT画像.jpg
+#+EXPORT_FILE_NAME: orgソースのbaseファイル名
