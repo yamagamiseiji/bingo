@@ -1,5 +1,5 @@
 #+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#                              Time-stamp: <2025-12-18 11:21:25 yamagami>
+#                              Time-stamp: <2025-12-18 17:46:00 yamagami>
 #+title: 2026年 新年のごあいさつ
 #+date: [2025-12-18]
 #+language: ja
@@ -15,7 +15,7 @@
 #+EXPORT_FILE_NAME: 2k26年賀blog.org
 
 
-* Under contruction
+* Under contsruction
 #+attr_html: :width 20%
 [[file:images/Under_Construction_clip_art.png]]
 

@@ -9,6 +9,6 @@ draft = false
 og_image = "/images/ogp午-fig.png"
 +++
 
-## Under contruction {#under-contruction}
+## Under contsruction {#under-contsruction}
 
 {{< figure src="/images/Under_Construction_clip_art.png" width="20%" >}}
