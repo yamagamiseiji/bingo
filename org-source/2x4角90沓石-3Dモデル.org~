@@ -1,0 +1,194 @@
+#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2026-01-15 14:49:57 yamagami>
+#+title: Sketchup 3Dモデル -- 沓石2x4角90
+#+date: [2026-01-15]
+#+language: ja
+#+link: file file+sys:../static/
+#+hugo_base_dir: ~/peace-blog/bingo/
+#+hugo_section: posts
+#+hugo_tags: Sketchup DIY 3D modeling
+#+hugo_categories: comp
+#+options: toc:nil
+#+draft: false
+#+HUGO_CUSTOM_FRONT_MATTER: :og_image "/images/2x4沓石カインズw寸法-ogp.jpg"
+#+HUGO_IMAGES: /images/2x4沓石カインズw寸法-ogp.jpg
+#+EXPORT_FILE_NAME: 2x4角90沓石-3Dモデル.org
+
+
+# OGP画像にしたい画像ファイルをOGPに合うように変換するスクリプトを使うこと
+#  $ change-images-to-OPG.sh finename-to-change.png
+
+
+* やりなおし！
+
+* デッキブロック
+図[[fig-0]]のようなブロックをSketchupで使う。そのために３Dモデルを作る。
+
+#+attr_html: :width 50%
+#+caption: 2x4のデッキブロック
+#+name: fig-0
+[[file:images/2x4沓石カインズw寸法.png]]
+
+
+* 3Dモデル作成手順
+
+*** 1. 沓石の躯体のもとになる直方体を描く
+- 底面サイズ＝200x200mm、高さ＝250mmの直方体をプッシュプル(**P**)で書く。
+#+attr_html: :width 50%
+#+caption: 躯体のもとになる直方体
+#+name: fig-1
+[[file:images/沓石四角推台.png]]
+
+
+*** 2. 四角錐台の形に整形する
+- 天面の四辺の各辺を **Shift** を押しながら選択する。
+#+attr_html: :width 50%
+#+caption: 天面の四辺を選択
+#+name: fig-2
+[[file:images/沓石天面四辺選択.png]]
+
+
+*** 3. 天面を180x180に縮める
+- **Ctrlキー** を押しながら **角** （コーナー）を内側にドラッグすることで、天面が中心に向かって均等に縮小される。
+- 縮小率は 0.9、数値は数字入力窓で入力
+#+attr_html: :width 50%
+#+caption: Ctrl+S で天面を縮める
+#+name: fig-3
+[[file:images/沓石S縮小.png]]
+
+
+*** 4. 天面中央に4x4用の穴を開ける
+- プッシュ/プル(**P**)で天面中央に95x95mmの正方形を描く。
+#+attr_html: :width 50%
+#+caption: ガイドライン＋直線で4x4穴を描く
+#+name: fig-4
+[[file:images/沓石ケガキ.png]]
+
+
+*** 5. 4x4の穴あけ
+- 95x95mmの正方形を選択し、プッシュ/プル(**P**)で深さ80mm の穴をあける。
+#+attr_html: :width 50%
+#+caption: 深さ80mmの4x4用穴あけ
+#+name: fig-5
+[[file:images/沓石4x4穴.png]]
+
+
+*** 6. 溝の十字型を作る
+- 十字溝の深さ40mmに対して深めの60mm、長さ180mmに対して長めの500mm、幅40mmに対して40mmの棒を2本作り、十字に組んで下図のような十字型とする[^fn_color]。
+- 中心部のガイドポイントに注目[^fn_flip]
+- グループ作成すること
+#+attr_html: :width 50%
+#+caption: 溝用の十字型
+#+name: fig-6
+[[file:images/沓石十字型.png]]
+
+
+[^fn_color]: 十字型は見やすさのために色付けした。
+
+[^fn_flip]: マークしたガイドポイントが底面になるように十字型を上下ひっくり返す必要があるが、それには反転(flip)を使う。
+
+
+*** 7. 四角錐台にガイドポイントを打つ
+- オブジェクトをX線透視モードにする。
+- 四角錐台と十字型を合体させる時に、十字型のガイドポイントが来る位置（天面レベルから40mm下方で躯体中心線上の位置）にガイドポイントを打つ[^fn_guideP]。
+#+attr_html: :width 50%
+#+caption: 躯体中心線上のガイドポイントに注目
+#+name: fig-7
+[[file:images/沓石ガイドP.png]]
+
+[^fn_guideP]: ガイドライン上にガイドポイントを打つには、 **T** しつつ **Ctrl** を押す。
+
+
+*** 8. 十字型と四角錐台の合体
+- オブジェクトをX線透視モードにする。
+- 十字型底面の中央に打ったガイドポイントをつまんで **M** で移動させ、躯体中心線上のガイドポイントに乗せる。
+#+attr_html: :width 50%
+#+caption: 十字型と四角錐台の合体
+#+name: fig-8
+[[file:images/沓石合体-X.png]]
+
+
+*** 9. 面を交差
+- 合体後、全オブジェクトを選択、右クリックで表示されるメニューから、「面を交差」➡ 「選択範囲と交差」を選ぶ[^fn_intersec]。
+- 四角錐台の斜面と十字型がぶつかっている部分（面の交差している箇所）に「新しい線」が自動的に書き込まれる。
+#+attr_html: :width 50%
+#+caption: 面の交差、選択範囲の交差の終了後
+#+name: fig-9
+[[file:images/沓石intersection.png]]
+
+
+[^fn_intersec]: 境界に線を引くことで不要になったオブジェクトを削除するため。
+
+*** 10. 完成
+- 不要な十字型の面や線などを削除[^fn_not-only]してできあがり[^fn_shuft-E]。
+- モデルをSketchup 3D Warehouse に登録して必要な時にダウンロードして使う。
+#+attr_html: :width 50%
+#+caption: 完成した2x4沓石90角の3Dモデル
+#+name: fig-10
+[[file:images/沓石完成品.png]]
+
+[^fn_not-only]: 削除だけでなく、場合によっては線を描き加えることが必要になる場合もある。
+
+[^fn_shuft-E]: 多数の線分や面を削除するときには、加算選択（ **Shift** キーを押しながらクリック）が有効。
+
+
+
+
+
+
+* COMMENT 画像パート
+#+attr_html: :width 60%
+#+caption: 躯体のもとになる直方体
+#+name: fig-1
+[[file:images/沓石四角推台.png]]
+
+#+attr_html: :width 60%
+#+caption: 天面の四辺を選択
+#+name: fig-2
+[[file:images/沓石天面四辺選択.png]]
+
+#+attr_html: :width 60%
+#+caption: Ctrl+S で天面を縮める
+#+name: fig-3
+[[file:images/沓石S縮小.png]]
+
+#+attr_html: :width 60%
+#+caption: ガイドライン＋直線で4x4穴を描く
+#+name: fig-4
+[[file:images/沓石ケガキ.png]]
+
+#+attr_html: :width 60%
+#+caption: 深さ80mmの4x4用穴あけ
+#+name: fig-5
+[[file:images/沓石4x4穴.png]]
+
+#+attr_html: :width 60%
+#+caption: 溝用の十字型
+#+name: fig-6
+[[file:images/沓石十字型.png]]
+
+#+attr_html: :width 60%
+#+caption: 躯体中心線上のガイドポイントに注目
+#+name: fig-7
+[[file:images/沓石ガイドP.png]]
+
+#+attr_html: :width 60%
+#+caption: 十字型と四角錐台の合体
+#+name: fig-8
+[[file:images/沓石合体-X.png]]
+
+#+attr_html: :width 60%
+#+caption: 面の交差、選択範囲の交差の終了後
+#+name: fig-9
+[[file:images/沓石intersection.png]]
+
+#+attr_html: :width 60%
+#+caption: 完成した2x4沓石90角の3Dモデル
+#+name: fig-10
+[[file:images/沓石完成品.png]]
+
+
+
+# Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
