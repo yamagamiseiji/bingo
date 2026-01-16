@@ -1,5 +1,5 @@
-#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
-#           Time-stamp: <2026-01-15 17:01:43 yamagami>
+cd#+setupfile: /home/yamagami/org/macros-org/org/org-macros.setup
+#           Time-stamp: <2026-01-16 09:21:27 yamagami>
 #+title: Sketchupで2x4用束石の3Dモデルを描く
 #+date: [2026-01-15]
 #+language: ja
@@ -56,11 +56,11 @@ DIYでは、屋外の小屋や塀、棚などの支柱を支えるコンクリ�
 
 
 *** 4. 天面中央に4x4用の穴を開ける
-- プッシュ/プル(**P**)で天面中央に95x95mmの正方形を描く。
+- 直線ツール(**L**)で天面中央に95x95mmの正方形を描く。
 #+attr_html: :width 50%
 #+caption: ガイドライン＋直線で4x4穴を描く
 #+name: fig-4
-[[file:images/沓石ケガキ.png]]
+o[[file:images/沓石ケガキ.png]]
 
 
 *** 5. 4x4の穴あけ
